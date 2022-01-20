@@ -1,29 +1,29 @@
 <div class="col-md-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Registrar </h3>
+                <h3 class="card-title">Registrarse</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form  action="validacion_persona" method="POST">
+                <form  action="validacion_persona.php" method="POST">
                   <div class="row">
                      <div class="col-sm-4">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Primer Nombre</label>
-                            <input type="text" name="nombre1" class="form-control" >
+                            <input type="text" name="nombre1" class="form-control" required>
                         </div>
                      </div>
                      <div class="col-sm-4">
                         <div class="form-group">
                             <label>Segundo Nombre</label>
-                            <input type="text" name="nombre2" class="form-control"  >
+                            <input type="text" name="nombre2" class="form-control"  required>
                         </div>
                      </div>
                      <div class="col-sm-4">
                         <div class="form-group">
                             <label>Primer Apellido</label>
-                            <input type="text" name="apellido1" class="form-control"  >
+                            <input type="text" name="apellido1" class="form-control"  required>
                         </div>
                      </div>
 
@@ -34,13 +34,13 @@
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Segundo Apellido</label>
-                            <input type="text" name="apellido2" class="form-control" >
+                            <input type="text" name="apellido2" class="form-control" required>
                         </div>
                       </div>
                       <div class="col-sm-4">
                         <div class="form-group">
                             <label>DNI</label>
-                            <input type="text" name="DNI" class="form-control" >
+                            <input type="text" name="DNI" class="form-control" required>
                         </div>
                      </div>
                      <div class="col-sm-4">

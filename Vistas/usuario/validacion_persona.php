@@ -38,8 +38,8 @@
  $resultado = mysqli_query($conexion, $insert_persona);
  if(!$resultado){
    echo "<script> 
-   alert('!Error al ingresar los datosÂ¡');
-   window.location= '..vistas/usuario/registrar_personas.php'
+   alert('!Error al ingresar los datos');
+   window.location= '..Vistas/usuario/registrar_personas.php'
    </script>";
    exit;
  }
