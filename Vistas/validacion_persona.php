@@ -1,6 +1,5 @@
 <?php
- require 'vistas/conexion_db.php';
-
+ require 'conexion_db.php';
     $conexion = mysqli_connect ($db_host_name, $db_user_name, $db_password);
 
     /* verificar la conexiÃ³n */
@@ -39,7 +38,7 @@
  if(!$resultado){
    echo "<script> 
    alert('!Error al ingresar los datos');
-   window.location= '..Vistas/usuario/registrar_personas.php'
+   window.location= '..usuario/registrar_personas.php'
    </script>";
    exit;
  }
@@ -47,7 +46,7 @@
 
    echo "<script> 
    alert('!Usuario registrado exitosamenteÂ¡');
-   window.location= 'registrar_personas.php'
+   window.location= 'index.php'
    </script>";
    exit;
  }

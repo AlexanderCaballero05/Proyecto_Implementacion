@@ -5,7 +5,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form  action="validacion_persona.php" method="POST">
+                <form  action="./validacion_persona.php" method="POST">
                   <div class="row">
                      <div class="col-sm-4">
                         <!-- text input -->
