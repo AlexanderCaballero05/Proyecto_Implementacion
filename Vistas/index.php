@@ -337,6 +337,25 @@
 
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa-security"></i>
+              <p>
+                Estado
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a onclick="cargar_contenido('contenido_principal','estado/estado.php')" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Estado</p>
+                </a>
+              </li>
+              
+
+            </ul>
+          </li>
 
           <li class="nav-header">Sobre el sistema</li>
             <li class="nav-item">
