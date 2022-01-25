@@ -38,14 +38,14 @@
  if(!$resultado){
    echo "<script> 
    alert('!Error al ingresar los datos');
-   window.location= '..usuario/registrar_personas.php'
+   window.location= 'index.php'
    </script>";
    exit;
  }
  else{
 
    echo "<script> 
-   alert('!Usuario registrado exitosamenteÂ¡');
+   alert('!Usuario registrado exitosamente¡');
    window.location= 'index.php'
    </script>";
    exit;
