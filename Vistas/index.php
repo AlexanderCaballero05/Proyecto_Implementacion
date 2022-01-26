@@ -172,19 +172,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a onclick="cargar_contenido('contenido_principal','usuario/registrar_personas.php')" class="nav-link" >
+                  <a onclick="cargar_contenido('contenido_principal','forms_usuario/registrar_personas.php')" class="nav-link" >
                     <i class="far fa-circle nav-icon"></i>
                     <p>Personas</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a onclick="cargar_contenido('contenido_principal','usuario/registrar_estudiante.php')" class="nav-link">
+                  <a onclick="cargar_contenido('contenido_principal','forms_usuario/registrar_estudiante.php')" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a onclick="cargar_contenido('contenido_principal','usuario/registrar_familiares.php')" class="nav-link">
+                  <a onclick="cargar_contenido('contenido_principal','forms_usuario/registrar_familiares.php')" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Familiares</p>
                   </a>

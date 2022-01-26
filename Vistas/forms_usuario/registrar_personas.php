@@ -1,26 +1,26 @@
 <div class="col-md-12">
             <div class="card card-info">
               <div class="card-header">
-                <h3 class="card-title">Registrarse</h3>
+                <h3 class="card-title">Registrar las personas</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <form  action="./validacion_persona.php" method="POST">
+                <form  action="./insert_form/validacion_persona.php" method="POST">
                   <div class="row">
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                         <!-- text input -->
                         <div class="form-group">
                             <label>Primer Nombre</label>
                             <input type="text" name="nombre1" class="form-control" required>
                         </div>
                      </div>
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Segundo Nombre</label>
                             <input type="text" name="nombre2" class="form-control"  required>
                         </div>
                      </div>
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                         <div class="form-group">
                             <label>Primer Apellido</label>
                             <input type="text" name="apellido1" class="form-control"  required>
@@ -30,7 +30,7 @@
                   </div>
 
                   <div class="row">
-                     <div class="col-sm-4">
+                     <div class="col-sm-3">
                         <!-- textarea -->
                         <div class="form-group">
                             <label>Segundo Apellido</label>
@@ -133,7 +133,7 @@
                   </div>
                   <section class="submission">
       <!-- El button envia todos los inputs de este  formulario al archivo especificado dentro del atributo action-->
-                       <input type="submit" name="registrarse">
+      <input class="btn btn-primary btn-lg" type="submit" name="registrarse">
                   </section>
 
 
