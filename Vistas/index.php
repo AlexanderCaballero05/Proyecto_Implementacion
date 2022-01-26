@@ -321,7 +321,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a onclick="cargar_contenido('contenido_principal','seguridad/tipos_usuario.php')" class="nav-link">
+                <a onclick="cargar_contenido('contenido_principal','seguridad/roles_participacion.php')" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipos usuario</p>
                 </a>
