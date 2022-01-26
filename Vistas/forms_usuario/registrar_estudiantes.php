@@ -7,6 +7,12 @@
     <title>Registrar estudiantes</title>
 </head>
 <body>
+
+<div class="div">
+    <ul>
+        <li>hola</li>
+    </ul>
+</div>
     
 </body>
 </html> 
