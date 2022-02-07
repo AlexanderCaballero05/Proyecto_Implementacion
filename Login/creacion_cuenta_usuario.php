@@ -12,9 +12,10 @@
   </head>
 
   <style>
+       
        body{
            background-color:#E8E8E1;
-          
+           background: linear-gradient(to right,#F9DD94);
        }
        .bg{
         background-size: cover;
@@ -24,36 +25,37 @@
        }
   </style>
   <body>
-    <div class="container w-50  mt-5 rounded shadow">
+    <div class="container w-50  mt-5 rounded ">
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-end">
               <!--ESPACIO DONDE ESTA COLOCADA LA IMAGEN -->
             </div>
             <div class="col bg-white p-4 rounded-end">
-                 <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
+                 <h3 class="fw-bold text-center py-4">REGISTRATE</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-              <form action="validarLogin.php" method="POST" CLASS="form-sesion">
+              <form>
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="text" class="form-control" placeholder="Ingresa nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="password" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
-                  <div class="mb-4">
-                     <input type="checkbox"class="form-check-input">
-                     <label class="form-check-label">Recuerdame</label>
+                  <div class="input-group mb-4">
+                      <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
+                      <input type="password" class="form-control" placeholder="Ingresa de nuevo la contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
+                  <div class="input-group mb-4">
+                      <span    class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
+                      <input type="password" class="form-control" placeholder="Ingresa un correo electronico" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+                  
                   <div class="d-grid">
-                      <button type="submit" class="btn btn-danger btn-block">INGRESAR</button>
+                      <button type="submit" class="btn btn-danger btn-block">REGISTRATE</button>
                   </div>
-                  <div class=" text-center my-3"> 
-                     <span><a style="color:black; text-decoration:none" href="recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
-                     </br>
-                     <span><a style=" text-decoration:none" href="./creacion_cuenta_usuario.php">Registrate </a></span>
-                   </div>
+                  
               </form>
             </div>
         </div>

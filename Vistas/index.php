@@ -494,8 +494,6 @@
 <script src="../Plantilla/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../Plantilla/dist/js/adminlte.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../Plantilla/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../Plantilla/dist/js/pages/dashboard.js"></script>
 </body>

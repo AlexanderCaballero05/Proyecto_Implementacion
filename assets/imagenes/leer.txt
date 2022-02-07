@@ -1,0 +1,3 @@
+En la carpeta assets disponemos archivos de imagenes,
+ videos y otros archivos (por ejemplo si tenemos una serie de archivos pdf que se descargar de nuestra aplicación)
+  que se copiarán tal cual en la aplicación definitiva
