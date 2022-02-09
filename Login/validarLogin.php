@@ -19,7 +19,7 @@
         //establece conjunto de caracteres predeterminados
         mysqli_set_charset($conexion, "utf8");
 
-        $query_select = "SELECT CODIGO_USUARIO,  USUARIO, CONTRASENA,  CODIGO_TIPO_ROL FROM TBL_MS_USUARIO WHERE USUARIO = ? AND CONTRASENA = ?";
+        $query_select = "SELECT USUARIO, CONTRASENA,  CODIGO_TIPO_ROL FROM TBL_MS_USUARIO WHERE USUARIO = ? AND CONTRASENA = ?";
 
           
  $resultados=mysqli_prepare($conexion, $query_select);
@@ -34,7 +34,7 @@
    
  } else{
 
-  $ok=mysqli_stmt_bind_result($resultados,$ID_USUARIO,$usuario,$contraseña, $codigo_tipo_rol);   
+  $ok=mysqli_stmt_bind_result($resultados,$usuario,$contraseña, $codigo_tipo_rol);   
 
 }
 

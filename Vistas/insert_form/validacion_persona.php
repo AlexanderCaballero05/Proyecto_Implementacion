@@ -34,8 +34,6 @@
  $insert_persona = "INSERT INTO persona (PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO, DNI, SEXO, FECHA_NACIMIENTO , LUGAR_NACIMIENTO , FECHA_INSCRIPCION , FECHA_BAJA , CODIGO_ESTADO , CODIGO_TIPO_ROL)
  VALUES ('$nombre1', '$nombre2', '$apellido1', '$apellido2', '$DNI' , '$sexo', '$fecha_nacimiento', '$lugar_nacimiento', '$fecha_registro', '$fecha_baja', '$codigo_estado', '$codigo_rol')";
 
- $insert_correo = "INSERT INTO correo (CORREO_PERSONA,CODIGO_PERSONA) VALUES ('$CORREO', '$codigo_persona')";
- $insert_telefono = "INSERT INTO telefono ("
  
  $resultado = mysqli_query($conexion, $insert_persona);
  if(!$resultado){
