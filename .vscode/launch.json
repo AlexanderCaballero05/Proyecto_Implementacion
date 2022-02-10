@@ -8,7 +8,7 @@
             "name": "Launch Edge",
             "request": "launch",
             "type": "pwa-msedge",
-            "url": "http://localhost/implementacion_proyecto/Login/index.php",
+            "url": "http://localhost/Rama_Proyecto_Implementacion/Login/login.php",
             "webRoot": "${workspaceFolder}"
         },
         {
