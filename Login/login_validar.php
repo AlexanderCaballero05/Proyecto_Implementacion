@@ -1,6 +1,6 @@
 <?php
 
-   $usuario = $_POST["usuario"];
+   $usuario = $_POST["nombre_usuario"];
    $contraseña = $_POST["contrasena"];
 
  
@@ -19,7 +19,7 @@
         //establece conjunto de caracteres predeterminados
         mysqli_set_charset($conexion, "utf8");
 
-        $query_select = "SELECT USUARIO, CONTRASENA,  CODIGO_TIPO_ROL FROM TBL_MS_USUARIO WHERE USUARIO = ? AND CONTRASENA = ?";
+        $query_select = "SELECT USUARIO, CONTRASENA,  CODIGO_TIPO_ROL FROM TBL_MS_USUARIO WHERE NOMBRE_USUARIO = ? AND CONTRASENA = ?";
 
           
  $resultados=mysqli_prepare($conexion, $query_select);

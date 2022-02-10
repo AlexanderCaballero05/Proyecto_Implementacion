@@ -22,7 +22,7 @@ $consultar_usuario="SELECT * FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'
         if($filas==0){
             echo '<script>
             alert(" El Usuario Ingresado no Existe ");
-            window.location="../Login/index.php";
+            window.location="../Login/metodos_recuperar_clave.php";
                   </script>';
         } else{
                $consultar_correo = "SELECT CORREO_ELECTRONICO
@@ -30,14 +30,14 @@ $consultar_usuario="SELECT * FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'
                 WHERE NOMBRE_USUARIO = '$usuario'";    
 
                 $revision_correo=$conn->query($consultar_correo);
-             if($revision_correo ->num_rows>0){
+             if($revision_correo->num_rows>0){
                  while($fila=$revision_correo->fetch_assoc()){
                   $correo= $fila['CORREO_ELECTRONICO'];
 
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../login";
+                         window.location="../login/login.php";
                                </script>';
                
                             require "PHPMailer/Exception.php";
@@ -59,31 +59,31 @@ $consultar_usuario="SELECT * FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'
                                 return $contraseña;
                          
                                  }
-
                                  
                                 $contra= (contraseña_random()) ;
+
                            $query_cambio="UPDATE tbl_ms_usuario
                                           SET CONTRASENA='$contra'
                                           WHERE NOMBRE_USUARIO= '$usuario'
                                           ";
                             $contraseña_cambiada=$conn->query($query_cambio);
 
+                            $oMail= new PHPMailer(true);
 
                             $oMail->isSMTP();
-                            $oMail->Host="smtp.gmail.com";
+                            $oMail->Host='smtp-mail.outlook.com';
                             $oMail->Port=587;
                             $oMail->SMTPSecure="tls";
                             $oMail->SMTPAuth=true;
 
-                            $oMail->Username="arnold95caballero@gmail.com";
-                            $oMail->Password="";
-                            $oMail->setFrom("arnold95caballero@gmail.com","");
+                            $oMail->Username="aacaballero@unah.hn";
+                            $oMail->Password="Caballero1995+";
+                            $oMail->setFrom("aacaballero@unah.hn","Proyecto Prosecar");
                             $oMail->addAddress($correo);
                             $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
-                            <p><h3>La nueva contraseña para ingresar al sistema: ".utf8_decode($contra)."</h3></p>
+                            <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>
                             <p>Al ingresar al sistema por razones de seguridad automaticamente se le pedirá cambiar su contraseña de recuperación</p>
-                            
-                            <p>Puede hacer click en el siguiente botón para hacer el cambio de contraseña</p>
+                            <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envio.</p>
                             
                             <a href='http://localhost/Rama_Proyecto_Implementacion/Login/index.php'>
                             <button class='btn btn-primary btn-flat'> Cambiar contraseña</button>

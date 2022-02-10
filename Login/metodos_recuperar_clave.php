@@ -32,29 +32,29 @@
             </div>
             <div class="col bg-white  p-4 rounded-end">
                 <div class="card-header ">
-                   <h3  class="fw-bold text-center py-1">Olvido de contrase&ntilde;a </h3>
+                   <h3  class="fw-bold text-center py-1">Recuperacion de contrase&ntilde;a </h3>
                </div></br>
-               <form action="../modelos/correo_recuperacion.php" method="POST">
+               <form action="../modelos/metodo_seleccionado_recuperacion.php" method="POST">
                      <div class="input-group mb-3">
                         <p><strong>¿Olvidaste tu contraseña?</strong>  </br>
-                          <p > Ingresa tu nombre de usuario para restablecer mediante 2 formas</p>
+                          <p > Ingresa tu nombre de usuario para restablecerla mediante 2 formas</p>
                         </p>
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="Usuario-recuperar"><i class="fas fa-user"></i></span>
-                        <input type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);">
+                        <input type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
                     </div>
 
                     <div class="d-grid gap-2">
                        <button type="submit" name="correo" id="correo"  class="btn btn-light border-secondary" type="button">
-                           Enviar contrase&ntilde;a por correo
+                           Recuperar contrase&ntilde;a por correo
                        </button>
 
                        <button type="submit" name="recu" id="recu" class="btn btn-light border-secondary" type="button">
                              Recuperar via preguntas secretas
                        </button>
 
-                       <button type="reset" onclick="location.href='index.php'" class="btn btn-block btn-warning btn-flat">
+                       <button type="reset" onclick="location.href='login.php'" class="btn btn-block btn-warning btn-flat">
                         cancelar
                      </button>
                      

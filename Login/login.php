@@ -33,10 +33,10 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-              <form action="validarLogin.php" method="POST" CLASS="form-sesion">
+              <form action="login_validar.php" method="POST" CLASS="form-sesion">
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="text" name="nombre_usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
@@ -50,7 +50,7 @@
                       <button type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
-                     <span><a style="color:black; text-decoration:none" href="recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
+                     <span><a style="color:black; text-decoration:none" href="metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
                      </br>
                      <span><a style=" text-decoration:none" href="./creacion_cuenta_usuario.php">Registrate </a></span>
                    </div>

@@ -44,7 +44,7 @@
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="Usuario-recuperar"><i class="fas fa-user"></i></span>
                         
-                        <input type="text" id="recupUsuario" name="recupUsuario" class="form-control" placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);">
+                        <input type="text" id="recupUsuario" name="recupUsuario" class="form-control" placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
                     </div>
 
                   
