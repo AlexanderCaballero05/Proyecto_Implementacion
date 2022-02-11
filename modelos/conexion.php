@@ -3,8 +3,7 @@
     $db_user_name="root";
     $db_password="";
     $db_name="db_Prueba_Prosecar";
-  
-
+    
     
 
 
