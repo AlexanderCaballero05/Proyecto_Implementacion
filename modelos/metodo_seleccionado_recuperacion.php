@@ -32,13 +32,13 @@ if(isset($_POST['usuario'])) {
         $filas=$existe->num_rows;
 
         if($filas>0){
-            header("location: ../Login/recuperacion_clave_correo.php"); 
+            header("location: ../Vistas/modulos/Login/recuperacion_clave_correo.php"); 
           
                   }else{
                       
                     echo '<script>
-                    alert(" El Usuario Ingresado no Existe ");
-                    window.location="../Login/metodos_recuperar_clave.php";
+                    alert(" No se puede acceder ");
+                    window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
                           </script>';
         }
 
@@ -55,13 +55,13 @@ if(isset($_POST['usuario'])) {
         $filas=$existe->num_rows;
 
         if($filas>0){
-            header("location: ../Login/recuperacion_clave_preguntas.php"); 
+            header("location: ../Vistas/modulos/Login/recuperacion_clave_preguntas.php"); 
           
                   }else{
                       
                     echo '<script>
                     alert(" El Usuario Ingresado no Existe ");
-                    window.location="../Login/metodos_recuperar_clave.php";
+                    window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
                           </script>';
         }
 

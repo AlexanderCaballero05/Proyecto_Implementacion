@@ -18,7 +18,7 @@
        }
        .bg{
         background-size: cover;
-         background-image:url(../assets/imagenes/fondo_login.jpg);
+         background-image:url(../assets/Vistas/modulos/imagenes/fondo_login.jpg);
          background-position: center center;
 
        }
@@ -33,7 +33,7 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-              <form action="login_validar.php" method="POST" CLASS="form-sesion">
+              <form action="../login_validar.php" method="POST" CLASS="form-sesion">
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
                       <input type="text" name="nombre_usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">

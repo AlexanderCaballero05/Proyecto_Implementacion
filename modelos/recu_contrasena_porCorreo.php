@@ -22,7 +22,7 @@ $consultar_usuario="SELECT * FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'
         if($filas==0){
             echo '<script>
             alert(" El Usuario Ingresado no Existe ");
-            window.location="../Login/metodos_recuperar_clave.php";
+            window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
                   </script>';
         } else{
                $consultar_correo = "SELECT CORREO_ELECTRONICO
@@ -37,7 +37,7 @@ $consultar_usuario="SELECT * FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../login/login.php";
+                         window.location="../Vistas/modulos/Login/login.php";
                                </script>';
                
                             require "PHPMailer/Exception.php";
