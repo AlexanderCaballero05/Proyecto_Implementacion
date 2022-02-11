@@ -46,20 +46,20 @@ if($codigo_tipo_rol== "1"){
 
     echo "<script> 
     alert('!Bienvenido Administrador se ha logeado exitosamente¡');
-    window.location='../Vistas/index.php'
+    window.location='../index.php'
     </script>";  
 
 }elseif($codigo_tipo_rol== "2") { 
   echo "<script> 
  alert('!Bienvenido Usuario se ha logeado exitosamente¡');
-     window.location='../Vistas/index.php'
+     window.location=../index.php'
      </script>";
     
   }else{
 
     echo "<script> 
     alert('!Error en la autenticacion¡');
-    window.location= 'index.php'
+    window.location= 'login.php'
     </script>";
 
   }

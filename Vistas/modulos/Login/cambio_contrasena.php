@@ -23,20 +23,27 @@
           <div class="col-md-5 rounded" style="width: 20rem;" >
             <H3 class="fw-bold text-center py-4">Cambio Contraseña</H3>
           <div  class="card">
+
+
+          
                 
               <div class="card-body">
-                <form>
+                <form  action="Validar_cambio_contrasena" method="POST">
+                <div class="form-group mb-3">
+                            <label>Ingrese su usuario:</label>
+                            <input type="password" name="nomUser" onkeyup="mayus(this);" class="form-control" required >
+                    </div>
                    <div class="form-group mb-3">
                             <label>Contrase&ntilde;a anterior:</label>
-                            <input id="ver_clave" type="password" name="codigo_persona" class="form-control" required >
+                            <input id="ver_clave" type="password" name="contraAnte" class="form-control"  minlength="8"   maxlength="30" required >
                     </div>
                     <div class="form-group mb-3">
-                            <label>Contrase&ntilde;a:</label>
-                            <input id="ver_clave1" type="password" name="codigo_persona" class="form-control" required >
+                            <label>Nueva Contrase&ntilde;a:</label>
+                            <input id="ver_clave1" type="password" name="contraNueva" class="form-control"  minlength="8"   maxlength="30" required >
                     </div>
                     <div class="form-group mb-3">
                             <label>Confirmar contrase&ntilde;a:</label>
-                            <input id="ver_clave2" type="password"name="codigo_persona" class="form-control" required >
+                            <input id="ver_clave2" type="password" name="contraConfirm" class="form-control"  minlength="8"   maxlength="30" required >
                     </div>
                     <div class="form-group">
                        <span  onclick="mostrar_clave()" ><i class="fa fa-eye"></i></span>
@@ -51,7 +58,7 @@
                     
                     </br>
                     <div class="d-grid">
-                        <button type="submit" class="btn btn btn-success btn-block">Cambiar Contrase&ntilde;a</button>
+                        <button type="submit" name="GUARDARCONTRA" id="GUARDARCONTRA" class="btn btn btn-success btn-block">Cambiar Contrase&ntilde;a</button>
                     </div>
                 </form>
               </div>
@@ -61,6 +68,15 @@
     </div>
 
     <script type="text/javascript">
+
+
+
+
+
+                function mayus(e) {
+                e.value = e.value.toUpperCase();
+                }          
+                    
 
             function mostrar_clave(){
                 var cla = document.getElementById("ver_clave");

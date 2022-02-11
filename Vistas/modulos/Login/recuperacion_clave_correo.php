@@ -34,7 +34,7 @@
                 <div class="card-header ">
                    <h3  class="fw-bold text-center py-1">Recuperar contrase&ntilde;a via correo </h3>
                </di""v></br>
-               <form action="../modelos/recu_contrasena_porCorreo.php" method="POST">
+               <form action="../../../modelos/recu_contrasena_porCorreo.php" method="POST">
                      <div class="input-group mb-3">
                         <p class="accent-info"><strong>¿Olvidaste tu contraseña?</strong>  </br>
                           <p class="text-md-center text-success"> Ingresa tu nombre de usuario abajo y </p> </br>
