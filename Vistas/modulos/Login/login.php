@@ -33,11 +33,11 @@
               <form action="../login_validar.php" method="POST" CLASS="form-sesion">
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="nombre_usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="text" name="nombre_usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1" required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
                   </div>
                   <div class="d-grid">
                       <button type="submit" class="btn btn-danger btn-block">INGRESAR</button>
@@ -51,6 +51,46 @@
             </div>
         </div>
     <div>
+
+    <script type="text/javascript">
+  
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+   }
+  </script>
+  <script type="text/javascript">
+
+function sinespacio(e) {
+
+var cadena =  e.value;
+var limpia = "";
+var parts = cadena.split(" ");
+var length = parts.length;
+
+for (var i = 0; i < length; i++) {
+ nuevacadena = parts[i];
+ subcadena = nuevacadena.trim();
+
+ if(subcadena != "") {
+   limpia += subcadena + " ";
+ }
+}
+limpia = limpia.trim();
+e.value = limpia;
+
+};
+</script>
+
+<script type="text/javascript">
+function quitarespacios(e) {
+
+var cadena =  e.value;
+cadena = cadena.trim();
+
+e.value = cadena;
+
+};
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
