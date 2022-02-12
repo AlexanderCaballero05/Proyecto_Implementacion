@@ -1,6 +1,6 @@
 <?php
 
-   $usuario = $_POST["nombre_usuario"];
+   $usuario = $_POST["usuario"];
    $contraseña = $_POST["contrasena"];
 
  
@@ -58,8 +58,8 @@ if($codigo_estado== "2"){
   }else{
 
     echo "<script> 
-    alert('!Error en la autenticacion¡');
-    window.location= 'login.php'
+    alert('!Usuario o contraseña inválidos¡');
+    window.location= 'Login/login.php'
     </script>";
 
   }
