@@ -34,7 +34,7 @@
                 <div class="card-header ">
                    <h3  class="fw-bold text-center py-1">Recuperacion de contrase&ntilde;a </h3>
                </div></br>
-               <form action="../../../modelos/metodo_seleccionado_recuperacion.php" method="POST">
+               <form action="../../../validaciones/metodo_seleccionado_recuperacion.php" method="POST">
                      <div class="input-group mb-3">
                         <p><strong>¿Olvidaste tu contraseña?</strong>  </br>
                           <p > Ingresa tu nombre de usuario para restablecerla mediante 2 formas</p>

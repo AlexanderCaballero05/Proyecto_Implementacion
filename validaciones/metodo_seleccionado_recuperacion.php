@@ -2,7 +2,7 @@
     $db_host_name="localhost";
     $db_user_name="root";
     $db_password="";
-    $db_name="db_Prueba_Prosecar";
+    $db_name="DB_Proyecto_Prosecar";
   
 
     
@@ -20,37 +20,37 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 
-if(isset($_POST['usuario'])) {
-    if(isset($_POST['correo'])) {
+if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
+    if(isset($_REQUEST['correo'])) { //este if es verdad si se presiono el boton correo <entonces.. entro al bloque de codigo
 
-        $usuario = ($_POST["usuario"]);
+        $usuario = ($_POST["usuario"]);// entonces capturo el dato del usuario enviado mediante el metodo POST
 
         session_start();
 
-        $consultar_usuario="SELECT *FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'";
-        $existe=$conn->query($consultar_usuario);
-        $filas=$existe->num_rows;
+        $consultar_usuario="SELECT *FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'"; // construyo el query o consulta requerida
+        $existe=$conn->query($consultar_usuario); //hago la consulta a la base de datos con el dato capturado
+        $filas=$existe->num_rows; // Hago el array para buscar el dato
 
-        if($filas>0){
+        if($filas>0){ // si es mayor a 1 se encontro el dato, entonces entro la pantalla de recuperacion de correo
             header("location: ../Vistas/modulos/Login/recuperacion_clave_correo.php"); 
           
                   }else{
                       
                     echo '<script>
-                    alert(" No se puede acceder ");
+                    alert("Datos incorrectos");
                     window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
                           </script>';
         }
 
     }
-    else if(isset($_POST['recu'])) {
+    else if(isset($_POST['recu'])) { // este if es verdad si se presiono el boton preguntas <entonces.. entro al bloque de codigo
 
 
         $usuario = ($_POST["usuario"]);
 
         session_start();
 
-        $consultar_usuario="SELECT *FROM tbl_ms_usuario WHERE NOMBRE_USUARIO='$usuario'";
+        $consultar_usuario="SELECT *FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
         $existe=$conn->query($consultar_usuario);
         $filas=$existe->num_rows;
 
@@ -60,7 +60,7 @@ if(isset($_POST['usuario'])) {
                   }else{
                       
                     echo '<script>
-                    alert(" El Usuario Ingresado no Existe ");
+                    alert("Datos incorrectos");
                     window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
                           </script>';
         }

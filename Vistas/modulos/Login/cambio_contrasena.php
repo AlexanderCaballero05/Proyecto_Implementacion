@@ -28,10 +28,10 @@
           
                 
               <div class="card-body">
-                <form  action="Validar_cambio_contrasena" method="POST">
+                <form  action="../../../validaciones/Validar_cambio_contrasena.php" method="POST">
                 <div class="form-group mb-3">
                             <label>Ingrese su usuario:</label>
-                            <input type="password" name="nomUser" onkeyup="mayus(this);" class="form-control" required >
+                            <input type="text" name="nomUser" class="form-control"  aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
                     </div>
                    <div class="form-group mb-3">
                             <label>Contrase&ntilde;a anterior:</label>
@@ -39,11 +39,11 @@
                     </div>
                     <div class="form-group mb-3">
                             <label>Nueva Contrase&ntilde;a:</label>
-                            <input id="ver_clave1" type="password" name="contraNueva" class="form-control"  minlength="8"   maxlength="30" required >
+                            <input id="ver_clave1" type="password" name="contraNueva" class="form-control" >
                     </div>
                     <div class="form-group mb-3">
                             <label>Confirmar contrase&ntilde;a:</label>
-                            <input id="ver_clave2" type="password" name="contraConfirm" class="form-control"  minlength="8"   maxlength="30" required >
+                            <input id="ver_clave2" type="password" name="contraConfirm" class="form-control"  >
                     </div>
                     <div class="form-group">
                        <span  onclick="mostrar_clave()" ><i class="fa fa-eye"></i></span>
