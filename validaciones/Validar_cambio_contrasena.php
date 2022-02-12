@@ -4,13 +4,20 @@ include_once "conexion.php"
 <?php
 if(isset($_POST['nomUser'])) {
     $nomUser=$_POST['nomUser'];
-    $contraActual=($_POST['contraActual']);
+    $contraActual=($_POST['contraAnte']);
 
       try{   
-            $sentencia_sp =  $db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
-            
-            $sentencia_sp->execute(array($nomUser,$contraActual));//ejecutar el procedimiento almacenado
-            $filas=$sentencia_sp->fetchColumn();
+           
+        //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
+           
+        $consultar_usuario="SELECT * FROM tbl_usuario
+         WHERE NOMBRE_USUARIO='$nomUser'
+         AND CONTRASENA ='$contraActual'"; 
+        $existe=$conn->query($consultar_usuario);
+        $filas=$existe->num_rows;
+      
+           // $sentencia_sp->execute(array($nomUser,$contraActual));//ejecutar el procedimiento almacenado
+           // $filas=$sentencia_sp->fetchColumn();
               if($filas>0){
                 
                 $mostrarUser= $filas;
@@ -29,8 +36,9 @@ if(isset($_POST['nomUser'])) {
                             else{
                                 try
                                 {
-                                    $sql = "CALL Sp_cambiar_con_provisional('$contraNueva','$mostrarUser');" ;
+                                   // $sql = "CALL Sp_cambiar_con_provisional('$contraNueva','$mostrarUser');" ;
                                     $consulta=$conn->query($sql);
+                                    
                                     if ($consulta>0) {
                                         echo "<script>
                                             alert('Contraseña guardada exitosamente');
