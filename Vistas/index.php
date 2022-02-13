@@ -104,7 +104,7 @@
                   <a href="#" class="btn btn-default btn-flat"><font style="vertical-align: inherit;"><font >Perfil</font></font></a>
                 </div>
                 <div class="float-right">
-                  <a href="../Login/index.php" class="btn btn-default btn-flat"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">salir</font></font></a>
+                  <a href="../Vistas/modulos/Login/login.php" class="btn btn-default btn-flat"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">salir</font></font></a>
                 </div>
               </li>
             </ul>
