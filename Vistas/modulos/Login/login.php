@@ -30,17 +30,17 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-              <form action="../login_validar.php" method="POST" CLASS="form-sesion">
+              <form action="../../../validaciones/login_validar.php" method="POST" CLASS="form-sesion">
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingusuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
+                      <input type="password" name="ingcontrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
                   </div>
                   <div class="d-grid">
-                      <button type="submit" class="btn btn-danger btn-block">INGRESAR</button>
+                      <button name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
                      <span><a style="color:black; text-decoration:none" href="metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
