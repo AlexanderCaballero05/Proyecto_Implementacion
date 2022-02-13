@@ -9,7 +9,8 @@ if(isset($_POST['nomUser'])) {
       try{   
            
         //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
-           
+        session_start();
+        $_SESSION['mi_variable'] = $nomUser;
         $consultar_usuario="SELECT * FROM tbl_usuario
          WHERE NOMBRE_USUARIO='$nomUser'
          AND CONTRASENA ='$contraActual'"; 
@@ -20,7 +21,8 @@ if(isset($_POST['nomUser'])) {
            // $filas=$sentencia_sp->fetchColumn();
               if($filas>0){
                 
-                $mostrarUser= $filas;
+                $mostrarUser=$filas;
+
                     if(isset($_POST['GUARDARCONTRA'])){
                         $contraNueva=($_POST['contraNueva']);
                         $contraConfirm=($_POST['contraConfirm']);
@@ -37,12 +39,19 @@ if(isset($_POST['nomUser'])) {
                                 try
                                 {
                                    // $sql = "CALL Sp_cambiar_con_provisional('$contraNueva','$mostrarUser');" ;
-                                    $consulta=$conn->query($sql);
+
+
+                                   $sql="UPDATE tbl_usuario u
+                                    set u.CONTRASENA = '$contraNueva',
+                                    u.CODIGO_ESTADO = 2
+                                    WHERE u.NOMBRE_USUARIO ='$nomUser'";
+
+                                   $consulta=$conn->query($sql);
                                     
                                     if ($consulta>0) {
                                         echo "<script>
                                             alert('Contraseña guardada exitosamente');
-                                             window.location = '..Vistas/index.php';
+                                             window.location = '../Vistas/modulos/Login/login.php';
                                              </script>";
                                      }else{
                                        
