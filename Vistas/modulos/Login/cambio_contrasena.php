@@ -35,7 +35,7 @@
                     </div>
                    <div class="form-group mb-3">
                             <label>Contrase&ntilde;a anterior:</label>
-                            <input id="ver_clave" type="password" name="contraAnte" class="form-control"  minlength="8"   maxlength="30" required >
+                            <input id="ver_clave" type="password" name="contraAnte" class="form-control"  required >
                     </div>
                     <div class="form-group mb-3">
                             <label>Nueva Contrase&ntilde;a:</label>

@@ -4,13 +4,11 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="../fontawesome-free/css/all.min.css">
     <title>Login Usuario</title>
   </head>
-
   <style>
        body{
            background-color:#E8E8E1;
@@ -18,9 +16,8 @@
        }
        .bg{
         background-size: cover;
-         background-image:url(../assets/Vistas/modulos/imagenes/fondo_login.jpg);
+         background-image:url(../../../assets/imagenes/fondo_login.jpg);
          background-position: center center;
-
        }
   </style>
   <body>
@@ -33,21 +30,17 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-              <form action="../login_validar.php" method="POST" CLASS="form-sesion">
+              <form action="../../../validaciones/login_validar.php" method="POST" CLASS="form-sesion">
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="nombre_usuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="text" name="ingusuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="contrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1">
-                  </div>
-                  <div class="mb-4">
-                     <input type="checkbox"class="form-check-input">
-                     <label class="form-check-label">Recuerdame</label>
+                      <input type="password" name="ingcontrasena" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
                   </div>
                   <div class="d-grid">
-                      <button type="submit" class="btn btn-danger btn-block">INGRESAR</button>
+                      <button name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
                      <span><a style="color:black; text-decoration:none" href="metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
@@ -59,9 +52,51 @@
         </div>
     <div>
 
+    <script type="text/javascript">
+  
+        function mayus(e) {
+          e.value = e.value.toUpperCase();
+         }
+    </script>
+
+
+    <script type="text/javascript">
+
+        function sinespacio(e) {
+
+        var cadena =  e.value;
+        var limpia = "";
+        var parts = cadena.split(" ");
+        var length = parts.length;
+
+          for (var i = 0; i < length; i++) {
+              nuevacadena = parts[i];
+              subcadena = nuevacadena.trim();
+
+          if(subcadena != "") {
+             limpia += subcadena + " ";
+                }
+          }
+        limpia = limpia.trim();
+        e.value = limpia;
+
+         };
+     </script>
+
+ <script type="text/javascript">
+
+    function quitarespacios(e) {
+
+      var cadena =  e.value;
+      cadena = cadena.trim();
+
+      e.value = cadena;
+
+    };
+
+  </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
