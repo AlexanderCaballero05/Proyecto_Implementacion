@@ -1,3 +1,3 @@
 <?php
-header('location:modulos/Login/login.php')
+header('location:Vistas/modulos/Login/login.php')
 ?>

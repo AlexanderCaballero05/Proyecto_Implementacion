@@ -32,7 +32,6 @@ if(isset($_POST['nomUser'])) {
                                 alert('Las contraseña no son iguales');
                                 location.href = '../Login/cambiar_contrasena.php';
                                       </script>";
-
                              }
 
                             else{
