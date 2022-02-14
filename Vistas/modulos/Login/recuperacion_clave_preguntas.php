@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  include_once 'conexion2.php';
+  $_SESSION['usua'] ;
+  $db = new Conexion();
+  $con = $db->conectar();
+  $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;");
+  $comando->execute();
+  $resultado = $comando->fetchall(PDO::FETCH_ASSOC);
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -11,93 +21,69 @@
     <title>Recuperacion contrase&ntilde;a mediante preguntas</title>
   </head>
   <body >
-    <style>
-      .btn-outline-info{
-       color: #424141;
-       border-color: none;
-       background-color:#F9F9F9;
-       }
+      <style>
        .cabeza{
-        background-color:#2F2F2F;
-       }
-       .fondo{
-         background:linear-gradient(rgba(5,4,5,0.10), rgba(5,4,5,0.10)),
-         url(../assets/imagenes/fondo3.jpg);
-         background-position: center center;
-         max-width: 100%;
-         background-attachment: fixed;
-         background-repeat:no repeat;
-       }
-       .form-control{
-         background: rgba(5,4,5,0.10);
-       }
-       .form-control:hover{
-         background: rgba(5,4,5,0.12);
-       }
-
-       .form-select:hover {
-        background: rgba(5,4,5,0.12);
-       }
-       .form-select{
-        background: rgba(5,4,5,0.10);
-       }
-       
-       .form-label{
-         color:#030303;
-       }
-    </style>
-      <div class="container-fluid w-50  mt-5">
-          <div class="card fondo  md-12 lg-5 xl-6 rounded-end" >
+            background-color:#2F2F2F;
+        }
+        .verde{
+          background-color:#4FCF87;
+        }
+     </style>
+      <div class="container-fluid w-50  mt-5" >
+          <div class="card   md-12 lg-5 xl-6 rounded-end" style="width: 45rem;" >
               <div class="card-header text-white  mb-3 cabeza">
-                <h4 class=" text-center ">Recuperación mediante pregunta secreta</h4>
+                <h4 class=" text-center ">Verificar preguntas de seguridad</h4>
               </div>
               <!-- INCIO FOMULARIO-->
-              <form class="form-horizontal">
+              <form class="form-horizontal" action="../../../validaciones/recu_contrasena_preguntas.php" method="POST">
                 <div class="card-body" >
+                    <div class="form-group row mb-3">
+                       <label  class="col-md-4 col-form-label">Usuario:</label>
+                       <div class="col-md-8"> <!--Muesrta el nombre del usuario que esta registrado en el sistema,pra cambiar contraseña -->
+                          <input type="text"   name="user" id="user" class="form-control" value="<?php echo ($_SESSION['usua']);?>" readonly required="" >
+                      </div>
+                    </div>
                    <div class="form-group row mb-3">
                      <label  class="col-md-4 col-form-label ">Seleccione la pregunta:</label>
                         <div class="col-md-8">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected></option>
-                                <option value="1">One</option>
+                            <select class="form-select" aria-label="Default select example" name="pregunta_usuario" id="pregunta_usuario">
+                              <Option class="custom-selected">Selecione una pregunta</option>
+                              <?php //Muestra los datos de la tabla de preguntas en el select
+                              foreach($resultado as $pregunta){
+                              $valuep =$pregunta['CODIGO_PREGUNTAS'];
+                              $pre =  $pregunta['PREGUNTA'];
+                              ?>
+                              <option value="<?php echo $valuep?>"><?php echo $pre;?></option>
+                              <?php
+                                }
+                              ?>
                             </select>
                         </div>
                    </div>
-
                    <div class="form-group row mb-3">
                       <label  class="col-md-4 col-form-label">Respuesta:</label>
-                      <div class="col-md-8">
-                          <input type="text" class="form-control" id="inputPassword3" >
+                      <div class="col-md-8"> <!-- -->
+                      <input type="text" name="respuesta" id="respuesta" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
+                         placeholder="RESPUESTA DE SEGURIDAD" required="">
                        </div>
-                    </div>
-
-                    <div class="form-group row mb-3">
-                       <label  class="col-md-4 col-form-label">Contrase&ntilde;a nueva:</label>
-                       <div class="col-md-8">
-                          <input type="password" class="form-control" id="inputPassword3" >
-                        </div>
-                    </div>
-                    <div class="form-group row mb-3">
-                       <label  class="col-md-4 col-form-label">Confirmar contrase&ntilde;a:</label>
-                       <div class="col-md-8">
-                          <input type="password" class="form-control" id="inputPassword3" >
-                        </div>
                     </div>
                 </div>
                    <div class="d-grid gap-2 d-md-block text-center">
-                     <button class="  btn btn-outline-info col-4 mx-auto  " type="button">
-                       <a style="text-decoration:none; color:#090909;" href="#">
-                         Aceptar
+                     <button type="reset" onclick="location.href='login.php'" class="btn btn-block btn-warning btn-flat col-5 mx-auto">
+                         Cancelar
                       </button>
-                       <button class="btn btn-outline-info col-4 mx-auto  " type="button">
-                         <a style=" text-decoration:none; color:#090909"; href="#">
-                          Siguiente
-                        </button>
+                       <button type="submit" class="btn btn-success col-5 mx-auto verde" name="verificar_res" id="verificar_res">
+                          Verificar
+                       </button>
                    </div></br> 
               </form>
           </div>
       </div>
-    
+      <script type="text/javascript">
+        function mayus(e) {
+        e.value = e.value.toUpperCase();
+        }
+      </script>
 
  
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

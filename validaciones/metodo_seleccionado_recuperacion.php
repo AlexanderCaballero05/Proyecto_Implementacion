@@ -2,18 +2,12 @@
     $db_host_name="localhost";
     $db_user_name="root";
     $db_password="";
-    $db_name="DB_Proyecto_Prosecar";
-  
-
-    
-
-
-$conn = new mysqli($db_host_name, $db_user_name, $db_password, $db_name );
-if($conn->connect_error){
-    die("conexion fallida: ".$conn->connect_error);
-}
+    $db_name="db_Proyecto_prosecar";
+    $conn = new mysqli($db_host_name, $db_user_name, $db_password, $db_name );
+    if($conn->connect_error){
+        die("conexion fallida: ".$conn->connect_error);
+    }
    ?> 
-
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
@@ -49,6 +43,7 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
         $usuario = ($_POST["usuario"]);
 
         session_start();
+        $_SESSION['usua'] = $_POST["usuario"]; // se crea una variable de sesion con el nombre del isuario
 
         $consultar_usuario="SELECT *FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
         $existe=$conn->query($consultar_usuario);
