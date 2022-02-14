@@ -19,9 +19,15 @@
        }
        .bg{
         background-size: cover;
-         background-image:url(../imagenes/fondo_login.jpg);
+         /* background-image:url(../../../assets/imagenes/fondo_login.jpg); */
          background-position: center center;
        }
+       hr{
+          border: 0;
+          border-top:1px solid  lightslategray;
+          margin: 20px -16px;
+
+        }
        .formulario__input-error {
           font-size: 13px;
           margin-bottom: 0;
@@ -38,16 +44,74 @@
         }
   </style>
   <body>
-    <div class="container w-50  mt-5 rounded ">
+    <div class="container w-50  mt-3 rounded ">
         <div class="row align-items-stretch">
-            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-end">
+            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-1  rounded-end">
               <!--ESPACIO DONDE ESTA COLOCADA LA IMAGEN -->
             </div>
             <div class="col bg-white p-4 rounded-end">
                  <h3 class="fw-bold text-center py-4">REGISTRATE</h3>
                  </br>
                 <!--LOGIN USUARIO -->
+
+                
               <form  action=""   class="formulario" id="formulario">
+
+
+                   <!-- Datos que se agregarán a la tabla personas -->
+                    <h5>Datos Personales</h5>
+                    <hr>
+                    <div class="row mb-4">
+                    <div class="col">
+                      
+                       <input type="text" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre">
+                    </div>
+                     <div class="col">
+                         
+                         <input type="text" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre">
+                    </div>
+                    </div>
+
+                    <div class="row mb-4">
+                    <div class="col">
+                      
+                       <input type="text" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido">
+                    </div>
+                     <div class="col">
+                         
+                         <input type="text" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido">
+                    </div>
+                    </div>
+
+                    <div class="row mb-4">
+                    <div class="col">
+                       <label for="dni" class="form-label">DNI:</label>
+                       <input type="text" class="form-control" placeholder="0000-0000-0000" aria-label="dni">
+                    </div>
+                     <div class="col">
+                         <label for="sexo" class="form-label">Sexo:</label>
+                         <select id="inputState" class="form-select">
+                             <option>...</option>
+                             <option>Femenino</option>
+                             <option>Masculino</option>
+                          </select>
+                    </div>
+                    </div>
+
+                    <div class="row mb-4">
+                    <div class="col">
+                       <label for="fecha" class="form-label">Fecha de Nacimiento:</label>
+                       <input type="date" class="form-control"  aria-label="fecha nacimiento">
+                    </div>
+                     <div class="col">
+                     <label for="lugar" class="form-label">Lugar de Nacimiento:</label>
+                         <input type="text" class="form-control" placeholder="Tegucigalpa" aria-label="lugar">
+                    </div>
+                    </div>
+
+                    <!-- datos que solo tiene que ver con la tabla de usuarios -->
+                    <h5>Datos de usuario</h5>
+                    <hr>
                   <div class="input-group mb-4"  >
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
                       <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
@@ -60,7 +124,7 @@
                   </div>
                   <div class="input-group mb-4" id="grupo__confirmar_clave">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
+                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
                       <p class="formulario__input-error">La contraseña tiene que coincidir con la contraseña anterior.</p>
                   </div>
 
