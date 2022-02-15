@@ -1,19 +1,19 @@
 <?php
-include_once "conexion.php"
+include_once "conexion.php";
+include_once "conexion3.php";
 ?>
 <?php
-if(isset($_POST['nomUser'])) {
-    $nomUser=$_POST['nomUser'];
+if(isset($_SESSION['usua'])) {
+    $nomUser=$_SESSION['usua'];
     $contraActual=($_POST['contraAnte']);
 
       try{   
-           
-        //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
+          //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
         session_start();
         $_SESSION['mi_variable'] = $nomUser;
         $consultar_usuario="SELECT * FROM tbl_usuario
-         WHERE NOMBRE_USUARIO='$nomUser'
-         AND CONTRASENA ='$contraActual'"; 
+                            WHERE NOMBRE_USUARIO= '$nomUser'
+                            AND CONTRASENA ='$contraActual'"; 
         $existe=$conn->query($consultar_usuario);
         $filas=$existe->num_rows;
       

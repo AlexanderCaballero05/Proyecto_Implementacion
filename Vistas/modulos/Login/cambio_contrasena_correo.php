@@ -45,18 +45,21 @@
      }
  </style>
 
-<body>
+<body >
     <div class="row align-items-center justify-content-center mt-5">
           <div class="col-md-5 rounded" style="width: 20rem;" >
             <H3 class="fw-bold text-center py-4">Cambiar Contraseña</H3>
-            <div  class="card">
-              <div class="card-body"> <!--action que  manda al archivo donde estan las validaciones,acuerdensen de poner el method="POST"! -->
-                <form  method="POST" action="../../../validaciones/validar_contrasena_preguntas.php" class="formulario" id="formulario"  >
-                   <div class="form-group mb-3">
-                        <label>Usuario:</label> <!--Muestra el usuario que se ingreso desde la pantalla para cambio de contraseña -->
-                        <input onkeyup="mayus(this);" autocomplete = "off" value="<?php echo ($_SESSION['usua']);?>"  id="usuarioc" type="text" name="usuarioc" class="form-control" readonly required >
-                        
-                    </div>
+          <div  class="card">           
+              <div class="card-body">
+                <form  action="../../../validaciones/validar_contrasena_correo.php" method="POST" class="formulario" id="formulario">
+               
+                   <div class="form-group mb-3" >
+                            <label>Contrase&ntilde;a anterior:</label>
+                            <input type="password"  name="contraAnte" class="form-control" 
+                            required minlength="5" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
+                            >
+                            <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.</p>
+                            </div>
                     <div class="form-group mb-3" id="grupo__clave_nueva">
                         <label>Contrase&ntilde;a:</label>
                         <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
@@ -77,56 +80,56 @@
                        </span>
                     </div></br>
                     <div class="d-grid">
-                      <button type="submit" name="cambiar_clave" id="cambiar_clave" class="btn btn btn-success btn-block">Cambiar Contrase&ntilde;a</button>
+                      <button type="submit" name="GUARDARCONTRA" id="GUARDARCONTRA" class="btn btn btn-success btn-block">Cambiar Contrase&ntilde;a</button>
                     </div>
                 </form>
               </div>
            </div>
         </div>
     </div>
+    
 
     <script type="text/javascript">// funcion que convierte en mayuscula lo que se vaya ingresando.
 
-      function mayus(e) {
-       e.value = e.value.toUpperCase();
-      }
-      
-      function mostrar_clave(){ //funcion para ver visualizar las contraseñas al mismo tiempo
-       var cla = document.getElementById("clave_nueva");//se debe de crear un variable que recoja el id del input donde se quiera ver la clave.
-       var cla1 = document.getElementById("confirmar_clave");
-          if(cla.type==="password" && cla1.type==="password"){
-             cla.type="text";
-              cla1.type="text";
-          }else{
-              cla.type="password";
-              cla1.type="text";
-          }
-      }
-      
-      function sinespacio(e) { //funcion sin espacion la clave
-        var cadena =  e.value;
-        var limpia = "";
-        var parts = cadena.split(" ");
-        var length = parts.length;
-        for (var i = 0; i < length; i++) {
-          nuevacadena = parts[i];
-          subcadena = nuevacadena.trim();
+function mayus(e) {
+ e.value = e.value.toUpperCase();
+}
 
-          if(subcadena != "") {
-            limpia += subcadena + " ";
-          }
-        }
-        limpia = limpia.trim();
-        e.value = limpia;
-      };
-    </script>
+function mostrar_clave(){ //funcion para ver visualizar las contraseñas al mismo tiempo
+ var cla = document.getElementById("clave_nueva");//se debe de crear un variable que recoja el id del input donde se quiera ver la clave.
+ var cla1 = document.getElementById("confirmar_clave");
+    if(cla.type==="password" && cla1.type==="password"){
+       cla.type="text";
+        cla1.type="text";
+    }else{
+        cla.type="password";
+        cla1.type="text";
+    }
+}
 
-    <script src="../../../validaciones/validacion_clave.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
-  </body>
+function sinespacio(e) { //funcion sin espacion la clave
+  var cadena =  e.value;
+  var limpia = "";
+  var parts = cadena.split(" ");
+  var length = parts.length;
+  for (var i = 0; i < length; i++) {
+    nuevacadena = parts[i];
+    subcadena = nuevacadena.trim();
+
+    if(subcadena != "") {
+      limpia += subcadena + " ";
+    }
+  }
+  limpia = limpia.trim();
+  e.value = limpia;
+};
+</script>
+
+<script src="../../../validaciones/validacion_clave.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+-->
+</body>
 </html>
-
