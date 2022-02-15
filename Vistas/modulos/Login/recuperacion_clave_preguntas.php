@@ -8,6 +8,7 @@
   $comando->execute();
   $resultado = $comando->fetchall(PDO::FETCH_ASSOC);
 ?>
+
 <!doctype html>
 <html lang="en">
   <head>

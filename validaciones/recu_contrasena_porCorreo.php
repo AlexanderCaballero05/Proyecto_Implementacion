@@ -39,7 +39,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../Vistas/modulos/Login/login.php";
+                         window.location="../Vistas/modulos/Login/cambio_contrasena_correo.php";
                                </script>';
                
                             require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
@@ -49,7 +49,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
                             function contraseña_random($length=8) // FUNCION para generar la contraseña aleatoria
                                 {
-                                $charset="abcdefghijklmnopqrstuvwxyz1234567890@";
+                                $charset=" /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/";
                                 $contraseña="";
                          
                                 for ($i=0;$i < $length;$i++)
@@ -82,9 +82,9 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                             $oMail->SMTPSecure="tls";
                             $oMail->SMTPAuth=true;
 
-                            $oMail->Username="";//  
-                            $oMail->Password="";
-                            $oMail->setFrom(""); // direccion de correo de destino hacia los correos de usuarios
+                            $oMail->Username="aacaballero@unah.hn";//  
+                            $oMail->Password="*Iamhappy.2020*";
+                            $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                             $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                             $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
                             <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>

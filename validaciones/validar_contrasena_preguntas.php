@@ -11,6 +11,7 @@
             $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
             $sentencia->execute(array($usuario));
             $row=$sentencia->fetchColumn();
+            
            if($row>0){
                 $usuari = $row;// Asigna el codigo al que pertenece el usuario de la tabla tbl_usario
                 if(isset($_POST['cambiar_clave'])){
@@ -53,7 +54,8 @@
                                                 
                                                 if($resultado>0){
                                                 //actualiza la tabla de tbl_usuario el cmapo de la contraseña el campo de modificado por
-                                                    $update = "UPDATE tbl_usuario SET CONTRASENA ='$clave', MODIFICADO_POR ='$usuari'
+                                                    $update = "UPDATE tbl_usuario SET CONTRASENA ='$clave',
+                                                     MODIFICADO_POR ='$usuari'
                                                     WHERE NOMBRE_USUARIO = '$usuario' ";
                                                     $resul=$conn->query($update);
                                                     if($resul >0){
@@ -104,9 +106,9 @@
             </script>";
             }
             //fin del if else de verificar si existe el usuario en el sistema.
-        }catch (PDOException $e){
-        echo $e->getMessage();  
-        return false;
+           }catch (PDOException $e){
+           echo $e->getMessage();  
+           return false;
         }
     }//Cierre del if padre
 ?>
