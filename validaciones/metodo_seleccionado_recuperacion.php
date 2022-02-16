@@ -20,6 +20,7 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
         $usuario = ($_POST["usuario"]);// entonces capturo el dato del usuario enviado mediante el metodo POST
 
         session_start();
+        $_SESSION['usua'] = $_POST["usuario"]; // se crea una variable de sesion con el nombre del isuario
 
         $consultar_usuario="SELECT *FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'"; // construyo el query o consulta requerida
         $existe=$conn->query($consultar_usuario); //hago la consulta a la base de datos con el dato capturado
