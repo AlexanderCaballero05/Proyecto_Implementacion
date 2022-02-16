@@ -9,7 +9,7 @@
             "request": "launch",
             "type": "pwa-msedge",
 
-            "url": "http://localhost/Rama_proyecto2/Vistas/modulos/Login/login.php",
+            "url": "http://localhost/Prosecar_Rama2/Vistas/modulos/Login/login.php",
 
             "webRoot": "${workspaceFolder}"
         },
