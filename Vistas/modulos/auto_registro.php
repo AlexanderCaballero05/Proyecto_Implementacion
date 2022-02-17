@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="./fontawesome-free/css/all.min.css">
     <title>Login Usuario</title>
   </head>
 
@@ -112,30 +112,47 @@
                     <!-- datos que solo tiene que ver con la tabla de usuarios -->
                     <h5>Datos de usuario</h5>
                     <hr>
+                  <div class="row">
+                  <div class="col">
                   <div class="input-group mb-4"  >
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
                       <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                   </div>
-              
+                  </div>
+
+                  <div class="col">
+                  <div class="input-group mb-4">
+                      <span    class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
+                      <input name ="ingcorreo" type="text" class="form-control" placeholder="Ingresa un correo electronico"  >
+                  </div>
+                  </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col">
                   <div class="input-group mb-4" id="grupo__clave_nueva">
                       <span  class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
                       <input type="password" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  id="clave_nueva" name="clave_nueva" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
                       <p class="formulario__input-error">La contraseña tiene que tener mayusculas,minisculas y caracteres especiales.</p>
                   </div>
+                  </div>
+
+                  <div class="col">
                   <div class="input-group mb-4" id="grupo__confirmar_clave">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
                       <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
                       <p class="formulario__input-error">La contraseña tiene que coincidir con la contraseña anterior.</p>
                   </div>
-
-
-                  <div class="input-group mb-4">
-                      <span    class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
-                      <input name ="ingcorreo" type="text" class="form-control" placeholder="Ingresa un correo electronico"  >
                   </div>
-                  
-                  <div class="d-grid">
-                      <button name = "btnregistrar" type="submit" class="btn btn-danger btn-block">REGISTRATE</button>
+                  </div>
+
+                  <!-- botones -->
+
+                  <div class="d-grid mb-2">
+                      <button name = "btnregistrar" type="submit" class="btn btn-primary btn-block">REGISTRATE</button>
+                  </div>
+                  <div class="d-grid mb-2">
+                      <button name = "btnregistrar" type="submit" class="btn btn-danger btn-            block">CANCELAR</button>
                   </div>
                   
               </form>

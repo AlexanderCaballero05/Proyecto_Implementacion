@@ -50,7 +50,7 @@
                   <div class=" text-center my-3"> 
                      <span><a style="color:black; text-decoration:none" href="metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
                      </br>
-                     <span><a style=" text-decoration:none" href="./creacion_cuenta_usuario.php">Registrate </a></span>
+                     <span><a style=" text-decoration:none" href="./auto_registro.php">Registrate </a></span>
                    </div>
                    <?php
 
