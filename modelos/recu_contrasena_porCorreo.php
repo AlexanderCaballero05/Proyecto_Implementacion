@@ -22,7 +22,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
         if($filas==0){
             echo '<script>
             alert(" El Usuario Ingresado no Existe ");
-            window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
+            window.location="../Vistas/modulos/metodos_recuperar_clave.php";
                   </script>';
         } else{ //construir el query para traer el dato del correo al cual se enviara la clave de recuperacion
                $consultar_correo = "SELECT c.CORREO_PERSONA  
@@ -39,7 +39,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../Vistas/modulos/Login/cambio_contrasena_correo.php";
+                         window.location="../Vistas/modulos/cambio_contrasena_correo.php";
                                </script>';
                
                             require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
@@ -83,7 +83,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                             $oMail->SMTPAuth=true;
 
                             $oMail->Username="aacaballero@unah.hn";//  
-                            $oMail->Password="*Iamhappy.2020*";
+                            $oMail->Password="";
                             $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                             $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                             $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
@@ -91,7 +91,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                             <p>Al ingresar al sistema por razones de seguridad automaticamente se le pedirá cambiar su contraseña de recuperación</p>
                             <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envio.</p>
                             
-                            <a href='http://localhost/Rama_Proyecto_Implementacion/Login/index.php'>
+                            <a href='http://localhost/Rama_Proyecto_Implementacion/index.php'>
                             <button class='btn btn-primary btn-flat'> Cambiar contraseña</button>
                             </a>
                             

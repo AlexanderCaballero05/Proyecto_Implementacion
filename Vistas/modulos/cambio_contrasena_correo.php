@@ -1,6 +1,6 @@
 <?php
   session_start();
-  include_once "../../../validaciones/conexion3.php";
+  include_once "../../modelos/conexion3.php";
   $parametro ="NUM_MAX_CARACTER";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($parametro));
@@ -51,7 +51,7 @@
             <H3 class="fw-bold text-center py-4">Cambiar Contraseña</H3>
           <div  class="card">           
               <div class="card-body">
-                <form  action="../../../validaciones/validar_contrasena_correo.php" method="POST" class="formulario" id="formulario">
+                <form  action="../../modelos/validar_contrasena_correo.php" method="POST" class="formulario" id="formulario">
                
                    <div class="form-group mb-3" >
                             <label>Contrase&ntilde;a anterior:</label>
@@ -125,7 +125,7 @@ function sinespacio(e) { //funcion sin espacion la clave
 };
 </script>
 
-<script src="../../../validaciones/validacion_clave.js"></script>
+<script src="../../modelos/validacion_clave.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

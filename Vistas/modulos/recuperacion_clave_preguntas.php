@@ -36,7 +36,7 @@
                 <h4 class=" text-center ">Verificar preguntas de seguridad</h4>
               </div>
               <!-- INCIO FOMULARIO-->
-              <form class="form-horizontal" action="../../../validaciones/recu_contrasena_preguntas.php" method="POST">
+              <form class="form-horizontal" action="../../modelos/recu_contrasena_preguntas.php" method="POST">
                 <div class="card-body" >
                     <div class="form-group row mb-3">
                        <label  class="col-md-4 col-form-label">Usuario:</label>

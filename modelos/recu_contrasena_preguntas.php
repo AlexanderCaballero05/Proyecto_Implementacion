@@ -26,19 +26,19 @@ if(isset($_SESSION['usua'])) {
                   echo "<script>
                   alert('Respuesta correcta');
                  
-                  window.location='../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                  window.location='../Vistas/modulos/cambio_contrasena_preguntas.php';
                   </script>";
                 }else{ //Si no hay registros en la fila ,la respuesta es incorrecta
                   echo "<script>
                   alert('Respuesta incorrecta');
-                  location.href = '../Vistas/modulos/Login/metodos_recuperar_clave.php';
+                  location.href = '../Vistas/modulos/metodos_recuperar_clave.php';
                   </script>";
                 }
             }
         }else{
             echo "<script>
             alert('El Usuario Ingresado no Existe');
-            window.location = '../Vistas/modulos/Login/metodos_recuperar_clave.php';
+            window.location = '../Vistas/modulos/metodos_recuperar_clave.php';
             </script>";
         }
     }catch(PDOException $e){

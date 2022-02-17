@@ -50,7 +50,7 @@ if(isset($_SESSION['usua'])) {
                                     if ($consulta>0) {
                                         echo "<script>
                                             alert('Contraseña guardada exitosamente');
-                                             window.location = '../Vistas/modulos/Login/login.php';
+                                             window.location = '../Vistas/modulos/login.php';
                                              </script>";
                                      }else{
                                        

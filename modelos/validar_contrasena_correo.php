@@ -29,7 +29,7 @@ if(isset($_SESSION['usua'])) {
                             if($contraNueva<>$contraConfirm){
                                 echo "<script>
                                 alert('Las contraseña no son iguales');
-                                location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                       </script>";
                              }
 
@@ -44,7 +44,7 @@ if(isset($_SESSION['usua'])) {
                                         $row=$datos->num_rows;
                                         if($row>0){ //si la contraseña es la misma que tiene en el sistema
                                             echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                            location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                             </script>";
                                         }
                                         else{ //si la contraseña es diferente de la que tiene en el sistema
@@ -54,7 +54,7 @@ if(isset($_SESSION['usua'])) {
                                                 $fila=$busqueda->num_rows;
                                                 if($fila>0){
                                                     echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                                    location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                                    location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                                     </script>";
                                                 }
                                                 else{
@@ -74,7 +74,7 @@ if(isset($_SESSION['usua'])) {
                                                             if($resul >0){
                                                                 echo "<script> 
                                                                 alert('Contraseña cambiada correctamente');
-                                                                location.href = '../Vistas/modulos/Login/login.php';
+                                                                location.href = '../Vistas/modulos/login.php';
                                                                 </script>";
                                                                 exit;
                                                             }
@@ -82,7 +82,7 @@ if(isset($_SESSION['usua'])) {
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
                                                             echo "<script> 
                                                             alert('!Error al ingresar los datos¡');
-                                                            location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                                             </script>";
                                                             exit;
                                                         }
@@ -96,7 +96,7 @@ if(isset($_SESSION['usua'])) {
                                                 return false;
                                             }
                                             echo "<script> alert('!cambio de contraseña correcto')
-                                            location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                             </script>";
                                         }//final del else
                                     }catch (PDOException $e){
@@ -105,7 +105,7 @@ if(isset($_SESSION['usua'])) {
                                     }
                                 }else{
                                     echo "<script> alert('La contraseña no cumple con los requisitos')
-                                    location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                                    location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                                     </script>";
                                 }
 
@@ -116,7 +116,7 @@ if(isset($_SESSION['usua'])) {
               }else {
                 echo "<script>
                 alert('Error nombre de usuario y contraseña incorrectos');
-                location.href = '../Vistas/modulos/Login/cambio_contrasena_correo.php';
+                location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
                  </script>";
 
 
