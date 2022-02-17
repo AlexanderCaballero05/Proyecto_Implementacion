@@ -21,7 +21,7 @@
                      que valida que la contraseña tenga minimo una letra mayuscula,minuscula,codigo especial y numeros  */
                     if($clave  <> $confirmar_clave){ //Si las contraseñas no son iguales 
                         echo "<script> alert('Las contraseñas no son iguales')
-                        location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                        location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                         </script>";
                     }
                     else{ 
@@ -33,7 +33,7 @@
                                 $row=$datos->num_rows;
                                 if($row>0){ //si la contraseña es la misma que tiene en el sistema
                                     echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                    location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                                    location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                                     </script>";
                                 }
                                 else{ //si la contraseña es diferente de la que tiene en el sistema
@@ -43,7 +43,7 @@
                                         $fila=$busqueda->num_rows;
                                         if($fila>0){
                                             echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                            location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                                            location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                                             </script>";
                                         }
                                         else{
@@ -61,7 +61,7 @@
                                                     if($resul >0){
                                                         echo "<script> 
                                                         alert('Contraseña cambiada correctamente');
-                                                        location.href = '../Vistas/modulos/Login/login.php';
+                                                        location.href = '../Vistas/modulos/login.php';
                                                         </script>";
                                                         exit;
                                                     }
@@ -69,7 +69,7 @@
                                                 else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
                                                     echo "<script> 
                                                     alert('!Error al ingresar los datos¡');
-                                                    location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                                                    location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                                                     </script>";
                                                     exit;
                                                 }
@@ -83,7 +83,7 @@
                                         return false;
                                     }
                                     echo "<script> alert('!cambio de contraseña correcto')
-                                    location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                                    location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                                     </script>";
                                 }//final del else
                             }catch (PDOException $e){
@@ -92,7 +92,7 @@
                             }
                         }else{
                             echo "<script> alert('La contraseña no cumple con los requisitos')
-                            location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+                            location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
                             </script>";
                         }
                         //Si las contraseñas son iguales
@@ -102,7 +102,7 @@
             }else{
             echo "<script>
             alert('El usuario que ingreso no existe');
-            location.href = '../Vistas/modulos/Login/cambio_contrasena_preguntas.php';
+            location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
             </script>";
             }
             //fin del if else de verificar si existe el usuario en el sistema.

@@ -27,13 +27,13 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
         $filas=$existe->num_rows; // Hago el array para buscar el dato
 
         if($filas>0){ // si es mayor a 1 se encontro el dato, entonces entro la pantalla de recuperacion de correo
-            header("location: ../Vistas/modulos/Login/recuperacion_clave_correo.php"); 
+            header("location: ../Vistas/modulos/recuperacion_clave_correo.php"); 
           
                   }else{
                       
                     echo '<script>
                     alert("Datos incorrectos");
-                    window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
+                    window.location="../Vistas/modulos/metodos_recuperar_clave.php";
                           </script>';
         }
 
@@ -51,13 +51,13 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
         $filas=$existe->num_rows;
 
         if($filas>0){
-            header("location: ../Vistas/modulos/Login/recuperacion_clave_preguntas.php"); 
+            header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
           
                   }else{
                       
                     echo '<script>
                     alert("Datos incorrectos");
-                    window.location="../Vistas/modulos/Login/metodos_recuperar_clave.php";
+                    window.location="../Vistas/modulos/metodos_recuperar_clave.php";
                           </script>';
         }
 
