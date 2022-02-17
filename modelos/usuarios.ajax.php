@@ -1,6 +1,6 @@
 <?php
 
-require_once "../controladores/usuario.contralador.php";
+require_once "../controladores/usuario.controlador.php";
 require_once "usuarios.modelo.php";
 
 class AjaxUsuarios{
