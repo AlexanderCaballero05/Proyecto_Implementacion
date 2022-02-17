@@ -82,7 +82,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                             $oMail->SMTPSecure="tls";
                             $oMail->SMTPAuth=true;
 
-                            $oMail->Username="";//  
+                            $oMail->Username="aacaballero@unah.hn";//  
                             $oMail->Password="*Iamhappy.2020*";
                             $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                             $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
