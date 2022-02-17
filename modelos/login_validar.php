@@ -54,7 +54,7 @@ if(mysqli_connect_errno()){
        }elseif($codigo_estado =="2") { 
          echo "<script> 
         alert('!Bienvenido Usuario¡');
-            window.location='../Vistas/index.php'
+            window.location='../index.php'
             </script>";
                 }else{
 
