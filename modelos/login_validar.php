@@ -20,7 +20,7 @@ if(mysqli_connect_errno()){
    $contrasena = $_POST["Logincontraseña"]; 
 
    
-        $query_select = "SELECT CODIGO_TIPO_ROL FROM TBL_USUARIO
+        $query_select = "SELECT CODIGO_ESTADO FROM TBL_USUARIO
          WHERE nombre_usuario = ?
            AND CONTRASENA = ?";
 
@@ -36,7 +36,7 @@ if(mysqli_connect_errno()){
           echo "Error en la consulta";
           
         } else{
-         $ok=mysqli_stmt_bind_result($resultados,$codigo_tipo_rol);   
+         $ok=mysqli_stmt_bind_result($resultados,$codigo_estado);   
        
        }
        
@@ -44,14 +44,14 @@ if(mysqli_connect_errno()){
        }
        
        
-       if($codigo_estado == "1"){
+       if($codigo_estado == "5"){
        
            echo "<script> 
            alert('!cambie su contrasena¡');
-           window.location='../Vistas/index.php'
+           window.location='../Vistas/modulos/cambio_contrasena_correo.php'
            </script>";
        
-       }elseif($codigo_tipo_rol ="2") { 
+       }elseif($codigo_estado =="2") { 
          echo "<script> 
         alert('!Bienvenido Usuario¡');
             window.location='../Vistas/index.php'
