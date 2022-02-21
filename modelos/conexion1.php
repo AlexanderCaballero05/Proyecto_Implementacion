@@ -1,17 +1,25 @@
 <?php
 
-class Conexion{
+  class Conexion1
+  {     
 
-	static public function conectar(){	
+    function __construct() {
+        
+    }
+    
+      function ConectarDB() {
+        
+        $server = "localhost";
+        $user = "root";
+        $password = "";
+        $database = "db_proyecto_prosecar";
+        
+        $conexion = mysqli_connect($server,$user,$password,$database) or die("Error al conectar a la base de datos.");
 
-		$base = new PDO("mysql:host=localhost;dbname=db_Proyecto_Prosecar",
-						"root",
-						""); 
-
-		$base -> exec("set names utf8");
-
-		return $base;
-	}
-
-}
+        if($conexion){
+            echo "Conexión exitosa.";
+        }
+        
+      }
+  }
 ?>

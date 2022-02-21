@@ -8,7 +8,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost/Proyecto_Rama3/vistas/modulos/login.php",
+            "url": "http://localhost/Plantilla_Prospecta/vistas/login.php",
             "webRoot": "${workspaceFolder}"
         }
     ]

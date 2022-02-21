@@ -1,157 +1,479 @@
-<!-- 
-<?php
-
+<?php 
 session_start();
-
-?> -->
-
-
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Prosecar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administrar Sistema| Inicio </title>
 
-  <!--=====================================
-  =            PLUGING DE CSS             =
-  ======================================-->
+    <link rel="shortcut icon" href="vistas/assets/dist/img/logoparroquia.jpg" type="image/x-icon">
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="Vistas/plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="Vistas/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="Vistas/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="Vistas/plugins/jqvmap/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="Vistas/dist/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="Vistas/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="Vistas/plugins/daterangepicker/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="Vistas/plugins/summernote/summernote-bs4.min.css">
+
+    <!-- CSS STYLES -->
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="vistas/assets/plugins/fontawesome-free/css/all.min.css">
+        <!-- Theme style -->
+        <link rel="stylesheet" href="vistas/assets/dist/css/adminlte.css">
+
+        <link rel="stylesheet" href="vistas/assets/dist/css/index.css">
+
+        <!-- DataTabes CSS -->
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+        <!-- SweetAlert2 -->
+        <link rel="stylesheet" href="vistas/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+
+              <!-- DataTables -->
+  <link rel="stylesheet" href="vistas/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="vistas/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="vistas/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+        
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+
+    <!-- SCRIPT -->
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+        <!-- jQuery -->
+        <script src="vistas/assets/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="vistas/assets/plugins/bootstrap/js/bootstrap.bundle.js"></script>
+        <!-- AdminLTE App -->
+        <script src="vistas/assets/dist/js/adminlte.js"></script>
+        
+        <!-- Datatable js -->
+        <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>    
+        <!-- SweetAlert2 -->
+        <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script>        
+    <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
+
+
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src=" Vistas/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
-
-<!--=====================================
-  =            PLUGING DE JAVASCRIPT      =
-  ======================================-->
-
-<!-- jQuery -->
-<script src="Vistas/plugins/jquery/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="Vistas/plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-
-<!-- Bootstrap 4 -->
-<script src="Vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="Vistas/plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="Vistas/plugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="Vistas/plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="Vistas/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="Vistas/plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="Vistas/plugins/moment/moment.min.js"></script>
-<script src="Vistas/plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="Vistas/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="Vistas/plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="Vistas/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="Vistas/dist/js/adminlte.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="Vistas/dist/js/pages/dashboard.js"></script>
 
 
 <?php
+      if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+ ?>
 
 
- /*=============================================
-=           ENCABEZADO                        =
-=============================================*/ 
-
-include "modulos/encabezado.php";
-
-
-
-/*=============================================
-  =            MENU                             =
+<body class="hold-transition sidebar-mini">
+ <?php
+    echo '<div class="wrapper">'; 
+   /*=============================================
+  =            encabezado                        =
   =============================================*/
+  include "modulos/header_navbar.php";
+   /*=============================================
+  =            menu                        =
+  =============================================*/
+  include "modulos/sidebar_lateral.php";
+  /*=============================================
+  =            CONTENIDO                        =
+  =============================================*/
+  if (isset($_GET["ruta"])){
+    if ( $_GET["ruta"] == "inicio" ||
+         $_GET["ruta"] == "login" ||     
+         $_GET["ruta"] == "salir" ||
+         $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "categorias"){
+      include_once "Modulos/".$_GET["ruta"].".php";
+    }else {
+      include "Modulos/404.php";
+    }
 
-  include "modulos/menu_general.php";
-
-
-  include "modulos/inicioadmin.php";
-
+  }else{
+    include "modulos/inicioadmin.php";
+  }
+  echo '</div>';
   /*=============================================
   =           FOOTER                     =
   =============================================*/
   include "modulos/footer.php";
+}else{
+ ?>
 
-
-  
-
-/*=============================================
-  =            CONTENIDO                        =
-  =============================================*/ 
-
-
-  
-
-   if(isset($_GET["ruta"])){
-
-     if($_GET["ruta"] == "login"){
-       include "modulos/".$GET["ruta"].".php";
-     }
-
-   }else{
-
-     include "../modulos/login.php";
-
-   }
-
+ <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style =" background-image: url(https://wallpaper.dog/large/5439256.jpg); background-size: cover;">
+ <?php
+  include "Modulos/login.php";
+}
 ?>
 
+    </div>
 
+    <!-- ./wrapper -->
+    <script src="vistas/assets/dist/js/demo.js"></script>
+
+    <script>
+      function cargarContenido(contenedor,contenido){
+        $("."+contenedor).load(contenido);
+      }
+  </script>
+
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": true, "autoWidth": false,
+      "buttons": [                    
+        {
+            extend: 'excelHtml5',
+            exportOptions: {
+            columns: [ 1, 2, 3, 4, 5, 6 ]
+                }
+        },  
+        {
+            extend: 'pdfHtml5',
+            exportOptions: {
+            columns: [ 1, 2, 3, 4, 5, 6 ]
+                }
+        },          
+        {
+            extend: 'print',
+            exportOptions: {
+            columns: [ 1, 2, 3, 4, 5, 6 ]
+                }
+        }
+      ]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+  });
+</script>
+
+<script>
+  $('.editbtn').on('click',function(){
+    $tr = $(this).closest('tr');
+    var datos  = $tr.children('td').map(function(){
+    return $(this).text();  
+    });
+
+    $('#edit_id').val(datos[1]);
+    $('#nombre_edit').val(datos[2]);
+    $('#descripcion_edit').val(datos[4]);
+  });
+</script>
+
+<script>
+  $('.deletebtn').on('click',function(){
+    $tr = $(this).closest('tr');
+    var datos  = $tr.children('td').map(function(){
+    return $(this).text();  
+    });
+
+    $('#delete_id').val(datos[1]);
+  });
+</script>
+
+<script>
+  $('.incrementbtn').on('click',function(){
+    $tr = $(this).closest('tr');
+    var datos  = $tr.children('td').map(function(){
+    return $(this).text();  
+    });
+    $('#increment_id').val(datos[1]);
+    $('#nombre_increment').val(datos[2]);
+  });
+</script>
+<script type="text/javascript">
   
-
-    
-
-<?php
-if (isset($_SESSION["iniciarSesion"])&& $_SESSION["iniciarSesion"] == "ok"){
-    echo '<div class="wrapper">';
-
-
-}else{
-
-include "/modulos/Login.login.php";
+  $( function() {
+    $("#cbx_persona").change( function() {
+        if ($(this).val() === "2") {
+           document.getElementById("c").style.display="block";
+        } else {
+            document.getElementById("c").style.display="none";
+        }
+    });
+});
+</script>
+<script type="text/javascript">
+function mostr() {
+  document.getElementById("vi").style.display="block";
 }
-?> 
+function ocultar() {
+  document.getElementById("vi").style.display="none";
+}
+</script>
+<script type="text/javascript">
+function mostrarr() {
+  document.getElementById("vii").style.display="block";
+}
+function ocultarr() {
+  document.getElementById("vii").style.display="none";
+}
+</script>
+<script type="text/javascript">
+function mostrarrr() {
+  document.getElementById("viii").style.display="block";
+}
+function ocultarrr() {
+  document.getElementById("viii").style.display="none";
+}
+</script>
+<script type="text/javascript">
+ function mayus(e) {
+   e.value = e.value.toUpperCase();
+ }
+</script>
+<script type="text/javascript"> function solonumeros(e) {
+       tecla = (document.all) ? e.keyCode : e.which;
+       if (tecla==8) return true;
+       else if (tecla==0||tecla==9)  return true;
+          // patron =/[0-9\s]/;// -> solo letras
+          patron =/[0-9\s]/;// -> solo numeros
+          te = String.fromCharCode(tecla);
+          return patron.test(te);
+        }
+      </script>
+<script>
+  function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = ["8-37-39-46"];
 
- 
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
 
- 
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+}
+function soloNumeros_tel(e)
+{
+        // capturamos la tecla pulsada
+        var teclaPulsada=window.event ? window.event.keyCode:e.which;
+        // capturamos el contenido del input
+        var valor=document.getElementById("tele").value;
 
+        if(valor.length<9)
+        {
+            // 13 = tecla enter
+            // Si el usuario pulsa la tecla enter o el punto y no hay ningun otro
+            // punto
+            if(teclaPulsada==9)
+            {
+              return true;
+            }
 
+            // devolvemos true o false dependiendo de si es numerico o no
+            return /\d/.test(String.fromCharCode(teclaPulsada));
+          }else{
+            return false;
+          }
+        }
+      </script>
+      <script type="text/javascript">
+
+        function quitarespacios(e) {
+
+          var cadena =  e.value;
+          cadena = cadena.trim();
+
+          e.value = cadena;
+
+        };
+
+      </script>
+      <script type="text/javascript">
+  
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
+</script>
+  <script type="text/javascript">
+
+    function sinespacio(e) {
+
+      var cadena =  e.value;
+      var limpia = "";
+      var parts = cadena.split(" ");
+      var length = parts.length;
+
+      for (var i = 0; i < length; i++) {
+        nuevacadena = parts[i];
+        subcadena = nuevacadena.trim();
+
+        if(subcadena != "") {
+          limpia += subcadena + " ";
+        }
+      }
+
+      limpia = limpia.trim();
+      e.value = limpia;
+
+    };
+
+  </script>
+
+  <script type="text/javascript">
+
+    function quitarespacios(e) {
+
+      var cadena =  e.value;
+      cadena = cadena.trim();
+
+      e.value = cadena;
+
+    };
+
+  </script>
+  <script>
+    function mostrarpassword (){
+      var cambio = document.getElementById("ingPassword");
+      if(cambio.type == "password"){
+        cambio.type = "text";
+        $('.icon').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+      }else{
+        cambio.type = "password";
+        $('.icon').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+      }        
+    }
+
+  </script> 
+  <script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+    //Datemask dd/mm/yyyy
+    $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+    //Datemask2 mm/dd/yyyy
+    $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+    //Money Euro
+    $('[data-mask]').inputmask()
+
+    //Date picker
+    $('#reservationdate').datetimepicker({
+        format: 'L'
+    });
+
+    //Date and time picker
+    $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+    //Date range picker
+    $('#reservation').daterangepicker()
+    //Date range picker with time picker
+    $('#reservationtime').daterangepicker({
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: 'MM/DD/YYYY hh:mm A'
+      }
+    })
+    //Date range as a button
+    $('#daterange-btn').daterangepicker(
+      {
+        ranges   : {
+          'Today'       : [moment(), moment()],
+          'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+          'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+          'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+          'This Month'  : [moment().startOf('month'), moment().endOf('month')],
+          'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate  : moment()
+      },
+      function (start, end) {
+        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+      }
+    )
+
+    //Timepicker
+    $('#timepicker').datetimepicker({
+      format: 'LT'
+    })
+
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+    //Colorpicker
+    $('.my-colorpicker1').colorpicker()
+    //color picker with addon
+    $('.my-colorpicker2').colorpicker()
+
+    $('.my-colorpicker2').on('colorpickerChange', function(event) {
+      $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+    })
+
+    $("input[data-bootstrap-switch]").each(function(){
+      $(this).bootstrapSwitch('state', $(this).prop('checked'));
+    })
+
+  })
+  // BS-Stepper Init
+  document.addEventListener('DOMContentLoaded', function () {
+    window.stepper = new Stepper(document.querySelector('.bs-stepper'))
+  })
+
+  // DropzoneJS Demo Code Start
+  Dropzone.autoDiscover = false
+
+  // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+  var previewNode = document.querySelector("#template")
+  previewNode.id = ""
+  var previewTemplate = previewNode.parentNode.innerHTML
+  previewNode.parentNode.removeChild(previewNode)
+
+  var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+    url: "/target-url", // Set the url
+    thumbnailWidth: 80,
+    thumbnailHeight: 80,
+    parallelUploads: 20,
+    previewTemplate: previewTemplate,
+    autoQueue: false, // Make sure the files aren't queued until manually added
+    previewsContainer: "#previews", // Define the container to display the previews
+    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+  })
+
+  myDropzone.on("addedfile", function(file) {
+    // Hookup the start button
+    file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+  })
+
+  // Update the total progress bar
+  myDropzone.on("totaluploadprogress", function(progress) {
+    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+  })
+
+  myDropzone.on("sending", function(file) {
+    // Show the total progress bar when upload starts
+    document.querySelector("#total-progress").style.opacity = "1"
+    // And disable the start button
+    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+  })
+
+  // Hide the total progress bar when nothing's uploading anymore
+  myDropzone.on("queuecomplete", function(progress) {
+    document.querySelector("#total-progress").style.opacity = "0"
+  })
+
+  // Setup the buttons for all transfers
+  // The "add files" button doesn't need to be setup because the config
+  // `clickable` has already been specified.
+  document.querySelector("#actions .start").onclick = function() {
+    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+  }
+  document.querySelector("#actions .cancel").onclick = function() {
+    myDropzone.removeAllFiles(true)
+  }
+  // DropzoneJS Demo Code End
+</script>
 
 </body>
 </html>

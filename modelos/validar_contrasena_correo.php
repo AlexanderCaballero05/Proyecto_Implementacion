@@ -1,21 +1,21 @@
 <?php
  session_start();
+ include_once "conexion3.php";
 include_once "conexion.php";
-include_once "conexion3.php";
 ?>
 <?php
-if(isset($_SESSION['usua'])) {
-    $nomUser=$_SESSION['usua'];
+if(isset($_SESSION['usuar'])) {
+    $nomUser=$_SESSION['usuar'];
     $contraActual=($_POST['contraAnte']);
 
     try{   
           //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
                
-        $consultar_usuario = $db->prepare("SELECT * FROM tbl_usuario
-                            WHERE NOMBRE_USUARIO= (?)
-                            AND CONTRASENA ='$contraActual'"); 
-        $consultar_usuario->execute(array($nomUser));
-        $row=$consultar_usuario->fetchColumn();
+          $consultar_usuario = $db->prepare("SELECT * FROM tbl_usuario
+          WHERE NOMBRE_USUARIO= (?)
+          AND CONTRASENA ='$contraActual'"); 
+            $consultar_usuario->execute(array($nomUser));
+            $row=$consultar_usuario->fetchColumn();
                         // $sentencia_sp->execute(array($nomUser,$contraActual));//ejecutar el procedimiento almacenado
            // $filas=$sentencia_sp->fetchColumn();
               if($row>0){
@@ -72,13 +72,12 @@ if(isset($_SESSION['usua'])) {
                                                    
                                                             $resul=$conn->query($update);
                                                             if($resul >0){
-                                                                echo "<script> 
-                                                                alert('Contraseña cambiada correctamente');
-                                                                location.href = '../Vistas/modulos/login.php';
-                                                                </script>";
-                                                                exit;
-                                                            }
-                                                        }
+                                                                       echo "<script>
+                                                                    alert('Contraseña cambiada correctamente');
+                                                                    location.href = '../index.php';
+                                                                            </script>";
+                                                                                                                }
+                                                                                                            }
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
                                                             echo "<script> 
                                                             alert('!Error al ingresar los datos¡');

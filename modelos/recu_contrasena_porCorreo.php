@@ -21,7 +21,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
         if($filas==0){
             echo '<script>
-            alert(" El Usuario Ingresado no Existe ");
+            alert("Datos incorrectos");
             window.location="../Vistas/modulos/metodos_recuperar_clave.php";
                   </script>';
         } else{ //construir el query para traer el dato del correo al cual se enviara la clave de recuperacion
@@ -39,7 +39,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../Vistas/modulos/cambio_contrasena_correo.php";
+                         window.location="../login";
                                </script>';
                
                             require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
@@ -76,15 +76,18 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
 
                             $oMail= new PHPMailer(true);
 
+
+                           // $parametros_mail="SELECT "
+
                             $oMail->isSMTP();
                             $oMail->Host='smtp-mail.outlook.com';
                             $oMail->Port=587;
                             $oMail->SMTPSecure="tls";
                             $oMail->SMTPAuth=true;
 
-                            $oMail->Username="aacaballero@unah.hn";//  
-                            $oMail->Password="";
-                            $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
+                            $oMail->Username="luz.montoya@unah.hn";//  
+                            $oMail->Password="Luzmamm.07";
+                            $oMail->setFrom("luz.montoya@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                             $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                             $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
                             <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>

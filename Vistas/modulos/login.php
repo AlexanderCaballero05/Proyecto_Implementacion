@@ -1,5 +1,9 @@
 
 
+<?php 
+session_destroy();
+session_start();
+?>
 
 <!doctype html>
 <html lang="en">
@@ -19,7 +23,7 @@
        }
        .bg{
         background-size: cover;
-         background-image:url(../../../assets/imagenes/fondo_login.jpg);
+         background-image:url(assets/imagenes/fondo_login.jpg);
          background-position: center center;
        }
   </style>
@@ -33,29 +37,29 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-                <form action="../../modelos/login_validar.php" method="POST">
+                <form method="POST">
           
 
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="Loginusuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="Logincontraseña" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
+                      <input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
                   </div>
                   <div class="d-grid">
                       <button name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
-                     <span><a style="color:black; text-decoration:none" href="metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
+                     <span><a style="color:black; text-decoration:none" href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
                      </br>
-                     <span><a style=" text-decoration:none" href="./auto_registro.php">Registrate </a></span>
+                     <span><a style=" text-decoration:none" href="vistas/modulos/auto_registro.php">Registrate </a></span>
                    </div>
                    <?php
 
-     //$login = new ControladorUsuarios();
-     //$login -> ctrIngresoUsuario();
+     $login = new ControladorUsuarios();
+     $login -> ctrIngresoUsuario();
 
             ?>
 
