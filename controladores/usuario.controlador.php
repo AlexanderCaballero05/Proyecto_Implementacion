@@ -9,202 +9,108 @@ cLass ControladorUsuarios
 
 static public function ctrIngresoUsuario(){
 
-	if(isset($_POST["usuario"])){
+if(isset($_POST["ingUsuario"])){
 
-	include "conexion.php";
+include "conexion3.php";
 
-		$Usuario = $_POST["usuario"];
-        $fechaactual=strtotime(date("d-m-Y H:i:00",time()));
-		$tabla = "tbl_usuarios";
-		$item = "nombre_usuario";
-		$tbl= "tbl_parametros";
-		$ite = "codigo_parametro";
-		$val =1;
-		$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $Usuario);
-		$respu = ModeloUsuarios::MdlMostrarparametros($tbl, $ite, $val);
-		$contra =$_POST["contrasena"];
+$valor = $_POST["ingUsuario"];
+$fechaactual=strtotime(date("d-m-Y H:i:00",time()));
 
-								if ($respuesta["nombre_usuario"] == $_POST["usuario"] && $respuesta["AES_DECRYPT(contrasena,'SI-PP')"] == $contra && $respuesta["codigo_estado"] ==2)
-									{
+$tabla = "tbl_usuario";
 
-										$_SESSION["iniciarSesion"] = "ok";
+$item = "NOMBRE_USUARIO";
+$valor = $_POST["ingUsuario"];
+$usuario = $_POST["ingUsuario"];
 
-										$va = $_POST["usuario"];
-										
-										$u=($_POST["usuario"]);
+$ta= "tbl_parametros";
+$ite = "CODIGO_PARAMETRO";
+$val =1;
+$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
+$respu = ModeloUsuarios::MdlMostrarparametros($ta, $ite, $val);
+$contra =$_POST["ingPassword"];
 
-													$_SESSION['vario'] =$u;
-													$_SESSION['userrr'] =$respuesta["codigo_tipo_rol"];
+if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 2)
+{
 
-													echo '<script>
-										Swal.fire({
-											type: "success",
-											title: "!Bienvenido al Sistema!",
-											showConfirmButton: "true",
-											confirmButtonText: "Entrar",
-											closeOnConfirm: "false",
-											background:"rgb(0,0,0,0.95)"
+    $_SESSION["iniciarSesion"] = "ok";
 
-											}).then((result)=>{
+    $va = $_POST["ingUsuario"];
+    
+    $u=($_POST["ingUsuario"]);
 
-												if (result.value){
+                $_SESSION['vario'] =$u;
+                $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
+                echo "<script>
+                  alert('Bienvenido al sistema');
+                  location.href = 'inicioadmin';
+                        </script>";
+}else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
+    $_SESSION['vario'] =$_POST["ingUsuario"];
+    echo "<script>
+                  alert('Debe contestar las preguntas de seguridad y cambiar su contraseña provisional');
+                  location.href = 'inicioadmin';
+                        </script>";
+                    }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==5){
+                        $_SESSION['usuar'] =$_POST["ingUsuario"];
+                        echo "<script>
+                              alert('Contraseña provisional correcta, debe cambiar su contraseña por razones de seguridad');
+                              location.href = 'Vistas/modulos/cambio_contrasena_correo.php';
+                                    </script>";
+}else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_USUARIO"] ==3){
+    echo "<script>
+    alert('Usuario Inhabilitado, contacte al administrador');
+    location.href = 'login';
+          </script>";
+} 
+else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_USUARIO"] ==4){
+    echo "<script>
+    alert('Usuario bloqueado, contacte al administrador');
+    location.href = 'login';
+          </script>";
+} else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"]) ){
+$servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "db_proyecto_prosecar";
 
-													window.location="../Vistas/index.php"
-												}
-												});
-												</script>';
-                        //preguntar por el parametro =16
-									}else if ($respuesta["nombre_usuario"] == $_POST["usuario"] && $respuesta["AES_DECRYPT(contrasena,'SI-PP')"] == $contra && $respuesta["CODIGO_ESTADO"] ==1){
-										echo '<script>
-										Swal.fire({
-											type: "success",
-											title: "!Debe contestar las preguntas de seguirdad y cambiar su contraseña provisional!",
-											showConfirmButton: "true",
-											confirmButtonText: "Entrar",
-											closeOnConfirm: "false",
-											background:"rgb(0,0,0,0.95)"
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if($conn->connect_error){
+            die("Conexión fallida: ".$conn->connect_error);
 
-											}).then((result)=>{
+        }
+$valor = $_POST["ingUsuario"];
+$query = "UPDATE tbl_usuario SET 
+CODIGO_USUARIO= 4
+WHERE Nombre_usuario='$valor'";
+ echo "<script>
+ alert('Usuario bloqueado, contacte al administrador');
+ location.href = 'login';
+       </script>";
+$dato=$conn->query($query);
+} else {	
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_proyecto_prosecar";
 
-												if (result.value){
+$conn = new mysqli($servername, $username, $password, $dbname);
+if($conn->connect_error){
+die("Conexión fallida: ".$conn->connect_error);
 
-													location.href = "vistas/modulos/preseguridad.php";
-												}
-												});
-												</script>';
-                     
-											}else if ($respuesta["nombre_usuario"] == $_POST["usuario"] && $respuesta["AES_DECRYPT(Contrasena,'SI-PP')"] == $contra && $respuesta["codigo_estado"] ==17){
-												echo '<script>
-												Swal.fire({
-													type: "success",
-													title: "!Contraseña de recuperacion correcta, por razones de seguridad debe restablecer su contraseña!",
-													showConfirmButton: "true",
-													confirmButtonText: "Entrar",
-													closeOnConfirm: "false",
-													background:"rgb(0,0,0,0.95)"
-		
-													}).then((result)=>{
-		
-														if (result.value){
-		
-															location.href = "vistas/login/recuperar_clave.php";
-														}
-														});
-														</script>';
-									}else if ($respuesta["nombre_usuario"] == $_POST["usuario"] && $respuesta["AES_DECRYPT(contrasena,'SI-PP')"] == $contra && $respuesta["codigo_estado"] ==3){
-													$va = $_POST["ingUsuario"];
-													include "conexion3.php";
-											echo '<script>
-											Swal.fire({
-												type: "error",
-												title: "!Usuario Inhabilitado!",
-												showConfirmButton: "true",
-												confirmButtonText: "Intentar de nuevo",
-												closeOnConfirm: "false",
-												background:"rgb(0,0,0,0.95)"
-
-												}).then((result)=>{
-
-													if (result.value){
-
-														location.href = "vistas/login/recuperar_clave.php"";// preguntar esta direccion
-													}
-													});
-													</script>';
-									} 
-									else if ($respuesta["nombre_usuario"] == $_POST["usuario"] && $respuesta["AES_DECRYPT(contrasena,'SI-PP')"] == $contra && $respuesta["codigo_estado"] ==4){
-										$va = $_POST["usuario"];
-										include "conexion.php";
-								echo '<script>
-								Swal.fire({
-									type: "error",
-									title: "!Usuario Bloqueado!",
-									showConfirmButton: "true",
-									confirmButtonText: "Intentar de nuevo",
-									closeOnConfirm: "false",
-									background:"rgb(0,0,0,0.95)"
-
-									}).then((result)=>{
-
-										if (result.value){
-
-											window.location = "login";
-										}
-										});
-										</script>';
-						} else if(($respuesta["Par_valor"]==$respu["Valor"])and ($respuesta["AES_DECRYPT(contrasena,'SI-PP')"] <> $_POST["contrasena"]) ){
-              $db_host_name="localhost";
-              $db_name="bd_prueba2_prosecar";
-              $db_user_name="root";
-              $db_password="";	
-
-							$conn = new mysqli($db_host_name,   $db_name, $db_user_name,  $db_password);
-											if($conn->connect_error){
-												die("Conexión fallida: ".$conn->connect_error);
-
-											}
-							$usuario = $_POST["Usuario"];
-							$query = "UPDATE tbl_ms_usuarios SET 
-						     codigo_estado =4
-						    WHERE nombre_usuario='$valor'";
-							echo '<script>
-							Swal.fire({
-								type: "error",
-								title: "!Usuario Bloqueado!",
-								showConfirmButton: "true",
-								confirmButtonText: "Intentar de nuevo",
-								closeOnConfirm: "false",
-								background:"rgb(0,0,0,0.95)"
-
-								}).then((result)=>{
-
-									if (result.value){
-
-										window.location = "login";
-									}
-									});
-									</script>';
-						    $dato=$conn->query($query);
-						} else {
-              $db_host_name="localhost";
-              $db_name="bd_Prueba2_Prosecar";
-              $db_user_name="root";
-              $db_password="";	
-
-							$conn = new mysqli($db_host_name,   $db_name, $db_user_name,  $db_password);
-							if($conn->connect_error){
-								die("Conexión fallida: ".$conn->connect_error);
-
-							}
-			$va = $_POST["usuario"];
-      //preguntar por la tbla de segmento 
-			$query = "UPDATE tbl_parametros_usuario  SET 
-			Par_Valor=Par_valor+1
-		   WHERE codigo_usuario=(SELECT codigo_usuario From tbl_usuarios where nombre_usuario = '$va') AND Codigo_parametro = 1;";
-		   $dato=$conn->query($query);
-	echo '<script>
-	Swal.fire({
-		type: "error",
-		title: "!Usuario y Contraseña Incorrectos !",
-		showConfirmButton: "true",
-		confirmButtonText: "Intentar de nuevo",
-		closeOnConfirm: "false",
-		background:"rgb(0,0,0,0.95)"
-
-		}).then((result)=>{
-
-			if (result.value){
-
-				window.location = "login";
-			}
-			});
-			</script>';				
-														
-									}
-
-
-															}
-														}
+}
+$va = $_POST["ingUsuario"];
+$query = "UPDATE tbl_parametros_usuarios SET 
+PAR_VALOR=(PAR_VALOR+1)
+WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$va') AND CODIGO_PARAMETRO = 3;";
+$dato=$conn->query($query);
+echo "<script>
+alert('Usuario y contraseña incorrectos');
+location.href = 'index.php';
+</script>";				
+                    
+}
+}
+}
 
 /*=============================================
 =            REGISTRO DE USUARIO              =
@@ -216,10 +122,10 @@ static public function ctrIngresoUsuario(){
   =            MOSTRAR USUARIO             =
   ======================================--*/
 
-  static public function ctrMostrarUsuarios($item, $usuario){
+  static public function ctrMostrarUsuarios($item, $valor){
 
-  	$tabla = "tbl_usuarios";
-  	$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $usuario );
+  	$tabla = "tbl_usuario";
+  	$respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 
   	return $respuesta;
   }

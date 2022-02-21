@@ -1,0 +1,9 @@
+.menu_lateral{
+    position: relative;
+}
+
+.nav_profile{
+    position: absolute;
+    bottom: 0;
+    /* left: 0; */
+}

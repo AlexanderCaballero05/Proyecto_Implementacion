@@ -55,45 +55,46 @@
                 <!--LOGIN USUARIO -->
 
                 
-              <form  action=""   class="formulario" id="formulario">
+              <form  action="../../modelos/autoregistro_validar"  method="POST" class="formulario" id="formulario">
 
 
                    <!-- Datos que se agregarán a la tabla personas -->
+                 
                     <h5>Datos Personales</h5>
                     <hr>
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre">
+                       <input type="text" name="nombre1" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre">
+                         <input type="text" name="nombre2" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido">
+                       <input type="text" name="apellido1" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido">
+                         <input type="text" name="apellido2" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
                     <div class="row mb-4">
                     <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
-                       <input type="text" class="form-control" placeholder="0000-0000-0000" aria-label="dni">
+                       <input type="text" name="dni" class="form-control" placeholder="0000-0000-0000" aria-label="dni">
                     </div>
                      <div class="col">
                          <label for="sexo" class="form-label">Sexo:</label>
-                         <select id="inputState" class="form-select">
-                             <option>...</option>
-                             <option>Femenino</option>
-                             <option>Masculino</option>
+                         <select name="sexo" class="form-select">
+                             <option >...</option>
+                             <option value="f">Femenino</option>
+                             <option value="m">Masculino</option>
                           </select>
                     </div>
                     </div>
@@ -101,11 +102,11 @@
                     <div class="row mb-4">
                     <div class="col">
                        <label for="fecha" class="form-label">Fecha de Nacimiento:</label>
-                       <input type="date" class="form-control"  aria-label="fecha nacimiento">
+                       <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento">
                     </div>
                      <div class="col">
                      <label for="lugar" class="form-label">Lugar de Nacimiento:</label>
-                         <input type="text" class="form-control" placeholder="Tegucigalpa" aria-label="lugar">
+                         <input type="text" name="lugarna" class="form-control" placeholder="Tegucigalpa" aria-label="lugar" onkeyup="mayus(this);">
                     </div>
                     </div>
 
@@ -152,7 +153,7 @@
                       <button name = "btnregistrar" type="submit" class="btn btn-primary btn-block">REGISTRATE</button>
                   </div>
                   <div class="d-grid mb-2">
-                      <button name = "btnregistrar" type="submit" class="btn btn-danger btn-            block">CANCELAR</button>
+                      <button name = "btncancelar" type="submit" class="btn btn-danger btn-            block">CANCELAR</button>
                   </div>
                   
               </form>
@@ -160,7 +161,7 @@
         </div>
     <div>
 
-    <script src="../../../js/cambio_clave.js"></script>
+    <script src="../../js/cambio_clave.js"></script>
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 

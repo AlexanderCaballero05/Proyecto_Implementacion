@@ -12,9 +12,10 @@
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT NOMBRE_USUARIO,AES_DECRYPT(CONTRASENA,'PROSECAR'),CODIGO_TIPO_ROL,CODIGO_ESTADO,p.Par_valor, FROM $tabla U
+			$stmt = Conexion::conectar()->prepare("SELECT NOMBRE_USUARIO,CONTRASENA,CODIGO_TIPO_ROL,CODIGO_ESTADO,p.Par_valor FROM $tabla U
 			INNER JOIN TBL_PARAMETROS_USUARIOS P ON P.CODIGO_USUARIO = U.CODIGO_USUARIO
 			WHERE $item =:$item and P.CODIGO_PARAMETRO = 1;");
+
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -43,7 +44,7 @@
 
 		if($ite != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT PAR_VALOR FROM $ta WHERE $ite = :$ite");
+			$stmt = Conexion::conectar()->prepare("SELECT VALOR FROM $ta WHERE $ite = :$ite");
 
 			$stmt -> bindParam(":".$ite, $val, PDO::PARAM_STR);
 
