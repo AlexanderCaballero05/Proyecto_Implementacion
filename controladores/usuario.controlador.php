@@ -41,23 +41,24 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
                 echo '<script>
-                Swal.fire({
-                    type: "success",
-                    title: "!Bienvenido al Sistema!",
-                    showConfirmButton: "true",
-                    confirmButtonText: "Entrar",
-                    closeOnConfirm: "false",
-                    background:"rgb(245, 245, 245)"
 
-                    }).then((result)=>{
+										Swal.fire({
+											type: "success",
+											title: "!Bienvenido al Sistema!",
+											showConfirmButton: "true",
+											confirmButtonText: "Entrar",
+											closeOnConfirm: "false",
+											background:"rgb(245, 245, 245)"
 
-                        if (result.value){
+											}).then((result)=>{
 
-                            window.location = "inicioadmin";
-                        }
-                        });
-                        </script>';
-                        //cuando el usuario tiene codigo Nuevo se envia hacer el ingreso de preguntas de seguridad
+												if (result.value){
+
+													window.location = "inicioadmin";
+												}
+												});
+												</script>';
+
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
 
     

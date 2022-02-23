@@ -85,7 +85,7 @@ session_start();
          $_GET["ruta"] == "categorias"){
       include_once "Modulos/".$_GET["ruta"].".php";
     }else {
-      include "Modulos/404.php";
+      include "modulos/inicioadmin.php";
     }
 
   }else{
