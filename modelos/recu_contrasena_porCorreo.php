@@ -31,11 +31,12 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                AND p.CODIGO_PERSONA = u.CODIGO_PERSONA
                AND u.NOMBRE_USUARIO = '$usuario'";    
 
-                $revision_correo=$conn->query($consultar_correo); //se hace la consulta a la base de datos
+                $revision_correo =$conn->query($consultar_correo);
+                 //se hace la consulta a la base de datos
              if($revision_correo->num_rows>0){
+                 
                  while($fila=$revision_correo->fetch_assoc()){
                   $correo= $fila['CORREO_PERSONA'];
-
 
                             echo '<script>
                             alert("Verifique su Correo se ha enviado la clave");
