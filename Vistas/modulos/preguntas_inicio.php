@@ -1,13 +1,17 @@
 <?php
   session_start();
+  $_SESSION['vario']; 
   include_once 'conexion2.php';
-  $_SESSION['usua'] ;
   $db = new Conexion();
   $con = $db->conectar();
   $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;");
   $comando->execute();
   $resultado = $comando->fetchall(PDO::FETCH_ASSOC);
 ?>
+
+
+
+ 
 
 <!doctype html>
 <html lang="en">
@@ -33,30 +37,32 @@
       <div class="container-fluid w-50  mt-5" >
           <div class="card   md-12 lg-5 xl-6 rounded-end" style="width: 45rem;" >
               <div class="card-header text-white  mb-3 cabeza">
-                <h4 class=" text-center ">Verificar preguntas de seguridad</h4>
+                <h4 class=" text-center ">Seleccione sus preguntas de seguridad</h4>
               </div>
               <!-- INCIO FOMULARIO-->
-              <form class="form-horizontal" action="../../modelos/recu_contrasena_preguntas.php" method="POST">
+              <form class="form-horizontal" action="../../modelos/validar_pregu_inicio.php" method="POST">
                 <div class="card-body" >
                     <div class="form-group row mb-3">
                        <label  class="col-md-4 col-form-label">Usuario:</label>
                        <div class="col-md-8"> <!--Muesrta el nombre del usuario que esta registrado en el sistema,pra cambiar contraseña -->
-                          <input type="text"   name="user" id="user" class="form-control" value="<?php echo ($_SESSION['usua']);?>" readonly required="" >
+                          <input type="text" name="user" id="user" class="form-control" value="<?php echo ($_SESSION['vario']);?>" readonly required="" >
                       </div>
                     </div>
+                    
                    <div class="form-group row mb-3">
                      <label  class="col-md-4 col-form-label ">Seleccione la pregunta:</label>
                         <div class="col-md-8">
-                            <select class="form-select" aria-label="Default select example" name="pregunta_usuario" id="pregunta_usuario">
+                            <select class="form-select" aria-label="Default select example" name="pregunta_usuario1" id="pregunta_usuario1">
                               <Option class="custom-selected">Selecione una pregunta</option>
                               <?php //Muestra los datos de la tabla de preguntas en el select
                               foreach($resultado as $pregunta){
                               $valuep =$pregunta['CODIGO_PREGUNTAS'];
                               $pre =  $pregunta['PREGUNTA'];
                               ?>
-                              <option value="<?php echo $valuep?>"><?php echo $pre;?></option>
+                              <option value="<?php echo $valuep?>"> <?php echo $pre;?></option>
                               <?php
                                 }
+                              
                               ?>
                             </select>
                         </div>
@@ -64,7 +70,7 @@
                    <div class="form-group row mb-3">
                       <label  class="col-md-4 col-form-label">Respuesta:</label>
                       <div class="col-md-8"> <!-- -->
-                      <input type="text" name="respuesta" id="respuesta" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
+                      <input type="text" name="respuesta1" id="respuesta1" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
                          placeholder="RESPUESTA DE SEGURIDAD" required="">
                        </div>
                     </div>
@@ -73,8 +79,8 @@
                      <button type="reset" onclick="location.href='../../index.php'" class="btn btn-block btn-warning btn-flat col-5 mx-auto">
                          Cancelar
                       </button>
-                       <button type="submit" class="btn btn-success col-5 mx-auto verde" name="verificar_res" id="verificar_res">
-                          Verificar
+                       <button type="submit" class="btn btn-success col-5 mx-auto verde"  name="verificar_res" id="verificar_res">
+                          Siguiente
                        </button>
                    </div></br> 
               </form>

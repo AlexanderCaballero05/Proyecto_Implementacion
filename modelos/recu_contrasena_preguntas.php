@@ -12,6 +12,7 @@ if(isset($_SESSION['usua'])) {
          $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
          $sentencia->execute(array($usuario));
          $row=$sentencia->fetchColumn();
+
         //$filas=$existe->num_rows;
         if($row>0){
             $user = $row;

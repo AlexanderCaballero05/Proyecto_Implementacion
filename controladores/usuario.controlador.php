@@ -44,25 +44,33 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                   alert('Bienvenido al sistema');
                   location.href = 'inicioadmin';
                         </script>";
+                        //cuando el usuario tiene codigo Nuevo se envia hacer el ingreso de preguntas de seguridad
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
+
+    
     $_SESSION['vario'] =$_POST["ingUsuario"];
     echo "<script>
                   alert('Debe contestar las preguntas de seguridad y cambiar su contraseña provisional');
-                  location.href = 'inicioadmin';
+                  location.href = 'Vistas/modulos/preguntas_inicio.php';
                         </script>";
+
+                        
+
+
+                        //Cuando se debe restablecer la contrasena porque se hizo la recuperacion por metodo correo
                     }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==5){
                         $_SESSION['usuar'] =$_POST["ingUsuario"];
                         echo "<script>
                               alert('Contraseña provisional correcta, debe cambiar su contraseña por razones de seguridad');
                               location.href = 'Vistas/modulos/cambio_contrasena_correo.php';
                                     </script>";
-}else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_USUARIO"] ==3){
+}else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==3){
     echo "<script>
     alert('Usuario Inhabilitado, contacte al administrador');
     location.href = 'login';
           </script>";
 } 
-else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_USUARIO"] ==4){
+else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==4){
     echo "<script>
     alert('Usuario bloqueado, contacte al administrador');
     location.href = 'login';
@@ -80,13 +88,14 @@ $servername = "localhost";
         }
 $valor = $_POST["ingUsuario"];
 $query = "UPDATE tbl_usuario SET 
-CODIGO_USUARIO= 4
+CODIGO_ESTADO = 4
 WHERE Nombre_usuario='$valor'";
  echo "<script>
  alert('Usuario bloqueado, contacte al administrador');
  location.href = 'login';
        </script>";
 $dato=$conn->query($query);
+
 } else {	
 $servername = "localhost";
 $username = "root";
@@ -101,7 +110,7 @@ die("Conexión fallida: ".$conn->connect_error);
 $va = $_POST["ingUsuario"];
 $query = "UPDATE tbl_parametros_usuarios SET 
 PAR_VALOR=(PAR_VALOR+1)
-WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$va') AND CODIGO_PARAMETRO = 3;";
+WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$va') AND CODIGO_PARAMETRO = 1;";
 $dato=$conn->query($query);
 echo "<script>
 alert('Usuario y contraseña incorrectos');
