@@ -30,6 +30,9 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
             header("location: ../Vistas/modulos/recuperacion_clave_correo.php"); 
           
                   }else{
+
+
+                    
                       
                     echo '<script>
                     alert("Datos incorrectos");

@@ -20,6 +20,7 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
       
 
         if($filas==0){
+            
             echo '<script>
             alert("Datos incorrectos");
             window.location="../Vistas/modulos/metodos_recuperar_clave.php";
