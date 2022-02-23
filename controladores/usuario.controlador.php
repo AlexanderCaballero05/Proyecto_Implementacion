@@ -63,10 +63,24 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
     
     $_SESSION['vario'] =$_POST["ingUsuario"];
-    echo "<script>
-                  alert('Debe contestar las preguntas de seguridad y cambiar su contraseña provisional');
-                  location.href = 'Vistas/modulos/preguntas_inicio.php';
-                        </script>";
+    echo '<script>
+
+    Swal.fire({
+        type: "success",
+        title: "!Tendra que modificar su contrasena!",
+        showConfirmButton: "true",
+        confirmButtonText: "Entrar",
+        closeOnConfirm: "false",
+        background:"rgb(245, 245, 245)"
+
+        }).then((result)=>{
+
+            if (result.value){
+
+                window.location = "Vistas/modulos/preguntas_inicio.php";
+            }
+            });
+            </script>';
 
                         
 
@@ -79,16 +93,45 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                               location.href = 'Vistas/modulos/cambio_contrasena_correo.php';
                                     </script>";
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==3){
-    echo "<script>
-    alert('Usuario Inhabilitado, contacte al administrador');
-    location.href = 'login';
-          </script>";
+    //Usuario Inhabilitado, contacte al administrador
+    echo '<script>
+
+    Swal.fire({
+        type: "success",
+        title: "!Usuario Inhabilitado, contacte al administrador!",
+        showConfirmButton: "true",
+        confirmButtonText: "cerrar",
+        closeOnConfirm: "false",
+        background:"rgb(245, 245, 245)"
+
+        }).then((result)=>{
+
+            if (result.value){
+
+                window.location = "login";
+            }
+            });
+            </script>';
 } 
 else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==4){
-    echo "<script>
-    alert('Usuario bloqueado, contacte al administrador');
-    location.href = 'login';
-          </script>";
+    echo '<script>
+
+    Swal.fire({
+        type: "success",
+        title: "!Usuario bloqueado, contacte al administrador!",
+        showConfirmButton: "true",
+        confirmButtonText: "cerrar",
+        closeOnConfirm: "false",
+        background:"rgb(245, 245, 245)"
+    
+        }).then((result)=>{
+    
+            if (result.value){
+    
+                window.location = "login";
+            }
+            });
+            </script>';
 } else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"]) ){
 $servername = "localhost";
         $username = "root";
@@ -104,10 +147,26 @@ $valor = $_POST["ingUsuario"];
 $query = "UPDATE tbl_usuario SET 
 CODIGO_ESTADO = 4
 WHERE Nombre_usuario='$valor'";
- echo "<script>
- alert('Usuario bloqueado, contacte al administrador');
- location.href = 'login';
-       </script>";
+
+
+echo '<script>
+
+Swal.fire({
+    type: "success",
+    title: "!Usuario bloqueado, contacte al administrador!",
+    showConfirmButton: "true",
+    confirmButtonText: "cerrar",
+    closeOnConfirm: "false",
+    background:"rgb(245, 245, 245)"
+
+    }).then((result)=>{
+
+        if (result.value){
+
+            window.location = "login";
+        }
+        });
+        </script>';
 $dato=$conn->query($query);
 
 } else {	
@@ -126,10 +185,26 @@ $query = "UPDATE tbl_parametros_usuarios SET
 PAR_VALOR=(PAR_VALOR+1)
 WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$va') AND CODIGO_PARAMETRO = 1;";
 $dato=$conn->query($query);
-echo "<script>
-alert('Usuario y contraseña incorrectos');
-location.href = 'index.php';
-</script>";				
+echo '<script>
+
+Swal.fire({
+    type: "success",
+    title: "!Usuario y contraseña incorrectos!",
+    showConfirmButton: "true",
+    confirmButtonText: "cerrar",
+    closeOnConfirm: "false",
+    background:"rgb(245, 245, 245)"
+
+    }).then((result)=>{
+
+        if (result.value){
+
+            window.location = "index.php";
+        }
+        });
+        </script>';
+
+			
                     
 }
 }
