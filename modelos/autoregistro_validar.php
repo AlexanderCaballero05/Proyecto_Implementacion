@@ -12,7 +12,7 @@ $fecha = $_POST['fechana'];
 $lugar = $_POST['lugarna'];
 $fechaActual = date('Y-m-d');
 
-//TABLA SEXO (CAMPO SEPARADO DE LA TABLA PERSONA)
+
 $sexo = $_POST['sexo'];
 
 //TABLA CORREO QUE ESTA RELACIONADO CON PERSONAS
@@ -23,36 +23,83 @@ $usuario = $_POST['ingusuario'];
 $contrasena = $_POST['ingcontrasena'];
 
 
-//INSERTS A LA BASE DE DATOS
+// VERIFICAR LOS DATOS NO EXISTAN EN LA BASE DE DATOS ANTES DE INSERTAR LOS DATOS
+try{
+
+  //nombre del usuario
+  $queryusuario = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE NOMBRE_USUARIO = '$usuario'");
+  $fila = mysqli_fetch_array($queryusuario);
+  $buscaru = mysqli_fetch_array($queryusuario);
+
+  //DNI o numero de identidad del usuario
+  $querydni = mysqli_query($conn,"SELECT * FROM TBL_PERSONA WHERE DNI = '$dni'");
+  $filadni = mysqli_fetch_array($querydni);
+  $buscardni = mysqli_fetch_array($querydni);
+
+  if(($fila > 0)||($usuario == $buscaru)){
+    echo "<script>
+    alert('El Nombre de usuario $usuario ya se encuentra registrado');
+        window.location = '../Vistas/modulos/auto_registro.php';
+        </script>";
+  }elseif(($filadni > 0)||($dni == $buscardni)){
+   echo "<script>
+    alert('El numero de identidad $dni ya se encuentra registrado');
+        window.location = '../Vistas/modulos/auto_registro.php';
+        </script>";
+  
+
+
+  // SI LOS DATOS DE USUARIO E IDENTIDAD NO EXISTEN PUEDE INSERTAR LOS DATOS EN LA BASE DE DATOS
+  }else{
+
+    //INSERTS A LA BASE DE DATOS
 
 if(isset($_POST['btnregistrar'])){
   try {
 
   $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
-  $queryregistrarp = "INSERT INTO TBL_PERSONA(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION)
-   VALUES('$primernombre','$segundonombre','$primerapellido','$segundoapellido','$dni','$fecha','$lugar', '$fechaActual','3','NO DEFINIDO', '$fechaActual','$fechaActual')";
+  $queryregistrarp = "INSERT INTO TBL_PERSONA(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
+   VALUES('$primernombre','$segundonombre','$primerapellido','$segundoapellido','$dni','$fecha','$lugar', '$fechaActual','3','NO DEFINIDO', '$fechaActual','$fechaActual','$sexo')";
   $resultado=$conn->query( $queryregistrarp);
+  
+  //CODIGO PERSONA: para poder relacionar las otras tablas de correo y usuario con el código de persona
+  $codigo = mysqli_insert_id($conn);
 
 
-  $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA) VALUES ('$correo')";
+  $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
 
   $resultado=$conn->query( $querycorreo);
 
 
-  $queryregisusuario = "INSERT INTO TBL_USUARIO(NOMBRE_USUARIO, CODIGO_ESTADO,CONTRASENA) VALUES  ('$usuario','3','$contrasena')";
+  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO,CONTRASENA) VALUES  ('$codigo','$usuario','3','$contrasena')";
   $resultado=$conn->query( $queryregisusuario);
   
-  $queryregisexo = "INSERT INTO tbl_sexo (sexo) VALUES  ('$sexo')";
-  $resultado=$conn->query( $queryregisexo);
+  
   
 
   $conn->commit();
-echo 'Datos insertados';
+  echo "<script>
+  alert('Registro Exitoso');
+  window.location = '../index';
+   </script>";
 } catch (PDOException $e) {
 // si ocurre un error hacemos rollback para anular todos los insert
 $conn->rollback();
 echo $e->getMessage();;
+echo "<script>
+                          alert('Error al crear registro');
+                          window.location = 'login';
+                           </script>";
 }}
+  }
+
+} catch(PDOException $e){
+  echo $e->getMessage();  
+  return false;
+}
+
+
+
 
 
 //VALIDACION DE CORREO CON VALORES REQUERIDO DOMINIO, @
@@ -68,21 +115,10 @@ alert('direccion de correo no valida');
 }
 }
 
-//VALIDACION QUE EL NOMBRE DE USUARIO NO SE REPITA
-//  sleep(1);
-//  if (isset($_POST)) {
-//      $nombre_usuario = (string)$_POST['NOMBRE_USUARIO'];
- 
-//      $result = $connexion->query(
-//          'SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO = "'.strtolower($nombre_usuario).'"'
-//      );
- 
-//      if ($result->num_rows > 0) {
-//         echo '<div class="alert alert-danger"><strong>Oh no!</strong> Nombre de usuario no disponible.</div>';
-//    } else {
-//          echo '<div class="alert alert-success"><strong>Enhorabuena!</strong> Usuario disponible.</div>';
-//      }
-//  }
+
+     
+   
+
 
 ?>
 
