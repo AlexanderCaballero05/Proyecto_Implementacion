@@ -78,7 +78,7 @@ if(isset($_POST['btnregistrar'])){
   $resultado=$conn->query( $querycorreo);
 
 
-  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO,CONTRASENA) VALUES  ('$codigo','$usuario','3','$contrasena')";
+  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO,CONTRASENA) VALUES  ('$codigo','$usuario','6','$contrasena')";
   $resultado=$conn->query( $queryregisusuario);
   
   

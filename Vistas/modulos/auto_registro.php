@@ -65,22 +65,22 @@
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" name="nombre1" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                       <input type="text" name="nombre1" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" name="nombre2" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                         <input type="text" name="nombre2" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" name="apellido1" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                       <input type="text" name="apellido1" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" name="apellido2" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                         <input type="text" name="apellido2" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
@@ -94,7 +94,7 @@
                     <div class="row mb-4">
                     <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
-                       <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" maxlength="13" onkeypress="return solonumero(event)">
+                       <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" minlength="13" maxlength="13" onkeypress="return solonumero(event)">
                     </div>
                      <div class="col">
                          <label for="sexo" class="form-label">Sexo:</label>
