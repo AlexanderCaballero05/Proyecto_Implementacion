@@ -52,7 +52,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="ediusuarios" class="nav-link" >
+                  <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-circle nav-icon"></i>
                     <p>Editar Usuarios</p>
                   </a>

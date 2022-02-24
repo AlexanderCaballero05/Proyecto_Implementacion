@@ -50,7 +50,9 @@ session_start();
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>    
         <!-- SweetAlert2 -->
-        <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script>        
+        <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script> 
+        <!-- SweetAlert2 version reciente :v -->
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
 
@@ -81,6 +83,7 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "categorias"){
       include_once "Modulos/".$_GET["ruta"].".php";
     }else {
@@ -114,9 +117,11 @@ session_start();
         $("."+contenedor).load(contenido);
       }
   </script>
-
+ 
+ 
 
 <script>
+  
   $(function () {
     $("#example1").DataTable({
       "responsive": true, "lengthChange": true, "autoWidth": false,
@@ -124,7 +129,7 @@ session_start();
         {
             extend: 'excelHtml5',
             exportOptions: {
-            columns: [ 1, 2, 3, 4, 5, 6 ]
+            columns: [ 1, 2, 3, 4, 5, 6]
                 }
         },  
         {
@@ -136,7 +141,7 @@ session_start();
         {
             extend: 'print',
             exportOptions: {
-            columns: [ 1, 2, 3, 4, 5, 6 ]
+            columns: [ 1, 2, 3, 4, 5, 6  ]
                 }
         }
       ]

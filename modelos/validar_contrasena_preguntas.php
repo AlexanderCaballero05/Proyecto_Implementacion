@@ -11,7 +11,6 @@
             $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
             $sentencia->execute(array($usuario));
             $row=$sentencia->fetchColumn();
-            
            if($row>0){
                 $usuari = $row;// Asigna el codigo al que pertenece el usuario de la tabla tbl_usario
                 if(isset($_POST['cambiar_clave'])){
