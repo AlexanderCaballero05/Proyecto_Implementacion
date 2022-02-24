@@ -23,6 +23,7 @@ $correo = $_POST['ingcorreo'];
 //DATOS PARA LA TABLA DE USUARIOS
 $usuario = $_POST['ingusuario'];
 $contrasena = $_POST['ingcontrasena'];
+$fecha_vencimiento = date("Y-m-d",strtotime($fechaActual."+ 60 days"));
 
 
 
@@ -71,14 +72,14 @@ if(isset($_POST['btnregistrar'])){
   $codigo = mysqli_insert_id($conn);
 
   $querytelefono = "INSERT INTO TBL_TELEFONO (CODIGO_TELEFONO, CODIGO_PERSONA) VALUES('$telefono','$codigo')";
+  $resultado=$conn->query( $querytelefono);
+
 
   $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
-   
-  $resultado=$conn->query( $querytelefono);
   $resultado=$conn->query( $querycorreo);
 
 
-  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO,CONTRASENA) VALUES  ('$codigo','$usuario','6','$contrasena')";
+  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA, FECHA_VENCIMIENTO, FECHA_CREACION) VALUES  ('$codigo','$usuario','6','3','$contrasena','$fecha_vencimiento','$fechaActual')";
   $resultado=$conn->query( $queryregisusuario);
   
   
