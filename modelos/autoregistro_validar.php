@@ -57,7 +57,8 @@ try{
 if(isset($_POST['btnregistrar'])){
   try {
 
-  $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
+  //ENCRIPTAR LA CONTRASEÑA
+  //$contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
   $queryregistrarp = "INSERT INTO TBL_PERSONA(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
    VALUES('$primernombre','$segundonombre','$primerapellido','$segundoapellido','$dni','$fecha','$lugar', '$fechaActual','3','NO DEFINIDO', '$fechaActual','$fechaActual','$sexo')";
   $resultado=$conn->query( $queryregistrarp);

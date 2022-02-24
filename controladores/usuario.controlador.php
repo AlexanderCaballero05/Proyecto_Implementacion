@@ -132,6 +132,25 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
             }
             });
             </script>';
+} else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 6){
+         echo '<script>
+        
+         Swal.fire({
+            type: "success",
+            title: "!Su cuenta no está activada, contacte al administrador!",
+             showConfirmButton: "true",
+             confirmButtonText: "cerrar",
+             closeOnConfirm: "false",
+             background:"rgb(245, 245, 245)"
+            
+                }).then((result)=>{
+            
+                    if (result.value){
+            
+                        window.location = "login";
+                    }
+                    });
+                    </script>';
 } else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"]) ){
 $servername = "localhost";
         $username = "root";

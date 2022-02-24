@@ -87,12 +87,12 @@
                     <div class="row mb-4">
                     <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
-                       <input type="text" name="dni" class="form-control" placeholder="0000-0000-0000" aria-label="dni" maxlength="15">
+                       <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" maxlength="13" onkeypress="return solonumero(event)">
                     </div>
                      <div class="col">
                          <label for="sexo" class="form-label">Sexo:</label>
                          <select name="sexo" class="form-select">
-                             <option >...</option>
+                             <option value="">--Seleccionar--</option>
                              <option value="f">Femenino</option>
                              <option value="m">Masculino</option>
                           </select>
@@ -102,11 +102,11 @@
                     <div class="row mb-4">
                     <div class="col">
                        <label for="fecha" class="form-label">Fecha de Nacimiento:</label>
-                       <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento">
+                       <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max="2011-01-01" min="1950-01-01">
                     </div>
                      <div class="col">
                      <label for="lugar" class="form-label">Lugar de Nacimiento:</label>
-                         <input type="text" name="lugarna" class="form-control" placeholder="Tegucigalpa" aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
+                         <input type="text" name="lugarna" class="form-control" placeholder="Ciudad" aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
                     </div>
                     </div>
 
@@ -124,7 +124,7 @@
                   <div class="col">
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
-                      <input name ="ingcorreo" type="text" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" >
+                      <input name ="ingcorreo" type="email" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" >
                   </div>
                   </div>
                   </div>
@@ -153,7 +153,7 @@
                       <button name = "btnregistrar" type="submit" class="btn btn-primary btn-block">REGISTRATE</button>
                   </div>
                   <div class="d-grid mb-2">
-                      <button name = "btncancelar" type="submit" class="btn btn-danger btn-            block">CANCELAR</button>
+                      <button name = "btncancelar" type="submit" class="btn btn-danger btn-block">CANCELAR</button>
                   </div>
                   
               </form>
@@ -177,7 +177,7 @@
       function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
-       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz123456789";
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
        especiales = ["8-37-39-46"];
 
        tecla_especial = false
@@ -233,4 +233,15 @@ function quitarespacios(e) {
 
 };
 </script>
+
+<script type="text/javascript"> function solonumero(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla==8) return true;
+        else if (tecla==0||tecla==9)  return true;
+       // patron =/[0-9\s]/;// -> solo letras
+        patron =/[0-9\s]/;// -> solo numeros
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    }
+	</script>
 
