@@ -53,7 +53,7 @@
                            Reiniciar my contrase&ntilde;a
                        </button>
 
-                       <button type="reset" onclick="location.href='login.php'" class="btn btn-clock bg-warning btn-flat">
+                       <button type="reset" onclick="location.href='../../index.php'" class="btn btn-clock bg-warning btn-flat">
                           cancelar
                       </button>
                    </div>               

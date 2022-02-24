@@ -54,7 +54,7 @@
                              Recuperar via preguntas secretas
                        </button>
 
-                       <button type="reset" onclick="location.href='login.php'" class="btn btn-block btn-warning btn-flat">
+                       <button type="reset" onclick="location.href='../../index.php'" class="btn btn-block btn-warning btn-flat">
                         cancelar
                      </button>
                      

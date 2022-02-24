@@ -58,9 +58,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="estudiantes" class="nav-link">
+                  <a href="Formbitacora" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Estudiantes</p>
+                    <p>Accion de Usuarios</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -226,21 +226,28 @@
                 </a>
               </li>
               
-
+              
             </ul>
           </li>
 
-          <li class="nav-header">Sobre el sistema</li>
-            <li class="nav-item">
-                <a href="" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                    Bitacora
-                    <span class="badge badge-info right"></span>
-                </p>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa-security"></i>
+              <p>
+              Sobre el sistema
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href=""class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Bitacora</p>
+                  <a href="bitacora" class="nav-link" >
                 </a>
-            </li>
-          
+              </li>
+
+                  
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

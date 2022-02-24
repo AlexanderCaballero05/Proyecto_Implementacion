@@ -5,6 +5,7 @@
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($parametro));
   $row=$sentencia->fetchColumn();
+  
   if($row>0){
     $valor = $row;
   }

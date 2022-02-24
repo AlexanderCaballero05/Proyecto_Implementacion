@@ -55,7 +55,7 @@
                 <!--LOGIN USUARIO -->
 
                 
-              <form  action="../../modelos/autoregistro_validar"  method="POST" class="formulario" id="formulario">
+              <form  action="../../modelos/autoregistro_validar.php"  method="POST" class="formulario" id="formulario">
 
 
                    <!-- Datos que se agregarán a la tabla personas -->
@@ -65,29 +65,29 @@
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" name="nombre1" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                       <input type="text" name="nombre1" class="form-control" placeholder="Primer Nombre" aria-label="primer nombre" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" name="nombre2" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                         <input type="text" name="nombre2" class="form-control" placeholder="Segundo Nombre" aria-label="segundo nombre" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
                     <div class="row mb-4">
                     <div class="col">
                       
-                       <input type="text" name="apellido1" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                       <input type="text" name="apellido1" class="form-control" placeholder="Primer Apellido" aria-label="primer apellido" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                          
-                         <input type="text" name="apellido2" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                         <input type="text" name="apellido2" class="form-control" placeholder="Segundo Apellido" aria-label="segundo apellido" onkeyup="mayus(this);" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 
                     <div class="row mb-4">
                     <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
-                       <input type="text" name="dni" class="form-control" placeholder="0000-0000-0000" aria-label="dni">
+                       <input type="text" name="dni" class="form-control" placeholder="0000-0000-0000" aria-label="dni" maxlength="15">
                     </div>
                      <div class="col">
                          <label for="sexo" class="form-label">Sexo:</label>
@@ -106,7 +106,7 @@
                     </div>
                      <div class="col">
                      <label for="lugar" class="form-label">Lugar de Nacimiento:</label>
-                         <input type="text" name="lugarna" class="form-control" placeholder="Tegucigalpa" aria-label="lugar" onkeyup="mayus(this);">
+                         <input type="text" name="lugarna" class="form-control" placeholder="Tegucigalpa" aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
                     </div>
                     </div>
 
@@ -117,14 +117,14 @@
                   <div class="col">
                   <div class="input-group mb-4"  >
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                      <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario" onkeyup="mayus(this);" minlength="3" maxlength="15" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                   </div>
                   </div>
 
                   <div class="col">
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
-                      <input name ="ingcorreo" type="text" class="form-control" placeholder="Ingresa un correo electronico"  >
+                      <input name ="ingcorreo" type="text" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" >
                   </div>
                   </div>
                   </div>
