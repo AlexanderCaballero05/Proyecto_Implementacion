@@ -2,6 +2,7 @@
 
 require_once "conexion1.php";
 
+
 class ModeloUsuarios{
     /*=============================================
 	MOSTRAR USUARIOS

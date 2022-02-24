@@ -1,8 +1,8 @@
 <?php
-
 cLass ControladorUsuarios
 {
 
+    
 /*=============================================
 =            INGRESO DE USUARIO              =
 =============================================*/
@@ -40,8 +40,15 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
-                echo '<script>
 
+                //llamada a la funcion bitacora
+                $codigoObjeto=1;
+                $accion='Ingreso al sistema';
+                $descripcion='Autenticacion Correcta';
+                bitacora($codigoObjeto, $accion,$descripcion);
+
+
+                                        echo '<script>
 										Swal.fire({
 											type: "success",
 											title: "!Bienvenido al Sistema!",
@@ -58,6 +65,8 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 												}
 												});
 												</script>';
+
+                            
 
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
 
