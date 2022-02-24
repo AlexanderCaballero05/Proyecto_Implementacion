@@ -141,7 +141,7 @@
                   <div class="col">
                   <div class="input-group mb-4" id="grupo__confirmar_clave">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
+                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="15" >
                       <p class="formulario__input-error">La contraseña tiene que coincidir con la contraseña anterior.</p>
                   </div>
                   </div>
