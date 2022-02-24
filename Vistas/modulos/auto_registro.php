@@ -86,6 +86,13 @@
 
                     <div class="row mb-4">
                     <div class="col">
+                       <label for="telefono" class="form-label">Número de teléfono:</label>
+                       <input type="text" name="telefono" class="form-control" placeholder="99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="20" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                    </div>
+                    </div>
+
+                    <div class="row mb-4">
+                    <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
                        <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" maxlength="13" onkeypress="return solonumero(event)">
                     </div>

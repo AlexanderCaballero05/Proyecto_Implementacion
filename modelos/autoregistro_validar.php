@@ -12,8 +12,10 @@ $fecha = $_POST['fechana'];
 $lugar = $_POST['lugarna'];
 $fechaActual = date('Y-m-d');
 
-
 $sexo = $_POST['sexo'];
+
+//DATOS PARA LA TABLA TELEFONO
+$telefono = $_POST['telefono'];
 
 //TABLA CORREO QUE ESTA RELACIONADO CON PERSONAS
 $correo = $_POST['ingcorreo'];
@@ -21,6 +23,8 @@ $correo = $_POST['ingcorreo'];
 //DATOS PARA LA TABLA DE USUARIOS
 $usuario = $_POST['ingusuario'];
 $contrasena = $_POST['ingcontrasena'];
+
+
 
 
 // VERIFICAR LOS DATOS NO EXISTAN EN LA BASE DE DATOS ANTES DE INSERTAR LOS DATOS
@@ -66,9 +70,11 @@ if(isset($_POST['btnregistrar'])){
   //CODIGO PERSONA: para poder relacionar las otras tablas de correo y usuario con el código de persona
   $codigo = mysqli_insert_id($conn);
 
+  $querytelefono = "INSERT INTO TBL_TELEFONO (CODIGO_TELEFONO, CODIGO_PERSONA) VALUES('$telefono','$codigo')";
 
   $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
-
+   
+  $resultado=$conn->query( $querytelefono);
   $resultado=$conn->query( $querycorreo);
 
 
