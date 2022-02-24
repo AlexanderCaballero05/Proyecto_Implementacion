@@ -78,7 +78,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a onclick="cargar_contenido('contenido_principal','esta disticas/grafica1.php')"class="nav-link">
+                  <a oclass="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Graficas de pastel</p>
                   </a>
