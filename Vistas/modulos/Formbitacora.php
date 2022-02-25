@@ -14,6 +14,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 }
 */?>
 
+<?php 
+                  $codigoObjeto=1;
+                    $accion='Ingreso a la bitacora universal';
+                    $descripcion= 'Consultar la informacion de la bitacora';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    ?>
+
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
 <div class="content-wrapper">
 

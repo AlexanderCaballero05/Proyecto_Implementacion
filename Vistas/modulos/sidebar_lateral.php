@@ -1,3 +1,4 @@
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral">
 
@@ -47,20 +48,22 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="categorias" class="nav-link" >
-                    <i class="far fa-circle nav-icon"></i>
+                   <i class="far fa-circle nav-icon"></i>
                     <p>Registrar Usuarios</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
+
                     <i class="far fa-circle nav-icon"></i>
                     <p>Editar Usuarios</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="Formbitacora" class="nav-link">
+                  
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Accion de Usuarios</p>
+                    <p>Bitacora Universal</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -243,7 +246,7 @@
                 <a href=""class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bitacora</p>
-                  <a href="bitacora" class="nav-link" >
+                  <a href="formGestion_bitacora" class="nav-link" >
                 </a>
               </li>
 
