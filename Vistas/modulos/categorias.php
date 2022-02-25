@@ -1,6 +1,18 @@
 <?php
-  include "../../modelos/conexion3.php";
+
+  include_once "conexionpdo.php";
   include_once "conexion3.php";
+  $parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($parametro));
+  $row=$sentencia->fetchColumn();
+  
+  if($row>0){
+    $valor = $row;
+  }
+  // llamar al procedimiento almacenado
+
+
   
 ?>
 <head>
@@ -45,7 +57,7 @@
                <form id="FORMPERSONAS" method="POST" >
                   <div class="card-body">
                     <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> <strong>Datos Generales persona</strong></h2>
+                      <h2 class="card-title"> <strong> Generales persona</strong></h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
@@ -85,7 +97,7 @@
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label for="identidad" class="control-label">Fecha Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_nacimiento" max="2002-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required="" >
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -136,7 +148,7 @@
                       <div class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Fecha Baja:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01">
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -164,22 +176,21 @@
                       <div class="col-md-4" id="segunda_fila"><!--INICIO SEXO--> 
                          <label for="cbx_persona" class="control-label">Estado</label>
                          <div class="form-group">
-                         <select name="estado" id="txtestado" class="form-control" >
-                            <Option class="custom-selected">Selecione un estado</option>
-                             <?php //Se traen los datos de la tabla tbl_estado en el select de estado
-                               $query = "SELECT CODIGO_ESTADO,NOMBRE FROM tbl_estado;";
-                               $result = $conn->query($query);
-                               if ($result->num_rows > 0) {
-                               while($row = $result->fetch_assoc()) {
-                                  $codigo_estado = $row['CODIGO_ESTADO'];
-                                  $estado = $row['NOMBRE'];
-                              ?>
-                            <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                              <?php
-                                }
-                                }
-                              ?>
-                          </select>
+                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="estado" id="estado" required="">
+                            <Option class="custom-selected">Selecione</option>
+                                <?php 
+                                $query = "SELECT * FROM tbl_estado WHERE NOMBRE = 'NUEVO' ";
+                                $resultadod=$conn->query($query);                
+                                if ($resultadod->num_rows > 0) {
+                                while($row = $resultadod->fetch_assoc()) { 
+                                $codigo_estado = $row['CODIGO_ESTADO'];
+                                $estado = $row['NOMBRE'];
+                                ?>
+                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
+                              <?php 
+                                } 
+                                }?>
+                              </select> 
                          </div>
                       </div>
                       <div class="col-md-4" id="tercera_fila"><!--INICIO ROL--> 
@@ -209,15 +220,10 @@
                         <label for="apellido" class="control-label">Contraseña</label>
 
                         <div class="form-group">
-                            <input class="form-control"  minlength="5" maxlength="<?php echo "$valor";?>" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
+                            <input class="form-control"  minlength="5" maxlength="<?php echo "$valor"?>" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
                         </div>
                       </div>
-                      <div class="col-md-4" id="quinta_fila"><!--INICIO de FECHA DE VENCIMIENTO-->
-                        <label for="apellido" class="control-label">Fecha Vencimiento</label>
-                        <div class="form-group">
-                            <input class="form-control"  onKeyDown="sinespacio(this);" type="date" name="fecha_nacimiento"    >
-                        </div>
-                      </div>
+                      
                     </div>
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                   </div><!--Fin del card body del form -->
@@ -261,5 +267,5 @@
            document.getElementById('quinta_fila').style.display = "none";
         }
     });
- }); //este codigo si me costo 
+  }); //este codigo si me costo 
 </script>

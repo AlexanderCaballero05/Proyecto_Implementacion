@@ -4,7 +4,7 @@ $username = "root";
 $password = "";
 $dbname = "db_proyecto_Prosecar";
 try {
-    $db= new PDO( "mysql:host=localhost;dbname=db_proyecto_Prosecar",
+    $db= new PDO( "mysql:host=localhost;dbname=db_proyecto_prosecar",
                   "root",
                   "", 
                   array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));           
