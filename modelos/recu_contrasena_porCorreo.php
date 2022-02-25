@@ -1,6 +1,56 @@
 <?php
 include_once "conexion.php";
+include_once "conexion3.php";
+  $parametro ="ADMIN_SERVIDOR_CORREO";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($parametro));
+  $row=$sentencia->fetchColumn();
+  
+  if($row>0){
+    $valor = $row;
+  }
 ?>
+
+<?php
+include_once "conexion.php";
+include_once "conexion3.php";
+  $parametro1 ="ADMIN_CPUERTO";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($parametro1));
+  $row1=$sentencia1->fetchColumn();
+  
+  if($row1>0){
+    $valor1 = $row1;
+  }
+?>
+
+<?php
+include_once "conexion.php";
+include_once "conexion3.php";
+  $parametro2 ="ADMIN_CUSUARIO";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($parametro2));
+  $row2=$sentencia2->fetchColumn();
+  
+  if($row2>0){
+    $valor2 = $row2;
+  }
+?>
+
+
+<?php
+include_once "conexion.php";
+include_once "conexion3.php";
+  $parametro3 ="ADMIN_CPASSWORD";
+  $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia3->execute(array($parametro3));
+  $row3=$sentencia3->fetchColumn();
+  
+  if($row3>0){
+    $valor3 = $row3;
+  }
+?>
+
 
 
 <?php
@@ -82,14 +132,14 @@ $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
                            // $parametros_mail="SELECT "
 
                             $oMail->isSMTP();
-                            $oMail->Host='smtp-mail.outlook.com';
-                            $oMail->Port=587;
+                            $oMail->Host=($valor);
+                            $oMail->Port=($valor1);
                             $oMail->SMTPSecure="tls";
                             $oMail->SMTPAuth=true;
 
-                            $oMail->Username="luz.montoya@unah.hn";//  
-                            $oMail->Password="Luzmamm.07";
-                            $oMail->setFrom("luz.montoya@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
+                            $oMail->Username="$valor2";//  
+                            $oMail->Password="$valor3";
+                            $oMail->setFrom("$valor2"); // direccion de correo de destino hacia los correos de usuarios
                             $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                             $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
                             <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>

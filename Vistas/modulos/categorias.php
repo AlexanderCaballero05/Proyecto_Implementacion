@@ -1,8 +1,16 @@
 <?php
-  include "../../modelos/conexion3.php";
   include_once "conexion3.php";
   
 ?>
+
+
+<?php 
+                  $codigoObjeto=1;
+                    $accion='Ingreso a la tabla de registro de usuarios';
+                    $descripcion= 'Aqui se pueden crear un usuario';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+
+                    ?>
 <head>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/
@@ -220,6 +228,7 @@
                       </div>
                     </div>
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                    
                   </div><!--Fin del card body del form -->
                </form> <!-- Final del form de registar persona -->
             </div>

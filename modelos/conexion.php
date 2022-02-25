@@ -1,13 +1,12 @@
 <?php
-    $db_host_name="localhost";
-    $db_user_name="root";
-    $db_password="";
-    $db_name="db_proyecto_Prosecar";
-    
-    
+	$servername = "localhost";
+    $username = "root";
+  	$password = "";
+  	$dbname = "db_proyecto_prosecar";
 
-
-$conn = new mysqli($db_host_name, $db_user_name, $db_password, $db_name );
-if($conn->connect_error){
-    die("conexion fallida: ".$conn->connect_error);
-}
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	$conn -> set_charset("utf8");
+      if($conn->connect_error){
+        die("Conexión fallida: ".$conn->connect_error);
+      }
+?>

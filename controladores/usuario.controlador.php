@@ -40,6 +40,16 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
+
+
+
+                    //llamado a la funcion
+                    $codigoObjeto=1;
+                    $accion='Ingreso al modulo de administrador';
+                    $descripcion= 'Usuario se autentifico';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+
+
                 echo '<script>
 
 										Swal.fire({
@@ -151,7 +161,7 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
                     }
                     });
                     </script>';
-} else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"]) ){
+} else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"])  ){
 $servername = "localhost";
         $username = "root";
         $password = "";
@@ -188,7 +198,7 @@ Swal.fire({
         </script>';
 $dato=$conn->query($query);
 
-} else {	
+} elseif(($respuesta["NOMBRE_USUARIO"])!='ADMIN') {	
 $servername = "localhost";
 $username = "root";
 $password = "";
