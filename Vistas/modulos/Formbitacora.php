@@ -14,6 +14,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 }
 */?>
 
+<?php 
+                  $codigoObjeto=1;
+                    $accion='Ingreso a la bitacora universal';
+                    $descripcion= 'Consultar la informacion de la bitacora';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    ?>
+
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
 <div class="content-wrapper">
 
@@ -42,7 +49,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
         <center>
 
-
+<!--
 <form action="rbitacora" method="POST"  role="form" >
 
 
@@ -63,7 +70,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <button type="submit"  name="excel" class="btn btn-warning"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>
 
-
+-->
 
 
 
@@ -157,31 +164,28 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
               </thead>
               <tbody>
               <?php   
-            include_once "modelos/conexion2.php";
+            include_once "Conexion1.php";
             ?>
                 <!-- es la conexion de la base para que muestre los datos en el datagrip-->
-                <?php /*
+                <?php 
 
  //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
-                   $desde1= $_SESSION['bdesde'];
-$hasta1= $_SESSION['bhasta'];
+                //   $desde1= $_SESSION['bdesde'];
+//$hasta1= $_SESSION['bhasta'];
  //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
-                    $queryi = "SELECT * FROM `tbl_bitacora_sistema`
-            WHERE  `Fec_bitacora` BETWEEN '$desde1' AND '$hasta1'";
+                    $queryi = "SELECT * FROM tbl_bitacora_sistema";
                            //llamando los datos de la base y almacenadolos en variables 
                     $resulta = $conn->query($queryi);
                     if ($resulta->num_rows > 0) {
                         // output data of each row
                         while($row = $resulta->fetch_assoc()) {
-                          $var9 = $row['Cod_bitacora'];
-                          $var1 = $row['Cod_usuario'];
-                          $var2 = $row['Tabla'];
-                          $var3 = $row['Cod_registro'];
-                          $var4 = $row['Campo'];
-                          $var5 = $row['Actividad'];
-                          $var6 = $row['Val_actual'];
-                          $var7 = $row['Val_anterior'];
-                          $var8 = $row['Fec_bitacora'];
+                          $var1 = $row['CODIGO_BITACORA'];
+                          $var2 = $row['CODIGO_USUARIO'];
+                          $var3 = $row['CODIGO_OBJETO'];
+                          $var4 = $row['FECHA'];
+                          $var5 = $row['ACCION'];
+                          $var6 = $row['DESCRIPCION'];
+                          
                            
 
                     ?>
@@ -195,15 +199,13 @@ $hasta1= $_SESSION['bhasta'];
 				 <td class="text-center"><?php echo $var4 ?></td>
 				 <td class="text-center"><?php echo $var5 ?></td>
                  <td class="text-center"><?php echo $var6 ?></td>
-				 <td class="text-center"><?php echo $var7 ?></td>
-                 <td class="text-center"><?php echo $var8 ?></td>
-                         </form>
+				
                     </div>
                     <?php
                       }
   }
                         
-              */      ?>
+                   ?>
                   </tr>
                 </tbody>
 

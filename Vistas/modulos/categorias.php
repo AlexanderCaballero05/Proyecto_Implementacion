@@ -1,6 +1,8 @@
 <?php
 
+
   include_once "conexionpdo.php";
+
   include_once "conexion3.php";
   $parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
@@ -15,6 +17,15 @@
 
   
 ?>
+
+
+<?php 
+                  $codigoObjeto=1;
+                    $accion='Ingreso a la tabla de registro de usuarios';
+                    $descripcion= 'Aqui se pueden crear un usuario';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+
+                    ?>
 <head>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/
@@ -226,6 +237,7 @@
                       
                     </div>
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                    
                   </div><!--Fin del card body del form -->
                </form> <!-- Final del form de registar persona -->
             </div>

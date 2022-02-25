@@ -5,8 +5,8 @@
  include_once "conexion3.php";
 ?>
 <?php
-    if(isset($_SESSION['usua'])){ //Verificar que haya datos en la variable de sesion
-        $usuario= $_SESSION['usua']; //asigna la variable de sesion
+    if(isset($_SESSION['vario'])){ //Verificar que haya datos en la variable de sesion
+        $usuario= $_SESSION['vario']; //asigna la variable de sesion
         try{
             $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
             $sentencia->execute(array($usuario));

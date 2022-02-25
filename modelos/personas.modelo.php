@@ -1,10 +1,16 @@
 <?php
   session_start();
   include_once 'conexion3.php';
+
   include_once 'conexion.php';
   include_once 'conexion2.php';
 
+
+  include_once 'function_bitacora.php';
+
 ?>
+
+
 
 <?php
   if(isset($_POST['identidad'])){
@@ -104,6 +110,7 @@
                                    $resultado_telefono=$conn->query($querytelefono);
 
                                   //registrar el usuario en tbl_usuario 
+
                                   $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION,FECHA_VENCIMIENTO,CREADO_POR) 
                                   VALUES('$codigo','$nombre_usuario','$estado', '$rol','$contrasena','$fechaActual','$fecha_vencimiento','$user_sesion')";
                                   $resultado_usuario=$conn->query($queryregisusuario);
@@ -121,6 +128,33 @@
                                     exit;
                                   }
                                  
+                      $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION) 
+                                  VALUES('$codigo','$nombre_usuario','$estado', '$rol','$contrasena',$fechaActual)";
+                                  $resultado_usuario=$conn->query( $queryregisusuario);
+
+                                  
+
+                            
+
+
+
+
+                                  echo "<script> 
+                                  alert('usuario registrado correctamente');
+                                  location.href = 'registrar_personas';
+                                  </script>";
+                                  exit;
+
+
+                                  
+                                  $codigoObjeto=1;
+                                  $accion='Registro';
+                                  $descripcion= 'Registro de un Usuario';
+                                  bitacora($codigoObjeto, $accion,$descripcion);
+
+
+
+
                                 }
                               }catch(PDOException $e){
                                 echo $e->getMessage(); 
@@ -130,20 +164,26 @@
                           }else{ //si no es un tipo de persona administrador o tutor,es decir un estudiante
                            try{
                               //Insertar en las respectivas tablas (tbl_persona,,tbl_correo_electonico)
-                              $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
+                            //  $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
                               $registrar_persona = "INSERT INTO tbl_persona(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
                               VALUES('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento', '$fechaActual','$tipo_persona','NO DEFINIDO', '$fechaActual','NO DEFINIDO','$sexo')";
 
                               $resultado_insert =$conn->query($registrar_persona);
                               if($resultado_insert > 0){
+
+
+                              
+                                
                                  //CODIGO PERSONA: 
                                 $codigo = mysqli_insert_id($conn);
                                 $querycorreo = " INSERT INTO tbl_correo_electronico(correo_persona, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
                                 $resultado_correo=$conn->query( $querycorreo);
 
+
                                 
                                 $querytelefono = " INSERT INTO tbl_telefono(CODIGO_TELEFONO, CODIGO_PERSONA,NUMERO_TELEFONO) VALUES ('$telefono','$codigo','$telefono')";
                                 $resultado_telefono=$conn->query($querytelefono);
+
 
                                 echo "<script> 
                                 alert('persona registrada correctamente');
@@ -188,6 +228,7 @@
 
   if(isset($_POST['CODUSUARIO'])) { 
     if (isset($_POST['ACT_PERSONA'])) {
+
         $CODUSUARIO = ($_POST['CODUSUARIO']);
         $USUARIO = ($_POST['NOMUSUARIO']); 
         $PASS = ($_POST['CONUSUARIO']);
@@ -195,6 +236,69 @@
         $ESTADO = ($_POST['ESTADOUSUARIO']);
         $fecha = ($_POST['FECHA_VENCIMIENTO']);
             try{
+
+      $CODUSUARIO = ($_POST['CODUSUARIO']);
+      $USUARIO = ($_POST['NOMUSUARIO']); 
+      $PASS = ($_POST['CONUSUARIO']);
+      $ROL = ($_POST['ROLUSUARIO']);
+      $ESTADO = ($_POST['ESTADOUSUARIO']);
+      try{
+        //Declaras parámetros de salida
+        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_usuario WHERE NOMBRE_USUARIO = ?");
+        // llamar al procedimiento almacenado
+        $sentencia->execute(array($USUARIO));
+        $row=$sentencia->fetchColumn();
+        if ($row>0){ 
+          echo "<script>
+          alert('Ya existe una persona registrada con el nombre de usuario: $USUARIO');
+          window.location = 'ediusuarios';
+          </script>";
+        }else{
+          try{
+            $sql = "CALL Sp_editar_usuarios('$CODUSUARIO','$ROL','$ESTADO','$USUARIO','$PASS');";
+            $consulta=$conn->query($sql);
+            if ($consulta>0) {
+
+
+     
+
+
+              echo "<script>
+               Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Usuario registrado exitosamente',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              </script>";
+
+
+              include_once 'function_bitacora.php';
+              $codigoObjeto=1;
+              $accion='Modificacion';
+              $descripcion= 'Se edito un Usuario ';
+              bitacora($codigoObjeto, $accion,$descripcion);
+            }else{ 
+              echo "<script>
+              alert('¡Error al modificar al usuario!');
+              window.location = 'ediusuarios';
+              </script>";
+            }
+           return true;
+          }catch(PDOException $e) {
+            echo $e->getMessage();  
+            return false;
+          }
+        }
+        return true; //FIN DEL ELSE
+      }catch(PDOException $e) {
+        echo $e->getMessage();  
+        return false;
+      }//FINAL DEL TRY CATCH PRINCIPAL 
+    }// FINAL DEL IF SEGUNDO 
+  }//FINAL DEL IF PRINCIPAL
+
 
                $consi ="SELECT NOMBRE_USUARIO from tbl_usuario where NOMBRE_USUARIO ='$USUARIO'  and CODIGO_USUARIO = '$CODUSUARIO'";
                $consulta=$conn->query($consi);

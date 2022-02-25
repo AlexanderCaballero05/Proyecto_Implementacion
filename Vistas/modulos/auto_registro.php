@@ -160,7 +160,7 @@
                       <button name = "btnregistrar" type="submit" class="btn btn-primary btn-block">REGISTRATE</button>
                   </div>
                   <div class="d-grid mb-2">
-                      <button name = "btncancelar" type="submit" class="btn btn-danger btn-block">CANCELAR</button>
+                      <button  onclick="location.href='../../index.php'" name = "btncancelar" type="submit" class="btn btn-danger btn-block">CANCELAR</button>
                   </div>
                   
               </form>

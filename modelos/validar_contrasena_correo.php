@@ -73,7 +73,6 @@ if(isset($_SESSION['usuar'])) {
                                                             $resul=$conn->query($update);
                                                             if($resul >0){
                                                                        echo "<script>
-                                                                    alert('Contraseña cambiada correctamente');
                                                                     location.href = '../index.php';
                                                                             </script>";
                                                                                                                 }
