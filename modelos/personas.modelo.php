@@ -5,13 +5,7 @@
   include_once 'function_bitacora.php';
 ?>
 
-<?php
 
-     $codigoObjeto=1;
-     $accion='Registro';
-     $descripcion= 'Registro de un Usuario';
-    bitacora($codigoObjeto, $accion,$descripcion);
-?>
 
 <?php
   if(isset($_POST['identidad'])){
@@ -98,11 +92,30 @@
                                   $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION) 
                                   VALUES('$codigo','$nombre_usuario','$estado', '$rol','$contrasena',$fechaActual)";
                                   $resultado_usuario=$conn->query( $queryregisusuario);
+
+                                  
+
+                            
+
+
+
+
                                   echo "<script> 
                                   alert('usuario registrado correctamente');
                                   location.href = 'registrar_personas';
                                   </script>";
                                   exit;
+
+
+                                  
+                                  $codigoObjeto=1;
+                                  $accion='Registro';
+                                  $descripcion= 'Registro de un Usuario';
+                                  bitacora($codigoObjeto, $accion,$descripcion);
+
+
+
+
                                 }
                               }catch(PDOException $e){
                                 echo $e->getMessage(); 
@@ -197,11 +210,7 @@
             if ($consulta>0) {
 
 
-              include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un Usuario ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+     
 
 
               echo "<script>
@@ -213,6 +222,13 @@
                 timer: 1500
               })
               </script>";
+
+
+              include_once 'function_bitacora.php';
+              $codigoObjeto=1;
+              $accion='Modificacion';
+              $descripcion= 'Se edito un Usuario ';
+              bitacora($codigoObjeto, $accion,$descripcion);
             }else{ 
               echo "<script>
               alert('¡Error al modificar al usuario!');
