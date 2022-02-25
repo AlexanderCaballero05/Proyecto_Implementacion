@@ -1,8 +1,13 @@
 <?php
   session_start();
-  include_once 'conexion.php';
   include_once 'conexion3.php';
+
+  include_once 'conexion.php';
+  include_once 'conexion2.php';
+
+
   include_once 'function_bitacora.php';
+
 ?>
 
 
@@ -11,6 +16,7 @@
   if(isset($_POST['identidad'])){
      try{
          if(isset($_POST['GUARDAR'])){
+             $usuario = $_SESSION['usua'];
              $identidad = ($_POST['identidad']);
              $primer_nombre = ($_POST['primer_nombre']);
              $segundo_nombre = ($_POST['segundo_nombre']);
@@ -28,9 +34,10 @@
              $estado = ($_POST['estado']);
              $rol = ($_POST['rol']);
              $contrasena = ($_POST['contrasena']);
-             $fecha_vencimiento= ($_POST['fecha_vencimiento']);
-             $fechaActual = date('Y-m-d');
+             $fechaActual = date('Y-m-d');           
             try{ 
+              $user_sesion = $_SESSION['usua'];
+                 
                 $consulta = $db->prepare("SELECT DNI FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
                 $consulta->execute(array($identidad));
                 $row=$consulta->fetchColumn();
@@ -62,6 +69,17 @@
                       </script>";
                       exit;
                     }else{//
+                       
+                      $dias_vencimiento = "ADMIN_DIAS_VIGENCIA";
+                      $sentencia = $db->prepare("SELECT  VALOR  FROM  tbl_parametros WHERE  PARAMETRO = (?);");
+                      $sentencia->execute(array($dias_vencimiento));
+                      $row=$sentencia->fetchColumn();
+                      if ($row>0) {
+                        $dias_ven = $row;
+                      }
+                      $fechaActual = date('Y-m-d'); 
+                      $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$dias_ven'+ days")); 
+
                       
                       try {
                          if(($tipo_persona == "1") 	|| ($tipo_persona == "2") ){
@@ -71,7 +89,7 @@
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
                               alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                              window.location = 'registrar_personas';
+                              window.location = 'categoria';
                               </script>";
                               exit;
                              }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar ,por fin!!!
@@ -88,8 +106,29 @@
                                   $querycorreo = "INSERT INTO tbl_correo_electronico(correo_persona, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
                                   $resultado_correo=$conn->query($querycorreo);
 
+                                  $querytelefono = " INSERT INTO tbl_telefono(CODIGO_TELEFONO, CODIGO_PERSONA,NUMERO_TELEFONO) VALUES ('$telefono','$codigo','$telefono')";
+                                   $resultado_telefono=$conn->query($querytelefono);
+
                                   //registrar el usuario en tbl_usuario 
-                                  $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION) 
+
+                                  $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION,FECHA_VENCIMIENTO,CREADO_POR) 
+                                  VALUES('$codigo','$nombre_usuario','$estado', '$rol','$contrasena','$fechaActual','$fecha_vencimiento','$user_sesion')";
+                                  $resultado_usuario=$conn->query($queryregisusuario);
+                                  if($resultado_usuario >0){
+                                    echo "<script> 
+                                    alert('usuario registrado correctamente');
+                                    location.href = 'categoria';
+                                    </script>";
+                                    exit;
+                                  }else{
+                                    echo "<script> 
+                                    alert('Error auxilio!');
+                                    location.href = 'categoria';
+                                    </script>";
+                                    exit;
+                                  }
+                                 
+                      $queryregisusuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA,FECHA_CREACION) 
                                   VALUES('$codigo','$nombre_usuario','$estado', '$rol','$contrasena',$fechaActual)";
                                   $resultado_usuario=$conn->query( $queryregisusuario);
 
@@ -140,7 +179,11 @@
                                 $querycorreo = " INSERT INTO tbl_correo_electronico(correo_persona, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
                                 $resultado_correo=$conn->query( $querycorreo);
 
-                               
+
+                                
+                                $querytelefono = " INSERT INTO tbl_telefono(CODIGO_TELEFONO, CODIGO_PERSONA,NUMERO_TELEFONO) VALUES ('$telefono','$codigo','$telefono')";
+                                $resultado_telefono=$conn->query($querytelefono);
+
 
                                 echo "<script> 
                                 alert('persona registrada correctamente');
@@ -183,10 +226,17 @@
       //fin del if de comprobar que el DNI no esta vacio
   //ELABORADO POR Diana Rut ****
 
-
-
   if(isset($_POST['CODUSUARIO'])) { 
     if (isset($_POST['ACT_PERSONA'])) {
+
+        $CODUSUARIO = ($_POST['CODUSUARIO']);
+        $USUARIO = ($_POST['NOMUSUARIO']); 
+        $PASS = ($_POST['CONUSUARIO']);
+        $ROL = ($_POST['ROLUSUARIO']);
+        $ESTADO = ($_POST['ESTADOUSUARIO']);
+        $fecha = ($_POST['FECHA_VENCIMIENTO']);
+            try{
+
       $CODUSUARIO = ($_POST['CODUSUARIO']);
       $USUARIO = ($_POST['NOMUSUARIO']); 
       $PASS = ($_POST['CONUSUARIO']);
@@ -250,17 +300,116 @@
   }//FINAL DEL IF PRINCIPAL
 
 
+               $consi ="SELECT NOMBRE_USUARIO from tbl_usuario where NOMBRE_USUARIO ='$USUARIO'  and CODIGO_USUARIO = '$CODUSUARIO'";
+               $consulta=$conn->query($consi);
+               if( $consulta >0){
+                 $upda = " UPDATE tbl_usuario SET CODIGO_ESTADO = '$ESTADO' , CODIGO_TIPO_ROL = '$ROL' 
+                 ,CONTRASENA = '$PASS' ,FECHA_VENCIMIENTO ='$fecha' ";
+                 $respuesta=$conn->query($upda);  
+                 echo "<script>
+                 alert('se ha modificado');
+                 window.location = 'ediusuarios';
+                 </script>"; 
+                 exit; 
+
+               }else{
+                                //Declaras parámetros de salida
+              $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_usuario WHERE NOMBRE_USUARIO = ?");
+              // llamar al procedimiento almacenado
+              $sentencia->execute(array($USUARIO));
+              $row=$sentencia->fetchColumn();
+              if ($row>0){ 
+                  echo "<script>
+                      alert('Ya existe una persona registrada con el nombre de usuario: $USUARIO');
+                      window.location = 'ediusuarios';
+                      </script>";
+                      exit;
+              }else{
+                  try{
+                    $sql = " UPDATE tbl_usuario SET CODIGO_ESTADO = '$ESTADO' , CODIGO_TIPO_ROL = '$ROL' ,CONTRASENA = '$PASS'
+                    WHERE CODIGO_USUARIO = '$CODUSUARIO', FECHA_VENCIMIENTO ='$fecha'  ";
+                      $consulta=$conn->query($sql);
+                      if ($consulta>0) {
+                        echo "<script>
+                        alert('¡Usuario modificado exitosamente!');
+                        window.location = 'ediusuarios';
+                         </script>";
+                         }else{ 
+                         echo "<script>
+                        alert('¡Error al modificar al usuario!');
+                        window.location = 'ediusuarios';
+                         </script>";
+                        }
+                        return true;
+                      } catch(PDOException $e) {
+                  
+                      echo $e->getMessage();  
+                          return false;
+                      }
+               }
+
+               }
+
+
+
+                  return true;
+              } catch(PDOException $e) {
+          
+              echo $e->getMessage();  
+                  return false;
+              }   
+   } 
+   
+ }
+
+
+
+  
+  
   //FUNCION PARA ELIMINAR EL USUARIO,OJALA DE : /
-
-  
-
-
-  
-
-
-
-  
-
-
-
-?>
+  if(isset($_POST['usuario_eliminar'])){
+    if(isset($_POST['ELIMINAR'])){
+      $code = ($_POST['usuario_eliminar']);
+      try{
+        $query_tablas =  $db->prepare("SELECT  u.CODIGO_PERSONA  from  
+        tbl_usuario  u ,tbl_ms_hist_contraseña h, tbl_preguntas_usuarios p
+        where u.CODIGO_USUARIO = h.CODIGO_USUARIO and  u.CODIGO_USUARIO = p.CODIGO_USUARIO and u.CODIGO_USUARIO = (?);");
+        $query_tablas->execute(array($code));
+        $row=$query_tablas->fetchColumn();
+         
+          if($row >0){
+           echo "<script>
+           alert('¡No se puede eliminar este usuario,tiene relaciones!');
+           window.location = 'ediusuarios';
+           </script>";
+           exit;
+          }else{
+             try{
+              $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+              mysqli_query($link, "DELETE FROM tbl_usuario WHERE  CODIGO_USUARIO = '$code' AND CODIGO_USUARIO <>1");
+              
+              if(mysqli_affected_rows($link)>0){
+                  echo "<script>
+                  alert('¡Usuario eliminado!');
+                  window.location = 'ediusuarios';
+                  </script>";
+                  exit;
+              }else{
+                echo "<script>
+                alert('¡No se puede eliminar este usuario!');
+                window.location = 'ediusuarios';
+                </script>";
+                exit;
+              }
+             }catch(PDOException $e) {
+             echo $e->getMessage();  
+             return false; }
+          }//fin del else
+        return true; //FIN DEL ELSE
+      }catch(PDOException $e) {
+       echo $e->getMessage();  
+       return false; }
+    }
+  }
+ 
+  ?> 

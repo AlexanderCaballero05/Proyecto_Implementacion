@@ -36,8 +36,8 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
     $va = $_POST["ingUsuario"];
     
-    $u=($_POST["ingUsuario"]);
-
+               $u=($_POST["ingUsuario"]);
+                session_start();
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
 
@@ -51,23 +51,23 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
 
                 echo '<script>
-
-										Swal.fire({
-											type: "success",
-											title: "!Bienvenido al Sistema!",
-											showConfirmButton: "true",
-											confirmButtonText: "Entrar",
-											closeOnConfirm: "false",
-											background:"rgb(245, 245, 245)"
-
-											}).then((result)=>{
-
-												if (result.value){
-
-													window.location = "inicioadmin";
-												}
-												});
-												</script>';
+                Swal.fire({
+                    type: "success",
+                    title: "!Bienvenido al Sistema!",
+                                                                showConfirmButton: "true",
+                                                                confirmButtonText: "Entrar",
+                                                                closeOnConfirm: "false",
+                                                                background:"rgb(245, 245, 245)"
+                    
+                                                                }).then((result)=>{
+                    
+                                                                    if (result.value){
+                    
+                                                                        window.location = "inicioadmin";
+                                                                    }
+                                                                    });
+                  			
+				</script>';
 
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
 

@@ -23,6 +23,7 @@ include_once "conexion3.php";
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -79,15 +80,13 @@ include_once "conexion3.php";
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                <!--
-                                <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="CODIGO_USUARIO" id="CODIGO_USUARIO">
-                                <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                                 -->
                                 
-                                 
+                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
+                               </a>
                                 <a href="#EDITARPERSONA<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar" class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
                               </div>
                             </div><!-- final del text-center -->
@@ -117,7 +116,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Usuario</label>
-                                          <input type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -150,7 +149,7 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN ROL--> 
                                       <?php //--INICIO DEL ESTADO
-                                      $query = "SELECT CODIGO_ESTADO,NOMBRE FROM tbl_estado;";
+                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' ";
                                       $resultadod=$conn->query($query);                
                                       ?> 
                                       <div class="col-sm-6">
@@ -180,18 +179,36 @@ include_once "conexion3.php";
                                          </div>
                                       </div>
                                     </div>
-
-
-
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
-                                    <button type="button" name="ELIMINAR" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
                                     <button type="submit" id="ACT_PERSONA" name="ACT_PERSONA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
+
+                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form id="FORMEeliminar" method="POST">
+                                  <div class="modal-body">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var1; ?>?</h4>
+                                </div> <!--fin el card body -->
+                                    <div class="modal-footer ">
+                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                      <button type="submit"  name="ELIMINAR" id="ELIMINAR"  class="btn btn-primary">Si,eliminar</button>      
+                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                               </form>
+                               </div><!--fin del modal contener -->
+                            </div><!--fin del modal dialog -->
+                          </div><!--fin del modal de eliminar -->
                       </tr>             
                         <?php
                         }
@@ -207,6 +224,14 @@ include_once "conexion3.php";
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
+
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+
+
 </div><!-- /.content-wrapper -->
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
   </aside>
@@ -218,8 +243,33 @@ include_once "conexion3.php";
 </div><!-- ./wrapper -->
 
 
-  
 
+
+
+ 
+
+
+
+
+ 
+ 
+
+
+
+<script type="text/javascript"> 
+$( function() {
+    $("#ESTADOUSUARIO").change( function() {
+        if ($(this).val() === "4") {
+          document.getElementById('CONUSUARIO').disable = true;
+        
+        } else{
+          document.getElementById('CONUSUARIO').disable = false;
+         
+        }
+    });
+ }); //este codigo si me costo 
+
+</script>
 
 
 
