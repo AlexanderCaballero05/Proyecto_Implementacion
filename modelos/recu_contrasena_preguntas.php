@@ -1,12 +1,13 @@
 <?php
   session_start();
+  include "function_bitacora.php";
  include_once "conexion.php";
  include_once "conexion3.php";
 ?> 
 <?php
 
-if(isset($_SESSION['usua'])) {
-    $usuario = $_SESSION['usua'];
+if(isset($_SESSION['vario'])) {
+    $usuario = $_SESSION['vario'];
      try{ 
         //$consultar_usuario="SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
          $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
@@ -25,9 +26,16 @@ if(isset($_SESSION['usua'])) {
                 $row=$existe1->num_rows;
                if($row>0){ //Si se en la consulta hay una fila si hay registro de la busqueda ,es decir que si es correcta la respuesta
                   echo "<script>
-                 
                   window.location='../Vistas/modulos/cambio_contrasena_preguntas.php';
                   </script>";
+
+                  $_SESSION['vario'] =$usuario;
+                  //llamada de la fuction bitacora -->
+                  $codigoObjeto=1;
+                  $accion='recuperacion contraseña por preguntas';
+                  $descripcion= 'Solicitud recuperacion de contraseña ';
+                  bitacora($codigoObjeto, $accion,$descripcion);
+
                 }else{ //Si no hay registros en la fila ,la respuesta es incorrecta
                   echo "<script>
                   alert('Respuesta incorrecta');
@@ -36,10 +44,12 @@ if(isset($_SESSION['usua'])) {
                 }
             }
         }else{
+
             echo "<script>
             alert('El Usuario Ingresado no Existe');
             window.location = '../Vistas/modulos/metodos_recuperar_clave.php';
             </script>";
+
         }
     }catch(PDOException $e){
     echo $e->getMessage();  

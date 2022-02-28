@@ -2,17 +2,14 @@
 include_once "conexion.php";
 include_once "conexion3.php";
 ?>
-
-
-
-
+      <!--llamada de la fuction bitacora -->
      <?php 
       $codigoObjeto=1;
-      $accion='Ingreso a la tabla usuarios registrados';
+      $accion='Ingreso a la pantalla de mantenimiento usuarios';
       $descripcion= 'Ver los registros de los usuarios';
       bitacora($codigoObjeto, $accion,$descripcion);
-
       ?>
+      
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>

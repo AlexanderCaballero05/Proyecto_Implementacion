@@ -1,7 +1,7 @@
 <?php
   session_start();
   include_once "../../modelos/conexion3.php";
-  $_SESSION['usuar'] ;
+  $_SESSION['vario'];
   $parametro ="NUM_MAX_CARACTER";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($parametro));
