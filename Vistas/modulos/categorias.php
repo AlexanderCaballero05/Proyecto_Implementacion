@@ -68,7 +68,7 @@
                <form id="FORMPERSONAS" method="POST" >
                   <div class="card-body">
                     <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> <strong> Generales persona</strong></h2>
+                      <h2 class="card-title"> <strong>Generales persona</strong></h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
@@ -174,7 +174,7 @@
                     </div><!--Fin de otra fila :v -->
 
                     <div class="card-header" id="form_usuario">
-                       <h2 class="card-title"> <strong> Registrar Usuario</strong></h2>
+                       <h2 class="card-title"> <strong>Registrar Usuario</strong></h2>
                     </div><br>
                     <div  class="row"> 
                       <div class="col-md-4" id="primera_fila"><!--INICIO NOMBRE USUARIO-->
