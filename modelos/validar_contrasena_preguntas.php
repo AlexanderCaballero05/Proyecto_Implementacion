@@ -1,12 +1,13 @@
 <?php
  //VALIDACIONES PARA CAMBIO DE CONTRASEÑAS DESPUES DE HABER HECHO LA VALIDADCION POR PREGUNTAS
  session_start();
+ include "function_bitacora.php";
  include_once 'conexion.php';
  include_once "conexion3.php";
 ?>
 <?php
-    if(isset($_SESSION['usua'])){ //Verificar que haya datos en la variable de sesion
-        $usuario= $_SESSION['usua']; //asigna la variable de sesion
+    if(isset($_SESSION['vario'])){ //Verificar que haya datos en la variable de sesion
+        $usuario= $_SESSION['vario']; //asigna la variable de sesion
         try{
             $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
             $sentencia->execute(array($usuario));
@@ -80,9 +81,15 @@
                                         echo $e->getMessage();  
                                         return false;
                                     }
-                                    echo "<script> alert('!cambio de contraseña correcto')
-                                    location.href = '../Vistas/modulos/cambio_contrasena_preguntas.php';
-                                    </script>";
+                                  
+
+                                    $_SESSION['vario'] =$usuario;
+                                    //llamada de la fuction bitacora -->
+                                 $codigoObjeto=1;
+                                 $accion='Cambio de contraseña';
+                                 $descripcion= 'Cambio la contraseña por metodo preguntas';
+                                 bitacora($codigoObjeto, $accion,$descripcion);
+
                                 }//final del else
                             }catch (PDOException $e){
                             echo $e->getMessage();  

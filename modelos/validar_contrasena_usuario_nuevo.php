@@ -5,8 +5,8 @@
 include_once "conexion.php";
 ?>
 <?php
-if(isset($_SESSION['vario'] )) {
-    $nomUser=$_SESSION['vario'] ;
+if(isset($_SESSION['vario'])) {
+    $nomUser=$_SESSION['vario'];
     $contraActual=($_POST['contraAnte']);
 
     try{   
@@ -30,7 +30,7 @@ if(isset($_SESSION['vario'] )) {
                             if($contraNueva<>$contraConfirm){
                                 echo "<script>
                                 alert('Las contraseña no son iguales');
-                                location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                                       </script>";
                              }
 
@@ -45,7 +45,7 @@ if(isset($_SESSION['vario'] )) {
                                         $row=$datos->num_rows;
                                         if($row>0){ //si la contraseña es la misma que tiene en el sistema
                                             echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                            location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                                             </script>";
                                         }
                                         else{ //si la contraseña es diferente de la que tiene en el sistema
@@ -55,7 +55,7 @@ if(isset($_SESSION['vario'] )) {
                                                 $fila=$busqueda->num_rows;
                                                 if($fila>0){
                                                     echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
-                                                    location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                                    location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                                                     </script>";
                                                 }
                                                 else{
@@ -81,7 +81,7 @@ if(isset($_SESSION['vario'] )) {
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
                                                             echo "<script> 
                                                             alert('!Error al ingresar los datos¡');
-                                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                                            location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                                                             </script>";
                                                             exit;
                                                         }
@@ -94,16 +94,15 @@ if(isset($_SESSION['vario'] )) {
                                                 echo $e->getMessage();  
                                                 return false;
                                             }
-                                            echo "<script> alert('!cambio de contraseña correcto')
-                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
-                                            </script>";
+                                            echo "<script>
+                                                location.href = '../index.php';
+                                                  </script>";
 
 
-                                            $_SESSION['vario'] =$nomUser;
                                             //llamada de la fuction bitacora -->
                                          $codigoObjeto=1;
                                          $accion='Cambio de contraseña';
-                                         $descripcion= 'Cambio la contraseña por metodo correo';
+                                         $descripcion= 'Usuario nuevo, hizo el cambio de contraseña';
                                          bitacora($codigoObjeto, $accion,$descripcion);
 
 
@@ -115,7 +114,7 @@ if(isset($_SESSION['vario'] )) {
                                     }
                                 }else{
                                     echo "<script> alert('La contraseña no cumple con los requisitos')
-                                    location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                    location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                                     </script>";
                                 }
 
@@ -126,7 +125,7 @@ if(isset($_SESSION['vario'] )) {
               }else {
                 echo "<script>
                 alert('Error nombre de usuario y contraseña incorrectos');
-                location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                location.href = '../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                  </script>";
 
 

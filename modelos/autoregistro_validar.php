@@ -2,6 +2,7 @@
 session_start();
 
 include("conexion.php");
+include("function_bitacora.php");
 //DATOS PARA LA TABLA PERSONA
 $primernombre = $_POST['nombre1'];
 $segundonombre = $_POST['nombre2'];
@@ -83,13 +84,22 @@ if(isset($_POST['btnregistrar'])){
   $resultado=$conn->query( $queryregisusuario);
   
   
-  
 
   $conn->commit();
   echo "<script>
   alert('Registro Exitoso');
   window.location = '../index';
    </script>";
+
+   $_SESSION['vario'] =$usuario;
+   
+   //llamada de la fuction bitacora -->
+   $codigoObjeto=1;
+   $accion='Autoregistro';
+   $descripcion= 'El usuario se autoregistro';
+   bitacora($codigoObjeto, $accion,$descripcion);
+  
+  
 } catch (PDOException $e) {
 // si ocurre un error hacemos rollback para anular todos los insert
 $conn->rollback();
@@ -98,6 +108,7 @@ echo "<script>
                           alert('Error al crear registro');
                           window.location = 'login';
                            </script>";
+
 }}
   }
 

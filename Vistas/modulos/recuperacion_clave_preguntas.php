@@ -1,7 +1,7 @@
 <?php
   session_start();
   include_once 'conexion2.php';
-  $_SESSION['usua'] ;
+  $_SESSION['vario'] ;
   $db = new Conexion();
   $con = $db->conectar();
   $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;");
@@ -41,7 +41,7 @@
                     <div class="form-group row mb-3">
                        <label  class="col-md-4 col-form-label">Usuario:</label>
                        <div class="col-md-8"> <!--Muesrta el nombre del usuario que esta registrado en el sistema,pra cambiar contraseña -->
-                          <input type="text"   name="user" id="user" class="form-control" value="<?php echo ($_SESSION['usua']);?>" readonly required="" >
+                          <input type="text"   name="user" id="user" class="form-control" value="<?php echo ($_SESSION['vario']);?>" readonly required="" >
                       </div>
                     </div>
                    <div class="form-group row mb-3">

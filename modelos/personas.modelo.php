@@ -1,8 +1,6 @@
+            
 
-
-             
-
-              <?php
+ <?php
   session_start();
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -118,7 +116,7 @@
                                     </script>";
 
                                     $codigoObjeto=1;
-                                    $accion='Ingreso';
+                                    $accion='Registro';
                                     $descripcion= 'Se registro un Usuario ';
                                     bitacora($codigoObjeto, $accion,$descripcion);
 
