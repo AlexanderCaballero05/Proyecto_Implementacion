@@ -1,4 +1,3 @@
-
 <?php /*
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
@@ -20,7 +19,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     $descripcion= 'Consultar la informacion de la bitacora';
                     bitacora($codigoObjeto, $accion,$descripcion);
                     ?>
-
+<head>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
 <div class="content-wrapper">
 
@@ -43,7 +44,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
   <section class="content">
 
-    <div class="box box-primary">
+    <div class="container-fluid">
 
       <div class="box-header with-border">
 
@@ -132,7 +133,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
 </div>
 
 
-<div class="box box-success">
+<div  class="card card-primary" >
 
 <div class="box-header with-border">
 </form>
@@ -142,15 +143,15 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
         </center>
         
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
-           <div class="box-body">
+           <div class="card-body">
             <div class="table-responsive">
-              <table id="ventas" class="table table-bordered table-striped tablas">
+              <table id="ventas" class="table table-bordered table-striped" style="width:100%">
                 <br><center>
                   
             
                <thead>
                 <tr>
-                   <th style="visibility:hidden;"></th>
+                <th style="visibility:hidden;"></th>
                 <th>Id_bitacora</th>
 			        	<th width="20%" class="center">Fecha</th>
 				        <th>Codigo_usuario</th>
@@ -196,8 +197,8 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                  <td class="text-center"><?php echo $var1 ?></td>
                  <td class="text-center"><?php echo $var2 ?></td>
                  <td class="text-center"><?php echo $var3 ?></td>
-				 <td class="text-center"><?php echo $var4 ?></td>
-				 <td class="text-center"><?php echo $var5 ?></td>
+				         <td class="text-center"><?php echo $var4 ?></td>
+				         <td class="text-center"><?php echo $var5 ?></td>
                  <td class="text-center"><?php echo $var6 ?></td>
 				
                     </div>
@@ -221,6 +222,12 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
 
         </div>
 
+
+        <script>
+          $(document).ready(function() {
+          $('#ventas').DataTable();
+          } );
+        </script>
 
        
 

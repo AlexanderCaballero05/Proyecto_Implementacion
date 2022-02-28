@@ -149,7 +149,7 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN ROL--> 
                                       <?php //--INICIO DEL ESTADO
-                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' ";
+                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' ";
                                       $resultadod=$conn->query($query);                
                                       ?> 
                                       <div class="col-sm-6">
