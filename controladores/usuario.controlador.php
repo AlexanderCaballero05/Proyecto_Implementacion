@@ -37,7 +37,6 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
     $va = $_POST["ingUsuario"];
     
                $u=($_POST["ingUsuario"]);
-                session_start();
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
 

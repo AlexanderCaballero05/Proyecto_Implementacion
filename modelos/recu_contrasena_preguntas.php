@@ -25,7 +25,6 @@ if(isset($_SESSION['usua'])) {
                 $row=$existe1->num_rows;
                if($row>0){ //Si se en la consulta hay una fila si hay registro de la busqueda ,es decir que si es correcta la respuesta
                   echo "<script>
-                  alert('Respuesta correcta');
                  
                   window.location='../Vistas/modulos/cambio_contrasena_preguntas.php';
                   </script>";
