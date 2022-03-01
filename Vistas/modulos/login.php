@@ -41,11 +41,11 @@ session_start();
 
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"  required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
+                      <input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"   minlength="8" maxlength="30" required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
                   </div>
                   <div class="d-grid">
                       <button name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
@@ -68,7 +68,26 @@ session_start();
         </div>
     <div>
 
- 
+    <script>
+      function soloLetras(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       especiales = ["8-37-39-46"];
+
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 
     <script type="text/javascript">
