@@ -53,12 +53,14 @@ include_once "conexion3.php";
                           <th>Primer nombre</th>
                           <th>Primer Apellido</th>
                           <th>Nombre Usuario</th>
+                          <th>Correo</th>
                           <th>Estado</th>
                           <th>Rol</th>
                           <th>Contraseña</th>
                           <th>Fecha creacion</th>
                           <th>Fecha Vencimiento</th>
                           <th>Creado por</th>
+                          
                         </tr>
                       </thead>
                       <tbody>
@@ -293,7 +295,11 @@ include_once "conexion3.php";
   </aside>
 </div><!-- ./wrapper -->
 
-
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
 
 
 

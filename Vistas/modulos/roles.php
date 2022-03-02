@@ -29,7 +29,7 @@
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tabla_roles" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
@@ -182,4 +182,11 @@
 
 
 <!-- Modal -->
+
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+$(document).ready( function () {
+    $('#tabla_roles').DataTable();
+} );
+</script>
 
