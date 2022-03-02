@@ -26,7 +26,7 @@ include_once "conexion3.php";
       <div class="row">
         <div class="col-md-12">
 
-        <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
+        <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
 
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -74,7 +74,7 @@ include_once "conexion3.php";
                                 <button id="ELIMINAR_PARAMETRO" name="ELIMINAR_PARAMETRO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-                                <a href="#EDITARPARAMETRO<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARPARAMETRO<?php echo $var2; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
                               </div>
@@ -89,7 +89,7 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var7; ?></td>
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARPARAMETRO<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
@@ -103,13 +103,13 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Parámetro</label>
-                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro">
+                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Editparametro" id="Editparametro">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Valor</label>
-                                          <input type="text" class="form-control" value ="<?php echo $var3; ?>" maxlength="100"  minlength="8"  name="valor" id="valor" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese el valor del parámetro">
+                                          <input type="text" class="form-control" value ="<?php echo $var3; ?>" maxlength="100"  minlength="8"  name="Editvalor" id="Editvalor" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese el valor del parámetro">
                                         </div>
                                       </div> 
                                     
@@ -125,7 +125,7 @@ include_once "conexion3.php";
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                          <div id="ELIMINAR<?php echo $var2 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -134,12 +134,12 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
+                                    <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
                                     <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var1; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR" id="ELIMINAR"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINARPARAM" id="ELIMINARPARAM"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -162,33 +162,33 @@ include_once "conexion3.php";
   </section><!-- FINAL SECTION -->
 
   <!--INICIO DEL MODAL DE AGREGAR PARAMETRO -->
-  <div id="AGREGAR_ROL" class="modal fade" role="dialog">
+  <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Rol</h4>
+                        <h4 class="text-center">Agregar Parámetro</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
+                                    <label for="txtparametro">Parámetro</label>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
+                                    <label for="txtvalor">Valor</label>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param"></textarea>
                                 </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_rol" name="agregar_rol" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_param" name="agregar_rol" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
@@ -262,7 +262,7 @@ $( function() {
   function soloLetras(e){
    key = e.keyCode || e.which;
    tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
    especiales = ["8-37-39-46"];
    tecla_especial = false
    for(var i in especiales){
