@@ -4,6 +4,7 @@ require_once "controladores/plantilla.controlador.php";
 require_once "controladores/usuario.controlador.php";
 require_once "modelos/usuario.modelo.php";
 require_once "modelos/personas.modelo.php";
+require_once "modelos/rol.modelo.php";
 
 
 

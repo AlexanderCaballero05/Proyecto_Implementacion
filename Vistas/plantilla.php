@@ -83,6 +83,8 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "roles" ||
+         $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "categorias"){
@@ -102,7 +104,7 @@ session_start();
 }else{
  ?>
 
- <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style =" background-image: url(https://wallpaper.dog/large/5439256.jpg); background-size: cover;">
+ <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style ="background-color:#000000;  ">
  <?php
   include "Modulos/login.php";
 }

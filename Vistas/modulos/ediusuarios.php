@@ -17,6 +17,15 @@ include_once "conexion3.php";
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
+<style>
+  #mostrar{
+    display: none;
+    
+  }
+  #pass{
+    display: none;
+  }
+</style>
 
 <div class="content-wrapper">
   <div class="content-header">
@@ -55,10 +64,11 @@ include_once "conexion3.php";
                       <tbody>
                         <?php
                         $query = "SELECT u.CODIGO_USUARIO,p.CODIGO_PERSONA, u.USUARIO, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, u.FECHA_CREACION ,u.FECHA_VENCIMIENTO , u.CREADO_POR
-                        FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p
+                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_VENCIMIENTO , u.CREADO_POR
+                        FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
                         where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
-                        u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+                        u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA
+                        ORDER BY CODIGO_USUARIO ASC;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -67,6 +77,7 @@ include_once "conexion3.php";
                             $var3 = $row['PRIMER_NOMBRE'];
                             $var4 = $row['PRIMER_APELLIDO'];
                             $var6 = $row['NOMBRE_USUARIO'];
+                            $var15 = $row['correo_persona'];
                             $var7 = $row['ESTADO'];
                             $var8 = $row['ROLL'];
                             $var9 = $row['CONTRASENA'];
@@ -95,6 +106,7 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td>
+                          <td class="text-center"><?php echo $var15; ?></td>
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
@@ -121,33 +133,27 @@ include_once "conexion3.php";
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtnombre_usuario">Contraseña</label>
-                                          <input type="text" class="form-control" value ="<?php echo $var9; ?>" maxlength="30"  minlength="8"  name="CONUSUARIO" id="CONUSUARIO" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese contraseña">
+                                          <label for="txtcodigo_persona">Primer nombre</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
                                         </div>
-                                      </div> 
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Primer Apellido</label>
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Correo</label>
+                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                        </div>
+                                      </div>
+                                      
+                                       
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row"> <!-- INICIO SEGUNDO ROW --> 
-                                      <?php
-                                      $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles;";
-                                      $resultadod=$conn->query($query);                
-                                      ?> 
-                                      <div class="col-sm-6">
-                                        <label for="cbx_persona" class="control-label">Rol</label>  
-                                        <div class="form-group">
-                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
-                                            <option value="<?php echo $var14?>"><?php echo $var8;?></option>
-                                            <?php 
-                                              if ($resultadod->num_rows > 0) {
-                                                while($row = $resultadod->fetch_assoc()) { 
-                                                $codigo_estado = $row['CODIGO_TIPO_ROL'];
-                                                $estado = $row['NOMBRE'];
-                                              ?>
-                                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                              <?php } 
-                                              }?>
-                                          </select> 
-                                        </div>  
-                                      </div> <!--FIN ROL--> 
+                                      
                                       <?php //--INICIO DEL ESTADO
                                       $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' ";
                                       $resultadod=$conn->query($query);                
@@ -169,14 +175,59 @@ include_once "conexion3.php";
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
-                                    </div> <!-- FIN ROW --> 
-
-                                    <div class="row">
                                       <div class="col-sm-6">
                                          <div class="form-group">
                                             <label for="txtnombre_usuario">Fecha vencimiento</label>
                                             <input type="date" class="form-control" value ="<?php echo $var11; ?>"   name="FECHA_VENCIMIENTO" id="FECHA_VENCIMIENTO">
                                          </div>
+                                      </div>
+                                    </div> <!-- FIN ROW --> 
+                                     <div class="row">
+                                        <?php
+                                        $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' ;";
+                                        $resultadod=$conn->query($query);                
+                                        ?> 
+                                        <div class="col-sm-6">
+                                          <label for="cbx_persona" class="control-label">Rol</label>  
+                                          <div class="form-group">
+                                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
+                                              <option value="<?php echo $var14?>"><?php echo $var8;?></option>
+                                              <?php 
+                                                if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo_estado = $row['CODIGO_TIPO_ROL'];
+                                                  $estado = $row['NOMBRE'];
+                                                ?>
+                                                <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
+                                                <?php } 
+                                                }?>
+                                            </select> 
+                                          </div>  
+                                        </div> <!--FIN ROL--> 
+                                      </div>
+
+                                    <div class="row">
+                                      <div class="col-sm-6">
+                                        <button type="button" onclick="MostrarInput()" class="btn btn-primary">Resetear Contraseña</button>
+                                       </br></br>
+                                       
+                                        <div class="input-group" >
+                                          <div  class="input-group-prepend">
+                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
+                                          </div>
+                                          <input type="text" class="form-control" id="pass" name="contrasena" >
+                                        </div>
+
+                                      </div>
+                                      <div class="col-sm-6">
+                                      <label for="" class="control-label">Confirmar Contraseña</label> 
+                                       <div class="input-group" >
+                                          <div  class="input-group-prepend">
+                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
+                                          </div>
+                                          <input type="text" class="form-control" id="pass" name="contrasena" >
+                                        </div>
+
                                       </div>
                                     </div>
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -286,6 +337,14 @@ $( function() {
   });
 </script>
 
+<script type="text/javascript">
+  //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
+  function MostrarInput(){
+    document.getElementById('mostrar').style.display = "block";
+    document.getElementById('pass').style.display = "block";
+  }
+  
+</script>
                                   
 <!-- funciones del sistema -->
 <script>
