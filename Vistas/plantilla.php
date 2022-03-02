@@ -83,6 +83,7 @@ session_start();
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
          $_GET["ruta"] == "roles" ||
+         $_GET["ruta"] == "preguntas" ||
          $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||

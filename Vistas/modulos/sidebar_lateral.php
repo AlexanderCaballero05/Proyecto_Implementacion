@@ -195,6 +195,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="preguntas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Preguntas</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Parametros</p>
