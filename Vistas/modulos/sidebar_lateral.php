@@ -52,13 +52,14 @@
                     <p>Registrar Usuarios</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
                   <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
-
                     <i class="far fa-circle nav-icon"></i>
                     <p>Editar Usuarios</p>
                   </a>
                 </li>
+                
                 <li class="nav-item">
                   <a href="Formbitacora" class="nav-link">
                   
@@ -67,9 +68,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a  href="familiares" class="nav-link">
+                  <a href="mostrarPreguntasUsuarios" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Familiares</p>
+                    <p>Preguntas Usuarios</p>
                   </a>
                 </li>
               </ul>
