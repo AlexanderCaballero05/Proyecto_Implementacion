@@ -75,7 +75,7 @@
                       <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                         <label for="identidad" class="control-label">Número de Identidad</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="IDENTIDAD" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                          <input class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
@@ -159,7 +159,7 @@
                       <div class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Fecha Baja:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01">
+                          <input readonly class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01">
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -187,41 +187,13 @@
                       <div class="col-md-4" id="segunda_fila"><!--INICIO SEXO--> 
                          <label for="cbx_persona" class="control-label">Estado</label>
                          <div class="form-group">
-                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="estado" id="estado" required="">
-                            <Option class="custom-selected">Selecione</option>
-                                <?php 
-                                $query = "SELECT * FROM tbl_estado WHERE NOMBRE = 'NUEVO' ";
-                                $resultadod=$conn->query($query);                
-                                if ($resultadod->num_rows > 0) {
-                                while($row = $resultadod->fetch_assoc()) { 
-                                $codigo_estado = $row['CODIGO_ESTADO'];
-                                $estado = $row['NOMBRE'];
-                                ?>
-                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                              <?php 
-                                } 
-                                }?>
-                              </select> 
+                          <input class="form-control" readonly value="NUEVO"></input>
                          </div>
                       </div>
                       <div class="col-md-4" id="tercera_fila"><!--INICIO ROL--> 
-                         <label for="cbx_persona" class="control-label">Rol</label>
+                        <label for="" class="control-label">Rol</label>
                          <div class="form-group">
-                           <select name="rol" id="txtrol" class="form-control" require>
-                              <Option class="custom-selected">Selecione un rol</option>
-                                <?php //Se traen los datos de la tabla tbl_roles en el select de rol
-                                   $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles;";
-                                   $result = $conn->query($query);
-                                   if ($result->num_rows > 0) {
-                                   while($row = $result->fetch_assoc()) {
-                                   $codigo_rol = $row['CODIGO_TIPO_ROL'];
-                                   $rol = $row['NOMBRE'];
-                                ?>
-                              <option value="<?php echo $codigo_rol;?>"><?php echo $rol;?></option>
-                                <?php
-                                 } }
-                                ?>
-                            </select>
+                          <input class="form-control" readonly value="Indefinido"></input>
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -260,6 +232,16 @@
 
 
 <script type="text/javascript">
+  var dni = document.getElementById('identidad');
+  identidad.addEventListener("keyup", function(e) {
+  var key = e.keyCode || e.charCode;
+  // si la tecla es un cero y el segundo carácter es un cero
+  if (key == 48 && this.value[1] == "0") {
+    // se eliminan los ceros delanteros
+    this.value = this.value.replace(/^0+/, '');
+  }
+  });
+
   //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
   $( function() {
     $("#tipo_persona").change( function() {

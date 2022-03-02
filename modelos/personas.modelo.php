@@ -1,5 +1,4 @@
             
-
  <?php
   session_start();
   include_once 'conexion3.php';
@@ -204,7 +203,6 @@
         $ESTADO = ($_POST['ESTADOUSUARIO']);
         $fecha = ($_POST['FECHA_VENCIMIENTO']);
             try{
-
                $consi ="SELECT NOMBRE_USUARIO from tbl_usuario where NOMBRE_USUARIO ='$USUARIO'  and CODIGO_USUARIO = '$CODUSUARIO'";
                $consulta=$conn->query($consi);
                if( $consulta >0){
@@ -212,7 +210,7 @@
                  ,CONTRASENA = '$PASS' ,FECHA_VENCIMIENTO ='$fecha' WHERE CODIGO_USUARIO = '$CODUSUARIO' ";
                  $respuesta=$conn->query($upda);  
                  echo "<script>
-                 alert('se ha modificado');
+                 alert('se ha modificado n');
                  window.location = 'ediusuarios';
                  </script>"; 
                  exit; 
@@ -241,10 +239,10 @@
                          </script>";
 
                          include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un Usuario ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+                         $codigoObjeto=1;
+                         $accion='Modificacion';
+                         $descripcion= 'Se edito un Usuario ';
+                         bitacora($codigoObjeto, $accion,$descripcion);
 
                          }else{ 
                          echo "<script>
