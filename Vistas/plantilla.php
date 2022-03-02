@@ -35,7 +35,6 @@ session_start();
         
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
-
     <!-- SCRIPT -->
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
@@ -85,8 +84,9 @@ session_start();
          $_GET["ruta"] == "ediusuarios" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categorias"){
-      include_once "Modulos/".$_GET["ruta"].".php";
+      include_once "modulos/".$_GET["ruta"].".php";
     }else {
       include "modulos/inicioadmin.php";
     }
