@@ -84,13 +84,7 @@
                     </div>
                     </div>
 
-                    <div class="row mb-4">
-                    <div class="col">
-                       <label for="telefono" class="form-label">Número de teléfono:</label>
-                       <input type="text" name="telefono" class="form-control" placeholder="99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="20" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
-                    </div>
-                    </div>
-
+                  
                     <div class="row mb-4">
                     <div class="col">
                        <label for="dni" class="form-label">DNI:</label>
@@ -114,6 +108,19 @@
                      <div class="col">
                      <label for="lugar" class="form-label">Lugar de Nacimiento:</label>
                          <input type="text" name="lugarna" class="form-control" placeholder="Ciudad" aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
+                    </div>
+                    </div>
+
+                     <!-- OJO -->
+                     <div class="row mb-4">
+                    <div class="col">
+                      
+                      <label for="telefono" class="form-label">Número de teléfono:</label>
+                       <input type="text" name="telefono" class="form-control" placeholder="99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="15" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                      </div>
+                     <div class="col">
+                     <label for="telefono" class="form-label">Dirección: </label>
+                         <input type="text" name="direccion" class="form-control" placeholder="Direccion" aria-label="Direccion" onkeyup="mayus(this);" minlength="10" maxlength="100" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                     </div>
 

@@ -30,7 +30,7 @@
             <a href="index" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Adminsitrador
+                Tutor
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -177,92 +177,8 @@
             <a href="#" class="nav-link">
               <i class=" nav-icon fas fa-shield-alt"></i>
               <p>
-                Seguridad
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Permisos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="roles" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Roles</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Parametros</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="objetos" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Objetos</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Recuperar clave</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tipos usuario</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href=""class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modulos</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa-security"></i>
-              <p>
-                Estado
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href=""class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Estado</p>
-                </a>
-              </li>
-              
-              
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fa-security"></i>
-              <p>
-              Sobre el sistema
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href=""class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bitacora</p>
-                  <a href="formGestion_bitacora" class="nav-link" >
-                </a>
-              </li>
-
+               
+            
                   
         </ul>
       </nav>

@@ -73,7 +73,7 @@ session_start();
    /*=============================================
   =            menu                        =
   =============================================*/
-  include "modulos/sidebar_lateral.php";
+  include "modulos/menuadmin.php";
   /*=============================================
   =            CONTENIDO                        =
   =============================================*/
@@ -87,14 +87,30 @@ session_start();
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
-         $_GET["ruta"] == "categorias"){
+         $_GET["ruta"] == "categorias"||
+         $_GET["ruta"] == "parametros"){
       include_once "modulos/".$_GET["ruta"].".php";
     }else {
-      include "modulos/inicioadmin.php";
+      include "Modulos/404.php";
     }
 
   }else{
-    include "modulos/inicioadmin.php";
+    include "modelos/Conexionpdo.php";
+    $rol= $_SESSION['vario'];
+    $sentencia = $db->prepare("CALL Sp_menus_sistemas(?);");
+    // llamar al procedimiento almacenado
+    $sentencia->execute(array($rol));
+    $row=$sentencia->fetchColumn();
+  switch ($row) {
+      case 1: 
+        include "modulos/inicioadmin.php";
+      break;
+      case 2:
+        $usuarr =$_SESSION['vario'];
+          include "modulos/iniciotutor.php";
+        
+      break;
+  }
   }
   echo '</div>';
   /*=============================================

@@ -18,6 +18,9 @@ $sexo = $_POST['sexo'];
 //DATOS PARA LA TABLA TELEFONO
 $telefono = $_POST['telefono'];
 
+//DATOS PARA LA TABLA DIRECCION
+$direccion = $_POST['direccion'];
+
 //TABLA CORREO QUE ESTA RELACIONADO CON PERSONAS
 $correo = $_POST['ingcorreo'];
 
@@ -78,6 +81,9 @@ if(isset($_POST['btnregistrar'])){
 
   $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
   $resultado=$conn->query( $querycorreo);
+
+  $querydireccion = "INSERT INTO TBL_DIRECCION(CODIGO_PERSONA, DIRECCION) VALUES ('$codigo', '$direccion')";
+  $resultado=$conn->query( $querydireccion);
 
 
   $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA, FECHA_VENCIMIENTO, FECHA_CREACION) VALUES  ('$codigo','$usuario','6','3','$contrasena','$fecha_vencimiento','$fechaActual')";
