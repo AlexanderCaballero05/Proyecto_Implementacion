@@ -49,23 +49,9 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                     bitacora($codigoObjeto, $accion,$descripcion);
 
 
+                    
                 echo '<script>
-                Swal.fire({
-                    type: "success",
-                    title: "!Bienvenido al Sistema!",
-                                                                showConfirmButton: "true",
-                                                                confirmButtonText: "Entrar",
-                                                                closeOnConfirm: "false",
-                                                                background:"rgb(245, 245, 245)"
-                    
-                                                                }).then((result)=>{
-                    
-                                                                    if (result.value){
-                    
-                                                                        window.location = "inicioadmin";
-                                                                    }
-                                                                    });
-                  			
+             window.location = "inicioadmin";
 				</script>';
 
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
@@ -76,7 +62,7 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
     Swal.fire({
         type: "success",
-        title: "!Tendra que modificar su contrasena!",
+        title: "!Debe contestar unas preguntas!",
         showConfirmButton: "true",
         confirmButtonText: "Entrar",
         closeOnConfirm: "false",
@@ -96,7 +82,7 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
                         //Cuando se debe restablecer la contrasena porque se hizo la recuperacion por metodo correo
                     }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==5){
-                        $_SESSION['usuar'] =$_POST["ingUsuario"];
+                        $_SESSION['vario'] =$_POST["ingUsuario"];
                         echo "<script>
                               alert('Contraseña provisional correcta, debe cambiar su contraseña por razones de seguridad');
                               location.href = 'Vistas/modulos/cambio_contrasena_correo.php';
@@ -121,6 +107,14 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
             }
             });
             </script>';
+
+
+            $_SESSION['vario'] =$_POST["ingUsuario"];
+            //llamada de la fuction bitacora -->
+         $codigoObjeto=1;
+         $accion='Intento de login fallido';
+         $descripcion= 'El usuario inhabilitado intento ingresar al sistema';
+         bitacora($codigoObjeto, $accion,$descripcion);
 } 
 else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==4){
     echo '<script>
@@ -141,6 +135,17 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
             }
             });
             </script>';
+
+
+
+            $_SESSION['vario'] =$_POST["ingUsuario"];
+            //llamada de la fuction bitacora -->
+         $codigoObjeto=1;
+         $accion='Intento de login fallido';
+         $descripcion= 'El usuario bloqueado intento ingresar al sistema';
+         bitacora($codigoObjeto, $accion,$descripcion);
+
+
 } else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==6){
          echo '<script>
         
@@ -160,6 +165,15 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
                     }
                     });
                     </script>';
+
+
+                $_SESSION['vario'] =$_POST["ingUsuario"];
+                    //llamada de la fuction bitacora -->
+                 $codigoObjeto=1;
+                 $accion='Intento de login fallido';
+                 $descripcion= 'El usuario se registro por medio de autoregistro';
+                 bitacora($codigoObjeto, $accion,$descripcion);
+
 } else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"])  ){
 $servername = "localhost";
         $username = "root";
@@ -170,32 +184,39 @@ $servername = "localhost";
         if($conn->connect_error){
             die("Conexión fallida: ".$conn->connect_error);
 
-        }
-$valor = $_POST["ingUsuario"];
-$query = "UPDATE tbl_usuario SET 
-CODIGO_ESTADO = 4
-WHERE Nombre_usuario='$valor'";
+                        }
+                $valor = $_POST["ingUsuario"];
+                $query = "UPDATE tbl_usuario SET 
+                CODIGO_ESTADO = 4
+                WHERE Nombre_usuario='$valor'";
 
 
-echo '<script>
+                echo '<script>
 
-Swal.fire({
-    type: "success",
-    title: "!Usuario bloqueado, contacte al administrador!",
-    showConfirmButton: "true",
-    confirmButtonText: "cerrar",
-    closeOnConfirm: "false",
-    background:"rgb(245, 245, 245)"
+                Swal.fire({
+                    type: "success",
+                    title: "!Usuario bloqueado, contacte al administrador!",
+                    showConfirmButton: "true",
+                    confirmButtonText: "cerrar",
+                    closeOnConfirm: "false",
+                    background:"rgb(245, 245, 245)"
 
-    }).then((result)=>{
+                    }).then((result)=>{
 
-        if (result.value){
+                        if (result.value){
 
-            window.location = "login";
-        }
-        });
-        </script>';
-$dato=$conn->query($query);
+                            window.location = "login";
+                        }
+                        });
+                        </script>';
+                $dato=$conn->query($query);
+
+                                $_SESSION['vario'] = $valor;
+                                //llamada de la fuction bitacora -->
+                                $codigoObjeto=1;
+                                $accion='Usuario bloqueado';
+                                $descripcion= 'Se ingreso el numero de intentos validos';
+                                bitacora($codigoObjeto, $accion,$descripcion);
 
 } elseif(($respuesta["NOMBRE_USUARIO"])!='ADMIN') {	
 $servername = "localhost";
@@ -231,6 +252,14 @@ Swal.fire({
         }
         });
         </script>';
+
+
+        $_SESSION['vario'] =$va;
+        //llamada de la fuction bitacora -->
+     $codigoObjeto=1;
+     $accion='Intento de login fallido';
+     $descripcion= 'Ingreso de Credenciales incorrectas';
+     bitacora($codigoObjeto, $accion,$descripcion);
 
 			
                     

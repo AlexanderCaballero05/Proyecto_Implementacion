@@ -54,7 +54,7 @@
                 <form  method="POST" action="../../modelos/validar_contrasena_preguntas.php" class="formulario" id="formulario"  >
                    <div class="form-group mb-3">
                         <label>Usuario:</label> <!--Muestra el usuario que se ingreso desde la pantalla para cambio de contraseña -->
-                        <input onkeyup="mayus(this);" autocomplete = "off" value="<?php echo ($_SESSION['usua']);?>"  id="usuarioc" type="text" name="usuarioc" class="form-control" readonly required >
+                        <input onkeyup="mayus(this);" autocomplete = "off" value="<?php echo ($_SESSION['vario']);?>"  id="usuarioc" type="text" name="usuarioc" class="form-control" readonly required >
                         
                     </div>
                     <div class="form-group mb-3" id="grupo__clave_nueva">

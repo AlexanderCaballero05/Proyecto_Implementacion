@@ -14,15 +14,6 @@ include_once "conexion3.php";
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
-<style>
-  #mostrar{
-    display: none;
-    
-  }
-  #pass{
-    display: none;
-  }
-</style>
 
 <div class="content-wrapper">
   <div class="content-header">
@@ -37,54 +28,36 @@ include_once "conexion3.php";
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información del Usuario</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Información Preguntas_Usuarios</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
-                      <thead>
+                  <table id="example1" class="table table-bordered table-hover">
+                  <thead class="table-success">
                         <tr>
                           <th>Acción</th>
                           <th>ID</th>
-                          <th>Primer nombre</th>
-                          <th>Primer Apellido</th>
+                          <th>Pregunta</th>
                           <th>Nombre Usuario</th>
-                          <th>Correo</th>
-                          <th>Estado</th>
-                          <th>Rol</th>
-                          <th>Contraseña</th>
-                          <th>Fecha creacion</th>
-                          <th>Fecha Vencimiento</th>
-                          <th>Creado por</th>
-                          
-                        </tr>
+                          <th>Respuesta</th>
+                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT u.CODIGO_USUARIO,p.CODIGO_PERSONA, u.USUARIO, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_VENCIMIENTO , u.CREADO_POR
-                        FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
-                        where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
-                        u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                        ORDER BY CODIGO_USUARIO ASC;";
+                        $query = "SELECT pu.CODIGO_PREGUNTA_USUARIO , p.PREGUNTA, u.NOMBRE_USUARIO, pu.RESPUESTA
+                        from tbl_usuario u, tbl_preguntas_usuarios pu, tbl_preguntas p
+                        where u.CODIGO_USUARIO = pu.CODIGO_USUARIO
+                        and p.CODIGO_PREGUNTAS = pu.CODIGO_PREGUNTAS
+                        ORDER BY pu.CODIGO_PREGUNTA_USUARIO ASC;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_USUARIO'];
-                            $var2 = $row['CODIGO_PERSONA'];
-                            $var3 = $row['PRIMER_NOMBRE'];
-                            $var4 = $row['PRIMER_APELLIDO'];
-                            $var6 = $row['NOMBRE_USUARIO'];
-                            $var15 = $row['correo_persona'];
-                            $var7 = $row['ESTADO'];
-                            $var8 = $row['ROLL'];
-                            $var9 = $row['CONTRASENA'];
-                            $var10 = $row['FECHA_CREACION']; 
-                            $var11= $row['FECHA_VENCIMIENTO']; 
-                            $var12 = $row['CREADO_POR']; 
-                            $var13 = $row['CODIGO_ESTADO']; 
-                            $var14 = $row['CODIGO_TIPO_ROL']; 
+                            $var1 = $row['CODIGO_PREGUNTA_USUARIO'];
+                            $var2 = $row['PREGUNTA'];
+                            $var3 = $row['NOMBRE_USUARIO'];
+                            $var4 = $row['RESPUESTA'];
+                           
                         ?>
                         <tr>
                           <td>
@@ -95,23 +68,16 @@ include_once "conexion3.php";
                                 <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-                                <a href="#EDITARPERSONA<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                </a>
+                                
                               </div>
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var15; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
-                          <td class="text-center"><?php echo $var8; ?></td>
-                          <td class="text-center"><?php echo $var9; ?></td>
-                          <td class="text-center"><?php echo $var10; ?></td>
-                          <td class="text-center"><?php echo $var11; ?></td>
-                          <td class="text-center"><?php echo $var12; ?></td>
+
+                         
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
@@ -127,32 +93,38 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Usuario</label>
-                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Primer nombre</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <label for="txtnombre_usuario">Contraseña</label>
+                                          <input type="text" class="form-control" value ="<?php echo $var3; ?>" maxlength="30"  minlength="8"  name="CONUSUARIO" id="CONUSUARIO" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese contraseña">
                                         </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Primer Apellido</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Correo</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
-                                        </div>
-                                      </div>
-                                      
-                                       
+                                      </div> 
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row"> <!-- INICIO SEGUNDO ROW --> 
-                                      
+                                      <?php
+                                      $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles;";
+                                      $resultadod=$conn->query($query);                
+                                      ?> 
+                                      <div class="col-sm-6">
+                                        <label for="cbx_persona" class="control-label">Rol</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
+                                            <option value="<?php echo $var14?>"><?php echo $var8;?></option>
+                                            <?php 
+                                              if ($resultadod->num_rows > 0) {
+                                                while($row = $resultadod->fetch_assoc()) { 
+                                                $codigo_estado = $row['CODIGO_TIPO_ROL'];
+                                                $estado = $row['NOMBRE'];
+                                              ?>
+                                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
+                                              <?php } 
+                                              }?>
+                                          </select> 
+                                        </div>  
+                                      </div> <!--FIN ROL--> 
                                       <?php //--INICIO DEL ESTADO
                                       $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' ";
                                       $resultadod=$conn->query($query);                
@@ -174,59 +146,14 @@ include_once "conexion3.php";
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
+                                    </div> <!-- FIN ROW --> 
+
+                                    <div class="row">
                                       <div class="col-sm-6">
                                          <div class="form-group">
                                             <label for="txtnombre_usuario">Fecha vencimiento</label>
                                             <input type="date" class="form-control" value ="<?php echo $var11; ?>"   name="FECHA_VENCIMIENTO" id="FECHA_VENCIMIENTO">
                                          </div>
-                                      </div>
-                                    </div> <!-- FIN ROW --> 
-                                     <div class="row">
-                                        <?php
-                                        $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' ;";
-                                        $resultadod=$conn->query($query);                
-                                        ?> 
-                                        <div class="col-sm-6">
-                                          <label for="cbx_persona" class="control-label">Rol</label>  
-                                          <div class="form-group">
-                                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
-                                              <option value="<?php echo $var14?>"><?php echo $var8;?></option>
-                                              <?php 
-                                                if ($resultadod->num_rows > 0) {
-                                                  while($row = $resultadod->fetch_assoc()) { 
-                                                  $codigo_estado = $row['CODIGO_TIPO_ROL'];
-                                                  $estado = $row['NOMBRE'];
-                                                ?>
-                                                <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                                <?php } 
-                                                }?>
-                                            </select> 
-                                          </div>  
-                                        </div> <!--FIN ROL--> 
-                                      </div>
-
-                                    <div class="row">
-                                      <div class="col-sm-6">
-                                        <button type="button" onclick="MostrarInput()" class="btn btn-primary">Resetear Contraseña</button>
-                                       </br></br>
-                                       
-                                        <div class="input-group" >
-                                          <div  class="input-group-prepend">
-                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
-                                          </div>
-                                          <input type="text" class="form-control" id="pass" name="contrasena" >
-                                        </div>
-
-                                      </div>
-                                      <div class="col-sm-6">
-                                      <label for="" class="control-label">Confirmar Contraseña</label> 
-                                       <div class="input-group" >
-                                          <div  class="input-group-prepend">
-                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
-                                          </div>
-                                          <input type="text" class="form-control" id="pass" name="contrasena" >
-                                        </div>
-
                                       </div>
                                     </div>
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -292,11 +219,7 @@ include_once "conexion3.php";
   </aside>
 </div><!-- ./wrapper -->
 
-<script>
-  $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-</script>
+
 
 
 
@@ -340,14 +263,6 @@ $( function() {
   });
 </script>
 
-<script type="text/javascript">
-  //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
-  function MostrarInput(){
-    document.getElementById('mostrar').style.display = "block";
-    document.getElementById('pass').style.display = "block";
-  }
-  
-</script>
                                   
 <!-- funciones del sistema -->
 <script>
