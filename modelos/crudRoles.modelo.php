@@ -21,23 +21,28 @@
                   if($row>0){
                     echo "<script>
                     alert('El nombre del rol $nombre_rol ya se encuentra registrado');
-                    window.location = 'roles';
+                    window.location = 'crudRoles';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO `tbl_roles`( `NOMBRE`, `DESCRIPCION`,  `FECHA_MODIFICACION`) VALUES ('$nombre_rol','$descripcion','$fechaActual'); ";
+                      $query_rol = " INSERT INTO `tbl_roles`( `NOMBRE`, `DESCRIPCION`,  `FECHA_CREACION`) VALUES ('$nombre_rol','$descripcion','$fechaActual'); ";
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
                         alert('Rol registrado correctamente');
-                        window.location = 'roles';
+                        window.location = 'crudRoles';
                         </script>";
                         exit;
+                        include_once 'function_bitacora.php';
+                        $codigoObjeto=1;
+                        $accion='Registro';
+                        $descripcion= 'Se agrego un nuevo rol ';
+                         bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
-                        window.location = 'roles';
+                        window.location = 'crudRoles';
                         </script>";
                         exit;
                       }
@@ -66,6 +71,7 @@
       $codigo_rol = ($_POST['id_rol']);
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
+      $fecha_modificacion = date('Y-m-d'); 
       try{
        // 
        $sentencia = $db->prepare("SELECT * FROM tbl_roles where NOMBRE = (?) and CODIGO_TIPO_ROL <> (?) ;");
@@ -74,20 +80,18 @@
         if($row>0){
           echo "<script>
           alert('Ya existe un rol con este mismo nombre: $editar_nombre');
-          window.location = 'roles';
+          window.location = 'crudRoles';
           </script>";
           exit;
-
         }else{
-         
           try{
-            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion'  
+            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion'  
             WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
               alert('¡Rol modificado exitosamente!');
-              window.location = 'roles';
+              window.location = 'crudRoles';
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=1;
@@ -97,7 +101,7 @@
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el rol!');
-              window.location = 'roles';
+              window.location = 'crudRoles';
               </script>";
             }
           }catch(PDOException $e){
@@ -124,7 +128,7 @@ if(isset($_POST['rol_eliminar'])){
       if($row >0){
         echo "<script>
         alert('¡No se puede eliminar este rol,esta relacionado con otras tablas!');
-        window.location = 'roles';
+        window.location = 'crudRoles';
         </script>";
         exit;
       }else{
@@ -134,18 +138,18 @@ if(isset($_POST['rol_eliminar'])){
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             alert('¡Rol eliminado!');
-            window.location = 'roles';
+            window.location = 'crudRoles';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=1;
-            $accion='Modificacion';
+            $accion='Eliminación';
             $descripcion= 'Se elimino un rol ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
             alert('¡Error al eliminar el rol!');
-            window.location = 'roles';
+            window.location = 'crudRoles';
             </script>";
             exit;
           }
@@ -159,7 +163,7 @@ if(isset($_POST['rol_eliminar'])){
      return false;
     }
   }
-}//Cerre del if padre
+}//Cirre del if padre
 
 
 //*****Elaborado por Diana Rut,no quiten creditos :v *******

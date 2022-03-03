@@ -119,7 +119,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar Tutorias</p>
                 </a>
@@ -189,7 +189,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="roles" class="nav-link">
+                <a href="crudRoles" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p>
                 </a>

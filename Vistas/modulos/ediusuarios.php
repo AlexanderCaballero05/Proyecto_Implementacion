@@ -17,7 +17,6 @@ include_once "conexion3.php";
 <style>
   #mostrar{
     display: none;
-    
   }
   #pass{
     display: none;
@@ -204,17 +203,19 @@ include_once "conexion3.php";
                                           </div>  
                                         </div> <!--FIN ROL--> 
                                       </div>
-
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <button type="button" onclick="MostrarInput()" class="btn btn-primary">Resetear Contraseña</button>
-                                       </br></br>
-                                       
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-sm-6">
+                                       <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group" >
                                           <div  class="input-group-prepend">
-                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
+                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo1 "></span></div>
                                           </div>
-                                          <input type="text" class="form-control" id="pass" name="contrasena" >
+                                          <input type="password" class="form-control" id="contrasena" name="contrasena" >
                                         </div>
 
                                       </div>
@@ -222,9 +223,9 @@ include_once "conexion3.php";
                                       <label for="" class="control-label">Confirmar Contraseña</label> 
                                        <div class="input-group" >
                                           <div  class="input-group-prepend">
-                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash "></span></div>
+                                            <div  class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo "></span></div>
                                           </div>
-                                          <input type="text" class="form-control" id="pass" name="contrasena" >
+                                          <input type="password" class="form-control" id="confirmar_contra" name="confirmar_contra" >
                                         </div>
 
                                       </div>
@@ -298,49 +299,33 @@ include_once "conexion3.php";
 } );
 </script>
 
+<script>
+ const mostrar_cla = document.querySelector(".ojo");
+  mostrar_cla.addEventListener('click',function(){
+    var cla = document.getElementById("confirmar_contra");
+    if(cla.type === "password"){
+       cla.type = "text";
 
-
- 
-
-
-
-
- 
- 
-
-
-
-<script type="text/javascript"> 
-$( function() {
-    $("#ESTADOUSUARIO").change( function() {
-        if ($(this).val() === "4") {
-          document.getElementById('CONUSUARIO').disable = true;
-        
-        } else{
-          document.getElementById('CONUSUARIO').disable = false;
-         
-        }
-    });
- }); //este codigo si me costo 
-
-</script>
-
-
-
-<script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-  $( function() {
-    $("#cbx_persona").change( function() {
-        if ($(this).val() === "2") {
-           document.getElementById("c").style.display="block";
-        } else {
-            document.getElementById("c").style.display="none";
-        }
-    });
+    }else{
+      cla.type ="password";
+    }
   });
 </script>
 
-<script type="text/javascript">
+<script>
+ const mostrar_cla = document.querySelector(".ojo1");
+  mostrar_cla.addEventListener('click',function(){
+    var cla = document.getElementById("contrasena");
+    if(cla.type === "password"){
+       cla.type = "text";
+
+    }else{
+      cla.type ="password";
+    }
+  });
+</script>
+
+<script type="text/javascript">  
   //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
   function MostrarInput(){
     document.getElementById('mostrar').style.display = "block";
