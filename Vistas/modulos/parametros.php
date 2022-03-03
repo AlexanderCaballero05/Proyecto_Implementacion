@@ -5,14 +5,13 @@ include_once "conexion3.php";
       <!--llamada de la fuction bitacora -->
      <?php 
       $codigoObjeto=1;
-      $accion='Ingreso a la pantalla de mantenimiento usuarios';
-      $descripcion= 'Ver los registros de los usuarios';
+      $accion='Ingreso a la pantalla de mantenimiento parámetros';
+      $descripcion= 'Ver los registros de parámetros';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
       
 <head>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
+
 </head>
 
 <div class="content-wrapper">
@@ -26,7 +25,7 @@ include_once "conexion3.php";
       <div class="row">
         <div class="col-md-12">
 
-        <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
+        <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
 
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -36,7 +35,7 @@ include_once "conexion3.php";
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tabla_parametros" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th>Acción</th>
@@ -70,11 +69,11 @@ include_once "conexion3.php";
                             <div class="text-center" >
                               <div class="btn-group">
                                 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_PARAMETRO" name="ELIMINAR_PARAMETRO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                               <a href="#ELIMINARPARAMETRO<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINARPARAM" name="ELIMINARPARAM" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-                                <a href="#EDITARPARAMETRO<?php echo $var2; ?>" data-toggle="modal">
+                                <a href="#EDITARPARAMETRO<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
                               </div>
@@ -89,43 +88,43 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var7; ?></td>
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPARAMETRO<?php echo $var2 ?>" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-lg">
+                          <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITPARAMETROS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parámetros</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODPARAMETRO" id="CODPARAMETRO">
-                                      <div class="col-sm-6">
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
+                                      <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Parámetro</label>
-                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Editparametro" id="Editparametro">
+                                          <label for="txtcodigo_parametro">Parámetro</label>
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Valor</label>
-                                          <input type="text" class="form-control" value ="<?php echo $var3; ?>" maxlength="100"  minlength="8"  name="Editvalor" id="Editvalor" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese el valor del parámetro">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor">
                                         </div>
                                       </div> 
-                                    
-
-                                   
+                                      </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="ACT_PERSONA" name="ACT_PERSONA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="Edit_parametro" name="Edit_parametro" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
-                          <div id="ELIMINAR<?php echo $var2 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+
+                          <!--MODAL ELIMINAR -->
+                          <div id="ELIMINARPARAMETRO<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -134,8 +133,8 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var1; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -188,12 +187,12 @@ include_once "conexion3.php";
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_param" name="agregar_rol" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_param" name="agregar_param" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL -->
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO PARAMETRO -->
 
   <!-- Button trigger modal -->
 
@@ -316,7 +315,7 @@ $( function() {
    limpia = limpia.trim();
    e.value = limpia;
   };
-  //otra funcion para quitar espacios :V
+  //otra funcion para quitar espacios 
   function quitarespacios(e) {
     var cadena =  e.value;
     cadena = cadena.trim();

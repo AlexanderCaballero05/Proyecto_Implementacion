@@ -8,6 +8,9 @@
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR PARÁMETROS
+
+
+//AGREGAR/REGISTRAR UN PARÁMETRO
     if(isset($_POST['parametro'])){
        try{
           if(isset($_POST['agregar_param'])){
@@ -45,7 +48,7 @@
                     echo $e->getMessage(); 
                     return false;
                     }
-                  }//fin del else de si no existe el nombre del rol
+                  }//fin del else de si no existe el nombre del parametro
               }catch(PDOException $e){
               echo $e->getMessage(); 
               return false;
@@ -60,29 +63,16 @@
 
 
 
-  //PARTE PARA EDITAR 
-  if(isset($_POST['CODPARAMETRO'])){
-    if(isset($_POST['Editparametro'])){
-      $codigo_param = ($_POST['CODPARAMETRO']);
-      $editar_param = ($_POST['Editparametro']);
+  //EDITAR UN PARÁMETRO 
+  if(isset($_POST['id_param'])){
+    if(isset($_POST['Edit_parametro'])){
+      $codigo_param = ($_POST['id_param']);
       $editar_valor = ($_POST['Editvalor']);
       try{
-       // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_parametros where PARAMETRO = (?) and CODIGO_PARAMETRO <> (?) ;");
-       $sentencia->execute(array($editar_param,$codigo_valor));
-       $row=$sentencia->fetchColumn();
-        if($row>0){
-          echo "<script>
-          alert('Ya existe un rol con este mismo nombre: $editar_param');
-          window.location = 'parametros';
-          </script>";
-          exit;
-
-        }else{
+       //   
          
-          try{
-            $sql = " UPDATE tbl_parametros SET NOMBRE = '$editar_param' ,DESCRIPCION = '$editar_valor'  
-            WHERE CODIGO_TIPO_ROL = '$codigo_param' ";
+            $sql = " UPDATE tbl_parametros SET VALOR = '$editar_valor'  
+            WHERE CODIGO_PARAMETRO = '$codigo_param' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
@@ -100,19 +90,15 @@
               window.location = 'parametros';
               </script>";
             }
-          }catch(PDOException $e){
-          echo $e->getMessage(); 
-          return false;
-          }//fin del try catch
-        }//fin del else
+
       }catch(PDOException $e){
         echo $e->getMessage(); 
         return false;
        }
     }
-  }//cierre del if principal
+  }
 
-//PARTE PARA ELIMINAR 
+//ELIMINAR UN PARÁMETRO 
 if(isset($_POST['param_eliminar'])){
   if(isset($_POST['ELIMINARPARAM'])){
     $code = ($_POST['param_eliminar']);//asigna a una variable el id del estado a eliminar
@@ -160,7 +146,6 @@ if(isset($_POST['param_eliminar'])){
     }
   }
 }//Cierre del if 
-
 
 
 ?>
