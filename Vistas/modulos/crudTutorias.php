@@ -42,7 +42,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_TUTORIA, t.NOMBRE , a.NOMBRE as AREA, t.FECHA_CREACION, t.CREADO_POR, t.FECHA_MODIFICACION, t.MODIFICADO_POR
+                        $query = "SELECT CODIGO_TUTORIA,t.CODIGO_AREA, t.NOMBRE , a.NOMBRE as AREA, t.FECHA_CREACION, t.CREADO_POR, t.FECHA_MODIFICACION, t.MODIFICADO_POR
                         FROM tbl_tutoria t, tbl_area a
                         WHERE  a.CODIGO_AREA = t.CODIGO_AREA ORDER BY  CODIGO_TUTORIA ASC ;";
                         $result = $conn->query($query);
@@ -53,6 +53,7 @@
                             $var3 = $row['AREA'];
                             $var4 = $row['FECHA_CREACION'];
                             $var5 = $row['FECHA_MODIFICACION'];
+                            $var6 = $row['CODIGO_AREA'];
                         ?>
                         <tr>
                           <td>
@@ -95,10 +96,25 @@
                                       </div>
 
                                       <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Area</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
-                                        </div>
+                                        <?php //--INICIO DEL ESTADO
+                                        $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                        $resultadod=$conn->query($query);                
+                                       ?>
+                                       <label  class="control-label">Area</label>  
+                                       <div class="form-group">
+                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
+                                         <option value="<?php echo $var6?>"><?php echo $var3;?></option>
+                                          <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                          while($row = $resultadod->fetch_assoc()) { 
+                                          $codigo = $row['CODIGO_AREA'];
+                                          $area = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $area;?></option>
+                                        <?php } 
+                                         }?>
+                                        </select> 
+                                       </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -167,7 +183,7 @@
                             </div>
                             <div class="col-sm-12">
                               <?php //--INICIO DEL ESTADO
-                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area  ";
+                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
                                 $resultadod=$conn->query($query);                
                                ?>
                               <label  class="control-label">Area</label>  

@@ -217,18 +217,17 @@ include_once "conexion3.php";
                                           </div>
                                           <input type="password" class="form-control" id="contrasena" name="contrasena" >
                                         </div>
-
-                                      </div>
+                                      </div><!--fin del col -->
                                       <div class="col-sm-6">
-                                      <label for="" class="control-label">Confirmar Contraseña</label> 
-                                       <div class="input-group" >
+                                        <label for="" class="control-label">Confirmar Contraseña</label> 
+                                        <div class="input-group" >
                                           <div  class="input-group-prepend">
                                             <div  class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo "></span></div>
                                           </div>
                                           <input type="password" class="form-control" id="confirmar_contra" name="confirmar_contra" >
                                         </div>
+                                      </div><!--fin del col -->
 
-                                      </div>
                                     </div>
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">

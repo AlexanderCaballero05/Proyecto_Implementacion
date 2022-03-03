@@ -68,7 +68,7 @@
     if(isset($_POST['editar_tutoria'])){
       $codigo_tutoria = ($_POST['id_tutoria']);
       $editar_nombre = ($_POST['editar_nombre']);
-      $editar_descripcion = ($_POST['editar_descripcion']);
+      $editar_area = ($_POST['editar_area']);
       $fecha_modificacion = date('Y-m-d'); 
       try{
        // 
@@ -83,7 +83,7 @@
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_tutoria SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion'  
+            $sql = " UPDATE tbl_tutoria SET NOMBRE = '$editar_nombre' ,CODIGO_AREA = '$editar_area',FECHA_MODIFICACION = '$fecha_modificacion'  
             WHERE CODIGO_TUTORIA = '$codigo_tutoria' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
