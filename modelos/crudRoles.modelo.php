@@ -122,7 +122,7 @@ if(isset($_POST['rol_eliminar'])){
     $code = ($_POST['rol_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
       $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
-      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);;");
+      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){

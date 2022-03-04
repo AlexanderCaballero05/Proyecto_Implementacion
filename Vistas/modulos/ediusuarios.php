@@ -15,10 +15,12 @@ include_once "conexion3.php";
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 <style>
-  #mostrar{
+  /*Para que el div que tiene las contraseñas se muestren por default en none,osea que no se pueda ver
+  hasta que se le de click,que esta en la funcion js de abajo */
+  #Mostrar_reseteo{
     display: none;
   }
-  #pass{
+  #Mostrar_reseteo1{
     display: none;
   }
 </style>
@@ -132,23 +134,21 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Primer nombre</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="primer_nombre" id="primer_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Primer Apellido</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="primer_apellido" id="primer_apellido">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Correo</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo" id="correo">
                                         </div>
                                       </div>
-                                      
-                                       
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row"> <!-- INICIO SEGUNDO ROW --> 
                                       
@@ -205,24 +205,24 @@ include_once "conexion3.php";
                                       </div>
                                     <div class="row">
                                       <div class="col-sm-6">
-                                        <button type="button" onclick="MostrarInput()" class="btn btn-primary">Resetear Contraseña</button>
+                                        <button type="button"  class="btn btn-primary" onclick="Mostar_div()">Resetear Contraseña</button>
                                       </div>
                                     </div>
-                                    <div class="row">
-                                      <div class="col-sm-6">
+                                    <div  class="row">
+                                      <div id="Mostrar_reseteo" class="col-sm-6">
                                        <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group" >
                                           <div  class="input-group-prepend">
-                                            <div id="mostrar" name="mostrar" class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo1 "></span></div>
+                                            <div id="mostrar"  class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo1 "></span></div>
                                           </div>
                                           <input type="password" class="form-control" id="contrasena" name="contrasena" >
                                         </div>
                                       </div><!--fin del col -->
-                                      <div class="col-sm-6">
+                                      <div id="Mostrar_reseteo1" class="col-sm-6">
                                         <label for="" class="control-label">Confirmar Contraseña</label> 
                                         <div class="input-group" >
                                           <div  class="input-group-prepend">
-                                            <div  class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo "></span></div>
+                                            <div class="input-group-text"><span class="nav-icon fas fa-eye-slash ojo "></span></div>
                                           </div>
                                           <input type="password" class="form-control" id="confirmar_contra" name="confirmar_contra" >
                                         </div>
@@ -274,14 +274,6 @@ include_once "conexion3.php";
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
-
-  <!-- Button trigger modal -->
-
-
-<!-- Modal -->
-
-
-
 </div><!-- /.content-wrapper -->
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
   </aside>
@@ -290,47 +282,56 @@ include_once "conexion3.php";
   </div><!-- /.content-wrapper -->
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
   </aside>
-</div><!-- ./wrapper -->
+</div><!--  -->
+
+
 
 <script>
   $(document).ready( function () {
     $('#myTable').DataTable();
 } );
 </script>
+<script>
+  function Mostar_div(){
+    var x = document.getElementById("Mostrar_reseteo");
+    var y = document.getElementById("Mostrar_reseteo1");
+    if(x.style.display === "none" && y.style.display === "none"){
+      x.style.display = "block";
+      y.style.display = "block";
+    }else{
+      x.style.display = "none";
+      y.style.display = "none";
+    }
+  }
+</script>
 
 <script>
- const mostrar_cla = document.querySelector(".ojo");
+  // Mostrar y ocultar contraseña para el input de confirmar contraseña
+  const mostrar_cla = document.querySelector(".ojo");
   mostrar_cla.addEventListener('click',function(){
     var cla = document.getElementById("confirmar_contra");
     if(cla.type === "password"){
        cla.type = "text";
-
+       $('.ojo').removeClass('nav-icon fas fa-eye-slash').addClass('nav-icon fas fa-eye');
     }else{
       cla.type ="password";
+      $('.ojo').removeClass('nav-icon fas fa-eye').addClass('nav-icon fas fa-eye-slash');
     }
   });
 </script>
-
 <script>
- const mostrar_cla = document.querySelector(".ojo1");
-  mostrar_cla.addEventListener('click',function(){
-    var cla = document.getElementById("contrasena");
-    if(cla.type === "password"){
-       cla.type = "text";
-
+  //Mostrar y ocultar la clave para el input de contrasena ,es lo mismo que arriba,pero no podian estar juntos,porque? pues solo se que no se puede :v
+  const mostrar = document.querySelector(".ojo1");
+  mostrar.addEventListener('click',function(){
+    var cla1 = document.getElementById("contrasena");
+    if(cla1.type === "password"){
+       cla1.type = "text";
+       $('.ojo1').removeClass('nav-icon fas fa-eye-slash').addClass('nav-icon fas fa-eye');
     }else{
-      cla.type ="password";
+      cla1.type ="password";
+      $('.ojo1').removeClass('nav-icon fas fa-eye').addClass('nav-icon fas fa-eye-slash');
     }
   });
-</script>
-
-<script type="text/javascript">  
-  //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
-  function MostrarInput(){
-    document.getElementById('mostrar').style.display = "block";
-    document.getElementById('pass').style.display = "block";
-  }
-  
 </script>
                                   
 <!-- funciones del sistema -->
@@ -399,5 +400,5 @@ include_once "conexion3.php";
     e.value = cadena;
   };
 </script>
-
-<!--♠DianaRut *No me quiten los creditos :( -->
+<!--Ordenado y comentado para su mejor compresion -->
+<!-- Elaborado  y modificado  unicamente por ♠Diana Rut  -->

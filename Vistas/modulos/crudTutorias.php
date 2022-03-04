@@ -91,7 +91,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input required type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
 
@@ -178,7 +178,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  require type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria" id="nombre_tutoria">
+                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria" id="nombre_tutoria">
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -188,7 +188,7 @@
                                ?>
                               <label  class="control-label">Area</label>  
                                 <div class="form-group">
-                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required="">
+                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
                                       <option > --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {

@@ -20,12 +20,11 @@
 
 
 <?php 
-                  $codigoObjeto=1;
-                    $accion='Ingreso a la tabla de registro de usuarios';
-                    $descripcion= 'Aqui se pueden crear un usuario';
-                    bitacora($codigoObjeto, $accion,$descripcion);
-
-                    ?>
+  $codigoObjeto=1;
+   $accion='Ingreso a la tabla de registro de usuarios';
+  $descripcion= 'Aqui se pueden crear un usuario';
+    bitacora($codigoObjeto, $accion,$descripcion);
+?>
 <head>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/

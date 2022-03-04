@@ -160,7 +160,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
+                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
                                 </div>
                             </div>
                             <div class="col-sm-12">

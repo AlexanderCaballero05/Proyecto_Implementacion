@@ -77,7 +77,7 @@
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe un rol con este mismo nombre: $editar_nombre');
+          alert('Ya existe una Tutoria con este mismo nombre: $editar_nombre');
           window.location = 'crudTutorias';
           </script>";
           exit;
@@ -119,7 +119,8 @@ if(isset($_POST['tutoria_eliminar'])){
   if(isset($_POST['ELIMINAR_TUTORIA'])){
     $code = ($_POST['tutoria_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT ");
+      $relacion_tablas =  $db->prepare("SELECT  t.CODIGO_TUTORIA  ,t.NOMBRE from tbl_tutoria t,tbl_carga_academica c
+      where  t.CODIGO_TUTORIA = c.CODIGO_TUTORIA and t.CODIGO_TUTORIA  = (?); ");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){

@@ -73,13 +73,14 @@
                         $dias_ven = $row;
                       }
                       $fechaActual = date('Y-m-d'); 
-                      $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$dias_ven'+ days")); 
+                      $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$60'+ days")); 
 
                       
                       try {
                          if(($tipo_persona == "1") 	|| ($tipo_persona == "2") ){
-                            $sentencia = $db->prepare("SELECT NOMBRE_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO  = (?) ;");
-                            $sentencia->execute(array($nombre_usuario));
+                            $sentencia = $db->prepare("SELECT NOMBRE_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO  = (?) 
+                            and DNI <> (?) ;");
+                            $sentencia->execute(array($nombre_usuario,$identidad));
                             $row=$sentencia->fetchColumn();
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
@@ -91,7 +92,7 @@
                               try{
 
                                 //Insertar en las respectivas tablas (tbl_persona,tbl_usuario,tbl_correo_electonico)
-                              //  $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
+                              
                                 $queryregistrarp = "INSERT INTO tbl_persona(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
                                 VALUES('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento', '$fechaActual','$tipo_persona','NO DEFINIDO', '$fechaActual','NO DEFINIDO','$sexo')";
                                 $resultado=$conn->query($queryregistrarp);
