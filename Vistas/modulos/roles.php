@@ -57,13 +57,24 @@
                             <div class="text-center" >
                               <div class="btn-group">
                                 
+
+
+
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+
+
+
+
+                               
                                 <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+
+
+
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -158,13 +169,13 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
                                 </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
