@@ -67,9 +67,12 @@
   if(isset($_POST['id_param'])){
     if(isset($_POST['Edit_parametro'])){
       $codigo_param = ($_POST['id_param']);
-      $editar_valor = ($_POST['Editvalor']);
+      $editar_valor = ($_POST['Edit_valor']);
       try{
        //   
+       $sentencia = $db->prepare("SELECT * FROM tbl_parametros where PARAMETRO = (?) and CODIGO_PARAMETRO <> (?) ;");
+       $sentencia->execute(array($editar_valor ,$codigo_param));
+       $row=$sentencia->fetchColumn();
          
             $sql = " UPDATE tbl_parametros SET VALOR = '$editar_valor'  
             WHERE CODIGO_PARAMETRO = '$codigo_param' ";
@@ -103,8 +106,9 @@ if(isset($_POST['param_eliminar'])){
   if(isset($_POST['ELIMINARPARAM'])){
     $code = ($_POST['param_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT a.CODIGO_PARAMETRO, a.CODIGO_PARAM_USUARIOS  from  TBL_PARAM_USUARIOS  a ,TBL_PARAMETROS b
-      where b.CODIGO_PARAMETRO  = a.CODIGO_PARAMETRO  and b.CODIGO_PARAMETRO  = (?);");
+      $relacion_tablas =  $db->prepare("SELECT a.CODIGO_PARAMETRO, a.CODIGO_PARAM_USUARIO
+       from tbl_parametros_usuarios a ,tbl_parametros p 
+       where p.CODIGO_PARAMETRO = a.CODIGO_PARAMETRO and p.CODIGO_PARAMETRO = (?);;");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
