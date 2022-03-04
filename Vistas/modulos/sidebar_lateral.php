@@ -59,7 +59,13 @@
                     <p>Editar Usuarios</p>
                   </a>
                 </li>
-                
+                <li class="nav-item">
+                  <a href="personas" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Editar personas</p>
+                  </a>
+                </li>
+
                 <li class="nav-item">
                   <a href="Formbitacora" class="nav-link">
                   

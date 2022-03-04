@@ -86,6 +86,8 @@ session_start();
          $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "personas" ||
+         $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categorias"){
       include_once "modulos/".$_GET["ruta"].".php";
