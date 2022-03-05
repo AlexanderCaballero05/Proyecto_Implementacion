@@ -11,7 +11,5 @@ require_once "modelos/crudTutoria.modelo.php";
 
 
 
-
-
 $plantilla = new PlantillaControlador();
 $plantilla->plantilla();

@@ -1,6 +1,5 @@
 
  <?php
-  session_start();
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -13,7 +12,8 @@
           if(isset($_POST['agregar_rol'])){
                $nombre_rol = ($_POST['nombre_rol']);
                $descripcion = ($_POST['descripcion_rol']);
-               $fechaActual = date('Y-m-d');   
+               $fechaActual = date('Y-m-d');
+               $usuario =$_SESSION['vario'];   
               try{ 
                   $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_roles WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_rol));
@@ -26,7 +26,7 @@
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO `tbl_roles`( `NOMBRE`, `DESCRIPCION`,  `FECHA_CREACION`) VALUES ('$nombre_rol','$descripcion','$fechaActual'); ";
+                      $query_rol = " INSERT INTO tbl_roles( NOMBRE, DESCRIPCION, FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_rol','$descripcion','$fechaActual','$usuario'); ";
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
@@ -35,7 +35,7 @@
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=1;
+                        $codigoObjeto=2;
                         $accion='Registro';
                         $descripcion= 'Se agrego un nuevo rol ';
                          bitacora($codigoObjeto, $accion,$descripcion);
@@ -72,6 +72,8 @@
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
       $fecha_modificacion = date('Y-m-d'); 
+      $user=$_SESSION['vario'];
+
       try{
        // 
        $sentencia = $db->prepare("SELECT * FROM tbl_roles where NOMBRE = (?) and CODIGO_TIPO_ROL <> (?) ;");
@@ -85,7 +87,7 @@
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion'  
+            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
             WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
@@ -94,10 +96,11 @@
               window.location = 'crudRoles';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=1;
+              $codigoObjeto=2;
               $accion='Modificacion';
               $descripcion= 'Se edito un rol ';
               bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el rol!');
@@ -141,7 +144,7 @@ if(isset($_POST['rol_eliminar'])){
             window.location = 'crudRoles';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
+            $codigoObjeto=2;
             $accion='Eliminación';
             $descripcion= 'Se elimino un rol ';
             bitacora($codigoObjeto, $accion,$descripcion);

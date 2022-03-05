@@ -1,9 +1,13 @@
 <?php
 
-
   include_once "conexionpdo.php";
-
   include_once "conexion3.php";
+  include_once 'function_bitacora.php';
+  $codigoObjeto=13;
+  $accion='Ingreso a la tabla de registro de personas';
+  $descripcion= 'Usuario se autentifico';
+  bitacora($codigoObjeto, $accion,$descripcion);
+
   $parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($parametro));
@@ -12,19 +16,9 @@
   if($row>0){
     $valor = $row;
   }
-  // llamar al procedimiento almacenado
-
-
   
 ?>
 
-
-<?php 
-  $codigoObjeto=1;
-   $accion='Ingreso a la tabla de registro de usuarios';
-  $descripcion= 'Aqui se pueden crear un usuario';
-    bitacora($codigoObjeto, $accion,$descripcion);
-?>
 <head>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/

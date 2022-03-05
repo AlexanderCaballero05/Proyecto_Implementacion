@@ -11,7 +11,8 @@
           if(isset($_POST['nueva_tutoria'])){
                $nombre_tutoria = ($_POST['nombre_tutoria']);
                $area = ($_POST['codigo_area']);
-               $fechaActual = date('Y-m-d');   
+               $fechaActual = date('Y-m-d');
+               $usuario =$_SESSION['vario'];    
               try{ 
                   $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_tutoria WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_tutoria));
@@ -24,7 +25,7 @@
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO `tbl_tutoria`( `NOMBRE`, `CODIGO_AREA`,  `FECHA_CREACION`) VALUES ('$nombre_tutoria','$area','$fechaActual'); ";
+                      $query_rol = " INSERT INTO `tbl_tutoria`( `NOMBRE`, `CODIGO_AREA`,  `FECHA_CREACION`,CREADO_POR) VALUES ('$nombre_tutoria','$area','$fechaActual','$usuario'); ";
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
@@ -33,7 +34,7 @@
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=1;
+                        $codigoObjeto=22;
                         $accion='Registro';
                         $descripcion= 'Se agrego una nueva tutoria ';
                          bitacora($codigoObjeto, $accion,$descripcion);
@@ -70,6 +71,7 @@
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_area = ($_POST['editar_area']);
       $fecha_modificacion = date('Y-m-d'); 
+      $user =$_SESSION['vario'];  
       try{
        // 
        $sentencia = $db->prepare("SELECT * FROM tbl_tutoria where NOMBRE = (?) and CODIGO_TUTORIA <> (?) ;");
@@ -83,7 +85,7 @@
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_tutoria SET NOMBRE = '$editar_nombre' ,CODIGO_AREA = '$editar_area',FECHA_MODIFICACION = '$fecha_modificacion'  
+            $sql = " UPDATE tbl_tutoria SET NOMBRE = '$editar_nombre' ,CODIGO_AREA = '$editar_area',FECHA_MODIFICACION = '$fecha_modificacion',MODIFICADO_POR = '$user'
             WHERE CODIGO_TUTORIA = '$codigo_tutoria' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
@@ -92,7 +94,7 @@
               window.location = 'crudTutorias';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=1;
+              $codigoObjeto=22;
               $accion='Modificacion';
               $descripcion= 'Se edito una tutoria ';
               bitacora($codigoObjeto, $accion,$descripcion);
@@ -139,7 +141,7 @@ if(isset($_POST['tutoria_eliminar'])){
             window.location = 'crudTutorias';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
+            $codigoObjeto=22;
             $accion='Eliminación';
             $descripcion= 'Se elimino una Tutoria ';
             bitacora($codigoObjeto, $accion,$descripcion);

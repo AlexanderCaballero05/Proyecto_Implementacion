@@ -1,33 +1,54 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ include "conexionpdo.php";
+ include_once 'function_bitacora.php';
+ 
+ $codigoObjeto=22;
+ $accion='Ingreso a la tabla de Tutorias';
+ $descripcion= 'Usuario se autentifico ';
+ bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
 
 </head>
-
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-           
+        <?php
+          $usuario=$_SESSION['vario'];
+           //Evaluo si existe el tipo de Rol
+           $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL  FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+           $evaluar_usuario->execute(array($usuario));
+           $row=$evaluar_usuario->fetchColumn();
+           if($row > 0){
+             $usuariomo = $row;
+             $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+             $evaluar_permiso->execute(array($usuariomo, '1'));
+             $row1=$evaluar_permiso->fetchColumn();
+             $permiso_registrar =$row1;             
+            }
+          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->   
+           <?php
+           if($permiso_registrar = 'ON' ){
+           ?>       
             <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Tutoria</button>
-            
-          
-          <!-- jquery validation -->
+           <?php
+            }
+           ?>
+          <!-- Inicio del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">Información de Tutorias</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
-                  
                 <div class="table-responsive">
                   <table id="tabla_tutoria" class="table table-bordered table-striped">
                       <thead>
@@ -59,14 +80,53 @@
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
+                              <?php
+                                $usuario=$_SESSION['vario'];
+                                //Evaluo si existe el tipo de Rol
+                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario  WHERE NOMBRE_USUARIO = (?);");
+                                $evaluar_usuario->execute(array($usuario));
+                                $row=$evaluar_usuario->fetchColumn();
+                                if($row > 0){
+                                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                  $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                  $row1=$evaluar_permiso_eliminar->fetchColumn();
+                                  $permiso_eliminar =$row1; 
+                                }
+                             ?>    
+                             <?php
+                             if($permiso_eliminar = 'ON'){
+                             ?>                           
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="eliminar" name="eliminar" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+                              <?php
+                               }
+                              ?>
+                               <?php
+                                $usuario=$_SESSION['vario'];
+                                //Evaluo si existe el tipo de Rol
+                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario  WHERE NOMBRE_USUARIO = (?);");
+                                $evaluar_usuario->execute(array($usuario));
+                                $row=$evaluar_usuario->fetchColumn();
+                                if($row > 0){
+                                  $usuariomo = $row;
+                                  $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                  $permiso_actualizar =$row1; 
+                                }
+                               ?>
+                               <?php
+                                if($permiso_actualizar = 'ON' ){
+                               ?>
                                 <a href="#EDITARTUTORIA<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+                                <?php
+                                 }
+                                ?><!--Fin del if de permitir permiso de actualizar -->
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -211,7 +271,7 @@
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA --> 
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA Elaborado por Diana Rut --> 
   
    <!--Funcion de la datatable -->
 <script type="text/javascript"> 

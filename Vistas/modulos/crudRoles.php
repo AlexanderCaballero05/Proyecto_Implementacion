@@ -1,26 +1,52 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ include "conexionpdo.php";
+ include_once 'function_bitacora.php';
+ 
+ $codigoObjeto=2;
+ $accion='Ingreso a la tabla de roles';
+ $descripcion= 'Usuario se autentifico ';
+ bitacora($codigoObjeto, $accion,$descripcion);
+ 
 ?>
+
 <head>
-
 </head>
-
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-           
-            <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Rol</button>
-            
+        <?php
+         include "conexionpdo.php";
+         $usuario=$_SESSION['vario'];
+          //Evaluo si existe el tipo de Rol
+          $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+          $evaluar_usuario->execute(array($usuario));
+          $row=$evaluar_usuario->fetchColumn();
+          if($row > 0){
+           $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+           $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+           $evaluar_permiso->execute(array($usuariomo, '1'));
+           $row1=$evaluar_permiso->fetchColumn();
+            $permiso_registrar =$row1;             
+           }
+          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->          
+          <?php
+          if($permiso_registrar == 'ON'){
+          ?>
+          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Rol</button>
+
+          <?php
+           }
+          ?>
           
-          <!-- jquery validation -->
+          <!-- Inicios del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">Información de los roles</strong></h1>
@@ -37,12 +63,14 @@
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Descripcion</th>
                           <th class="text-center">Fecha Creación</th>
+                          <th class="text-center">Creado por</th>
                           <th class="text-center">Fecha Modificación</th>
+                          <th class="text-center">Modificado por</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT `CODIGO_TIPO_ROL`, `NOMBRE`, `DESCRIPCION`,  `FECHA_CREACION` ,FECHA_MODIFICACION FROM `tbl_roles`
+                        $query = "SELECT * FROM `tbl_roles`
                         ORDER BY  CODIGO_TIPO_ROL ASC ;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
@@ -51,20 +79,64 @@
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
                             $var4 = $row['FECHA_CREACION'];
+                            $var6 = $row['CREADO_POR_USUARIO'];
                             $var5 = $row['FECHA_MODIFICACION'];
+                            $var7 = $row['MODIFICADO_POR'];
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                              <!-- Codigo de permiso para Eliminar -->
+                              <?php
+                                $usuario=$_SESSION['vario'];
+                                //Evalua si existe el tipo de Rol
+                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL  FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                                $evaluar_usuario->execute(array($usuario));
+                                $row=$evaluar_usuario->fetchColumn();
+                                if($row > 0){
+                                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                  $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                  $row1=$evaluar_permiso_eliminar->fetchColumn();
+                                  $permiso_eliminar =$row1; 
+                                }
+                              ?> 
+                               <?php
+                                 if($permiso_eliminar == 'ON'){
+                               ?>                            
+                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+                               <?php
+                                }
+                               ?><!--Fin del boton de eliminar -->
+                              <!--Codigo para asignar permiso del boton de editar -->
+                              <?php
+                               $usuario=$_SESSION['vario'];
+                               //Evaluo si existe el tipo de Rol
+                               $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                               $evaluar_usuario->execute(array($usuario));
+                               $row=$evaluar_usuario->fetchColumn();
+                               if($row > 0){
+                                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                  //llamar al procedimiento almacenado
+                                  $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                  $permiso_actualizar =$row1; 
+                               }
+                              ?>
+                              <?php
+                                if($permiso_actualizar = 'ON'){
+                              ?>
                                 <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+                              <?php
+                                }
+                              ?>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -72,7 +144,9 @@
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo $var6; ?></td>
                           <td class="text-center"><?php echo $var5; ?></td>
+                          <td class="text-center"><?php echo $var7; ?></td>
 
                         <!--INICIO DEL MODAL DE EDITAR ROL -->
                           <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
@@ -109,7 +183,7 @@
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
                             
-                          <!--INCICIO DEL MODAL ELIMINAR   -->
+                          <!--INICIO DEL MODAL ELIMINAR   -->
                           <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
@@ -147,7 +221,7 @@
   </section><!-- FINAL SECTION -->
 
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ROL -->
-  <div id="AGREGAR_ROL" class="modal fade" role="dialog">
+    <div id="AGREGAR_ROL" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
@@ -179,6 +253,7 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
+   <!--Elaborado por Diana Rut -->
   
    <!--Funcion de la datatable -->
 <script type="text/javascript"> 
