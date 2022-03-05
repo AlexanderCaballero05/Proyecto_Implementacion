@@ -1,6 +1,24 @@
 <?php
+
+  include_once "conexionpdo.php";
   include_once "conexion3.php";
+  include_once 'function_bitacora.php';
+  $codigoObjeto=13;
+  $accion='Ingreso a la tabla de registro de personas';
+  $descripcion= 'Usuario se autentifico';
+  bitacora($codigoObjeto, $accion,$descripcion);
+
+  $parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($parametro));
+  $row=$sentencia->fetchColumn();
+  
+  if($row>0){
+    $valor = $row;
+  }
+  
 ?>
+
 <head>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/
@@ -43,26 +61,26 @@
                <form id="FORMPERSONAS" method="POST" >
                   <div class="card-body">
                     <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> <strong>Datos Generales persona</strong></h2>
+                      <h2 class="card-title"> <strong>Generales persona</strong></h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
                       <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                         <label for="identidad" class="control-label">Número de Identidad</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="IDENTIDAD" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                          <input class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label for="identidad" class="control-label">Primer Nombre:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);"  required="" >
+                          <input class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" required="" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO er NOMBRE-->
                         <label for="identidad" class="control-label">Segundo Nombre:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="3" name="segundo_nombre" id="" onKeyDown="sinespacio(this);" >
+                          <input class="form-control" type="text" maxlength="13" minlength="3" name="segundo_nombre" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off">
                         </div>
                       </div>
                     </div><!--Fin de una fila -->
@@ -71,19 +89,19 @@
                       <div class="col-md-4"><!--INICIO 1er APELLIDO-->
                         <label for="identidad" class="control-label">Pimer Apellido:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="" onKeyDown="sinespacio(this);" required="" >
+                          <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 2er APELLIDO-->
                         <label for="identidad" class="control-label">Segundo Apellido:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="" onKeyDown="sinespacio(this);" >
+                          <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label for="identidad" class="control-label">Fecha Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_nacimiento" max="2002-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required="" >
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -134,7 +152,7 @@
                       <div class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Fecha Baja:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01" required="" >
+                          <input readonly class="form-control" type="date" placeholder="Fecha" name="fecha_baja" max="2002-01-01" min="1950-01-01">
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -149,7 +167,7 @@
                     </div><!--Fin de otra fila :v -->
 
                     <div class="card-header" id="form_usuario">
-                       <h2 class="card-title"> <strong> Registrar Usuario</strong></h2>
+                       <h2 class="card-title"> <strong>Registrar Usuario</strong></h2>
                     </div><br>
                     <div  class="row"> 
                       <div class="col-md-4" id="primera_fila"><!--INICIO NOMBRE USUARIO-->
@@ -162,42 +180,13 @@
                       <div class="col-md-4" id="segunda_fila"><!--INICIO SEXO--> 
                          <label for="cbx_persona" class="control-label">Estado</label>
                          <div class="form-group">
-                         <select name="estado" id="txtestado" class="form-control" >
-                            <Option class="custom-selected">Selecione un estado</option>
-                             <?php //Se traen los datos de la tabla tbl_estado en el select de estado
-                               $query = "SELECT CODIGO_ESTADO,NOMBRE FROM tbl_estado;";
-                               $result = $conn->query($query);
-                               if ($result->num_rows > 0) {
-                               while($row = $result->fetch_assoc()) {
-                                  $codigo_estado = $row['CODIGO_ESTADO'];
-                                  $estado = $row['NOMBRE'];
-                              ?>
-                            <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                              <?php
-                                }
-                                }
-                              ?>
-                          </select>
+                          <input class="form-control" readonly value="NUEVO"></input>
                          </div>
                       </div>
                       <div class="col-md-4" id="tercera_fila"><!--INICIO ROL--> 
-                         <label for="cbx_persona" class="control-label">Rol</label>
+                        <label for="" class="control-label">Rol</label>
                          <div class="form-group">
-                           <select name="rol" id="txtrol" class="form-control" require>
-                              <Option class="custom-selected">Selecione un rol</option>
-                                <?php //Se traen los datos de la tabla tbl_roles en el select de rol
-                                  $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles;";
-                                  $result = $conn->query($query);
-                                  if ($result->num_rows > 0) {
-                                  while($row = $result->fetch_assoc()) {
-                                  $codigo_rol = $row['CODIGO_TIPO_ROL'];
-                                  $rol = $row['NOMBRE'];
-                                ?>
-                              <option value="<?php echo $codigo_rol;?>"><?php echo $rol;?></option>
-                                <?php
-                                 } }
-                                ?>
-                            </select>
+                          <input class="form-control" readonly value="Indefinido"></input>
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -205,18 +194,15 @@
                     <div class="row"  >
                       <div class="col-md-4" id="cuarta_fila" ><!--INICIO contraseña-->
                         <label for="apellido" class="control-label">Contraseña</label>
+
                         <div class="form-group">
-                            <input class="form-control"  minlength="5" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
+                            <input class="form-control"  minlength="5" maxlength="<?php echo "$valor"?>" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
                         </div>
                       </div>
-                      <div class="col-md-4" id="quinta_fila"><!--INICIO de FECHA DE VENCIMIENTO-->
-                        <label for="apellido" class="control-label">Fecha Vencimiento</label>
-                        <div class="form-group">
-                            <input class="form-control"  onKeyDown="sinespacio(this);" type="date" name="fecha_nacimiento"    >
-                        </div>
-                      </div>
+                      
                     </div>
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                    
                   </div><!--Fin del card body del form -->
                </form> <!-- Final del form de registar persona -->
             </div>
@@ -239,6 +225,16 @@
 
 
 <script type="text/javascript">
+  var dni = document.getElementById('identidad');
+  identidad.addEventListener("keyup", function(e) {
+  var key = e.keyCode || e.charCode;
+  // si la tecla es un cero y el segundo carácter es un cero
+  if (key == 48 && this.value[1] == "0") {
+    // se eliminan los ceros delanteros
+    this.value = this.value.replace(/^0+/, '');
+  }
+  });
+
   //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
   $( function() {
     $("#tipo_persona").change( function() {
@@ -258,5 +254,5 @@
            document.getElementById('quinta_fila').style.display = "none";
         }
     });
- }); //este codigo si me costo 
+  }); //este codigo si me costo 
 </script>
