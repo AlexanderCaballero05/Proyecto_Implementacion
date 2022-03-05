@@ -47,7 +47,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="registrar_persona" class="nav-link" >
+                  <a href="categoria" class="nav-link" >
                    <i class="far fa-circle nav-icon"></i>
                     <p>Registrar Personas/usuarios</p>
                   </a>

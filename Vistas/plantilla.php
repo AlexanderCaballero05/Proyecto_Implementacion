@@ -89,7 +89,7 @@ session_start();
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
-         $_GET["ruta"] == "registrar_persona")
+         $_GET["ruta"] == "categoria")
          {
       include_once "modulos/".$_GET["ruta"].".php";
     }else {
