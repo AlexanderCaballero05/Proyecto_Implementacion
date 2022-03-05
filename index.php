@@ -6,6 +6,9 @@ require_once "modelos/usuario.modelo.php";
 require_once "modelos/personas.modelo.php";
 require_once "modelos/crudRoles.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";
+require_once "modelos/rol.modelo.php";
+require_once "modelos/crudPermisos.modelo.php";
+
 
 
 
