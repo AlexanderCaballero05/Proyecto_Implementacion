@@ -17,7 +17,7 @@
                 <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander</a>
+                <a href="#" class="d-block"><?php $usuario =$_SESSION['vario']; echo $usuario; ?></a>
             </div>
         </div>
 
@@ -47,9 +47,9 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="categorias" class="nav-link" >
+                  <a href="categoria" class="nav-link" >
                    <i class="far fa-circle nav-icon"></i>
-                    <p>Registrar Usuarios</p>
+                    <p>Registrar Personas/usuarios</p>
                   </a>
                 </li>
 
@@ -82,15 +82,15 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
-                  Estadisticas
+                  Gestion de Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href=""class="nav-link">
+                  <a href="procesoRegistrarEstudiante"class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Graficas de pastel</p>
+                    <p>Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -119,15 +119,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar Tutorias</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="procesoCargaAcademica" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Matricular Tutorias</p>
+                  <p>Carga academica</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -189,7 +189,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="roles" class="nav-link">
+                <a href="crudRoles" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p>
                 </a>

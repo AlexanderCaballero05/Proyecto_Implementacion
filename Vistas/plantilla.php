@@ -82,14 +82,25 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
-         $_GET["ruta"] == "roles" ||
+         $_GET["ruta"] == "crudRoles" ||
          $_GET["ruta"] == "objetos" ||
-         $_GET["ruta"] == "registrar_personas" ||
+         $_GET["ruta"] == "procesoCargaAcademica" ||
+         $_GET["ruta"] == "procesoRegistrarEstudiante" ||
+         
          $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "crudTutorias" ||
+         $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
+         $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
+
          $_GET["ruta"] == "crudPermisos" ||
          $_GET["ruta"] == "categorias"||
          $_GET["ruta"] == "crudParametros"){
+
+         
+         $_GET["ruta"] == "crudCargaAcademica" ||
+         $_GET["ruta"] == "crudPermisos"){
+
       include_once "modulos/".$_GET["ruta"].".php";
     }else {
       include "modulos/inicioadmin.php";
@@ -153,6 +164,13 @@ session_start();
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
 </script>
+
+
+
+
+
+
+
 
 <script>
   $('.editbtn').on('click',function(){

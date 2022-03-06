@@ -7,7 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="../fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="./fontawesome-free/css/all.min.css">
     <title>Recuperar Contraseña</title>
   </head>
   <body>
@@ -35,14 +35,14 @@
                    <h3  class="fw-bold text-center py-1">Recuperacion de contrase&ntilde;a </h3>
                </div></br>
                <form action="../../modelos/metodo_seleccionado_recuperacion.php" method="POST">
-                     <div class="input-group mb-3">
-                        <p><strong>¿Olvidaste tu contraseña?</strong>  </br>
-                          <p > Ingresa tu nombre de usuario para restablecerla mediante 2 formas</p>
+                     <div class="input-group mb-1">
+                        <p class="mx-1"><strong>¿Olvidaste tu contraseña?</strong></br>
+                          <p class="mx-1"> Ingresa tu nombre de usuario para restablecerla mediante 2 formas</p>
                         </p>
-                    </div>
+                      </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="Usuario-recuperar"><i class="fas fa-user"></i></span>
-                        <input type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
+                        <input required type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
                     </div>
 
                     <div class="d-grid gap-2">
@@ -55,7 +55,7 @@
                        </button>
 
                        <button type="reset" onclick="location.href='../../index.php'" class="btn btn-block btn-warning btn-flat">
-                        cancelar
+                        <strong>Cancelar</strong> 
                      </button>
                      
                    </div>
