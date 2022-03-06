@@ -7,6 +7,7 @@ require_once "modelos/personas.modelo.php";
 require_once "modelos/crudRoles.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";
 require_once "modelos/crudPermisos.modelo.php";
+require_once "modelos/crudParametros.modelo.php";
 
 
 
