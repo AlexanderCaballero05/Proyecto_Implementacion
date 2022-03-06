@@ -84,13 +84,16 @@ session_start();
          $_GET["ruta"] == "ediusuarios" ||
          $_GET["ruta"] == "crudRoles" ||
          $_GET["ruta"] == "objetos" ||
-         $_GET["ruta"] == "Carga" ||
-         $_GET["ruta"] == "carga_academica" ||
+         $_GET["ruta"] == "procesoCargaAcademica" ||
+         $_GET["ruta"] == "procesoRegistrarEstudiante" ||
+         
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
+         
+         $_GET["ruta"] == "crudCargaAcademica" ||
          $_GET["ruta"] == "crudPermisos"){
       include_once "modulos/".$_GET["ruta"].".php";
     }else {

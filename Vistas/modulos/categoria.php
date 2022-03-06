@@ -2,7 +2,7 @@
 
   include_once "conexionpdo.php";
   include_once "conexion3.php";
-  include_once 'function_bitacora.php';
+  
   $codigoObjeto=13;
   $accion='Ingreso a la tabla de registro de personas';
   $descripcion= 'Usuario se autentifico';

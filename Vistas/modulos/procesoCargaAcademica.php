@@ -2,7 +2,6 @@
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- include_once 'function_bitacora.php';
  
  $codigoObjeto=20;
  $accion='Ingreso al proceso de Carga Academica';
@@ -25,7 +24,7 @@
                 <a class="nav-link active" aria-current="true" href="#">Carga academica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="carga_academica">Ver carga</a>
+                <a class="nav-link" href="crudCargaAcademica">Ver carga</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled">Otros</a>
@@ -76,7 +75,7 @@
                 <label for="identidad" class="control-label">Encargado</label> 
                  <div class="form-group">
                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
-                    <option value="<?php echo $var6?>"><?php echo $var3;?></option>
+                    <option><-SELECCIONAR-></option>
                      <?php 
                        if ($resultadod->num_rows > 0) {
                          while($row = $resultadod->fetch_assoc()) { 
@@ -101,7 +100,7 @@
                 <label for="identidad" class="control-label">Clase/Tutoria</label> 
                  <div class="form-group">
                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
-                    <option value="<?php echo $var6?>"><?php echo $var3;?></option>
+                   <option><-SELECCIONAR-></option>
                      <?php 
                        if ($resultadod->num_rows > 0) {
                          while($row = $resultadod->fetch_assoc()) { 
@@ -127,7 +126,7 @@
                 <label for="identidad" class="control-label">Modalidad</label> 
                  <div class="form-group">
                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
-                    <option value="<?php echo $var6?>"><?php echo $var3;?></option>
+                   <option><-SELECCIONAR-></option>
                      <?php 
                        if ($resultadod->num_rows > 0) {
                          while($row = $resultadod->fetch_assoc()) { 
