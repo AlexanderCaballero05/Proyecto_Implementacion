@@ -2,7 +2,6 @@
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- include_once 'function_bitacora.php';
  
  $codigoObjeto=22;
  $accion='Ingreso a la tabla de Tutorias';
@@ -30,13 +29,13 @@
            if($row > 0){
              $usuariomo = $row;
              $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-             $evaluar_permiso->execute(array($usuariomo, '1'));
+             $evaluar_permiso->execute(array($usuariomo, '22'));
              $row1=$evaluar_permiso->fetchColumn();
              $permiso_registrar =$row1;             
             }
           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->   
            <?php
-           if($permiso_registrar = 'ON' ){
+           if($permiso_registrar == 'ON' ){
            ?>       
             <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Tutoria</button>
            <?php
@@ -89,13 +88,13 @@
                                 if($row > 0){
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '22'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
                              ?>    
                              <?php
-                             if($permiso_eliminar = 'ON'){
+                             if($permiso_eliminar == 'ON'){
                              ?>                           
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="eliminar" name="eliminar" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -113,13 +112,13 @@
                                 if($row > 0){
                                   $usuariomo = $row;
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '22'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                 }
                                ?>
                                <?php
-                                if($permiso_actualizar = 'ON' ){
+                                if($permiso_actualizar == 'ON' ){
                                ?>
                                 <a href="#EDITARTUTORIA<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>

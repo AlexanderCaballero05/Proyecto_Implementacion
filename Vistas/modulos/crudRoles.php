@@ -2,7 +2,6 @@
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- include_once 'function_bitacora.php';
  
  $codigoObjeto=2;
  $accion='Ingreso a la tabla de roles';
@@ -32,7 +31,7 @@
           if($row > 0){
            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-           $evaluar_permiso->execute(array($usuariomo, '1'));
+           $evaluar_permiso->execute(array($usuariomo, '2'));
            $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
            }
@@ -98,7 +97,7 @@
                                 if($row > 0){
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '2'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
@@ -124,13 +123,14 @@
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
-                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
-                                  $permiso_actualizar =$row1; 
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
+                                  $row2=$evaluar_permiso_actualizar->fetchColumn();
+                                  $permiso_actualizar =$row2; 
                                }
                               ?>
                               <?php
-                                if($permiso_actualizar = 'ON'){
+                                if($permiso_actualizar == 'ON')
+                                {
                               ?>
                                 <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
@@ -143,18 +143,6 @@
 
 
 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
-                               </a>
-
-
-
-
-                               
-                                <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                </a>
 
 
 
@@ -257,7 +245,6 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
 
-                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
                                     <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
                                 </div>
                             </div>
@@ -265,7 +252,6 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
 
-                                    <textarea  type="text"  value ="" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
                                     <textarea  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
                                 </div>
                             </div>
