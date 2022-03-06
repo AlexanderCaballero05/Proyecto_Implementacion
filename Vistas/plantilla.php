@@ -88,7 +88,8 @@ session_start();
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
          $_GET["ruta"] == "crudPermisos" ||
-         $_GET["ruta"] == "categorias"){
+         $_GET["ruta"] == "categorias"||
+         $_GET["ruta"] == "crudParametros"){
       include_once "modulos/".$_GET["ruta"].".php";
     }else {
       include "modulos/inicioadmin.php";
