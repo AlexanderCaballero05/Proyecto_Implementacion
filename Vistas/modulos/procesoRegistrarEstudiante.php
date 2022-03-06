@@ -16,7 +16,7 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-
+                <!-- Inicio del PROCESO inscripcion de estudiantes-->
         <div class="card ">
           <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
@@ -24,10 +24,10 @@
                 <a class="nav-link active" aria-current="true" href="#">Estudiantes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="crudCargaAcademica">Ver datos escolares</a>
+                <a class="nav-link" href="crudEstudiante">Ver datos escolares</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link" href="crudCargaAcademica">Ver datos socioeconomicos</a>
+              <a class="nav-link" href="crudContenidoEconoEstudiante">Ver datos socioeconomicos</a>
               </li>
             </ul>
           </div>
@@ -42,27 +42,41 @@
             
 
              </div>
-
             <div class="row">
-             <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+             <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                 <label for="identidad" class="control-label">Grado Actual</label> 
                  <div class="form-group">
-                  <input class="form-control" type="time" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                  <input class="form-control" type="number" maxlength="2" minlength="1" name="GRADO" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 1" required="" >
                 </div>
               </div>
-              <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+              <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                 <label for="identidad" class="control-label">Pasatiempos</label> 
                  <div class="form-group">
-                  <input class="form-control" type="date" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                 <textarea class="form-control" type="textarea" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                 </div>
               </div>
-              <div class="col-md-4"> <!--INICIO IDENTIDAD-->
-                <label for="identidad" class="control-label">Distractores</label> 
+
+              <div class="col-md-3"> <!--INICIO IDENTIDAD-->
+                <label for="DISTRACTORES" class="control-label">Distractores</label> 
                  <div class="form-group">
-                  <input class="form-control" type="date" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                   <textarea class="form-control" type="text" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Ver Telelevision"  required="" > </textarea>
                 </div>
               </div>
+              <div class="col-md-3"> <!--INICIO IDENTIDAD-->
+                <label for="DISTRACTORES" class="control-label">METAS</label> 
+                 <div class="form-group">
+                   <textarea class="form-control" type="text" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Ver Telelevision"  required="" > </textarea>
+                </div>
+              </div>
+
+
+
             </div><!--Cierre del row general -->
+
+            <div class="row">
+            <h3 style="background:aquamarine"> Datos Socioecomicos</h3>
+            
+            </div>
 
             <div class="row">
 
