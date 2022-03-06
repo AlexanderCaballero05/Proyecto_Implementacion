@@ -209,10 +209,10 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+              <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                   <i class="far fa-circle nav-icon"></i>
                   <p>Parametros</p>
-                </a>
+              </a>
               </li>
               <li class="nav-item">
                 <a href="objetos" class="nav-link">
