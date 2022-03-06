@@ -82,6 +82,8 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "estado" ||
+         $_GET["ruta"] == "crudEstudiante" ||
          $_GET["ruta"] == "crudRoles" ||
          $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "procesoCargaAcademica" ||

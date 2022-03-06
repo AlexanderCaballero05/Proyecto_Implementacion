@@ -59,6 +59,20 @@
                     <p>Editar Usuarios</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="estado" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mantenimiento Estado</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="crudEstudiante" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Mantenimiento Estudiante</p>
+                  </a>
+                </li>
                 
                 <li class="nav-item">
                   <a href="Formbitacora" class="nav-link">
