@@ -66,13 +66,7 @@
                     <p>Mantenimiento Estado</p>
                   </a>
                 </li>
-
-                <li class="nav-item">
-                  <a href="crudEstudiante" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Mantenimiento Estudiante</p>
-                  </a>
-                </li>
+              
                 
                 <li class="nav-item">
                   <a href="Formbitacora" class="nav-link">
@@ -110,13 +104,13 @@
                 <li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Graficas lineal</p>
+                    <p>Tipo de contenido</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Otras graficas</p>
+                    <p>Contenido</p>
                   </a>
                 </li>
               </ul>

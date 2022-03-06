@@ -16,9 +16,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <a  href="procesoRegistrarEstudiante">
-            <button  data-toggle="modal" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Estudiante</button>
-        </a>
+           <a  href="procesoRegistrarEstudiante">
+            <button  data-toggle="modal"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo contenido</button>
+            </a>
           
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -33,38 +33,45 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Cod Estudiante</th>
-                          <th class="text-center">Grado Actual</th>
-                          <th class="text-center">Pasatiempos</th>
-                          <th class="text-center">Distractor Escolar</th>
-                          <th class="text-center">Metas</th>
+                          <th class="text-center">ID</th>
+                          <th class="text-center">Nombre estudiante</th>
+                          <th class="text-center">Contenido Socieconomico</th>
+                          <th class="text-center">Nombre tipo contenido</th>
                           
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT e.CODIGO_ESTUDIANTE, p.CODIGO_PERSONA, s.CODIGO_ESTUDIANTE_SOCIOECONOMICO, e.GRADO_ACTUAL ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS FROM tbl_estudiante e , tbl_persona p, tbl_estudiante_socioeconomico s WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA AND s.CODIGO_ESTUDIANTE_SOCIOECONOMICO= s.CODIGO_ESTUDIANTE_SOCIOECONOMICO;";
+                        $query = "SELECT es.CODIGO_ESTUDIANTE_SOCIOECONOMICO as id_tabla, p.PRIMER_NOMBRE as nombre_estudiante, t.TIPO as Contenido_Socieconomico ,c.NOMBRE_TIPO as nombre_tipo_contenido
+                        FROM tbl_tipo_socioeconomico t, tbl_contenido_socioeconomico c, tbl_estudiante_socioeconomico es, tbl_estudiante e , tbl_persona p
+                        WHERE es.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
+                        AND es.CODIGO_CONTENIDO_SOCIOECONOMICO = c.CODIGO_CONTENIDO_SOCIOECONOMICO
+                        AND t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO
+                        AND e.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+
+
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_ESTUDIANTE'];
-                            $var2 = $row['GRADO_ACTUAL'];
-                            $var3 = $row['PASATIEMPOS'];
-                            $var4 = $row['DISTRACTORES_ESCOLARES'];
-                            $var5 = $row['METAS'];
+                            $var1 = $row['id_tabla'];
+                            $var2 = $row['nombre_estudiante'];
+                            $var3 = $row['Contenido_Socieconomico'];
+                            $var4 = $row['nombre_tipo_contenido'];
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
+                              <!--  
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+                               
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+                          -->
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -72,8 +79,25 @@
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
                          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                         <!--INICIO DEL MODAL DE EDITAR ESTUDIANTE -->
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
@@ -163,6 +187,21 @@
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTUDIANTE -->
   <div id="AGREGAR_ESTUDIANTE" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
@@ -171,10 +210,10 @@
                     $query= "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
                     $result= $conn->query($query);
                     ?>
-                    <!--Traer el contenido socienomico de dispositivos electronicos-->
+
                     <?php
                     include_once "conexion3.php";
-                    $query1= "SELECT s.CODIGO_TIPOSOCIO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s";
+                    $query1= "SELECT s.CODIGO_TIPOSOCIO,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s";
                     $result1= $conn->query($query1);
                     ?>
            <div class="modal-content"><!-- Modal content-->
