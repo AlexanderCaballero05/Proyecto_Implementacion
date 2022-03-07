@@ -97,8 +97,6 @@ session_start();
          $_GET["ruta"] == "crudPermisos" ||
          $_GET["ruta"] == "crudpreguntas" ||
          $_GET["ruta"] == "crudtipopersona" ||
-         $_GET["ruta"] == "categorias"){
-         $_GET["ruta"] == "categorias"||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
          $_GET["ruta"] == "crudPermisos"){

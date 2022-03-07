@@ -34,17 +34,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '4'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                          <php
-                             if ($permiso_registrar= 'ON'){
+                          <?php
+                             if ($permiso_registrar == 'ON'){
 
                           ?>
             <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Pregunta</button>
-                          <php
+                          <?php
                               }
                           ?>
           
@@ -66,12 +66,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <th>Pregunta</th>
                           <th>Creado por Usuario</th>
                           <th>Fecha de Creación</th>
+                          <th>Modificado por Usuario</th>
+                          <th>Fecha de Modificacion</th>
+                          
                       
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA,CREADO_POR_USUARIO, FECHA_CREACION from tbl_preguntas;";
+                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA,CREADO_POR_USUARIO, FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION from tbl_preguntas;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -79,6 +82,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             $var2 = $row['PREGUNTA'];
                             $var3 = $row['CREADO_POR_USUARIO'];
                             $var4 = $row['FECHA_CREACION'];
+                            $var5 = $row['MODIFICADO_POR'];
+                            $var6 = $row['FECHA_MODIFICACION'];
                          
                         ?>
                         <tr>
@@ -100,18 +105,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '4'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
                                 ?>  
-                                <php
-                                    if ($permiso_registrar= 'ON'){
+                                <?php
+                                    if ($permiso_eliminar == 'ON'){
 
                                 ?>
                                 <button id="ELIMINAR_PREGUNTA" name="ELIMINAR_PREGUNTA" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
-                               <php
+                               <?php
                                   }
                                 ?>
                                </a>
@@ -130,18 +135,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                    //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '4'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                     
                                   }
                                 ?>
-                                <php
-                                    if ($permiso_registrar= 'ON'){
+                                <?php
+                                    if ($permiso_actualizar == 'ON'){
 
                                 ?>
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <php
+                                <?php
                                   }
                                  ?> 
                               </a>
@@ -152,6 +157,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo $var5; ?></td>
+                          <td class="text-center"><?php echo $var6; ?></td>
+
                           
 
                         <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->

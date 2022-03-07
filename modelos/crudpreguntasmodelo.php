@@ -10,7 +10,8 @@
        try{
           if(isset($_POST['agregar_pregunta'])){
                $pregunta = ($_POST['pregunta']);
-               $fechaActual = date('Y-m-d');   
+               $fechaActual = date('Y-m-d');  
+               $usuario=$_SESSION['vario']; 
               try{ 
                   $consulta_pregunta = $db->prepare("SELECT pregunta FROM tbl_preguntas WHERE pregunta = (?);");
                   $consulta_pregunta->execute(array($pregunta));
@@ -23,12 +24,12 @@
                   exit;
                   }else{
                     try{
-                      $query_pregunta = " INSERT INTO `tbl_preguntas`( `PREGUNTA`, `FECHA_CREACION`) VALUES ('$pregunta','$fechaActual'); ";
+                      $query_pregunta = " INSERT INTO `tbl_preguntas`( `PREGUNTA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`) VALUES ('$pregunta',' $usuario','$fechaActual'); ";
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
                         alert('Pregunta registrada correctamente');
-                        window.location = 'preguntas';
+                        window.location = 'crudpreguntas';
                         </script>";
                         include_once 'function_bitacora.php';
                         $codigoObjeto=4;
@@ -39,7 +40,7 @@
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
-                        window.location = 'preguntas';
+                        window.location = 'crudpreguntas';
                         </script>";
                         exit;
                       }
@@ -65,6 +66,8 @@
   //PARTE PARA EDITAR UNA PREGUNTA
   if(isset($_POST['id_pregunta'])){
     if(isset($_POST['editar'])){
+      $usuario=$_SESSION['vario']; 
+      $fechaActual = date('Y-m-d');  
       $codigo_pregunta = ($_POST['id_pregunta']);
       $editar_pregunta = ($_POST['editar_pregunta']);
       try{
@@ -82,13 +85,16 @@
         }else{
          
           try{
-            $sql = " UPDATE tbl_preguntas SET pregunta = '$editar_pregunta'  
+            $sql = " UPDATE tbl_preguntas
+            SET pregunta = '$editar_pregunta',
+            MODIFICADO_POR = '$usuario', 
+            FECHA_MODIFICACION = '$fechaActual'
             WHERE CODIGO_PREGUNTAS = '$codigo_pregunta' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
               alert('¡pregunta modificado exitosamente!');
-              window.location = 'preguntas';
+              window.location = 'crudpreguntas';
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=4;
@@ -98,7 +104,7 @@
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar la pregunta!');
-              window.location = 'preguntas';
+              window.location = 'crudpreguntas';
               </script>";
             }
           }catch(PDOException $e){
