@@ -195,6 +195,18 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="crudpreguntas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Preguntas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudtipopersona" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tipo Persona</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Parametros</p>
