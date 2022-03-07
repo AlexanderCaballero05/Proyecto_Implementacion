@@ -90,6 +90,10 @@ session_start();
          $_GET["ruta"] == "procesoCargaAcademica" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
+
+         $_GET["ruta"] == "categorias" ||
+         $_GET["ruta"] == "parametrosusuario"){
+    
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
@@ -102,6 +106,7 @@ session_start();
          $_GET["ruta"] == "crudPermisos"){
 
       include_once "modulos/".$_GET["ruta"].".php";
+
     }else {
       include "modulos/inicioadmin.php";
     }
