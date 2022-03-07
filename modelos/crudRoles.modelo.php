@@ -1,9 +1,8 @@
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
-  
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ROL
@@ -91,10 +90,11 @@
             WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo "<script>
-              alert('¡Rol modificado exitosamente!');
-              window.location = 'crudRoles';
-              </script>";
+              echo '<script>
+              alert("Rol actualizado,exitosamente");
+              
+              window.location = "crudRoles";
+              </script>';
               include_once 'function_bitacora.php';
               $codigoObjeto=2;
               $accion='Modificacion';

@@ -138,15 +138,6 @@
                               <?php
                                 }
                               ?>
-
-                                
-
-
-
-
-
-
-
                               </div>
                             </div><!-- final del text-center -->
                           </td>
