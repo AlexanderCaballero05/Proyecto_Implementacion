@@ -14,6 +14,7 @@ require_once "modelos/crudtipopersonamode.php";
 
 require_once "modelos/crudEstudiante.modelo.php";
 require_once "modelos/crudParametros.modelo.php";
+require_once "modelos/procesoCarga.modelo.php";
 
 
 

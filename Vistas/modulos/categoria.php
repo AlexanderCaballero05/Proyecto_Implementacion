@@ -57,7 +57,7 @@
       <div class="container-fluid">
         <div class="row"><!-- COLUMNA PRINCIPAL -->
           <div class="col-md-12"> <!-- COLUMNA DE REGISTRO DE PERSONAS -->
-            <div class="card card-primary bg-transparent">
+            <div class="card card-primary ">
                <form id="FORMPERSONAS" method="POST" >
                   <div class="card-body">
                     <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -211,16 +211,9 @@
       </div>
 
     </section> <!-- Fin del section principal -->
-</div><!-- Fin del conten wrapeer -->
-<!-- divs que agrego que no se para que son :V-->
-<aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
-  </aside>
+
   <!-- /.control-sidebar -->
-</div>
-  </div><!-- /.content-wrapper -->
-  <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
-  </aside>
-</div><!-- ./wrapper -->
+
 
 
 
