@@ -49,7 +49,7 @@
                 <li class="nav-item">
                   <a href="categoria" class="nav-link" >
                    <i class="far fa-circle nav-icon"></i>
-                    <p>Registrar Personas/usuarios</p>
+                    <p>Registrar Usuarios</p>
                   </a>
                 </li>
 
@@ -68,13 +68,7 @@
                 </li>
               
                 
-                <li class="nav-item">
-                  <a href="Formbitacora" class="nav-link">
-                  
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bitacora Universal</p>
-                  </a>
-                </li>
+              
                 <li class="nav-item">
                   <a href="crudPreguntasUsuarios" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
