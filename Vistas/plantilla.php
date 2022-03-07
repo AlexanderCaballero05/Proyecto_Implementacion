@@ -35,7 +35,6 @@ session_start();
         
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
-
     <!-- SCRIPT -->
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
 
@@ -83,11 +82,31 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
-         $_GET["ruta"] == "registrar_personas" ||
+         $_GET["ruta"] == "estado" ||
+         $_GET["ruta"] == "crudEstudiante" ||
+         $_GET["ruta"] == "crudContenidoEconoEstudiante" ||
+         $_GET["ruta"] == "crudRoles" ||
+         $_GET["ruta"] == "objetos" ||
+         $_GET["ruta"] == "procesoCargaAcademica" ||
+         $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
+
          $_GET["ruta"] == "categorias" ||
          $_GET["ruta"] == "parametrosusuario"){
-      include_once "Modulos/".$_GET["ruta"].".php";
+    
+         $_GET["ruta"] == "crudTutorias" ||
+         $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
+         $_GET["ruta"] == "categoria" ||
+         $_GET["ruta"] == "crudPreguntasUsuarios" ||
+         $_GET["ruta"] == "crudPermisos" ||
+         $_GET["ruta"] == "crudpreguntas" ||
+         $_GET["ruta"] == "crudtipopersona" ||
+         $_GET["ruta"] == "crudParametros" ||
+         $_GET["ruta"] == "crudCargaAcademica" ||
+         $_GET["ruta"] == "crudPermisos"){
+
+      include_once "modulos/".$_GET["ruta"].".php";
+
     }else {
       include "modulos/inicioadmin.php";
     }
@@ -103,7 +122,7 @@ session_start();
 }else{
  ?>
 
- <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style =" background-image: url(https://wallpaper.dog/large/5439256.jpg); background-size: cover;">
+ <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style ="background-color:#000000;  ">
  <?php
   include "Modulos/login.php";
 }
@@ -150,6 +169,13 @@ session_start();
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
 </script>
+
+
+
+
+
+
+
 
 <script>
   $('.editbtn').on('click',function(){

@@ -17,7 +17,7 @@
                 <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander</a>
+                <a href="#" class="d-block"><?php $usuario =$_SESSION['vario']; echo $usuario; ?></a>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
             <a href="index" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Adminsitrador
+                Administrador
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -47,29 +47,32 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="categorias" class="nav-link" >
+                  <a href="categoria" class="nav-link" >
                    <i class="far fa-circle nav-icon"></i>
                     <p>Registrar Usuarios</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
                   <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
-
                     <i class="far fa-circle nav-icon"></i>
                     <p>Editar Usuarios</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
-                  <a href="Formbitacora" class="nav-link">
-                  
+                  <a href="estado" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Bitacora Universal</p>
+                    <p>Mantenimiento Estado</p>
                   </a>
                 </li>
+              
+                
+              
                 <li class="nav-item">
-                  <a  href="familiares" class="nav-link">
+                  <a href="crudPreguntasUsuarios" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Familiares</p>
+                    <p>Preguntas Usuarios</p>
                   </a>
                 </li>
               </ul>
@@ -81,27 +84,27 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-chart-pie"></i>
                 <p>
-                  Estadisticas
+                  Gestion de Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href=""class="nav-link">
+                  <a href="procesoRegistrarEstudiante"class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Graficas de pastel</p>
+                    <p>Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Graficas lineal</p>
+                    <p>Tipo de contenido</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Otras graficas</p>
+                    <p>Contenido</p>
                   </a>
                 </li>
               </ul>
@@ -118,15 +121,15 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar Tutorias</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="procesoCargaAcademica" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Matricular Tutorias</p>
+                  <p>Carga academica</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -182,15 +185,42 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="crudPermisos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="crudRoles" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Paramentros</p>
+                  <p>Roles</p>
+                </a>
+              </li>
+              <li class="nav-item">
+
+                <a href="crudpreguntas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Preguntas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudtipopersona" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tipo Persona</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+
+              <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Parametros</p>
+              </a>
+              </li>
+              <li class="nav-item">
+                <a href="objetos" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Objetos</p>
                 </a>
               </li>
               <li class="nav-item">
