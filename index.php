@@ -8,9 +8,12 @@ require_once "modelos/crudRoles.modelo.php";
 require_once "modelos/estado.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";
 require_once "modelos/crudPermisos.modelo.php";
+require_once "modelos/crudpreguntasmodelo.php";
+require_once "modelos/crudtipopersonamode.php";
 
 require_once "modelos/crudEstudiante.modelo.php";
 require_once "modelos/crudParametros.modelo.php";
+
 
 
 
