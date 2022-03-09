@@ -3,9 +3,9 @@ include_once "conexion.php";
 include_once "conexion3.php";
 
 
-$codigoObjeto = 1;
-$accion = 'Ingreso a la pantalla de mantenimiento usuarios';
-$descripcion = 'Ver los registros de los usuarios';
+$codigoObjeto = 17;
+$accion = 'Ingreso a la pantalla de mantenimiento de tipo socioeconomico ';
+$descripcion = 'Ver los registros de los tipo socioeconomico';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
@@ -22,8 +22,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <form method="POST">
 
                 <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Crear informacion
-                        objetos</h4>
+                    <h4 class="text-center">Crear información
+                         Tipo de Socio Economico</h4>
 
                 </div>
                 <div class="modal-body">
@@ -33,15 +33,17 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
-                                    Nombre</label>
-                                <input type="text" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="nombre" id="nombre">
+                                    Tipo Socio Economico</label>
+                                <input type="text" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                 name="guardar_tipo" id="guardar_tipo">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
-                                <input type="text" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="descripcion" id="descripcion">
+                                <input type="text" class="form-control" maxlength="100" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                 name="guardar_descripcion" id="guardar_descripcion">
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -51,16 +53,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                 <!--FINAL DEL CARD BODY -->
                 <div class="modal-footer ">
                     <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                    <button type="submit" name="ADD_OBJETO" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                    <button type="submit" name="guardar_tipo_socio"  id = "guardar_tipo_socio" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                 </div>
                 <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-
-                <?php
-
-                $nueva = new ControladorObjetos();
-                $nueva->ctrIngresoObjeto();
-
-                ?>
             </form>
         </div>
     </div>
@@ -77,18 +72,44 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    <!-- Codigo de permiso de insertar -->
+                    <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
 
+                 
+                     <?php 
+                      if($permiso_registrar = 'ON'){
+                     ?>
                     <button type="button" class="btn btn-warning m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                        Nueva
-                        Objeto
+                        Nuevo
+                        Tipo Socio Economico
                     </button>
-
+                    <?php 
+                      }
+                     ?>
+                   
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Personas</strong></h1>
+                            <h1 class=" card-title text-center"><strong style="color:black;">Tipo Socio Economico</strong></h1>
                         </div>
 
                         <!-- form start -->
@@ -99,41 +120,94 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         <tr>
                                             <th>Acción</th>
                                             <th>ID</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
+                                            <th>Tipo de Socio Economico</th>
+                                            <th>Descripción</th>
                                             <th>Creado por</th>
                                             <th>Fecha creacion</th>
+                                            <th>Modificado por</th>
+                                            <th>Fecha Modificación</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tbl_objetos";
+                                        $query = "SELECT * from tbl_tipo_socioeconomico";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
-                                                $var1 = $row['CODIGO_OBJETO'];
-                                                $var3 = $row['NOMBRE'];
+                                                $var1 = $row['CODIGO_TIPOSOCIO'];
+                                                $var3 = $row['TIPO'];
                                                 $var4 = $row['DESCRIPCION'];
-                                                $var5 = $row['CREADO_POR_USUARIO'];
+                                                $var5 = $row['CREADO_POR'];
                                                 $var6 = $row['FECHA_CREACION'];
                                                 $var7 = $row['MODIFICADO_POR'];
                                                 $var8 = $row['FECHA_MODIFICACION'];
-
-
                                         ?>
                                                 <tr>
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">
+                                                               <!-- Codigo de permiso para Eliminar -->
 
+                                                                <?php
+                                                                include "conexionpdo.php";
+                                                                $usuario=$_SESSION['vario'];
+                                                                //Evaluo si existe el tipo de Rol
+                                                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                                                                FROM tbl_usuario 
+                                                                                                WHERE NOMBRE_USUARIO = (?);");
+                                                                $evaluar_usuario->execute(array($usuario));
+                                                                $row=$evaluar_usuario->fetchColumn();
+                                                                if($row > 0){
+                                                                    $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                                                    $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
+                                                                    $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                                                    $row1=$evaluar_permiso_eliminar->fetchColumn();
+                                                                    $permiso_eliminar =$row1; 
+                                                                }
+                                                                ?>  <!-- fin del codigo para sustraer el permiso de eliminar-->
+                                                                <?php 
+                                                                if($permiso_eliminar= 'ON'){
+                                                                ?>
                                                                 <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                                                    <button id="eliminar_tipo" name="eliminar_tipo" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                                                     </button>
                                                                 </a>
-                                                                <a href="#EDITAROBJETO<?php echo $var1; ?>" data-toggle="modal">
+                                                                <?php 
+                                                                    }
+                                                                    ?>
+                                                                     <!-- Codigo de permiso para Actualizar -->
+                                                                    <?php
+                                                                    include "conexionpdo.php";
+                                                                    $usuario=$_SESSION['vario'];
+                                                                    //Evaluo si existe el tipo de Rol
+                                                                    $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                                                                    FROM tbl_usuario 
+                                                                                                    WHERE NOMBRE_USUARIO = (?);");
+                                                                    $evaluar_usuario->execute(array($usuario));
+                                                                    $row=$evaluar_usuario->fetchColumn();
+                                                                    if($row > 0){
+                                                                        $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                                                        //llamar al procedimiento almacenado
+                                                                        $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                                                        $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                                                        $permiso_actualizar =$row1; 
+                                                                    
+                                                                    }
+                                                                    ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
+                                                                     <?php 
+                                                                    if($permiso_actualizar= 'ON'){
+                                                                    ?>
+                                                                <a href="#editar_tipo<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
                                                                             <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
+                                                                    <?php 
+                                                                        }
+                                                                        ?>
                                                             </div>
                                                         </div><!-- final del text-center -->
                                                     </td>
@@ -142,18 +216,19 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     <td class="text-center"><?php echo $var4; ?></td>
                                                     <td class="text-center"><?php echo $var5; ?></td>
                                                     <td class="text-center"><?php echo $var6; ?></td>
-
+                                                    <td class="text-center"><?php echo $var7; ?></td>
+                                                    <td class="text-center"><?php echo $var8; ?></td>
 
 
 
                                                     <!--INICIO DEL MODAL DE EDITAR -->
-                                                    <div id="EDITAROBJETO<?php echo $var1; ?>" class="modal fade" role="dialog">
+                                                    <div id="editar_tipo<?php echo $var1; ?>" class="modal fade" role="dialog">
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content-->
                                                                 <form method="POST">
                                                                     <div class="modal-header" style="background-color: #0CCDE3">
-                                                                        <h4 class="text-center">Editar informacion objetos
+                                                                        <h4 class="text-center">Editar informacion Tipo Socio Economico
                                                                         </h4>
                                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                     </div>
@@ -161,80 +236,62 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <!--CUERPO DEL MODAL -->
                                                                         <div class="row">
                                                                             <!-- INICIO PRIMERA ROW -->
-                                                                            <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_objeto" id="cod_objeto">
+                                                                            <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
+                                                                                 name="cod_edit_tipo" id="cod_edit_tipo" >
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
-                                                                                        Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="nombre" id="nombre">
+                                                                                    Tipo Socio Economico</label>
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                    name="edit_tipo_socio" id="edit_tipo_socio">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="descripcion" id="descripcion">
+                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="100" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                     name="edit_descripcion" id="edit_descripcion">
                                                                                 </div>
                                                                             </div>
-
-
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
-
-
-
                                                                     </div>
                                                                     <!--FINAL DEL CARD BODY -->
                                                                     <div class="modal-footer ">
                                                                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                        <button type="submit"  name="EDIT_OBJETO" class="btn btn-success"><span>
+                                                                        <button type="submit"  name="edit_tipo"  id="edit_tipo" class="btn btn-success"><span>
                                                                                 <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                                                                     </div>
                                                                     <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                                                    <?php
-
-                                                                    $edit = new ControladorObjetos();
-                                                                    $edit->ctrEditarObjeto();
-
-                                                                    ?>
                                                                 </form>
                                                             </div>
                                                         </div>
                                                     </div><!-- FIN DEL MODAL EDITAR -->
 
-
-                                                    <div id="ELIMINAR<?php echo $var1 ?>" name="div_eliminar" id="div_eliminar" class="modal fade" role="dialog">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <form id="FORMEeliminar" method="POST">
-                                                                    <div class="modal-body">
-                                                                        <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_objeto">
-                                                                        <h4 class="text-center">¿Esta seguro de eliminar el
-                                                                            objeto <?php echo $var1; ?>?
-                                                                        </h4>
-                                                                    </div>
-                                                                    <!--fin el card body -->
-                                                                    <div class="modal-footer ">
-                                                                        <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                                                        <button type="submit" name="ELIMINAR_OBJETO" id="ELIMINAR" class="btn btn-primary">Si,eliminar</button>
-                                                                    </div>
-                                                                    <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                                                    <?php
-
-                                                                    $per_elimina = new ControladorObjetos();
-                                                                    $per_elimina->ctrEliminarObjeto();
-
-                                                                    ?>
-
-                                                                </form>
-                                                            </div>
-                                                            <!--fin del modal contener -->
+                                                    <!-- inicio modal eliminar  -->   
+                                                    <div id="ELIMINAR<?php echo $var1 ?>"  
+                                                    name="eliminar_tipo_socio" id="eliminar_tipo_socio"class="modal fade" role="dialog">
+                                                    <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                         </div>
-                                                        <!--fin del modal dialog -->
-                                                    </div>
+                                                        <form id="FORMEeliminar" method="POST">
+                                                        <div class="modal-body">
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_tipo_socio" id="eliminar_tipo_socio">
+                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
+                                                        </div> <!--fin el card body -->
+                                                            <div class="modal-footer ">
+
+                                                            <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                            <button type="submit"  
+                                                            name="eliminar_tipo" id="eliminar_tipo"  class="btn btn-primary">Si,eliminar</button>      
+                                                            </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                                    </form>
+                                                    </div><!--fin del modal contener -->
+                                                    </div><!--fin del modal dialog -->
+                                                </div><!--fin del modal de eliminar -->
                                                     <!--fin del modal de eliminar -->
                                                 </tr>
                                         <?php
@@ -387,4 +444,4 @@ bitacora($codigoObjeto, $accion, $descripcion);
     };
 </script>
 
-<!--♠DianaRut *No me quiten los creditos :( -->
+<!--♠DianaRut *No me quiten los creditos modificado por any :( --> 

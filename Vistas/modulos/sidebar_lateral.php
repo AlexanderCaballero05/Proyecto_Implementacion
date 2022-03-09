@@ -60,9 +60,15 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="personas" class="nav-link" > <!--modifique acuerdate -->
+                  <a href="crudpersonas" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-circle nav-icon"></i>
                     <p>Editar personas</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>tipo de socio economico</p>
                   </a>
                 </li>
 
@@ -207,7 +213,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="objetos" class="nav-link">
+                <a href="crudobjetos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Objetos</p>
                 </a>
