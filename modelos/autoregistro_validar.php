@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 include("conexion.php");
 include("function_bitacora.php");
 //DATOS PARA LA TABLA PERSONA
@@ -12,31 +11,22 @@ $dni = $_POST['dni'];
 $fecha = $_POST['fechana'];
 $lugar = $_POST['lugarna'];
 $fechaActual = date('Y-m-d');
-
 $sexo = $_POST['sexo'];
-
 //DATOS PARA LA TABLA TELEFONO
 $telefono = $_POST['telefono'];
-
 //TABLA CORREO QUE ESTA RELACIONADO CON PERSONAS
 $correo = $_POST['ingcorreo'];
-
 //DATOS PARA LA TABLA DE USUARIOS
 $usuario = $_POST['ingusuario'];
 $contrasena = $_POST['ingcontrasena'];
 $fecha_vencimiento = date("Y-m-d",strtotime($fechaActual."+ 60 days"));
 
-
-
-
 // VERIFICAR LOS DATOS NO EXISTAN EN LA BASE DE DATOS ANTES DE INSERTAR LOS DATOS
 try{
-
   //nombre del usuario
   $queryusuario = mysqli_query($conn,"SELECT * FROM TBL_USUARIO WHERE NOMBRE_USUARIO = '$usuario'");
   $fila = mysqli_fetch_array($queryusuario);
   $buscaru = mysqli_fetch_array($queryusuario);
-
   //DNI o numero de identidad del usuario
   $querydni = mysqli_query($conn,"SELECT * FROM TBL_PERSONA WHERE DNI = '$dni'");
   $filadni = mysqli_fetch_array($querydni);
@@ -52,9 +42,6 @@ try{
     alert('El numero de identidad $dni ya se encuentra registrado');
         window.location = '../Vistas/modulos/auto_registro.php';
         </script>";
-  
-
-
   // SI LOS DATOS DE USUARIO E IDENTIDAD NO EXISTEN PUEDE INSERTAR LOS DATOS EN LA BASE DE DATOS
   }else{
 
@@ -109,8 +96,9 @@ echo "<script>
                           window.location = 'login';
                            </script>";
 
-}}
-  }
+}
+}// fin if
+  }// fine else
 
 } catch(PDOException $e){
   echo $e->getMessage();  

@@ -92,6 +92,13 @@ session_start();
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "ediusuarios" ||
+
+         $_GET["ruta"] == "roles" ||
+         $_GET["ruta"] == "registrar_personas" ||
+         $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "crudpersonas" ||
+         $_GET["ruta"] == "crudobjetos" ||
+         $_GET["ruta"] == "crudtiposocioeconomico" ||
          $_GET["ruta"] == "estado" ||
          $_GET["ruta"] == "crudEstudiante" ||
          $_GET["ruta"] == "crudContenidoEconoEstudiante" ||
@@ -103,6 +110,7 @@ session_start();
          $_GET["ruta"] == "categorias" ||
          $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
+
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
