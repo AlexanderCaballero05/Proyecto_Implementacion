@@ -1,13 +1,15 @@
 <?php
+
   session_start();
+
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
   include_once 'function_bitacora.php';
 ?>
-
 <?php
   if(isset($_POST['identidad'])){
+    session_start();
      try{
          if(isset($_POST['GUARDAR'])){
              $usuario = $_SESSION['usua'];
@@ -72,13 +74,14 @@
                         $dias_ven = $row;
                       }
                       $fechaActual = date('Y-m-d'); 
-                      $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$dias_ven'+ days")); 
+                      $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$60'+ days")); 
 
                       
                       try {
                          if(($tipo_persona == "1") 	|| ($tipo_persona == "2") ){
-                            $sentencia = $db->prepare("SELECT NOMBRE_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO  = (?) ;");
-                            $sentencia->execute(array($nombre_usuario));
+                            $sentencia = $db->prepare("SELECT NOMBRE_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO  = (?) 
+                            and DNI <> (?) ;");
+                            $sentencia->execute(array($nombre_usuario,$identidad));
                             $row=$sentencia->fetchColumn();
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
@@ -90,7 +93,7 @@
                               try{
 
                                 //Insertar en las respectivas tablas (tbl_persona,tbl_usuario,tbl_correo_electonico)
-                              //  $contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
+                              
                                 $queryregistrarp = "INSERT INTO tbl_persona(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
                                 VALUES('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento', '$fechaActual','$tipo_persona','NO DEFINIDO', '$fechaActual','NO DEFINIDO','$sexo')";
                                 $resultado=$conn->query($queryregistrarp);
@@ -194,88 +197,89 @@
   //ELABORADO POR Diana Rut ****
 
   if(isset($_POST['CODUSUARIO'])) { 
-    if (isset($_POST['ACT_PERSONA'])) {
-        $CODUSUARIO = ($_POST['CODUSUARIO']);
-        $USUARIO = ($_POST['NOMUSUARIO']); 
-        $PASS = ($_POST['CONUSUARIO']);
-        $ROL = ($_POST['ROLUSUARIO']);
-        $ESTADO = ($_POST['ESTADOUSUARIO']);
-        $fecha = ($_POST['FECHA_VENCIMIENTO']);
-            try{
-               $consi ="SELECT NOMBRE_USUARIO from tbl_usuario where NOMBRE_USUARIO ='$USUARIO'  and CODIGO_USUARIO = '$CODUSUARIO'";
-               $consulta=$conn->query($consi);
-               if( $consulta >0){
-                 $upda = " UPDATE tbl_usuario SET CODIGO_ESTADO = '$ESTADO' , CODIGO_TIPO_ROL = '$ROL' 
-                 ,CONTRASENA = '$PASS' ,FECHA_VENCIMIENTO ='$fecha' WHERE CODIGO_USUARIO = '$CODUSUARIO' ";
-                 $respuesta=$conn->query($upda);  
-                 echo "<script>
-                 alert('se ha modificado n');
-                 window.location = 'ediusuarios';
-                 </script>"; 
-                 exit; 
+    session_start();
+    $userregis = ($_SESSION['vario']);
+    if (isset($_POST['ACT_PERSONA'])){
+      $CODUSUARIO = ($_POST['CODUSUARIO']);
+      $USUARIO = ($_POST['NOMUSUARIO']); 
+      $PASS = ($_POST['clave_nueva']);
+      $CONFIRMA = ($_POST['confirmar_clave']);
+      $ROL = ($_POST['ROLUSUARIO']);
+      $ESTADO = ($_POST['ESTADOUSUARIO']);
+      $correo_mofi = ($_POST['correo_modi']);
+      $nombre_modi = ($_POST['nombre_modi']);
+      $apellido_modi = ($_POST['apellido_modi']);
+      $connueva = ($_POST['clave_nueva']);
+      $confconn = ($_POST['confirmar_clave']);
+      $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
 
-               }else{
-                                //Declaras parámetros de salida
-              $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_usuario WHERE NOMBRE_USUARIO = ?");
-              // llamar al procedimiento almacenado
-              $sentencia->execute(array($USUARIO));
-              $row=$sentencia->fetchColumn();
-              if ($row>0){ 
-                  echo "<script>
-                      alert('Ya existe una persona registrada con el nombre de usuario: $USUARIO');
-                      window.location = 'ediusuarios';
-                      </script>";
-                      exit;
-              }else{
-                  try{
-                    $sql = " UPDATE tbl_usuario SET CODIGO_ESTADO = '$ESTADO' , CODIGO_TIPO_ROL = '$ROL' ,CONTRASENA = '$PASS'
-                    WHERE CODIGO_USUARIO = '$CODUSUARIO', FECHA_VENCIMIENTO ='$fecha'  ";
-                      $consulta=$conn->query($sql);
-                      if ($consulta>0) {
-                        echo "<script>
-                        alert('¡Usuario modificado exitosamente!');
-                        window.location = 'ediusuarios';
-                         </script>";
-
-                         include_once 'function_bitacora.php';
-                         $codigoObjeto=1;
-                         $accion='Modificacion';
-                         $descripcion= 'Se edito un Usuario ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
-
-                         }else{ 
-                         echo "<script>
-                        alert('¡Error al modificar al usuario!');
-                        window.location = 'ediusuarios';
-                         </script>";
+          try{
+            // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
+            $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
+            $sentencia->execute(array($correo_mofi));
+            $row=$sentencia->fetchColumn();
+            $ID_PERSONA_CORREO = $row;
+            if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
+                try{
+                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$ROL','$userregis');" ;
+                $consulta=$conn->query($sql);
+                if ($consulta>0) {
+                  if (empty($connueva) and empty($confconn)) {
+                    echo "<script>
+                    alert('Actualización Exitosa');
+                    window.location = 'ediusuarios';
+                    </script>";
+                  }else{
+                    if($connueva<>$confconn){
+                      echo "<script>
+                    alert('Las contraseñas no son iguales');
+                    window.location = 'ediusuarios';
+                    </script>";
+                    }else{
+                      if(preg_match($expre,$connueva)){
+                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO','$connueva');" ;
+                        $consulta=$conn->query($sql);
+                        if ($consulta>0) {
+                          echo "<script>
+                          alert('Actualización Exitosa');
+                          window.location = 'ediusuarios';
+                          </script>";
                         }
-                        return true;
-                      } catch(PDOException $e) {
-                  
-                      echo $e->getMessage();  
-                          return false;
+                      }else{
+                        echo "<script>
+                        alert('La contraseña que ingreso no es segura');
+                        window.location = 'ediusuarios';
+                        </script>";
                       }
-               }
-
-               }
-
-
-
-                  return true;
-              } catch(PDOException $e) {
-          
-              echo $e->getMessage();  
-                  return false;
-              }   
-   } 
-   
- }
-
-
+                    }
+                  }
+                }else{ 
+                echo "<script>
+                alert('Error al actualizar el registro');
+                window.location = 'ediusuarios';
+                </script>";
+                }
+                return true;
+                } catch(PDOException $e) {
+                echo $e->getMessage();  
+                return false;
+                }
+            }elseif($ID_PERSONA_CORREO <> $CODUSUARIO){ 
+            echo "<script>
+            alert('Ya existe una persona con el número de telefono: $correo_mofi');
+           window.location = 'ediusuarios';
+            </script>";
+            }//if del correo :v
+            return true;
+          } catch(PDOException $e) {
+          echo $e->getMessage();  
+          return false;
+          }
+  }//if padre
+}//if padre del padre :v
 
   
-  
-  //FUNCION PARA ELIMINAR EL USUARIO,OJALA DE : /
+  //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR
   if(isset($_POST['usuario_eliminar'])){
     if(isset($_POST['ELIMINAR'])){
       $code = ($_POST['usuario_eliminar']);
