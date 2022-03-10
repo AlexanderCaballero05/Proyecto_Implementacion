@@ -232,7 +232,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR_PREGUNTA" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Pregunta</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -242,7 +242,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text"  placeholder="Ingrese la pregunta" name="pregunta" id="pregunta">
+                                    <input  type="text"   class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregunta" required="">
+                                    <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
                                 </div>
                             </div>
                           
@@ -267,4 +270,32 @@ bitacora($codigoObjeto,$accion,$descripcion);
 $(document).ready( function () {
     $('#tabla_roles').DataTable();
 } );
+</script>
+
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
+
 </script>
