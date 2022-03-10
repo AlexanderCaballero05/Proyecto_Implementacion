@@ -41,14 +41,16 @@
             <form method="POST">
 
               <div class="row mb-4">
+                
                  <?php //
                   $query = "SELECT CODIGO_PERSONA, CONCAT(PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
                   FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
                   $resultadod=$conn->query($query);                
                   ?>
+
                 <button  class="btn btn-info"  class="col-sm-1 col-form">Buscador</button>
                 <div class="col-sm-4">
-                  <select   style="width: 100%;"  class="form-control select2"  id="" type="text" required >
+                  <select  style="width: 100%;"  class="form-control select2"  id="" type="text" required >
                       <option>Buscar tutor</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {

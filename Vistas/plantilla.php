@@ -19,6 +19,7 @@ session_start();
     <!-- CSS STYLES -->
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
         <!-- Font Awesome -->
+        
         <link rel="stylesheet" href="vistas/assets/plugins/fontawesome-free/css/all.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="vistas/assets/dist/css/adminlte.css">
@@ -56,6 +57,7 @@ session_start();
         <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script> 
         <!-- SweetAlert2 version reciente :v -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 
         <!-- Select2 -->
         
@@ -98,10 +100,8 @@ session_start();
          $_GET["ruta"] == "procesoCargaAcademica" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
-
          $_GET["ruta"] == "categorias" ||
-         $_GET["ruta"] == "parametrosusuario"){
-    
+         $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
