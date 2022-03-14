@@ -45,7 +45,7 @@ include_once "conexion3.php";
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                           <?php 
-                      if($permiso_registrar = 'ON'){
+                      if($permiso_registrar = 'SI'){
                      ?>    
                       <a href="categorias"> 
                     <button type="button" class="btn btn-warning m-2" style="color:white;" >
@@ -391,7 +391,7 @@ include_once "conexion3.php";
                                                                     ?>
                                                                    <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                    <?php 
-                                                                    if($permiso_actualizar = 'ON'){
+                                                                    if($permiso_actualizar = 'SI'){
                                                                     ?>
                                                                 <button type="submit" id="EDIT_PERSONA"
                                                                     name="EDIT_PERSONA" class="btn btn-success"><span>
@@ -454,7 +454,7 @@ include_once "conexion3.php";
                                                                 ?> 
                                                                <!-- fin del codigo para sustraer el permiso de eliminar-->
                                                                <?php 
-                                                                if($permiso_eliminar = 'ON'){
+                                                                if($permiso_eliminar = 'SI'){
                                                                 ?>
                                                                 <button type="submit" name="ELIMINAR_PERSONA" id="ELIMINAR"
                                                                     class="btn btn-primary">Si,eliminar</button>

@@ -1,4 +1,6 @@
  <!-- Navbar -->
+
+
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
     <!-- Left navbar links -->
@@ -57,29 +59,45 @@
         </a>
       </li>
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="fas fa-user mr-2"></i>
-          <span class="badge badge-danger navbar-badge"></span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-          <a class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-            <img src="iconos/cerrar.png" width="40" height="40" class="img-circle elevation-2" alt="User Image">
-              <div class="media-body">
-              <form class="form-horizontal" method="POST">
-              <center>
-              <button type="button" onclick="location.href='salir'" id="salir" name="salir" class="btn btn-link">Cerrar Sesión</button> 
-              </center>
-            </form>
-            </div>
-            </div>
-            <!-- Message End -->
-          </a>
-      </li>
+      <li class="dropdown no-arrow nav-item">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                                <img class="img-profile rounded-circle" width="50 px" src="vistas/assets/dist/img/user8-128x128.jpg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-blue"
+                                aria-labelledby="userDropdown">
+                              <div class="dropdown-item">
+                                  <div class="dropdown-author" style="color:white"><?php echo $_SESSION['vario']; ?>
+
+                                  </div>
+                              </div>
+                             
+                                                            
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item menu-action" onclick="location.href='perfilUsuario'" >
+
+                                <i class="fas fa-user"></i>
+                                    <span class="menu-action-text pr-2" style="color:white">Perfil</span>
+                                    </a>
+
+                                <div class="dropdown-divider"></div>
+                                
+                                <a class="dropdown-item menu-action" onclick="location.href='salir'" >
+
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    <span class="menu-action-text pr-2" style="color:white">Cerrar sesion</span>
+                                </a>
+
+                               
+                            </div>
+   </li>
     </ul>
   </nav>
 
 </nav>
 <!-- /.navbar -->
+              <!--INICIO DEL MODAL DE EDITAR -->
+        
