@@ -37,7 +37,7 @@
            }
           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->          
           <?php
-          if($permiso_registrar == 'ON'){
+          if($permiso_registrar == 'SI'){
           ?>
           <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Rol</button>
 
@@ -103,7 +103,7 @@
                                 }
                               ?> 
                                <?php
-                                 if($permiso_eliminar == 'ON'){
+                                 if($permiso_eliminar == 'SI'){
                                ?>                            
                                 <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -129,7 +129,7 @@
                                }
                               ?>
                               <?php
-                                if($permiso_actualizar == 'ON')
+                                if($permiso_actualizar == 'SI')
                                 {
                               ?>
                                 <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">

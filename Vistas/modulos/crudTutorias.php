@@ -35,7 +35,7 @@
             }
           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->   
            <?php
-           if($permiso_registrar == 'ON' ){
+           if($permiso_registrar == 'SI' ){
            ?>       
             <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Tutoria</button>
            <?php
@@ -94,7 +94,7 @@
                                 }
                              ?>    
                              <?php
-                             if($permiso_eliminar == 'ON'){
+                             if($permiso_eliminar == 'SI'){
                              ?>                           
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="eliminar" name="eliminar" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -118,7 +118,7 @@
                                 }
                                ?>
                                <?php
-                                if($permiso_actualizar == 'ON' ){
+                                if($permiso_actualizar == 'SI' ){
                                ?>
                                 <a href="#EDITARTUTORIA<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>

@@ -319,7 +319,7 @@
                           </select>
                           <div class="invalid-feedback">
                                   Eliga una opción.
-                   </div>
+                         </div>
                    <div class="valid-feedback">
                         ¡Se ve bien!
                    </div>
@@ -358,7 +358,7 @@
                       <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
                       <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
 
-        </form>
+          </form>
           </div>
         </div>
    </div><!-- CIerre del container fluid--> 

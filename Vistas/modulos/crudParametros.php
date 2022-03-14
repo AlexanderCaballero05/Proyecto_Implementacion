@@ -47,7 +47,7 @@ include_once "conexion3.php";
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
 
                     <?php 
-                    if ($permiso_registrar == 'ON') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>      
 
@@ -144,7 +144,7 @@ include_once "conexion3.php";
                               <div class="btn-group">
                                 
                               <?php
-                              if($permiso_eliminar == 'ON')
+                              if($permiso_eliminar == 'SI')
                                {
                             ?>
 
@@ -160,7 +160,7 @@ include_once "conexion3.php";
 
 
                                <?php 
-                                if ($permiso_actualizar == 'ON')
+                                if ($permiso_actualizar == 'SI')
                                 {
                                 ?>
 
