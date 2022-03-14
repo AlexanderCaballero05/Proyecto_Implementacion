@@ -1,37 +1,77 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- include_once  "conexionpdo.php";
+ include "conexionpdo.php";
+ 
+ $codigoObjeto=20;
+ $accion='Ingreso Matricula';
+ $descripcion= 'Ingreso al proceso/registros de matricula ';
+ bitacora($codigoObjeto, $accion,$descripcion);
 ?>
-<head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-</head>
 
-<body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  <section class="content">
+  
+
+    <section class="content">
     <div class="container-fluid">
         <div class="card">
           <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                 <a class="nav-link" href="crudCargaAcademica">Ver carga academica</a>
+                <a class="nav-link "  href="crudMatricula">Ver Matricula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#">Carga academica</a>
+                <a class="nav-link active" aria-current="true" href="procesoMatricula">Matricula</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Otros</a>
               </li>
             </ul>
-          </div><!--FIN DEL CARD HEADER -->
-          <div class="card-body"><!--Cuerpo del card body principal -->
+          </div>
+          <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+                <a href="procesoCargaAcademica">
+            
+            <form id="formMatricula" action="procesoCargaAcademica" method="POST">
+            <h5>Matricula</h5>
+            <hr>
             </br>
-          <form id="formBuscarCarga" action="procesoCargaAcademica" method="POST">
-             <div class="row mb-4">
-              <?php // AQUI INICIA EL SELECT con su botoncito,(como se escriba :v)
+            <!--INICIO COMOBOX PARA ELEGIR AL ESTUDIANTE-->
+            <div class="form-group">
+
+            <!-- query para traer los datos del estudiante -->
+            <?php
+            include_once "conexion3.php";
+            $query= "SELECT p.CODIGO_PERSONA,CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
+            as NOMBRE_COMPLETO FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
+            $result= $conn->query($query);
+            ?>
+
+                <label for="txtcodigo_persona">Seleccionar Estudiante:</label>
+                    <select class="form-control" name="PERUSUARIO" required="">
+                      <option selected disabled value="">Estudiante</option>
+                      <?php
+                        if ($result->num_rows > 0){
+                          while($row = $result->fetch_assoc()){
+                      ?>
+                      <option value="<?php echo $row['CODIGO_PERSONA'];?>"><?php echo $row['NOMBRE_COMPLETO'];?></option>
+                       <?php
+                       }
+                         }
+
+                        ?>
+                      </select> </br>
+                      
+            </div> <!--FIN DEL COMOBOX -->
+            <h5>Carga Académica</h5>
+            <hr> </br>
+            <div class="row mb-4">
+              <?php // AQUI INICIA EL SELECT con su boton
               $query = "SELECT c.CODIGO_PERSONA, c.CODIGO_CARGA,t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
               as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
               FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
@@ -39,7 +79,7 @@
               AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA";
               $resultadod=$conn->query($query);                
               ?>
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                <select style="width: 100%;"  class="form-control select2" required=""  name="BUSCADOR" id="BUSCADOR" type="text" required >
                  <option selected disabled value="">Buscar carga academica</option>
                  <?php 
@@ -47,9 +87,8 @@
                    while($row = $resultadod->fetch_assoc()) { 
                    $codigo_buscar = $row['CODIGO_CARGA']; //se trae el codigo de carga al que pertenece la seccion
                    $nombre = $row['NOMBRE_COMPLETO']; //el nombre del encargado de la seccion (se repiten los nombre,porque llevan varias secciones)
-                   $seccion = $row['SECCION'];
-                   $tutoria = $row['TUTORIA'];// y el nombre de la seccion
-                   $conca = $seccion .' '.$tutoria.' ' .$nombre; //se concatena la seccion con el encargado para que lo busque de esta forma
+                   $seccion = $row['SECCION']; // y el nombre de la seccion
+                   $conca = $seccion .' '.$nombre; //se concatena la seccion con el encargado para que lo busque de esta forma
                    ?>
                  <option value="<?php echo $codigo_buscar?>" ><?php echo $conca;?></option><!--En el value se trae el codigo de carga y se muestra la concatenacion de seccion y encargado -->
                  <?php 
@@ -70,7 +109,6 @@
             AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA and c.CODIGO_CARGA='$CODIGO'";
             $result = $conn->query($query);
 
-
             if ($result->num_rows > 0) { 
              while($row = $result->fetch_assoc()) { //se asigna las variables que vamos utilizar
                 $var1 = $row['CODIGO_CARGA'];
@@ -89,67 +127,32 @@
           }
           ?>
            <!--FORMULARIO FLTRADO-->
-         </form> <!--fin del formBuscarCarga -->
-            <form method="POST"  class=" needs-validation" novalidate  >
-
-              <div class="row mb-4">
-                
-                 <?php //
-                  $query = "SELECT CODIGO_PERSONA, CONCAT(PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-
-                <button  class="btn btn-info"  class="col-sm-1 col-form">Buscador</button>
-                <div class="col-sm-4">
-                  <select  style="width: 100%;"  class="form-control select2"  id="" type="text" required >
-                      <option>Buscar tutor</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                        while($row = $resultadod->fetch_assoc()) { 
-                        $codigo = $row['CODIGO_PERSONA'];
-                        $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select>
-                </div>
-                
-              </div>
-
+         </form>
+            <form method="POST">
               <div class="row">
                 <!--Input que guarda el codigo de la carga,con este dato sirve para eliminar y editar,se pone en hidden para que no se visualice-->
-               <input class="form-control" hidden  value="<?php echo $var1; ?>" type="text" name="IDCARGA" >
+               <input class="form-control"  hidden value="<?php echo $var1; ?>" type="text" name="IDCARGA" id="IDCARGA"   >
                 <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Incio:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora de clase:</label> 
                     <div class="form-group">
-                      <input class="form-control" value="<?php echo $var7; ?>" type="time" name="hora1"  required><!--Tiene como value la variable 7 que contiene  la hora -->
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Final:</label> 
-                    <div class="form-group">
-                      <input class="form-control" value="<?php  ?>" type="time" name="hora_final1" required><!--Tiene como value la variable 7 que contiene  la hora -->
+                      <input class="form-control" value="<?php echo $var7; ?>" type="time" maxlength="13" minlength="13" name="hora" id="" required><!--Tiene como value la variable 7 que contiene  la hora -->
                     </div>
                 </div>
                   <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                      <input class="form-control" value="<?php echo $var8; ?>" type="date" name="fecha_inicio1"><!--Tiene como value la variable 8 que contiene  la fecha de inicio -->
+                      <input class="form-control" value="<?php echo $var8; ?>" type="date" maxlength="13" minlength="13" name="fecha_inicio"><!--Tiene como value la variable 8 que contiene  la fecha de inicio -->
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
+                    <label  class="control-label">Fecha final:</label> 
+                    <div class="form-group">
+                      <input class="form-control" value="<?php echo $var9; ?>" type="date" maxlength="13" minlength="13" name="fecha_final" id="fecha_final"   >
                     </div>
                   </div>
               </div><!--Cierre del primer row -->
 
               <div class="row">
-                <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
-                    <label  class="control-label">Fecha final:</label> 
-                    <div class="form-group">
-                      <input class="form-control" value="<?php echo $var9; ?>" type="date" name="fecha_final1"    >
-                    </div>
-                </div>
                 <div class="col-md-4 mb-3 "> 
                   <?php //
                   $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
@@ -158,9 +161,8 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado:</label>
-                    <select class="form-control select2"  style="width: 100%;"  name="tutor1" required>
-                       
-                      <option value="<?php echo $var2;?>"> <?php echo $var11; ?></option><!--Se muestra el nombre completo y se trae al value el codigo de la persona de la tabla carga -->
+                    <select class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required>
+                      <option value="<?php echo $var2; ?>"><?php echo $var11; ?></option><!--Se muestra el nombre completo y se trae al value el codigo de la persona de la tabla carga -->
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -181,9 +183,9 @@
                   $query = "SELECT * FROM tbl_tutoria";
                   $resultadod=$conn->query($query);                
                   ?>
-                  <label  class="control-label">Tutoria:</label> 
+                  <label for="identidad" class="control-label">Tutoria:</label> 
                   <div class="form-group">
-                    <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  required>
+                    <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria" id="editar_area" required>
                       <option value="<?php echo $var4; ?>" ><?php echo $var12; ?></option> <!--Lo mismo que el de arriba :v -->
                       <?php 
                         if ($resultadod->num_rows > 0) {
@@ -199,8 +201,7 @@
                     </select> 
                   </div>
                 </div><!--CIERRE DE LA TUTORIA -->
-              </div><!--FINAL DEL ROW -->
-              <div class="row">
+
                 <div class="col-md-4"> 
                   <?php //
                   $query = "SELECT * FROM tbl_modalidad";
@@ -208,7 +209,7 @@
                   ?>
                   <label for="identidad" class="control-label">Modalidad:</label> 
                   <div class="form-group">
-                    <select class="form-control select2 "  style="width: 100%;"  name="modalidad1"  required>
+                    <select class="form-control select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
                     <option value="<?php echo $var4; ?>" ><?php echo $var13; ?></option><!--La misama forma que lo de encargado -->
                       <?php 
                         if($resultadod->num_rows > 0) {
@@ -216,37 +217,36 @@
                           $codigo_modalidad = $row['CODIGO_MODALIDA'];
                           $nombre = $row['TIPO'];
                         ?>
-                      <option  value="<?php echo $codigo_modalidad?>" ><?php echo $nombre;?></option>
+                      <option value="<?php echo $codigo_modalidad?>" ><?php echo $nombre;?></option>
                       <?php 
                       } 
                       }
                       ?>
                     </select> 
                   </div>
-                </div><!--cierre de modalidad  -->
+                </div><!--CIERRE DEL  -->
+              </div><!--FINAL DEL ROW -->
+              <div class="row">
                 <div class="col-md-4"><!--seccion-->
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
-                      <select class="form-control select2" id="" name="seccion1" >
+                      <select class="form-control select2" id="" name="seccion">
                       <option value="<?php echo $var6; ?>"><?php echo $var6; ?></option>
-                       <option value="SECCIONA">SECCION A</option><!--se esta en proceso si dejarlo asi o no :v -->
-                       <option value="SECCIONB">SECCION B </option>
-                       <option value ="SECCIONC">SECCION C </option>
-                       <option value ="SECCIOND">SECCION D </option>
-                       <option value ="SECCIONE">SECCION E </option>
-                       <option value ="SECCIONF">SECCION F </option>
+                       <option value="Sección A">Sección A</option><!--se esta en proceso si dejarlo asi o no :v -->
+                       <option value="Sección B">Sección B </option>
+                       <option value ="Sección C">Sección C </option>
                       </select>
                     </div>
                   </div>
               </div><!--Fin del row -->
               </br></br></br>
 
-              <!-- <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>-->
-              <button type="submit" name="EDITAR_CARGA" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Editar</button>
+              <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+              <button type="submit"  id="" name="EDITAR_CARGA" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
               <a href="#ELIMINAR" data-toggle="modal">
-              <button type="submit"  id="" name="eli" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-trash mx-1"></i></span>Eliminar</button>
+              <button type="submit"  id="" name="eli" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
               </a> 
-            </form><!-- FIN DEL  PRIMER FORM-->
+            </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
 
           <!--INICIO DEL MODAL ELIMINAR   -->
@@ -259,7 +259,7 @@
                     </div>
                     <form id="FORMEeliminar" method="POST">
                       <div class="modal-body">
-                        <input type="text" hidden value ="<?php echo $var1; ?>"  class="form-control" name="eliminar_carga" id="eliminar_carga">
+                        <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
                         <h4 class="text-center">¿Esta seguro de eliminar la carga academica <?php  ?>?</h4>
                       </div> <!--fin el card body -->
                       <div class="modal-footer ">
@@ -267,29 +267,17 @@
                         <button type="submit"  name="ELIMINAR_CARGA" id="ELIMINAR_CARGA"  class="btn btn-primary">Si,eliminar</button>      
                       </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                     </form> <!--FIN FORMULARIO FLTRADO-->
-                  </div><!--fin del modal contener -->
-              </div><!--fin del modal dialog -->         
-          </div><!--fin del modal de eliminar -->
           <?php
           }else {  //ES un else por si no hay datos en el isset ,osea si no se buscar una carga,entonces se muestran  todos los campos vacios,para que se llenen
            ?>
            <!--FORMULARIO FLTRADO-->
-           </form> <!-- NO QUITAR -->
-            <form  class=" needs-validation" novalidate id="FORMREGISTRAR" method="POST">
+         </form>
+            <form method="POST">
               <div class="row">
                 <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Inicio:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora de clase:</label> 
                     <div class="form-group">
-                      <input class="form-control"  type="time"  name="hora" id="" required >
-                        <div class="invalid-feedback">
-                        Llene este campo.
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Final:</label> 
-                    <div class="form-group">
-                      <input class="form-control"  type="time"  name="hora_final"  required >
+                      <input class="form-control"  type="time" maxlength="13" minlength="13" name="hora" id="" required >
                         <div class="invalid-feedback">
                         Llene este campo.
                         </div>
@@ -298,24 +286,17 @@
                   <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                      <input class="form-control" type="date"  name="fecha_inicio" required>
-                       <div class="invalid-feedback">
-                         Llene este campo.
-                        </div>
+                      <input class="form-control" type="date" maxlength="13" minlength="13" name="fecha_inicio" >
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
+                    <label  class="control-label">Fecha final:</label> 
+                    <div class="form-group">
+                      <input class="form-control" type="date" maxlength="13" minlength="13" name="fecha_final" id=""   >
                     </div>
                   </div>
               </div><!--Cierre del row general -->
               <div class="row">
-
-                 <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
-                    <label  class="control-label">Fecha final:</label> 
-                    <div class="form-group">
-                      <input class="form-control" type="date"  name="fecha_final" required>
-                       <div class="invalid-feedback">
-                         Llene este campo.
-                        </div>
-                    </div>
-                  </div>
                 <div class="col-md-4 mb-3"> <!--Fila para el encargado-->
                   <?php 
                   $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
@@ -324,8 +305,8 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required >
-                      <option selected disabled value="">Seleccione</option>
+                    <select class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required>
+                      <option selected disabled></option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -338,9 +319,6 @@
                       }
                       ?>
                     </select> 
-                     <div class="invalid-feedback">
-                         Llene este campo.
-                     </div>
                   </div>
                 </div><!--CIERRE DEL ENCARAGADO -->
 
@@ -351,8 +329,8 @@
                   ?>
                   <label for="identidad" class="control-label">Tutoria:</label> 
                   <div class="form-group">
-                    <select style="width: 100%"   class="form-control select2" required name="tutoria"   >
-                      <option selected disabled value="" >--Seleccione--</option>
+                    <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria" id="editar_area" required>
+                      <option selected disabled >--Seleccione--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -365,14 +343,8 @@
                       }
                       ?>
                     </select> 
-                     <div class="invalid-feedback">
-                        Llene este campo.
-                      </div>
                   </div>
                 </div><!--CIERRE DE LA TUTORIA -->
-              </div><!--FINAL DEL ROW -->
-
-              <div class="row">
                 <div class="col-md-4"> 
                   <?php //
                   $query = "SELECT * FROM tbl_modalidad";
@@ -380,8 +352,8 @@
                   ?>
                   <label for="identidad" class="control-label">Modalidad:</label> 
                   <div class="form-group">
-                    <select  class="form-select select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
-                      <option selected disabled value="" >--Seleccione--</option>
+                    <select class="form-control select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
+                      <option selected disabled>--Seleccione--</option>
                       <?php 
                         if($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -393,45 +365,65 @@
                       } 
                       }
                       ?>
-                    </select>
-                     <div class="invalid-feedback">
-                        Llene este campo.
-                      </div> 
+                    </select> 
                   </div>
-                </div><!--cierre de la modalidad  -->
+                </div><!--CIERRE DEL  -->
+              </div><!--FINAL DEL ROW -->
+              <div class="row">
                 <div class="col-md-4"><!--CORREO ELECTRONICO-->
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
-                      <select class="form-control select2" id="" name="seccion" required >
-                       <option  selected disabled value="">--Seleccione</option>
-                       <option value="SECCIONA">SECCION A</option>
-                       <option value="SECCIONB">SECCION B </option>
-                       <option value ="SECCIONC">SECCION C </option>
-                       <option value ="SECCIOND">SECCION D </option>
-                       <option value ="SECCIONE">SECCION E </option>
-                       <option value ="SECCIONF">SECCION F </option>
+                      <select class="form-control select2" id="" name="seccion">
+                      <option selected disabled >--Seleccione--</option>
+                       <option value="Sección A">Sección A</option>
+                       <option value="Sección B">Sección B </option>
+                       <option value ="Sección C">Sección C </option>
                       </select>
-                      <div class="invalid-feedback">
-                        Llene este campo.
-                      </div>
                     </div>
                   </div>
               </div><!--Fin del row -->
               </br></br></br>
               <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+              <button type="submit"  id="" name="EDITAR_CARGA" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
+              <a href="#ELIMINAR" data-toggle="modal">
+              <button type="submit"  id="" name="eli" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
+              </a> 
+
             </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
-
+             <!--INICIO DEL MODAL ELIMINAR   -->
+          <div id="ELIMINAR"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"></h5>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <form id="FORMEeliminar" method="POST">
+                      <div class="modal-body">
+                        <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
+                        <h4 class="text-center">¿Esta seguro de eliminar la carga academica <?php  ?>?</h4>
+                      </div> <!--fin el card body -->
+                      <div class="modal-footer ">
+                        <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit"  name="ELIMINAR_CARGA" id="ELIMINAR_CARGA"  class="btn btn-primary">Si,eliminar</button>      
+                      </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                    </form> <!--FIN FORMULARIO FLTRADO-->
            <?php
-              }//cierre del else :)
+              }
             ?>
-                         
+
+</div>
+</div>
+</div>
+                  </div><!--fin del modal contener -->
+              </div><!--fin del modal dialog -->
+          </div><!--fin del modal de eliminar -->          
         </div><!--fIN DEL CARD GENERAL -->
    </div><!-- CIerre del container fluid--> 
   </section>
-</div>
-</div>
-
+  </div><!--fin del form group -->
+<!-- Cierre del div wraper -->
 
 
  <script>
@@ -452,7 +444,44 @@
     })()
 </script>
 
-<!-- Elaborado por Diana Rut y Jose Guifarro :) -->
-                    
+<script>
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+
+(function () {
+
+  'use strict'
 
 
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+
+  var forms = document.querySelectorAll('.needs-validation')
+
+
+
+  // Loop over them and prevent submission
+
+  Array.prototype.slice.call(forms)
+
+    .forEach(function (form) {
+
+      form.addEventListener('submit', function (event) {
+
+        if (!form.checkValidity()) {
+
+          event.preventDefault()
+
+          event.stopPropagation()
+
+        }
+
+
+
+        form.classList.add('was-validated')
+
+      }, false)
+
+    })
+
+})()

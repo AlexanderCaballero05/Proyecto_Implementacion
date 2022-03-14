@@ -33,8 +33,12 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Cod Estudiante</th>
+                          <th class="text-center">Id</th>
+                          <th class="text-center">Nombre</th>
+                          <th class="text-center">Apellido</th>
                           <th class="text-center">Grado Actual</th>
+                          <th class="text-center">Repitente</th>
+                          <th class="text-center">Indice Academico</th>
                           <th class="text-center">Pasatiempos</th>
                           <th class="text-center">Distractor Escolar</th>
                           <th class="text-center">Metas</th>
@@ -43,15 +47,22 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT e.CODIGO_ESTUDIANTE, p.CODIGO_PERSONA, s.CODIGO_ESTUDIANTE_SOCIOECONOMICO, e.GRADO_ACTUAL ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS FROM tbl_estudiante e , tbl_persona p, tbl_estudiante_socioeconomico s WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA AND s.CODIGO_ESTUDIANTE_SOCIOECONOMICO= s.CODIGO_ESTUDIANTE_SOCIOECONOMICO;";
+                        $query = "SELECT e.CODIGO_ESTUDIANTE, p.PRIMER_NOMBRE , p.PRIMER_APELLIDO, p.CODIGO_PERSONA, e.GRADO_ACTUAL, e.REPITENTE,
+                         e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS
+                        FROM tbl_estudiante e , tbl_persona p
+                        WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_ESTUDIANTE'];
-                            $var2 = $row['GRADO_ACTUAL'];
-                            $var3 = $row['PASATIEMPOS'];
-                            $var4 = $row['DISTRACTORES_ESCOLARES'];
-                            $var5 = $row['METAS'];
+                            $var2 = $row['PRIMER_NOMBRE'];
+                            $var3 = $row['PRIMER_APELLIDO'];
+                            $var4 = $row['GRADO_ACTUAL'];
+                            $var5 = $row['REPITENTE'];
+                            $var6 = $row['INDICE_ACADEMICO'];
+                            $var7 = $row['PASATIEMPOS'];
+                            $var8 = $row['DISTRACTORES_ESCOLARES'];
+                            $var9 = $row['METAS'];
                         ?>
                         <tr>
                           <td>
@@ -73,7 +84,11 @@
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var5; ?></td>
-                         
+                          <td class="text-center"><?php echo $var6; ?></td>
+                          <td class="text-center"><?php echo $var7; ?></td>
+                          <td class="text-center"><?php echo $var8; ?></td>
+                          <td class="text-center"><?php echo $var9; ?></td>
+                          
 
                         <!--INICIO DEL MODAL DE EDITAR ESTUDIANTE -->
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">

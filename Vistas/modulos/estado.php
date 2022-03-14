@@ -38,7 +38,7 @@
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
 
                     <?php 
-                    if ($permiso_registrar == 'ON') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
 
                     ?> 
@@ -131,7 +131,7 @@
                             }
                             ?> 
                                 <?php
-                                if ($permiso_eliminar == 'ON'){
+                                if ($permiso_eliminar == 'SI'){
                                     
                                 ?> 
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
@@ -144,7 +144,7 @@
 
 
                                <?php
-                                if ($permiso_actualizar == 'ON'){    
+                                if ($permiso_actualizar == 'SI'){    
                                 ?> 
 
                                 <a href="#EDITARESTADO<?php echo $var1; ?>" data-toggle="modal">

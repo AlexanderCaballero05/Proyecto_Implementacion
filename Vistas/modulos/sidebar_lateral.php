@@ -49,7 +49,7 @@
                 <li class="nav-item">
                   <a href="categoria" class="nav-link" >
                    <i class="far fa-circle nav-icon"></i>
-                    <p>Registrar Personas/usuarios</p>
+                    <p>Registrar Usuarios</p>
                   </a>
                 </li>
 
@@ -61,6 +61,21 @@
                 </li>
 
                 <li class="nav-item">
+                  <a href="crudpersonas" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Editar personas</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>tipo de socio economico</p>
+                  </a>
+                </li>
+
+
+
+                <li class="nav-item">
                   <a href="estado" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-circle nav-icon"></i>
                     <p>Mantenimiento Estado</p>
@@ -68,13 +83,7 @@
                 </li>
               
                 
-                <li class="nav-item">
-                  <a href="Formbitacora" class="nav-link">
-                  
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Bitacora Universal</p>
-                  </a>
-                </li>
+              
                 <li class="nav-item">
                   <a href="crudPreguntasUsuarios" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
@@ -96,7 +105,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="procesoRegistrarEstudiante"class="nav-link">
+                  <a href="crudEstudiante"class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Estudiantes</p>
                   </a>
@@ -126,6 +135,13 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="crudMatricula" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Proceso Matricula</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -203,16 +219,35 @@
                 </a>
               </li>
               <li class="nav-item">
+
+                <a href="crudpreguntas" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Preguntas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudtipopersona" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tipo Persona</p>
+                </a>
+              </li>
+              <li class="nav-item">
               <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                   <i class="far fa-circle nav-icon"></i>
                   <p>Parametros</p>
               </a>
               </li>
               <li class="nav-item">
-                <a href="objetos" class="nav-link">
+                <a href="crudobjetos" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Objetos</p>
                 </a>
+              </li>
+              <li class="nav-item">
+              <a href="parametrosusuario" class="nav-link" > 
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Parametros usuarios</p>
+              </a>
               </li>
               <li class="nav-item">
                 <a href="" class="nav-link">
@@ -224,6 +259,12 @@
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipos usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudmodalidad"class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Modalidad</p>
                 </a>
               </li>
               <li class="nav-item">

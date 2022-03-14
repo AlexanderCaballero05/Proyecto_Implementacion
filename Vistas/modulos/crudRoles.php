@@ -37,7 +37,7 @@
            }
           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->          
           <?php
-          if($permiso_registrar == 'ON'){
+          if($permiso_registrar == 'SI'){
           ?>
           <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Rol</button>
 
@@ -103,7 +103,7 @@
                                 }
                               ?> 
                                <?php
-                                 if($permiso_eliminar == 'ON'){
+                                 if($permiso_eliminar == 'SI'){
                                ?>                            
                                 <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -129,7 +129,7 @@
                                }
                               ?>
                               <?php
-                                if($permiso_actualizar == 'ON')
+                                if($permiso_actualizar == 'SI')
                                 {
                               ?>
                                 <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
@@ -225,7 +225,7 @@
     <div id="AGREGAR_ROL" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form  method="POST"  class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Rol</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -235,15 +235,20 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" required="">
+                                    <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
 
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol">
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-
-                                    <textarea  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol"></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" required=""></textarea>
+                                    <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
                                 </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -288,3 +293,29 @@
   } );
 </script>
 
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
+
+</script>

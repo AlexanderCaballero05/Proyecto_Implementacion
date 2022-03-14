@@ -19,6 +19,7 @@ session_start();
     <!-- CSS STYLES -->
     <!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
         <!-- Font Awesome -->
+        
         <link rel="stylesheet" href="vistas/assets/plugins/fontawesome-free/css/all.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="vistas/assets/dist/css/adminlte.css">
@@ -56,6 +57,7 @@ session_start();
         <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script> 
         <!-- SweetAlert2 version reciente :v -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
 
         <!-- Select2 -->
         
@@ -81,7 +83,7 @@ session_start();
    /*=============================================
   =            menu                        =
   =============================================*/
-  include "modulos/sidebar_lateral.php";
+  include "modulos/menuGeneral.php";
   /*=============================================
   =            CONTENIDO                        =
   =============================================*/
@@ -89,7 +91,14 @@ session_start();
     if ( $_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
+         $_GET["ruta"] == "perfilUsuario" ||
          $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "roles" ||
+         $_GET["ruta"] == "registrar_personas" ||
+         $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "crudpersonas" ||
+         $_GET["ruta"] == "crudobjetos" ||
+         $_GET["ruta"] == "crudtiposocioeconomico" ||
          $_GET["ruta"] == "estado" ||
          $_GET["ruta"] == "crudEstudiante" ||
          $_GET["ruta"] == "crudContenidoEconoEstudiante" ||
@@ -98,17 +107,25 @@ session_start();
          $_GET["ruta"] == "procesoCargaAcademica" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
+         $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
+
+         $_GET["ruta"] == "crudmodalidad" ||
+
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
          $_GET["ruta"] == "crudPermisos" ||
-         $_GET["ruta"] == "categorias"||
+         $_GET["ruta"] == "crudpreguntas" ||
+         $_GET["ruta"] == "procesoMatricula" ||
+         $_GET["ruta"] == "crudMatricula" ||
+         $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
          $_GET["ruta"] == "crudPermisos"){
 
       include_once "modulos/".$_GET["ruta"].".php";
+
     }else {
       include "modulos/inicioadmin.php";
     }

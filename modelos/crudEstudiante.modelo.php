@@ -6,42 +6,55 @@
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN estudiante
-    if(isset($_POST['editar_estudiante'])){
+    if(isset($_POST['GUARDARPERSONA'])){
        try{
-          if(isset($_POST['editar_estudiante'])){
-               $codigo_persona = ($_POST['codigo_persona']);
-               $codigo_contenido = ($_POST['contenido_socio']);
-
-               $nombre_estudiante = ($_POST['nombre_estudiante']);
-               $pasatiempos_estudiante = ($_POST['pasatiempos_estudiante']);
-               $distractores_estudiante = ($_POST['distractores_estudiante']);
-               $metas_estudiante = ($_POST['metas_estudiante']);
+          if(isset($_POST['CODPERSONA'])){
+            //Datos escolares
+               $codigo_persona = ($_POST['CODPERSONA']);
+               $grado = ($_POST['GRADO']);
+               $repitente = ($_POST['REPITENTE']);
+               $indice = ($_POST['INDICE']);
+               $materias = ($_POST['MATERIAS']);
+               $pasatiempos = ($_POST['PASATIEMPOS']);
+               $distractores = ($_POST['DISTRACTORES']);
+               $metas = ($_POST['METAS']);
+            //Datos socioeconomicos
+               $dispositivos = ($_POST['DISPOSITIVOS']);
+               $servicios = ($_POST['SERVICIOS']);
+               $proveedor = ($_POST['PROVEEDOR']);
+               $basicos = ($_POST['BASICOS']);
                   
               try{ 
-                  $consulta_estudiante = $db->prepare("SELECT GRADO_ACTUAL FROM tbl_estudiante WHERE GRADO_ACTUAL = (?);");
-                  $consulta_estudiante->execute(array($nombre_estudiante));
+                  $consulta_estudiante = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_estudiante WHERE CODIGO_PERSONA = (?);");
+                  $consulta_estudiante->execute(array($codigo_persona));
                   $row=$consulta_estudiante->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre del estudiante $nombre_estudiante ya se encuentra registrado');
-                    window.location = 'estudiante';
+                    alert('El nombre del estudiante ya se encuentra registrado');
+                    window.location = 'procesoRegistrarEstudiante';
                     </script>";
                   exit;
                   }else{
                     try{
                       
-                      $query_estudiante = " INSERT INTO `tbl_estudiante`( `CODIGO_PERSONA`,`GRADO_ACTUAL`, `PASATIEMPOS`, `DISTRACTORES_ESCOLARES`, `METAS`) VALUES ('$codigo_persona','$nombre_estudiante','$pasatiempos_estudiante','$distractores_estudiante','$metas_estudiante'); ";
+                      $query_estudiante = "INSERT INTO tbl_estudiante(CODIGO_PERSONA, GRADO_ACTUAL, REPITENTE, INDICE_ACADEMICO, MATE_BAJO_RENDI, PASATIEMPOS, DISTRACTORES_ESCOLARES, METAS)
+                       VALUES ('$codigo_persona','$grado','$repitente','$indice','$materias', '$pasatiempos', '$distractores', '$metas'); ";
                       $resul=$conn->query($query_estudiante);
                       $codigo = mysqli_insert_id($conn);
 
-                      $query_contenido = "INSERT INTO `tbl_estudiante_socioeconomico` (`CODIGO_CONTENIDO_SOCIOECONOMICO`, `CODIGO_ESTUDIANTE`) VALUES ( '$codigo_contenido', '$codigo')";    
+                      $query_contenido = "INSERT INTO tbl_estudiante_socioeconomico (CODIGO_CONTENIDO_SOCIOECONOMICO, CODIGO_ESTUDIANTE)
+                       VALUES ('$dispositivos', '$codigo'),
+                              ('$servicios', '$codigo'),
+                              ('$proveedor','$codigo'),
+                              ('$basicos','$codigo');";  
+
                       $resul2=$conn->query($query_contenido);
                       
                       $conn->commit();
                       
                         echo "<script> 
                         alert('Estudiante registrado correctamente');
-                        window.location = 'estudiante';
+                        window.location = 'procesoRegistrarEstudiante';
                         </script>";
                     
                     }catch(PDOException $e){
@@ -62,7 +75,7 @@
     }//FIN DEL IF DE REGISTAR UN estudiante
 
 
-
+/*
   //PARTE PARA EDITAR UN estudiante
   if(isset($_POST['id_estudiante'])){
     if(isset($_POST['editar_estudiante'])){
@@ -165,6 +178,6 @@ if(isset($_POST['estudiante_eliminar'])){
   }
 }//Cerre del if padre
 
-
+*/
 //*****Elaborado por Carlos Amador,no quiten creditos :v *******
 ?>

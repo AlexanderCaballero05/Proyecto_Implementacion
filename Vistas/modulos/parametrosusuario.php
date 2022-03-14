@@ -1,18 +1,18 @@
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
-
 ?>
       <!--llamada de la fuction bitacora -->
      <?php 
-      $codigoObjeto=3;
-      $accion='Ingreso a la pantalla de mantenimiento parámetros';
-      $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
+      $codigoObjeto=1;
+      $accion='Parametros Usuarios';
+      $descripcion= 'Ver los parametros de los usuarios';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
       
 <head>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
 <div class="content-wrapper">
@@ -25,77 +25,51 @@ include_once "conexion3.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-
-                    <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '3'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
-                    <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-                    ?>      
-
-                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
-
-
-                   <?php
-                    }
-                    ?>
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">PARÁMETROS</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Parametros Usuarios</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tabla_parametros" class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Acción</th>
-                          <th>ID</th>
-                          <th>Parametro</th>
-                          <th>Valor</th>
-                          <th>Creado por</th>
-                          <th>Fecha de creación</th>
-                          <th>Modificado por</th>
-                          <th>Fecha de Modificación</th>
+                          <th>EDITAR</th>
+                          <th>CODIGO PARAM USUARIO</th>
+                          <th>CODIGO USUARIO</th>
+                          <th>NOMBRE USUARIO</th>
+                          <th>CODIGO PARAMETRO</th>
+                          <th>PARAMETRO</th>
+                          <th>PAR VALOR</th>
+                          <th>CREADO POR USUARIO</th>
+                          <th>FECHA CREACION</th>
+                          <th>MODIFICADO POR</th>
+                          <th>FECHA MODIFICACION</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PARAMETRO, PARAMETRO, VALOR, CREADO_POR_USUARIO, FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION
-                                   FROM TBL_PARAMETROS;";
+                        $query = "SELECT a.CODIGO_PARAM_USUARIO, a.CODIGO_USUARIO, u.NOMBRE_USUARIO,a.CODIGO_PARAMETRO, p.PARAMETRO,a.PAR_VALOR, a.CREADO_POR_USUARIO, a.FECHA_CREACION, a.MODIFICADO_POR, a.FECHA_MODIFICACION 
+                        FROM tbl_parametros_usuarios a ,tbl_parametros p, tbl_usuario u WHERE a.CODIGO_USUARIO = u.CODIGO_USUARIO AND a.CODIGO_PARAMETRO = p.CODIGO_PARAMETRO
+                        ORDER BY a.CODIGO_PARAM_USUARIO;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_PARAMETRO'];
-                            $var2 = $row['PARAMETRO'];
-                            $var3 = $row['VALOR'];
-                            $var4 = $row['CREADO_POR_USUARIO'];
-                            $var5 = $row['FECHA_CREACION'];
-                            $var6 = $row['MODIFICADO_POR'];
-                            $var7 = $row['FECHA_MODIFICACION'];
+                            $var1 = $row['CODIGO_PARAM_USUARIO'];
+                            $var2 = $row['CODIGO_USUARIO'];
+                            $var3 = $row['NOMBRE_USUARIO'];
+                            $var4 = $row['CODIGO_PARAMETRO'];
+                            $var5 = $row['PARAMETRO'];
+                            $var6 = $row['PAR_VALOR'];
+                            $var7 = $row['CREADO_POR_USUARIO'];
+                            $var8 = $row['FECHA_CREACION'];
+                            $var9 = $row['MODIFICADO_POR'];
+                            $var10 = $row['FECHA_MODIFICACION']; 
+                        ?>
 
-                            ?>
-
-                            <?php
+<?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -109,7 +83,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '9'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -118,7 +92,7 @@ include_once "conexion3.php";
                             }
                             ?> 
 
-                            <?php
+<?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -131,40 +105,37 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '9'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
                             ?> 
-                            
-                       
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-                              <?php
-                              if($permiso_eliminar == 'SI')
-                               {
-                            ?>
 
-                               <a href="#ELIMINARPARAMETRO<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINARPARAM" name="ELIMINARPARAM" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                
+
+                                <?php
+                                 if($permiso_eliminar == 'ON')
+                                 {
+                                ?>
+                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINAR_PARAMETROUSUARIO" name="ELIMINAR_PARAMETROUSUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
 
-
-                               <?php
-                                }
-                               ?>
-
-
-                               <?php 
-                                if ($permiso_actualizar == 'SI')
+                                  <?php
+                                  }
+                                  ?>
+ 
+                                
+                                <?php 
+                                if ($permiso_actualizar == 'ON')
                                 {
                                 ?>
-
-                                <a href="#EDITARPARAMETRO<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
 
@@ -182,36 +153,37 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var5; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td>
                           <td class="text-center"><?php echo $var7; ?></td>
-                        
-                        <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <td class="text-center"><?php echo $var8; ?></td>
+                          <td class="text-center"><?php echo $var9; ?></td>
+                          <td class="text-center"><?php echo $var10; ?></td>
+                     
+                          
+                          <!--INICIO DEL MODAL DE EDITAR PAR VALOR -->
+                          <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARAMETROS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Parámetros</h4>
+                                    <h4 class="text-center">Editar Parametro Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_paramusu" id="id_paramusu">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_parametro">Parámetro</label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
+                                          <label for="txt_parvalor">Par Valor</label>
+                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="editar_parvalor" id="editar_parvalor">
                                         </div>
                                       </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtnombre_usuario">Valor</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor">
-                                        </div>
-                                      </div> 
-                                      </div> <!-- FIN DE EL PRIMER ROW --> 
+                                      <div class="col-sm-12">
+                                       
+                                      </div>
+                                    </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="Edit_parametro" name="Edit_parametro" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="editar_paramusu" name="editar_paramusu" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -219,8 +191,7 @@ include_once "conexion3.php";
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
 
-                          <!--MODAL ELIMINAR -->
-                          <div id="ELIMINARPARAMETRO<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                          <div id="ELIMINAR<?php echo $var1 ?>"  name="paramusuario_eli" id="paramusuario_eli"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -229,12 +200,13 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var2; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="paramusuario_eli" id="paramusuario_eli">
+                                    <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
+
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINARPARAM" id="ELIMINARPARAM"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_PARAMETROUSUARIO" id="ELIMINAR_PARAMETROUSUARIO"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -255,40 +227,6 @@ include_once "conexion3.php";
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
-
-  <!--INICIO DEL MODAL DE AGREGAR PARAMETRO -->
-  <div id="agregar_param" class="modal fade" role="dialog">
-       <div class="modal-dialog modal-md">
-           <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
-                    <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Parámetro</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->  
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtvalor">Valor</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param"></textarea>
-                                </div>
-                            </div>
-                        </div> <!-- FIN DE EL PRIMER ROW --> 
-                    </div><!--FINAL DEL CARD BODY -->                       
-                    <div class="modal-footer ">
-                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_param" name="agregar_param" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                </div>
-            </form>
-      </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO PARAMETRO -->
 
   <!-- Button trigger modal -->
 
@@ -332,7 +270,7 @@ $( function() {
          
         }
     });
- }); //este codigo si me costo 
+ }); 
 
 </script>
 
@@ -357,7 +295,7 @@ $( function() {
   function soloLetras(e){
    key = e.keyCode || e.which;
    tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
    especiales = ["8-37-39-46"];
    tecla_especial = false
    for(var i in especiales){
@@ -411,7 +349,7 @@ $( function() {
    limpia = limpia.trim();
    e.value = limpia;
   };
-  //otra funcion para quitar espacios 
+  //otra funcion para quitar espacios :V
   function quitarespacios(e) {
     var cadena =  e.value;
     cadena = cadena.trim();
@@ -419,4 +357,13 @@ $( function() {
   };
 </script>
 
-<!--♠DianaRut *No me quiten los creditos :( -->
+<script type="text/javascript"> function solonumero(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla==8) return true;
+        else if (tecla==0||tecla==9)  return true;
+       // patron =/[0-9\s]/;// -> solo letras
+        patron =/[0-9\s]/;// -> solo numeros
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    }
+	</script>
