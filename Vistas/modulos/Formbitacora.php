@@ -1,4 +1,4 @@
-<?php /*
+<?php 
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
   $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
@@ -11,7 +11,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   $_SESSION["bhasta"] = $_POST["bhasta"];
 
 }
-*/?>
+?>
 
 <?php 
                   $codigoObjeto=1;
@@ -25,17 +25,17 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
 <div class="content-wrapper">
 
- <section class="content-header">
+ <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-           Bitácora Central
+           Bitácora Universal
 
       </h1>
 
       <ol class="breadcrumb">
 
-        <li><i class="fa fa-dashboard"></i>Inicio</li>
+      <!--  <li><i class="fa fa-dashboard"></i>Inicio</li>
         
-        <li class="active">Bitácora Central</li>
+        <li class="active">Bitácora Universal</li>-->
 
       </ol>
 
@@ -48,41 +48,43 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
       <div class="box-header with-border">
 
-        <center>
 
-<!--
-<form action="rbitacora" method="POST"  role="form" >
+        <form action="rbitacora" method="POST"  role="form" >
+      <div class="row pl-3">
+       
+
+          <div class="col-sm-3">
+            <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
+            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
+          </div>
+
+          <div class="col-sm-3">
+            <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
+            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
+          </div>
+          <div class="col-sm-2 mt-4">
+             <button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>
+           </div>
+       </div>
+        <br>
+        <div class="row pl-3">
+          <div class="col-sm-4">
+          <button type="submit"  name="excel" class="btn btn-success"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>
+          <button type="submit"  name="excel" class="btn bg-gradient-danger"><span class="glyphicon glyphicon-export"></span> Exportar PDF</button>
+
+          </div>
+          </div>
 
 
-<label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
 
-<div class="col-sm-2">
-
-<input class="form-control" type="date" />
-</div>
-
-<label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-<div class="col-sm-2">
-<input class="form-control" type="date"  />
-</div>
-
-<button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>
-
-
-<button type="submit"  name="excel" class="btn btn-warning"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>
-
--->
-
-
-
-<?php /*
+<?php 
 
 if(isset($_POST['excel'])){
   $desde = date("Y-m-d", strtotime($_POST['bdesde']));
 $hasta = date("Y-m-d", strtotime($_POST['bhasta']));
-$conexion =@mysqli_connect('localhost','root', '','si-ortizindustrial') or die ("Problema en la conexion");
+$conexion =@mysqli_connect('localhost','root', '','db_Proyecto_Prosecar') or die ("Problema en la conexion");
 $sql = "SELECT COUNT(*) FROM `tbl_bitacora_sistema`
- WHERE  `Fec_bitacora`  BETWEEN '$desde' AND '$hasta'";
+ WHERE  `FECHA`  BETWEEN '$desde' AND '$hasta'";
 
 $result = mysqli_query($conexion, $sql);
 while($fila = mysqli_fetch_assoc($result)){
@@ -95,7 +97,7 @@ while($fila = mysqli_fetch_assoc($result)){
   </script>";
   
 } 
-*/?> 
+?> 
 
 
 <?php /*
@@ -145,13 +147,13 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
            <div class="card-body">
             <div class="table-responsive">
-              <table id="ventas" class="table table-bordered table-striped" style="width:100%">
+              <table id="ventas" class="table table-bordered table-striped table-hover" style="width:100%">
                 <br><center>
                   
             
-               <thead>
+               <thead class="bg-info">
                 <tr>
-                <th style="visibility:hidden;"></th>
+                <th></th>
                 <th>Id_bitacora</th>
 			        	<th width="20%" class="center">Fecha</th>
 				        <th>Codigo_usuario</th>

@@ -17,7 +17,8 @@
       <div class="row">
         <div class="col-md-12">
         <a  href="procesoRegistrarEstudiante">
-            <button  data-toggle="modal" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Estudiante</button>
+        <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
+
         </a>
           
           <!-- jquery validation -->

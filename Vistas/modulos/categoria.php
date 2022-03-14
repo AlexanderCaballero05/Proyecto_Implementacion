@@ -8,14 +8,14 @@
   $descripcion= 'Usuario se autentifico';
   bitacora($codigoObjeto, $accion,$descripcion);
 
-  $parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
+  /*$parametro ="NUM_MAX_CARACTER"; //traer el valor delparametro
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($parametro));
   $row=$sentencia->fetchColumn();
   
   if($row>0){
     $valor = $row;
-  }
+  }*/
   
 ?>
 
@@ -196,7 +196,7 @@
                         <label for="apellido" class="control-label">Contraseña</label>
 
                         <div class="form-group">
-                            <input class="form-control"  minlength="5" maxlength="<?php echo "$valor"?>" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
+                            <input class="form-control"  minlength="5" maxlength="30" onKeyDown="sinespacio(this);" type="text" name="contrasena" >
                         </div>
                       </div>
                       
