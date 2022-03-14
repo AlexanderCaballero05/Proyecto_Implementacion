@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Administrador</h1>
+            <h1 class="m-0">Bienvenido</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Admnistrador</li>
+              <li class="breadcrumb-item"><a href="index">INICIO</a></li>
+              <li class="breadcrumb-item active">PROSECAR</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -29,7 +29,7 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i class="fas fa-bullhorn"></i>
-                  PROSECAR
+                  Proyecto PROSECAR
                 </h3>
               </div>
               <!-- /.card-header -->

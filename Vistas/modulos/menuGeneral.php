@@ -94,21 +94,8 @@
                     <p>Editar personas</p>
                   </a>
                 </li>
-                <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>tipo de socio economico</p>
-                  </a>
-                </li>
-
-
-
-                <li class="nav-item">
-                  <a href="estado" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Mantenimiento Estado</p>
-                  </a>
-                </li>
+              
+                
               
                 
               
@@ -168,14 +155,14 @@
                 </li>
                 <li class="nav-item">
                   <a href=" " class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href=" " class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Contenido</p>
+                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>Tipo socieconomico</p>
                   </a>
                 </li>
               </ul>
@@ -236,7 +223,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crudModalidad" class="nav-link">
+                <a href="crudmodalidad" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar modalidad</p>
                 </a>
@@ -418,59 +405,46 @@
               </li>
               <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-table"></i>
                   <p>Roles</p>
                 </a>
               </li>
               <li class="nav-item">
 
                 <a href="crudpreguntas" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-table"></i>
                   <p>Preguntas</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crudtipopersona" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tipo Persona</p>
+                  <a href="estado" class="nav-link" > 
+                    <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento Estado</p>
+                  </a>
+                </li>
+             
+              <li class="nav-item">
+                <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
+                   <i class="nav-icon fas fa-table"></i>
+                   <p>Parametros</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-
-              <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Parametros</p>
-              </a>
-              </li>
-              <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-table"></i>
                   <p>Objetos</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="parametrosusuario" class="nav-link" > 
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-table"></i>
                   <p>Parametros usuarios</p>
               </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Recuperar clave</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tipos usuario</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href=""class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modulos</p>
+                <a href="crudtipopersona" class="nav-link">
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>Tipo Persona</p>
                 </a>
               </li>
             </ul>
