@@ -194,7 +194,7 @@
   //ELABORADO POR Diana Rut ****
 
   if(isset($_POST['CODUSUARIO'])) { 
-    session_start();
+    
     $userregis = ($_SESSION['vario']);
     if (isset($_POST['ACT_PERSONA'])){
       $CODUSUARIO = ($_POST['CODUSUARIO']);
