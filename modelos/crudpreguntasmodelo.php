@@ -3,6 +3,8 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
+  
+  include_once 'function_bitacora.php';
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UNA PREGUNTA
@@ -78,7 +80,7 @@
         if($row>0){
           echo "<script>
           alert('Ya existe una pregunta con este mismo nombre: $editar_pregunta');
-          window.location = 'preguntas';
+          window.location = 'crudpreguntas';
           </script>";
           exit;
 
@@ -142,7 +144,7 @@ if(isset($_POST['pregunta_eliminar'])){
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             alert('¡Pregunta eliminada!');
-            window.location = 'preguntas';
+            window.location = 'crudpreguntas';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=4;
@@ -153,7 +155,7 @@ if(isset($_POST['pregunta_eliminar'])){
           }else{
             echo "<script>
             alert('¡Error al eliminar la pregunta!');
-            window.location = 'preguntas';
+            window.location = 'crudpreguntas';
             </script>";
             exit;
           }
