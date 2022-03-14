@@ -105,6 +105,7 @@ session_start();
          $_GET["ruta"] == "crudRoles" ||
          $_GET["ruta"] == "objetos" ||
          $_GET["ruta"] == "procesoCargaAcademica" ||
+         $_GET["ruta"] == "procesoBuscarCarga" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "parametrosusuario" ||

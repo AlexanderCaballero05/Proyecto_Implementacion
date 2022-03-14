@@ -24,17 +24,24 @@
             <li class="nav-item">
              <a class="nav-link"  href="procesoCargaAcademica">Carga Academica</a>
             </li>
+
+            <li class="nav-item">
+             <a class="nav-link"  href="procesoBuscarCarga">Editar Carga</a>
+            </li>
           </ul>
         </div>
         <div class="card-body"> 
           <div class="row">
             <div class="col-md-12">
                 <a href="procesoCargaAcademica" >
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
+                </a>
+                <a href="procesoBuscarCarga" >
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  class="btn btn-warning mb-3"><span> <i class="nav-icon  fas fa-edit mx-1"></i></span>Editar Carga</button>
                 </a>
                 
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>PDF</button>
-                
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                <button hidden  onclick="Descargar1()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>PDF estudiantes</button>
               
               <!-- jquery validation -->
               <div class="card card-primary">
@@ -110,7 +117,7 @@
           </div><!-- FINAL ROW PADRE --> 
             
         </div><!--Fin del card body general -->
-      </div><!--Fin del card general --> -->
+      </div><!--Fin del card general --> 
 
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
@@ -119,6 +126,13 @@
   <script>
     function Descargar() {
       window.open('Vistas/modulos/reporte.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+
+<script>
+    function Descargar1() {
+      window.open('Vistas/modulos/reporteEstudiante.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
