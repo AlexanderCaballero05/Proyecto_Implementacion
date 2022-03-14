@@ -149,7 +149,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="procesoCargaAcademica" class="nav-link">
+                <a href="crudCargaAcademica" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Carga academica</p>
                 </a>
