@@ -297,7 +297,7 @@
               <li class="nav-item">
                 <a href="procesoCargaAcademica" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Listado de matricula</p>
+                  <p>Listado de matriculas</p>
                 </a>
               </li>
               <li class="nav-item">
