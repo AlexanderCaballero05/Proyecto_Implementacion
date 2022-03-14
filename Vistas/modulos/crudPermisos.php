@@ -38,7 +38,7 @@
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
 
                     <?php 
-                    if ($permiso_registrar == 'ON') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>                
            
@@ -149,7 +149,7 @@
                               <div class="btn-group">
 
                                 <?php
-                                  if($permiso_eliminar == 'ON')
+                                  if($permiso_eliminar == 'SI')
                                    {
                                 ?>
                                 
@@ -164,7 +164,7 @@
 
 
                                 <?php 
-                                if ($permiso_actualizar == 'ON')
+                                if ($permiso_actualizar == 'SI')
                                 {
                                 ?>
 
@@ -237,9 +237,9 @@
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Insertar</label>
                                             <select class="form-control" name="ediInsertar" id="editar_descripcion">
-                                                 <option value="<?php echo $var6?>"> <?php echo $var6 ?></option>
-                                                 <option value="ON">ON</option>
-                                                 <Option value="OFF">OFF</Option>
+                                                 <option hidden value="<?php echo $var6?>"> <?php echo $var6 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
                                             </select>
                                         </div>
                                       </div>
@@ -249,9 +249,9 @@
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Eliminar</label>
                                             <select class="form-control" name="ediEliminar" id="editar_descripcion">
-                                                 <option value="<?php echo $var7?>"> <?php echo $var7 ?></option>
-                                                 <option value="ON">ON</option>
-                                                 <Option value="OFF">OFF</Option>
+                                                 <option hidden value="<?php echo $var7?>"> <?php echo $var7 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
                                             </select>
                                         </div>
                                       </div>
@@ -260,9 +260,9 @@
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Actualizar</label>
                                             <select class="form-control" name="ediActualizar" id="editar_descripcion">
-                                                 <option value="<?php echo $var8?>"> <?php echo $var8 ?></option>
-                                                 <option value="ON">ON</option>
-                                                 <Option value="OFF">OFF</Option>
+                                                 <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
                                             </select>
                                         </div>
                                       </div>
@@ -272,9 +272,9 @@
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Mostrar</label>
                                             <select class="form-control" name="ediMostrar" id="editar_descripcion">
-                                                 <option value="<?php echo $var8?>"> <?php echo $var8 ?></option>
-                                                 <option value="ON">ON</option>
-                                                 <Option value="OFF">OFF</Option>
+                                                 <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
                                             </select>
                                         </div>
 
@@ -351,7 +351,7 @@
 
 
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Permisos</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -363,7 +363,7 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Seleccionar Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
-                                        <option>< Seleccionar rol ></option>
+                                        <option selected disabled value="">Elegir...</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
                                         while($rowt = $resultadod->fetch_assoc()) { ?>
@@ -371,6 +371,9 @@
                                       <?php } 
                                               }?>
                                     </select>
+                                             <div class="invalid-feedback">
+                                                Eliga una opción.
+                                             </div>
                                 </div>
                             </div> <!--FIN DEL COMOBOX TIPO DE ROL-->
 
@@ -378,9 +381,9 @@
                                 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Seleccionar Modulo<!--  -->:</label>
+                                    <label for="txtcodigo_persona">Seleccionar Modulo:</label>
                                     <select class="form-control" name="MODUSUARIO" required="">
-                                        <option>< Seleccionar modulo ></option>
+                                        <option selected disabled value="">Elegir...</option>
                                                 <?php 
                                                   if ($resultador->num_rows > 0) {
                                                     while($rowr = $resultador->fetch_assoc()) { ?>
@@ -388,6 +391,9 @@
                                                 <?php } 
                                                       }?>
                                       </select>
+                                             <div class="invalid-feedback">
+                                                Eliga una opción.
+                                             </div>
                                 </div>
                             </div> <!--FINAL COMOBOX OBJETO-->
                             
@@ -397,9 +403,9 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Insertar:</label>
                                     <select class="form-control" name="INSERTAR" required>
-                                        <option>< Seleccionar ></option>
-                                        <option value="ON">ON</option>
-                                        <option value="OFF">OFF</option>
+                                        <option selected disabled value="">Elegir...</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
                                     </select>
                                 </div>
                             </div> <!--FIN DEL COMOBOX INSERTAR-->
@@ -410,9 +416,10 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Eliminar:</label>
                                     <select class="form-control"name="ELIMINAR" required="">
-                                        <option>< Seleccionar ></option>
-                                        <option value="ON">ON</option>
-                                        <option value="OFF">OFF</option>
+                                    <option selected disabled value="">Elegir...</option>
+
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
                                     </select>
                                 </div>
                             </div> <!--FINAL COMOBOX ELIMINAR-->
@@ -422,22 +429,21 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Modificar:</label>
                                     <select class="form-control"name="ACTUALIZAR" required="">
-                                        <option>< Seleccionar ></option>
-                                        <option value="ON">ON</option>
-                                        <option value="OFF">OFF</option>
+                                    <option selected disabled value="">Elegir...</option>
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
                                     </select>
                                 </div>
                             </div> <!--FINAL COMOBOX MODIFICAR-->
-
                              <!--INICIO COMBOBOX MOSTRAR -->
                              <div class="col-sm-12">
                             <label>Mostrar</label>
                                 <div class="input-group">
                                 <span class="input-group-append"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                                  <select class="form-control" name="MOSTRAR">
-                                    <option>< Seleccionar ></option>
-                                    <option value="ON">ON</option>
-                                    <option value="OFF">OFF</option>
+                                  <select class="form-control" name="MOSTRAR" required="">
+                                  <option selected disabled value="">Elegir...</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
                                   </select>
                                 </div>
                             </div><!--FINAL COMOBOX MOSTRAR-->
@@ -453,7 +459,7 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
-
+</div>
   <!-- Button trigger modal -->
 
 
@@ -464,5 +470,27 @@
 $(document).ready( function () {
     $('#tabla_permisos').DataTable();
 } );
+</script>
+
+<script>
+(function() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
 </script>
 

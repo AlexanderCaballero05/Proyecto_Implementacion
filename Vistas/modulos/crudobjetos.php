@@ -19,7 +19,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal content-->
-            <form method="POST">
+            <form method="POST" class="needs-validation" novalidate>
 
                 <div class="modal-header" style="background-color: #0CCDE3">
                     <h4 class="text-center">Crear informacion
@@ -34,16 +34,22 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="nombre" id="nombre">
+                                <input type="text" class="form-control" maxlength="30" minlength="10"  onkeyup="mayus(this);"  type="text"
+                                 name="nombre" id="nombre" required="">
+                                 <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
-                                <input type="text" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="descripcion" id="descripcion">
+                                <input type="text" class="form-control" onkeyup="mayus(this);"  type="text" 
+                                 name="descripcion" id="descripcion" required="">
+                                 <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -95,11 +101,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                  
                      <?php 
-                      if($permiso_registrar = 'ON'){
+                      if($permiso_registrar = 'SI'){
                      ?>
-                    <button type="button" class="btn btn-warning m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                        Nueva
-                        Objeto
+                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
+                       Agregar objeto
                     </button>
                     <?php 
                       }
@@ -170,7 +175,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 }
                                                                 ?>  <!-- fin del codigo para sustraer el permiso de eliminar-->
                                                                 <?php 
-                                                                if($permiso_eliminar= 'ON'){
+                                                                if($permiso_eliminar= 'SI'){
                                                                 ?>
                                                                 <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -201,7 +206,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     }
                                                                     ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                      <?php 
-                                                                    if($permiso_actualizar= 'ON'){
+                                                                    if($permiso_actualizar= 'SI'){
                                                                     ?>
                                                                 <a href="#EDITAROBJETO<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
@@ -442,6 +447,32 @@ bitacora($codigoObjeto, $accion, $descripcion);
         cadena = cadena.trim();
         e.value = cadena;
     };
+</script>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+
+
+
 </script>
 
 <!--♠DianaRut *No me quiten los creditos modificado por any :( -->

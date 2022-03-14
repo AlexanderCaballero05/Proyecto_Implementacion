@@ -83,7 +83,7 @@ session_start();
    /*=============================================
   =            menu                        =
   =============================================*/
-  include "modulos/sidebar_lateral.php";
+  include "modulos/menuGeneral.php";
   /*=============================================
   =            CONTENIDO                        =
   =============================================*/
@@ -91,8 +91,8 @@ session_start();
     if ( $_GET["ruta"] == "inicio" ||
          $_GET["ruta"] == "login" ||     
          $_GET["ruta"] == "salir" ||
+         $_GET["ruta"] == "perfilUsuario" ||
          $_GET["ruta"] == "ediusuarios" ||
-
          $_GET["ruta"] == "roles" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "Formbitacora" ||
@@ -107,10 +107,11 @@ session_start();
          $_GET["ruta"] == "procesoCargaAcademica" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "Formbitacora" ||
-         $_GET["ruta"] == "categorias" ||
          $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
+
          $_GET["ruta"] == "crudmodalidad" ||
+
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
