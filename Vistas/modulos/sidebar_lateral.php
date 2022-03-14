@@ -135,6 +135,13 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="crudMatricula" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Proceso Matricula</p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -225,8 +232,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="" class="nav-link">
-
               <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                   <i class="far fa-circle nav-icon"></i>
                   <p>Parametros</p>
@@ -254,6 +259,12 @@
                 <a href="" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tipos usuario</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudmodalidad"class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Modalidad</p>
                 </a>
               </li>
               <li class="nav-item">

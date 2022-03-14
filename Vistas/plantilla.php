@@ -110,12 +110,14 @@ session_start();
          $_GET["ruta"] == "categorias" ||
          $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
-
+         $_GET["ruta"] == "crudmodalidad" ||
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
          $_GET["ruta"] == "crudPermisos" ||
          $_GET["ruta"] == "crudpreguntas" ||
+         $_GET["ruta"] == "procesoMatricula" ||
+         $_GET["ruta"] == "crudMatricula" ||
          $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
