@@ -177,6 +177,12 @@
                 <i class="far fa-circle nav-icon"></i>
                 <p>Registar Cita</p>
               </a>
+              <li class="nav-item">
+                <a href="crudespecialidad" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Especialidad</p>
+                </a>
+              </li>
             </li>
             <li class="nav-item">
               <a href="  " class="nav-link">
