@@ -447,6 +447,17 @@
                   <p>Tipo Persona</p>
                 </a>
               </li>
+
+              </li>
+              <li class="nav-item">
+              <a href="area" class="nav-link" > 
+                  <i class="nav-icon fas fa-table"></i>
+                  <p>Area</p>
+              </a>
+              </li>
+
+
+
             </ul>
           </li>
 
