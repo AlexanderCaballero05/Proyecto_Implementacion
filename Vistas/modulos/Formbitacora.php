@@ -14,7 +14,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 ?>
 
 <?php 
-                  $codigoObjeto=1;
+                  $codigoObjeto=7;
                     $accion='Ingreso a la bitacora universal';
                     $descripcion= 'Consultar la informacion de la bitacora';
                     bitacora($codigoObjeto, $accion,$descripcion);
@@ -48,8 +48,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
       <div class="box-header with-border">
 
+     <!-- <button type="submit"  name="excel" class="btn btn-success"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>-->
 
-        <form action="rbitacora" method="POST"  role="form" >
+        <form action="Formbitacora" method="POST"  role="form" >
       <div class="row pl-3">
        
 
@@ -67,13 +68,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
            </div>
        </div>
         <br>
-        <div class="row pl-3">
-          <div class="col-sm-4">
-          <button type="submit"  name="excel" class="btn btn-success"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>
-          <button type="submit"  name="excel" class="btn bg-gradient-danger"><span class="glyphicon glyphicon-export"></span> Exportar PDF</button>
-
-          </div>
-          </div>
+        
 
 
 
@@ -100,7 +95,7 @@ while($fila = mysqli_fetch_assoc($result)){
 ?> 
 
 
-<?php /*
+<?php 
 if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST["bhasta"])
 &&($_POST["bdesde"])>($_POST["bhasta"])){
 
@@ -117,7 +112,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
       
                   if (result.value){
       
-                    window.location = "rbitacora";
+                    window.location = "Formbitacora";
                   }
                   });
                   </script>';
@@ -126,7 +121,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
 
 
   if(isset($_POST["tipo"]) && !Empty($_POST["tipo"]) && $_POST["tipo"] == "Venta")
-*/?>
+?>
 
 
 
@@ -134,8 +129,10 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
 </div>
 </div>
 
-
-<div  class="card card-primary" >
+<div class="pl-3">
+  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+  </div>
+<div  class="card card-primary p-2" >
 
 <div class="box-header with-border">
 </form>
@@ -145,7 +142,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
         </center>
         
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
-           <div class="card-body">
+           <div class="card-body pr-1">
             <div class="table-responsive">
               <table id="ventas" class="table table-bordered table-striped table-hover" style="width:100%">
                 <br><center>
@@ -156,8 +153,8 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                 <th></th>
                 <th>Id_bitacora</th>
 			        	<th width="20%" class="center">Fecha</th>
-				        <th>Codigo_usuario</th>
-				        <th>Id_objeto</th>
+				        <th>Usuario</th>
+				        <th>Objeto</th>
 				        <th>Accion</th>
                 <th>Descripción</th>
                
@@ -173,19 +170,24 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                 <?php 
 
  //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
-                //   $desde1= $_SESSION['bdesde'];
-//$hasta1= $_SESSION['bhasta'];
+                  $desde1= $_SESSION['bdesde'];
+                  $hasta1= $_SESSION['bhasta'];
  //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
-                    $queryi = "SELECT * FROM tbl_bitacora_sistema";
+                    $queryi = "SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
+                    FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
+                    WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
+                    AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
+                    AND bi.FECHA BETWEEN '$desde1' AND '$hasta1';";
                            //llamando los datos de la base y almacenadolos en variables 
+                           
                     $resulta = $conn->query($queryi);
                     if ($resulta->num_rows > 0) {
                         // output data of each row
                         while($row = $resulta->fetch_assoc()) {
                           $var1 = $row['CODIGO_BITACORA'];
-                          $var2 = $row['CODIGO_USUARIO'];
-                          $var3 = $row['CODIGO_OBJETO'];
-                          $var4 = $row['FECHA'];
+                          $var2 = $row['FECHA'];
+                          $var3 = $row['NOMBRE_USUARIO'];
+                          $var4 = $row['NOMBRE_OBJETO'];
                           $var5 = $row['ACCION'];
                           $var6 = $row['DESCRIPCION'];
                           
@@ -231,6 +233,13 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
           } );
         </script>
 
+
+ <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteBitacora.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>
        
 
 

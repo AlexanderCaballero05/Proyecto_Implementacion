@@ -110,7 +110,7 @@ session_start();
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
-
+         $_GET["ruta"] == "Respaldo" ||
          $_GET["ruta"] == "crudmodalidad" ||
 
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||

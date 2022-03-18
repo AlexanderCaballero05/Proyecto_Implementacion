@@ -5,7 +5,7 @@
   
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN estudiante
+//FUNCIONES DEL CRUD ,AGREGAR UN estudiante
     if(isset($_POST['GUARDARPERSONA'])){
        try{
           if(isset($_POST['CODPERSONA'])){
@@ -75,36 +75,27 @@
     }//FIN DEL IF DE REGISTAR UN estudiante
 
 
-/*
-  //PARTE PARA EDITAR UN estudiante
+  //PARTE PARA EDITAR DATOS ESCOLARES DE UN ESTUDIANTE
   if(isset($_POST['id_estudiante'])){
     if(isset($_POST['editar_estudiante'])){
       $codigo_estudiante = ($_POST['id_estudiante']);
-      $editar_estudiante = ($_POST['editar_estudiante']);
-      $editar_pasatiempos = ($_POST['editar_pasatiempos']);
-      $editar_distractores = ($_POST['editar_distractores']);
-      $editar_metas = ($_POST['editar_metas']);
-      try{
-       // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_estudiante where NOMBRE = (?) and CODIGO_ESTUDIANTE <> (?) ;");
-       $sentencia->execute(array($editar_nombre,$codigo_estudiante));
-       $row=$sentencia->fetchColumn();
-        if($row>0){
-          echo "<script>
-          alert('Ya existe un estudiante con este mismo nombre: $editar_nombre');
-          window.location = 'estudiante';
-          </script>";
-          exit;
-
-        }else{
+      $editar_grado = ($_POST['editGRADOACTUAL']);
+      $editar_pasatiempos = ($_POST['ediTPASATIEMPOS']);
+      $editar_distractores = ($_POST['editDISTRACTORES']);
+      $editar_metas = ($_POST['editMETAS']);
+      
          
           try{
-            $sql = " UPDATE tbl_estudiante SET GRADO_ACTUAL = '$editar_estudiante' ,PASATIEMPOS = '$editar_pasatiempos' ,DISTRACTORES_ESCOLARES = '$editar_distractores', METAS = '$editar_metas'  WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante' ";
+            $sql = "UPDATE tbl_estudiante SET GRADO_ACTUAL = '$editar_grado',
+                                                PASATIEMPOS = '$editar_pasatiempos',
+                                                DISTRACTORES_ESCOLARES = '$editar_distractores',
+                                                METAS = '$editar_metas' 
+                                                WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
               alert('¡Estudiante modificado exitosamente!');
-              window.location = 'estudiante';
+              window.location = 'crudEstudiante';
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=1;
@@ -114,20 +105,17 @@
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el estudiante!');
-              window.location = 'estudiante';
+              window.location = 'crudEstudiante';
               </script>";
             }
           }catch(PDOException $e){
           echo $e->getMessage(); 
           return false;
           }//fin del try catch
-        }//fin del else
-      }catch(PDOException $e){
-        echo $e->getMessage(); 
-        return false;
-       }
+     
     }
   }//cierre del if principal
+
 
 //PARTE PARA ELIMINAR UN ESTUDIANTE
 if(isset($_POST['estudiante_eliminar'])){
@@ -141,7 +129,7 @@ if(isset($_POST['estudiante_eliminar'])){
       if($row >0){
         echo "<script>
         alert('¡No se puede eliminar este estudiante,esta relacionado con otras tablas!');
-        window.location = 'estudiante';
+        window.location = 'crudEstudiante';
         </script>";
         exit;
       }else{
@@ -178,6 +166,189 @@ if(isset($_POST['estudiante_eliminar'])){
   }
 }//Cerre del if padre
 
-*/
-//*****Elaborado por Carlos Amador,no quiten creditos :v *******
+
+?>
+
+
+<?php
+
+  // PARTE PARA EDITAR DATOS SOCIECONOMICOS DE UN ESTUDIANTE
+  if(isset($_POST['EDITDISPOSITIVOS'])){
+  if(isset($_POST['id_estudiante_conte'])){
+    if(isset($_POST['editar_contenidoSocio'])){
+      $codigo_contenido = ($_POST['id_contenido']);
+      $edit_dispositivos = ($_POST['EDITDISPOSITIVOS']);
+      $codigo_estudiante_conte = ($_POST['id_estudiante_conte']);
+     
+        $editar_contenido = "UPDATE tbl_estudiante_socioeconomico
+                               SET CODIGO_CONTENIDO_SOCIOECONOMICO = '$edit_dispositivos'
+                            WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante_conte'
+                            AND CODIGO_CONTENIDO_SOCIOECONOMICO = '$codigo_contenido'
+                            ";
+
+
+        $result_consulta=$conn->query($editar_contenido);
+
+
+
+
+
+
+        if($result_consulta>0){
+          echo "<script>
+          alert('¡contenido Estudiante modificado exitosamente!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+        }else{
+
+          echo "<script>
+          alert('¡Error al  intentar modificar el estudiante!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+
+
+        }
+
+
+    }
+  }
+}elseif(isset($_POST['EDITSERVICIOS'])){
+  if(isset($_POST['id_estudiante_conte'])){
+    if(isset($_POST['editar_contenidoSocio'])){
+      $codigo_contenido = ($_POST['id_contenido']);
+      $edit_servicios = ($_POST['EDITSERVICIOS']);
+      $codigo_estudiante_conte = ($_POST['id_estudiante_conte']);
+     /* 
+      $edit_proveedor = ($_POST['EDITPROVEEDOR']);
+      $edit_basicos   = ($_POST['EDITBASICOS']);*/
+     // $anterior = $_SESSION['codigo']; AND CODIGO_CONTENIDO_SOCIOECONOMICO = '$anterior';
+        $editar_contenido = "UPDATE tbl_estudiante_socioeconomico
+                               SET CODIGO_CONTENIDO_SOCIOECONOMICO = '$edit_servicios'
+                            WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante_conte'
+                            AND CODIGO_CONTENIDO_SOCIOECONOMICO = '$codigo_contenido'
+                            ";
+
+
+        $result_consulta=$conn->query($editar_contenido);
+
+
+
+
+
+
+        if($result_consulta>0){
+          echo "<script>
+          alert('¡contenido Estudiante modificado exitosamente!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+        }else{
+
+          echo "<script>
+          alert('¡Error al  intentar modificar el estudiante!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+
+
+        }
+
+
+    }
+  }
+
+
+
+}elseif(isset($_POST['EDITPROVEEDOR'])){
+  if(isset($_POST['id_estudiante_conte'])){
+    if(isset($_POST['editar_contenidoSocio'])){
+      $codigo_contenido = ($_POST['id_contenido']);
+      $codigo_estudiante_conte = ($_POST['id_estudiante_conte']);
+      $edit_proveedor = ($_POST['EDITPROVEEDOR']);
+     /*  $edit_basicos   = ($_POST['EDITBASICOS']);*/
+        $editar_contenido = "UPDATE tbl_estudiante_socioeconomico
+                               SET CODIGO_CONTENIDO_SOCIOECONOMICO = '$edit_proveedor'
+                            WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante_conte'
+                            AND CODIGO_CONTENIDO_SOCIOECONOMICO = '$codigo_contenido'
+                            ";
+
+
+        $result_consulta=$conn->query($editar_contenido);
+
+
+
+
+
+
+        if($result_consulta>0){
+          echo "<script>
+          alert('¡contenido Estudiante modificado exitosamente!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+        }else{
+
+          echo "<script>
+          alert('¡Error al  intentar modificar el estudiante!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+
+
+        }
+
+
+    }
+  }
+
+
+
+
+}elseif(isset($_POST['EDITBASICOS'])){
+  if(isset($_POST['id_estudiante_conte'])){
+    if(isset($_POST['editar_contenidoSocio'])){
+      $codigo_contenido = ($_POST['id_contenido']);
+      $codigo_estudiante_conte = ($_POST['id_estudiante_conte']);
+       $edit_basicos   = ($_POST['EDITBASICOS']);
+
+        $editar_contenido = "UPDATE tbl_estudiante_socioeconomico
+                               SET CODIGO_CONTENIDO_SOCIOECONOMICO = '$edit_basicos'
+                            WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante_conte'
+                            AND CODIGO_CONTENIDO_SOCIOECONOMICO = '$codigo_contenido'
+                            ";
+
+
+        $result_consulta=$conn->query($editar_contenido);
+
+
+
+
+
+
+        if($result_consulta>0){
+          echo "<script>
+          alert('¡contenido Estudiante modificado exitosamente!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+        }else{
+
+          echo "<script>
+          alert('¡Error al  intentar modificar el estudiante!');
+          window.location = 'crudContenidoEconoEstudiante';
+          </script>";
+
+
+        }
+
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+}
+
 ?>
