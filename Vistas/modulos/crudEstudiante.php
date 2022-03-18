@@ -16,10 +16,13 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+          <div class="pl-3">
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
         <a  href="procesoRegistrarEstudiante">
         <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
 
         </a>
+        </div>
           
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -106,13 +109,13 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editar_estudiante" id="editar_estudiante">
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pasatiempos</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editar_pasatiempos" id="editar_pasatiempos">
+                                          <input  type="text"  value ="<?php echo $var7 ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="ediTPASATIEMPOS" id="editar_pasatiempos">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -121,13 +124,13 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_distractores" id="editar_distractores">
+                                          <input  type="text"  value ="<?php echo $var8; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editDISTRACTORES" id="editar_distractores">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Metas</label>
-                                          <input  type="text"  value ="<?php echo $var5; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editar_metas" id="editar_metas">
+                                          <input  type="text"  value ="<?php echo $var9; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editMETAS" id="editar_metas">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -310,3 +313,10 @@ $(document).ready( function () {
         return patron.test(te);
     }
 	</script>
+
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteEstudiantes.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>

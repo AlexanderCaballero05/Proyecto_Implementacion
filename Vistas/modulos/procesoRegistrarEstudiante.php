@@ -43,7 +43,7 @@
           <div class="card-header bg-gradient-cyan"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Datos escolares</strong></h2>
            </div></br>
-        <form method="POST" class="needs-validation" novalidate>
+         <form method="POST" class="needs-validation" novalidate>
 
             <div class="row mb-5 pl-3">
                 
@@ -94,11 +94,11 @@
                         <label  class="control-label pl-4">Repitente de curso</label>
                         <br>
                         <div class="form-check form-check-inline pl-4 pr-4">
-                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio1" value="option1" required="">
+                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio1" value="SI" required="">
                           <label class="form-check-label" for="inlineRadio1">SI</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio2" value="option2" required="">
+                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio2" value="NO" required="">
                           <label class="form-check-label" for="inlineRadio2">NO</label>
                           
                         </div>
@@ -349,15 +349,14 @@
                    <div class="valid-feedback">
                         ¡Se ve bien!
                    </div>
-                         </div><!--CIERRE DEL  -->
+                </div><!--CIERRE DEL  -->
                   </div><!--FINAL DEL ROW Socieconomico-->
                       
                       </br></br></br>
+                      <div class="card-footer pr-2">
 
-                      <button type="submit"  id="GUARDARPERSONA" name="GUARDARPERSONA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                      <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
-                      <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
-
+                           <button type="submit"  id="GUARDARPERSONA" name="GUARDARPERSONA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                      </div>
           </form>
           </div>
         </div>

@@ -84,24 +84,27 @@
                 <li class="nav-item">
                   <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Editar Usuarios</p>
+                    <p>Mantenimiento usuarios</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
                   <a href="crudpersonas" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Editar personas</p>
+                    <p>Mantenimiento personas</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Especialidades</p>
                   </a>
                 </li>
               
-                
-              
-                
-              
                 <li class="nav-item">
                   <a href="crudPreguntasUsuarios" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="nav-icon fas fa-table"></i>
                     <p>Preguntas Usuarios</p>
                   </a>
                 </li>
@@ -149,8 +152,8 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="crudEstudiante"class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Estudiantes</p>
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Agregar estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -330,7 +333,7 @@
 
 
 
-         <!-- Menu de otras cosas -->
+         <!-- Menu de AREA MEDICA -->
          <li class="nav-item">
           <a href="#" class="nav-link">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
@@ -343,14 +346,22 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="far fa-edit nav-icon"></i>
                 <p>Registar Cita</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="  " class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Medicamentos</p>
+                <p>Preclinica</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="  " class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Expedientes de pacientes</p>
               </a>
             </li>
             
@@ -361,6 +372,72 @@
         <?php
           }
           ?>
+
+<?php
+                           include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '31'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?> 
+
+
+
+
+         <!-- Menu de AREA PSICOLOGO -->
+         <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class=" nav-icon fas fa-briefcase"></i>
+            <p>
+              Area Psicologica
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                <p>Registar Cita</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="  " class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Expedientes de pacientes</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+         
+
+        <?php
+          }
+          ?>
+          
+
+
+
+
 
 
                     <?php
@@ -534,7 +611,7 @@
                     {
                     ?> 
                     <li class="nav">
-                      <a href="#" class="nav-link bg-gradient-navy">
+                      <a href="Respaldo" class="nav-link bg-gradient-navy">
                         <i class=" nav-icon fas fa-cloud-download-alt"></i>
                         <p>
                           Respaldo y Restauración
