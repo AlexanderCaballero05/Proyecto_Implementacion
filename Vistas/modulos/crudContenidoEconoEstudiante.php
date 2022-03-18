@@ -42,27 +42,30 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT es.CODIGO_ESTUDIANTE_SOCIOECONOMICO as id_tabla, p.PRIMER_NOMBRE as nombre_estudiante, t.TIPO as Contenido_Socieconomico ,c.NOMBRE_TIPO as nombre_tipo_contenido
+                        $query = "SELECT es.CODIGO_ESTUDIANTE_SOCIOECONOMICO as codigo_tabla, es.CODIGO_CONTENIDO_SOCIOECONOMICO as codigo_contenido, es.CODIGO_ESTUDIANTE as codigo_estudiante , p.PRIMER_NOMBRE as nombre_estudiante, t.TIPO as Contenido_Socieconomico ,c.NOMBRE_TIPO as nombre_tipo_contenido
                         FROM tbl_tipo_socioeconomico t, tbl_contenido_socioeconomico c, tbl_estudiante_socioeconomico es, tbl_estudiante e , tbl_persona p
                         WHERE es.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
                         AND es.CODIGO_CONTENIDO_SOCIOECONOMICO = c.CODIGO_CONTENIDO_SOCIOECONOMICO
                         AND t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO
-                        AND e.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+                        AND e.CODIGO_PERSONA = p.CODIGO_PERSONA
+                        ORDER BY codigo_tabla asc;";
 
 
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['id_tabla'];
-                            $var2 = $row['nombre_estudiante'];
-                            $var3 = $row['Contenido_Socieconomico'];
-                            $var4 = $row['nombre_tipo_contenido'];
+                            $var1 = $row['codigo_contenido'];
+                            $var2 = $row['codigo_estudiante'];
+                            $var3 = $row['nombre_estudiante'];
+                            $var4 = $row['Contenido_Socieconomico'];
+                            $var5 = $row['nombre_tipo_contenido'];
+                            $var6 = $row['codigo_tabla'];
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                              <!--  
+                                
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
@@ -71,79 +74,191 @@
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
-                          -->
+                          
                               </div>
                             </div><!-- final del text-center -->
                           </td>
-                          <td class="text-center"><?php echo $var1; ?></td>
-                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var6; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo $var5; ?></td>
                          
+                          <!-- Traer los datos socioeconimicos de las tablas-->
+                          <?php
+                              include_once "conexion3.php";
+                              $query1= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
+                              FROM tbl_contenido_socioeconomico s
+                              WHERE S.CODIGO_TIPOSOCIO = 1;";
+                              $result1= $conn->query($query1);
+                           ?>
+
+                            <?php 
+                              include_once "conexion3.php";
+                              $query2= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
+                              FROM tbl_contenido_socioeconomico s
+                              WHERE S.CODIGO_TIPOSOCIO = 2; ";
+                              $result2= $conn->query($query2);
+                           ?>
+
+                            <?php
+                            
+                              include_once "conexion3.php";
+                              $query3= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
+                              FROM tbl_contenido_socioeconomico s
+                              WHERE S.CODIGO_TIPOSOCIO = 3; ";
+                              $result3= $conn->query($query3);
+                           ?>
+                              
+                            <?php
+                            
+                            include_once "conexion3.php";
+                            $query4= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
+                            FROM tbl_contenido_socioeconomico s
+                            WHERE S.CODIGO_TIPOSOCIO = 4; ";
+                            $result4= $conn->query($query4);
+                         ?>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        <!--INICIO DEL MODAL DE EDITAR ESTUDIANTE -->
+                        <!--INICIO DEL MODAL DE EDITAR CONTENIDO SOCIECONOMICO ESTUDIANTE -->
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Estudiante</h4>
+                                    <h4 class="text-center">Editar Contenido socieconomico</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_estudiante" id="id_estudiante">
+                                    <input type="text" value ="<?php echo $var1;?>" hidden class="form-control" name="id_contenido" id="id_contenido">
+                                      <input type="text" value ="<?php echo $var2;?>" hidden class="form-control" name="id_estudiante_conte" id="id_estudiante">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editar_estudiante" id="editar_estudiante">
+                                          <label for="txtcodigo_persona">Nombre_Estudiante</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editar_estudiante" id="editar_estudiante" disabled>
                                         </div>
                                       </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Pasatiempos</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editar_pasatiempos" id="editar_pasatiempos">
-                                        </div>
-                                      </div>
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
 
+
+
+                                      <?php
+                                      if ($var4 == 'DISPOSITIVO ELECTRONICO')
+                                      { 
+
+                                      ?>
+
+                                      <div class="col-sm-12">
+                                          <label for="DISPOSITIVOS" class="control-label">¿Con que dispositivos cuenta?</label> 
+                                            <select  style="width: 100%;"  class="form-control select2"  name="EDITDISPOSITIVOS" type="text" aria-placeholder="Buscar" required="" >
+                                              <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
+                                            
+                                                <?php 
+                                                session_start();
+                                                $_SESSION['codigo'] = $var5;
+                                                    if ($result1->num_rows > 0) {
+                                                    while($row1 = $result1->fetch_assoc()) { 
+                                                    $codigo = $row1['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                                    $nombre = $row1['NOMBRE_TIPO'];
+                                                    ?>
+                                                  <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                  <?php 
+                                                  } 
+                                                  }
+                                                  ?>
+                                                  
+                                                </select>
+                                      </div>
+
+                                      <?php
+                                      }elseif($var4 == 'SERVICIOS DE INTERNET')
+                                      {
+                                    ?>
+                                    </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_distractores" id="editar_distractores">
+                                          <label for="txtcodigo_persona">¿Qué servicios de internet utiliza?</label>
+                                           <select  style="width: 100%;"  class="form-control select2" name="EDITSERVICIOS"  id="EDITSERVICIOS" type="text" aria-placeholder="Buscar" required="" >
+                                            <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
+
+                                                      <?php 
+                                                        if ($result2->num_rows > 0) {
+                                                        while($row2 = $result2->fetch_assoc()) { 
+                                                        $codigo = $row2['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                                        $nombre = $row2['NOMBRE_TIPO'];
+                                                        ?>
+                                                    <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                      <?php 
+                                                      } 
+                                                      }
+                                                      ?>
+                                           </select>
                                         </div>
                                       </div>
+
+                                      <?php
+                                      }elseif($var4 == 'PROVEEDOR DE INGRESO')
+                                      {
+                                    ?>
+
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Metas</label>
-                                          <input  type="text"  value ="<?php echo $var5; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editar_metas" id="editar_metas">
+                                         <label for="EDITPROVEEDOR" class="control-label">¿Quién provee el ingreso familiar?</label> 
+                                          <select  style="width: 100%;"  class="form-control select2" name="EDITPROVEEDOR" id="EDITPROVEEDOR" type="text" aria-placeholder="Buscar" required >
+                                           <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
+
+                                                  <?php 
+                                                    if ($result3->num_rows > 0) {
+                                                    while($row3 = $result3->fetch_assoc()) { 
+                                                    $codigo = $row3['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                                    $nombre = $row3['NOMBRE_TIPO'];
+                                                    ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                  <?php 
+                                                  } 
+                                                  }
+                                                  ?>
+                                          </select>
                                         </div>
                                       </div>
+
+                                      <?php
+                                      }elseif($var4 == 'SERVICIOS BASICOS')
+                                      {
+                                    ?>
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                         <label for="BASICOS" class="control-label">¿Con qué servicios básicos cuenta en su casa?</label> 
+                                          <select  stye="width: 100%;"  class="form-control select2" name="EDITBASICOS" id="EDITBASICOS" type="text" aria-placeholder="Buscar" required >
+                                          <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
+                                                  <?php 
+                                                    if ($result4->num_rows > 0) {
+                                                    while($row4 = $result4->fetch_assoc()) { 
+                                                    $codigo = $row4['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                                    $nombre = $row4['NOMBRE_TIPO'];
+                                                    ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                  <?php 
+                                                  } 
+                                                  }
+                                                  ?>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <?php
+                                      }
+                                      
+                                    ?>
+                                      
+
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY --> 
 
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar_estudiante" name="editar_estudiante" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="editar_contenidoSocio" name="editar_contenidoSocio" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -161,7 +276,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estudiante_eliminar" id="estudiante_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estudiante<?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el estudiante<?php echo $var3; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
