@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="pl-3">
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn bg-gradient-cyan mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Estudiantes</button>
         <a  href="procesoRegistrarEstudiante">
         <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
 
@@ -80,6 +80,10 @@
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+                                <a href="" data-toggle="modal">
+                                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;" class="btn btn-info"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button>
+                               </button>
+                               </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
