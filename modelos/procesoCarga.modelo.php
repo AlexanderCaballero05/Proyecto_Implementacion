@@ -62,8 +62,8 @@ if(isset($_POST['tutor'])  ){
                             }else{
                                try{
                                     $insert = " INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `SECCION`, 
-                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`) 
-                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha'); ";
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`) 
+                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final'); ";
                                     $resul=$conn->query($insert);
                                     if($resul >0){
                                         echo "<script> 
@@ -115,6 +115,7 @@ if(isset($_POST['tutor'])  ){
 if(isset($_POST['IDCARGA'])){
     if(isset($_POST['EDITAR_CARGA'])){
         $hora_modi = ($_POST['hora1']);
+        $hora_final_modi = ($_POST['hora_final1']);
         $fecha_inicio_modi = ($_POST['fecha_inicio1']);
         $fecha_final_modi = ($_POST['fecha_final1']);
         $tutor_modi = ($_POST['tutor1']);

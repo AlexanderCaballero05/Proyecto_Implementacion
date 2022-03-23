@@ -183,12 +183,12 @@ include_once "conexion3.php";
                                         </div> <!--FIN ROL-->
                                     </div> <!-- FIN ROW --> 
 
-                                <div class="row">
+                                     <div class="row">
                                       <div class="col-sm-6">
                                         <button type="button"  class="btn btn-primary mb-3" onclick="Mostar_div(<?php echo $var2?>)">Resetear Contraseña</button>
                                       </div>
                                     </div>
-                            <div  class="row">
+                                   <div  class="row">
 
                                       <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label for="" class="control-label">Cambiar Contraseña</label> 

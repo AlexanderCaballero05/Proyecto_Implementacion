@@ -14,6 +14,9 @@ session_start();
     <!--select2 -->
     <link rel="stylesheet" href="vistas/plugins/select2/css/select2.min.css">
     <link rel="stylesheet" href="vistas/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+
+    
+
   
 
     <!-- CSS STYLES -->
@@ -32,6 +35,7 @@ session_start();
         <!-- SweetAlert2 -->
         <link rel="stylesheet" href="vistas/assets/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
          
+        <link rel="stylesheet" href="vistas/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 
               <!-- DataTables -->
   <link rel="stylesheet" href="vistas/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
@@ -57,6 +61,8 @@ session_start();
         <script src="vistas/assets/plugins/sweetalert2/sweetalert2.min.js"></script> 
         <!-- SweetAlert2 version reciente :v -->
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+     
         
 
         <!-- Select2 -->
@@ -113,11 +119,16 @@ session_start();
          $_GET["ruta"] == "crudTutorias" ||
 
          $_GET["ruta"] == "area" ||
-
+         $_GET["ruta"] == "procesoPreClinica" ||
+         $_GET["ruta"] == "crudPreClinica" ||
 
          $_GET["ruta"] == "Respaldo" ||
 
          $_GET["ruta"] == "crudmodalidad" ||
+
+
+         $_GET["ruta"] == "crudCitasPsicologicas" ||
+
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||

@@ -16,20 +16,19 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-           <div class="alert alert" role="alert">
-            <h4>Registrar Carga Academica</h4>
-          </div>
+    <section class="content-header text-xl-center mb-3 btn-light">
+      <h1>
+          <h4> REGISTRAR CARGA ACADEMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+      </h1>
+    </section>
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                 <a class="nav-link" href="crudCargaAcademica">Ver carga academica</a>
+                 <a class="nav-link"  style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#">Carga academica</a>
-              </li>
-              <li class="nav-item">
-                 <a class="nav-link" href="procesoBuscarCarga">Editar Carga</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Carga academica</a>
               </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
@@ -38,7 +37,7 @@
             <form  class=" needs-validation" novalidate id="FORMREGISTRAR" method="POST">
               <div class="row">
                 <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Inicio:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
                       <input class="form-control"  type="time"  name="hora" id="" required >
                         <div class="invalid-feedback">
@@ -47,9 +46,9 @@
                     </div>
                   </div>
                   <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Final:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
                     <div class="form-group">
-                      <input class="form-control"  type="time"  name="hora_final"  required >
+                      <input class="form-control" placeholder="0:0:0"  type="time"  name="hora_final"  required >
                         <div class="invalid-feedback">
                         Llene este campo.
                         </div>
@@ -83,9 +82,9 @@
                   $resultadod=$conn->query($query);                
                   ?>
                   <div class="form-group">
-                    <label  class="control-label">Encargado:</label>
+                    <label  class="control-label">Encargado-Tutor:</label>
                     <select  class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required >
-                      <option selected disabled value="">Seleccione</option>
+                      <option selected disabled value="">--Buscar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -112,7 +111,7 @@
                   <label for="identidad" class="control-label">Tutoria:</label> 
                   <div class="form-group">
                     <select style="width: 100%"   class="form-control select2" required name="tutoria"   >
-                      <option selected disabled value="" >--Seleccione--</option>
+                      <option selected disabled value="" >--Buscar Tutoria--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -141,7 +140,7 @@
                   <label for="identidad" class="control-label">Modalidad:</label> 
                   <div class="form-group">
                     <select  class="form-select select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
-                      <option selected disabled value="" >--Seleccione--</option>
+                      <option selected disabled value="" >--Seleccione Modalidad--</option>
                       <?php 
                         if($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -163,7 +162,7 @@
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
                       <select class="form-control select2" id="" name="seccion" required >
-                       <option  selected disabled value="">--Seleccione</option>
+                       <option  selected disabled value="">--Seleccione Seccion--</option>
                        <option value="SECCIONA">SECCION A</option>
                        <option value="SECCIONB">SECCION B </option>
                        <option value ="SECCIONC">SECCION C </option>
@@ -206,7 +205,6 @@
     })()
 </script>
 
-<!-- Elaborado por Diana Rut y Jose Guifarro :) -->
+
                     
-
-
+  

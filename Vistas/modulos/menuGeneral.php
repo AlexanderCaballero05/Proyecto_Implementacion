@@ -352,7 +352,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="  " class="nav-link">
+              <a href="crudPreClinica" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Preclinica</p>
               </a>
@@ -364,7 +364,14 @@
                 <p>Expedientes de pacientes</p>
               </a>
             </li>
-            
+            <li class="nav-item">
+              <a href="crudCitasPsicologicas" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Citas psicologicas</p>
+              </a>
+            </li>
+
+
           </ul>
         </li>
          

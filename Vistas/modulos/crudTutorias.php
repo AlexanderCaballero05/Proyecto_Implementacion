@@ -36,8 +36,8 @@
           ?> <!-- fin del codigo para sustraer el permiso de insertar.-->   
            <?php
            if($permiso_registrar == 'SI' ){
-           ?>       
-            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Tutoria</button>
+           ?> 
+            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoria</button>
            <?php
             }
            ?>
@@ -52,12 +52,10 @@
                   <table id="tabla_tutoria" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
+                          <th class="text-center">ACCION</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">Nombre</th>
-                          <th class="text-center">Area</th>
-                          <th class="text-center">Fecha Creación</th>
-                          <th class="text-center">Fecha Modificación</th>
+                          <th class="text-center">NOMBRE</th>
+                          <th class="text-center">AREA</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -71,8 +69,6 @@
                             $var1 = $row['CODIGO_TUTORIA'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['AREA'];
-                            $var4 = $row['FECHA_CREACION'];
-                            $var5 = $row['FECHA_MODIFICACION'];
                             $var6 = $row['CODIGO_AREA'];
                         ?>
                         <tr>
@@ -132,9 +128,6 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-
                         <!--INICIO DEL MODAL DE EDITAR TUTORIA -->
                           <div id="EDITARTUTORIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -273,9 +266,31 @@
    </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA Elaborado por Diana Rut --> 
   
    <!--Funcion de la datatable -->
+
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_tutoria').DataTable();
-} );
+  $(document).ready( function () {
+      $('#tabla_tutoria').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Tutoria:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
 </script>

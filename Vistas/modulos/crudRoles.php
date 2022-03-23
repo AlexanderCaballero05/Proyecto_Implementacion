@@ -39,8 +39,8 @@
           <?php
           if($permiso_registrar == 'SI'){
           ?>
-          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo Rol</button>
-
+          
+          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Nuevo Rol</button>
           <?php
            }
           ?>
@@ -57,14 +57,10 @@
                   <table id="tabla_roles" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
+                          <th class="text-center">ACCION</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">Nombre</th>
-                          <th class="text-center">Descripcion</th>
-                          <th class="text-center">Fecha Creación</th>
-                          <th class="text-center">Creado por</th>
-                          <th class="text-center">Fecha Modificación</th>
-                          <th class="text-center">Modificado por</th>
+                          <th class="text-center">NOMBRE</th>
+                          <th class="text-center">DESCRIPCION</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -77,10 +73,6 @@
                             $var1 = $row['CODIGO_TIPO_ROL'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
-                            $var4 = $row['FECHA_CREACION'];
-                            $var6 = $row['CREADO_POR_USUARIO'];
-                            $var5 = $row['FECHA_MODIFICACION'];
-                            $var7 = $row['MODIFICADO_POR'];
                         ?>
                         <tr>
                           <td>
@@ -144,11 +136,6 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
-
                         <!--INICIO DEL MODAL DE EDITAR ROL -->
                           <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -279,7 +266,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar:",
+        "search": "Buscar Rol:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
