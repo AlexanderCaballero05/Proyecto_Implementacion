@@ -61,7 +61,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
+            <input class="form-control" type="date" max="<?= date("Y-m-d")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
           </div>
           <div class="col-sm-2 mt-4">
              <button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>

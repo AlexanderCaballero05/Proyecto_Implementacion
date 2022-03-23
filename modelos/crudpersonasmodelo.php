@@ -45,7 +45,7 @@
           if($CONTEOIDENTIDAD == 0 || $CODIGO_PERSONA_IDENTIDAD == $codpersona){
             if($CONTEOCORREO == 0 || $CODIGO_PERSONA_CORREO == $codpersona){
                 try{
-                  $sql = "CALL  	sp_actualizar_personas('$p_nombre','$s_nombre','$p_apellido','$s_apellido','$dni','$f_nacimiento','$lugar_n','$sexo','$user','$fechaactual','$correo','$telefono','$codpersona','$tipo_persona','$direccion');" ;
+                  $sql = "CALL sp_actualizar_personas('$p_nombre','$s_nombre','$p_apellido','$s_apellido','$dni','$f_nacimiento','$lugar_n','$sexo','$user','$fechaactual','$correo','$telefono','$codpersona','$tipo_persona','$direccion');" ;
                     $consulta=$conn->query($sql);
                       if ($consulta>0) {
                             echo "<script>

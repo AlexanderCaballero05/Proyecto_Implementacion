@@ -95,6 +95,7 @@ session_start();
          $_GET["ruta"] == "ediusuarios" ||
          $_GET["ruta"] == "roles" ||
          $_GET["ruta"] == "registrar_personas" ||
+         $_GET["ruta"] == "crudespecialidad" ||
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "crudpersonas" ||
          $_GET["ruta"] == "crudobjetos" ||
@@ -117,7 +118,6 @@ session_start();
          $_GET["ruta"] == "Respaldo" ||
 
          $_GET["ruta"] == "crudmodalidad" ||
-
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||

@@ -88,7 +88,7 @@ include_once "conexion3.php";
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
+                     <?php
                         $query = "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,
                          p.SEGUNDO_APELLIDO,p.DNI,p.CREADO_POR_USUARIO, p.FECHA_CREACION,
                           p.MODIFICADO_POR, p.FECHA_MODIFICACION,p.SEXO,P.FECHA_NACIMIENTO, 
@@ -243,7 +243,7 @@ include_once "conexion3.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona">Dni</label>
-                                                                            <input type="text"
+                                                                            <input type="number"
                                                                                 value="<?php echo $var7; ?>"
                                                                                 class="form-control" maxlength="20"
                                                                                 minlength="5"
