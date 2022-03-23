@@ -68,10 +68,7 @@
                           <th class="text-center">Permiso Eliminar</th>
                           <th class="text-center">Permiso Actualizar</th>
                           <th class="text-center">Permiso Mostrar</th>
-                          <th class="text-center">Creado por</th>
-                          <th class="text-center">Fecha Creación</th>
-                          <th class="text-center">Modificado por</th>
-                          <th class="text-center">Fecha modificación</th>                          
+                                                   
 
                         </tr>
                       </thead>
@@ -90,11 +87,7 @@
                             $var7 = $row['ELIMINAR'];
                             $var8 = $row['ACTUALIZAR'];
                             $var9 = $row['MOSTRAR'];
-                            $var10 = $row['CREADO_POR'];
-                            $var11 = $row['FECHA_CREACION'];
-                            $var12 = $row['MODIFICADO_POR'];
-                            $var13 = $row['FECHA_MODIFICACION'];   
-                         
+                           
                         ?>
 
                             <?php
@@ -187,11 +180,7 @@
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
-                          <td class="text-center"><?php echo $var10; ?></td>
-                          <td class="text-center"><?php echo $var11; ?></td>
-                          <td class="text-center"><?php echo $var12; ?></td>
-                          <td class="text-center"><?php echo $var13; ?></td>
-
+                          
                           
 
 

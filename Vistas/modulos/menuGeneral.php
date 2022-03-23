@@ -96,7 +96,7 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="" class="nav-link" > <!--modifique acuerdate -->
+                  <a href="crudespecialidad" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-edit nav-icon"></i>
                     <p>Especialidades</p>
                   </a>

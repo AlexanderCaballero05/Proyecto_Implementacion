@@ -30,7 +30,6 @@ class PDF extends FPDF {
 		$this->Ln(5);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
 		$this->SetFont('Arial','',10);
-		$this->Cell(65, 5, "Fecha: ". date("d/m/Y"), 0, 1, "C");
 		
 		$this->Ln(10);
 	}
