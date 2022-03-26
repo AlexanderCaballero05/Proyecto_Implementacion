@@ -107,6 +107,8 @@ session_start();
          $_GET["ruta"] == "crudobjetos" ||
          $_GET["ruta"] == "crudtiposocioeconomico" ||
          $_GET["ruta"] == "estado" ||
+         $_GET["ruta"] == "crudfamiliares" ||
+         
          $_GET["ruta"] == "crudEstudiante" ||
          $_GET["ruta"] == "crudContenidoEconoEstudiante" ||
          $_GET["ruta"] == "crudRoles" ||
@@ -114,21 +116,20 @@ session_start();
          $_GET["ruta"] == "procesoCargaAcademica" ||
          $_GET["ruta"] == "procesoBuscarCarga" ||
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
+         $_GET["ruta"] == "procesoRegistrarFamiliares" ||
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "parametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
-
          $_GET["ruta"] == "area" ||
          $_GET["ruta"] == "procesoPreClinica" ||
          $_GET["ruta"] == "crudPreClinica" ||
-
+         $_GET["ruta"] == "procesoRecetaMedica" ||
          $_GET["ruta"] == "Respaldo" ||
-
          $_GET["ruta"] == "crudmodalidad" ||
-
-
          $_GET["ruta"] == "crudCitasPsicologicas" ||
+
          $_GET["ruta"] == "crudPruebapsicometrica" ||
+
 
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
@@ -140,6 +141,12 @@ session_start();
          $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
+
+
+
+         $_GET["ruta"] == "crudinscripcioncita" ||
+         $_GET["ruta"] == "procesocita" ||
+
          $_GET["ruta"] == "crudPermisos"){
 
       include_once "modulos/".$_GET["ruta"].".php";
