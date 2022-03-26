@@ -425,6 +425,12 @@
                 <p>Registar Cita</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="crudPruebapsicometrica" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Pruebas Psicométricas</p>
+              </a>
+            </li>
 
             <li class="nav-item">
               <a href="  " class="nav-link">
