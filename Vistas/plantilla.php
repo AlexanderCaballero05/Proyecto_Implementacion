@@ -138,6 +138,11 @@ session_start();
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
 
+
+
+         $_GET["ruta"] == "crudinscripcioncita" ||
+         $_GET["ruta"] == "procesocita" ||
+
          $_GET["ruta"] == "crudPermisos"){
 
       include_once "modulos/".$_GET["ruta"].".php";
