@@ -18,6 +18,7 @@ require_once "modelos/crudmodalid.php";
 require_once "modelos/crudtipopersonamode.php";
 require_once "modelos/crudEstudiante.modelo.php";
 require_once "modelos/crudParametros.modelo.php";
+require_once "modelos/crudPrueba.modelo.php";
 require_once "modelos/perfilUsuario.modelo.php";
 require_once "modelos/procesoCarga.modelo.php";
 require_once "modelos/procesoPreClinica.modelo.php";

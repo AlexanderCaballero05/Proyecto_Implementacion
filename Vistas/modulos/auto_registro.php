@@ -89,6 +89,10 @@
                        <label for="telefono" class="form-label">Número de teléfono:</label>
                        <input type="text" name="telefono" class="form-control" placeholder="99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="20" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
+                     <div class="col">
+                     <label for="telefono" class="form-label">Dirección:</label>
+                         <input type="text" name="direccion" class="form-control" placeholder="Dirección" aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="">
+                    </div>
                     </div>
 
                     <div class="row mb-4">
