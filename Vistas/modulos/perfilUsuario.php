@@ -204,8 +204,8 @@
                          
                           <div class="col-sm-3">
                             <label for="" class="form-label">Telefono</label>
-                              <input type="number" value="<?php echo $var8; ?>" class="form-control" min="5" maxlength="8" onKeyDown="sinespacio(this);"
-                                     name="telefono" id="telefono">
+                            <input class="form-control" type="text" value="<?php echo $var8; ?>" minlength="8" maxlength="8"  name="telefono" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                             
                           </div>
                           
                           <div class="col-sm-3">
