@@ -19,9 +19,8 @@ class PDF extends FPDF {
 		$this->Cell(180, 8, utf8_decode('Reporte de Estudiantes'));
 		$this->SetX(5);
 		$this->Ln(5);
-		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
 		$this->SetFont('Arial','',10);
-		$this->Cell(65, 5, "Fecha: ". date("d/m/Y"), 0, 1, "C");
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -34,7 +33,7 @@ class PDF extends FPDF {
 	$this->SetY(-18);
 	$this->SetX(28);
 	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	$this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R',);
+	
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	

@@ -96,7 +96,7 @@
 			<option value="">Selecciona un Punto de Restauración</option>
 			<?php
 				include_once 'Connet.php';
-				$ruta="C:/xampp/htdocs/Proyecto_Implementacion3/vistas/modulos/Backup/" ;
+				$ruta="C:/xampp/htdocs/Proyecto_Implementacion4/vistas/modulos/Backup/" ;
 				if(is_dir($ruta)){
 				    if($aux=opendir($ruta)){
 				        while(($archivo = readdir($aux)) !== false){

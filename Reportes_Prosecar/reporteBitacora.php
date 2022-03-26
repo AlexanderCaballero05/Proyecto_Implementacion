@@ -22,14 +22,14 @@ class PDF extends FPDF {
 		$this->SetY(20);
 		$this->SetX(86);
 		$this->SetFont('Arial','B',14);
-		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-		$this->SetFont('Arial','',12);
+        $this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+        $this->SetFont('Arial','',16);
 		$this->SetX(120);
 		$this->Cell(180, 8, utf8_decode('Reporte de Bitacora Universal'));
 		$this->SetX(5);
 		$this->Ln(5);
-		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
 		$this->SetFont('Arial','',10);
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -42,7 +42,6 @@ class PDF extends FPDF {
 	$this->SetY(-18);
 	$this->SetX(28);
 	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	$this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R',);
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
