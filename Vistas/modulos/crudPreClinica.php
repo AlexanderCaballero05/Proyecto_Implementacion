@@ -53,36 +53,32 @@
                   <table id="tabla_preclinicarga" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Acción</th>
+                        <th class="text-center">ACCION</th>
                         <th class="text-center">ID </th>
                         <th class="text-center">PACIENTE CITA</th>
-                        <th class="text-center">TIPO SANGRE</th>
                         <th class="text-center">PESO</th>
                         <th class="text-center">ESTATURA</th>
-                        <th class="text-center">ALERGIAS</th>
+                        <th class="text-center">FRECUENCIA CARDIACA</th>
+                        <th class="text-center">FRECUENCIA RESPIRATORIA</th>
+                        <th class="text-center">FECHA PRE-CLINICA</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
-                      $query = "SELECT p.CODIGO_PRECLINICA , CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) 
-                      as NOMBRE_PACIENTE, t.TIPO as TIPO_SANGRE, p.PESO, p.ESTATURA ,
-                      GROUP_CONCAT(a.NOMBRE)as ALERGIAS
-                      
-                      FROM tbl_preclinica p, tbl_tipo_sangre t, tbl_inscripcion_cita i, tbl_persona pe ,
-                      tbl_alergias a ,tbl_personas_alergias pa
-                      WHERE p.CODIGO_TIPO_SANGRE = t.CODIGO_TIPO_SANGRE 
-                      AND i.CODIGO_PERSONA_PACIENTE = Pe.CODIGO_PERSONA and p.CODIGO_CITA = i.CODIGO_CITA
-                      and a.CODIGO_ALERGIAS = pa.CODIGO_ALERGIAS
-                      GROUP BY p.CODIGO_PRECLINICA;";
+                      $query = "SELECT pre.CODIGO_PRECLINICA, pre.FRECUENCIA_CARDIACA , pre.FRECUENCIA_RESPIRATORIA, pre.PESO,pre.ESTATURA, c.CODIGO_CITA as CODIGO,
+                       CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) AS PACIENTE ,pre.FECHA_CREACION
+                       from tbl_inscripcion_cita c ,tbl_persona p ,tbl_preclinica pre 
+                      where p.CODIGO_PERSONA = c.CODIGO_PERSONA and pre.CODIGO_CITA = c.CODIGO_CITA";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
                           $var1 = $row['CODIGO_PRECLINICA'];
-                          $var2 = $row['NOMBRE_PACIENTE'];
-                          $var4 = $row['TIPO_SANGRE'];
-                          $var5 = $row['PESO'];
-                          $var6 = $row['ESTATURA'];
-                          $var7 = $row['ALERGIAS'];
+                          $var2 = $row['PACIENTE'];
+                          $var3 = $row['PESO'];
+                          $var4 = $row['ESTATURA'];
+                          $var5 = $row['FRECUENCIA_CARDIACA'];
+                          $var6 = $row['FRECUENCIA_RESPIRATORIA'];
+                          $var7 = $row['FECHA_CREACION'];
                       ?>
                       <tr>
                         <td>
@@ -140,6 +136,7 @@
                         </td>
                         <td class="text-center"><?php echo $var1; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>
+                        <td class="text-center"><?php echo $var3; ?></td>
                         <td class="text-center"><?php echo $var4; ?></td>
                         <td class="text-center"><?php echo $var5; ?></td>
                         <td class="text-center"><?php echo $var6; ?></td>
@@ -156,42 +153,40 @@
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="id_preclinica">
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="txtcodigo_persona">Peso:</label>
-                                                <input  type="text"  value ="<?php echo $var5;?>" class="form-control" name="editar_peso">
+                                                <input  type="text"  value ="<?php echo $var3;?>" class="form-control" name="editar_peso">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="txtcodigo_persona">Estatura:</label>
-                                                <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" name="editar_estatura">
+                                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" name="editar_estatura">
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                            <?php 
-                                            $query = "SELECT * from tbl_tipo_sangre";
-                                            $resultadod=$conn->query($query);                
-                                            ?>
-                                            <div class="form-group">
-                                                <label for="txtcodigo_persona">Tipo Sangre:</label>
-                                                <select  class="form-control select2"  style="width: 100%;"  name="editar_sangre" required >
-                                                <option value="<?php echo $var4;?>" ><?php echo $var4;?></option>
-                                                    <?php 
-                                                        if ($resultadod->num_rows > 0) {
-                                                        while($row = $resultadod->fetch_assoc()) { 
-                                                        $codigo = $row['CODIGO_TIPO_SANGRE'];
-                                                        $nombre = $row['TIPO'];
-                                                        ?>
-                                                    <option value="<?php echo $codigo;?>" ><?php echo $nombre;?></option>
-                                                    <?php 
-                                                    } 
-                                                    }
-                                                    ?>
-                                                </select>
-                                                
-                                            </div>
+                                  </div><!--fin row -->
+                                  <div class="row">
+                                      <div class="col-sm-6">
+                                        <?php 
+                                        $query = "SELECT * from tbl_tipo_sangre";
+                                        $resultadod=$conn->query($query);                
+                                        ?>
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Frecuencia Cardica:</label>
+                                          <input type="text"  value ="<?php echo $var5; ?>" class="form-control" name="editar_fc">
                                         </div>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <?php 
+                                        $query = "SELECT * from tbl_tipo_sangre";
+                                        $resultadod=$conn->query($query);                
+                                        ?>
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Frecuencia Respiratoria:</label>
+                                          <input type="text"  value ="<?php echo $var6; ?>" class="form-control" name="editar_fr">
+                                        </div>
+                                      </div>
                                   </div><!--fin row -->
                                   <div class="row">
                                        <div class="col-sm-12">
@@ -273,6 +268,8 @@
      </section>
   </div> 
 </div>   
+<div>
+</div>
 
 
 <script>

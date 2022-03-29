@@ -20,6 +20,7 @@
              $tipo_persona = ($_POST['tipo_persona']);
              $sexo = ($_POST['sexo']);
              $telefono = ($_POST['telefono']);
+             $otro_telefono = ($_POST['otro_telefono']);
              $correo = ($_POST['correo']);
              $fecha_baja = ($_POST['fecha_baja']);
              $direccion = ($_POST['direccion']);
@@ -89,7 +90,7 @@
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena');" ;
-
+                                 
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
                                   echo "<script> 

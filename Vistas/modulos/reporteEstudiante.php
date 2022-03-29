@@ -10,12 +10,12 @@ class PDF extends FPDF {
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
-		$this->SetX(86);
-		$this->SetFont('Arial','B',14);
-		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+		$this->SetX(70);
+		$this->SetFont('Arial','B',16);
+		$this->Cell(14, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',12);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de estudiante'));
+		$this->Cell(170, 14, utf8_decode('Reporte por estudiante '));
 		$this->SetX(5);
 		$this->Ln(5);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
@@ -105,14 +105,14 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 15);
+			/*$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(50, 8, 'Sección', 1, 0, 'C', 0);
 			$this->Cell(60, 8, 'Modalidad', 1, 0, 'C', 0);
 			$this->Cell(80, 8, 'Tutoria', 1, 0, 'C', 0);
 			$this->Cell(35, 8, 'Tutor', 1, 1, 'C', 0);
 			$this->Cell(35, 8, 'Hora', 1, 1, 'C', 0);
-			$this->SetFont('Arial', '', 12);
+			$this->SetFont('Arial', '', 12); */
 			
 		
 		}
@@ -200,29 +200,58 @@ class PDF extends FPDF {
 		 echo "ERROR DE CONEXION DE: ".$e->getMessage();
 	 }
 	 $parametro = 4;
+	 $persona = 42;
 	 $sentencia = $db->prepare("SELECT CONCAT(PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE FROM tbl_persona
-	 where CODIGO_TIPO_PERSONA = (?)");
-	 $sentencia->execute(array($parametro));
+	 where CODIGO_TIPO_PERSONA = (?) and CODIGO_PERSONA = (?);" );
+	 $sentencia->execute(array($parametro,$persona));
 	 $row=$sentencia->fetchColumn();
 	 if($row>0){
 	   $valor = $row;
 	 }
 
 	 $sentencia = $db->prepare("SELECT FECHA_NACIMIENTO FROM tbl_persona
-	 where CODIGO_TIPO_PERSONA = (?)");
-	 $sentencia->execute(array($parametro));
+	 where CODIGO_TIPO_PERSONA = (?) and CODIGO_PERSONA = (?)");
+	 $sentencia->execute(array($parametro,$persona));
 	 $fila=$sentencia->fetchColumn();
 	 if($fila>0){
 	   $fecha = $fila;
 	 }
 	 $sentencia = $db->prepare("SELECT LUGAR_NACIMIENTO  FROM tbl_persona 
-	 where  CODIGO_TIPO_PERSONA = (?)");
-	 $sentencia->execute(array($parametro));
+	 where  CODIGO_TIPO_PERSONA = (?) AND CODIGO_PERSONA = (?) ");
+	 $sentencia->execute(array($parametro,$persona));
 	 $fila1=$sentencia->fetchColumn();
 	 if($fila1>0){
 	   $lugar = $fila1;
 	 }
+	 $sentencia = $db->prepare("SELECT correo_persona  FROM tbl_correo_electronico
+	  where CODIGO_PERSONA = (?) ");
+	 $sentencia->execute(array($persona));
+	 $fila2=$sentencia->fetchColumn();
+	 if($fila2>0){
+	   $correo = $fila2;
+	 }
+	 $sentencia = $db->prepare("SELECT GRADO_ACTUAL  FROM tbl_estudiante
+	 where CODIGO_PERSONA = (?) ");
+	$sentencia->execute(array($persona));
+	$fila2=$sentencia->fetchColumn();
+	if($fila2>0){
+	  $grado = $fila2;
+	}
+	$sentencia = $db->prepare("SELECT INDICE_ACADEMICO  FROM tbl_estudiante
+	where CODIGO_PERSONA = (?) ");
+   $sentencia->execute(array($persona));
+   $fila2=$sentencia->fetchColumn();
+   if($fila2>0){
+	 $indice = $fila2;
+   }
 
+   $sentencia = $db->prepare("SELECT REPITENTE FROM tbl_estudiante
+	where CODIGO_PERSONA = (?) ");
+   $sentencia->execute(array($persona));
+   $fila2=$sentencia->fetchColumn();
+   if($fila2>0){
+	 $res = $fila2;
+   }
 	 
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
@@ -237,23 +266,69 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 // -----------ENCABEZADO------------------
 $pdf->SetX(28);
 $pdf->SetFillColor(72, 208, 234);
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(45, 10, 'Nombres y Apellidos: ',0,0);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(90, 10,$valor ,0 );
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(33, 10,'Fecha Nacimiento:' ,0 );
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(30, 10,$fecha ,0,0);
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(14, 10, 'Edad: ',0,0);
+$pdf->Cell(8, 10,'13' ,0,1);
+
+
+$pdf->SetX(28);
+$pdf->Cell(33, 10,'Lugar y direccion:' ,0 );
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(60, 10,$lugar ,0,0 );
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(50, 10,'Celular y Correo electronico:' ,0 );
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(100, 10,$correo ,0,1 );
+$pdf->SetFont('Arial','',10);
+$pdf->SetX(28);
+$pdf->Cell(45, 10,'Datos Estudiantiles estudiante:',0,1,0);
+$pdf->Line(29,73,91,73);
+$pdf->SetX(28);
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(30, 10,'Grado Escolar:',0);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(10, 10,$grado,0,0 );
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(35, 10,'Indice Academico:',0);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(10, 10,$indice,0,0 );
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(20, 10,'Repitente:',0);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(5, 10,$res,0,1 );
+
+$pdf->SetX(28);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(45, 10, 'Nombres y Apellidos:  ',0,0);
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(110, 10,$valor ,0 );
-$pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(40, 10,'Fecha Nacimiento:' ,0 );
-$pdf->Cell(20, 10,$fecha ,0,1 );
-$pdf->SetX(28);
-$pdf->Cell(40, 10,'Lugar y direccion:' ,0 );
-$pdf->SetFont('Arial','',10);
-$pdf->Cell(20, 10,$lugar ,0,1 );
-$pdf->SetX(28);
-$pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(40, 10,'CELULAR Y  CORREO ELCTRONICO:' ,0,1 );
-$pdf->SetFont('Helvetica', 'B', 10);
-$pdf->SetX(28);
-$pdf->Cell(40, 10,'Formacion espiritual:' ,0 );
+$pdf->Cell(60, 8, 'Proveedor ingreso ', 0,0, 'C',1);
+$pdf->Cell(60, 8, 'Servicios Intenet ', 0,0, 'C',1);
+$pdf->Cell(60, 8, 'Servicios basicos ', 0,0, 'C',1);
+$pdf->Cell(60, 8, 'Dispositivos electronicos ', 0,1, 'C',1);
+
+$data=new Conexion();
+ $conexion=$data->conect(); 
+  $strquery ="select ts.nombre_tipo as TIPO,  es.CODIGO_ESTUDIANTE 
+  from tbl_tipo_socioeconomico tc ,tbl_contenido_socioeconomico ts ,tbl_estudiante_socioeconomico es
+  where ts.CODIGO_CONTENIDO_SOCIOECONOMICO = es.CODIGO_CONTENIDO_SOCIOECONOMICO and ts.CODIGO_TIPOSOCIO = 3 and
+   es.CODIGO_ESTUDIANTE = 42 and ts.CODIGO_TIPOSOCIO = tc.CODIGO_TIPOSOCIO ";
+  $result = $conexion->prepare($strquery);
+  $result->execute();
+  $data = $result->fetchall(PDO::FETCH_ASSOC);
+
+  $query ="select ts.nombre_tipo as TIPO,  es.CODIGO_ESTUDIANTE 
+  from tbl_tipo_socioeconomico tc ,tbl_contenido_socioeconomico ts ,tbl_estudiante_socioeconomico es
+  where ts.CODIGO_CONTENIDO_SOCIOECONOMICO = es.CODIGO_CONTENIDO_SOCIOECONOMICO and ts.CODIGO_TIPOSOCIO = 3 and
+   es.CODIGO_ESTUDIANTE = 42 and ts.CODIGO_TIPOSOCIO = tc.CODIGO_TIPOSOCIO ";
+  $result1 = $conexion->prepare($query);
+  $result1->execute();
+  $data1 = $result1->fetchall(PDO::FETCH_ASSOC);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -261,13 +336,36 @@ $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
 //$pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 
 $pdf->SetFont('Arial', '', 12);
-
 //El ancho de las celdas
-//$pdf->SetWidths(array(120)); //???
-/*for ($i = 0; $i < count($data); $i++) {
+$pdf->SetWidths(array(60,60,60,60)); //???
+for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array(ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ),75); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
-} */
+	$pdf->Row(array(ucwords(strtolower(utf8_decode($data[$i]['m']))),$data['m'],$data['m'],$data['m'] ),28); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+} 
+$pdf->Ln(3);
+$pdf->SetX(15);
+$pdf->SetFont('Helvetica', 'B', 12);
+$pdf->Cell(130, 8, 'Situacion Familiar(personas con las que vive) : ', 0,1, 'C',1);
+$pdf->Ln(3);
+
+$pdf->SetFillColor(72, 208, 234);
+$pdf->SetX(28);
+$pdf->SetFont('Helvetica', 'B', 12);
+$pdf->Cell(70, 8, 'Nombre y Apellido ', 0,0, 'C',1);
+$pdf->Cell(60, 8, 'Ocupacion ', 0,0, 'C',1);
+$pdf->Cell(30, 8, 'Edad ', 0,0, 'C',1);
+$pdf->Cell(60, 8, 'Parentesco ', 0,1, 'C',1);
+$pdf->SetFont('Arial', '', 12);
+//El ancho de las celdas
+
+$pdf->SetFillColor(252, 254, 254); //color de fondo rgb
+$pdf->SetWidths(array(70,60,30,60)); //???
+for ($i = 0; $i < count($data); $i++) {
+
+	$pdf->Row(array(ucwords(strtolower(utf8_decode($data[$i]['DATO']))),$data['DATO'],$data['DATO'],$data['DATO'] ),28); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+}
+
+
 //$pdf->Ln(10);
 //$pdf->Cell(200,5 ,'Edad', 0);
 

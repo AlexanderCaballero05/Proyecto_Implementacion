@@ -8,15 +8,8 @@
   $descripcion= 'Usuario se autentifico';
   bitacora($codigoObjeto, $accion,$descripcion); */
 
-
-        
-
-
-  
 ?>
-
 <head>
-
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
   <style type="text/css">
@@ -80,21 +73,21 @@
 
                     <div class="row">
                       <div class="col-md-4"><!--INICIO 1er APELLIDO-->
-                        <label for="identidad" class="control-label">Pimer Apellido</label> 
+                        <label  class="control-label">Pimer Apellido</label> 
                         <div class="form-group">
                           <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 2er APELLIDO-->
-                        <label for="identidad" class="control-label">Segundo Apellido</label> 
+                        <label  class="control-label">Segundo Apellido</label> 
                         <div class="form-group">
                           <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
-                        <label for="identidad" class="control-label">Fecha Nacimiento</label> 
+                        <label  class="control-label">Fecha Nacimiento</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date" placeholder="Fecha" name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required="" >
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -145,7 +138,7 @@
                       <div class="col-md-4"><!--telefono-->
                       <label for="" class="control-label">Telefono</label> 
                         <div class="input-group">
-                          <input class="form-control" type="text" minlength="8" maxlength="8"  name="telefono" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                          <input class="form-control" type="text" minlength="8" maxlength="8"  name="telefono"  onKeyDown="sinespacio(this);"   onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
                             <div class="input-group-prepend">
                             <button  type="button"  class="btn btn-primary btn-md"><span onclick="MostrarTelefono();"  > <i class="nav-icon fa fa-plus mx-1"></i></span></button>
                           </div>
@@ -154,23 +147,23 @@
                       <div  style ="display:none;" id="telefono2" class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Otro Telefono</label> 
                         <div class="form-group">
-                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="telefono" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
                         </div>
                       </div>
 
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
-                        <label for="identidad" class="control-label">Correo Electrónico:</label> 
+                        <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="email" maxlength="50"  name="correo" id="" onKeyDown="sinespacio(this);"   required="" >
+                          <input class="form-control" type="email" maxlength="50"  name="correo"  onKeyDown="sinespacio(this);"   required="" >
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
 
                     <div class="row"> 
                       <div class="col-md-12"><!--INICIO DIRECCION--> 
-                        <label for="apellido" class="control-label">Direccion</label> <!--INICIO DIRECCION-->
+                        <label  class="control-label">Direccion</label> <!--INICIO DIRECCION-->
                         <div class="form-group">
-                          <textarea class="form-control" type="text" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ingrese Direccion" required="" ></textarea>
+                          <textarea class="form-control" type="text" name="direccion" id="DIRECCION" onkeyup="mayus(this);"  onkeypress="" placeholder="Ingrese Direccion" required="" ></textarea>
                         </div>
                       </div>
 
@@ -182,14 +175,14 @@
                     <div  class="row"> 
                       
                       <div class="col-md-4" id="primera_fila"><!--INICIO NOMBRE USUARIO-->
-                        <label for="apellido" class="control-label">Nombre Usuario</label>
+                        <label  class="control-label">Nombre Usuario</label>
                         <div class="form-group">
                             <input class="form-control" maxlength="15" minlength="4" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
                             onblur="quitarespacios(this);" placeholder="Nombre Usuario" >
                         </div>
                       </div>
                       <div class="col-md-4" id="cuarta_fila" ><!--INICIO contraseña-->
-                        <label for="apellido" class="control-label">Contraseña</label>
+                        <label  class="control-label">Contraseña</label>
                         <div class="form-group">
                             <input class="form-control"  minlength="8"  maxlength="<?php echo $max; ?>" onKeyDown="sinespacio(this);" type="text" id="contrasena" name="contrasena" >
                         </div>
