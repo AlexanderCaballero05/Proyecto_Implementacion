@@ -129,7 +129,6 @@ session_start();
          $_GET["ruta"] == "crudAlergias" ||
 
 
-         $_GET["ruta"] == "crudCitasPsicologicas" ||
 
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
