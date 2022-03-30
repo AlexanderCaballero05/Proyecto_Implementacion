@@ -176,6 +176,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
+
+                                                                <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
+                                                                    <button type='button' style="color:white;" class="btn btn-info"><span>
+                                                                     <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                                                </a>
                                                                     <?php 
                                                                         }
                                                                         ?>
