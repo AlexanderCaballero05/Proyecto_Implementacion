@@ -33,20 +33,17 @@ include_once "conexion3.php";
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="tabla_usuarios" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
-                          <th class="text-center">Primer Nombre</th>
-                          <th class="text-center">Primer Apellido</th>
-                          <th class="text-center">Nombre Usuario</th>
-                          <th class="text-center">Correo Electronico</th>
-                          <th class="text-center">Estado</th>
-                          <th class="text-center">Rol</th>
-                          <th class="text-center">Contraseña</th>
-                          <th class="text-center">Fecha Creacion</th>
-                          <th class="text-center">Fecha Modificación</th>
-                          <th class="text-center">Creado Por</th>
+                          <th class="text-center">ACCION</th>
+                          <th class="text-center">PRIMER NOMBRE</th>
+                          <th class="text-center">PRIMER APELLIDO</th>
+                          <th class="text-center">NOMBRE USUARIO</th>
+                          <th class="text-center">CORREO ELECTRONICO</th>
+                          <th class="text-center">EESTADO</th>
+                          <th class="text-center">ROL</th>
+                          <th class="text-center">CONTRASEÑA</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -69,9 +66,6 @@ include_once "conexion3.php";
                             $var7 = $row['ESTADO'];
                             $var8 = $row['ROLL'];
                             $var9 = $row['CONTRASENA'];
-                            $var10 = $row['FECHA_CREACION']; 
-                            $var11= $row['FECHA_MODIFICACION']; 
-                            $var12 = $row['CREADO_POR']; 
                             $var13 = $row['CODIGO_ESTADO']; 
                             $var14 = $row['CODIGO_TIPO_ROL']; 
                         ?>
@@ -97,9 +91,6 @@ include_once "conexion3.php";
                           <td><?php echo $var7; ?></td>
                           <td><?php echo $var8; ?></td>
                           <td><?php echo $var9; ?></td>
-                          <td><?php echo $var10; ?></td>
-                          <td><?php echo $var11; ?></td>
-                          <td><?php echo $var12; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
@@ -268,10 +259,33 @@ include_once "conexion3.php";
 
 
 
-<script>
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
-    $('#myTable').DataTable();
-} );
+      $('#tabla_usuarios').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar un  Usuario:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
 </script>
 
 
@@ -316,12 +330,6 @@ include_once "conexion3.php";
     }        
   }
 </script>
-
-
-
-
-
- 
 <script>
   // Mostrar y ocultar contraseña para el input de confirmar contraseña
   const mostrar_cla = document.querySelector(".ojo");
@@ -336,8 +344,6 @@ include_once "conexion3.php";
     }
   });
 </script>
-
-
 <script>
   //Mostrar y ocultar la clave para el input de contrasena ,es lo mismo que arriba,pero no podian estar juntos,porque? pues solo se que no se puede :v
   const mostrar = document.querySelector(".ojo1");
@@ -353,73 +359,5 @@ include_once "conexion3.php";
   });
 </script>
 
-
-                                  
-<!-- funciones del sistema -->
-<script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- //funcion para solu numeros ingresar en el campo
- function soloNumeros_tel(e){
-   var teclaPulsada=window.event ? window.event.keyCode:e.which;
-    // capturamos el contenido del input
-    var valor=document.getElementById("tele").value;
-    if(valor.length<9){
-      if(teclaPulsada==9){
-        return true;
-      }
-    // devolvemos true o false dependiendo de si es numerico o no
-    return /\d/.test(String.fromCharCode(teclaPulsada));
-    }else{
-    return false;
-    }
-  }
-   //funcion para quitar espacios
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-  //funcion para poner mayusculas
-  function mayus(e) {
-    e.value = e.value.toUpperCase();
-  }
-   //funcion sin espacios 
-  function sinespacio(e) {
-    var cadena =  e.value;
-    var limpia = "";
-    var parts = cadena.split(" ");
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-     nuevacadena = parts[i];
-     subcadena = nuevacadena.trim();
-     if(subcadena != "") {
-       limpia += subcadena + " ";
-      }
-    }
-   limpia = limpia.trim();
-   e.value = limpia;
-  };
-  //otra funcion para quitar espacios :V
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-</script>
 <!--Ordenado y comentado para su mejor compresion -->
 <!-- Elaborado  y modificado  unicamente por ♠Diana Rut  -->
