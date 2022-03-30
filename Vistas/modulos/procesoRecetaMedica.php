@@ -1,6 +1,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ include_once 'conexionpdo.php';
  include "conexionpdo.php";
  
  $codigoObjeto=20;
@@ -50,11 +51,39 @@
             </div>
 
             <div class="row mb-5 pl-3">
+
+            <?php
+              $usuario= $_SESSION['vario'];
+
+              //Consulta que trae el codigo del usuario
+              $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+              FROM tbl_usuario u, tbl_persona p 
+              WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+              AND NOMBRE_USUARIO = (?);");
+              $sentencia1->execute(array($usuario));
+              $cod_usuario=$sentencia1->fetchColumn();
+
+              ?>
                 
-                    <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 2;";
+                    <?php   
+                
+                 
+
+                    $query = "SELECT con.CODIGO_CONSULTA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe , tbl_usuario u, tbl_persona_especialidad es
+                    WHERE con.CODIGO_CITA = i.CODIGO_CITA
+                    AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                    AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                    AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                    AND con.FECHA_CREACION = CURDATE()
+                    AND es.CODIGO_PERSONA = '$cod_usuario';";
                     $resultadod=$conn->query($query);                
+                    ?>
+
+                    <?php
+                      $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
+                      FROM tbl_medicamento me; ";
+                      $resultado2=$conn->query($query1);
                     ?>
 
                   <!--<button  class="btn btn-secondary "  class="col-sm-1 col-form mt-3">Buscador</button>-->
@@ -65,8 +94,8 @@
                         <?php 
                           if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
+                          $codigo = $row['CODIGO_CONSULTA'];
+                          $nombre = $row['PACIENTE'];
                           
                           ?>
                         <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
@@ -91,13 +120,13 @@
                     <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR" id="" type="text" required >
                     <option selected disabled value="">Buscar medicamento...</option>
                         <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                          
+                          if ($resultado2->num_rows > 0) {
+                          while($row1 = $resultado2->fetch_assoc()) { 
+                          $codigo1 = $row1['CODIGO_MEDICAMENTO'];
+                          $nombre1 = $row1['NOMBRE_MEDICAMENTO'];
+                         
                           ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <option value="<?php echo $codigo1?>" ><?php echo $nombre1;?></option>
                         <?php 
                         } 
                         }
