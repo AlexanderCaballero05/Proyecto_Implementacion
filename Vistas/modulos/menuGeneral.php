@@ -461,6 +461,13 @@
             </li>
 
             <li class="nav-item">
+              <a href="crudAlergias" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Mantenimiento Tipo Alergia</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
               <a href="crudPreClinica" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Preclinica</p>
@@ -473,6 +480,7 @@
                 <p>Expedientes de pacientes</p>
               </a>
             </li>
+
             <li class="nav-item">
               <a href="procesoRecetaMedica" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>

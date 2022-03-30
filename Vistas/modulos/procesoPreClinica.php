@@ -32,22 +32,22 @@
             </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
-             <form method="POST">
+             <form method="POST"  class=" needs-validation" novalidate>
                     </br>
                     <strong>Datos generales  Paciente Pre-Clinica</strong>
                     <hr>
                     <br>
                     <div class= "row"> 
-                        <div  class="col-sm-6">
+                        <div  class="col-sm-6 mb-3">
                         <?php 
                         $query = "SELECT c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
                         as PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
-                        where p.CODIGO_PERSONA = c.CODIGO_PERSONA_PACIENTE";
+                        where p.CODIGO_PERSONA = c.CODIGO_PERSONA";
                         $resul=$conn->query($query);                
                         ?>
                         <label for="" class="control-label">Paciente</label> 
                         <div class="form-group">
-                            <select class="form-control select2" required name="codigo_paciente" > 
+                            <select class="form-control select2" required name="codigo_paciente" required > 
                                 <option selected disabled value="">--Buscar Paciente--</option>
                                 <?php 
                                     if ($resul->num_rows > 0) {
@@ -64,117 +64,51 @@
                         </div>
                         </div><!--fin del paciente -->
 
-                        <div class="col-sm-2">
+                        <div class="col-sm-2 mb-3">
                          <label for="" class="control-label">Peso</label> 
                             <div class="form-group">
-                                <input type="text" placeholder=" Ej:60 kg" required class="form-control" name="peso" >
+                                <input type="text" placeholder=" Ej:60 kg" required class="form-control" name="peso" required >
+                                <div class="invalid-feedback">
+                                 Llene este campo.
+                                </div>
                             </div>
                         </div><!--fin del peso -->
 
-                        <div  class="col-sm-2">
+                        <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">Estatura</label> 
                             <div class="form-group">
-                                <input type="text" placeholder=" Ej:1.82 cm" required class="form-control"  name="estatura" >
+                                <input type="text" placeholder=" Ej:1.82 cm" required class="form-control"  name="estatura" required >
+                                <div class="invalid-feedback">
+                                 Llene este campo.
+                                </div>
                             </div>
                         </div><!--fin del la estatura -->
 
-                        <div  class="col-sm-2">
-                            <?php 
-                            $query = "SELECT CODIGO_TIPO_SANGRE,TIPO from tbl_tipo_sangre ";
-                            $resultadod=$conn->query($query);                
-                            ?>
-                          <label for="" class="control-label">Tipo Sangre</label> 
+                        <div  class="col-sm-2 mb-3">
+                          <label for="" class="control-label">Frecuencia Cardiaca</label> 
                            <div class="form-group">
-                             <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"  required > 
-                                <option selected >--Seleccione tipo--</option>
-                                <?php 
-                                    if ($resultadod->num_rows > 0) {
-                                    while($row = $resultadod->fetch_assoc()) { 
-                                    $codigo = $row['CODIGO_TIPO_SANGRE'];
-                                    $tipo_sangre= $row['TIPO'];
-                                    ?>
-                                <option value="<?php echo $codigo; ?>" ><?php echo $tipo_sangre;?></option>
-                                <?php 
-                                } 
-                                }
-                                ?>
-                             </select>
+                             <input class="form-control" type="text" name="FC" required> 
+                              <div class="invalid-feedback">
+                              Llene este campo.
+                              </div>
                             </div>
                         </div><!--fin del tipo sangre -->
                     </div> <!--fin del row -->
-                    </br>
-                    <strong>Otros Datos Paciente</strong>
-                    <hr>
-                    <br>
                     <div class="row">
-                     
-                      <div class="col-md-4">
-                       <div class="card">
-                          <div class="card-header" style="background-color:#DFD4FE;">
-                             <strong>ALERGIAS </strong>
-                          </div>
-                       <div class="card-body">
-                        <?php 
-                          $query = "SELECT CODIGO_ALERGIAS,NOMBRE from tbl_alergias ";
-                          $resultadod=$conn->query($query);                
-                          ?>
-                          <?php 
-                          if ($resultadod->num_rows > 0) {
-                            while($row = $resultadod->fetch_assoc()) { 
-                            $codigo = $row['CODIGO_ALERGIAS'];
-                            $nombre= $row['NOMBRE'];
-                          ?>
-                        <div  class="form-check icheck-green" >
-                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                            <label class="form-check-label" for="alergia<?php echo $codigo;?>">
-                              <?php echo $nombre;?>
-                            </label>
-                            </br>
-                            
-                          </div>
-                          <?php 
-                          } 
-                          }
-                          ?>
-                      </div>
-                     </div>
-                      </div>
-                      <!-- End: checkbox -->
-                      <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>OTROS ANTECEDENTES</strong>
+                      <div class="col-md-2 mb-3"> <!--HORA-->
+                        <label for="validationCustom03"  class="control-label">Frecuencia Respiratoria:</label> 
+                        <div class="form-group">
+                          <input class="form-control"  type="text"  name="FR" id="" required >
+                            <div class="invalid-feedback">
+                            Llene este campo.
                             </div>
-                        <div class="card-body">
-                        
-                          <?php 
-                            $query = "SELECT CODIGO_OA,NOMBRE from `tbl_otros_antecedentes` ";
-                            $resultadod=$conn->query($query);                
-                            ?>
-                            <?php 
-                            if ($resultadod->num_rows > 0) {
-                              while($row = $resultadod->fetch_assoc()) { 
-                              $codigo = $row['CODIGO_OA'];
-                              $nombre= $row['NOMBRE'];
-                            ?>
-                          <div  class="form-check icheck-pink" >
-                              <input  class="form-check-input" type="checkbox" name="antecedentes[]" id="antecedente<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                              <label class="form-check-label" for="antecedente<?php echo $codigo;?>">
-                                <?php echo $nombre;?>
-                              </label>
-                              </br>
-                              
-                            </div>
-                            <?php 
-                            } 
-                            }
-                            ?>
-                      </div><!--fin otros antecedentes--> 
+                        </div>
                       </div>
-                      </div>
-                     
-                    </div><!--div del row -->  
 
+                    </div>
+                  
+                    <br>
+                    
                  </br></br>
                 <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
              </form><!-- FIN DEL FORM-->

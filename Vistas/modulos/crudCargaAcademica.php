@@ -57,7 +57,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-                
+                <button  onclick="Descargar1()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> 
+                <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
                 </br></br>
                 <?php 
                     if(isset($_POST['excel'])){

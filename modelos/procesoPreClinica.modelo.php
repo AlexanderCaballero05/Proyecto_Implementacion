@@ -14,36 +14,25 @@ if(isset($_POST['codigo_paciente'])){
       $codigo_cita = ($_POST['codigo_paciente']);
       $peso = ($_POST['peso']);
       $estatura = ($_POST['estatura']);
-      $tipo_sangre = ($_POST['tipo_sangre']);
+      $fc = ($_POST['FC']);
+      $fr = ($_POST['FR']);
       $fechaActual = date('Y-m-d'); 
       $user = 'admin';
       //
-      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `CODIGO_TIPO_SANGRE`, `PESO`, `ESTATURA`, `CREADO_POR`, `FECHA_CREACION`)
-       VALUES ('$codigo_cita','$tipo_sangre','$peso', '$estatura', '$usuario', '$fechaActual') ";
+      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `PESO`, `ESTATURA`, `CREADO_POR`, `FECHA_CREACION`,FRECUENCIA_CARDIACA,FRECUENCIA_RESPIRATORIA)
+       VALUES ('$codigo_cita','$peso', '$estatura', '$usuario', '$fechaActual','$fc','$fr') ";
       $consulta=$conn->query($inser);
       if ($consulta>0){
-
-        if (is_array($_POST['alergia'])) {
-          foreach ($_POST['alergia'] as $alergia){
-            $sentencia = $db->prepare("CALL Sp_insertar_alergias(?,?);");
-            // llamar al procedimiento almacenado
-            $sentencia->execute(array($codigo_cita,$alergia));
-          }
-          echo "<script>
-          alert('Datos preClinica guardados');
-          window.location = 'procesoPreClinica';
-          </script>";
-          exit;
-        }else{
-          echo "<script>
-          alert('ERRROR');
-          window.location = 'procesoPreClinica';
-          </script>";
-          exit;
+        echo "<script> 
+        alert(' registro registrado exitosamente');
+        window.location = 'procesoPreClinica';
+        </script>";
         
-        }
-        
-      }else{    
+      }else{  
+        echo "<script> 
+        alert('Ocurrio algun error');
+        window.location = 'procesoPreClinica';
+        </script>";  
         exit;
 
       }
@@ -72,15 +61,17 @@ if(isset($_POST['codigo_paciente'])){
       $codigo_preclinica = ($_POST['id_preclinica']);
       $editar_peso = ($_POST['editar_peso']);
       $editar_estatura = ($_POST['editar_estatura']);
+      $editar_FC = ($_POST['editar_fc']);
+      $editar_FR = ($_POST['editar_fr']);
      
       try{         
           try{
-            $sql = " UPDATE tbl_Preclinica SET PESO = '$editar_peso',ESTATURA = '$editar_estatura' WHERE CODIGO_PRECLINICA = '$codigo_preclinica' ";
+            $sql = " UPDATE tbl_Preclinica SET PESO = '$editar_peso', FRECUENCIA_CARDIACA ='$editar_FC', FRECUENCIA_RESPIRATORIA = '$editar_FR',  ESTATURA = '$editar_estatura' WHERE CODIGO_PRECLINICA = '$codigo_preclinica' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
               alert('Registro modificado exitosamente!');
-              window.location = 'crudPreclinica';
+              window.location = 'crudPreClinica';
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=1;
@@ -90,7 +81,7 @@ if(isset($_POST['codigo_paciente'])){
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar un registro en Preclinica!');
-              window.location = 'crudPreclinica';
+              window.location = 'crudPreClinica';
               </script>";
             }
           }catch(PDOException $e){

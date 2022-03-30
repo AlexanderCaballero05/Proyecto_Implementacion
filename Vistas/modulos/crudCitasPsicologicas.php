@@ -16,13 +16,18 @@
                 <a class=" nav-link active" style="color:#000000;" href="#">Citas Psicologicas</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="procesoPreClinica">Registrar Cita</a>
+                <a class="nav-link" style="color:#000000;" href="procesoCitasPsicologicas">Registrar Cita</a>
                 </li>
             </ul>
          </div>
          <div class="card-body">
               <div class="row">
                  <div class="col-md-12">
+                    <a href="procesoCitasPsicologicas" >
+                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Cita</button>
+                    </a>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                    </br></br>
                      <form method="POST">
                          <div class= "card">
                             <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -33,36 +38,32 @@
                                  <table id="tabla_citapsicologica" class="table table-bordered table-striped">
                                     <thead>
                                      <tr>
-                                        <th class="text-center">Acción</th>
-                                        <th class="text-center">ID </th>
-                                        <th class="text-center">PACIENTE CITA</th>
-                                        <th class="text-center">TIPO SANGRE</th>
-                                        <th class="text-center">PESO</th>
-                                        <th class="text-center">ESTATURA</th>
-                                        <th class="text-center">ALERGIAS</th>
+                                        <th class="text-center">ACCION</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">PACIENTE</th>
+                                        <th class="text-center">ESPECIALISTA</th>
+                                        <th class="text-center">FECHA CITA</th>
+                                        <th class="text-center">ESPECIALIDAD</th>
+                                        <th class="text-center">HORARIO</th>
+                                        
                                       </tr>
                                     </thead>
                                     <tbody>
                                        <?php
-                                        $query = "SELECT p.CODIGO_PRECLINICA , CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) 
-                                        as NOMBRE_PACIENTE, t.TIPO as TIPO_SANGRE, p.PESO, p.ESTATURA ,
-                                        GROUP_CONCAT(a.NOMBRE)as ALERGIAS
-                                        
-                                        FROM tbl_preclinica p, tbl_tipo_sangre t, tbl_inscripcion_cita i, tbl_persona pe ,
-                                        tbl_alergias a ,tbl_personas_alergias pa
-                                        WHERE p.CODIGO_TIPO_SANGRE = t.CODIGO_TIPO_SANGRE 
-                                        AND i.CODIGO_PERSONA_PACIENTE = Pe.CODIGO_PERSONA and p.CODIGO_CITA = i.CODIGO_CITA
-                                        and a.CODIGO_ALERGIAS = pa.CODIGO_ALERGIAS
-                                        GROUP BY p.CODIGO_PRECLINICA;";
+                                        $query =" SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                                        MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE ,ES.NOMBRE AS ESPECIALIDAD
+                                        FROM tbl_inscripcion_cita_psicologica IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT ,tbl_especialidad ES
+                                          WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD AND
+                                         OT.CODIGO_PERSONA = IC.CODIGO_PERSONA AND  ES.CODIGO_ESPECIALIDAD = E.CODIGO_ESPECIALIDAD";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while($row = $result->fetch_assoc()) {
-                                            $var1 = $row['CODIGO_PRECLINICA'];
-                                            $var2 = $row['NOMBRE_PACIENTE'];
-                                            $var4 = $row['TIPO_SANGRE'];
-                                            $var5 = $row['PESO'];
-                                            $var6 = $row['ESTATURA'];
-                                            $var7 = $row['ALERGIAS'];
+                                            $var1 = $row['CODIGO_CITA'];
+                                            $var2 = $row['PACIENTE'];
+                                            $var3 = $row['MEDICO'];
+                                            $var4 = $row['FECHA_CITA'];
+                                            $var5 = $row['ESPECIALIDAD'];
+                                            $var6 = $row['HORARIO'];
                                         ?>
                                         <tr>
                                           <td>
@@ -119,13 +120,13 @@
                                           </td>
                                           <td class="text-center"><?php echo $var1; ?></td>
                                           <td class="text-center"><?php echo $var2; ?></td>
+                                          <td class="text-center"><?php echo $var3; ?></td>
                                           <td class="text-center"><?php echo $var4; ?></td>
                                           <td class="text-center"><?php echo $var5; ?></td>
                                           <td class="text-center"><?php echo $var6; ?></td>
-                                          <td class="text-center"><?php echo $var7; ?></td>
-                                          
+
                                           <div id="EDITARPRECLINICA<?php echo $var1 ?>" class="modal fade" role="dialog">
-                                            <div class="modal-dialog modal-md">
+                                            <div class="modal-dialog modal-lg">
                                                 <div class="modal-content"><!-- Modal content-->
                                                 <form  method="POST">
                                                     <div class="modal-header" style="background-color: #0CCDE3">
@@ -134,78 +135,91 @@
                                                     </div>
                                                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                                                     <div class="row"><!-- INICIO PRIMERA ROW --> 
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="id_preclinica">
-                                                            <div class="col-sm-4">
+                                                        <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="id_cita_psico">
+                                                        <div class="col-md-6 mb-3"> <!--paciente-->
+                                                           <?php
+                                                             $consulta = "SELECT  CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) 
+                                                             as NOMBRE  from tbl_persona where CODIGO_TIPO_PERSONA <> 6 AND CODIGO_PERSONA <>1";
+                                                             $filas=$conn->query($consulta);   
+                                                           ?>
+                                                            <label for="validationCustom03"  class="control-label">Paciente</label> 
                                                                 <div class="form-group">
-                                                                    <label for="txtcodigo_persona">Peso:</label>
-                                                                    <input  type="text"  value ="<?php echo $var5;?>" class="form-control" name="editar_peso">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <div class="form-group">
-                                                                    <label for="txtcodigo_persona">Estatura:</label>
-                                                                    <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" name="editar_estatura">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <?php 
-                                                                $query = "SELECT * from tbl_tipo_sangre";
-                                                                $resultadod=$conn->query($query);                
-                                                                ?>
-                                                                <div class="form-group">
-                                                                    <label for="txtcodigo_persona">Tipo Sangre:</label>
-                                                                    <select  class="form-control select2"  style="width: 100%;"  name="editar_sangre" required >
-                                                                    <option value="<?php echo $var4;?>" ><?php echo $var4;?></option>
+                                                                 <select  class="form-control " style="width: 100%;"  name="editar_paciente"  required >
+                                                                 <option value="<?php echo $var2?>" ><?php echo $var2;?></option>
                                                                         <?php 
-                                                                            if ($resultadod->num_rows > 0) {
-                                                                            while($row = $resultadod->fetch_assoc()) { 
-                                                                            $codigo = $row['CODIGO_TIPO_SANGRE'];
-                                                                            $nombre = $row['TIPO'];
-                                                                            ?>
-                                                                        <option value="<?php echo $codigo;?>" ><?php echo $nombre;?></option>
-                                                                        <?php 
-                                                                        } 
-                                                                        }
+                                                                        if ($filas->num_rows > 0) {
+                                                                        while($row = $filas->fetch_assoc()) { 
+                                                                        $codigo = $row['CODIGO_PERSONA'];
+                                                                        $nombre_p = $row['NOMBRE'];
+                                                                        
                                                                         ?>
-                                                                    </select>
-                                                                    
+                                                                 <option value="<?php echo $codigo;?>" ><?php echo $nombre_p;?></option>
+                                                                 <?php 
+                                                                  } 
+                                                                  }
+                                                                 ?>
+                                                                 </select>
+                                                                  <div class="invalid-feedback">
+                                                                    Llene este campo.
+                                                                  </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3"> <!--paciente-->
+                                                            <?php 
+                                                            $consulti = "SELECT  pe.CODIGO_PERSONA_ESPECIALIDAD, pe.CODIGO_PERSONA  ,pe.CODIGO_ESPECIALIDAD as ESPECIALISTA ,CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
+                                                            as NOMBRE
+                                                            FROM tbl_persona_especialidad pe, tbl_especialidad e ,tbl_persona p
+                                                            WHERE pe.CODIGO_ESPECIALIDAD = e.CODIGO_ESPECIALIDAD and e.codigo_area =3
+                                                            and pe.CODIGO_PERSONA = p.CODIGO_PERSONA";
+                                                            $filas=$conn->query($consulti);
+                                                            ?>
+                                                            <label for="validationCustom03"  class="control-label">Medico Especialista</label> 
+                                                            <div class="form-group">
+                                                                <select  class="form-control select2" style="width: 100%;"  name="editar_especialista"  required >
+                                                                <option value="<?php echo $var3?>" ><?php echo $var3;?></option>
+                                                                <?php 
+                                                                if ($filas->num_rows > 0) {
+                                                                while($row = $filas->fetch_assoc()) { 
+                                                                $codigo_medico = $row['CODIGO_PERSONA_ESPECIALIDAD'];
+                                                                $nombre = $row['NOMBRE'];
+                                                                ?>
+                                                                 <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                                    <?php 
+                                                                    } 
+                                                                    }
+                                                                    ?>
+                                                                </select>
+                                                                <div class="invalid-feedback">
+                                                                 Llene este campo.
                                                                 </div>
                                                             </div>
+                                                        </div>    
                                                     </div><!--fin row -->
                                                     <div class="row">
-                                                        <div class="col-sm-12">
-                                                                <?php 
-                                                                $query = "SELECT c.CODIGO_CITA, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as 
-                                                                PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
-                                                                where p.CODIGO_PERSONA = c.CODIGO_PERSONA_PACIENTE";
-                                                                $resultadod=$conn->query($query);                
-                                                                ?>
-                                                                <div class="form-group">
-                                                                    <label for="txtcodigo_persona">Paciente cita:</label>
-                                                                    <select  class="form-control select2"  style="width: 100%;"  name="editar_cita"  required >
-                                                                        <option value="<?php echo $var2; ?>" ><?php echo $var2; ?></option>
-                                                                        
-                                                                        <?php 
-                                                                            if ($resultadod->num_rows > 0) {
-                                                                            while($row = $resultadod->fetch_assoc()) { 
-                                                                            $codigo = $row['CODIGO_CITA'];
-                                                                            $nombre = $row['PACIENTE'];
-                                                                            ?>
-                                                                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                                        <?php 
-                                                                        } 
-                                                                        }
-                                                                        ?>
-                                                                    </select>
-                                                                    
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="validationCustom03"  class="control-label">Hora Cita</label>
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="time"  value="<?php echo $var6;?>" name="editar_hora" required>
+                                                                <div class="invalid-feedback">
+                                                                    Llene este campo.
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="validationCustom03"  class="control-label">Fecha Cita</label>
+                                                            <div class="form-group">
+                                                                <input class="form-control" type="date" value="<?php echo $var4;?>"  name="editar_fecha" required>
+                                                                <div class="invalid-feedback">
+                                                                    Llene este campo.
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 
                                                     </div><!--fin modal body -->
                                                     <div class="modal-footer ">
                                                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                        <button type="submit" name="editar_preclinica" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Editar</button>
+                                                        <button type="submit" name="EDITAR_CITA_PSICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Editar Cita</button>
                                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                                 </form>
                                                 </div>
