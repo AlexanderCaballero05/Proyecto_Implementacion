@@ -1,17 +1,7 @@
-<?php
-session_start();
-$desde= $_SESSION['bdesde'];
-$hasta= $_SESSION['bhasta'];
-
-?>
 
 <?php
-
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
-
-//Inicamos la sesion de las fechas para poder filtrar los Resultados que el usuario requiere desde una fecha de incio y de final
-
 class PDF extends FPDF {
 
 // Cabecera de página
@@ -20,16 +10,17 @@ class PDF extends FPDF {
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
-		$this->SetX(86);
-		$this->SetFont('Arial','B',14);
-        $this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-        $this->SetFont('Arial','',16);
-		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Bitacora Universal'));
+		$this->SetX(45);
+		$this->SetFont('Arial','B',12);
+		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+		$this->SetFont('Arial','',14);
+		$this->SetX(73);
+		$this->Cell(45, 8, utf8_decode('Reporte de Inscripción de Citas'));
 		$this->SetX(5);
 		$this->Ln(5);
+	    //$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(45, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -38,15 +29,13 @@ class PDF extends FPDF {
 
 	function Footer() {
 	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
-	$this->SetY(-18);
-	$this->SetX(28);
-	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	$this->SetX(27);
-	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
-	$this->SetX(10);
+		$this->SetFont('helvetica', 'B', 9);
+		$this->SetY(-15);
+		$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
+	  
+		//$this->Line(10,287,200,287);
+		$this->Cell(170,0,utf8_decode('Prosecar © Todos los derechos reservados.'),0,0,'C');
+		$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 	
 
 	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
@@ -115,12 +104,11 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Fecha', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Usuario', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Accion', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Descripcion', 1, 1, 'C', 0);
+			$this->Cell(20, 12, 'Codigo', 1, 0, 'C', 0);
+			$this->Cell(30, 12, 'Fecha Cita', 1, 0, 'C', 0);
+			$this->Cell(25, 12, 'Hora ', 1, 0, 'C', 0);
+			$this->Cell(50, 12, 'Paciente', 1, 1, 'C', 0);
+			$this->Cell(55, 12, 'Especialista', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
 			
 		
@@ -197,11 +185,12 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
-    FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
-    WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
-    AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-    AND bi.FECHA BETWEEN '$desde' AND '$hasta'; ";
+	$strquery ="SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA ,
+	 CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+	MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE
+	FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT
+	WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD AND
+	OT.CODIGO_PERSONA = IC.CODIGO_PERSONA";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -216,20 +205,20 @@ si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una 
 // Creación del objeto de la clase heredada
 $pdf = new PDF(); //hacemos una instancia de la clase
 $pdf->AliasNbPages();
-$pdf->AddPage('L'); //añade l apagina / en blanco
+$pdf->AddPage(''); //añade l apagina / en blanco
 $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(32);
+$pdf->SetX(15);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(20, 12, 'Codigo', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Fecha Cita', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Paciente', 1, 0, 'C', 1);
+$pdf->Cell(55, 12, 'Especialista', 1, 1, 'C', 1);
+
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -239,11 +228,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 30, 40,50,50)); //???
+$pdf->SetWidths(array(20, 30, 25, 50,55)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($data[$i]['CODIGO_BITACORA'], ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_USUARIO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_OBJETO']))), utf8_decode($data[$i]['ACCION']), $data[$i]['DESCRIPCION']   ),32 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['FECHA_CITA'], $data[$i]['HORARIO'],ucwords(strtolower(utf8_decode($data[$i]['PACIENTE']))), ucwords(strtolower(utf8_decode($data[$i]['MEDICO']))),   ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -15,8 +15,11 @@ CREATE TABLE `tbl_alergias` (
   `MODIFICADO_POR` varchar(20) DEFAULT NULL,
   `FECHA_MODIFICACION` date NOT NULL,
   PRIMARY KEY (`CODIGO_ALERGIAS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO tbl_alergias VALUES("1","Alergia al polen","","","0000-00-00","","0000-00-00");
+INSERT INTO tbl_alergias VALUES("2","Alergia al humo","","","0000-00-00","","0000-00-00");
+INSERT INTO tbl_alergias VALUES("3","Alergia al polvo","","","0000-00-00","","0000-00-00");
 
 
 
@@ -50,7 +53,7 @@ CREATE TABLE `tbl_bitacora_sistema` (
   `ACCION` varchar(100) DEFAULT NULL,
   `DESCRIPCION` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`CODIGO_BITACORA`)
-) ENGINE=InnoDB AUTO_INCREMENT=350 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=439 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_bitacora_sistema VALUES("1","1","1","2022-03-12 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
 INSERT INTO tbl_bitacora_sistema VALUES("2","1","1","2022-03-12 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
@@ -401,6 +404,95 @@ INSERT INTO tbl_bitacora_sistema VALUES("346","41","3","2022-03-21 00:00:00","In
 INSERT INTO tbl_bitacora_sistema VALUES("347","41","4","2022-03-21 00:00:00","Ingreso a mantenimiento preguntas","Pregunta realizadas al usuario para cambio de contraseña");
 INSERT INTO tbl_bitacora_sistema VALUES("348","41","2","2022-03-21 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
 INSERT INTO tbl_bitacora_sistema VALUES("349","41","6","2022-03-21 00:00:00","Ingreso a la pantalla de mantenimiento objetos ","Ver los registros de los objetos");
+INSERT INTO tbl_bitacora_sistema VALUES("350","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("351","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("352","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("353","41","13","2022-03-22 00:00:00","Ingreso a la tabla de registro de personas","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("354","41","2","2022-03-22 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("355","41","14","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
+INSERT INTO tbl_bitacora_sistema VALUES("356","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("357","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("358","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("359","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("360","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("361","41","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("362","41","1","2022-03-22 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("363","43","1","2022-03-22 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("364","43","1","2022-03-22 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("365","1","1","2022-03-22 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("366","1","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("367","1","13","2022-03-22 00:00:00","Ingreso a la tabla de registro de personas","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("368","1","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("369","1","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("370","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("371","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("372","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("373","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("374","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("375","1","3","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento parámetros","Aqui se visualiza los registros existentes de la tabla parámetros");
+INSERT INTO tbl_bitacora_sistema VALUES("376","1","3","2022-03-22 00:00:00","Insertar parámetro","Agregó/insertó un nuevo parámetro");
+INSERT INTO tbl_bitacora_sistema VALUES("377","1","3","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento parámetros","Aqui se visualiza los registros existentes de la tabla parámetros");
+INSERT INTO tbl_bitacora_sistema VALUES("378","1","3","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento parámetros","Aqui se visualiza los registros existentes de la tabla parámetros");
+INSERT INTO tbl_bitacora_sistema VALUES("379","1","2","2022-03-22 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("380","1","4","2022-03-22 00:00:00","Ingreso a mantenimiento preguntas","Pregunta realizadas al usuario para cambio de contraseña");
+INSERT INTO tbl_bitacora_sistema VALUES("381","1","6","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento objetos ","Ver los registros de los objetos");
+INSERT INTO tbl_bitacora_sistema VALUES("382","1","13","2022-03-22 00:00:00","Ingreso a la tabla de registro de personas","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("383","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("384","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("385","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("386","1","20","2022-03-22 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("387","1","7","2022-03-22 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("388","1","2","2022-03-22 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("389","1","4","2022-03-22 00:00:00","Ingreso a mantenimiento preguntas","Pregunta realizadas al usuario para cambio de contraseña");
+INSERT INTO tbl_bitacora_sistema VALUES("390","1","3","2022-03-22 00:00:00","Ingreso a la pantalla de mantenimiento parámetros","Aqui se visualiza los registros existentes de la tabla parámetros");
+INSERT INTO tbl_bitacora_sistema VALUES("391","1","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("392","2","1","2022-03-23 00:00:00","Intento de login fallido","El usuario bloqueado intento ingresar al sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("393","2","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("394","2","22","2022-03-23 00:00:00","Ingreso a la tabla de Tutorias","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("395","2","2","2022-03-23 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("396","2","19","2022-03-23 00:00:00","Ingreso a mantenimiento preguntas","Pregunta realizadas al usuario para cambio de contraseña");
+INSERT INTO tbl_bitacora_sistema VALUES("397","2","22","2022-03-23 00:00:00","Ingreso a la tabla de Tutorias","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("398","2","2","2022-03-23 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("399","2","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("400","44","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("401","44","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("402","2","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("403","2","2","2022-03-23 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("404","44","1","2022-03-23 00:00:00","Intento de login fallido","Ingreso de Credenciales incorrectas");
+INSERT INTO tbl_bitacora_sistema VALUES("405","44","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("406","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("407","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("408","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("409","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("410","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("411","44","17","2022-03-23 00:00:00","Ingreso a la pantalla de mantenimiento de Inscripcion Cita ","Ver los registros de los Inscripcion Cita ");
+INSERT INTO tbl_bitacora_sistema VALUES("412","44","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("413","1","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("414","44","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("415","2","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("416","2","2","2022-03-23 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("417","2","2","2022-03-23 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("418","2","1","2022-03-23 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("419","1","1","2022-03-23 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("420","1","7","2022-03-23 00:00:00","Ingreso a la bitacora universal","Consultar la informacion de la bitacora");
+INSERT INTO tbl_bitacora_sistema VALUES("421","1","20","2022-03-23 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("422","1","20","2022-03-23 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("423","1","20","2022-03-23 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("424","1","20","2022-03-23 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("425","1","20","2022-03-23 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("426","1","20","2022-03-24 00:00:00","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("427","1","4","2022-03-24 00:00:00","Ingreso a mantenimiento de Familiar","Aqui se visualiza los familiares que se han registrado");
+INSERT INTO tbl_bitacora_sistema VALUES("428","1","14","2022-03-26 00:00:00","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
+INSERT INTO tbl_bitacora_sistema VALUES("429","1","14","2022-03-26 00:00:00","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
+INSERT INTO tbl_bitacora_sistema VALUES("430","1","14","2022-03-26 00:00:00","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
+INSERT INTO tbl_bitacora_sistema VALUES("431","1","1","2022-03-26 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("432","2","1","2022-03-26 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("433","2","22","2022-03-26 00:00:00","Ingreso a la tabla de Tutorias","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("434","2","2","2022-03-26 00:00:00","Ingreso a la tabla de roles","Usuario se autentifico ");
+INSERT INTO tbl_bitacora_sistema VALUES("435","2","1","2022-03-26 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("436","1","1","2022-03-26 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
+INSERT INTO tbl_bitacora_sistema VALUES("437","1","1","2022-03-26 00:00:00","salio al modulo de administrador","Usuario se salio del sistema");
+INSERT INTO tbl_bitacora_sistema VALUES("438","41","1","2022-03-26 00:00:00","Ingreso al modulo de administrador","Usuario se autentifico");
 
 
 
@@ -427,6 +519,7 @@ CREATE TABLE `tbl_carga_academica` (
   `CODIGO_MODALIDAD` int(5) DEFAULT NULL,
   `SECCION` varchar(10) DEFAULT NULL,
   `HORA` time DEFAULT NULL,
+  `HORA_FINAL` date NOT NULL,
   `FECHA_INICIO` date DEFAULT NULL,
   `FECHA_FINAL` date DEFAULT NULL,
   `CREADO_POR_USUARIO` varchar(20) DEFAULT NULL,
@@ -498,6 +591,7 @@ INSERT INTO tbl_correo_electronico VALUES("aacaballero@una.hn","38");
 INSERT INTO tbl_correo_electronico VALUES("ld@gmail.com","39");
 INSERT INTO tbl_correo_electronico VALUES("arnoldpballero@gmail.com","40");
 INSERT INTO tbl_correo_electronico VALUES("aaca090lero@unah.hn","41");
+INSERT INTO tbl_correo_electronico VALUES("josueherrera@gmail.com","43");
 
 
 
@@ -607,11 +701,23 @@ CREATE TABLE `tbl_expediente_medico_historico` (
   KEY `FK_COD_PREC` (`CODIGO_PRECLINICA`),
   KEY `FK_COD_CIT` (`CODIGO_CITA`),
   KEY `FK_COD_AL` (`CODIGO_ALERGIAS`),
-  KEY `FK_COD_TS` (`CODIGO_TIPO_SANGRE`),
-  CONSTRAINT `FK_COD_AL` FOREIGN KEY (`CODIGO_ALERGIAS`) REFERENCES `tbl_alergias` (`CODIGO_ALERGIAS`),
-  CONSTRAINT `FK_COD_CIT` FOREIGN KEY (`CODIGO_CITA`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_CITA`),
-  CONSTRAINT `FK_COD_PREC` FOREIGN KEY (`CODIGO_PRECLINICA`) REFERENCES `tbl_preclinica` (`CODIGO_PRECLINICA`),
-  CONSTRAINT `FK_COD_TS` FOREIGN KEY (`CODIGO_TIPO_SANGRE`) REFERENCES `tbl_tipo_sangre` (`CODIGO_TIPO_SANGRE`)
+  KEY `FK_COD_TS` (`CODIGO_TIPO_SANGRE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+DROP TABLE IF EXISTS tbl_familiar;
+
+CREATE TABLE `tbl_familiar` (
+  `CODIGO_FAMILIAR` int(11) NOT NULL AUTO_INCREMENT,
+  `CODIGO_PERSONA` int(5) DEFAULT NULL,
+  `ESTADO_CIVIL` varchar(10) DEFAULT NULL,
+  `INGRESOS_DE_FAMILIAR` int(10) DEFAULT NULL,
+  `NOMBRE_IGLESIA` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`CODIGO_FAMILIAR`),
+  KEY `FAM_PK` (`CODIGO_PERSONA`),
+  CONSTRAINT `FAM_PK` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -620,23 +726,20 @@ CREATE TABLE `tbl_expediente_medico_historico` (
 DROP TABLE IF EXISTS tbl_inscripcion_cita;
 
 CREATE TABLE `tbl_inscripcion_cita` (
-  `CODIGO_CITA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA_PACIENTE` int(5) DEFAULT NULL,
+  `CODIGO_CITA` int(5) NOT NULL AUTO_INCREMENT,
+  `CODIGO_PERSONA` int(5) DEFAULT NULL,
   `CODIGO_ESPECIALISTA` int(5) DEFAULT NULL,
-  `CODIGO_AREA` int(5) DEFAULT NULL,
-  `HORARIO` time NOT NULL,
-  `FECHA_CITA` date NOT NULL,
-  `CREADO_POR` varchar(20) NOT NULL,
-  `FECHA_CREACION` date NOT NULL,
+  `FECHA_CITA` date DEFAULT NULL,
+  `HORARIO` time DEFAULT NULL,
+  `FECHA_CREACION` date DEFAULT NULL,
+  `CREADO_POR_USUARIO` varchar(20) DEFAULT NULL,
+  `FECHA_MODIFICACION` date DEFAULT NULL,
   `MODIFICADO_POR` varchar(20) DEFAULT NULL,
-  `FECHA_MODIFICACION` date NOT NULL,
   PRIMARY KEY (`CODIGO_CITA`),
-  KEY `FK_COIDGO_ESPECIALISTA` (`CODIGO_ESPECIALISTA`),
-  KEY `FK_CODIGO_PERSONA` (`CODIGO_PERSONA_PACIENTE`),
-  KEY `FK_CODIGO_AREA` (`CODIGO_AREA`),
-  CONSTRAINT `FK_CODIGO_AREA` FOREIGN KEY (`CODIGO_AREA`) REFERENCES `tbl_area` (`CODIGO_AREA`),
-  CONSTRAINT `FK_CODIGO_PERSONA` FOREIGN KEY (`CODIGO_PERSONA_PACIENTE`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`),
-  CONSTRAINT `FK_COIDGO_ESPECIALISTA` FOREIGN KEY (`CODIGO_ESPECIALISTA`) REFERENCES `tbl_persona_especialidad` (`CODIGO_PERSONA_ESPECIALIDAD`)
+  KEY `FK_CODIGO_PERSONAS` (`CODIGO_PERSONA`),
+  KEY `FK_CODIGO_ESPECIALISTA` (`CODIGO_ESPECIALISTA`),
+  CONSTRAINT `FK_CODIGO_ESPECIALISTA` FOREIGN KEY (`CODIGO_ESPECIALISTA`) REFERENCES `tbl_persona_especialidad` (`CODIGO_PERSONA_ESPECIALIDAD`),
+  CONSTRAINT `FK_CODIGO_PERSONAS` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -686,8 +789,7 @@ CREATE TABLE `tbl_ms_hist_contraseña` (
   `MODIFICADO_POR` int(5) DEFAULT NULL,
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_HIST_CONTRASEÑA`),
-  KEY `FK_COD_USU_HISCON` (`CODIGO_USUARIO`),
-  CONSTRAINT `FK_COD_USU_HISCON` FOREIGN KEY (`CODIGO_USUARIO`) REFERENCES `tbl_usuario` (`CODIGO_USUARIO`)
+  KEY `FK_COD_USU_HISCON` (`CODIGO_USUARIO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_ms_hist_contraseña VALUES("1","2","Pedro12*","2","","","");
@@ -772,6 +874,20 @@ INSERT INTO tbl_objetos VALUES("31","GESTION_AREA_PSICOLOGIA","OBJETO DEL AREA P
 
 
 
+DROP TABLE IF EXISTS tbl_otros_antecedentes;
+
+CREATE TABLE `tbl_otros_antecedentes` (
+  `CODIGO_OA` int(5) NOT NULL AUTO_INCREMENT,
+  `NOMBRE` varchar(50) NOT NULL,
+  PRIMARY KEY (`CODIGO_OA`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO tbl_otros_antecedentes VALUES("1","Enfermedades base");
+INSERT INTO tbl_otros_antecedentes VALUES("2","Problemas visuales");
+INSERT INTO tbl_otros_antecedentes VALUES("3","Enfermedades hereditarias ");
+
+
+
 DROP TABLE IF EXISTS tbl_parametros;
 
 CREATE TABLE `tbl_parametros` (
@@ -783,7 +899,7 @@ CREATE TABLE `tbl_parametros` (
   `MODIFICADO_POR` varchar(30) DEFAULT NULL,
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PARAMETRO`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_parametros VALUES("1","NUM_INTEN_VALIDOS","3","Administrador","2022-02-07","ADMIN","2022-03-10");
 INSERT INTO tbl_parametros VALUES("2","NUM_MAX_PREGUNTAS","3","Administrador","2022-02-07","ADMIN","2022-03-10");
@@ -793,6 +909,7 @@ INSERT INTO tbl_parametros VALUES("5","ADMIN_SERVIDOR_CORREO","smtp-mail.outlook
 INSERT INTO tbl_parametros VALUES("7","ADMIN_CPASSWORD","Prosecar2021*","Administrador","2022-02-23","","");
 INSERT INTO tbl_parametros VALUES("8","ADMIN_CUSUARIO","proyecto_prosecar@hotmail.com","","0000-00-00","","");
 INSERT INTO tbl_parametros VALUES("9","ADMIN_CPUERTO","587","ADMIN","2022-03-07","","");
+INSERT INTO tbl_parametros VALUES("10","NOMBRE_EMPRESA","PROYECTO SEMILLERO CARMELITANO PROSECAR\n","ADMIN","2022-03-22","","");
 
 
 
@@ -809,13 +926,11 @@ CREATE TABLE `tbl_parametros_usuarios` (
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PARAM_USUARIO`),
   KEY `FK_CODPAR_USU` (`CODIGO_USUARIO`),
-  KEY `FK_CODPAR_PAR` (`CODIGO_PARAMETRO`),
-  CONSTRAINT `FK_CODPAR_PAR` FOREIGN KEY (`CODIGO_PARAMETRO`) REFERENCES `tbl_parametros` (`CODIGO_PARAMETRO`),
-  CONSTRAINT `FK_CODPAR_USU` FOREIGN KEY (`CODIGO_USUARIO`) REFERENCES `tbl_usuario` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+  KEY `FK_CODPAR_PAR` (`CODIGO_PARAMETRO`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_parametros_usuarios VALUES("1","2","2","1","","","ADMIN","2022-03-11");
-INSERT INTO tbl_parametros_usuarios VALUES("2","2","1","3","","","ADMIN","2022-03-10");
+INSERT INTO tbl_parametros_usuarios VALUES("2","2","1","0","","","ADMIN","2022-03-10");
 INSERT INTO tbl_parametros_usuarios VALUES("3","1","1","0","Administrador","2022-02-01","","");
 INSERT INTO tbl_parametros_usuarios VALUES("4","40","1","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("5","40","2","0","","","","");
@@ -829,7 +944,7 @@ INSERT INTO tbl_parametros_usuarios VALUES("12","42","3","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("13","43","1","2","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("14","43","2","2","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("15","43","3","0","","","","");
-INSERT INTO tbl_parametros_usuarios VALUES("16","44","1","0","","","","");
+INSERT INTO tbl_parametros_usuarios VALUES("16","44","1","1","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("17","44","2","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("18","44","3","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("19","45","1","0","","","","");
@@ -841,6 +956,9 @@ INSERT INTO tbl_parametros_usuarios VALUES("24","46","3","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("25","47","1","0","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("26","47","2","2","","","","");
 INSERT INTO tbl_parametros_usuarios VALUES("27","47","3","0","","","","");
+INSERT INTO tbl_parametros_usuarios VALUES("31","49","1","0","","","","");
+INSERT INTO tbl_parametros_usuarios VALUES("32","49","2","0","","","","");
+INSERT INTO tbl_parametros_usuarios VALUES("33","49","3","0","","","","");
 
 
 
@@ -860,9 +978,7 @@ CREATE TABLE `tbl_permisos` (
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PERMISO`),
   KEY `FK_CO_OBJECT` (`CODIGO_OBJETO`),
-  KEY `FK_CO_TROL` (`CODIGO_TIPO_ROL`),
-  CONSTRAINT `FK_CO_OBJECT` FOREIGN KEY (`CODIGO_OBJETO`) REFERENCES `tbl_objetos` (`CODIGO_OBJETO`),
-  CONSTRAINT `FK_CO_TROL` FOREIGN KEY (`CODIGO_TIPO_ROL`) REFERENCES `tbl_roles` (`CODIGO_TIPO_ROL`)
+  KEY `FK_CO_TROL` (`CODIGO_TIPO_ROL`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_permisos VALUES("1","1","1","SI","SI","SI","NO","Administrador","2022-03-02","ADMIN","2022-03-11");
@@ -912,9 +1028,8 @@ CREATE TABLE `tbl_persona` (
   `FECHA_MODIFICACION` date NOT NULL,
   `SEXO` char(1) DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PERSONA`),
-  KEY `FK_COD_TIP_PERSONA` (`CODIGO_TIPO_PERSONA`),
-  CONSTRAINT `FK_COD_TIP_PERSONA` FOREIGN KEY (`CODIGO_TIPO_PERSONA`) REFERENCES `tbl_tipo_persona` (`CODIGO_TIPO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4;
+  KEY `FK_COD_TIP_PERSONA` (`CODIGO_TIPO_PERSONA`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_persona VALUES("1","Admin","Admin","Admin","Admin","","","","","2022-02-11","","1","","0000-00-00","","0000-00-00","");
 INSERT INTO tbl_persona VALUES("2","PEDRO","LUIS","AMADOR","AMADO","9888888888","2022-02-14","Tegucigalpa","","2022-02-11","","2","Administrador","2022-02-11","LUISILLO","0000-00-00","M");
@@ -927,6 +1042,7 @@ INSERT INTO tbl_persona VALUES("39","JUAN","ARNOLD","GARCIA","VALOR","0801-1998-
 INSERT INTO tbl_persona VALUES("40","ROMARIO","ARNOLD","GARCIA","VALOR","0801-1008-909","2010-12-28","TEGUCIGALPA","","2022-02-28","","4","NO DEFINIDO","2022-02-28","","2022-02-28","m");
 INSERT INTO tbl_persona VALUES("41","PRUEBA","ARNOLD ALEXANDER","GARCIA","VALOR","2312723188778","2010-12-30","TEGUCIGALPA","","2022-02-28","","4","NO DEFINIDO","2022-02-28","","2022-02-28","f");
 INSERT INTO tbl_persona VALUES("42","CARLOS","ENMANUEL","AMADOR","SARMIENTO","0801199801644","2022-03-02","TEGUCIGALPA","","2022-03-05","","4","ADMIN","2022-03-05","","0000-00-00","M");
+INSERT INTO tbl_persona VALUES("43","SAMUEL","JOSUE","AMADOR","HERRERA","2147483647","1999-10-04","distrito","EN UNA CASITA,CON SU MICHI UWU","2022-03-23","","6","ADMIN","0000-00-00","","0000-00-00","2");
 
 
 
@@ -942,11 +1058,10 @@ CREATE TABLE `tbl_persona_especialidad` (
   `MODIFICADO_POR` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PERSONA_ESPECIALIDAD`),
   KEY `FK_COD_PERSONA` (`CODIGO_PERSONA`),
-  KEY `FK_COD_ESPECIALIDAD` (`CODIGO_ESPECIALIDAD`),
-  CONSTRAINT `FK_COD_ESPECIALIDAD` FOREIGN KEY (`CODIGO_ESPECIALIDAD`) REFERENCES `tbl_especialidad` (`CODIGO_ESPECIALIDAD`),
-  CONSTRAINT `FK_COD_PERSONA` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  KEY `FK_COD_ESPECIALIDAD` (`CODIGO_ESPECIALIDAD`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
+INSERT INTO tbl_persona_especialidad VALUES("1","43","3","2022-03-23","ADMIN","0000-00-00","");
 
 
 
@@ -958,9 +1073,7 @@ CREATE TABLE `tbl_personas_alergias` (
   `CODIGO_ALERGIAS` int(5) NOT NULL,
   PRIMARY KEY (`CODIGO_PA`),
   KEY `FK_CODPERSONA_PA_` (`CODIGO_PERSONA_PACIENTE`),
-  KEY `FK_CODALERGIA_PA` (`CODIGO_ALERGIAS`),
-  CONSTRAINT `FK_CODALERGIA_PA` FOREIGN KEY (`CODIGO_ALERGIAS`) REFERENCES `tbl_alergias` (`CODIGO_ALERGIAS`),
-  CONSTRAINT `FK_CODPERSONA_PA_` FOREIGN KEY (`CODIGO_PERSONA_PACIENTE`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_PERSONA_PACIENTE`)
+  KEY `FK_CODALERGIA_PA` (`CODIGO_ALERGIAS`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -980,9 +1093,7 @@ CREATE TABLE `tbl_preclinica` (
   `FECHA_MODIFICACION` date NOT NULL,
   PRIMARY KEY (`CODIGO_PRECLINICA`),
   KEY `FK_CODIGO_CITA` (`CODIGO_CITA`),
-  KEY `FK_CODIGO_TIPO_SANGRE` (`CODIGO_TIPO_SANGRE`),
-  CONSTRAINT `FK_CODIGO_CITA` FOREIGN KEY (`CODIGO_CITA`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_CITA`),
-  CONSTRAINT `FK_CODIGO_TIPO_SANGRE` FOREIGN KEY (`CODIGO_TIPO_SANGRE`) REFERENCES `tbl_tipo_sangre` (`CODIGO_TIPO_SANGRE`)
+  KEY `FK_CODIGO_TIPO_SANGRE` (`CODIGO_TIPO_SANGRE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -1030,9 +1141,7 @@ CREATE TABLE `tbl_preguntas_usuarios` (
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PREGUNTA_USUARIO`),
   KEY `FK_CODPRE_PREU` (`CODIGO_PREGUNTAS`),
-  KEY `FK_CODU_PREU` (`CODIGO_USUARIO`),
-  CONSTRAINT `FK_CODPRE_PREU` FOREIGN KEY (`CODIGO_PREGUNTAS`) REFERENCES `tbl_preguntas` (`CODIGO_PREGUNTAS`),
-  CONSTRAINT `FK_CODU_PREU` FOREIGN KEY (`CODIGO_USUARIO`) REFERENCES `tbl_usuario` (`CODIGO_USUARIO`)
+  KEY `FK_CODU_PREU` (`CODIGO_USUARIO`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_preguntas_usuarios VALUES("1","1","2","BALEADA","Administrador","","","");
@@ -1105,11 +1214,11 @@ CREATE TABLE `tbl_telefono` (
   `NUMERO_TELEFONO` int(10) NOT NULL,
   `CODIGO_PERSONA` int(5) DEFAULT NULL,
   PRIMARY KEY (`NUMERO_TELEFONO`),
-  KEY `Numero_perso` (`CODIGO_PERSONA`),
-  CONSTRAINT `Numero_perso` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
+  KEY `Numero_perso` (`CODIGO_PERSONA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_telefono VALUES("32995236","35");
+INSERT INTO tbl_telefono VALUES("0","43");
 
 
 
@@ -1176,8 +1285,7 @@ CREATE TABLE `tbl_tutoria` (
   `FECHA_MODIFICACION` date DEFAULT NULL,
   `MODIFICADO_POR` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`CODIGO_TUTORIA`),
-  KEY `FK_CODATREA_TUTO` (`CODIGO_AREA`),
-  CONSTRAINT `FK_CODATREA_TUTO` FOREIGN KEY (`CODIGO_AREA`) REFERENCES `tbl_area` (`CODIGO_AREA`)
+  KEY `FK_CODATREA_TUTO` (`CODIGO_AREA`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
@@ -1204,14 +1312,11 @@ CREATE TABLE `tbl_usuario` (
   PRIMARY KEY (`CODIGO_USUARIO`),
   KEY `FK_CODPER_USU` (`CODIGO_PERSONA`),
   KEY `FK_CODROL_USU` (`CODIGO_TIPO_ROL`),
-  KEY `FK_CODES_USU` (`CODIGO_ESTADO`),
-  CONSTRAINT `FK_CODES_USU` FOREIGN KEY (`CODIGO_ESTADO`) REFERENCES `tbl_estado` (`CODIGO_ESTADO`),
-  CONSTRAINT `FK_CODPER_USU` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`),
-  CONSTRAINT `FK_CODROL_USU` FOREIGN KEY (`CODIGO_TIPO_ROL`) REFERENCES `tbl_roles` (`CODIGO_TIPO_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4;
+  KEY `FK_CODES_USU` (`CODIGO_ESTADO`)
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_usuario VALUES("1","1","Admin","ADMIN","2","1","12345","","0","0","","","","","");
-INSERT INTO tbl_usuario VALUES("2","2","Tutor","PEDROLUIS","4","2","Pedro123*xexx1","2022-02-11","3","0","2022-02-28","","","2","");
+INSERT INTO tbl_usuario VALUES("2","2","Tutor","PEDROLUIS","2","2","Pedro123*xexx1","2022-02-11","3","0","2022-02-28","","","2","");
 INSERT INTO tbl_usuario VALUES("40","34","","ALEXANDER","1","2","$2y$10$E1b07xJE.u2HazAJBG9KcO.1C.15MP9ZrL62FgmjEkeSBp48Xcwuq","","0","0","0000-00-00","","2022-02-25","ADMIN","2022-03-07");
 INSERT INTO tbl_usuario VALUES("41","35","","LUISILLO","2","1","Luis123**","","0","0","0000-00-00","","2022-02-25","41","");
 INSERT INTO tbl_usuario VALUES("42","36","","RAFALEE","5","3","$z&[!a[?","","0","0","2022-04-26","","2022-02-25","","");
@@ -1220,6 +1325,7 @@ INSERT INTO tbl_usuario VALUES("44","38","","LUISMIGUEL","2","5","Luis123*","","
 INSERT INTO tbl_usuario VALUES("45","39","","LUISFONSI","6","3","Luis12*","","0","0","2022-04-29","","2022-02-28","","");
 INSERT INTO tbl_usuario VALUES("46","40","","PRUEBE","6","3","Prueb12*","","0","0","2022-04-29","","2022-02-28","","");
 INSERT INTO tbl_usuario VALUES("47","41","","PRUEBES","2","3","Pruebe12**","","0","0","2022-04-29","","2022-02-28","ADMIN","2022-03-10");
+INSERT INTO tbl_usuario VALUES("49","43","","JOSUEHERRERA","1","3",":gN\n??7[u&+???","","0","0","","ADMIN","2022-03-23","","");
 
 
 

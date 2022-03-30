@@ -1,17 +1,7 @@
 <?php
-session_start();
-$desde= $_SESSION['bdesde'];
-$hasta= $_SESSION['bhasta'];
-
-?>
-
-<?php
 
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
-
-//Inicamos la sesion de las fechas para poder filtrar los Resultados que el usuario requiere desde una fecha de incio y de final
-
 class PDF extends FPDF {
 
 // Cabecera de página
@@ -22,14 +12,15 @@ class PDF extends FPDF {
 		$this->SetY(20);
 		$this->SetX(86);
 		$this->SetFont('Arial','B',14);
-        $this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-        $this->SetFont('Arial','',16);
+		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+		$this->SetFont('Arial','',12);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Bitacora Universal'));
+		$this->Cell(180, 8, utf8_decode('Reporte de las Pruebas Psicométricas'));
 		$this->SetX(5);
 		$this->Ln(5);
+		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(65, 5, "Fecha: ". date("d/m/Y | g:i:a"), 0, 1, "C");
 		
 		$this->Ln(10);
 	}
@@ -42,6 +33,7 @@ class PDF extends FPDF {
 	$this->SetY(-18);
 	$this->SetX(28);
 	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	// $this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R',);
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
@@ -115,13 +107,9 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Fecha', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Usuario', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Accion', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Descripcion', 1, 1, 'C', 0);
-			$this->SetFont('Arial', '', 12);
+			$this->Cell(50, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(60, 8, 'Nombre', 1, 0, 'C', 0);
+			$this->Cell(35, 8, 'Descripcion', 1, 1, 'C', 0);
 			
 		
 		}
@@ -197,11 +185,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
-    FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
-    WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
-    AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-    AND bi.FECHA BETWEEN '$desde' AND '$hasta'; ";
+	$strquery ="SELECT CODIGO_PRUEBA, NOMBRE, DESCRIPCION
+    FROM tbl_prueba_psicometrica;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -221,15 +206,12 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(32);
+$pdf->SetX(70);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(50, 12, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(100, 12, 'Descripcion', 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -239,12 +221,14 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 30, 40,50,50)); //???
+$pdf->SetWidths(array(10, 50,100)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($data[$i]['CODIGO_BITACORA'], ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_USUARIO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_OBJETO']))), utf8_decode($data[$i]['ACCION']), $data[$i]['DESCRIPCION']   ),32 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
-}
+	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))),  ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION'])))  ),70 ); 
+		
+	
+}   
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
 
