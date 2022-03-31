@@ -49,7 +49,8 @@
                         <?php 
                         $query = "SELECT c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
                         as PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
-                        where p.CODIGO_PERSONA = c.CODIGO_PERSONA";
+                        where p.CODIGO_PERSONA = c.CODIGO_PERSONA
+                        AND c.CODIGO_ESTADO = '10'";
                         $resul=$conn->query($query);                
                         ?>
                         <label for="" class="control-label">Paciente</label> 
