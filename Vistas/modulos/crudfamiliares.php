@@ -68,13 +68,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-          <div class="card-header"  style="background-color: #A8D2D0 ">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#"> Ver Familiares </a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#"> Ver Familiares </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="procesoRegistrarFamiliares"> Registrar Familiar </a>
+                <a class="nav-link"  style="color:#000000;" href="procesoRegistrarFamiliares"> Registrar Familiar </a>
               </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->

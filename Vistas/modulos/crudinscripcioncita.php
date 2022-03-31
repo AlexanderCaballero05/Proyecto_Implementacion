@@ -16,6 +16,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
+    <div class="content-header text-xl-center mb-3 btn-light">
+              <h4>CITAS GENERALES PROSECAR </h4>
+    </div>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -35,7 +38,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <a href="procesocita" >
                     <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Cita</button>
                     </a>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     </br></br>
                     <div class="row">
                         <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
@@ -76,8 +79,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       }
                      ?>
                    
-                    <!-- jquery validation -->
-                    <div class="card card-primary">
+                    <div class="card ">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                             <h1 class=" card-title text-center"><strong style="color:black;">Registro de citas previas</strong></h1>
@@ -167,7 +169,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white;" class="btn btn-secondary"><span>
+                                                                    <button type='button' style="color:white; background-color:#3DC2F6;" class="btn "><span>
                                                                      <i class="nav-icon fas fa-eye mx-1"></i></span></button>
                                                               </a>
 
@@ -365,77 +367,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         </div>
                                                     </div><!-- FIN DEL MODAL editar -->
 
-
-                                                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    <!-- inicio modal eliminar  -->   
-                                                    <div id="ELIMINAR<?php echo $var1 ?>"   name="eliminar_cod_cita" id="eliminar_cod_cita"class="modal fade" role="dialog">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        </div>
-                                                        <form id="FORMEeliminar" method="POST">
-                                                        <div class="modal-body">
-                                                            <input type="text" 
-                                                            value ="<?php echo $var1; ?>" hidden class="form-control"
-                                                             name="eliminar_nue_cita" id="eliminar_nue_cita">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var4; ?>?</h4>
-                                                        </div> <!--fin el card body eliminar -->
-                                                            <div class="modal-footer ">
-
-                                                            <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                                            <button type="submit"  
-                                                            name="eliminar_cita" id="eliminar_cita"  class="btn btn-primary">Si,eliminar</button>      
-                                                            </div><!--FIN DEL DIV DE BOTONES DE GUARDAR eliminar -->
-                                                    </form>
-                                                    </div><!--fin del modal contener -->
-                                                    </div><!--fin del modal dialog -->
-                                                </div><!--fin del modal de eliminar -->
-                                                    <!--fin del modal de eliminar -->
                                                 </tr>
                                                 <?php
                                                    }
@@ -446,19 +377,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             </div>
                             <!--fin del div de responsivi -->
                         </div> <!-- /.card-body -->
-
-                    </div><!-- fINAL DEL card PRIMARY -->
+                    </div><!-- fINAL DEL card de la tabla-->
                 </div>
-
 
                 <!--FINAL DE COL-M12-->
             </div><!-- FINAL ROW PADRE -->
         <!-- FINAL CONTAINER FLUID -->
-        <div>
-        <div>
+       </div>
+     </div>
     </section><!-- FINAL SECTION -->  
-    <!-- Button trigger modal -->
-</div><!-- /.content-wrapper -->
+    </div><!-- /.content-wrapper -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control Sidebar -->
 </aside>

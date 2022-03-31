@@ -16,6 +16,11 @@ if(isset($_POST['codigo_paciente'])){
       $estatura = ($_POST['estatura']);
       $fc = ($_POST['FC']);
       $fr = ($_POST['FR']);
+      $fr = ($_POST['pulso']);
+      $fr = ($_POST['masa_corporal']);
+      $fr = ($_POST['desnutricion']);
+      $fr = ($_POST['temperatura']);
+
       $fechaActual = date('Y-m-d'); 
       $user = 'admin';
       //

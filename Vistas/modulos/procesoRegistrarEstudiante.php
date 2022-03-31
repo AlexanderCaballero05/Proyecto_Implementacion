@@ -20,33 +20,34 @@
     </div><!-- /.container-fluid -->
   </div>
   <section class="content">
-              <div class="text-center font-weight-bold mb-3">
-                 <h2> Registro de estudiantes</h2>
+              <div class="content-header text-xl-center mb-3 btn-light">
+               <h4>REGISTRAR DATOS ESTUDIANTES</h4>
               </div>
     <div class="container-fluid">
                 <!-- Inicio del PROCESO inscripcion de estudiantes-->
         <div class="card ">
-          <div class="card-header">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#">Registrar estudiantes</a>
+            <li class="nav-item">
+                <a class="nav-link " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="crudEstudiante">Ver datos escolares</a>
+                <a class="nav-link active" style="color:#000000;" href="#">Registrar Estudiantes</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link" href="crudContenidoEconoEstudiante">Ver datos socioeconomicos</a>
+              <a class="nav-link"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
             </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
-          <div class="card-header bg-gradient-cyan"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title" > <strong>Datos escolares</strong></h2>
-           </div></br>
+          <!-- TITULO ENCABEZADO DATOS PERSONALES -->
+            
          <form method="POST" class="needs-validation" novalidate>
+            <strong>Datos escolares</strong>
+            <hr>
+            </br>
 
             <div class="row mb-5 pl-3">
-                
                     <?php //
                     $query = "SELECT CODIGO_PERSONA, CONCAT(PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
                     FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 4;";
@@ -91,7 +92,7 @@
                       </div>
 
                       <div class="col-md-3">
-                        <label  class="control-label pl-4">Repitente de curso</label>
+                        <label  class="control-label pl-4">¿Repitente de curso?</label>
                         <br>
                         <div class="form-check form-check-inline pl-4 pr-4">
                           <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio1" value="SI" required="">
@@ -161,13 +162,10 @@
                               </div>
                           </div>
                         </div>
-
-
-
                   </div><!--Cierre del row general -->
-
-                      <div class="card-header bg-gradient-cyan m-2"> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
-                                <h2 class="card-title"> <strong>Datos socioeconomicos</strong></h2>
+                      </br>
+                      <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
+                        <h2 class="card-title"> <strong>Datos socioeconomicos</strong></h2>
                     </div></br>
 
                            <?php
@@ -326,7 +324,7 @@
                          </div><!--CIERRE DEL  -->
 
                          <div class="col-md-3"> 
-                          <label for="BASICOS" class="control-label">¿Con qué servicios básicos cuenta en su casa?</label> 
+                          <label for="BASICOS" class="control-label">¿Servicios básicos cuenta en su casa?</label> 
                       
                           <select  stye="width: 100%;"  class="form-control select2" name="BASICOS" id="BASICOS" type="text" aria-placeholder="Buscar" required >
                           <option selected disabled value="">Elegir...</option>
