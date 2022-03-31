@@ -119,11 +119,7 @@
                                 return false;
                               }
                             }//fin del else de insertar personas
-
-                          }elseif($tipo_persona == "4" || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
-
                           }elseif($tipo_persona == "4"  || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
-
                            try{
                               //Insertar en las respectivas tablas (tbl_persona,,tbl_correo_electonico)
                               $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
