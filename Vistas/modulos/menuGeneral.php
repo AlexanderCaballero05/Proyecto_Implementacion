@@ -454,9 +454,9 @@
 
           <ul class="nav nav-treeview">
           <li class="nav-item">
-                              <a href="crudinscripcioncita"class="nav-link">
+                              <a href="ProcesoCitasMedicos"class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>
-                                <p>Agregar Cita </p>
+                                <p>lista Citas</p>
                               </a>
                             </li>
 

@@ -119,6 +119,22 @@ if (isset($_POST['cod_edit_cita'])){
   
   }
   }
+
+
+
+  if (isset($_POST['cod_enviar_cita'])){
+    if(isset($_POST['enviar_cita'])){
+        $codigo_cita = ($_POST['cod_enviar_cita']);
+        $estado_cita = ($_POST['estado_cita']);
+
+        $enviar_cita = "UPDATE tbl_inscripcion_cita
+                         SET CODIGO_ESTADO = '9'
+                         WHERE CODIGO_CITA = '$codigo_cita'";
+
+        $consulta_cita =$conn->query($enviar_cita);
+
+    }
+  }
   
   
   

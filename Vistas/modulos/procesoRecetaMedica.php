@@ -21,22 +21,32 @@
     </div><!-- /.container-fluid -->
   </div>
   <section class="content">
-              <div class="text-center font-weight-bold mb-3">
-                 <h2> Registro de recetas</h2>
-              </div>
+            
     <div class="container-fluid">
                 <!-- Inicio del PROCESO inscripcion de estudiantes-->
-        <div class="card ">
-          <div class="card-header">
+                <section class="content">
+    <div class="container-fluid">
+        <section class="content-header text-xl-center mb-3 btn-light"> 
+          <h4> REGISTRO DE PRECLINICA PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+        </section>
+        <div class="card">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="procesoRecetaMedica">Registrar recetas</a>
+                 <a class="nav-link" style="color:#000000;" href="#">Citas Medicas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="">Ver recetas registradas</a>
+                <a  class="nav-link" aria-current="true" href="#"  style=" color:#000000;">Pre Clinica</a>
               </li>
+              <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            </li>
+
+            <li class="nav-item">
+            <a  class="nav-link active" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
             </ul>
-          </div>
+          </div><
           <div class="card-body"><!--Cuerpo del card body principal -->
           <div class="card-header bg-gradient-cyan"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Registro de recetas medicas</strong></h2>
