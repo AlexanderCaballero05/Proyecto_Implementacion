@@ -32,7 +32,6 @@
               <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
             </li>
-
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
             </li>
@@ -42,34 +41,33 @@
              <form method="POST"  class=" needs-validation" novalidate>
                     </br>
                     <strong>Datos generales  Paciente Pre-Clinica</strong>
-                    <hr>
-                    <br>
+                    <hr> <br>
                     <div class= "row"> 
-                        <div  class="col-sm-6 mb-3">
-                        <?php 
-                        $query = "SELECT c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                        as PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
-                        where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                        AND c.CODIGO_ESTADO = '10'";
-                        $resul=$conn->query($query);                
-                        ?>
-                        <label for="" class="control-label">Paciente</label> 
-                        <div class="form-group">
+                       <div  class="col-sm-6 mb-3">
+                          <?php 
+                          $query = "SELECT c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
+                          as PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
+                          where p.CODIGO_PERSONA = c.CODIGO_PERSONA
+                          AND c.CODIGO_ESTADO = '10'";
+                          $resul=$conn->query($query);                
+                          ?>
+                          <label for="" class="control-label">Paciente</label> 
+                          <div class="form-group">
                             <select class="form-control select2" required name="codigo_paciente" required > 
-                                <option selected disabled value="">--Buscar Paciente--</option>
-                                <?php 
-                                    if ($resul->num_rows > 0) {
-                                    while($row = $resul->fetch_assoc()) { 
+                              <option selected disabled value="">--Buscar Paciente--</option>
+                                 <?php 
+                                   if ($resul->num_rows > 0) {
+                                   while($row = $resul->fetch_assoc()) { 
                                     $codigo = $row['CODIGO'];
                                     $nombre = $row['PACIENTE'];
                                     ?>
-                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                              <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
                                 <?php 
                                 } 
                                 }
                                 ?>
                             </select>
-                        </div>
+                          </div>
                         </div><!--fin del paciente -->
 
                         <div class="col-sm-2 mb-3">
@@ -91,32 +89,68 @@
                                 </div>
                             </div>
                         </div><!--fin del la estatura -->
-
                         <div  class="col-sm-2 mb-3">
-                          <label for="" class="control-label">Frecuencia Cardiaca</label> 
+                          <label for="" class="control-label">temperatura</label> 
+                            <div class="form-group">
+                                <input type="text" placeholder=" Ej:1.82 cm" required class="form-control"  name="temperatura" required >
+                                <div class="invalid-feedback">
+                                 Llene este campo.
+                                </div>
+                            </div>
+                        </div><!--fin del temperatura -->
+                    </div> <!--fin del row -->
+                    <div class="row">
+                      <div  class="col-sm-4 mb-3">
+                          <div class="form-group">
+                            <label for="" class="control-label">Estatus de desnutrición</label>
+                            <select class="form-control " required name="desnutricion" required> 
+                             <option  value="">--Seleccione--</option>
+                              <option  value="">No tiene</option>
+                              <option   value="">Moderado</option>
+                              <option  value="">Grave</option>
+                            </select>
+                          </div>
+                        </div>
+                       <div  class="col-sm-2 mb-3">
+                          <label for="" class="control-label">Presión Arterial</label> 
                            <div class="form-group">
                              <input class="form-control" type="text" name="FC" required> 
                               <div class="invalid-feedback">
                               Llene este campo.
                               </div>
                             </div>
-                        </div><!--fin del tipo sangre -->
-                    </div> <!--fin del row -->
-                    <div class="row">
-                      <div class="col-md-2 mb-3"> <!--HORA-->
-                        <label for="validationCustom03"  class="control-label">Frecuencia Respiratoria:</label> 
-                        <div class="form-group">
-                          <input class="form-control"  type="text"  name="FR" id="" required >
-                            <div class="invalid-feedback">
-                            Llene este campo.
-                            </div>
+                        </div><!--fin de presion -->
+                        <div class="col-md-2 mb-3"> <!--Nivel de respiracion-->
+                          <label for="validationCustom03"  class="control-label">Nivel Respiración</label> 
+                          <div class="form-group">
+                            <input class="form-control"  type="text"  name="FR"  required >
+                              <div class="invalid-feedback">
+                              Llene este campo.
+                              </div>
+                          </div>
                         </div>
-                      </div>
+                        <div class="col-md-2 mb-3"> <!--PULSO-->
+                          <label for="validationCustom03"  class="control-label">Pulso</label> 
+                          <div class="form-group">
+                            <input class="form-control"  type="text"  name="pulso"  required >
+                              <div class="invalid-feedback">
+                              Llene este campo.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-2 mb-3"> <!--masica corporal-->
+                          <label for="validationCustom03"  class="control-label">Indice masa corporal</label> 
+                          <div class="form-group">
+                            <input class="form-control"  type="text"  name="masa_corporal"  required >
+                              <div class="invalid-feedback">
+                              Llene este campo.
+                              </div>
+                          </div>
+                        </div>
+                        
 
-                    </div>
-                  
+                    </div><!--fin row -->
                     <br>
-                    
                  </br></br>
                 <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
              </form><!-- FIN DEL FORM-->
