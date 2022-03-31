@@ -6,7 +6,7 @@
 ?>
 <?php
   if(isset($_POST['identidad'])){
-    session_start();
+  
     $usuario = $_SESSION['vario'];
      try{
          if(isset($_POST['GUARDAR'])){
@@ -22,7 +22,7 @@
              $telefono = ($_POST['telefono']);
              $otro_telefono = ($_POST['otro_telefono']);
              $correo = ($_POST['correo']);
-             $fecha_baja = ($_POST['fecha_baja']);
+             //$fecha_baja = ($_POST['fecha_baja']);
              $direccion = ($_POST['direccion']);
              $nombre_usuario = ($_POST['nombre_usuario']);
              $estado = "1";
@@ -114,7 +114,7 @@
                                 return false;
                               }
                             }//fin del else de insertar personas
-                          }elseif($tipo_persona == "4"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
+                          }elseif($tipo_persona == "4" || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
                            try{
                               //Insertar en las respectivas tablas (tbl_persona,,tbl_correo_electonico)
                               $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
@@ -122,7 +122,6 @@
                               $consulti =$conn->query($insert_persona);
                               if($resultado = mysqli_fetch_assoc($consulti)>0 ){
                                 echo "<script> 
-                                alert('estudiante registrado correctamente');
                                 location.href = 'categoria';
                                 </script>";
                                 exit;
