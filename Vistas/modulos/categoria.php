@@ -159,6 +159,8 @@
                       </div>
                     </div><!--Fin de otra fila :v -->
 
+                    
+
                     <div class="row"> 
                       <div class="col-md-12"><!--INICIO DIRECCION--> 
                         <label  class="control-label">Direccion</label> <!--INICIO DIRECCION-->
@@ -235,22 +237,41 @@
                             </select>
                          </div>
                       </div>
-
+                      <div  style ="display:none;" class="col-md-4" id="catequistas"><!--catequistas-->
+                        <?php 
+                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 4;";
+                        $resultadod=$conn->query($query);                
+                        ?>
+                         <label for="cbx_persona" class="control-label">Catequistas:</label>
+                         <div class="form-group">
+                            <select class="form-control select2"   style="width: 100%;" name="catequista" required="">
+                             <option selected enable value="" >--Seleccione Catequesis--</option>
+                              <?php 
+                                if ($resultadod->num_rows > 0) {
+                                  while($row = $resultadod->fetch_assoc()) { 
+                                  $codigo = $row['CODIGO_ESPECIALIDAD'];
+                                  $nombre= $row['NOMBRE'];
+                                ?>
+                              <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                              <?php 
+                              } 
+                              }
+                              ?>
+                            </select>
+                         </div>
+                      </div>
                     </div><!--Fin de otra fila :v -->
-
                     </br>                    
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                    
+                    </br> 
                   </div><!--Fin del card body del form -->
                </form> <!-- Final del form de registar persona -->
             </div>
           </div><!-- FIN DE LA COLUMNA DE REGISTRO DE PERSONAS y DE USUARIOS  -->
         </div><!-- COLUMNA PRINCIPAL -->
       </div>
-
     </section> <!-- Fin del section principal -->
-
-  <!-- /.control-sidebar -->
+</div>
 
 
  <script>
@@ -276,20 +297,23 @@
   });
 
   //Funcion para habilitar los campos del form de usuario,solo si es administrador o tutor
- //Funcion para habilitar los campos del form de usuario,dependiendo el tipo personas,es largo pero funciona ok :v ,no tocar!
+ //Funcion para habilitar los campos del form de usuario,dependiendo el tipo personas,
+ //es larguito ,no saber un metodo para acortarlo,existe pero pues lo importante es que de :v
  $( function() {
     $("#tipo_persona").change( function() {
         if ($(this).val() === "1" || $(this).val() === "2" ) {
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('catequistas').style.display = "none";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
 
            
-        } else if ($(this).val() === "4"){
+        } else if ($(this).val() === "4" || $(this).val() === "7"){
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('catequistas').style.display = "none";
           document.getElementById('form_usuario').style.display = "none";
           document.getElementById('primera_fila').style.display = "none";
            document.getElementById('cuarta_fila').style.display = "none";
@@ -297,6 +321,7 @@
            
         }else if($(this).val() ===  "5" ){
           document.getElementById('especialidad_psico').style.display = "none";
+          document.getElementById('catequistas').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
@@ -304,10 +329,20 @@
 
         }else if($(this).val() ===  "6" ){
           document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('catequistas').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
+          
+        }else if($(this).val() ===  "8"){
+          document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('especialidad_psico').style.display = "none";
+          document.getElementById('catequistas').style.display = "block";
+          document.getElementById('form_usuario').style.display = "block";
+          document.getElementById('primera_fila').style.display = "block";
+          document.getElementById('cuarta_fila').style.display = "block";
+          
         }
     });
   }); // 

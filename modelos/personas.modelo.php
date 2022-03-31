@@ -6,7 +6,7 @@
 ?>
 <?php
   if(isset($_POST['identidad'])){
-  
+
     $usuario = $_SESSION['vario'];
      try{
          if(isset($_POST['GUARDAR'])){
@@ -22,7 +22,11 @@
              $telefono = ($_POST['telefono']);
              $otro_telefono = ($_POST['otro_telefono']);
              $correo = ($_POST['correo']);
+
              //$fecha_baja = ($_POST['fecha_baja']);
+
+            // $fecha_baja = ($_POST['fecha_baja']);
+
              $direccion = ($_POST['direccion']);
              $nombre_usuario = ($_POST['nombre_usuario']);
              $estado = "1";
@@ -30,7 +34,8 @@
              $contrasena = ($_POST['contrasena']);
              $fechaActual = date('Y-m-d');  
              $especialidad_medico = ($_POST['medico']);   
-             $especialidad_psicologo = ($_POST['psicologo']);   
+             $especialidad_psicologo = ($_POST['psicologo']); 
+             $especialidad_catequista =   ($_POST['catequista']); 
             try{ 
                 $consulta = $db->prepare("SELECT DNI FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
                 $consulta->execute(array($identidad));
@@ -114,7 +119,11 @@
                                 return false;
                               }
                             }//fin del else de insertar personas
+
                           }elseif($tipo_persona == "4" || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
+
+                          }elseif($tipo_persona == "4"  || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
+
                            try{
                               //Insertar en las respectivas tablas (tbl_persona,,tbl_correo_electonico)
                               $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
@@ -172,29 +181,45 @@
 
                               if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                 echo "<script> 
-                                alert('Psicologo registrado correctamente');
-                                location.href = 'categoria';
-                                </script>";
+                                alert('Psicologo registrado correctamente');location.href = 'categoria';</script>";
                                 exit;
                               }else{
                                 echo "<script> 
-                                alert('No se puede registrar el medico');
-                                location.href = 'categoria';
-                                </script>";
+                                alert('No se puede registrar el medico');location.href = 'categoria'</script>";
                                 exit;
                               }
                             }catch(PDOException $e){
                             echo $e->getMessage(); 
                             return false;
                             }
-                          }//Fin del ultimo ElseIf
-                           
+                          }else if($tipo_persona == "8"){
+                            try{
+                              $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                              '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                              '$estado','$rol','$contrasena','$especialidad_catequista');" ;
+                              $consul =$conn->query($insert_medico);
+
+                              if($resultado = mysqli_fetch_assoc($consul)>0 ){
+                                echo "<script> 
+                                alert('Catequista registrado correctamente');
+                                location.href = 'categoria';
+                                </script>";
+                                exit;
+                              }else{
+                                echo "<script> 
+                                alert('No se puede registrar el medico');location.href = 'categoria';</script>";
+                                exit;
+                              }
+                            }catch(PDOException $e){
+                            echo $e->getMessage(); 
+                            return false;
+                            }
+                          }
                          //cierre del else de tipos de usuario
                       }catch (PDOException $e) {
                         echo $e->getMessage(); 
                         return false;
                       }//final del try cathc
-                      
                     }//final del else de comprobacion del usuario
                   }//final del else de comprbacion del telefono
                 } //final del else de comprabacion del correo    
@@ -210,7 +235,6 @@
         } //fin del try catch principal
     }
       //fin del if de comprobar que el DNI no esta vacio
-  
 
 //************EDITAR USUARIO************ */
   if(isset($_POST['CODUSUARIO'])) { 
