@@ -1,5 +1,5 @@
 <?php
- session_start();
+
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -8,14 +8,17 @@
 <?php
 
 
-if(isset($_POST['GUARDARCITA'])){
+if(isset($_POST['GUARDARCITA_GENERAL'])){
   if(isset($_POST['CODPACIENTE'])){
          $paciente=($_POST['CODPACIENTE']);
          $fecha=($_POST['agregar_fecha_cita']);
          $hora=($_POST['agregar_hora']);
-         $especialista=($_POST['agregar_especialista']);
-         $user= $_SESSION['vario'];
-         $fechaactual = date("Y-m-d");
+         $estado = "5";
+         $area=($_POST['area_cita']);
+         $encargado_medico=($_POST['encargado_medico']);
+         $encargado_psicologo=($_POST['encargado_psicologo']);
+         $encargado_catequesis=($_POST['encargado_catequesis']);
+         
 
          $sentencia = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
@@ -38,33 +41,90 @@ if(isset($_POST['GUARDARCITA'])){
             window.location = 'procesocita';
             </script>";
             exit;
-           }else{
+          }else{
+             //else que insertara dependiendo de area especialidad y  especialista
              try {
-            $sql ="call sp_insert_inscripcion_cita('$paciente','$especialista','$fecha','$hora','$fechaactual','$user');";
-            $consulta=$conn->query($sql);
+            if($area == "2"){ //medica
+              $sql ="call sp_insert_inscripcion_cita('$paciente','$encargado_medico', '$estado','$area', '$fecha','$hora','$fechaactual','$user');";
+              $consulta=$conn->query($sql);
+              if($consulta >0){ 
+                echo "<script> 
+                alert('Cita registrada exitosamente');
+                window.location = 'procesocita';
+                </script>";
+                $codigoObjeto=32;
+                $accion='Registro';
+                $descripcion='Se vizualiza citas registradas';
+                bitacora($codigoObjeto,$accion,$descripcion);
+                exit;
+              }else{
+                echo "<script> 
+                alert('Ocurrio algun error,comunicarse con el administrador Arnold');
+                window.location = 'procesocita';
+                </script>";
+                exit;
+              }
 
-            if($consulta >0){ 
-              echo "<script> 
-              alert('Cita registrada exitosamente');
-              window.location = 'procesocita';
-              </script>";
-              $codigoObjeto=32;
-              $accion='Registro';
-              $descripcion='Se vizualiza citas registradas';
-              bitacora($codigoObjeto,$accion,$descripcion);
-              exit;
+            }else if($area == "3"){ //psicologo
+              $sql ="call sp_insert_inscripcion_cita('$paciente','$encargado_psicologo', '$estado','$area', '$fecha','$hora','$fechaactual','$user');";
+              $consulta=$conn->query($sql);
+              if($consulta >0){ 
+                echo "<script> 
+                alert('Cita registrada exitosamente');
+                window.location = 'procesocita';
+                </script>";
+                $codigoObjeto=32;
+                $accion='Registro';
+                $descripcion='Se vizualiza citas registradas';
+                bitacora($codigoObjeto,$accion,$descripcion);
+                exit;
+              }else{
+                echo "<script> 
+                alert('Ocurrio algun error,comunicarse con el administrador Arnold');
+                window.location = 'procesocita';
+                </script>";
+                exit;
+              }
+
+            }else if($area == "4"){//espiritual
+              $sql ="call sp_insert_inscripcion_cita('$paciente','$encargado_catequesis', '$estado','$area', '$fecha','$hora','$fechaactual','$user');";
+              $consulta=$conn->query($sql);
+              if($consulta >0){ 
+                echo "<script> 
+                alert('Cita registrada exitosamente');
+                window.location = 'procesocita';
+                </script>";
+                $codigoObjeto=32;
+                $accion='Registro';
+                $descripcion='Se vizualiza citas registradas';
+                bitacora($codigoObjeto,$accion,$descripcion);
+                exit;
+              }else{
+                echo "<script> 
+                alert('Ocurrio algun error,comunicarse con el administrador Arnold');
+                window.location = 'procesocita';
+                </script>";
+                exit;
+              }
+
             }else{
-              echo "<script> 
-              alert('Ocurrio algun error,comunicarse con el administrador Arnold');
-              window.location = 'procesocita';
-              </script>";
-              exit;
+                echo "<script> 
+                alert('Ocurrio algun error,comunicarse con el administrador Arnold');
+                window.location = 'procesocita';
+                </script>";
+                exit;
+
             }
-        }catch(PDOException $e){
-        echo $e->getMessage(); 
-        return false;
-        } 
-           }
+              //fin del elseif
+
+
+            
+
+           }catch(PDOException $e){
+           echo $e->getMessage(); 
+           return false;
+           } 
+         }//fin del else del tipo de insertado
       }
   }// if hijo 
 }// if padre

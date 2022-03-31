@@ -9,7 +9,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <head>
-  
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 <style type="text/css">
@@ -18,7 +17,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
       
     }
 </style>
-
 </head>
 
 
@@ -64,6 +62,11 @@ AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 4
 $result3= $conn->query($query);
 ?>
 
+<?php
+ $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
+ $filas_area= $conn->query($query);
+ ?>
+
     <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light">
@@ -81,7 +84,7 @@ $result3= $conn->query($query);
             </ul>
           </div>
           <div class="card-body">  
-            <form id="formcita" action="procesocita" method="POST" class=" needs-validation">
+            <form   method="POST" class="needs-validation">
 
               <div class="row">
                 <div class="col-sm-5 mb-3">
@@ -91,14 +94,14 @@ $result3= $conn->query($query);
                   from tbl_persona tp  ,tbl_tipo_persona pt
                   WHERE tp.CODIGO_TIPO_PERSONA = pt.CODIGO_TIPO_PERSONA AND tp.CODIGO_TIPO_PERSONA <> 5 and  tp.CODIGO_TIPO_PERSONA <> 6 
                   and tp.CODIGO_TIPO_PERSONA <> 8 and tp.CODIGO_TIPO_PERSONA <> 3 and tp.CODIGO_TIPO_PERSONA <> 2 and tp.CODIGO_TIPO_PERSONA <> 1";
-                  $result3= $conn->query($query);
+                  $resultado = $conn->query($query);
                   ?>
                    <label for="txtcodigo_cita">Beneficiario</label>
-                    <select  style="width: 100%;"  class="form-control select2" name="CODPACIENTE" id="" type="text" required >
+                    <select  style="width: 100%;"  class="form-control select2" name="CODPACIENTE"  type="text" required >
                       <option selected disabled value="">--Seleccionar Beneficiario--</option>
                         <?php 
-                          if ($result3->num_rows > 0) {
-                          while($row = $result3->fetch_assoc()) { 
+                          if ($resultado->num_rows > 0) {
+                          while($row = $resultado->fetch_assoc()) { 
                           $codigo = $row['CODIGO_PERSONA'];
                           $nombre = $row['BENEFICIARIO'];
                           ?>
@@ -117,18 +120,16 @@ $result3= $conn->query($query);
                   </div>
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
-                          <?php
-                          $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
-                          $result5= $conn->query($query);
-                          ?>
                             <label for="txtcodigo_especialista">Area de la cita</label>
-                            <select class="form-control select2" name="area" id="area_cita" required="">
+                            <select class="form-control select2" name="area_cita" id="area_cita" required="">
                             <option value= "10">--Seleccionar Area--</option>
                                 <?php
-                                if ($result5->num_rows > 0){
-                                while($row = $result5->fetch_assoc()){ 
+                                if ($filas_area->num_rows > 0){
+                                while($row = $filas_area->fetch_assoc()){ 
+                                  $codigo_Area = $row['CODIGO_PERSONA'];
+                                  $nombre = $row['BENEFICIARIO'];
                                 ?>
-                                <option value="<?php echo $row['CODIGO_AREA'];?>"><?php echo $row['NOMBRE'];?></option>
+                                <option value="<?php echo $codigo_Area['CODIGO_AREA'];?>"><?php echo $row['NOMBRE'];?></option>
                                 <?php
                                   }
                                   }
@@ -147,11 +148,12 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Medica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_medico"  required="">
+                            <select class="form-control select2" name="es_medico" >
                             <option value= "">--Selecionar Especialidad--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
                                 while($row = $resultado->fetch_assoc()){ 
+                                  $codigo_medico = $row['CODIGO_PERSONA'];
                                 ?>
                                 <option value="<?php echo $row['CODIGO_ESPECIALIDAD'];?>"><?php echo $row['NOMBRE'];?></option>
                                 <?php
@@ -171,7 +173,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Psicologica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_psico"  required="">
+                            <select class="form-control select2" name="es_psico"  >
                             <option value= "">--Selecionar Especialidad Psicologica--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -195,7 +197,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Tipos de Catequesis</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_espiritual"  required="">
+                            <select class="form-control select2" name="es_espiritual"  >
                             <option value= "">--Selecionar Catequesis--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -217,7 +219,7 @@ $result3= $conn->query($query);
                     <div  id="mostrar_ecita" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados citas</label>
-                            <select class="form-control select2"  required="">
+                            <select class="form-control select2" >
                             <option value= "">--Seleccionar Encargado--</option>
                             </select>
                             <div class="invalid-feedback">
@@ -228,7 +230,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
-                            <select class="form-control select2" name="encargado_medico"  required="">
+                            <select class="form-control select2" name="encargado_medico"  >
                             <option value= "">--Seleccionar Encargado--</option>
                                 <?php
                                 if ($result1->num_rows > 0){
@@ -248,7 +250,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_psico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
-                            <select class="form-control select2" name="encargado_psicologo"  required="">
+                            <select class="form-control select2" name="encargado_psicologo" >
                             <option value= "">--Seleccionar Encargado--</option>
                                 <?php
                                 if ($result2->num_rows > 0){
@@ -268,7 +270,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_catequesis" class="col-sm-5 mb-3"><!-- area espiritual-->
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
-                            <select class="form-control select2" name="encargado_catequesis"  required="">
+                            <select class="form-control select2" name="encargado_catequesis" >
                             <option value= "">--Seleccionar Encargado--</option>
                                 <?php
                                 if ($result3->num_rows > 0){
@@ -302,7 +304,7 @@ $result3= $conn->query($query);
                       </div>
                  </div> <!-- fin de algo--> 
               </br></br></br>
-              <button type="submit"  id="GUARDARCITA" name="GUARDARCITA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+              <button type="submit"  id="GUARDARCITA_GENERAL" name="GUARDARCITA_GENERAL" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                <br><br>
             </form>
           </div><!--fin del modal de eliminar -->          
