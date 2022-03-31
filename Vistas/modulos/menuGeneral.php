@@ -475,7 +475,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="procesoExpedienteMedico" class="nav-link">
+              <a href="procesoConsulta" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>Expedientes de pacientes</p>
               </a>
