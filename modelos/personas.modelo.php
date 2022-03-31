@@ -22,15 +22,9 @@
              $telefono = ($_POST['telefono']);
              $otro_telefono = ($_POST['otro_telefono']);
              $correo = ($_POST['correo']);
-
-             //$fecha_baja = ($_POST['fecha_baja']);
-
-            // $fecha_baja = ($_POST['fecha_baja']);
-
              $direccion = ($_POST['direccion']);
              $nombre_usuario = ($_POST['nombre_usuario']);
-             $estado = "1";
-             $rol = "3";   
+             $estado = "1";  
              $contrasena = ($_POST['contrasena']);
              $fechaActual = date('Y-m-d');  
              $especialidad_medico = ($_POST['medico']);   
@@ -143,25 +137,39 @@
                             }
                             //CODIGO PARA INSERTAR UN MEDICO CON SU ESPECIALIDAD
                           }elseif( ($tipo_persona == "5") ){
+                            $rol = "5";
                             try{
-                              $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
-                              '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                              '$estado','$rol','$contrasena','$especialidad_medico');" ;
-                              $consul =$conn->query($insert_medico);
-
-                              if($resultado = mysqli_fetch_assoc($consul)>0 ){
-                                echo "<script> 
-                                alert('Medico registrado correctamente');
-                                location.href = 'categoria';
+                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia->execute(array($nombre_usuario));
+                              $row=$sentencia->fetchColumn();
+                              if($row>0){// si hay registros con el mismo nombre 
+                                echo "<script>
+                                alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
+                                window.location = 'categoria';
                                 </script>";
                                 exit;
                               }else{
-                                echo "<script> 
-                                alert('No se puede registrar el medico');
-                                location.href = 'categoria';
-                                </script>";
-                                exit;
+                                $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                                '$estado','$rol','$contrasena','$especialidad_medico');" ;
+                                $consul =$conn->query($insert_medico);
+  
+                                if($resultado = mysqli_fetch_assoc($consul)>0 ){
+                                  echo "<script> 
+                                  alert('Medico registrado correctamente');
+                                  location.href = 'categoria';
+                                  </script>";
+                                  exit;
+                                }else{
+                                  echo "<script> 
+                                  alert('No se puede registrar el medico');
+                                  location.href = 'categoria';
+                                  </script>";
+                                  exit;
+                                }
+
                               }
+                             
                             }catch(PDOException $e){
                             echo $e->getMessage(); 
                             return false;
@@ -169,46 +177,72 @@
                             
                             //CODIGO PARA INSERTAR UN PSICOLOGO CON SU ESPECIALIDAD
                           }elseif ($tipo_persona == "6"){
-                            try{
-                              $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
-                              '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                              '$estado','$rol','$contrasena','$especialidad_psicologo');" ;
-                              $consul =$conn->query($insert_medico);
-
-                              if($resultado = mysqli_fetch_assoc($consul)>0 ){
-                                echo "<script> 
-                                alert('Psicologo registrado correctamente');location.href = 'categoria';</script>";
-                                exit;
-                              }else{
-                                echo "<script> 
-                                alert('No se puede registrar el medico');location.href = 'categoria'</script>";
-                                exit;
+                            $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                            $sentencia->execute(array($nombre_usuario));
+                            $row=$sentencia->fetchColumn();
+                            if($row>0){// si hay registros con el mismo nombre 
+                              echo "<script>
+                              alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
+                              window.location = 'categoria';
+                              </script>";
+                              exit;
+                            }else{
+                              try{
+                                $rol= "4";
+                                $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                                '$estado','$rol','$contrasena','$especialidad_psicologo');" ;
+                                $consul =$conn->query($insert_medico);
+  
+                                if($resultado = mysqli_fetch_assoc($consul)>0 ){
+                                  echo "<script> 
+                                  alert('Psicologo registrado correctamente');location.href = 'categoria';</script>";
+                                  exit;
+                                }else{
+                                  echo "<script> 
+                                  alert('No se puede registrar el medico');location.href = 'categoria'</script>";
+                                  exit;
+                                }
+                              }catch(PDOException $e){
+                              echo $e->getMessage(); 
+                              return false;
                               }
-                            }catch(PDOException $e){
-                            echo $e->getMessage(); 
-                            return false;
+
                             }
+                            
                           }else if($tipo_persona == "8"){
-                            try{
-                              $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
-                              '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                              '$estado','$rol','$contrasena','$especialidad_catequista');" ;
-                              $consul =$conn->query($insert_medico);
-
-                              if($resultado = mysqli_fetch_assoc($consul)>0 ){
-                                echo "<script> 
-                                alert('Catequista registrado correctamente');
-                                location.href = 'categoria';
-                                </script>";
-                                exit;
-                              }else{
-                                echo "<script> 
-                                alert('No se puede registrar el medico');location.href = 'categoria';</script>";
-                                exit;
+                            $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                            $sentencia->execute(array($nombre_usuario));
+                            $row=$sentencia->fetchColumn();
+                            if($row>0){// si hay registros con el mismo nombre 
+                              echo "<script>
+                              alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
+                              window.location = 'categoria';
+                              </script>";
+                              exit;
+                            }else{
+                              try{
+                                $rol ="3";
+                                $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                                '$estado','$rol','$contrasena','$especialidad_catequista');" ;
+                                $consul =$conn->query($insert_medico);
+  
+                                if($resultado = mysqli_fetch_assoc($consul)>0 ){
+                                  echo "<script> 
+                                  alert('Catequista registrado correctamente');
+                                  location.href = 'categoria';
+                                  </script>";
+                                  exit;
+                                }else{
+                                  echo "<script> 
+                                  alert('No se puede registrar el medico');location.href = 'categoria';</script>";
+                                  exit;
+                                }
+                              }catch(PDOException $e){
+                              echo $e->getMessage(); 
+                              return false;
                               }
-                            }catch(PDOException $e){
-                            echo $e->getMessage(); 
-                            return false;
                             }
                           }
                          //cierre del else de tipos de usuario

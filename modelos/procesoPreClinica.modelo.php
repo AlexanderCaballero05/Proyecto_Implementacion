@@ -16,32 +16,40 @@ if(isset($_POST['codigo_paciente'])){
       $estatura = ($_POST['estatura']);
       $fc = ($_POST['FC']);
       $fr = ($_POST['FR']);
-      $fr = ($_POST['pulso']);
-      $fr = ($_POST['masa_corporal']);
-      $fr = ($_POST['desnutricion']);
-      $fr = ($_POST['temperatura']);
-
+      $pulso = ($_POST['pulso']);
+      $masa_corporal = ($_POST['masa_corporal']);
+      $desnutricion = ($_POST['desnutricion']);
+      $temperatura = ($_POST['temperatura']);
       $fechaActual = date('Y-m-d'); 
       $user = 'admin';
+      $estado = "11";
       //
-      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `PESO`, `ESTATURA`, `CREADO_POR`, `FECHA_CREACION`,FRECUENCIA_CARDIACA,FRECUENCIA_RESPIRATORIA)
-       VALUES ('$codigo_cita','$peso', '$estatura', '$usuario', '$fechaActual','$fc','$fr') ";
+      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `PESO`, `MASA_CORPORAL`, `ESTATURA`, `TEMPERATURA` ,`PULSO`,`CREADO_POR`, `FECHA_CREACION`,FRECUENCIA_CARDIACA, FRECUENCIA_RESPIRATORIA,`DESNUTRICION`)
+       VALUES ('$codigo_cita',  '$peso', '$masa_corporal', '$estatura', '$temperatura', '$pulso' ,'$usuario', '$fechaActual','$fc','$fr','$desnutricion') ";
       $consulta=$conn->query($inser);
-      if ($consulta>0){
+      $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo_cita'";
+      $consulTITA=$conn->query($update);
+
+      //CODIGO PERSONA: para poder relacionar las otras tablas de correo y usuario con el código de persona
+      
+      if ($consulta>0  && $consulTITA >0 ){
+        $conn->commit();
         echo "<script> 
-        alert(' registro registrado exitosamente');
-        window.location = 'procesoPreClinica';
-        </script>";
-        
+        alert('Pre-clinica registrada');
+        window.location = 'procesoConsulta';
+        </script>";  
+        exit;
+      
       }else{  
         echo "<script> 
-        alert('Ocurrio algun error');
+        alert('Ocurrio algun error,comuniquese con el admin :)');
         window.location = 'procesoPreClinica';
         </script>";  
         exit;
 
       }
     }catch(PDOException $e){
+      $conn->rollback();
     echo $e->getMessage(); 
     return false;
     }
