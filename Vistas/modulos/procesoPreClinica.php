@@ -24,11 +24,18 @@
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                 <a class="nav-link" style="color:#000000;" href="crudPreClinica">  Ver Pre-Clinica</a>
+                 <a class="nav-link" style="color:#000000;" href="#">Citas Medicas</a>
               </li>
               <li class="nav-item">
                 <a  class="nav-link active" aria-current="true" href="#"  style=" color:#000000;">Pre Clinica</a>
               </li>
+              <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            </li>
+
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
