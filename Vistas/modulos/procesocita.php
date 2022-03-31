@@ -62,10 +62,7 @@ AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 4
 $result3= $conn->query($query);
 ?>
 
-<?php
- $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
- $filas_area= $conn->query($query);
- ?>
+
 
     <section class="content">
     <div class="container-fluid">
@@ -118,7 +115,12 @@ $result3= $conn->query($query);
                         ¡Se ve bien!
                       </div>
                   </div>
+
                    <div class="col-sm-3 mb-3">
+                     <?php
+                      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
+                      $filas_area= $conn->query($query);
+                      ?>
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Area de la cita</label>
                             <select class="form-control select2" name="area_cita" id="area_cita" required="">
@@ -126,10 +128,9 @@ $result3= $conn->query($query);
                                 <?php
                                 if ($filas_area->num_rows > 0){
                                 while($row = $filas_area->fetch_assoc()){ 
-                                  $codigo_Area = $row['CODIGO_PERSONA'];
-                                  $nombre = $row['BENEFICIARIO'];
+                                  
                                 ?>
-                                <option value="<?php echo $codigo_Area['CODIGO_AREA'];?>"><?php echo $row['NOMBRE'];?></option>
+                                <option value="<?php echo $row['CODIGO_AREA'];?>"><?php echo $row['NOMBRE'];?></option>
                                 <?php
                                   }
                                   }
@@ -344,6 +345,7 @@ $result3= $conn->query($query);
           document.getElementById('encargado_psico').style.display = "none";
           document.getElementById('es_espiritual').style.display = "block";
           document.getElementById('encargado_catequesis').style.display = "block";
+
         }else if($(this).val() === "10"){
           document.getElementById('es_psico').style.display = "none";
           document.getElementById('encargado_catequesis').style.display = "none";

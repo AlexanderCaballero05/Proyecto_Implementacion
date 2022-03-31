@@ -11,22 +11,41 @@
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+        <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>VER ESTUDIANTES PROSECAR </h4>
+        </section>
   
   <section class="content">
+    <div class="card"> 
+        <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link active " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Registrar Estudiantes</a>
+            </li>
+              <li class="nav-item ">
+              <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+              </li>
+          </ul>
+        </div>
+        <div class="card-body">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <div class="pl-3">
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn bg-gradient-cyan mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Estudiantes</button>
-        <a  href="procesoRegistrarEstudiante">
-        <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
-
-        </a>
-        </div>
+            </br>
+           <div class="pl-3">
+             <a  href="procesoRegistrarEstudiante">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Estudiantes</button>
+              </a>
+             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Estudiantes</button>
+              
+           </div>
           
           <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+          <div class="card ">
+            <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">Información de los Estudiantes</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
@@ -36,16 +55,16 @@
                   <table id="tabla_estudiantes" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
-                          <th class="text-center">Id</th>
-                          <th class="text-center">Nombre</th>
-                          <th class="text-center">Apellido</th>
-                          <th class="text-center">Grado Actual</th>
-                          <th class="text-center">Repitente</th>
-                          <th class="text-center">Indice Academico</th>
-                          <th class="text-center">Pasatiempos</th>
-                          <th class="text-center">Distractor Escolar</th>
-                          <th class="text-center">Metas</th>
+                          <th class="text-center">ACCION</th>
+                          <th class="text-center">ID</th>
+                          <th class="text-center">NOMBRE</th>
+                          <th class="text-center">APELLIDO</th>
+                          <th class="text-center">GRADO ACTUAL</th>
+                          <th class="text-center">REPITENTE</th>
+                          <th class="text-center">INDICE ACADEMICO</th>
+                          <th class="text-center">PASATIEMPOS</th>
+                          <th class="text-center">DISTRACTORES ESCOLARES</th>
+                          <th class="text-center">METAS</th>
                           
                         </tr>
                       </thead>
@@ -184,7 +203,10 @@
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
+    <div>
+       
   </section><!-- FINAL SECTION -->
+  </div>
 
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTUDIANTE -->
   <div id="AGREGAR_ESTUDIANTE" class="modal fade" role="dialog">
@@ -300,23 +322,36 @@
 
 <!-- Modal -->
 
-<script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_estudiantes').DataTable();
-} );
-</script>
 
-<script type="text/javascript"> function solonumero(e) {
-        tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla==8) return true;
-        else if (tecla==0||tecla==9)  return true;
-       // patron =/[0-9\s]/;// -> solo letras
-        patron =/[0-9\s]/;// -> solo numeros
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    }
-	</script>
+
+<script type="text/javascript"> 
+  $(document).ready( function () {
+      $('#tabla_estudiantes').DataTable({
+
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Estudiante:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
 <script>
     function Descargar() {

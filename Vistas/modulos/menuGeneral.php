@@ -66,7 +66,7 @@
             <!-- Menu de usuarios del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Gestion Usuarios
                   <i class="fas fa-angle-left right"></i>
@@ -143,7 +143,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-graduation-cap"></i>
                 <p>
                   Gestion de Estudiantes
                   <i class="right fas fa-angle-left"></i>
@@ -156,18 +156,20 @@
                     <p>Agregar estudiantes</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                 <!--<li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
-                </li>
+                </li> -->
+                <!--
                 <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                  <a href="crudtiposocioeconomico" class="nav-link" > modifique acuerdate 
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo socieconomico</p>
                   </a>
-                </li>
+                </li>-->
+                   
               </ul>
             </li>
         <?php
@@ -203,7 +205,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
                           <a href="" class="nav-link bg-gradient-navy">
-                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
                               Gestion de Citas 
                               <i class="right fas fa-angle-left"></i>
@@ -252,7 +254,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas  fa-copy"></i>
                 <p>
                   Gestion de Familiares
                   <i class="right fas fa-angle-left"></i>
