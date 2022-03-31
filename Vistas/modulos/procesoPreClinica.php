@@ -105,9 +105,9 @@
                             <label for="" class="control-label">Estatus de desnutrición</label>
                             <select class="form-control " required name="desnutricion" required> 
                              <option  value="">--Seleccione--</option>
-                              <option  value="">No tiene</option>
-                              <option   value="">Moderado</option>
-                              <option  value="">Grave</option>
+                              <option  value="No tiene">No tiene</option>
+                              <option   value="Moderado">Moderado</option>
+                              <option  value="Grave">Grave</option>
                             </select>
                           </div>
                         </div>

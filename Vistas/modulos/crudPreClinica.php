@@ -46,7 +46,7 @@
             <form  method="POST">
               <div class= "card">
                  <div class="card-header text-center" style="background-color: #F7F8F9;">
-                    <h5 class=" card-title text-center"><strong style="color:black;">Listado de Carga Academica</strong></h5>
+                    <h5 class=" card-title text-center"><strong style="color:black;">Listado de Datos Pre-Clinica</strong></h5>
                  </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -60,15 +60,19 @@
                         <th class="text-center">ESTATURA</th>
                         <th class="text-center">FRECUENCIA CARDIACA</th>
                         <th class="text-center">FRECUENCIA RESPIRATORIA</th>
+                        <th class="text-center">MASA CORPORAL</th>
+                        <th class="text-center">PULSO</th>
+                        <th class="text-center">TEMPERATURA</th>
+                        <th class="text-center">ESTATUS DE DESNUTRICION</th>
                         <th class="text-center">FECHA PRE-CLINICA</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
-                      $query = "SELECT pre.CODIGO_PRECLINICA, pre.FRECUENCIA_CARDIACA , pre.FRECUENCIA_RESPIRATORIA, pre.PESO,pre.ESTATURA, c.CODIGO_CITA as CODIGO,
-                       CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) AS PACIENTE ,pre.FECHA_CREACION
-                       from tbl_inscripcion_cita c ,tbl_persona p ,tbl_preclinica pre 
-                      where p.CODIGO_PERSONA = c.CODIGO_PERSONA and pre.CODIGO_CITA = c.CODIGO_CITA";
+                      $query = "SELECT  pre.TEMPERATURA,pre.PULSO,pre.DESNUTRICION,pre.MASA_CORPORAL,    pre.CODIGO_PRECLINICA, pre.FRECUENCIA_CARDIACA , pre.FRECUENCIA_RESPIRATORIA, pre.PESO,pre.ESTATURA, c.CODIGO_CITA as CODIGO,
+                      CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) AS PACIENTE ,pre.FECHA_CREACION
+                      from tbl_inscripcion_cita c ,tbl_persona p ,tbl_preclinica pre 
+                     where p.CODIGO_PERSONA = c.CODIGO_PERSONA and pre.CODIGO_CITA = c.CODIGO_CITA";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -79,33 +83,16 @@
                           $var5 = $row['FRECUENCIA_CARDIACA'];
                           $var6 = $row['FRECUENCIA_RESPIRATORIA'];
                           $var7 = $row['FECHA_CREACION'];
+                          $var8 = $row['TEMPERATURA'];
+                          $var9 = $row['PULSO'];
+                          $var10 = $row['DESNUTRICION'];
+                          $var11 = $row['MASA_CORPORAL'];
+
                       ?>
                       <tr>
                         <td>
                           <div class="text-center">
                             <div class="btn-group">
-                              <?php
-                                $usuario=$_SESSION['vario'];
-                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL  FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
-                                $evaluar_usuario->execute(array($usuario));
-                                $row=$evaluar_usuario->fetchColumn();
-                                if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-                                $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '2'));
-                                $row1=$evaluar_permiso_eliminar->fetchColumn();
-                                $permiso_eliminar =$row1; 
-                                }
-                                ?>
-                                <?php
-                                    if($permiso_eliminar == 'SI'){
-                                ?> 
-                                <?php
-                                  }
-                                ?><!--Fin del boton de eliminar -->
-                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                  <button id="ELIMINAR" name="ELIMINAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
-                                </a>
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
                                   $usuario=$_SESSION['vario'];
@@ -140,10 +127,14 @@
                         <td class="text-center"><?php echo $var4; ?></td>
                         <td class="text-center"><?php echo $var5; ?></td>
                         <td class="text-center"><?php echo $var6; ?></td>
+                        <td class="text-center"><?php echo $var11; ?></td>
+                        <td class="text-center"><?php echo $var9; ?></td>
+                        <td class="text-center"><?php echo $var8; ?></td>
+                        <td class="text-center"><?php echo $var10; ?></td>
                         <td class="text-center"><?php echo $var7; ?></td>
                         
                         <div id="EDITARPRECLINICA<?php echo $var1 ?>" class="modal fade" role="dialog">
-                          <div class="modal-dialog modal-md">
+                          <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST">
                                 <div class="modal-header" style="background-color: #0CCDE3">
@@ -153,69 +144,64 @@
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="id_preclinica">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="txtcodigo_persona">Peso:</label>
                                                 <input  type="text"  value ="<?php echo $var3;?>" class="form-control" name="editar_peso">
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="txtcodigo_persona">Estatura:</label>
                                                 <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" name="editar_estatura">
                                             </div>
                                         </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="txtcodigo_persona">Masa Corporal:</label>
+                                                <input  type="text"  value ="<?php echo $var11; ?>" class="form-control" name="editar_estatura">
+                                            </div>
+                                        </div>
                                   </div><!--fin row -->
                                   <div class="row">
-                                      <div class="col-sm-6">
-                                        <?php 
-                                        $query = "SELECT * from tbl_tipo_sangre";
-                                        $resultadod=$conn->query($query);                
-                                        ?>
+                                      <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Frecuencia Cardica:</label>
                                           <input type="text"  value ="<?php echo $var5; ?>" class="form-control" name="editar_fc">
                                         </div>
                                       </div>
-                                      <div class="col-sm-6">
-                                        <?php 
-                                        $query = "SELECT * from tbl_tipo_sangre";
-                                        $resultadod=$conn->query($query);                
-                                        ?>
+                                      <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Frecuencia Respiratoria:</label>
                                           <input type="text"  value ="<?php echo $var6; ?>" class="form-control" name="editar_fr">
                                         </div>
                                       </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Pulso:</label>
+                                          <input type="text"  value ="<?php echo $var9; ?>" class="form-control" name="editar_fr">
+                                        </div>
+                                      </div>
                                   </div><!--fin row -->
                                   <div class="row">
-                                       <div class="col-sm-12">
-                                            <?php 
-                                            $query = "SELECT c.CODIGO_CITA, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as 
-                                            PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
-                                            where p.CODIGO_PERSONA = c.CODIGO_PERSONA_PACIENTE";
-                                            $resultadod=$conn->query($query);                
-                                            ?>
-                                            <div class="form-group">
-                                                <label for="txtcodigo_persona">Paciente cita:</label>
-                                                <select  class="form-control select2"  style="width: 100%;"  name="editar_cita"  required >
-                                                    <option value="<?php echo $var2; ?>" ><?php echo $var2; ?></option>
-                                                    
-                                                    <?php 
-                                                        if ($resultadod->num_rows > 0) {
-                                                        while($row = $resultadod->fetch_assoc()) { 
-                                                        $codigo = $row['CODIGO_CITA'];
-                                                        $nombre = $row['PACIENTE'];
-                                                        ?>
-                                                    <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                    <?php 
-                                                    } 
-                                                    }
-                                                    ?>
-                                                </select>
-                                                
-                                            </div>
+                                     <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Temperatura:</label>
+                                          <input type="text"  value ="<?php echo $var8; ?>" class="form-control" name="editar_fr">
+                                        </div>
                                       </div>
+                                      <div  class="col-sm-4 mb-3">
+                                        <div class="form-group">
+                                          <label for="" class="control-label">Estatus de desnutrición</label>
+                                          <select class="form-control " required name="desnutricion" required> 
+                                          <option  value="10">--Seleccione--</option>
+                                            <option  value="No tiene">No tiene</option>
+                                            <option   value="Moderado">Moderado</option>
+                                            <option  value="Grave">Grave</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      
                                   </div>
                                  
                     
@@ -228,28 +214,6 @@
                             </div>
                           </div>
                         </div><!--fin modal editar -->
-                        <!--INICIO DEL MODAL ELIMINAR   -->
-                        <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              </div>
-                              <form  method="POST">
-                                <div class="modal-body">
-                                  <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="preclinica_eliminar" >
-                                  <h4 class="text-center">¿Esta seguro que desea eliminar un registro en Preclinica?</h4>
-                                </div> <!--fin el card body -->
-                                <div class="modal-footer ">
-                                  <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                  <button type="submit"   name="ELIMINAR_PRECLINICA" id="ELIMINAR_PRECLINICA"   class="btn btn-primary">Si,eliminar</button>      
-                                </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                              </form>
-                            </div><!--fin del modal contener -->
-                          </div><!--fin del modal dialog -->
-                        </div><!--fin del modal de eliminar -->
-
                       </tr>
                       <?php
                         }
