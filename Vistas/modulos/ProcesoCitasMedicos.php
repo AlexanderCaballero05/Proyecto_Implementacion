@@ -69,7 +69,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                     <tbody>
                                     <?php
                                     $usuario= $_SESSION['vario'];
-
                                     //Consulta que trae el codigo del usuario
                                     $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
                                     FROM tbl_usuario u, tbl_persona p 
@@ -88,7 +87,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
                                         AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                         AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
-                                        AND es.CODIGO_PERSONA = '38'
+                                        AND es.CODIGO_PERSONA = '$cod_usuario'
                                         AND i.CODIGO_ESTADO = '9';" ;
                                       
                                         $result = $conn->query($query);
@@ -105,9 +104,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">
-                                                               <!-- Codigo de permiso para Eliminar -->
+                                                              
 
-                                                                     <!-- Codigo de permiso para Actualizar -->
                                                                   
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
@@ -220,11 +218,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  
                                                                 <input type="text" value="<?php echo $var1; ?>" 
                                                                         hidden class="form-control"
-                                                                        name="cod_enviar_cita" id="cod_edit_cita" >
+                                                                        name="codigo_enviar_cita" id="cod_edit_cita" >
 
-                                                                        <input type="text" value="<?php echo $var6; ?>" 
-                                                                        hidden class="form-control"
-                                                                        name="estado_cita" id="cod_edit_cita" >
+                                                                        
 
                                                                         <h2 class="text-center">Informacion de cita</h2>
                                                                         <br>
@@ -274,7 +270,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a preclinica</button>
+                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a preclinica</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

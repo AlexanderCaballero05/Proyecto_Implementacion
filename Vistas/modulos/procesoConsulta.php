@@ -23,14 +23,20 @@
     <div class="container-fluid">
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" href="crudConsulta">Ver Consultas médicas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="procesoExpediente">Consulta Médica</a>
-              </li>
-            </ul>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="#">Citas Medicas</a>
+            </li>
+            <li class="nav-item" disabled="disabled">
+            <a class="nav-link" style="color:#000000;" href="#">Pre Clinica</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
+          </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
             </br>
