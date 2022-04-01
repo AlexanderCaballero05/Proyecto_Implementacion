@@ -44,6 +44,9 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
           }else{
              //else que insertara dependiendo de area especialidad y  especialista
              try {
+
+              $user=$_SESSION['vario'];
+              $fechaactual = date("Y-m-d"); 
             if($area == "2"){ //medica
               $sql ="call sp_insert_inscripcion_cita('$paciente','$encargado_medico', '$estado','$area', '$fecha','$hora','$fechaactual','$user');";
               $consulta=$conn->query($sql);
