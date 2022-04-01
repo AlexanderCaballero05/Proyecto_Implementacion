@@ -27,7 +27,7 @@
                 <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE PRECLINICA PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> REGISTRO DE RECETAS PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -52,20 +52,7 @@
                       <h2 class="card-title" > <strong>Registro de recetas medicas</strong></h2>
            </div></br>
 
-           <?php
-
-              $querycita = "SELECT i.CODIGO_CITA
-              FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe , tbl_usuario u,tbl_persona_especialidad es,  tbl_estado esta
-                                                WHERE con.CODIGO_CITA = i.CODIGO_CITA
-                                                AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                                AND i.CODIGO_ESTADO = esta.CODIGO_ESTADO
-                                                AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                                                AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                                AND es.CODIGO_PERSONA = '38'
-                                                AND esta.CODIGO_ESTADO = '8';";
-                $resultadocodigo =$conn->query($querycita);   
-
-              ?>
+        
 
          <form method="POST" class="needs-validation" novalidate>
            
@@ -101,13 +88,12 @@
                 
                  //AND con.FECHA_CREACION = CURDATE()
                     //QUERY PAR EL CODIGO DE CONSULTA
-                    $query = "SELECT con.CODIGO_CONSULTA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
-                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe , tbl_usuario u,tbl_persona_especialidad es, tbl_estado esta
+                    $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
                     WHERE con.CODIGO_CITA = i.CODIGO_CITA
                     AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                     AND i.CODIGO_ESTADO = esta.CODIGO_ESTADO
                     AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                    AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
                     AND es.CODIGO_PERSONA = '$cod_usuario'
                     AND esta.CODIGO_ESTADO = '8';";
                     $resultadocon=$conn->query($query);                
@@ -132,7 +118,9 @@
                           if ($resultadocon->num_rows > 0) {
                           while($row = $resultadocon->fetch_assoc()) { 
                           $codigocon = $row['CODIGO_CONSULTA'];
+                          $codigocita = $row['CODIGO_CITA'];
                           $nombrecon = $row['PACIENTE'];
+
                           
                           ?>
                         <option value="<?php echo $codigocon?>" ><?php echo $nombrecon;?></option>
@@ -141,6 +129,8 @@
                         }
                         ?>
                       </select>
+
+                      <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_cita">
                           
                       <div class="invalid-feedback">
                           Agregue un nombre!

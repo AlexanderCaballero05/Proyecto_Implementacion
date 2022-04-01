@@ -199,8 +199,6 @@ if (isset($_POST['cod_edit_cita'])){
   }
   }
 
-
-
   if (isset($_POST['cod_enviar_cita'])){
     if(isset($_POST['enviar_cita'])){
         $codigo_cita = ($_POST['cod_enviar_cita']);

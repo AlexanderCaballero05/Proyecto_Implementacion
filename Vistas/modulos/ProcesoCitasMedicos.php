@@ -82,13 +82,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         <?php
                                     
                                         $query = "SELECT i.CODIGO_CITA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
-                                        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_usuario u, tbl_persona_especialidad es, tbl_estado est
-                                        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                        AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                                        AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                        AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
-                                        AND es.CODIGO_PERSONA = '$cod_usuario'
-                                        AND i.CODIGO_ESTADO = '9';" ;
+                                        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                                WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                                AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                                AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                                AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                                AND i.CODIGO_ESTADO = '9' 
+                                                                                AND i.FECHA_CITA = CURDATE();" ;
                                       
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
