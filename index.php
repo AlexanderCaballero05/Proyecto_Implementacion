@@ -23,6 +23,9 @@ require_once "modelos/perfilUsuario.modelo.php";
 require_once "modelos/procesoCarga.modelo.php";
 require_once "modelos/procesoPreClinica.modelo.php";
 require_once "modelos/ProcesoCitasMedicas.modelo.php";
+require_once "modelos/ProcesoExpedienteMedico.modelo.php";
+
+
 require_once "modelos/area.modelo.php";
 
 
