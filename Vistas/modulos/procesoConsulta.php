@@ -9,8 +9,13 @@
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
+<head>
+ 
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
+</head>
 
-
+<body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -21,6 +26,7 @@
 
     <section class="content">
     <div class="container-fluid">
+      
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
@@ -48,33 +54,58 @@
             <div class="row mb-8">
                     <div class="col">
                     <?php 
-                          $query = "SELECT c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                          as PACIENTE  from tbl_inscripcion_cita c ,tbl_persona p
+                          $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI
+                          from tbl_inscripcion_cita c ,tbl_persona p
                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                          AND c.CODIGO_ESTADO = '11'";
-                          $resul=$conn->query($query);                
+                          AND c.CODIGO_ESTADO = '11';";
+                          $resul=$conn->query($query); 
+                           
+                          while($row = $resul->fetch_assoc()){
+                            $var1 = $row['PACIENTE'];
+                            $var2 = $row['DNI'];
+                          
                           ?>
                       <label for="">Nombre del paciente:</label>
-                       <input type="text" name="nombre" class="form-control"  aria-label="primer nombre" onkeyup="mayus(this);" minlength="3" maxlength="20" value="" >
+                       <input type="text" name="nombre" class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1 ?>" disabled ="disabled" >
                     </div>
                      <div class="col">
                          <label for="">DNI:</label>
-                         <input type="text" name="dni" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                         <input type="text" name="dni" class="form-control"  aria-label="dni"  value="<?php echo $var2 ?>" disabled ="disabled">
                     </div>
                     </div>
+                    <?php
+                    }
+                    ?>
             </form>
             
                     </br>
                     <h5>Preclinica</h5>
                     <hr>
+                    
                   
             <!--INICIO COMBOBOX PARA ELEGIR AL ESTUDIANTE-->
             <div class="form-group">
+              <?php
+              $query = "SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL
+              FROM tbl_preclinica pr, tbl_inscripcion_cita c
+              WHERE pr.CODIGO_CITA = c.CODIGO_CITA AND c.CODIGO_ESTADO = '11';";
+              $resul=$conn->query($query); 
+               
+              while($row = $resul->fetch_assoc()){
+                $var1 = $row['PESO'];
+                $var2 = $row['ESTATURA'];
+                $var3 = $row['TEMPERATURA'];
+                $var4 = $row['DESNUTRICION'];
+                $var5 = $row['FRECUENCIA_CARDIACA'];
+                $var6 = $row['FRECUENCIA_RESPIRATORIA'];
+                $var7 = $row['PULSO'];
+                $var8 = $row['MASA_CORPORAL'];
+              ?>
             <div class= "row">                      
             <div class="col-sm-2 mb-3">
                          <label for="" class="control-label">Peso</label> 
                             <div class="form-group">
-                                <input type="text"  required class="form-control" name="peso" required >
+                                <input type="text"  required class="form-control" name="peso" required value="<?php echo $var1 ?>" disabled ="disabled" >
                                 <div class="invalid-feedback">
                                  Llene este campo.
                                 </div>
@@ -84,7 +115,7 @@
                         <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">Estatura</label> 
                             <div class="form-group">
-                                <input type="text"  required class="form-control"  name="estatura" required >
+                                <input type="text"  required class="form-control"  name="estatura" required value="<?php echo $var2 ?>" disabled ="disabled">
                                 <div class="invalid-feedback">
                                  Llene este campo.
                                 </div>
@@ -93,7 +124,7 @@
                         <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">temperatura</label> 
                             <div class="form-group">
-                                <input type="text"  required class="form-control"  name="temperatura" required >
+                                <input type="text"  required class="form-control"  name="temperatura" required value="<?php echo $var3 ?>" disabled ="disabled" >
                                 <div class="invalid-feedback">
                                  Llene este campo.
                                 </div>
@@ -102,8 +133,8 @@
                         <div  class="col-sm-4 mb-3">
                           <div class="form-group">
                             <label for="" class="control-label">Estatus de desnutrición</label>
-                            <select class="form-control " required name="desnutricion" required> 
-                             <option  value="">--Seleccione--</option>
+                            <select class="form-control " required name="desnutricion" required disabled ="disabled"> 
+                             <option  value=""><?php echo $var4 ?></option>
                               <option  value="No tiene">No tiene</option>
                               <option   value="Moderado">Moderado</option>
                               <option  value="Grave">Grave</option>
@@ -116,7 +147,7 @@
                        <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">Presión Arterial</label> 
                            <div class="form-group">
-                             <input class="form-control" type="text" name="FC" required> 
+                             <input class="form-control" type="text" name="FC" required value="<?php echo $var5 ?>" disabled ="disabled"> 
                               <div class="invalid-feedback">
                               Llene este campo.
                               </div>
@@ -125,7 +156,7 @@
                         <div class="col-md-2 mb-3"> <!--Nivel de respiracion-->
                           <label for="validationCustom03"  class="control-label">Nivel Respiración</label> 
                           <div class="form-group">
-                            <input class="form-control"  type="text"  name="FR"  required >
+                            <input class="form-control"  type="text"  name="FR"  required value="<?php echo $var6 ?>" disabled ="disabled">
                               <div class="invalid-feedback">
                               Llene este campo.
                               </div>
@@ -134,7 +165,7 @@
                         <div class="col-md-2 mb-3"> <!--PULSO-->
                           <label for="validationCustom03"  class="control-label">Pulso</label> 
                           <div class="form-group">
-                            <input class="form-control"  type="text"  name="pulso"  required >
+                            <input class="form-control"  type="text"  name="pulso"  required value="<?php echo $var7 ?>" disabled ="disabled">
                               <div class="invalid-feedback">
                               Llene este campo.
                               </div>
@@ -143,14 +174,16 @@
                         <div class="col-md-4 mb-3"> <!--masica corporal-->
                           <label for="validationCustom03"  class="control-label">Indice masa corporal</label> 
                           <div class="form-group">
-                            <input class="form-control"  type="text"  name="masa_corporal"  required >
+                            <input class="form-control"  type="text"  name="masa_corporal"  required value="<?php echo $var8 ?>" disabled ="disabled">
                               <div class="invalid-feedback">
                               Llene este campo.
                               </div>
                           </div>
                         </div>
                       </div><!--fin del div de form-group-->
-                      
+                      <?php
+                    }
+                    ?> 
                     </div><!--fin del div de row-->
                     
                     <h5>Consulta</h5>
@@ -159,13 +192,19 @@
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Sintomas:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="500" minlength="5" name="sintomas" id="sintomas"   autocomplete = "off"></textarea>
+                          <textarea class="form-control" type="text" maxlength="500" minlength="5" name="sintomas" id="sintomas"   autocomplete = "off" required></textarea>
+                          <div class="invalid-feedback">
+                              Llene este campo.
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico1" id="diagnostico1"  autocomplete = "off" ></textarea>
+                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
+                          <div class="invalid-feedback">
+                              Llene este campo.
+                          </div>
                         </div>
                       </div>
                     </div><!--Fin de una fila -->
@@ -174,18 +213,24 @@
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Evolución:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" name="evolucion" id="evolucion" onKeyDown="sinespacio(this);"  autocomplete = "off" ></textarea>
+                          <textarea class="form-control" type="text" maxlength="200" minlength="5" name="evolucion" id="evolucion" onKeyDown="sinespacio(this);"  autocomplete = "off" required></textarea>
+                          <div class="invalid-feedback">
+                              Llene este campo.
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico de egreso/ Hallazgos importantes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico2" id="diagnostico2" onKeyDown="sinespacio(this);"  autocomplete = "off"></textarea>
+                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico2" id="diagnostico2" onKeyDown="sinespacio(this);"  autocomplete = "off" required></textarea>
+                          <div class="invalid-feedback">
+                              Llene este campo.
+                          </div>
                         </div>
                       </div>
                     </div><!--Fin de una fila -->
                     <br>
-                    <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
+                    <button type="submit"  id="" name="Guardar_Consulta" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
                       
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
@@ -201,4 +246,27 @@
  
 
  
- 
+  <script>
+
+$(document).ready(function() {
+    $('.hb').select2();
+});
+
+
+
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
+</script>
