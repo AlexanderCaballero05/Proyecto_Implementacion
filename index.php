@@ -26,6 +26,7 @@ require_once "modelos/ProcesoCitasMedicas.modelo.php";
 require_once "modelos/ProcesoExpedienteMedico.modelo.php";
 require_once "modelos/procesoRecetaMedica.modelo.php";
 require_once "modelos/area.modelo.php";
+require_once "modelos/tiposangremodelo.php";
 
 require_once "modelos/procesoMatricula.modelo.php";
 
