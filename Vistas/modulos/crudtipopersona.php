@@ -45,7 +45,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           ?>
 
-            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Pregunta</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar tipo persona</button>
                             <php
                               }
                             ?>
@@ -55,11 +55,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">TABLA TIPO DE PERSONAS</strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" class="needs-validation" novalidate ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_preguntas" class="table table-bordered table-striped">
+                  <table id="tabla_tipopersona" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                         <th>Acción</th>
@@ -224,7 +224,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR_TIPOPER" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">AGREGAR TIPO DE PERSONA</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -234,8 +234,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Nombre Tipo de personas</label>
-                                    <input  type="text"    class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese la pregunta" name="TIPO_PERSONA" id="TIPO_PERSONA">
-                                </div>
+                                    <input  type="text"    class="form-control"  maxlength="50" minlength="5" onkeyup="mayus(this);"  autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese la pregunta" name="TIPO_PERSONA" id="TIPO_PERSONA" required ="">
+                                    <div class="invalid-feedback">
+                                     campo obligatorio.
+                                    </div>
+                                  </div>
                             </div>
                           
                         </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -256,7 +259,52 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_roles').DataTable();
-} );
+  $(document).ready( function () {
+      $('#tabla_tipopersona').DataTable({
+
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar tipo persona:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
+
+<script>
+(function() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
 </script>

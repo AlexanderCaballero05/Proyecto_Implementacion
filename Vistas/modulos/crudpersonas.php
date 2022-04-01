@@ -64,7 +64,7 @@ include_once "conexion3.php";
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="tabla_personas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Acción</th>
@@ -90,16 +90,15 @@ include_once "conexion3.php";
                                     <tbody>
                      <?php
                         $query = "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,
-                         p.SEGUNDO_APELLIDO,p.DNI,p.CREADO_POR_USUARIO, p.FECHA_CREACION,
-                          p.MODIFICADO_POR, p.FECHA_MODIFICACION,p.SEXO,P.FECHA_NACIMIENTO, 
-                          P.LUGAR_NACIMIENTO, t.NUMERO_TELEFONO, c.correo_persona, td.DIRECCION,
-                         tt.NOMBRE as TIPO_PERSONA, tt.CODIGO_TIPO_PERSONA 
-                        FROM tbl_persona p 
-                        LEFT JOIN tbl_telefono t on p.CODIGO_PERSONA= t.CODIGO_PERSONA 
-                        LEFT JOIN tbl_correo_electronico c on p.CODIGO_PERSONA = c.CODIGO_PERSONA 
-                        LEFT JOIN tbl_tipo_persona TT on p.CODIGO_PERSONA = tt.CODIGO_TIPO_PERSONA 
-                        left join tbl_direccion td on p.CODIGO_PERSONA = td.CODIGO_PERSONA 
-                        ORDER BY p.CODIGO_PERSONA ASC;";
+                        p.SEGUNDO_APELLIDO,p.DNI,p.CREADO_POR_USUARIO, p.FECHA_CREACION,
+                         p.MODIFICADO_POR, p.FECHA_MODIFICACION,p.SEXO,P.FECHA_NACIMIENTO, 
+                         P.LUGAR_NACIMIENTO, t.NUMERO_TELEFONO, c.correo_persona, DIRECCION,
+                        tt.NOMBRE as TIPO_PERSONA, tt.CODIGO_TIPO_PERSONA 
+                       FROM tbl_persona p 
+                       LEFT JOIN tbl_telefono t on p.CODIGO_PERSONA= t.CODIGO_PERSONA 
+                       LEFT JOIN tbl_correo_electronico c on p.CODIGO_PERSONA = c.CODIGO_PERSONA 
+                       LEFT JOIN tbl_tipo_persona TT on p.CODIGO_PERSONA = tt.CODIGO_TIPO_PERSONA 
+                       ORDER BY p.CODIGO_PERSONA ASC;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -165,7 +164,7 @@ include_once "conexion3.php";
                                                 <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                         <!-- Modal content-->
-                                                        <form method="POST">
+                                                        <form method="POST" class="needs-validation" novalidate >
                                                             <div class="modal-header" style="background-color: #0CCDE3">
                                                                 <h4 class="text-center">Editar informacion persona
                                                                 </h4>
@@ -192,7 +191,10 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_nombre" id="p_nombre">
+                                                                                name="p_nombre" id="p_nombre" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -207,7 +209,10 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_nombre" id="s_nombre">
+                                                                                name="s_nombre" id="s_nombre" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -222,7 +227,10 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_apellido" id="p_apellido">
+                                                                                name="p_apellido" id="p_apellido" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -237,7 +245,10 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_apellido" id="s_apellido">
+                                                                                name="s_apellido" id="s_apellido" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -249,7 +260,10 @@ include_once "conexion3.php";
                                                                                 minlength="5"
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="dni" id="dni">
+                                                                                name="dni" id="dni" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -265,6 +279,12 @@ include_once "conexion3.php";
                                                                                 <option value="M">M</option>
                                                                                 <option value="F">F</option>
                                                                             </select>
+                                                                            <div class="invalid-feedback">
+                                                                             Eliga una opción.
+                                                                            </div>
+                                                                            <div class="valid-feedback">
+                                                                             ¡Se ve bien!
+                                                                          </div>
                                                                         </div>
                                                                     </div>
 
@@ -274,7 +294,10 @@ include_once "conexion3.php";
                                                                                 vencimiento</label>
                                                                             <input type="date" class="form-control"
                                                                                 value="<?php echo $var9; ?>"
-                                                                                name="f_nacimiento" id="f_nacimiento">
+                                                                                name="f_nacimiento" id="f_nacimiento" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
 
@@ -289,7 +312,10 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="lugar_n" id="lugar_n">
+                                                                                name="lugar_n" id="lugar_n" required ="">
+                                                                                <div class="invalid-feedback">
+                                                                                 campo obligatorio.
+                                                                                 </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -300,7 +326,10 @@ include_once "conexion3.php";
                                                                              class="form-control"  name="direccion" id="direccion"
                                                                               onkeyup="mayus(this);" autocomplete = "off"
                                                                                onkeypress="" placeholder="Ingrese Direccion" 
-                                                                               required="" ">
+                                                                               required="" >
+                                                                               <div class="invalid-feedback">
+                                                                             campo obligatorio.
+                                                                              </div>
                                                                         </div>
                                                                     </div>
                                                                     <?php
@@ -329,6 +358,12 @@ include_once "conexion3.php";
                                                                                 <?php } 
                                                                                  }?>
                                                                             </select>
+                                                                            <div class="invalid-feedback">
+                                                                             Eliga una opción.
+                                                                            </div>
+                                                                            <div class="valid-feedback">
+                                                                            ¡Se ve bien!
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -342,6 +377,9 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 name="correo" id="correo">
+                                                                                <div class="invalid-feedback">
+                                                                                campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -357,6 +395,9 @@ include_once "conexion3.php";
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
                                                                                 name="telefono" id="telefono">
+                                                                                <div class="invalid-feedback">
+                                                                                campo obligatorio.
+                                                                                </div>
                                                                         </div>
                                                                     </div>
                                                                 </div> <!-- FIN DE EL PRIMER ROW -->
@@ -512,7 +553,35 @@ include_once "conexion3.php";
 
 
 
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_personas').DataTable({
 
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar personas:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
 
 

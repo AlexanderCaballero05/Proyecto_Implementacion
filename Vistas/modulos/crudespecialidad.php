@@ -19,7 +19,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <!-- Modal content-->
-            <form method="POST">
+            <form method="POST" class="needs-validation" novalidate>
 
                 <div class="modal-header" style="background-color: #0CCDE3">
                     <h4 class="text-center">Crear información
@@ -35,7 +35,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <label for="txtcodigo_persona">
                                     Nombre de la especialidad</label>
                                 <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_tipo_espe" id="guardar_tipo_espe">
+                                 name="guardar_tipo_espe" id="guardar_tipo_espe" required="">
+                                 <div class="invalid-feedback">
+                                  campo obligatorio.
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -43,7 +46,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
                                 <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_descripcion_espe" id="guardar_descripcion_espe">
+                                 name="guardar_descripcion_espe" id="guardar_descripcion_espe" required="">
+                                 <div class="invalid-feedback">
+                                  campo obligatorio.
+                                </div>
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -221,7 +227,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content-->
-                                                                <form method="POST">
+                                                                <form method="POST " class="needs-validation" novalidate>
                                                                     <div class="modal-header" style="background-color: #0CCDE3">
                                                                         <h4 class="text-center">Editar informacion de especialidad
                                                                         </h4>
@@ -239,7 +245,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     <label for="txtcodigo_persona">
                                                                                     Especialidad</label>
                                                                                     <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="edit_tipo_espe" id="edit_tipo_espe">
+                                                                                    name="edit_tipo_espe" id="edit_tipo_espe" required ="">
+                                                                                    <div class="invalid-feedback">
+                                                                                     campo obligatorio.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
@@ -247,7 +256,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
                                                                                     <input type="text" value="<?php echo $var5; ?>" class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                                                     name="edit_descripcion_espe" id="edit_descripcion_espe">
+                                                                                     name="edit_descripcion_espe" id="edit_descripcion_espe" required ="">
+                                                                                     <div class="invalid-feedback">
+                                                                                        campo obligatorio.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -332,17 +344,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
 </div><!-- ./wrapper -->
 
 
-
-
-
-
-
-
-
-
-
-
-
 <script type="text/javascript">
     $(function() {
         $("#ESTADOUSUARIO").change(function() {
@@ -416,4 +417,24 @@ bitacora($codigoObjeto, $accion, $descripcion);
     
    
 </script>
+<script>
+(function() {
+    'use strict'
 
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
+</script>

@@ -44,7 +44,7 @@
         <div class="row"><!-- COLUMNA PRINCIPAL -->
           <div class="col-md-12"> <!-- COLUMNA DE REGISTRO DE PERSONAS -->
             <div class="card card-primary ">
-               <form id="FORMPERSONAS" method="POST" >
+               <form id="FORMPERSONAS" method="POST" class="needs-validation" novalidate >
                   <div class="card-body">
                     <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title"> <strong> Datos Generales persona</strong></h2>
@@ -55,39 +55,58 @@
                         <label for="identidad" class="control-label">Número de Identidad</label> 
                         <div class="form-group">
                           <input class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 0801199716227" required="" >
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>                     
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label for="identidad" class="control-label">Primer Nombre</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" required="" >
+                          <input class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" required="">
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>  
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO er NOMBRE-->
                         <label for="identidad" class="control-label">Segundo Nombre</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="3" name="segundo_nombre" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off">
+                          <input class="form-control" type="text" maxlength="13" minlength="3" name="segundo_nombre" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <div class="invalid-feedback">
+                          campo obligatorio.
+                          </div> 
                         </div>
                       </div>
                     </div><!--Fin de una fila -->
+
 
                     <div class="row">
                       <div class="col-md-4"><!--INICIO 1er APELLIDO-->
                         <label  class="control-label">Pimer Apellido</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
+                          <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div> 
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 2er APELLIDO-->
                         <label  class="control-label">Segundo Apellido</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" >
+                          <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div> 
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label  class="control-label">Fecha Nacimiento</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required=""  >
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div> 
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -96,7 +115,10 @@
                       <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
                         <label for="identidad" class="control-label">Lugar Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" placeholder="lugar nacimiento" name="lugar_nacimiento" max="2002-01-01" min="1950-01-01" required="" >
+                          <input class="form-control" type="text" placeholder="lugar nacimiento" name="lugar_nacimiento" max="2002-01-01" min="1950-01-01" required="">
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div> 
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO TIPO PERSONA-->
@@ -106,7 +128,7 @@
                       ?>
                          <label for="cbx_persona" class="control-label">Tipo Persona</label>
                          <div class="form-group">
-                            <select class="form-control"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required="">
+                            <select class="form-control"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
                              <option selected >--Seleccione tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -120,6 +142,14 @@
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                  Eliga una opción.
+                         </div>
+                            <div class="invalid-feedback">
+                                  Elija una opcion
+                            </div>
+                   
+                            
                          </div>
                       </div>
                       <div class="col-md-4"><!--INICIO SEXO--> 
@@ -130,6 +160,10 @@
                               <option value="1">FEMENINO</option>
                               <option  value="2">MASCULINO</option>
                             </select>
+                            <div class="invalid-feedback">
+                                  Elija una opción.
+                            </div>
+
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -138,8 +172,11 @@
                       <div class="col-md-4"><!--telefono-->
                       <label for="" class="control-label">Telefono</label> 
                         <div class="input-group">
-                          <input class="form-control" type="text" minlength="8" maxlength="8"  name="telefono"  onKeyDown="sinespacio(this);"   onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
-                            <div class="input-group-prepend">
+                          <input class="form-control" type="text" minlength="8" maxlength="8"  name="telefono"  onKeyDown="sinespacio(this);"   onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" required="">
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
+                          <div class="input-group-prepend">
                             <button  type="button"  class="btn btn-primary btn-md"><span onclick="MostrarTelefono();"  > <i class="nav-icon fa fa-plus mx-1"></i></span></button>
                           </div>
                         </div>
@@ -147,14 +184,20 @@
                       <div  style ="display:none;" id="telefono2" class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Otro Telefono</label> 
                         <div class="form-group">
-                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" required="">
+                         <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                         </div>
                       </div>
 
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
                         <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="email" maxlength="50"  name="correo"  onKeyDown="sinespacio(this);"   required="" >
+                          <input class="form-control" type="email" maxlength="50"  name="correo"  onKeyDown="sinespacio(this);"  required=""  >
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -166,6 +209,9 @@
                         <label  class="control-label">Direccion</label> <!--INICIO DIRECCION-->
                         <div class="form-group">
                           <textarea class="form-control" type="text" name="direccion" id="DIRECCION" onkeyup="mayus(this);"  onkeypress="" placeholder="Ingrese Direccion" required="" ></textarea>
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                         </div>
                       </div>
 
@@ -181,13 +227,19 @@
                         <div class="form-group">
                             <input class="form-control" maxlength="15" minlength="4" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
                             onblur="quitarespacios(this);" placeholder="Nombre Usuario" >
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                         </div>
                       </div>
                       <div class="col-md-4" id="cuarta_fila" ><!--INICIO contraseña-->
                         <label  class="control-label">Contraseña</label>
                         <div class="form-group">
                             <input class="form-control"  minlength="8"  maxlength="<?php echo $max; ?>" onKeyDown="sinespacio(this);" type="text" id="contrasena" name="contrasena" >
-                        </div>
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
+                          </div>
                       </div>
                       
                       <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->
@@ -197,7 +249,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Tipo Especialidad Psicologia:</label>
                          <div class="form-group">
-                            <select class="form-control select2" style="width: 100%;" name="psicologo" required="">
+                            <select class="form-control select2" style="width: 100%;" name="psicologo" >
                              <option selected >--Seleccione tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -211,6 +263,9 @@
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                          </div>
                       </div>
 
@@ -221,7 +276,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Tipo Especialidad Medico:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="medico" required="">
+                            <select class="form-control select2"   style="width: 100%;" name="medico" >
                              <option selected >--Seleccione tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -235,6 +290,9 @@
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                          </div>
                       </div>
                       <div  style ="display:none;" class="col-md-4" id="catequistas"><!--catequistas-->
@@ -244,7 +302,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Catequistas:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="catequista" required="">
+                            <select class="form-control select2"   style="width: 100%;" name="catequista">
                              <option selected enable value="" >--Seleccione Catequesis--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -258,6 +316,9 @@
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                          </div>
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
@@ -346,4 +407,25 @@
         }
     });
   }); // 
+</script>
+<script>
+(function() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
 </script>
