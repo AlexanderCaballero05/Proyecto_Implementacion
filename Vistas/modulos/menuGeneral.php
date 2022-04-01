@@ -455,42 +455,85 @@
           </a>
 
           <ul class="nav nav-treeview">
-          <li class="nav-item">
-                              <a href="ProcesoCitasMedicos"class="nav-link">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>lista Citas</p>
-                              </a>
-                            </li>
+           <li class="nav-item">
+             <a href="ProcesoCitasMedicos"class="nav-link">
+               <i class="far fa-edit nav-icon"></i>
+                <p>Proceso consultas</p>
+             </a>
+           </li>
+
+            <li class="nav-item">
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Proceso de expedientes</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+
+
+
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class=" nav-icon fas fa-briefcase-medical "></i>
+            <p>
+              Mantenimiento medica
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+
+          <ul class="nav nav-treeview">
+           <li class="nav-item">
+             <a href="crudPreClinica"class="nav-link">
+               <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento Preclinica</p>
+             </a>
+           </li>
+
+            <li class="nav-item">
+              <a href="crudConsulta" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento consultas</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento medicamentos</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento medicamentos-pacientes</p>
+              </a>
+            </li>
+
 
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Mantenimiento Tipo Alergia</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="crudPreClinica" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Preclinica</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="procesoConsulta" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Expedientes de pacientes</p>
+                <p>mantenimiento alergias</p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="procesoRecetaMedica" class="nav-link">
+              <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Recetas de pacientes</p>
+                <p>mantenimiento transtornos</p>
               </a>
             </li>
 
-
+            <li class="nav-item">
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento condiciones fisicas</p>
+              </a>
+            </li>
           </ul>
         </li>
          
