@@ -27,6 +27,8 @@ require_once "modelos/ProcesoExpedienteMedico.modelo.php";
 
 
 require_once "modelos/area.modelo.php";
+require_once "modelos/procesoMatricula.modelo.php";
+
 
 
 require_once "modelos/crudAlergia.modelo.php";
