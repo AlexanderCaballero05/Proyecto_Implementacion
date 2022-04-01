@@ -114,7 +114,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
                                         AND E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD
                                         AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA
-                                        AND est.NOMBRE = 'PENDIENTE' ;
+                                        AND est.CODIGO_ESTADO = '5' ;
                                         ";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {

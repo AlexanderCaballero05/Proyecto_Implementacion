@@ -245,6 +245,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             <!-- INICIO PRIMERA ROW -->
                                                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
                                                                                  name="cod_objetoedit" id="cod_objetoedit">
+                                                                                 
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
