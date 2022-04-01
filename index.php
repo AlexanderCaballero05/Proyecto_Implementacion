@@ -24,7 +24,8 @@ require_once "modelos/procesoCarga.modelo.php";
 require_once "modelos/procesoPreClinica.modelo.php";
 require_once "modelos/area.modelo.php";
 
-
+//require_once "modelos/crudrecetamedica.modelo.php";
+require_once "modelos/crudmedicamento.modelo.php";
 require_once "modelos/crudAlergia.modelo.php";
 
 require_once "modelos/familiaresmodelo.php";

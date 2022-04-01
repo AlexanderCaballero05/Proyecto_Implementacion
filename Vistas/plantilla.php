@@ -130,6 +130,8 @@ session_start();
 
          $_GET["ruta"] == "procesoCitasPsicologicas" ||
          $_GET["ruta"] == "crudAlergias" ||
+         $_GET["ruta"] == "crudmedicamento" ||
+         $_GET["ruta"] == "crudrecetamedica" ||
 
 
          $_GET["ruta"] == "crudCitasPsicologicas" ||

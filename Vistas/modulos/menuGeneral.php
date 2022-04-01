@@ -488,6 +488,20 @@
               </a>
             </li>
 
+            <li class="nav-item">
+              <a href="crudrecetamedica" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Receta Medica</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="crudmedicamento" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Medicamento</p>
+              </a>
+            </li>
+
 
           </ul>
         </li>
