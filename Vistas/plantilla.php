@@ -143,6 +143,7 @@ session_start();
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
+         $_GET["ruta"] == "crudpersonaespecialidad" ||
          $_GET["ruta"] == "crudPermisos" ||
          $_GET["ruta"] == "crudpreguntas" ||
          $_GET["ruta"] == "procesoMatricula" ||
@@ -157,6 +158,7 @@ session_start();
          $_GET["ruta"] == "procesocita" ||
          $_GET["ruta"] == "crudConsulta" ||
          $_GET["ruta"] == "procesoConsulta" ||
+         $_GET["ruta"] == "crudNoPatologia" ||
 
          $_GET["ruta"] == "crudPermisos"){
 

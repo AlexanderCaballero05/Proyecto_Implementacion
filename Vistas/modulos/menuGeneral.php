@@ -101,6 +101,13 @@
                     <p>Especialidades</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="crudpersonaespecialidad" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Persona Especialidad</p>
+                  </a>
+                </li>
               
                 <li class="nav-item">
                   <a href="crudPreguntasUsuarios" class="nav-link">
@@ -547,6 +554,13 @@
               <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>mantenimiento condiciones fisicas</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="crudNoPatologia" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento No Patologia</p>
               </a>
             </li>
           </ul>
