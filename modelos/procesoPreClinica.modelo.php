@@ -76,6 +76,13 @@ if(isset($_POST['codigo_paciente'])){
       $editar_estatura = ($_POST['editar_estatura']);
       $editar_FC = ($_POST['editar_fc']);
       $editar_FR = ($_POST['editar_fr']);
+
+      $editar_FR = ($_POST['editar_masa']);
+      $editar_FR = ($_POST['editar_pulso']);
+      $editar_FR = ($_POST['editar_temperatura']);
+      
+      $editar_FR = ($_POST['editar_desnutricion']);
+      
      
       try{         
           try{
