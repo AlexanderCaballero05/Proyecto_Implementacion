@@ -9,7 +9,7 @@
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
-
+    
 
 <div class="content-wrapper">
   <div class="content-header">
@@ -22,38 +22,81 @@
     <section class="content">
     <div class="container-fluid">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link "  href="crudMatricula">Ver Matricula</a>
+                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matricula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="procesoMatricula">Matricula</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Otros</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Matricula</a>
               </li>
             </ul>
           </div>
-          <div class="card-body"><!--Cuerpo del card body principal -->
-            </br>
-            
-            
-            <form action="">
-            <div class="row sm-6">
-                      <label for="">Seleccionar al estudiante:</label>
-                       <input type="text" name="nombre1" class="form-control" placeholder="Buscar" onkeyup="mayus(this);" minlength="3" maxlength="20"   required="">
-                       <button  class="btn btn-secondary "  class="col-sm-1 col-form">Buscador</button>
-                    
+          <div class="card-body">
+          </br> 
+
+          <form method="POST" action="procesoMatricula">
+            <div class="row mb-4">
+              <form method="POST" action="procesoMatricula">
+                     <?php
+                      $query = "SELECT es.CODIGO_ESTUDIANTE, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as NOMBRE
+                      FROM tbl_estudiante es , tbl_persona p 
+                      where  p.CODIGO_PERSONA = es.CODIGO_PERSONA";
+                      $resultado=$conn->query($query);
+                    ?>
+                    <button  type="submit" name="BOTON_BUSCAR"  id= "BOTON_BUSCAR" class="btn btn-primary " class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Buscador</button>
+                    <div class="col-sm-4">
+                    <div class="form-group">
+                      <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="BUSCA_ESTUDIANTE"  required>
+                        <option selected enable value="">Seleccione</option> <!--Lo mismo que el de arriba :v -->
+                        <?php 
+                          if ($resultado->num_rows > 0) {
+                            while($row = $resultado->fetch_assoc()) { 
+                            $codigo_estudiante = $row['CODIGO_ESTUDIANTE'];
+                            $nombre_Estudiante = $row['NOMBRE'];
+                          ?>
+                        <option value="<?php echo $codigo_estudiante?>"><?php echo $nombre_Estudiante;?></option>
+                        <?php
+                        }
+                        }
+                        ?>
+                      </select>
+                   </div>
               </div>
-            </form>
-            <br>
+              </form>
+            </div>
+           </br> 
+           
            
 
-               <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Clases a matricular </strong></h1>
+           
+
+           <?php
+            if( isset($_POST['BOTON_BUSCAR'])){
+              $codigo_estudiante = $_POST['BUSCA_ESTUDIANTE'];
+              $query = "SELECT es.CODIGO_ESTUDIANTE, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as NOMBRE
+              FROM tbl_estudiante es , tbl_persona p 
+              where p.CODIGO_PERSONA = es.CODIGO_PERSONA AND  es.CODIGO_ESTUDIANTE = '$codigo_estudiante' ;";
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  $COD_ES = $row['CODIGO_ESTUDIANTE'];
+                  $NOMBRE_ES = $row['NOMBRE'];
+               }
+              }
+            ?>
+
+            <div class="col-md-4 mb-3">
+                <input hidden class="form-control" value="<?php echo $COD_ES; ?> ">
+                <input class="form-control" value="<?php echo $NOMBRE_ES; ?> ">
+             </div>
+
+            
+             
+
+          <div class="card ">
+            <div class="card-header text-center" style="background-color: #3FCDFD"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;">CARGA ACADEMICA PARA MATRICULAR </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -62,19 +105,21 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Asignatura </th>
-                          <th>Nombre del Tutor</th>
-                          <th>Modalidad</th>
-                          <th>Seccion</th>
-                          <th>Hora</th>                     
-                          <th>Acción</th>                   
+                          <th class="text-center">ACCION</th> 
+                          <th class="text-center">ASIGNATURA</th>
+                          <th class="text-center">NOMBRE DEL TUTOR</th>
+                          <th class="text-center">MODALIDAD</th>
+                          <th class="text-center">SECCION</th>
+                          <th class="text-center">HORA</th> 
+                          <th class="text-center">FECHA INICIO</th>                     
+                                            
                         </tr>
                       </thead>
                       <tbody>
                         <?php                      
                $query = "SELECT  t.NOMBRE as TUTORIA,
                 CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
-                 m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA 
+                 m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA ,c.FECHA_INICIO ,c.CODIGO_TUTORIA
                  FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
                  WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
                  AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
@@ -88,34 +133,95 @@
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
                   $var6 = $row['CODIGO_CARGA'];
-                  
+                  $var7 = $row['FECHA_INICIO'];
+                  $var8 =  $row['CODIGO_TUTORIA'];
                         ?>
                         <tr>
-                          
+                        <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                <a href="#MODAL_MATRICULA<?php echo $var1; ?>" data-toggle="modal">
+                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
+                              </a>
+                              </div>
+                            </div><!-- final del text-center -->
+                          </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td> 
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td> 
+                          <td class="text-center"><?php echo $var7; ?></td> 
 
-                          <td>
-                            <div class="text-center" >
-                              <div class="btn-group">
-                                
-                                <a href="# <?php echo $var1; ?>" data-toggle="modal">
-                               
-                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-Primary"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
-                                 
-                              </a>
-                              </div>
-                            </div><!-- final del text-center -->
-                          </td>
+                          <div id="MODAL_MATRICULA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content"><!-- Modal content-->
+                                <form id="FORMESTUDIANTE" method="POST">
+                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Matricular Tutoria</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
+                                  <strong>información de la clase</strong>
+                                    </hr> 
+                                    <div class="row"><!-- INICIO PRIMERA ROW --> 
+                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="ID_CARGA" id="ID_CARGA"><!--este es el importante -->
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">TUTOR</label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" readonly>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-3">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">SECCION</label>
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" readonly>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-3">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">HORA</label>
+                                          <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" readonly>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">TUTORIA</label>
+                                          <input hidden type="text" name="tutoria" value ="<?php echo $var8; ?>" >
+                                          <input  type="text"  value ="<?php echo $var1; ?>" class="form-control"  readonly>
+                                          <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">FECHA INICIO</label>
+                                          <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
+                                          <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">FECHA FINAL</label>
+                                          <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
+                                          <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
+                                        </div>
+                                      </div>
+                                    </div> <!-- FIN DE EL PRIMER ROW --> 
+                                  </div><!--FINAL DEL CARD BODY -->                       
+                                  <div class="modal-footer ">
+                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                    <button type="submit"  name="AGREGAR_MATRICULA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Matricular</button>      
+                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                </div>
+                              </form>
+                            </div>
+                          </div><!-- FIN DEL MODAL EDITAR -->  
                       </tr>             
-                        <?php
+                      </tbody>
+                      <?php
                         }
                         }
                         ?>
-                      </tbody>
                   </table>
                 </div><!--fin del div de responsivi -->
                 
@@ -124,9 +230,9 @@
           </div><!-- fINAL DEL card PRIMARY -->
           
           <br>
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #33FFC8" id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Clases ya matriculadas </strong></h1>
+          <div class="card">
+            <div class="card-header text-center" style="background-color:#3FCDFD " id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;">ClASES MATRICULADAS </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -135,17 +241,18 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Asignatura </th>
-                          <th>Nombre del Tutor</th>
-                          <th>Modalidad</th>
-                          <th>Seccion</th>
-                          <th>Hora</th>                     
-                          <th>Acción</th>                   
+                          <th class="text-center"> ACCION</th> 
+                          <th class="text-center"> ASIGNATURA</th>
+                          <th class="text-center"> NOMBRE DEL TUTOR</th>
+                          <th class="text-center"> MODALIDAD</th>
+                          <th class="text-center"> Seccion</th>
+                          <th class="text-center"> Hora</th>                     
+                                            
                         </tr>
                       </thead>
                       <tbody>
                         <?php                      
-               $query = "SELECT  t.NOMBRE as TUTORIA,
+               $query = "SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE,
                CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
                 m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA 
                 FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
@@ -153,7 +260,7 @@
                 AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
                 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
                 AND ma.CODIGO_CARGA = c.CODIGO_CARGA
-                AND ma.CODIGO_ESTUDIANTE = $codigo;";
+                AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante';";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -163,9 +270,21 @@
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
                   $var6 = $row['CODIGO_CARGA'];
-                  
+                  $var7 =  $row['CODIGO_TUTORIA'];
+                  $var8 =  $row['CODIGO_MATRICULA'];
+                  $var9 =  $row['CODIGO_ESTUDIANTE'];
+
                         ?>
                         <tr>
+                          <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                <a href="#ELIMINAR<?php echo $var8; ?>" data-toggle="modal">
+                                <button type='button' id="ELIMINAR_MA"  style="color:white;"class="btn btn-Danger"><span> <i class="nav-icon fas fa-trash"></i></span> Eliminar</button>
+                              </a>
+                              </div>
+                            </div><!-- final del text-center -->
+                          </td>
                           
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
@@ -173,18 +292,28 @@
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td> 
 
-                          <td>
-                            <div class="text-center" >
-                              <div class="btn-group">
-                                
-                                <a href="# <?php echo $var1; ?>" data-toggle="modal">
-                               
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-Danger"><span> <i class="nav-icon fas fa-trash"></i></span> Eliminar</button>
-                                 
-                              </a>
-                              </div>
-                            </div><!-- final del text-center -->
-                          </td>
+                          <div id="ELIMINAR<?php echo $var8 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form id="FORMEeliminar" method="POST">
+                                  <div class="modal-body">
+                                    <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
+                                    <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
+                                    <h4 class="text-center">¿Esta seguro de eliminar la clase?<?php echo $var1; ?>?</h4>
+                                </div> <!--fin el card body -->
+                                    <div class="modal-footer ">
+                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                      <button type="submit"  name="ELIMINAR_MATRICULA"   class="btn btn-primary">Si,eliminar</button>      
+                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                               </form>
+                               </div><!--fin del modal contener -->
+                            </div><!--fin del modal dialog -->
+                          </div><!--fin del modal de eliminar -->
+                          
                       </tr>             
                         <?php
                         }
@@ -195,31 +324,23 @@
                 </div><!--fin del div de responsivi -->
                 
               </div> <!-- /.card-body -->
-            </form>
+              </form><!-- CIERRE DE ESTE -->
+
+            </form><!--FORM GENERAL -->
+            <?php
+               }
+            ?>
           </div><!-- fINAL DEL card PRIMARY -->  
            
         </div><!--FINAL DE COL-M12-->
 
-        
-
-  
       </div><!-- FINAL ROW PADRE -->
 
-
-    </div><!-- FINAL CONTAINER FLUID --> 
-    </div>
-    </div>
-
- 
-  
-    
-
-  </section>
-
- 
-
-  </section>
-                
+         </div><!-- FINAL CONTAINER FLUID --> 
+        </div>
+        </div>
+      </section>
+      </section>
             </div><!--fin del modal contener -->
               </div><!--fin del modal dialog -->
           </div><!--fin del modal de eliminar -->          
@@ -227,9 +348,11 @@
    </div><!-- CIerre del container fluid--> 
   </section>
 <!-- Cierre del div wraper -->
+                      
 
-
- 
+      
+        
+      
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
@@ -237,22 +360,6 @@ $(document).ready( function () {
       language:espanol
     });
 } );
-
- //Funcion para habilitar el de la tabla
- $( function() {
-    $("#estudiante").change( function() {
-        if ($(this).val() > 0 ) {
-          document.getElementById('asignaturas').style.display = "block";
-          document.getElementById('tabla_asignaturas').style.display = "block";
-          
-        } else{
-          document.getElementById('asignaturas').style.display = "none";
-          document.getElementById('tabla_asignaturas').style.display = "none";
-           
-        }
-    });
-  });
-
 
 //todo lo que tenga que ver con el datatable se verá en español
 let = espanol = {
@@ -265,7 +372,7 @@ let = espanol = {
     "search": "Buscar:",
     "infoThousands": ",",
     "loadingRecords": "Cargando...",
-    "paginate": {
+    "p?aginate": {
         "first": "Primero",
         "last": "Último",
         "next": "Siguiente",

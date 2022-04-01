@@ -19,7 +19,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
            
                         <?php
                             include "conexionpdo.php";
@@ -45,7 +45,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           ?>
 
-            <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Modalidad</button>
+            <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Modalidad</button>
                             <php
                               }
                             ?>
@@ -53,7 +53,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">MODALIDAD</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"> Tabla de Modalidad</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -62,10 +62,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   <table id="tabla_Modalidad" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                          <th>Codigo</th>
-                          <th>Tipo</th>
-                          <th>Descripcion</th>
+                        <th>ACCION</th>
+                          <th>CODIGO</th>
+                          <th>TIPO MODALIDAD</th>
+                          <th>DESCRIPCION</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -277,40 +277,50 @@ bitacora($codigoObjeto,$accion,$descripcion);
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO PREGUNTA --> 
 
-  <!-- Button trigger modal -->
-
-
-<!-- Modal -->
 
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_Modalidad').DataTable();
-} );
-</script>
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
+  $(document).ready( function () {
+      $('#tabla_Modalidad').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Modalidad:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
         }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
-
-
+      },
+        
+      })
+  } );
+</script>
 
 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>

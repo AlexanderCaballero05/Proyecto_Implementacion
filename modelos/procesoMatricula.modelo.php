@@ -10,66 +10,81 @@
 <?php
 
 //AGREGAR/REGISTRAR LA MATRICULA
-if(isset($_POST['estudiante'])){
-       
-    $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
+if(isset($_POST['AGREGAR_MATRICULA'])){
+   isset($_POST['ID_ESTUDIANTE']);
+      $ESTUDIANTE = ($_POST['ID_ESTUDIANTE']);
+      $CARGA =  ($_POST['ID_CARGA']);
+      $usuario = $_SESSION['vario']; //variable que trae el usuario que está logeado
+      $fechaActual = date('Y-m-d');  
+      $tutoria = ($_POST['tutoria']);
    try{
-      if(isset($_POST['btnmatricular'])){
-           $estudiante = ($_POST['estudiante']);
-           $carga = ($_POST['CODIGO_CARGA']);
-           $fechaActual = date('Y-m-d');   
-          try{ 
-              $consulta_nom = $db->prepare("SELECT PARAMETRO FROM tbl_parametros WHERE PARAMETRO = (?);");
-              $consulta_nom->execute(array($nombre_param));
-              $row=$consulta_nom->fetchColumn();
-              if($row>0){
-                echo "<script>
-                alert('El nombre de parámetro $nombre_param ya se encuentra registrado');
-                window.location = 'crudParametros';
-                </script>";
-              exit;
-              }else{
-                try{
-                  $query_param = " INSERT INTO `tbl_matricula_academica`( `CODIGO_CARGA`, `CODIGO_ESTUDIANTE`,`FECHA_MATRICULA`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$carga','$estudiante','$fechaActual','$usuario','$fechaActual' ); ";
-                  $resul=$conn->query($query_param);
-                  if($resul >0){
-                    echo "<script> 
-                    alert('egistro de matricula exitoso');
-                    window.location = 'procesoMatricula';
-                    </script>";
-                    
+     $consulta = "";
+     $consulta = $db->prepare("SELECT ma.CODIGO_CARGA ,ma.CODIGO_ESTUDIANTE, ca.CODIGO_TUTORIA 
+     from tbl_carga_academica ca ,tbl_matricula_academica ma
+     where ca.CODIGO_CARGA = ma.CODIGO_CARGA and ca.CODIGO_TUTORIA = (?) and ma.CODIGO_ESTUDIANTE = (?)");
+     $consulta ->execute(array($tutoria,$ESTUDIANTE));
+     $row = $consulta->fetchColumn();
 
-                    //<!--llamada de la fuction bitacora -->
-                    $codigoObjeto=3;
-                    $accion='Insertar parámetro';
-                    $descripcion= 'Registro de matricula exitoso';
-                    bitacora($codigoObjeto, $accion,$descripcion);
+     if($row > 0){
+      echo "<script> 
+      alert('No puede adicionar esta clase,ya la tiene matriculada');
+      window.location = 'procesoMatricula';
+      </script>";
 
-                  }else{
-                    echo "<script> 
-                    alert('Error !');
-                    window.location = 'procesoMatricula';
-                    </script>";
-                    
-                    //<!--llamada de la fuction bitacora -->
-                    $codigoObjeto=3;
-                    $accion='Registro fallido de parámetro';
-                    $descripcion= 'Se intentó insertar un nuevo parámetro';
-                    bitacora($codigoObjeto, $accion,$descripcion);
-                  }
-                }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                }
-              }//fin del else de si no existe el nombre del parametro
-          }catch(PDOException $e){
-          echo $e->getMessage(); 
-          return false;
-          }
-        }//fin del if de verificar si hay datos
+     }else{
+      $matricula = " INSERT INTO `tbl_matricula_academica`( `CODIGO_CARGA`, `CODIGO_ESTUDIANTE`,`FECHA_MATRICULA`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) 
+      VALUES ('$CARGA','$ESTUDIANTE','$fechaActual','$usuario','$fechaActual' ); ";
+      $resul=$conn->query($matricula);
 
+      if($resul >0){
+        echo "<script> 
+        alert('Registro de matricula exitoso');
+        window.location = 'procesoMatricula';
+        </script>";
+      }else{
+        echo "<script> 
+        alert('Registro de matricula exitoso');
+        window.location = 'procesoMatricula';
+        </script>";
+      }
+
+     }
+
+      
+      
    }catch(PDOException $e){
     echo $e->getMessage(); 
     return false;
    }
 }//FIN DEL IF DE REGISTAR
+
+
+
+if(isset($_POST['ma_eliminar'])){
+  if(isset($_POST['ELIMINAR_MATRICULA'])){
+    $code = ($_POST['ma_eliminar']);//asigna a una variable el id del estado a eliminar
+    $estudiante = ($_POST['estudiante_eli']);
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            alert('¡Materia eliminada!');
+            window.location = 'procesoMatricula';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar la matricula!');
+            window.location = 'procesoMatricula';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       
+      }
+    
+  }
+}//Cirre del if padre

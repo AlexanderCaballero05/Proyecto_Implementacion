@@ -224,7 +224,7 @@
                                     <label for="txtcodigo_persona">Nombre</label>
                                     <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" required="">
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                     campo obligatorio.
                                    </div>
 
                                 </div>
@@ -234,7 +234,7 @@
                                     <label for="txtcodigo_persona">Descripción</label>
                                     <textarea  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" required=""></textarea>
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                      campo obligatorio.
                                    </div>
                                 </div>
                             </div>

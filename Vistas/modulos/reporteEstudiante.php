@@ -313,14 +313,7 @@ $pdf->Cell(60, 8, 'Servicios basicos ', 0,0, 'C',1);
 $pdf->Cell(60, 8, 'Dispositivos electronicos ', 0,1, 'C',1);
 
 $data=new Conexion();
- $conexion=$data->conect(); 
-  $strquery ="select ts.nombre_tipo as TIPO,  es.CODIGO_ESTUDIANTE 
-  from tbl_tipo_socioeconomico tc ,tbl_contenido_socioeconomico ts ,tbl_estudiante_socioeconomico es
-  where ts.CODIGO_CONTENIDO_SOCIOECONOMICO = es.CODIGO_CONTENIDO_SOCIOECONOMICO and ts.CODIGO_TIPOSOCIO = 3 and
-   es.CODIGO_ESTUDIANTE = 42 and ts.CODIGO_TIPOSOCIO = tc.CODIGO_TIPOSOCIO ";
-  $result = $conexion->prepare($strquery);
-  $result->execute();
-  $data = $result->fetchall(PDO::FETCH_ASSOC);
+ $conexion=$data->conect();   
 
   $query ="select ts.nombre_tipo as TIPO,  es.CODIGO_ESTUDIANTE 
   from tbl_tipo_socioeconomico tc ,tbl_contenido_socioeconomico ts ,tbl_estudiante_socioeconomico es

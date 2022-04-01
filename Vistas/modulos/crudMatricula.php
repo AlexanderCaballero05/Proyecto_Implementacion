@@ -24,16 +24,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <section class="content">
     <div class="container-fluid">
         <div class="card">
-          <div class="card-header">
+          <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="#">Ver Matricula</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matricula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="procesoMatricula">Matricula</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Otros</a>
+                <a class="nav-link" style="color:#000000;" active href="procesoMatricula">Matricula</a>
               </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
@@ -64,7 +61,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           ?>
                 <a href="procesoMatricula">
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span> Agregar Nueva matricula</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span> Agregar Matricula</button>
 
                 </a>
                 <php

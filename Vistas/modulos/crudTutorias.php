@@ -132,7 +132,7 @@
                           <div id="EDITARTUTORIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Tutoria</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -220,7 +220,7 @@
   <div id="AGREGAR_TUTORIA" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Tutoria</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -230,18 +230,21 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria" id="nombre_tutoria">
+                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
+                                    <div class="invalid-feedback">
+                                     campo obligatorio.
+                                   </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                               <?php //--INICIO DEL ESTADO
-                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area where CODIGO_AREA <> 2 and  CODIGO_AREA <> 3;";
                                 $resultadod=$conn->query($query);                
                                ?>
                               <label  class="control-label">Area</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
-                                      <option > --Seleccione-- </option>
+                                      <option selected enable value=""> --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
                                        while($row = $resultadod->fetch_assoc()) { 
@@ -251,6 +254,9 @@
                                       <option value="<?php echo $codigo_area?>" ><?php echo $area;?></option>
                                       <?php } 
                                       }?>
+                                      <div class="invalid-feedback">
+                                         campo obligatorio.
+                                     </div>
                                     </select> 
                                 </div>
                             </div>
@@ -293,4 +299,21 @@
         
       })
   } );
+</script>
+<script>
+(function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>
