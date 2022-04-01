@@ -522,11 +522,26 @@
             </li>
 
             <li class="nav-item">
+
+              <a href="crudrecetamedica" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Receta Medica</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="crudmedicamento" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Medicamento</p>
+              </a>
+            </li>
+
               <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>mantenimiento transtornos</p>
               </a>
             </li>
+
 
             <li class="nav-item">
               <a href="procesoExpedienteMedico" class="nav-link">

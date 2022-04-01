@@ -197,7 +197,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Tipo Especialidad Psicologia:</label>
                          <div class="form-group">
-                            <select class="form-control select2" style="width: 100%;" name="psicologo" required="">
+                            <select class="form-control select2" style="width: 100%;" name="psicologo" >
                              <option selected >--Seleccione tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -221,7 +221,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Tipo Especialidad Medico:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="medico" required="">
+                            <select class="form-control select2"   style="width: 100%;" name="medico" >
                              <option selected >--Seleccione tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -244,7 +244,7 @@
                         ?>
                          <label for="cbx_persona" class="control-label">Catequistas:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="catequista" required="">
+                            <select class="form-control select2"   style="width: 100%;" name="catequista">
                              <option selected enable value="" >--Seleccione Catequesis--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {

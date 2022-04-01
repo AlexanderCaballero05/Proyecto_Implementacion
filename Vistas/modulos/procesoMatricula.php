@@ -3,18 +3,21 @@
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=20;
+ $codigoObjeto=23;
  $accion='Ingreso Matricula';
  $descripcion= 'Ingreso al proceso/registros de matricula ';
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
+
+
 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  
+  <section class="content">
+    <div class="container-fluid">
 
     <section class="content">
     <div class="container-fluid">
@@ -32,456 +35,470 @@
               </li>
             </ul>
           </div>
-          <div class="card-body">
-          <div class="row">
-            <div class="col-md-12">
-                <a href="procesoCargaAcademica">
-            
-            <form id="formMatricula" action="procesoCargaAcademica" method="POST">
-            <h5>Matricula</h5>
-            <hr>
+          <div class="card-body"><!--Cuerpo del card body principal -->
             </br>
-            <!--INICIO COMOBOX PARA ELEGIR AL ESTUDIANTE-->
-            <div class="form-group">
+            
+            
+            <form action="">
+            <div class="row sm-6">
+                      <label for="">Seleccionar al estudiante:</label>
+                       <input type="text" name="nombre1" class="form-control" placeholder="Buscar" onkeyup="mayus(this);" minlength="3" maxlength="20"   required="">
+                       <button  class="btn btn-secondary "  class="col-sm-1 col-form">Buscador</button>
+                    
+              </div>
+            </form>
+            <br>
+           
 
-            <!-- query para traer los datos del estudiante -->
-            <?php
-            include_once "conexion3.php";
-            $query= "SELECT p.CODIGO_PERSONA,CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-            as NOMBRE_COMPLETO FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
-            $result= $conn->query($query);
-            ?>
-
-                <label for="txtcodigo_persona">Seleccionar Estudiante:</label>
-                    <select class="form-control" name="PERUSUARIO" required="">
-                      <option selected disabled value="">Estudiante</option>
-                      <?php
-                        if ($result->num_rows > 0){
-                          while($row = $result->fetch_assoc()){
-                      ?>
-                      <option value="<?php echo $row['CODIGO_PERSONA'];?>"><?php echo $row['NOMBRE_COMPLETO'];?></option>
-                       <?php
-                       }
-                         }
-
+               <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;">Clases a matricular </strong></h1>
+            </div>
+            <form  method="POST"><!-- form start -->
+              <div class="card-body">
+                  
+                <div class="table-responsive">
+                  <table id="tabla_asignaturas" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Asignatura </th>
+                          <th>Nombre del Tutor</th>
+                          <th>Modalidad</th>
+                          <th>Seccion</th>
+                          <th>Hora</th>                     
+                          <th>Acción</th>                   
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php                      
+               $query = "SELECT  t.NOMBRE as TUTORIA,
+                CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
+                 m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA 
+                 FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
+                 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+                 AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
+                 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA;";
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  $var1 = $row['TUTORIA'];
+                  $var2 = $row['TUTOR'];
+                  $var3 = $row['MODALIDAD'];
+                  $var4 = $row['SECCION'];
+                  $var5 = $row['HORA'];
+                  $var6 = $row['CODIGO_CARGA'];
+                  
                         ?>
-                      </select> </br>
-                      
-            </div> <!--FIN DEL COMOBOX -->
-            <h5>Carga Académica</h5>
-            <hr> </br>
-            <div class="row mb-4">
-              <?php // AQUI INICIA EL SELECT con su boton
-              $query = "SELECT c.CODIGO_PERSONA, c.CODIGO_CARGA,t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-              as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
-              FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
-              WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-              AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA";
-              $resultadod=$conn->query($query);                
-              ?>
-              <div class="col-sm-4">
-               <select style="width: 100%;"  class="form-control select2" required=""  name="BUSCADOR" id="BUSCADOR" type="text" required >
-                 <option selected disabled value="">Buscar carga academica</option>
-                 <?php 
-                   if ($resultadod->num_rows > 0) {
-                   while($row = $resultadod->fetch_assoc()) { 
-                   $codigo_buscar = $row['CODIGO_CARGA']; //se trae el codigo de carga al que pertenece la seccion
-                   $nombre = $row['NOMBRE_COMPLETO']; //el nombre del encargado de la seccion (se repiten los nombre,porque llevan varias secciones)
-                   $seccion = $row['SECCION']; // y el nombre de la seccion
-                   $conca = $seccion .' '.$nombre; //se concatena la seccion con el encargado para que lo busque de esta forma
-                   ?>
-                 <option value="<?php echo $codigo_buscar?>" ><?php echo $conca;?></option><!--En el value se trae el codigo de carga y se muestra la concatenacion de seccion y encargado -->
-                 <?php 
-                 } 
-                 }
-                 ?>
-               </select><!--Fin del select de busqueda por seccion y tutor -->
-           </div>
-           <button type="submit"  name="filtrartutor"  class="btn btn-info"><i style='font-size:18px' class='fas'>&#xf0d0;</i></button><!--botoncito de busqueda : ) -->     
-         </div><!--AQUI TERMINARIA-->
-         <?php
-         if(isset($_POST['BUSCADOR'])) {
-            $CODIGO = $_POST['BUSCADOR'];
-            $query = "SELECT c.CODIGO_PERSONA, c.CODIGO_CARGA,t.NOMBRE as TUTORIA,c.CODIGO_MODALIDAD,m.TIPO, c.SECCION, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL, c.CODIGO_TUTORIA,CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-            as NOMBRE_COMPLETO, t.NOMBRE as TUTORIA,m.TIPO as MODALIDAD
-            FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m
-            WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-            AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA and c.CODIGO_CARGA='$CODIGO'";
-            $result = $conn->query($query);
+                        <tr>
+                          
+                          <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td> 
+                          <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo $var6; ?></td> 
 
-            if ($result->num_rows > 0) { 
-             while($row = $result->fetch_assoc()) { //se asigna las variables que vamos utilizar
-                $var1 = $row['CODIGO_CARGA'];
-                $var2 = $row['CODIGO_PERSONA'];
-                $var3 = $row['CODIGO_MODALIDAD'];
-                $var4 = $row['CODIGO_TUTORIA'];
-                $var6 = $row['SECCION'];
-                $var7 = $row['HORA'];
-                $var8 = $row['FECHA_INICIO'];
-                $var9 = $row['FECHA_FINAL'];
-                $var10 = $row['TIPO'];
-                $var11 = $row['NOMBRE_COMPLETO']; //Se trae el nombre completo de la persona
-                $var12 = $row['TUTORIA'];
-                $var13 = $row['MODALIDAD'];
-            }
-          }
-          ?>
-           <!--FORMULARIO FLTRADO-->
-         </form>
-            <form method="POST">
-              <div class="row">
-                <!--Input que guarda el codigo de la carga,con este dato sirve para eliminar y editar,se pone en hidden para que no se visualice-->
-               <input class="form-control"  hidden value="<?php echo $var1; ?>" type="text" name="IDCARGA" id="IDCARGA"   >
-                <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora de clase:</label> 
-                    <div class="form-group">
-                      <input class="form-control" value="<?php echo $var7; ?>" type="time" maxlength="13" minlength="13" name="hora" id="" required><!--Tiene como value la variable 7 que contiene  la hora -->
-                    </div>
-                </div>
-                  <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
-                    <label  class="control-label">Fecha Inicio:</label> 
-                    <div class="form-group">
-                      <input class="form-control" value="<?php echo $var8; ?>" type="date" maxlength="13" minlength="13" name="fecha_inicio"><!--Tiene como value la variable 8 que contiene  la fecha de inicio -->
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
-                    <label  class="control-label">Fecha final:</label> 
-                    <div class="form-group">
-                      <input class="form-control" value="<?php echo $var9; ?>" type="date" maxlength="13" minlength="13" name="fecha_final" id="fecha_final"   >
-                    </div>
-                  </div>
-              </div><!--Cierre del primer row -->
-
-              <div class="row">
-                <div class="col-md-4 mb-3 "> 
-                  <?php //
-                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <div class="form-group">
-                    <label  class="control-label">Encargado:</label>
-                    <select class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required>
-                      <option value="<?php echo $var2; ?>"><?php echo $var11; ?></option><!--Se muestra el nombre completo y se trae al value el codigo de la persona de la tabla carga -->
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutor = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
+                          <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                
+                                <a href="# <?php echo $var1; ?>" data-toggle="modal">
+                               
+                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-Primary"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
+                                 
+                              </a>
+                              </div>
+                            </div><!-- final del text-center -->
+                          </td>
+                      </tr>             
+                        <?php
+                        }
+                        }
                         ?>
-                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option><!--Trae el nombre de las personas que son tutores de la tabla de personas -->
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DEL ENCARAGADO -->
-
-                <div class="col-md-4"> 
-                  <?php //
-                  $query = "SELECT * FROM tbl_tutoria";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <label for="identidad" class="control-label">Tutoria:</label> 
-                  <div class="form-group">
-                    <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria" id="editar_area" required>
-                      <option value="<?php echo $var4; ?>" ><?php echo $var12; ?></option> <!--Lo mismo que el de arriba :v -->
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutoria = $row['CODIGO_TUTORIA'];
-                          $nombre = $row['NOMBRE'];
+                      </tbody>
+                  </table>
+                </div><!--fin del div de responsivi -->
+                
+              </div> <!-- /.card-body -->
+            </form>
+          </div><!-- fINAL DEL card PRIMARY -->
+          
+          <br>
+          <div class="card card-primary">
+            <div class="card-header text-center" style="background-color: #33FFC8" id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;">Clases ya matriculadas </strong></h1>
+            </div>
+            <form  method="POST"><!-- form start -->
+              <div class="card-body">
+                  
+                <div class="table-responsive">
+                  <table id="tabla_asignaturas" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th>Asignatura </th>
+                          <th>Nombre del Tutor</th>
+                          <th>Modalidad</th>
+                          <th>Seccion</th>
+                          <th>Hora</th>                     
+                          <th>Acción</th>                   
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php                      
+               $query = "SELECT  t.NOMBRE as TUTORIA,
+               CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
+                m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA 
+                FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
+                WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+                AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
+                AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
+                AND ma.CODIGO_CARGA = c.CODIGO_CARGA
+                AND ma.CODIGO_ESTUDIANTE = $codigo;";
+              $result = $conn->query($query);
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  $var1 = $row['TUTORIA'];
+                  $var2 = $row['TUTOR'];
+                  $var3 = $row['MODALIDAD'];
+                  $var4 = $row['SECCION'];
+                  $var5 = $row['HORA'];
+                  $var6 = $row['CODIGO_CARGA'];
+                  
                         ?>
-                      <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DE LA TUTORIA -->
+                        <tr>
+                          
+                          <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td> 
+                          <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo $var6; ?></td> 
 
-                <div class="col-md-4"> 
-                  <?php //
-                  $query = "SELECT * FROM tbl_modalidad";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <label for="identidad" class="control-label">Modalidad:</label> 
-                  <div class="form-group">
-                    <select class="form-control select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
-                    <option value="<?php echo $var4; ?>" ><?php echo $var13; ?></option><!--La misama forma que lo de encargado -->
-                      <?php 
-                        if($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_modalidad = $row['CODIGO_MODALIDA'];
-                          $nombre = $row['TIPO'];
+                          <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                
+                                <a href="# <?php echo $var1; ?>" data-toggle="modal">
+                               
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-Danger"><span> <i class="nav-icon fas fa-trash"></i></span> Eliminar</button>
+                                 
+                              </a>
+                              </div>
+                            </div><!-- final del text-center -->
+                          </td>
+                      </tr>             
+                        <?php
+                        }
+                        }
                         ?>
-                      <option value="<?php echo $codigo_modalidad?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DEL  -->
-              </div><!--FINAL DEL ROW -->
-              <div class="row">
-                <div class="col-md-4"><!--seccion-->
-                    <label for="identidad" class="control-label">Sección:</label> 
-                    <div class="form-group">
-                      <select class="form-control select2" id="" name="seccion">
-                      <option value="<?php echo $var6; ?>"><?php echo $var6; ?></option>
-                       <option value="Sección A">Sección A</option><!--se esta en proceso si dejarlo asi o no :v -->
-                       <option value="Sección B">Sección B </option>
-                       <option value ="Sección C">Sección C </option>
-                      </select>
-                    </div>
-                  </div>
-              </div><!--Fin del row -->
-              </br></br></br>
+                      </tbody>
+                  </table>
+                </div><!--fin del div de responsivi -->
+                
+              </div> <!-- /.card-body -->
+            </form>
+          </div><!-- fINAL DEL card PRIMARY -->  
+           
+        </div><!--FINAL DE COL-M12-->
 
-              <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-              <button type="submit"  id="" name="EDITAR_CARGA" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
-              <a href="#ELIMINAR" data-toggle="modal">
-              <button type="submit"  id="" name="eli" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
-              </a> 
-            </form><!-- FIN DEL FORM-->
-          </div><!--FIN DEL CARD BODY -->
+        
 
-          <!--INICIO DEL MODAL ELIMINAR   -->
-          <div id="ELIMINAR"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form id="FORMEeliminar" method="POST">
-                      <div class="modal-body">
-                        <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
-                        <h4 class="text-center">¿Esta seguro de eliminar la carga academica <?php  ?>?</h4>
-                      </div> <!--fin el card body -->
-                      <div class="modal-footer ">
-                        <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="submit"  name="ELIMINAR_CARGA" id="ELIMINAR_CARGA"  class="btn btn-primary">Si,eliminar</button>      
-                      </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                    </form> <!--FIN FORMULARIO FLTRADO-->
-          <?php
-          }else {  //ES un else por si no hay datos en el isset ,osea si no se buscar una carga,entonces se muestran  todos los campos vacios,para que se llenen
-           ?>
-           <!--FORMULARIO FLTRADO-->
-         </form>
-            <form method="POST">
-              <div class="row">
-                <div class="col-md-4 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora de clase:</label> 
-                    <div class="form-group">
-                      <input class="form-control"  type="time" maxlength="13" minlength="13" name="hora" id="" required >
-                        <div class="invalid-feedback">
-                        Llene este campo.
-                        </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
-                    <label  class="control-label">Fecha Inicio:</label> 
-                    <div class="form-group">
-                      <input class="form-control" type="date" maxlength="13" minlength="13" name="fecha_inicio" >
-                    </div>
-                  </div>
-                  <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
-                    <label  class="control-label">Fecha final:</label> 
-                    <div class="form-group">
-                      <input class="form-control" type="date" maxlength="13" minlength="13" name="fecha_final" id=""   >
-                    </div>
-                  </div>
-              </div><!--Cierre del row general -->
-              <div class="row">
-                <div class="col-md-4 mb-3"> <!--Fila para el encargado-->
-                  <?php 
-                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <div class="form-group">
-                    <label  class="control-label">Encargado:</label>
-                    <select class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required>
-                      <option selected disabled></option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutor = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DEL ENCARAGADO -->
+  
+      </div><!-- FINAL ROW PADRE -->
 
-                <div class="col-md-4"> 
-                  <?php //
-                  $query = "SELECT * FROM tbl_tutoria";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <label for="identidad" class="control-label">Tutoria:</label> 
-                  <div class="form-group">
-                    <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria" id="editar_area" required>
-                      <option selected disabled >--Seleccione--</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutoria = $row['CODIGO_TUTORIA'];
-                          $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DE LA TUTORIA -->
-                <div class="col-md-4"> 
-                  <?php //
-                  $query = "SELECT * FROM tbl_modalidad";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <label for="identidad" class="control-label">Modalidad:</label> 
-                  <div class="form-group">
-                    <select class="form-control select2 " id="modalidad" style="width: 100%;"  name="modalidad"  required>
-                      <option selected disabled>--Seleccione--</option>
-                      <?php 
-                        if($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_modalidad = $row['CODIGO_MODALIDA'];
-                          $nombre = $row['TIPO'];
-                        ?>
-                      <option value="<?php echo $codigo_modalidad?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                  </div>
-                </div><!--CIERRE DEL  -->
-              </div><!--FINAL DEL ROW -->
-              <div class="row">
-                <div class="col-md-4"><!--CORREO ELECTRONICO-->
-                    <label for="identidad" class="control-label">Sección:</label> 
-                    <div class="form-group">
-                      <select class="form-control select2" id="" name="seccion">
-                      <option selected disabled >--Seleccione--</option>
-                       <option value="Sección A">Sección A</option>
-                       <option value="Sección B">Sección B </option>
-                       <option value ="Sección C">Sección C </option>
-                      </select>
-                    </div>
-                  </div>
-              </div><!--Fin del row -->
-              </br></br></br>
-              <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-              <button type="submit"  id="" name="EDITAR_CARGA" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Editar</button>
-              <a href="#ELIMINAR" data-toggle="modal">
-              <button type="submit"  id="" name="eli" class="btn btn-danger btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Eliminar</button>
-              </a> 
 
-            </form><!-- FIN DEL FORM-->
-          </div><!--FIN DEL CARD BODY -->
-             <!--INICIO DEL MODAL ELIMINAR   -->
-          <div id="ELIMINAR"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel"></h5>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <form id="FORMEeliminar" method="POST">
-                      <div class="modal-body">
-                        <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
-                        <h4 class="text-center">¿Esta seguro de eliminar la carga academica <?php  ?>?</h4>
-                      </div> <!--fin el card body -->
-                      <div class="modal-footer ">
-                        <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="submit"  name="ELIMINAR_CARGA" id="ELIMINAR_CARGA"  class="btn btn-primary">Si,eliminar</button>      
-                      </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                    </form> <!--FIN FORMULARIO FLTRADO-->
-           <?php
-              }
-            ?>
+    </div><!-- FINAL CONTAINER FLUID --> 
+    </div>
+    </div>
 
-</div>
-</div>
-</div>
-                  </div><!--fin del modal contener -->
+ 
+  
+    
+
+  </section>
+
+ 
+
+  </section>
+                
+            </div><!--fin del modal contener -->
               </div><!--fin del modal dialog -->
           </div><!--fin del modal de eliminar -->          
         </div><!--fIN DEL CARD GENERAL -->
    </div><!-- CIerre del container fluid--> 
   </section>
-  </div><!--fin del form group -->
 <!-- Cierre del div wraper -->
 
 
- <script>
-    (function () { //todavia no esta lo del validation :v
-        'use strict'
-        var forms = document.querySelectorAll('.needs-validation')
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-          .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-              form.classList.add('was-validated')
-            }, false)
-          })
-    })()
+ 
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+$(document).ready( function () {
+    $('#tabla_asignaturas').DataTable({
+      language:espanol
+    });
+} );
+
+ //Funcion para habilitar el de la tabla
+ $( function() {
+    $("#estudiante").change( function() {
+        if ($(this).val() > 0 ) {
+          document.getElementById('asignaturas').style.display = "block";
+          document.getElementById('tabla_asignaturas').style.display = "block";
+          
+        } else{
+          document.getElementById('asignaturas').style.display = "none";
+          document.getElementById('tabla_asignaturas').style.display = "none";
+           
+        }
+    });
+  });
+
+
+//todo lo que tenga que ver con el datatable se verá en español
+let = espanol = {
+    "processing": "Procesando...",
+    "lengthMenu": "Mostrar _MENU_ registros",
+    "zeroRecords": "No se encontraron resultados",
+    "emptyTable": "Ningún dato disponible en esta tabla",
+    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "search": "Buscar:",
+    "infoThousands": ",",
+    "loadingRecords": "Cargando...",
+    "paginate": {
+        "first": "Primero",
+        "last": "Último",
+        "next": "Siguiente",
+        "previous": "Anterior"
+    },
+    "aria": {
+        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad",
+        "collection": "Colección",
+        "colvisRestore": "Restaurar visibilidad",
+        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+        "copySuccess": {
+            "1": "Copiada 1 fila al portapapeles",
+            "_": "Copiadas %ds fila al portapapeles"
+        },
+        "copyTitle": "Copiar al portapapeles",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Mostrar todas las filas",
+            "_": "Mostrar %d filas"
+        },
+        "pdf": "PDF",
+        "print": "Imprimir",
+        "renameState": "Cambiar nombre",
+        "updateState": "Actualizar",
+        "createState": "Crear Estado",
+        "removeAllStates": "Remover Estados",
+        "removeState": "Remover",
+        "savedStates": "Estados Guardados",
+        "stateRestore": "Estado %d"
+    },
+    "autoFill": {
+        "cancel": "Cancelar",
+        "fill": "Rellene todas las celdas con <i>%d<\/i>",
+        "fillHorizontal": "Rellenar celdas horizontalmente",
+        "fillVertical": "Rellenar celdas verticalmentemente"
+    },
+    "decimal": ",",
+    "searchBuilder": {
+        "add": "Añadir condición",
+        "button": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "clearAll": "Borrar todo",
+        "condition": "Condición",
+        "conditions": {
+            "date": {
+                "after": "Despues",
+                "before": "Antes",
+                "between": "Entre",
+                "empty": "Vacío",
+                "equals": "Igual a",
+                "notBetween": "No entre",
+                "notEmpty": "No Vacio",
+                "not": "Diferente de"
+            },
+            "number": {
+                "between": "Entre",
+                "empty": "Vacio",
+                "equals": "Igual a",
+                "gt": "Mayor a",
+                "gte": "Mayor o igual a",
+                "lt": "Menor que",
+                "lte": "Menor o igual que",
+                "notBetween": "No entre",
+                "notEmpty": "No vacío",
+                "not": "Diferente de"
+            },
+            "string": {
+                "contains": "Contiene",
+                "empty": "Vacío",
+                "endsWith": "Termina en",
+                "equals": "Igual a",
+                "notEmpty": "No Vacio",
+                "startsWith": "Empieza con",
+                "not": "Diferente de",
+                "notContains": "No Contiene",
+                "notStarts": "No empieza con",
+                "notEnds": "No termina con"
+            },
+            "array": {
+                "not": "Diferente de",
+                "equals": "Igual",
+                "empty": "Vacío",
+                "contains": "Contiene",
+                "notEmpty": "No Vacío",
+                "without": "Sin"
+            }
+        },
+        "data": "Data",
+        "deleteTitle": "Eliminar regla de filtrado",
+        "leftTitle": "Criterios anulados",
+        "logicAnd": "Y",
+        "logicOr": "O",
+        "rightTitle": "Criterios de sangría",
+        "title": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "value": "Valor"
+    },
+    "searchPanes": {
+        "clearMessage": "Borrar todo",
+        "collapse": {
+            "0": "Paneles de búsqueda",
+            "_": "Paneles de búsqueda (%d)"
+        },
+        "count": "{total}",
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "Sin paneles de búsqueda",
+        "loadMessage": "Cargando paneles de búsqueda",
+        "title": "Filtros Activos - %d",
+        "showMessage": "Mostrar Todo",
+        "collapseMessage": "Colapsar Todo"
+    },
+    "select": {
+        "cells": {
+            "1": "1 celda seleccionada",
+            "_": "%d celdas seleccionadas"
+        },
+        "columns": {
+            "1": "1 columna seleccionada",
+            "_": "%d columnas seleccionadas"
+        },
+        "rows": {
+            "1": "1 fila seleccionada",
+            "_": "%d filas seleccionadas"
+        }
+    },
+    "thousands": ".",
+    "datetime": {
+        "previous": "Anterior",
+        "next": "Proximo",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "unknown": "-",
+        "amPm": [
+            "AM",
+            "PM"
+        ],
+        "months": {
+            "0": "Enero",
+            "1": "Febrero",
+            "10": "Noviembre",
+            "11": "Diciembre",
+            "2": "Marzo",
+            "3": "Abril",
+            "4": "Mayo",
+            "5": "Junio",
+            "6": "Julio",
+            "7": "Agosto",
+            "8": "Septiembre",
+            "9": "Octubre"
+        },
+        "weekdays": [
+            "Dom",
+            "Lun",
+            "Mar",
+            "Mie",
+            "Jue",
+            "Vie",
+            "Sab"
+        ]
+    },
+    "editor": {
+        "close": "Cerrar",
+        "create": {
+            "button": "Nuevo",
+            "title": "Crear Nuevo Registro",
+            "submit": "Crear"
+        },
+        "edit": {
+            "button": "Editar",
+            "title": "Editar Registro",
+            "submit": "Actualizar"
+        },
+        "remove": {
+            "button": "Eliminar",
+            "title": "Eliminar Registro",
+            "submit": "Eliminar",
+            "confirm": {
+                "_": "¿Está seguro que desea eliminar %d filas?",
+                "1": "¿Está seguro que desea eliminar 1 fila?"
+            }
+        },
+        "error": {
+            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
+        },
+        "multi": {
+            "title": "Múltiples Valores",
+            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+            "restore": "Deshacer Cambios",
+            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+        }
+    },
+    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+    "stateRestore": {
+        "creationModal": {
+            "button": "Crear",
+            "name": "Nombre:",
+            "order": "Clasificación",
+            "paging": "Paginación",
+            "search": "Busqueda",
+            "select": "Seleccionar",
+            "columns": {
+                "search": "Búsqueda de Columna",
+                "visible": "Visibilidad de Columna"
+            },
+            "title": "Crear Nuevo Estado",
+            "toggleLabel": "Incluir:"
+        },
+        "emptyError": "El nombre no puede estar vacio",
+        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
+        "removeError": "Error al eliminar el registro",
+        "removeJoiner": "y",
+        "removeSubmit": "Eliminar",
+        "renameButton": "Cambiar Nombre",
+        "renameLabel": "Nuevo nombre para %s",
+        "duplicateError": "Ya existe un Estado con este nombre.",
+        "emptyStates": "No hay Estados guardados",
+        "removeTitle": "Remover Estado",
+        "renameTitle": "Cambiar Nombre Estado"
+    }
+};
+
+
+
 </script>
 
-<script>
-
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-
-(function () {
-
-  'use strict'
-
-
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-
-  var forms = document.querySelectorAll('.needs-validation')
-
-
-
-  // Loop over them and prevent submission
-
-  Array.prototype.slice.call(forms)
-
-    .forEach(function (form) {
-
-      form.addEventListener('submit', function (event) {
-
-        if (!form.checkValidity()) {
-
-          event.preventDefault()
-
-          event.stopPropagation()
-
-        }
-
-
-
-        form.classList.add('was-validated')
-
-      }, false)
-
-    })
-
-})()
