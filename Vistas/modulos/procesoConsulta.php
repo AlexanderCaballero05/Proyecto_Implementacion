@@ -54,7 +54,7 @@
             <div class="row mb-8">
                     <div class="col">
                     <?php 
-                          $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI
+                          $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI, C.CODIGO_CITA
                           from tbl_inscripcion_cita c ,tbl_persona p
                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
                           AND c.CODIGO_ESTADO = '11';";
@@ -63,6 +63,7 @@
                           while($row = $resul->fetch_assoc()){
                             $var1 = $row['PACIENTE'];
                             $var2 = $row['DNI'];
+                            $var3 = $row['CODIGO_CITA'];
                           
                           ?>
                       <label for="">Nombre del paciente:</label>
@@ -83,12 +84,14 @@
                     <hr>
                     
                   
-            <!--INICIO COMBOBOX PARA ELEGIR AL ESTUDIANTE-->
+            <!--INICIO COMBOBOX -->
             <div class="form-group">
               <?php
-              $query = "SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL
+              $query = "SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL, pr.CODIGO_PRECLINICA
               FROM tbl_preclinica pr, tbl_inscripcion_cita c
-              WHERE pr.CODIGO_CITA = c.CODIGO_CITA AND c.CODIGO_ESTADO = '11';";
+              WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+              AND c.CODIGO_ESTADO = '11'
+              AND pr.FECHA_CREACION = CURDATE();";
               $resul=$conn->query($query); 
                
               while($row = $resul->fetch_assoc()){
@@ -100,15 +103,14 @@
                 $var6 = $row['FRECUENCIA_RESPIRATORIA'];
                 $var7 = $row['PULSO'];
                 $var8 = $row['MASA_CORPORAL'];
+                $var9 = $row['CODIGO_PRECLINICA'];
+
               ?>
             <div class= "row">                      
             <div class="col-sm-2 mb-3">
                          <label for="" class="control-label">Peso</label> 
                             <div class="form-group">
                                 <input type="text"  required class="form-control" name="peso" required value="<?php echo $var1 ?>" disabled ="disabled" >
-                                <div class="invalid-feedback">
-                                 Llene este campo.
-                                </div>
                             </div>
                         </div><!--fin del peso -->
 
@@ -116,18 +118,12 @@
                           <label for="" class="control-label">Estatura</label> 
                             <div class="form-group">
                                 <input type="text"  required class="form-control"  name="estatura" required value="<?php echo $var2 ?>" disabled ="disabled">
-                                <div class="invalid-feedback">
-                                 Llene este campo.
-                                </div>
                             </div>
                         </div><!--fin del la estatura -->
                         <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">temperatura</label> 
                             <div class="form-group">
                                 <input type="text"  required class="form-control"  name="temperatura" required value="<?php echo $var3 ?>" disabled ="disabled" >
-                                <div class="invalid-feedback">
-                                 Llene este campo.
-                                </div>
                             </div>
                         </div><!--fin del temperatura -->
                         <div  class="col-sm-4 mb-3">
@@ -148,36 +144,24 @@
                           <label for="" class="control-label">Presión Arterial</label> 
                            <div class="form-group">
                              <input class="form-control" type="text" name="FC" required value="<?php echo $var5 ?>" disabled ="disabled"> 
-                              <div class="invalid-feedback">
-                              Llene este campo.
-                              </div>
                             </div>
                         </div><!--fin de presion -->
                         <div class="col-md-2 mb-3"> <!--Nivel de respiracion-->
                           <label for="validationCustom03"  class="control-label">Nivel Respiración</label> 
                           <div class="form-group">
                             <input class="form-control"  type="text"  name="FR"  required value="<?php echo $var6 ?>" disabled ="disabled">
-                              <div class="invalid-feedback">
-                              Llene este campo.
-                              </div>
                           </div>
                         </div>
                         <div class="col-md-2 mb-3"> <!--PULSO-->
                           <label for="validationCustom03"  class="control-label">Pulso</label> 
                           <div class="form-group">
                             <input class="form-control"  type="text"  name="pulso"  required value="<?php echo $var7 ?>" disabled ="disabled">
-                              <div class="invalid-feedback">
-                              Llene este campo.
-                              </div>
                           </div>
                         </div>
                         <div class="col-md-4 mb-3"> <!--masica corporal-->
                           <label for="validationCustom03"  class="control-label">Indice masa corporal</label> 
                           <div class="form-group">
                             <input class="form-control"  type="text"  name="masa_corporal"  required value="<?php echo $var8 ?>" disabled ="disabled">
-                              <div class="invalid-feedback">
-                              Llene este campo.
-                              </div>
                           </div>
                         </div>
                       </div><!--fin del div de form-group-->
@@ -185,14 +169,14 @@
                     }
                     ?> 
                     </div><!--fin del div de row-->
-                    
+                    <form class=" needs-validation" novalidate method="POST">
                     <h5>Consulta</h5>
                     <hr>
                     <div class="row">
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Sintomas:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="500" minlength="5" name="sintomas" id="sintomas"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" maxlength="500" minlength="5" name="sintomas2" id="sintomas2"   autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -230,8 +214,8 @@
                       </div>
                     </div><!--Fin de una fila -->
                     <br>
-                    <button type="submit"  id="" name="Guardar_Consulta" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
-                      
+                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
+                    </form>   
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
             </form>

@@ -6,19 +6,21 @@
 ?>
 <?php
 //AGREGAR NUEVO REGISTRO A LA TABLA DE CONSULTA
-if(isset($_POST['sintomas'])){
+if(isset($_POST['sintomas2'])){
   session_start();
   $usuario = $_SESSION['vario'];
-  if(isset($_POST['Guardar_Consulta'])){
+  $fechaActual = date('Y-m-d');
+  if(isset($_POST['Guardar_Consulta2'])){
     try{
-      $sintomas = ($_POST['sintomas']);
+      $sintomas = ($_POST['sintomas2']);
       $diagnostico1 = ($_POST['diagnostico1']);
       $evolucion = ($_POST['evolucion']);
       $diagnostico2 = ($_POST['diagnostico2']);
       $estado = "8";
+      $codigo_pre = ($_POST['codigopre']);
       //
-      $inser ="INSERT INTO tbl_consulta_medica (`SINTOMAS`, `DIAGNOSTICO_INGRESO`, `EVOLUCION`, `DIAGNOSTICO_EGRESO`,`CREADO_POR_USUARIO`, `FECHA_CREACION`)
-       VALUES ('$sintomas',  '$diagnostico1', '$evolucion', ' $diagnostico2', '$usuario', '$fechaActual') ";
+      $inser ="INSERT INTO tbl_consulta_medica (`CODIGO_PRECLINICA`,`SINTOMAS`, `DIAGNOSTICO_INGRESO`, `EVOLUCION`, `DIAGNOSTICO_EGRESO`,`CREADO_POR_USUARIO`, `FECHA_CREACION`)
+       VALUES ('$codigo_pre','$sintomas',  '$diagnostico1', '$evolucion', ' $diagnostico2', '$usuario', '$fechaActual') ";
       $consulta=$conn->query($inser);
       $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo_cita'";
       $consult=$conn->query($update);
