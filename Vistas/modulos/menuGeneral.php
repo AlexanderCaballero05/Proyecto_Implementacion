@@ -331,15 +331,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="crudCargaAcademica" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Carga academica</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="crudmodalidad" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar modalidad</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudCargaAcademica" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Carga academica</p>
                 </a>
               </li>
             </ul>
@@ -390,21 +390,9 @@
           </a>
           <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="crudTutorias" class="nav-link">
+               <a href="crudMatricula" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Adicionar tutoria</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="procesoCargaAcademica" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Listado de matriculas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Calificaciones</p>
+                  <p>Gestion de Matricula</p>
                 </a>
               </li>
             </ul>
