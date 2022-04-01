@@ -159,7 +159,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="txtcodigo_persona">Masa Corporal:</label>
-                                                <input  type="text"  value ="<?php echo $var11; ?>" class="form-control" name="editar_estatura">
+                                                <input  type="text"  value ="<?php echo $var11; ?>" class="form-control" name="editar_masa">
                                             </div>
                                         </div>
                                   </div><!--fin row -->
@@ -179,7 +179,7 @@
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pulso:</label>
-                                          <input type="text"  value ="<?php echo $var9; ?>" class="form-control" name="editar_fr">
+                                          <input type="text"  value ="<?php echo $var9; ?>" class="form-control" name="editar_pulso">
                                         </div>
                                       </div>
                                   </div><!--fin row -->
@@ -187,13 +187,13 @@
                                      <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Temperatura:</label>
-                                          <input type="text"  value ="<?php echo $var8; ?>" class="form-control" name="editar_fr">
+                                          <input type="text"  value ="<?php echo $var8; ?>" class="form-control" name="editar_temperatura">
                                         </div>
                                       </div>
                                       <div  class="col-sm-4 mb-3">
                                         <div class="form-group">
                                           <label for="" class="control-label">Estatus de desnutrición</label>
-                                          <select class="form-control " required name="desnutricion" required> 
+                                          <select class="form-control " required name="editar_desnutricion" required> 
                                           <option  value="10">--Seleccione--</option>
                                             <option  value="No tiene">No tiene</option>
                                             <option   value="Moderado">Moderado</option>
