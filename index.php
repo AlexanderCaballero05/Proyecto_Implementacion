@@ -21,22 +21,22 @@ require_once "modelos/crudParametros.modelo.php";
 require_once "modelos/crudPrueba.modelo.php";
 require_once "modelos/perfilUsuario.modelo.php";
 require_once "modelos/procesoCarga.modelo.php";
+require_once "modelos/procesoConsulta.modelo.php";
 require_once "modelos/procesoPreClinica.modelo.php";
 require_once "modelos/ProcesoCitasMedicas.modelo.php";
 require_once "modelos/ProcesoExpedienteMedico.modelo.php";
-
-
+require_once "modelos/procesoRecetaMedica.modelo.php";
 require_once "modelos/area.modelo.php";
+require_once "modelos/tiposangremodelo.php";
+
 require_once "modelos/procesoMatricula.modelo.php";
 
 
 //require_once "modelos/crudrecetamedica.modelo.php";
 require_once "modelos/crudmedicamento.modelo.php";
+
 require_once "modelos/crudAlergia.modelo.php";
-
 require_once "modelos/familiaresmodelo.php";
-
-
 require_once "modelos/inscripcioncita.php";
 
 

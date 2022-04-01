@@ -265,11 +265,35 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
 <!-- Modal -->
 
-<script type="text/javascript"> 
+
+ <!--Funcion de la datatable -->
+ <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_roles').DataTable();
-} );
+  $(document).ready( function () {
+      $('#tabla_preguntas').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Pregunta:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
 </script>
 
 

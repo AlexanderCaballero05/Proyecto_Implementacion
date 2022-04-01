@@ -14,7 +14,7 @@
 
 //AGREGAR/REGISTRAR 
     if(isset($_POST['prueba'])){
-       
+       session_start();
         $usuario = $_SESSION['vario']; //variable que trae el usuario que está logeado
        try{
           if(isset($_POST['agregar_pruebap'])){

@@ -115,7 +115,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="tabla_tiposocio" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Acción</th>
@@ -335,7 +335,35 @@ bitacora($codigoObjeto, $accion, $descripcion);
 </aside>
 </div><!-- ./wrapper -->
 
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_tiposocio').DataTable({
 
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar tiposocioeconomico:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
 
 

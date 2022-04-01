@@ -390,7 +390,23 @@
           </a>
           <ul class="nav nav-treeview">
               <li class="nav-item">
+
                <a href="crudMatricula" class="nav-link">
+
+                <a href="crudTutorias" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Adicionar tutoria</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="crudMatricula" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Listado de matriculas</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="" class="nav-link">
+
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestion de Matricula</p>
                 </a>
@@ -585,9 +601,9 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="ProcesoCitasPsicologicas" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                <p>Registar Cita</p>
+                <p>Proceso de consultas</p>
               </a>
             </li>
             <li class="nav-item">

@@ -20,7 +20,7 @@
                   if($row>0){
                     echo "<script>
                     alert('La $pregunta ya se encuentra registrado');
-                    window.location = 'tipopersona';
+                    window.location = 'crudtipopersona';
                     </script>";
                   exit;
                   }else{
@@ -30,7 +30,7 @@
                       if($resul >0){
                         echo "<script> 
                         alert('Pregunta registrada correctamente');
-                        window.location = 'tipopersona';
+                        window.location = 'crudtipopersona';
                         </script>";
                         $codigoObjeto=12;
                         $accion='Se ingreso un tipo persona';
@@ -40,7 +40,7 @@
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
-                        window.location = 'tipopersona';
+                        window.location = 'crudtipopersona';
                         </script>";
                         exit;
                       }
@@ -76,7 +76,7 @@
         if($row>0){
           echo "<script>
           alert('Ya existe un tipo de persona con este mismo nombre: $editar_persona');
-          window.location = 'tipopersona';
+          window.location = 'crudtipopersona';
           </script>";
           exit;
 
@@ -89,7 +89,7 @@
             if ($consulta>0){
               echo "<script>
               alert('¡Tipo persona modificado exitosamente!');
-              window.location = 'tipopersona';
+              window.location = 'crudtipopersona';
               </script>";
               $codigoObjeto=12;
               $accion='Modificacion';
@@ -98,7 +98,7 @@
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el tipo de persona!');
-              window.location = 'tipopersona';
+              window.location = 'crudtipopersona';
               </script>";
             }
           }catch(PDOException $e){
@@ -126,7 +126,7 @@ if(isset($_POST['persona_eliminar'])){
       if($row >0){
         echo "<script>
         alert('¡No se puede eliminar esta, relacionado con otras tablas!');
-        window.location = 'tipopersona';
+        window.location = 'crudtipopersona';
         </script>";
         exit;
       }else{
@@ -136,7 +136,7 @@ if(isset($_POST['persona_eliminar'])){
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             alert('¡Tipo de persona eliminada!');
-            window.location = 'tipopersona';
+            window.location = 'crudtipopersona';
             </script>";
             $codigoObjeto=12;
             $accion='Eliminacion';
@@ -146,7 +146,7 @@ if(isset($_POST['persona_eliminar'])){
           }else{
             echo "<script>
             alert('¡Error al eliminar la persona!');
-            window.location = 'tipopersona';
+            window.location = 'crudtipopersona';
             </script>";
             exit;
           }

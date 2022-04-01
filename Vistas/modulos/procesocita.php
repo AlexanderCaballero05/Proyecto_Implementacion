@@ -81,7 +81,7 @@ $result3= $conn->query($query);
             </ul>
           </div>
           <div class="card-body">  
-            <form   method="POST" class="needs-validation">
+            <form   method="POST" class="needs-validation" novalidate>
 
               <div class="row">
                 <div class="col-sm-5 mb-3">
@@ -135,11 +135,13 @@ $result3= $conn->query($query);
                                   }
                                   }
                                 ?>
+                                
                             </select>
-                            <div class="invalid-feedback">
+                            
+                        </div>
+                        <div class="invalid-feedback">
                              Llene este campo.
                             </div>
-                        </div>
                     </div>
                     
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
@@ -223,9 +225,7 @@ $result3= $conn->query($query);
                             <select class="form-control select2" >
                             <option value= "">--Seleccionar Encargado--</option>
                             </select>
-                            <div class="invalid-feedback">
-                             Llene este campo.
-                            </div>
+                           
                         </div>
                     </div>
                     <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
@@ -292,15 +292,23 @@ $result3= $conn->query($query);
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
                         <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control" name="agregar_hora" id="agregar_hora">
+                        
                      </div>
+                     <div class="invalid-feedback">
+                             Llene este campo.
+                            </div>
                    </div>
                    <div class="col-sm-4 mb-3">
                         <div class="form-group">
+
                             <label for="fecha" class="form-label">Fecha de la cita </label>
-                            <input type="date"  
-                            required max="<?php $hoy=date("Y"); echo $hoy;?>"  
+                            <input type="date" min="<?= date("Y-m-d")?>" 
+                            max="<?= date("2022-04-30")?>"
                             class="form-control" 
-                            name="agregar_fecha_cita" id="agregar_fecha_cita">
+                            name="agregar_fecha_cita" id="agregar_fecha_cita" required>
+                            <div class="invalid-feedback">
+                             Llene este campo.
+                            </div>
                         </div>
                       </div>
                  </div> <!-- fin de algo--> 

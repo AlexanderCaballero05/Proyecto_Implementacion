@@ -27,7 +27,7 @@
                 <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE PRECLINICA PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> REGISTRO DE RECETAS PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -46,18 +46,27 @@
             <a  class="nav-link active" style="color:#000000;" href="#">Recetas Medicas</a>
             </li>
             </ul>
-          </div><
+          </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
           <div class="card-header bg-gradient-cyan"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Registro de recetas medicas</strong></h2>
            </div></br>
+
+        
+
          <form method="POST" class="needs-validation" novalidate>
+           
+          
 
             <div class="row pl-3 mb-3">
+
+
               <div class="col-sm-3">
                 <label for="" class="form-label">Fecha de receta</label>
-                 <input class="form-control" type="date" min="<?= date("Y-m-d")?>" max="<?= date("Y-m-d")?>"  name="telefono" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                 <input class="form-control" type="date" min="<?= date("Y-m-d")?>" max="<?= date("Y-m-d")?>"  name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+
               </div>
+
             </div>
 
             <div class="row mb-5 pl-3">
@@ -77,18 +86,21 @@
                 
                     <?php   
                 
-                 
-
-                    $query = "SELECT con.CODIGO_CONSULTA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
-                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe , tbl_usuario u, tbl_persona_especialidad es
+                 //AND con.FECHA_CREACION = CURDATE()
+                    //QUERY PAR EL CODIGO DE CONSULTA
+                    $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
                     WHERE con.CODIGO_CITA = i.CODIGO_CITA
                     AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                    AND i.CODIGO_ESTADO = esta.CODIGO_ESTADO
                     AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                    AND u.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                    AND con.FECHA_CREACION = CURDATE()
-                    AND es.CODIGO_PERSONA = '$cod_usuario';";
-                    $resultadod=$conn->query($query);                
+                    AND es.CODIGO_PERSONA = '$cod_usuario'
+                    AND esta.CODIGO_ESTADO = '8';";
+                    $resultadocon=$conn->query($query);                
                     ?>
+
+
+                  
 
                     <?php
                       $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
@@ -96,24 +108,29 @@
                       $resultado2=$conn->query($query1);
                     ?>
 
+
                   <!--<button  class="btn btn-secondary "  class="col-sm-1 col-form mt-3">Buscador</button>-->
                 <div class="col-sm-6 order-2 pl-2 mt-3 mb-3">
                   <label for="identidad" class="control-label">Nombre del paciente</label> 
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR" id="" type="text" required >
+                    <select  style="width: 100%;"  type="text" class="form-control select2" name="codigo_consulta" id="codigo_consulta">
                     <option selected disabled value="">Buscar paciente...</option>
                         <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_CONSULTA'];
-                          $nombre = $row['PACIENTE'];
+                          if ($resultadocon->num_rows > 0) {
+                          while($row = $resultadocon->fetch_assoc()) { 
+                          $codigocon = $row['CODIGO_CONSULTA'];
+                          $codigocita = $row['CODIGO_CITA'];
+                          $nombrecon = $row['PACIENTE'];
+
                           
                           ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <option value="<?php echo $codigocon?>" ><?php echo $nombrecon;?></option>
                         <?php 
                         } 
                         }
                         ?>
                       </select>
+
+                      <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_cita">
                           
                       <div class="invalid-feedback">
                           Agregue un nombre!
@@ -127,7 +144,7 @@
                 <!--Datalist para agregar el medicamento-->
                 <div class="col-sm-6 order-2 pl-2 mt-3 mb-3">
                   <label for="identidad" class="control-label">Medicamento</label> 
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR" id="" type="text" required >
+                    <select  style="width: 100%;"  class="form-control select2" name="codigo_medicamento" id="" type="text">
                     <option selected disabled value="">Buscar medicamento...</option>
                         <?php 
                           if ($resultado2->num_rows > 0) {
@@ -157,7 +174,8 @@
                         <div class="col-md-6"> <!--INICIO INDICE ACADEMICO-->
                           <label for="identidad" class="control-label">Indicacione de receta</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                            
+                          <textarea class="form-control" type="textarea" name="indicaciones" id="indicaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -168,7 +186,7 @@
                         <div class="col-md-6"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Observaciones</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                          <textarea class="form-control" type="textarea" name="observaciones" id="observaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
                                <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -178,15 +196,16 @@
 
                         
                   </div>
-
-
-                     
                 
                       </br></br></br>
                       <div class="card-footer mb-2 pr-2">
+                           <button type="submit"  id="receta_medica" name="receta_medica" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                      <!--colocar esta seguro que quiere finalizar la consulta-->
+                           <button type="submit"  id="receta_medica" name="finalizar_consulta" class="btn btn-primary btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
 
-                           <button type="submit"  id="GUARDARPERSONA" name="GUARDARFAMILIAR" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                       </div>
+
+                    
           </form>
           </div>
         </div>
