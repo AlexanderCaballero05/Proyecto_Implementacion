@@ -45,12 +45,12 @@
           </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
+          <form class=" needs-validation" novalidate method="POST">
             
-            <form id="formMatricula" action="procesoMatricula" method="POST">
             <h5>Datos del Paciente</h5>
             <hr>
             
-            <form action="">
+            
             <div class="row mb-8">
                     <div class="col">
                     <?php 
@@ -66,8 +66,10 @@
                             $var3 = $row['CODIGO_CITA'];
                           
                           ?>
+                      
                       <label for="">Nombre del paciente:</label>
-                       <input type="text" name="nombre" class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1 ?>" disabled ="disabled" >
+                      <input type="text" name="codigocita2" value="<?php echo $var3?>" hidden>
+                       <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
                          <label for="">DNI:</label>
@@ -77,13 +79,13 @@
                     <?php
                     }
                     ?>
-            </form>
+           
             
                     </br>
                     <h5>Preclinica</h5>
                     <hr>
                     
-                  
+            
             <!--INICIO COMBOBOX -->
             <div class="form-group">
               <?php
@@ -104,10 +106,10 @@
                 $var7 = $row['PULSO'];
                 $var8 = $row['MASA_CORPORAL'];
                 $var9 = $row['CODIGO_PRECLINICA'];
-
               ?>
             <div class= "row">                      
             <div class="col-sm-2 mb-3">
+            <input type="text" name="codigopre" value="<?php echo $var9 ?>" Hidden>
                          <label for="" class="control-label">Peso</label> 
                             <div class="form-group">
                                 <input type="text"  required class="form-control" name="peso" required value="<?php echo $var1 ?>" disabled ="disabled" >
@@ -168,8 +170,9 @@
                       <?php
                     }
                     ?> 
+                    
                     </div><!--fin del div de row-->
-                    <form class=" needs-validation" novalidate method="POST">
+                    
                     <h5>Consulta</h5>
                     <hr>
                     <div class="row">
