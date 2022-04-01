@@ -42,7 +42,7 @@
                     {
                     ?>                
            
-                       <button  data-toggle="modal"  href="#agregar_permisos" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar permiso</button>
+                       <button  data-toggle="modal"  href="#agregar_permisos" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar permiso</button>
                     
                     <?php
                     }
@@ -58,7 +58,7 @@
                   
                 <div class="table-responsive">
                   <table id="tabla_permisos" class="table table-bordered table-striped table-hover">
-                      <thead class="table-success" >
+                      <thead class="table" >
                         <tr><!--fila del encabezado de la tabla -->
                           <th class="text-center">Acción</th> 
                           <th class="text-center">ID</th> <!--encabezados de la tabla -->

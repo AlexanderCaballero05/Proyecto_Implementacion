@@ -11,18 +11,32 @@
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  
+  <div class="content-header text-xl-center mb-3 btn-light">
+              <h4>VER DATOS SOCIO-ECONOMICOS </h4>
+  </div>
   <section class="content">
     <div class="container-fluid">
+      <div class="card"> 
+        <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Registrar Estudiantes</a>
+            </li>
+              <li class="nav-item ">
+              <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+              </li>
+          </ul>
+        </div>
+        <div class="card-body">
       <div class="row">
         <div class="col-md-12">
-           <a  href="procesoRegistrarEstudiante">
-            <button  data-toggle="modal"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Nuevo contenido</button>
-            </a>
-          
-          <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+          </br>
+          <!-- card de la tabla-->
+          <div class="card "> 
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">Información de los Estudiantes</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
@@ -32,11 +46,11 @@
                   <table id="tabla_estudiantes" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
+                          <th class="text-center">ACCION</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">Nombre estudiante</th>
-                          <th class="text-center">Contenido Socieconomico</th>
-                          <th class="text-center">Nombre tipo contenido</th>
+                          <th class="text-center">NOMBRE ESTUDIANTE</th>
+                          <th class="text-center">CONTENIDO SOCIO-ECONOMICO</th>
+                          <th class="text-center">NOMBRE TIPO CONTENIDO</th>
                           
                         </tr>
                       </thead>
@@ -300,7 +314,9 @@
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
-  </section><!-- FINAL SECTION -->
+    </div>
+    </div><!--fin del card del menu -->
+  </section>
 
 
 
@@ -426,25 +442,34 @@
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTUDIANTE --> 
 
-  <!-- Button trigger modal -->
 
-
-<!-- Modal -->
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_estudiantes').DataTable();
-} );
-</script>
+  $(document).ready( function () {
+      $('#tabla_estudiantes').DataTable({
 
-<script type="text/javascript"> function solonumero(e) {
-        tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla==8) return true;
-        else if (tecla==0||tecla==9)  return true;
-       // patron =/[0-9\s]/;// -> solo letras
-        patron =/[0-9\s]/;// -> solo numeros
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    }
-	</script>
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Registro:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>

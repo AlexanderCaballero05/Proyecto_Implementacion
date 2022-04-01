@@ -39,26 +39,26 @@
                         <div  class="col-sm-4">
                         <?php 
 
-                        
+                        // AND i.FECHA_CITA = CURDATE();";
 
-                        $query = "SELECT con.CODIGO_CONSULTA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
-                        FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe 
-                        WHERE con.CODIGO_CITA = i.CODIGO_CITA
-                        AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND con.FECHA_CREACION = CURDATE();";
-                        $resul=$conn->query($query);                
+                        $query2 = "SELECT i.CODIGO_CITA as CITA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                        FROM tbl_inscripcion_cita i, tbl_persona pe 
+                        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                        AND I.CODIGO_ESTADO = '9';";
+                       
+                        $resul2=$conn->query($query2);                
                         ?>
                         <label for="" class="control-label">Paciente</label> 
                         <div class="form-group">
-                            <select class="form-control select2" required name="codigo_paciente" > 
+                            <select class="form-control select2" name="codigo_paciente_expediente"> 
                                 <option selected disabled value="">--Buscar Paciente--</option>
                                 <?php 
-                                    if ($resul->num_rows > 0) {
-                                    while($row = $resul->fetch_assoc()) { 
-                                    $codigo = $row['CODIGO_CONSULTA'];
-                                    $nombre = $row['PACIENTE'];
+                                    if ($resul2->num_rows > 0) {
+                                    while($row2 = $resul2->fetch_assoc()) { 
+                                    $codigo2 = $row2['CITA'];
+                                    $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                <option value="<?php echo $codigo2?>" ><?php echo $nombre2;?></option>
                                 <?php 
                                 } 
                                 }
@@ -69,20 +69,20 @@
 
                         <div  class="col-sm-2">
                             <?php 
-                            $query = "SELECT CODIGO_TIPO_SANGRE,TIPO from tbl_tipo_sangre ";
-                            $resultadod=$conn->query($query);                
+                            $queryTipo = "SELECT CODIGO_TIPO_SANGRE ,TIPO from tbl_tipo_sangre ";
+                            $resultadotipo=$conn->query($queryTipo);                
                             ?>
                           <label for="" class="control-label">Tipo Sangre</label> 
                            <div class="form-group">
-                             <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"  required > 
+                             <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"> 
                                 <option selected >--Seleccione tipo--</option>
                                 <?php 
-                                    if ($resultadod->num_rows > 0) {
-                                    while($row = $resultadod->fetch_assoc()) { 
-                                    $codigo = $row['CODIGO_TIPO_SANGRE'];
-                                    $tipo_sangre= $row['TIPO'];
+                                    if ($resultadotipo->num_rows > 0) {
+                                    while($rowtipo = $resultadotipo->fetch_assoc()) { 
+                                    $codigo_tipo = $rowtipo['CODIGO_TIPO_SANGRE'];
+                                    $tipo_sangre= $rowtipo['TIPO'];
                                     ?>
-                                <option value="<?php echo $codigo; ?>" ><?php echo $tipo_sangre;?></option>
+                                <option value="<?php echo $codigo_tipo; ?>" ><?php echo $tipo_sangre;?></option>
                                 <?php 
                                 } 
                                 }
@@ -92,16 +92,16 @@
                         </div><!--fin del tipo sangre -->
 
                         <div class="col-sm-3">
-                         <label for="" class="control-label">Antecedentes padre</label> 
+                         <label for="" class="control-label">Tratamientos que toma actualmente</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                            <textarea class="form-control" type="textarea" name="tratamientos" id="DIRECCION" autocomplete = "off" onkeypress=""></textarea>
                             </div>
                         </div><!--fin del peso -->
 
                         <div  class="col-sm-3">
-                          <label for="" class="control-label">Antecedentes madre</label> 
+                          <label for="" class="control-label">¿Padece de alguna enfermedad?</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                            <textarea class="form-control" type="textarea" name="enfermedades"  autocomplete = "off" onkeypress=""></textarea>
                             </div>
                         </div><!--fin del la estatura -->
 
@@ -120,19 +120,19 @@
                           </div>
                        <div class="card-body">
                         <?php 
-                          $query = "SELECT CODIGO_ALERGIAS,NOMBRE from tbl_alergias ";
-                          $resultadod=$conn->query($query);                
+                          $queryALE = "SELECT CODIGO_ALERGIAS,NOMBRE from tbl_alergias ";
+                          $resultadodALE=$conn->query($queryALE);                
                           ?>
                           <?php 
-                          if ($resultadod->num_rows > 0) {
-                            while($row = $resultadod->fetch_assoc()) { 
-                            $codigo = $row['CODIGO_ALERGIAS'];
-                            $nombre= $row['NOMBRE'];
+                          if ($resultadodALE->num_rows > 0) {
+                            while($rowALE = $resultadodALE->fetch_assoc()) { 
+                            $codigoALE = $rowALE['CODIGO_ALERGIAS'];
+                            $nombreALE= $rowALE['NOMBRE'];
                           ?>
                         <div  class="form-check icheck-green" >
-                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                            <label class="form-check-label" for="alergia<?php echo $codigo;?>">
-                              <?php echo $nombre;?>
+                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigoALE;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="alergia<?php echo $codigoALE;?>">
+                              <?php echo $nombreALE;?>
                             </label>
                             </br>
                             
@@ -148,19 +148,19 @@
                       <div class="col-md-3">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>ANTECEDENTES PATALOGICOS</strong>
+                              <strong>Transtornos sistemas corporales</strong>
                             </div>
                         <div class="card-body">
                         
                             <?php 
-                                $query = "SELECT CODIGO_OA,NOMBRE from `tbl_otros_antecedentes` ";
+                                $query = "SELECT CODIGO_TRANSTORNO ,TIPO from `TBL_TRANSTORNOS_CORPORALES` ";
                                 $resultadod=$conn->query($query);                
                                 ?>
                                 <?php 
                                 if ($resultadod->num_rows > 0) {
                                 while($row = $resultadod->fetch_assoc()) { 
-                                $codigo = $row['CODIGO_OA'];
-                                $nombre= $row['NOMBRE'];
+                                $codigo = $row['CODIGO_TRANSTORNO'];
+                                $nombre= $row['TIPO'];
                                 ?>
                             <div  class="form-check icheck-pink" >
                                 <input  class="form-check-input" type="checkbox" name="antecedentes[]" id="antecedente<?php echo $codigo;?>" value="<?php echo $codigo;?>">
@@ -182,24 +182,24 @@
                       <div class="col-md-3">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>ANTECEDENTES NO-PATALOGICOS</strong>
+                              <strong>Apariencia fisica</strong>
                             </div>
                         <div class="card-body">
                         
                             <?php 
-                                $query = "SELECT CODIGO_OA,NOMBRE from `tbl_otros_antecedentes` ";
-                                $resultadod=$conn->query($query);                
+                                $query1 = "SELECT CODIGO_APARIENCIA ,TIPO from TBL_APARIENCIA_FISICA  ";
+                                $resultadod1=$conn->query($query1);                
                                 ?>
                                 <?php 
-                                if ($resultadod->num_rows > 0) {
-                                while($row = $resultadod->fetch_assoc()) { 
-                                $codigo = $row['CODIGO_OA'];
-                                $nombre= $row['NOMBRE'];
+                                if ($resultadod1->num_rows > 0) {
+                                while($row1 = $resultadod1->fetch_assoc()) { 
+                                $codigo1 = $row1['CODIGO_APARIENCIA'];
+                                $nombre1= $row1['TIPO'];
                                 ?>
                             <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="antecedentes[]" id="antecedente<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                                <label class="form-check-label" for="antecedente<?php echo $codigo;?>">
-                                    <?php echo $nombre;?>
+                                <input  class="form-check-input" type="checkbox" name="apariencia[]" id="apariencia<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                                <label class="form-check-label" for="antecedente<?php echo $codigo1;?>">
+                                    <?php echo $nombre1;?>
                                 </label>
                                 </br>
                                 
@@ -215,7 +215,7 @@
                     </div><!--div del row -->  
 
                  </br></br>
-                <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
+                <button type="submit"  id="" name="expediente_medico" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->

@@ -66,7 +66,7 @@
             <!-- Menu de usuarios del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-copy"></i>
+                <i class="nav-icon fas fa-users"></i>
                 <p>
                   Gestion Usuarios
                   <i class="fas fa-angle-left right"></i>
@@ -143,7 +143,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas fa-graduation-cap"></i>
                 <p>
                   Gestion de Estudiantes
                   <i class="right fas fa-angle-left"></i>
@@ -156,18 +156,20 @@
                     <p>Agregar estudiantes</p>
                   </a>
                 </li>
-                <li class="nav-item">
+                 <!--<li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
-                </li>
+                </li> -->
+                <!--
                 <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                  <a href="crudtiposocioeconomico" class="nav-link" > modifique acuerdate 
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo socieconomico</p>
                   </a>
-                </li>
+                </li>-->
+                   
               </ul>
             </li>
         <?php
@@ -203,7 +205,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
                           <a href="" class="nav-link bg-gradient-navy">
-                            <i class="nav-icon fas fa-chart-pie"></i>
+                            <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
                               Gestion de Citas 
                               <i class="right fas fa-angle-left"></i>
@@ -252,7 +254,7 @@
             <!-- Menu de graficas del sistema -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas fa-chart-pie"></i>
+                <i class="nav-icon fas  fa-copy"></i>
                 <p>
                   Gestion de Familiares
                   <i class="right fas fa-angle-left"></i>
@@ -453,42 +455,74 @@
           </a>
 
           <ul class="nav nav-treeview">
-          <li class="nav-item">
-                              <a href="crudinscripcioncita"class="nav-link">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>Agregar Cita </p>
-                              </a>
-                            </li>
+           <li class="nav-item">
+             <a href="ProcesoCitasMedicos"class="nav-link">
+               <i class="far fa-edit nav-icon"></i>
+                <p>Proceso consultas</p>
+             </a>
+           </li>
 
             <li class="nav-item">
-              <a href="crudAlergias" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Mantenimiento Tipo Alergia</p>
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Proceso de expedientes</p>
               </a>
             </li>
+          </ul>
+        </li>
+
+
+
+
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class=" nav-icon fas fa-briefcase-medical "></i>
+            <p>
+              Mantenimiento medica
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+
+          <ul class="nav nav-treeview">
+           <li class="nav-item">
+             <a href="crudPreClinica"class="nav-link">
+               <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento Preclinica</p>
+             </a>
+           </li>
 
             <li class="nav-item">
-              <a href="crudPreClinica" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Preclinica</p>
+              <a href="crudConsulta" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento consultas</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Expedientes de pacientes</p>
+                <p>mantenimiento medicamentos</p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="procesoRecetaMedica" class="nav-link">
+              <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Recetas de pacientes</p>
+                <p>mantenimiento medicamentos-pacientes</p>
+              </a>
+            </li>
+
+
+            <li class="nav-item">
+              <a href="crudAlergias" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento alergias</p>
               </a>
             </li>
 
             <li class="nav-item">
+
               <a href="crudrecetamedica" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Receta Medica</p>
@@ -502,7 +536,19 @@
               </a>
             </li>
 
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento transtornos</p>
+              </a>
+            </li>
 
+
+            <li class="nav-item">
+              <a href="procesoExpedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento condiciones fisicas</p>
+              </a>
+            </li>
           </ul>
         </li>
          
