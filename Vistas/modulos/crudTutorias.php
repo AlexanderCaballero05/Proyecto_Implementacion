@@ -220,7 +220,7 @@
   <div id="AGREGAR_TUTORIA" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST"  class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Tutoria</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -230,8 +230,11 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria" id="nombre_tutoria">
-                                </div>
+                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria" id="nombre_tutoria">
+                                    <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
+                                  </div>
                             </div>
                             <div class="col-sm-12">
                               <?php //--INICIO DEL ESTADO
@@ -241,6 +244,9 @@
                               <label  class="control-label">Area</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
+                                    <div class="invalid-feedback">
+                                    Seleccione un campo!
+                                   </div>
                                       <option > --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
@@ -293,4 +299,88 @@
         
       })
   } );
+</script>
+
+<script>
+    function soloLetras(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+        especiales = ["8-37-39-46"];
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    }
+    //funcion para solu numeros ingresar en el campo
+    function soloNumeros_tel(e) {
+        var teclaPulsada = window.event ? window.event.keyCode : e.which;
+        // capturamos el contenido del input
+        var valor = document.getElementById("tele").value;
+        if (valor.length < 9) {
+            if (teclaPulsada == 9) {
+                return true;
+            }
+            // devolvemos true o false dependiendo de si es numerico o no
+            return /\d/.test(String.fromCharCode(teclaPulsada));
+        } else {
+            return false;
+        }
+    }
+    //funcion para quitar espacios
+    function quitarespacios(e) {
+        var cadena = e.value;
+        cadena = cadena.trim();
+        e.value = cadena;
+    };
+    //funcion para poner mayusculas
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+    //funcion sin espacios 
+    function sinespacio(e) {
+        var cadena = e.value;
+        var limpia = "";
+        var parts = cadena.split(" ");
+        var length = parts.length;
+        for (var i = 0; i < length; i++) {
+            nuevacadena = parts[i];
+            subcadena = nuevacadena.trim();
+            if (subcadena != "") {
+                limpia += subcadena + " ";
+            }
+        }
+        limpia = limpia.trim();
+        e.value = limpia;
+    };
+    //otra funcion para quitar espacios :V
+    function quitarespacios(e) {
+        var cadena = e.value;
+        cadena = cadena.trim();
+        e.value = cadena;
+    };
+</script>
+
+<script>
+(function () {
+  'use strict'
+  var forms = document.querySelectorAll('.needs-validation')
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
 </script>

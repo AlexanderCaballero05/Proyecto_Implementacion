@@ -20,11 +20,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="modal-content">
             <!-- Modal content-->
             <form method="POST" class="needs-validation" novalidate>
-
                 <div class="modal-header" style="background-color: #0CCDE3">
                     <h4 class="text-center">Crear informacion
                         objetos</h4>
-
                 </div>
                 <div class="modal-body">
                     <!--CUERPO DEL MODAL -->
@@ -34,7 +32,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="30" minlength="10"  onkeyup="mayus(this);"  type="text"
+                                <input type="text" class="form-control" maxlength="40" minlength="10" onkeypress="return soloLetras(event);"   onkeyup="mayus(this);"  type="text"
                                  name="nombre" id="nombre" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
@@ -45,7 +43,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
-                                <input type="text" class="form-control" onkeyup="mayus(this);"  type="text" 
+                                <input type="text" class="form-control" maxlength="100" minlength="10" onkeyup="mayus(this);"  type="text" 
                                  name="descripcion" id="descripcion" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
@@ -120,7 +118,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="tabla_objetos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                             <th>Acción</th>
@@ -249,7 +247,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                                                     name="editnombre" id="editnombre">
                                                                                 </div>
                                                                             </div>
@@ -257,7 +255,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text"
                                                                                      name="editdescripcion" id="editdescripcion">
                                                                                 </div>
                                                                             </div>
@@ -342,7 +340,34 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
 
-
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_objetos').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Objeto:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
 
 
@@ -448,15 +473,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
         e.value = cadena;
     };
 </script>
+
 <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
       form.addEventListener('submit', function (event) {
@@ -469,10 +490,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
       }, false)
     })
 })()
-
-
-
-
 </script>
 
 <!--♠DianaRut *No me quiten los creditos modificado por any :( -->

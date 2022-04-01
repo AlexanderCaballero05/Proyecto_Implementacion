@@ -54,7 +54,7 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">Información de los estados</strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -178,13 +178,13 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" disabled>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="15" minlength="5" onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" disabled>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50"    onkeyup="mayus(this);"  autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -240,7 +240,7 @@
   <div id="AGREGAR_ESTADO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation"novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Estado</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,14 +250,23 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al estado" name="nombre_estado" id="nombre_estado">
-                                </div>
+                                    <input  type="text"  class="form-control"  maxlength="15" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                     placeholder="Ingrese un nombre al estado" name="nombre_estado" id="nombre_estado" required=''>
+                                    <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+
+                                  </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del Estado" name="descripcion_estado" id="descripcion_estado"></textarea>
-                                </div>
+                                    <textarea  type="text"  class="form-control"  maxlength="50" onkeyup="mayus(this);" autocomplete = "off" type="text"  
+                                    placeholder="Ingrese una descripción del Estado" name="descripcion_estado" id="descripcion_estado" required='' ></textarea>
+                                    <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                  </div> 
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
@@ -276,8 +285,112 @@
 <!-- Modal -->
 
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_estados').DataTable();
-} );
+  $(document).ready( function () {
+      $('#tabla_estados').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Estado:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
 </script>
+
+<script>
+    (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+</script>
+<script>
+    function soloLetras(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+        especiales = ["8-37-39-46"];
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    }
+    //funcion para solu numeros ingresar en el campo
+    function soloNumeros_tel(e) {
+        var teclaPulsada = window.event ? window.event.keyCode : e.which;
+        // capturamos el contenido del input
+        var valor = document.getElementById("tele").value;
+        if (valor.length < 9) {
+            if (teclaPulsada == 9) {
+                return true;
+            }
+            // devolvemos true o false dependiendo de si es numerico o no
+            return /\d/.test(String.fromCharCode(teclaPulsada));
+        } else {
+            return false;
+        }
+    }
+    //funcion para quitar espacios
+    function quitarespacios(e) {
+        var cadena = e.value;
+        cadena = cadena.trim();
+        e.value = cadena;
+    };
+    //funcion para poner mayusculas
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+    //funcion sin espacios 
+    function sinespacio(e) {
+        var cadena = e.value;
+        var limpia = "";
+        var parts = cadena.split(" ");
+        var length = parts.length;
+        for (var i = 0; i < length; i++) {
+            nuevacadena = parts[i];
+            subcadena = nuevacadena.trim();
+            if (subcadena != "") {
+                limpia += subcadena + " ";
+            }
+        }
+        limpia = limpia.trim();
+        e.value = limpia;
+    };
+    //otra funcion para quitar espacios :V
+    function quitarespacios(e) {
+        var cadena = e.value;
+        cadena = cadena.trim();
+        e.value = cadena;
+    };
+</script>
+<script>

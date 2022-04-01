@@ -198,13 +198,13 @@ include_once "conexion3.php";
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_parametro">Parámetro</label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Valor</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"  onkeypress="return solonumeros(event);"   autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor">
                                         </div>
                                       </div> 
                                       </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -229,7 +229,7 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar" >
                                     <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
@@ -260,7 +260,7 @@ include_once "conexion3.php";
   <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Parámetro</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -270,14 +270,24 @@ include_once "conexion3.php";
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" 
+                                    placeholder="Ingrese el parámetro" name="parametro" id="parametro" required ="">
+                                    <div class="invalid-feedback">
+                                     campo obligatorio.
+                                   </div>
+
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtvalor">Valor</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param"></textarea>
-                                </div>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"  onkeypress="return solonumero(event)"  onkeyup="mayus(this);" autocomplete = "off" type="text"  
+                                    placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param" required=""></textarea>
+                                    <div class="invalid-feedback">
+                                    campo obligatorio.
+                                   </div>
+
+                                  </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
@@ -308,17 +318,66 @@ include_once "conexion3.php";
 </div><!-- ./wrapper -->
 
 
-
-
+  <!--Funcion de la datatable -->
+  <script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_parametros').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Parametro:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
  
 
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+$(document).ready( function () {
+    $('#tabla_parametros').DataTable();
+} );
+</script>
 
 
 
- 
- 
 
+
+<script>
+    (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+        }, false)
+        })
+    })()
+</script>
 
 
 <script type="text/javascript"> 
@@ -419,4 +478,14 @@ $( function() {
   };
 </script>
 
+<script type="text/javascript"> function solonumero(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla==8) return true;
+        else if (tecla==0||tecla==9)  return true;
+       // patron =/[0-9\s]/;// -> solo letras
+        patron =/[0-9\s]/;// -> solo numeros
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    }
+	</script>
 <!--♠DianaRut *No me quiten los creditos :( -->

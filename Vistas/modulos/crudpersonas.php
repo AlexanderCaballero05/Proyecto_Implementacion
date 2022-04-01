@@ -45,11 +45,13 @@ include_once "conexion3.php";
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                           <?php 
-                      if($permiso_registrar = 'SI'){
+                      if($permiso_registrar = 'ON'){
                      ?>    
-                      <a href="categoria"> 
-                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-
+                      <a href="categorias"> 
+                    <button type="button" class="btn btn-warning m-2" style="color:white;" >
+                        Nueva
+                        persona
+                    </button>
                     </a>
                     <?php 
                       }
@@ -64,42 +66,46 @@ include_once "conexion3.php";
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="tbl_persona" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Acción</th>
-                                            <th>ID</th>
-                                            <th>Primer nombre</th>
-                                            <th>Segundo nombre</th>
-                                            <th>Primer Apellido</th>
-                                            <th>Segundo Apellido</th>
-                                            <th>Dni</th>
-                                            <th>Sexo</th>
-                                            <th>Fecha nacimiento</th>
-                                            <th>Lugar nacimiento</th>
-                                            <th>Dirección</th>
-                                            <th>Tipo de Persona</th>
-                                            <th>Telefono</th>
-                                            <th>Correo</th>
-                                            <th>Fecha de Modificación</th>
-                                            <th>Modificado por</th>
-                                            <th>Creado por </th>
-                                            
+                                        <th class="text-center">Acción</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Primer nombre</th>
+                                        <th class="text-center">Segundo nombre</th>
+                                        <th class="text-center">Primer Apellido</th>
+                                        <th class="text-center">Segundo Apellido</th>
+                                        <th class="text-center">Dni</th>
+                                        <th class="text-center">Sexo</th>
+                                        <th class="text-center">Fecha nacimiento</th>
+                                        <th class="text-center">Lugar nacimiento</th>
+                                        <th class="text-center">Dirección</th>
+                                        <th class="text-center">Tipo de Persona</th>
+                                        <th class="text-center">Telefono</th>
+                                        <th class="text-center">Correo</th>
+                                    
                                         </tr>
                                     </thead>
                                     <tbody>
-                     <?php
-                        $query = "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,
-                         p.SEGUNDO_APELLIDO,p.DNI,p.CREADO_POR_USUARIO, p.FECHA_CREACION,
-                          p.MODIFICADO_POR, p.FECHA_MODIFICACION,p.SEXO,P.FECHA_NACIMIENTO, 
-                          P.LUGAR_NACIMIENTO, t.NUMERO_TELEFONO, c.correo_persona, td.DIRECCION,
-                         tt.NOMBRE as TIPO_PERSONA, tt.CODIGO_TIPO_PERSONA 
-                        FROM tbl_persona p 
-                        LEFT JOIN tbl_telefono t on p.CODIGO_PERSONA= t.CODIGO_PERSONA 
-                        LEFT JOIN tbl_correo_electronico c on p.CODIGO_PERSONA = c.CODIGO_PERSONA 
-                        LEFT JOIN tbl_tipo_persona TT on p.CODIGO_PERSONA = tt.CODIGO_TIPO_PERSONA 
-                        left join tbl_direccion td on p.CODIGO_PERSONA = td.CODIGO_PERSONA 
-                        ORDER BY p.CODIGO_PERSONA ASC;";
+                                        <?php
+                        $query = "SELECT tp.CODIGO_PERSONA, 
+                        tp.PRIMER_NOMBRE , 
+                        tp.SEGUNDO_NOMBRE, 
+                        tp.PRIMER_APELLIDO,
+                        tp.SEGUNDO_APELLIDO,
+                        tp.DNI,
+                        tp.FECHA_NACIMIENTO , 
+                        tp.LUGAR_NACIMIENTO,
+                         tp.DIRECCION,
+                         tp.SEXO ,
+                         tt.NUMERO_TELEFONO ,
+                         ttp.NOMBRE , 
+                         tce.correo_persona 
+                         from tbl_persona tp  
+                         left join   tbl_telefono tt  on tt.CODIGO_PERSONA =  tp.CODIGO_PERSONA   
+                         left  join  tbl_tipo_persona ttp  on ttp.CODIGO_TIPO_PERSONA  =  tp.CODIGO_PERSONA  
+                         left  join  tbl_correo_electronico tce  on tce.CODIGO_PERSONA   =  tp.CODIGO_PERSONA  
+                          where tp.CODIGO_PERSONA  > 1;                        ";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -112,13 +118,9 @@ include_once "conexion3.php";
                             $var8 = $row['SEXO'];
                             $var9 = $row['FECHA_NACIMIENTO'];
                             $var10 = $row['LUGAR_NACIMIENTO'];
-                            $var11 = $row['CODIGO_TIPO_PERSONA'];
-                            $var12 = $row['TIPO_PERSONA'];
+                            $var11 = $row['NOMBRE'];
                             $var13 = $row ['NUMERO_TELEFONO'];
                             $var14 = $row ['correo_persona'];
-                            $var15 = $row ['FECHA_MODIFICACION'];
-                            $var16 = $row['MODIFICADO_POR'];
-                            $var17 = $row['CREADO_POR_USUARIO'];
                             $var18 = $row['DIRECCION'];
                         ?>
                                         <tr>
@@ -153,12 +155,10 @@ include_once "conexion3.php";
                                             <td class="text-center"><?php echo $var9; ?></td>
                                             <td class="text-center"><?php echo $var10; ?></td>
                                             <td class="text-center"><?php echo $var18; ?></td>
-                                            <td class="text-center"><?php echo $var12; ?></td>
+                                            <td class="text-center"><?php echo $var11; ?></td>
                                             <td class="text-center"><?php echo $var13; ?></td>
                                             <td class="text-center"><?php echo $var14; ?></td>
-                                            <td class="text-center"><?php echo $var15; ?></td>
-                                            <td class="text-center"><?php echo $var16; ?></td>
-                                            <td class="text-center"><?php echo $var17; ?></td>
+
                                             <!--INICIO DEL MODAL DE EDITAR -->
                                             <div id="EDITARPERSONA<?php echo $var1; ?>" class="modal fade"
                                                 role="dialog">
@@ -243,7 +243,7 @@ include_once "conexion3.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona">Dni</label>
-                                                                            <input type="number"
+                                                                            <input type="text"
                                                                                 value="<?php echo $var7; ?>"
                                                                                 class="form-control" maxlength="20"
                                                                                 minlength="5"
@@ -252,46 +252,7 @@ include_once "conexion3.php";
                                                                                 name="dni" id="dni">
                                                                         </div>
                                                                     </div>
-                                                                    <div class="col-sm-6">
-                                                                        <label for="cbx_persona"
-                                                                            class="control-label">Sexo</label>
-                                                                        <div class="form-group">
-                                                                            <select
-                                                                                class="form-control select2 select2-primary"
-                                                                                style="width: 100%;" name="sexo"
-                                                                                id="sexo" required="">
-                                                                                <option value="<?php echo $var8?>">
-                                                                                    <?php echo $var8;?></option>
-                                                                                <option value="M">M</option>
-                                                                                <option value="F">F</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group">
-                                                                            <label for="txtnombre_usuario">Fecha
-                                                                                vencimiento</label>
-                                                                            <input type="date" class="form-control"
-                                                                                value="<?php echo $var9; ?>"
-                                                                                name="f_nacimiento" id="f_nacimiento">
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Lugar
-                                                                                nacimiento</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="<?php echo $var10; ?>"
-                                                                                maxlength="20" minlength="5"
-                                                                                onKeyDown="sinespacio(this);"
-                                                                                onkeyup="mayus(this);"
-                                                                                autocomplete="off" type="text"
-                                                                                onkeypress="return soloLetras(event);"
-                                                                                name="lugar_n" id="lugar_n">
-                                                                        </div>
-                                                                    </div>
+                                    
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona">Dirección</label>
@@ -300,35 +261,7 @@ include_once "conexion3.php";
                                                                              class="form-control"  name="direccion" id="direccion"
                                                                               onkeyup="mayus(this);" autocomplete = "off"
                                                                                onkeypress="" placeholder="Ingrese Direccion" 
-                                                                               required="" ">
-                                                                        </div>
-                                                                    </div>
-                                                                    <?php
-                                                                     $query = "SELECT CODIGO_TIPO_PERSONA,NOMBRE FROM tbl_tipo_persona;";
-                                                                    $resultadod=$conn->query($query);                
-                                                                     ?>
-                                                                    <div class="col-sm-6">
-                                                                        <label for="cbx_persona"
-                                                                            class="control-label">Rol</label>
-                                                                        <div class="form-group">
-                                                                            <select
-                                                                                class="form-control select2 select2-primary"
-                                                                                style="width: 100%;" name="cod_tip_per"
-                                                                                id="cod_tip_per" required="">
-                                                                                <option value="<?php echo $var11?>">
-                                                                                    <?php echo $var12;?></option>
-                                                                                <?php 
-                                                                                if ($resultadod->num_rows > 0) {
-                                                                                    while($row = $resultadod->fetch_assoc()) { 
-                                                                                    $codigo_estado = $row['CODIGO_TIPO_PERSONA'];
-                                                                                    $estado = $row['NOMBRE'];
-                                                                                ?>
-                                                                                <option
-                                                                                    value="<?php echo $codigo_estado?>">
-                                                                                    <?php echo $estado;?></option>
-                                                                                <?php } 
-                                                                                 }?>
-                                                                            </select>
+                                                                               required="" >
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -336,7 +269,7 @@ include_once "conexion3.php";
                                                                             <label for="txtcodigo_persona">Correo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
-                                                                                class="form-control" maxlength="20"
+                                                                                class="form-control" maxlength="25"
                                                                                 minlength="5"
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
@@ -389,7 +322,7 @@ include_once "conexion3.php";
                                                                     ?>
                                                                    <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                    <?php 
-                                                                    if($permiso_actualizar = 'SI'){
+                                                                    if($permiso_actualizar = 'ON'){
                                                                     ?>
                                                                 <button type="submit" id="EDIT_PERSONA"
                                                                     name="EDIT_PERSONA" class="btn btn-success"><span>
@@ -406,9 +339,9 @@ include_once "conexion3.php";
                                                 </div>
                                             </div><!-- FIN DEL MODAL EDITAR -->
 
-
+                                           <!-- FIN DEL MODAL ELIMINAR -->
                                             <div id="ELIMINAR<?php echo $var1 ?>" name="div_eliminar" id="div_eliminar"
-                                                class="modal fade" role="dialog">
+                                              class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -452,7 +385,7 @@ include_once "conexion3.php";
                                                                 ?> 
                                                                <!-- fin del codigo para sustraer el permiso de eliminar-->
                                                                <?php 
-                                                                if($permiso_eliminar = 'SI'){
+                                                                if($permiso_eliminar = 'ON'){
                                                                 ?>
                                                                 <button type="submit" name="ELIMINAR_PERSONA" id="ELIMINAR"
                                                                     class="btn btn-primary">Si,eliminar</button>
@@ -488,37 +421,18 @@ include_once "conexion3.php";
         </div><!-- FINAL CONTAINER FLUID -->
     </section><!-- FINAL SECTION -->
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-
-
-
-
-
-
 </div><!-- /.content-wrapper -->
+
+
+
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control Sidebar -->
 </aside>
 <!-- /.control-sidebar -->
-</div>
-</div><!-- /.content-wrapper -->
+
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control Sidebar -->
 </aside>
-</div><!-- ./wrapper -->
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -617,6 +531,36 @@ function quitarespacios(e) {
     cadena = cadena.trim();
     e.value = cadena;
 };
+</script>
+
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tbl_persona').DataTable({
+
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Persona:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
 </script>
 
 <!--♠DianaRut *No me quiten los creditos  modificado por any :( -->

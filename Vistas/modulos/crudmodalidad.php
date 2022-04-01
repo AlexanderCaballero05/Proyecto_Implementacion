@@ -173,19 +173,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona"> Modalidad</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"  onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_modalidad" id="editar_modalidad" required="">
-                                          <div class="invalid-feedback">
-                                       campo obligatorio.
-                                   </div>
-                                        </div>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_modalidad" id="editar_modalidad">
+                                          
                          </div>
                           <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion" required="">
-                                          <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);"   autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -240,7 +234,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR_MODALIDAD" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITARMODA" method="POST">
+                <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">AGREGAR  MODALIDAD</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,7 +244,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Tipo de modalidad</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese modalidad" name="nombremodalidad" id="nombremodalidad" required="">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese modalidad" name="nombremodalidad" id="nombremodalidad" required="">
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -260,7 +254,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="150"     autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id="descripcionmodalidad" required=""></textarea>
+                                    <textarea  type="text" class="form-control"  maxlength="100" onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id="descripcionmodalidad" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -283,6 +277,32 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <!-- Modal -->
 
 <script type="text/javascript"> 
+
+$(document).ready( function () {
+      $('#tabla_Modalidad').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Modalidad:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
     $('#tabla_Modalidad').DataTable();
@@ -310,7 +330,28 @@ $(document).ready( function () {
     })
 })()
 
+</script>
+<script type="text/javascript"> 
+//funcion para poner mayusculas
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+}
 
 
-
+function soloLetras(e) {
+        key = e.keyCode || e.which;
+        tecla = String.fromCharCode(key).toLowerCase();
+        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+        especiales = ["8-37-39-46"];
+        tecla_especial = false
+        for (var i in especiales) {
+            if (key == especiales[i]) {
+                tecla_especial = true;
+                break;
+            }
+        }
+        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
+            return false;
+        }
+    }
 </script>

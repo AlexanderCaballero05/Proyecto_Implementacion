@@ -179,7 +179,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                           <label for="txtcodigo_persona">Preguntas</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  name="editar_pregunta" id="editar_pregunta">
                                         </div>
-                          </div>
+                                     </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
@@ -268,10 +268,39 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
-    $('#tabla_roles').DataTable();
+    $('#tabla_preguntas').DataTable();
 } );
 </script>
 
+   <!--Funcion de la datatable -->
+   <script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_preguntas').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Preguntas:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
