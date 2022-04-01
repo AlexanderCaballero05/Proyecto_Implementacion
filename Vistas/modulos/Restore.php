@@ -17,6 +17,21 @@ $con->close();
 
 if($totalErrors>=0){
 
+    include 'conexion3.php';
+
+
+    $TRIGGER_ASIGNAR_PARAMETROS = "
+    CREATE TRIGGER `TRIGGER_ASIGNAR_PARAMETROS` AFTER INSERT ON `tbl_usuario`
+    FOR EACH ROW BEGIN
+    IF(NEW.Codigo_usuario=1) THEN 
+    INSERT INTO tbl_parametros_usuarios(Codigo_usuario, Codigo_parametro,Par_valor) values(NEW.Codigo_usuario,1,0); 
+    ELSE INSERT INTO tbl_parametros_usuarios(Codigo_usuario, Codigo_parametro,Par_valor) values(NEW.Codigo_usuario,1,0);
+    INSERT INTO tbl_parametros_usuarios(Codigo_usuario, Codigo_parametro,Par_valor) values(NEW.Codigo_usuario,2,0);
+     INSERT INTO tbl_parametros_usuarios(Codigo_usuario, Codigo_parametro,Par_valor) values(NEW.Codigo_usuario,3,0);
+    END IF; END
+    
+    ";
+    $TRIGGER16=$conn->query($TRIGGER_ASIGNAR_PARAMETROS);
 
     echo "<script>
               alert('Restauracion completada exitosamente');
