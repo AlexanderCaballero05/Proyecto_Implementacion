@@ -22,6 +22,21 @@ include_once "conexion3.php";
     </div>
 
     <section class="content">
+     <div class="card"> 
+        <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link " style="color:#000000;" href="categoria">Registrar Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="">Ver Usuarios</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
@@ -46,11 +61,13 @@ include_once "conexion3.php";
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                           <?php 
                       if($permiso_registrar = 'SI'){
-                     ?>    
+                     ?>  
+                     <!--  
                       <a href="categoria"> 
                       <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
 
                     </a>
+                      -->
                     <?php 
                       }
                      ?> 
@@ -527,6 +544,8 @@ include_once "conexion3.php";
                 <!--FINAL DE COL-M12-->
             </div><!-- FINAL ROW PADRE -->
         </div><!-- FINAL CONTAINER FLUID -->
+        </div>
+     </div>
     </section><!-- FINAL SECTION -->
 
     <!-- Button trigger modal -->

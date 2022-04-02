@@ -40,10 +40,11 @@
           if($permiso_registrar == 'SI'){
           ?>
           
-          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Nuevo Rol</button>
+          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Nuevo Rol</button>
           <?php
            }
           ?>
+          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
           
           <!-- Inicios del card -->
           <div class="card card-primary">
@@ -248,11 +249,10 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
-   <!--Elaborado por Diana Rut -->
+ 
   
-   <!--Funcion de la datatable -->
+
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
       $('#tabla_roles').DataTable({
         language: {
@@ -281,28 +281,27 @@
 </script>
 
 <script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-  'use strict'
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation')
-
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-        }
-
-        form.classList.add('was-validated')
-      }, false)
-    })
-})()
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteRol.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
 
 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
 
-
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>

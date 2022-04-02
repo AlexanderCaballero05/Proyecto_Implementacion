@@ -22,13 +22,28 @@ include_once "conexion3.php";
   </div>
   
   <section class="content">
+   <div class="card"> 
+        <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link " style="color:#000000;" href="categoria">Registrar Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="">Ver Usuarios</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información del Usuario</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"> Usuarios</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -97,7 +112,7 @@ include_once "conexion3.php";
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar informacion del usuario</h4>
+                                    <h4 class="text-center"> UsuarioS</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -246,6 +261,8 @@ include_once "conexion3.php";
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
+    </div>
+  </div>
   </section><!-- FINAL SECTION -->
 </div><!-- /.content-wrapper -->
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
