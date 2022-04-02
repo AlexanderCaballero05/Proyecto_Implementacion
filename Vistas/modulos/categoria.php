@@ -62,7 +62,7 @@
                <form id="FORMPERSONAS" method="POST" class="needs-validation" novalidate >
                   <div class="card-body">
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> <strong> Datos Generales persona</strong></h2>
+                      <h2 class="card-title"> <strong>Datos Generales persona</strong></h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
@@ -178,7 +178,6 @@
                             <div class="invalid-feedback">
                                   Elija una opción.
                             </div>
-
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
