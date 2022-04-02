@@ -40,13 +40,28 @@
     </div>
     <!-- Main content -->
     <section class="content">
+     <div class="card"> 
+        <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Personas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Usuarios</a>
+            </li>
+          </ul>
+        </div>
+        <div class="card-body">
       <div class="container-fluid">
         <div class="row"><!-- COLUMNA PRINCIPAL -->
           <div class="col-md-12"> <!-- COLUMNA DE REGISTRO DE PERSONAS -->
             <div class="card card-primary ">
                <form id="FORMPERSONAS" method="POST" class="needs-validation" novalidate >
                   <div class="card-body">
-                    <div class="card-header bh"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
+                    <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title"> <strong> Datos Generales persona</strong></h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
@@ -184,10 +199,8 @@
                       <div  style ="display:none;" id="telefono2" class="col-md-4"><!--INICIO FECHA DE BAJA-->
                         <label for="identidad" class="control-label">Otro Telefono</label> 
                         <div class="form-group">
-                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" required="">
-                         <div class="invalid-feedback">
-                                  campo obligatorio.
-                          </div>
+                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" >
+
                         </div>
                       </div>
 
@@ -330,8 +343,11 @@
             </div>
           </div><!-- FIN DE LA COLUMNA DE REGISTRO DE PERSONAS y DE USUARIOS  -->
         </div><!-- COLUMNA PRINCIPAL -->
+        </div>
+        </div>
       </div>
     </section> <!-- Fin del section principal -->
+</div>
 </div>
 
 
