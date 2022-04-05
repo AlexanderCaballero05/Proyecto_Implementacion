@@ -2,6 +2,7 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
+  include_once  "conexionpdo.php";
   
 ?>
 <?php
@@ -18,11 +19,6 @@
                $pasatiempos = ($_POST['PASATIEMPOS']);
                $distractores = ($_POST['DISTRACTORES']);
                $metas = ($_POST['METAS']);
-            //Datos socioeconomicos
-               $dispositivos = ($_POST['DISPOSITIVOS']);
-               $servicios = ($_POST['SERVICIOS']);
-               $proveedor = ($_POST['PROVEEDOR']);
-               $basicos = ($_POST['BASICOS']);
                   
               try{ 
                   $consulta_estudiante = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_estudiante WHERE CODIGO_PERSONA = (?);");
@@ -42,20 +38,48 @@
                       $resul=$conn->query($query_estudiante);
                       $codigo = mysqli_insert_id($conn);
 
-                      $query_contenido = "INSERT INTO tbl_estudiante_socioeconomico (CODIGO_CONTENIDO_SOCIOECONOMICO, CODIGO_ESTUDIANTE)
-                       VALUES ('$dispositivos', '$codigo'),
-                              ('$servicios', '$codigo'),
-                              ('$proveedor','$codigo'),
-                              ('$basicos','$codigo');";  
+                      //inicio del insert de dispositivos
+                      if(is_array($_POST['dispositivos'])){
+                          foreach ($_POST['dispositivos'] as $dispositivos){
+                            $query_contenido = $db->prepare("CALL Sp_insertar_socieconomico_dispositivos(?,?);");
+                            $query_contenido->execute(array($dispositivos,$codigo));     
+                           $conn->commit();
+                          }
+                      }  //fin del insert de dispositivos
 
-                      $resul2=$conn->query($query_contenido);
+                       //inicio del insert de servicios
+                       if(is_array($_POST['servicios'])){
+                          foreach($_POST['servicios'] as $servicios){
+                            $sp_servicios = $db->prepare("CALL Sp_insertar_socieconomico_servicios(?,?);");
+                            $sp_servicios->execute(array($servicios,$codigo));
+                            $conn->commit();
+                          }
+                       } //fin del insert de servicios
+
+                        //inicio del insert de proveedor
+                       if(is_array($_POST['proveedor'])){
+                         foreach($_POST['proveedor'] as $proveedor){
+                         $sp_proveedor = $db->prepare("CALL Sp_insertar_socieconomico_proveedor(?,?);");
+                         $sp_proveedor->execute(array($proveedor,$codigo));
+                         $conn->commit();
+                          }
+                       } //fin del insert de servicios
+
+                          //inicio del insert de basicos
+                       if(is_array($_POST['basicos'])){
+                         foreach($_POST['basicos'] as $basicos){
+                         $sp_basicos = $db->prepare("CALL Sp_insertar_socieconomico_basicos(?,?);");
+                         $sp_basicos->execute(array($basicos,$codigo));
+                         $conn->commit();
+                          }
+                       } //fin del insert de servicios
+                      echo "<script>
+                      window.location = 'crudEstudiante';
+                      </script>";
+                      exit; 
+                    
                       
-                      $conn->commit();
-                      
-                        echo "<script> 
-                        alert('Estudiante registrado correctamente');
-                        window.location = 'procesoRegistrarEstudiante';
-                        </script>";
+                        
                     
                     }catch(PDOException $e){
                     echo $e->getMessage(); 

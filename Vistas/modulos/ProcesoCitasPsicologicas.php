@@ -34,7 +34,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Pruebas Psicometricas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Expedientes Psicologicos</a>
             </li>
           </ul>
         </div>
@@ -267,7 +270,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a preclinica</button>
+                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a consulta</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 
