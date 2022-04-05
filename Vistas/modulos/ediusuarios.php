@@ -25,14 +25,14 @@ include_once "conexion3.php";
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="categoria">Registrar Personas</a>
+          <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Personas</a>
+            <a class="nav-link active" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="">Ver Usuarios</a>
+            <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
             </li>
           </ul>
         </div>
@@ -63,7 +63,7 @@ include_once "conexion3.php";
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT p.CODIGO_PERSONA, u.USUARIO, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+                        $query = "SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
                         e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
                         FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
                         where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND

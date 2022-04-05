@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set("America/Guatemala");
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
   $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));

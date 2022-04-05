@@ -41,7 +41,7 @@
 
                         // AND i.FECHA_CITA = CURDATE();";
 
-                        $query2 = "SELECT i.CODIGO_CITA as CITA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                        $query2 = "SELECT pe.CODIGO_PERSONA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
                         FROM tbl_inscripcion_cita i, tbl_persona pe 
                         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                         AND I.CODIGO_ESTADO = '9';";
@@ -55,7 +55,7 @@
                                 <?php 
                                     if ($resul2->num_rows > 0) {
                                     while($row2 = $resul2->fetch_assoc()) { 
-                                    $codigo2 = $row2['CITA'];
+                                    $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
                                 <option value="<?php echo $codigo2?>" ><?php echo $nombre2;?></option>
@@ -126,7 +126,7 @@
                     <br>
                     <div class="row">
                      
-                      <div class="col-md-3">
+                  <div class="col-md-3">
                        <div class="card">
                           <div class="card-header" style="background-color:#DFD4FE;">
                              <strong>ALERGIAS </strong>
@@ -143,7 +143,7 @@
                             $nombreALE= $rowALE['NOMBRE'];
                           ?>
                         <div  class="form-check icheck-green" >
-                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigoALE;?>" value="<?php echo $codigo;?>">
+                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigoALE;?>" value="<?php echo $codigoALE;?>">
                             <label class="form-check-label" for="alergia<?php echo $codigoALE;?>">
                               <?php echo $nombreALE;?>
                             </label>
@@ -154,9 +154,9 @@
                           } 
                           }
                           ?>
-                      </div>
-                     </div>
-                      </div>
+                         </div>
+                         </div>
+                  </div>
                       <!-- End: checkbox -->
                       <div class="col-md-3">
                         <div class="card">
@@ -176,8 +176,8 @@
                                 $nombre= $row['TIPO'];
                                 ?>
                             <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="antecedentes[]" id="antecedente<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                                <label class="form-check-label" for="antecedente<?php echo $codigo;?>">
+                                <input  class="form-check-input" type="checkbox" name="transtornos[]" id="transtornos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                                <label class="form-check-label" for="transtornos<?php echo $codigo;?>">
                                     <?php echo $nombre;?>
                                 </label>
                                 </br>
@@ -210,8 +210,8 @@
                                 $nombre1= $row1['TIPO'];
                                 ?>
                             <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="apariencia[]" id="apariencia<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                                <label class="form-check-label" for="antecedente<?php echo $codigo1;?>">
+                                <input  class="form-check-input" type="checkbox" name="apariencia[]" id="apariencia<?php echo $codigo1;?>" value="<?php echo $codigo1;?>">
+                                <label class="form-check-label" for="apariencia<?php echo $codigo1;?>">
                                     <?php echo $nombre1;?>
                                 </label>
                                 </br>

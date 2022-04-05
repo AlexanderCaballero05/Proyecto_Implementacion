@@ -17,7 +17,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Estudiantes'));
+		$this->Cell(180, 8, utf8_decode('Reporte de Permisos'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -108,17 +108,13 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Nombre', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Grado', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Repite', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Indice', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Materias', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Pasatiempos', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Distractores', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Metas', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Contenido socieco', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Contenido tipo', 1, 1, 'C', 0);
+			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(50, 8, 'Rol usuario', 1, 0, 'C', 0);
+			$this->Cell(70, 8, 'Objeto', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Insertar', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Eliminar', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Actualizar', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Mostrar', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -195,14 +191,11 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT es.CODIGO_ESTUDIANTE as codigo_estudiante, CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO) as nombre_estudiante, e.GRADO_ACTUAL, e.REPITENTE, e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI, e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS , GROUP_CONCAT(t.TIPO) as tipo_contenido, GROUP_CONCAT(c.NOMBRE_TIPO) as nombre_tipo_contenido
-    FROM tbl_tipo_socioeconomico t, tbl_contenido_socioeconomico c, tbl_estudiante_socioeconomico es, tbl_estudiante e , tbl_persona p
-                            WHERE es.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
-                            AND es.CODIGO_CONTENIDO_SOCIOECONOMICO = c.CODIGO_CONTENIDO_SOCIOECONOMICO
-                            AND t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO
-                            AND e.CODIGO_PERSONA = p.CODIGO_PERSONA
-                            GROUP BY E.CODIGO_ESTUDIANTE
-                            order by e.CODIGO_ESTUDIANTE;";
+	$strquery ="SELECT p.CODIGO_PERMISO, r.NOMBRE AS ROL, o.NOMBRE, p.INSERTAR, p.ELIMINAR, p.ACTUALIZAR, p.MOSTRAR
+	FROM tbl_roles r, tbl_permisos p, tbl_objetos o
+	WHERE p.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL
+	AND p.CODIGO_OBJETO = o.CODIGO_OBJETO
+	ORDER BY P.CODIGO_PERMISO;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -222,21 +215,16 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(6);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Grado', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Repite', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Indice', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Materias', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Pasatiempos', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Distractores', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Metas', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido socieco', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido tipo', 1, 1, 'C', 1);
-
+$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Rol usuario', 1, 0, 'C', 1);
+$pdf->Cell(70, 12, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Insertar', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Eliminar', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Actualizar', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Mostrar', 1, 1, 'C', 1);
 
 
 
@@ -249,11 +237,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 15, 15,15,30,30,30,30,40,40)); //???
+$pdf->SetWidths(array(15, 50, 70, 25,25,25,25)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['nombre_estudiante'], $data[$i]['GRADO_ACTUAL'] , ucwords(strtolower(utf8_decode($data[$i]['REPITENTE']))), utf8_decode($data[$i]['INDICE_ACADEMICO']), $data[$i]['MATE_BAJO_RENDI'], $data[$i]['PASATIEMPOS'] , $data[$i]['DISTRACTORES_ESCOLARES'] , $data[$i]['METAS'] , $data[$i]['tipo_contenido'] , $data[$i]['nombre_tipo_contenido']  ),6 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['ROL'], $data[$i]['NOMBRE'],ucwords(strtolower(utf8_decode($data[$i]['INSERTAR']))), ucwords(strtolower(utf8_decode($data[$i]['ELIMINAR']))),ucwords(strtolower(utf8_decode($data[$i]['ACTUALIZAR']))),ucwords(strtolower(utf8_decode($data[$i]['MOSTRAR']))),   ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

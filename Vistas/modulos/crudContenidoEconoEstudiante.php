@@ -12,28 +12,37 @@
     </div><!-- /.container-fluid -->
   </div>
   <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>VER DATOS SOCIO-ECONOMICOS </h4>
+              <h4>ESTUDIANTES PROSECAR</h4>
   </div>
   <section class="content">
+    
     <div class="container-fluid">
+      
       <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Registrar Estudiantes</a>
+          <li class="nav-item">
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
-              <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+                <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
       <div class="row">
         <div class="col-md-12">
           </br>
+          <div class="pl-3">
+             <a  href="procesoRegistrarEstudiante">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar estudiante</button>
+              </a>
+             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
+              
+           </div>
           <!-- card de la tabla-->
           <div class="card "> 
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->

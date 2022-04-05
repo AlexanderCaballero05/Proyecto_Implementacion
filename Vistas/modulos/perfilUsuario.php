@@ -53,7 +53,7 @@
      }
  </style>
 
-
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -85,7 +85,7 @@
                         <div class="row mb-3">
                           <div class="col-sm-4 pl-4">
                             <label for="" class="form-label">Actual contraseña</label>
-                              <input type="password"  name="contraAnte" class="form-control" 
+                              <input type="password"  name="contraAnte" id="contraAnte" class="form-control" 
                                             required minlength="5" maxlength="30" title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
                                             >
                                             <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.</p>
@@ -240,7 +240,7 @@
       </div><!-- /.container-fluid -->
     </div>
   </div>
-
+  </body>
   <script type="text/javascript">// funcion que convierte en mayuscula lo que se vaya ingresando.
 
 function mayus(e) {
@@ -354,7 +354,31 @@ function quitarespacios(e) {
             }, false)
         })
 })()
+
+
+window.onload = function() {
+        var contraAnte = document.getElementById('contraAnte'); /// la variable se puede poner con el mismo nombre del id 
+        contraAnte.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      contraAnte.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+
+    window.onload = function() {
+        var clave_nueva = document.getElementById('clave_nueva'); /// la variable se puede poner con el mismo nombre del id 
+        clave_nueva.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      clave_nueva.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+    
 </script>
+
 
 <script src="../../modelos/validacion_clave.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

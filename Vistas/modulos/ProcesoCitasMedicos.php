@@ -38,6 +38,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
             </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Expedientes Medicos</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
@@ -68,16 +72,15 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $usuario= $_SESSION['vario'];
-                                    //Consulta que trae el codigo del usuario
-                                    $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
-                                    FROM tbl_usuario u, tbl_persona p 
-                                    WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
-                                    AND NOMBRE_USUARIO = (?);");
-                                    $sentencia1->execute(array($usuario));
-                                    $cod_usuario=$sentencia1->fetchColumn();
-
-                                   ?>
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>
 
                                         <?php
                                     

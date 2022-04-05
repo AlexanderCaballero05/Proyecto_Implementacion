@@ -5,14 +5,14 @@
 <head>
 
 </head>
-
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>VER ESTUDIANTES PROSECAR </h4>
+              <h4>ESTUDIANTES PROSECAR </h4>
         </section>
   
   <section class="content">
@@ -20,14 +20,14 @@
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Registrar Estudiantes</a>
+              <a class=" nav-link active " style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
-              <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
@@ -37,16 +37,16 @@
             </br>
            <div class="pl-3">
              <a  href="procesoRegistrarEstudiante">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Estudiantes</button>
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
               </a>
-             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Estudiantes</button>
+             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
               
            </div>
           
           <!-- jquery validation -->
           <div class="card ">
             <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información de los Estudiantes</strong></h1>
+               <h1 class=" card-title text-center"></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -316,7 +316,7 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTUDIANTE --> 
-
+   </body>
   <!-- Button trigger modal -->
 
 
@@ -358,4 +358,9 @@
       window.open('Reportes_Prosecar/reporteEstudiantes.php','_blank');
       window.open(this.href,'_self');
     } 
+
+
+   
   </script>
+
+  
