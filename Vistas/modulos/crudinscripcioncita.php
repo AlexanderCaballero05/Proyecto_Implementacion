@@ -27,7 +27,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class=" nav-link active" style="color:#000000;" href="#">Citas Medicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesocita">Registar Cita</a>
+            <a class="nav-link" style="color:#000000;" href="procesocita">Agregar Cita</a>
             </li>
           </ul>
         </div>
@@ -36,9 +36,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <div class="row">
                 <div class="col-md-12">
                     <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Cita</button>
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
                     </a>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     </br></br>
                     <div class="row">
                         <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
@@ -82,7 +82,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <div class="card ">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Registro de citas previas</strong></h1>
+                            <h1 class=" card-title text-center"><strong style="color:black;">CITAS GENERALES PROSECAR</strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">
@@ -210,17 +210,17 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
-                                                                        <input type="date" value="<?php echo $var2; ?>" 
+                                                                        <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" 
                                                                         required max="<?php $hoy=date("Y"); echo $hoy;?>"  
                                                                         class="form-control" 
-                                                                        name="edit_fecha_cita" id="edit_fecha_cita">
+                                                                        name="edit_fecha_cita"  id="edit_fecha_cita">
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona"> Hora: </label>
                                                                             <input type="time"  value="<?php echo $var3; ?>" 
-                                                                            required min="09:00" step="900" max= "17:00" step="1700"
+                                                                            required min="09:00"autocomplete = "off" step="900" max= "17:00" step="1700"
                                                                             class="form-control" 
                                                                             name="edit_hora" id="edit_hora">
                                                                         </div>
@@ -245,7 +245,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
                                                                             <select class="form-control" name="MODUSUARIO" required="">
-                                                                                <option selected disabled value="">Elegir...</option>
+                                                                                <option selected disabled autocomplete = "off" value="">--Seleccione...</option>
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
@@ -254,7 +254,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                             }?>
                                                                             </select>
                                                                                     <div class="invalid-feedback">
-                                                                                        Eliga una opción.
+                                                                                    Seleccione una opción.
                                                                                     </div>
                                                                         </div>
                                                                     </div>

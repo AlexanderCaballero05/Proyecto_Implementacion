@@ -1,5 +1,5 @@
 <?php
-  
+
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -11,25 +11,24 @@
     if(isset($_POST['TIPO_PERSONA'])){
        try{
           if(isset($_POST['agregar_persona'])){
-               $pregunta = ($_POST['TIPO_PERSONA']);
+               $persona = ($_POST['TIPO_PERSONA']);
                
               try{ 
-                  $consulta_pregunta = $db->prepare("SELECT nombre FROM tbl_tipo_persona WHERE nombre = (?);");
-                  $consulta_pregunta->execute(array($pregunta));
+                  $consulta_pregunta = $db->prepare("SELECT NOMBRE FROM tbl_tipo_persona WHERE NOMBRE = (?);");
+                  $consulta_pregunta->execute(array($persona));
                   $row=$consulta_pregunta->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('La $pregunta ya se encuentra registrado');
+                    alert('La $persona ya se encuentra registrado');
                     window.location = 'crudtipopersona';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_pregunta = " INSERT INTO `tbl_tipo_persona`( `nombre`) VALUES ('$pregunta'); ";
+                      $query_pregunta = " INSERT INTO `tbl_tipo_persona`( `nombre`) VALUES ('$persona'); ";
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
-                        alert('Pregunta registrada correctamente');
                         window.location = 'crudtipopersona';
                         </script>";
                         $codigoObjeto=12;
@@ -59,18 +58,18 @@
         echo $e->getMessage(); 
         return false;
        }
-    }//FIN DEL IF DE REGISTAR UNA PREGUNTA
+    }//FIN DEL IF DE REGISTAR UN TIPO PERSONA
 
 
 
   //PARTE PARA EDITAR UNA PREGUNTA
   if(isset($_POST['id_editar'])){
-    if(isset($_POST['editar'])){
+    if(isset($_POST['editartipoper'])){
       $codigo_persona = ($_POST['id_editar']);
       $editar_persona = ($_POST['editar_persona']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_tipo_persona where nombre = (?) and CODIGO_TIPO_PERSONA <> (?) ;");
+       $sentencia = $db->prepare("SELECT * FROM tbl_tipo_persona where NOMBRE = (?) and CODIGO_TIPO_PERSONA <> (?) ;");
        $sentencia->execute(array($editar_persona,$codigo_persona));
        $row=$sentencia->fetchColumn();
         if($row>0){
@@ -88,7 +87,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Tipo persona modificado exitosamente!');
               window.location = 'crudtipopersona';
               </script>";
               $codigoObjeto=12;
@@ -113,7 +111,7 @@
     }
   }//cierre del if principal
 
-//PARTE PARA ELIMINAR UNA PREGUNTA
+//PARTE PARA ELIMINAR UN tipo PERSONA
 if(isset($_POST['persona_eliminar'])){
   if(isset($_POST['ELIMINAR_PERSONA'])){
     $codigo = ($_POST['persona_eliminar']);//asigna a una variable el id de la pregunta a  eliminar

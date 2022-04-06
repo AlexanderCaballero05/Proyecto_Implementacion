@@ -25,6 +25,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   <div class="content-header">
     <div class="container-fluid">
     </div>
+    <section class="content-header text-xl-center mb-3 btn-light">
+      <h1>
+          <h4> LISTA CARGA ACADEMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+      </h1>
+    </section>
       <section class="content">
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -102,7 +107,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
             <form  method="POST">
               <div class= "card">
                 <div class="card-header text-center" style="background-color: #F7F8F9;">
-                  <h5 class=" card-title text-center"><strong style="color:black;">Listado de Carga Academica</strong></h5>
+                  <h5 class=" card-title text-center"><strong style="color:black;"></strong></h5>
                 </div>
                <div class="card-body"> 
               <div class="table-responsive">
@@ -163,12 +168,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                 <?php
                                     if($permiso_eliminar == 'SI'){
                                 ?> 
-                                
                                 <?php
                                   }
                                 ?><!--Fin del boton de eliminar -->
                                 <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                  <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
+                                  <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class=" form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
                                 </a>
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
@@ -195,8 +199,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     }
                                   ?>
                                   <a href="#EDITACARGA<?php echo $var1; ?>" data-toggle="modal">
-                                    <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                    <button type='button' id="btnGuardar"  style="color:white;"class=" form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                     </a>
+                                 <a>
+                                   <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
+                                    <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
+                                    <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>

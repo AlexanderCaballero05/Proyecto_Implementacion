@@ -6,10 +6,9 @@
 ?>
 <?php
   if(isset($_POST['identidad'])){
-
-    $usuario = $_SESSION['vario'];
      try{
          if(isset($_POST['GUARDAR'])){
+            $usuario = $_SESSION['vario'];
              $identidad = ($_POST['identidad']);
              $primer_nombre = ($_POST['primer_nombre']);
              $segundo_nombre = ($_POST['segundo_nombre']);
@@ -61,8 +60,7 @@
                       window.location = 'agregarusuarios';
                       </script>";
                       exit;
-                    }else{//
-                       
+                    }else{
                       $dias_vencimiento = "ADMIN_DIAS_VIGENCIA";
                       $sentencia = $db->prepare("SELECT  VALOR  FROM  tbl_parametros WHERE  PARAMETRO = (?);");
                       $sentencia->execute(array($dias_vencimiento));
@@ -72,7 +70,6 @@
                       }
                       $fechaActual = date('Y-m-d'); 
                       $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$60'+ days")); 
-
                       try{ //Se evalua el tipo de persona,dependiendo de que tipo es se llenan en sus correspondientes tablas
                          if(($tipo_persona == "1") 	|| ($tipo_persona == "2") ){
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
@@ -81,7 +78,7 @@
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
                               alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                              window.location = 'categoria';
+                              window.location = 'crudpersonas';
                               </script>";
                               exit;
                              }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar ,por fin!!!
@@ -89,12 +86,11 @@
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena');" ;
-                                 
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
                                   echo "<script> 
                                     alert('Usuario registrado correctamente');
-                                    location.href = 'categoria';
+                                    location.href = 'crudpersonas';
                                     </script>";
                                     $codigoObjeto=1;
                                     $accion='Registro';
@@ -104,7 +100,7 @@
                                   }else{
                                     echo "<script> 
                                     alert('Ocurrio algun error,comunicarse con el administrador!');
-                                    location.href = 'categoria';
+                                    location.href = 'crudpersonas';
                                     </script>";
                                     exit;
                                   }
@@ -113,21 +109,40 @@
                                 return false;
                               }
                             }//fin del else de insertar personas
-                          }elseif($tipo_persona == "4"  || $tipo_persona == "7"){ //persona que no no cuenta con usuario,osea estudiantes y familiares
+                          }elseif($tipo_persona == "4" ){ //para estudiantes
                            try{
-                              //Insertar en las respectivas tablas (tbl_persona,,tbl_correo_electonico)
-                              $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
-                              '$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo');" ;
-                              $consulti =$conn->query($insert_persona);
-                              if($resultado = mysqli_fetch_assoc($consulti)>0 ){
+                              $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
+                              FECHA_INSCRIPCION,CODIGO_TIPO_PERSONA,CREADO_POR_USUARIO,SEXO,DIRECCION)
+                              VALUES('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento',
+                              '$fechaActual','$tipo_persona','$usuario','$sexo','$direccion')";
+                              $resultado=$conn->query($queryregistrarp);
+                              $codigo = mysqli_insert_id($conn);
+                              //inserta en telefono
+                              $querytelefono = "INSERT INTO TBL_TELEFONO (NUMERO_TELEFONO, CODIGO_PERSONA) VALUES('$telefono','$codigo')";
+                              $resultado1=$conn->query($querytelefono);
+                               //inserta en  correo
+                              $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO(CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
+                              $resultado2=$conn->query($querycorreo);
+
+                              if (is_array($_POST['sacramento'])) {
+                                foreach ($_POST['sacramento'] as $sacramento){
+                                  $sentencia = $db->prepare(" CALL Sp_insertar_sacramentos(?,?);");
+                                  $sentencia->execute(array($sacramento,$codigo));
+                                  $row1=$sentencia->fetchColumn();
+                                }
+                                $row1=$sentencia->fetchColumn();
+                              }
+                                $conn->commit();
+                              if($resultado>0  &&  $resultado1 >0  &&  $resultado2 > 0  ){ 
                                 echo "<script> 
-                                location.href = 'categoria';
+                                location.href = 'crudpersonas';
                                 </script>";
                                 exit;
                               }else{
+                                $conn->rollback();
                                 echo "<script> 
-                                alert('No se pudo registrar la persona,por motivos desconocidos :v');
-                                location.href = 'categoria';
+                                alert('No se pudo registrar la persona,comunicarse con el admin');
+                                location.href = 'crudpersonas';
                                 </script>";
                                 exit;
                               }
@@ -145,7 +160,7 @@
                               if($row>0){// si hay registros con el mismo nombre 
                                 echo "<script>
                                 alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                                window.location = 'categoria';
+                                window.location = 'crudpersonas';
                                 </script>";
                                 exit;
                               }else{
@@ -157,24 +172,21 @@
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
                                   alert('Medico registrado correctamente');
-                                  location.href = 'categoria';
+                                  location.href = 'crudpersonas';
                                   </script>";
                                   exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el medico');
-                                  location.href = 'categoria';
+                                  location.href = 'crudpersonas';
                                   </script>";
                                   exit;
                                 }
-
                               }
-                             
                             }catch(PDOException $e){
                             echo $e->getMessage(); 
                             return false;
                             }//Fin de registrar medico
-                            
                             //CODIGO PARA INSERTAR UN PSICOLOGO CON SU ESPECIALIDAD
                           }elseif ($tipo_persona == "6"){
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
@@ -183,7 +195,7 @@
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
                               alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                              window.location = 'categoria';
+                              window.location = 'crudpersonas';
                               </script>";
                               exit;
                             }else{
@@ -196,11 +208,11 @@
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
-                                  alert('Psicologo registrado correctamente');location.href = 'categoria';</script>";
+                                  alert('Psicologo registrado correctamente');location.href = 'crudpersonas';</script>";
                                   exit;
                                 }else{
                                   echo "<script> 
-                                  alert('No se puede registrar el medico');location.href = 'categoria'</script>";
+                                  alert('No se puede registrar el medico');location.href = 'crudpersonas'</script>";
                                   exit;
                                 }
                               }catch(PDOException $e){
@@ -217,7 +229,7 @@
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
                               alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                              window.location = 'categoria';
+                              window.location = 'crudpersonas';
                               </script>";
                               exit;
                             }else{
@@ -231,12 +243,12 @@
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
                                   alert('Catequista registrado correctamente');
-                                  location.href = 'categoria';
+                                  location.href = 'crudpersonas';
                                   </script>";
                                   exit;
                                 }else{
                                   echo "<script> 
-                                  alert('No se puede registrar el medico');location.href = 'categoria';</script>";
+                                  alert('No se puede registrar el medico');location.href = 'crudpersonas';</script>";
                                   exit;
                                 }
                               }catch(PDOException $e){
@@ -244,6 +256,30 @@
                               return false;
                               }
                             }
+                          }else{
+                            try{
+                              //Insertar  personas mortales ok no :v ,demas personas no importantes del sistema
+                              $rol = "3";
+                              $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
+                              '$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo');" ;
+                              $consulti =$conn->query($insert_persona);
+                              if($resultado = mysqli_fetch_assoc($consulti)>0 ){
+                                echo "<script> 
+                                location.href = 'crudpersonas';
+                                </script>";
+                                exit;
+                              }else{
+                                echo "<script> 
+                                alert('No se pudo registrar la persona,comunicarse con el admin');
+                                location.href = 'crudpersonas';
+                                </script>";
+                                exit;
+                              }
+                            }catch(PDOException $e){
+                            echo $e->getMessage(); 
+                            return false;
+                            }
+
                           }
                          //cierre del else de tipos de usuario
                       }catch (PDOException $e) {
@@ -266,9 +302,10 @@
     }
       //fin del if de comprobar que el DNI no esta vacio
 
+
+
 //************EDITAR USUARIO************ */
   if(isset($_POST['CODUSUARIO'])) { 
-    
     $userregis = ($_SESSION['vario']);
     if (isset($_POST['ACT_PERSONA'])){
       $CODUSUARIO = ($_POST['CODUSUARIO']);
@@ -394,11 +431,9 @@
        return false; }
     }
   }
- 
-  ?> 
+?> 
 
 <?php
-
   if(isset($_POST['CODUSUARIO'])) { 
     session_start();
     $userregis = ($_SESSION['vario']);

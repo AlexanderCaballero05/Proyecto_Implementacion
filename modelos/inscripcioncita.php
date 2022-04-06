@@ -69,8 +69,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
-                          alert('Cita registrada exitosamente');
-                          window.location = 'procesocita';
+                          window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
                           $accion='Registro';
@@ -79,7 +78,6 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          alert('Ocurrio algun error,comunicarse con el administrador Arnold');
                           window.location = 'procesocita';
                           </script>";
                           exit;
@@ -90,8 +88,10 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
+
                           alert('Cita registrada exitosamente');
-                          window.location = 'procesocita';
+
+                          window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
                           $accion='Registro';
@@ -100,7 +100,6 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          alert('Ocurrio algun error,comunicarse con el administrador Arnold');
                           window.location = 'procesocita';
                           </script>";
                           exit;
@@ -110,8 +109,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
-                          alert('Cita registrada exitosamente');
-                          window.location = 'procesocita';
+                          window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
                           $accion='Registro';
@@ -120,14 +118,12 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          alert('Ocurrio algun error,comunicarse con el administrador Arnold');
                           window.location = 'procesocita';
                           </script>";
                           exit;
                         }
                       }else{
                           echo "<script> 
-                          alert('Ocurrio algun error,comunicarse con el administrador Arnold');
                           window.location = 'procesocita';
                           </script>";
                           exit;
@@ -170,7 +166,6 @@ if (isset($_POST['cod_edit_cita'])){
            $consulta=$conn->query($sql);
            if ($consulta > 0){
             echo "<script>
-            alert('Actualización Exitosa');
                window.location = 'crudinscripcioncita';
                 </script>";
               $codigoObjeto=32;

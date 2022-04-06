@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
-<body>
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -39,7 +39,7 @@
                 <div class="col-md-4 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
-                      <input class="form-control"  type="time"  name="hora" id="" required >
+                      <input class="form-control"  type="time"  name="hora"  required >
                         <div class="invalid-feedback">
                         Llene este campo.
                         </div>
@@ -48,7 +48,7 @@
                   <div class="col-md-4 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
                     <div class="form-group">
-                      <input class="form-control" placeholder="0:0:0"  type="time"  name="hora_final"  required >
+                      <input class="form-control"   type="time"  name="hora_final"  required >
                         <div class="invalid-feedback">
                         Llene este campo.
                         </div>
@@ -57,7 +57,7 @@
                   <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                      <input class="form-control" type="date"  name="fecha_inicio" required>
+                      <input class="form-control" required min="09:00:00"  step="1800" max= "17:00:00"  type="date"  name="fecha_inicio" required>
                        <div class="invalid-feedback">
                          Llene este campo.
                         </div>
@@ -75,6 +75,7 @@
                         </div>
                     </div>
                   </div>
+                  
                 <div class="col-md-4 mb-3"> <!--Fila para el encargado-->
                   <?php 
                   $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
@@ -84,7 +85,7 @@
                   <div class="form-group">
                     <label  class="control-label">Encargado-Tutor:</label>
                     <select  class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required >
-                      <option selected disabled value="">--Buscar Tutor--</option>
+                      <option selected disabled value="">--Seleccionar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -102,36 +103,38 @@
                      </div>
                   </div>
                 </div><!--CIERRE DEL ENCARAGADO -->
-
                 <div class="col-md-4"> 
-                  <?php //
-                  $query = "SELECT * FROM tbl_tutoria";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <label for="identidad" class="control-label">Tutoria:</label> 
-                  <div class="form-group">
-                    <select style="width: 100%"   class="form-control select2" required name="tutoria"   >
-                      <option selected disabled value="" >--Buscar Tutoria--</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutoria = $row['CODIGO_TUTORIA'];
-                          $nombre = $row['NOMBRE'];
+                    <?php //
+                    $query = "SELECT * FROM tbl_tutoria";
+                    $resultadod=$conn->query($query);                
+                    ?>
+                    <label for="identidad" class="control-label">Tutoria:</label> 
+                    <div class="form-group">
+                      <select style="width: 100%"   class="form-control select2" required name="tutoria"   >
+                        <option selected disabled value="" >--Seleccionar Tutoria--</option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                            while($row = $resultadod->fetch_assoc()) { 
+                            $codigo_tutoria = $row['CODIGO_TUTORIA'];
+                            $nombre = $row['NOMBRE'];
+                          ?>
+                        <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
                         ?>
-                      <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                     <div class="invalid-feedback">
-                        Llene este campo.
-                      </div>
-                  </div>
-                </div><!--CIERRE DE LA TUTORIA -->
+                      </select> 
+                      <div class="invalid-feedback">
+                          Llene este campo.
+                        </div>
+                    </div>
+                  </div><!--CIERRE DE LA TUTORIA -->
+
+                
               </div><!--FINAL DEL ROW -->
 
               <div class="row">
+                  
                 <div class="col-md-4"> 
                   <?php //
                   $query = "SELECT * FROM tbl_modalidad";
@@ -162,7 +165,7 @@
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
                       <select class="form-control select2" id="" name="seccion" required >
-                       <option  selected disabled value="">--Seleccione Seccion--</option>
+                       <option  selected disabled value="">--Seleccionar Seccion--</option>
                        <option value="SECCIONA">SECCION A</option>
                        <option value="SECCIONB">SECCION B </option>
                        <option value ="SECCIONC">SECCION C </option>
@@ -186,6 +189,7 @@
   </section>
 </div>
 </div>
+</body>
 
  <script>
     (function () { 

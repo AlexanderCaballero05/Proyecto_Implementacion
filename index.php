@@ -30,6 +30,8 @@ require_once "modelos/ProcesoExpedientePsicologico.modelo.php";
 require_once "modelos/procesoRecetaMedica.modelo.php";
 require_once "modelos/area.modelo.php";
 require_once "modelos/tiposangremodelo.php";
+require_once "modelos/crudSacramento.modelo.php";
+require_once "modelos/crudSeccion.modelo.php";
 
 require_once "modelos/procesoMatricula.modelo.php";
 
@@ -40,6 +42,7 @@ require_once "modelos/crudmedicamento.modelo.php";
 require_once "modelos/crudAlergia.modelo.php";
 require_once "modelos/familiaresmodelo.php";
 require_once "modelos/inscripcioncita.php";
+require_once "modelos/procesoconsultapsicologia.php";
 
 
 

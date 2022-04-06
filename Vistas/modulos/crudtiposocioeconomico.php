@@ -15,8 +15,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 <!--INICIO DEL MODAL DE Agregar -->
+
 <div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
+    <body oncopy="return false" onpaste="return false" >
         <div class="modal-content">
             <!-- Modal content-->
             <form method="POST">
@@ -34,7 +36,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Tipo Socio Economico</label>
-                                <input type="text" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                <input type="text" class="form-control"  autocomplete = "off"maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="guardar_tipo" id="guardar_tipo">
                             </div>
                         </div>
@@ -42,8 +44,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
-                                <input type="text" class="form-control" maxlength="100" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_descripcion" id="guardar_descripcion">
+                                <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                 name="guardar_descripcion"autocomplete = "off" id="guardar_descripcion">
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -61,11 +63,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 </div><!-- FIN DEL MODAL AGREGAR -->
 
-
+<body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
+    </div>
+    <div class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO TIPO DE DATOS SOCIOECONOMICOS</h4>
     </div>
 
     <section class="content">
@@ -97,19 +102,20 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <?php 
                       if($permiso_registrar == 'SI'){
                      ?>
-                    <button type="button" class="btn btn-warning m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                        Nuevo
-                        Tipo Socio Economico
+                    <button type="button" style="color:white;"class="btn btn-primary mb-3" data-toggle="modal" data-target="#ADDOBJETO">
+                        Agregar
+                        Tipo Socioeconomico
                     </button>
                     <?php 
                       }
                      ?>
+                        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                    
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Tipo Socio Economico</strong></h1>
+                            <!-- <h1 class=" card-title text-center"><strong style="color:black;">Tipo Socio Economico</strong></h1> -->
                         </div>
 
                         <!-- form start -->
@@ -118,15 +124,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <table id="tabla_tiposocio" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Acción</th>
-                                            <th>ID</th>
-                                            <th>Tipo de Socio Economico</th>
-                                            <th>Descripción</th>
-                                            <th>Creado por</th>
-                                            <th>Fecha creacion</th>
-                                            <th>Modificado por</th>
-                                            <th>Fecha Modificación</th>
-
+                                            <th class="text-center">Acción</th>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">Tipo de Socio Economico</th>
+                                            <th class="text-center">Descripción</th>
+                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -138,10 +140,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                 $var1 = $row['CODIGO_TIPOSOCIO'];
                                                 $var3 = $row['TIPO'];
                                                 $var4 = $row['DESCRIPCION'];
-                                                $var5 = $row['CREADO_POR'];
-                                                $var6 = $row['FECHA_CREACION'];
-                                                $var7 = $row['MODIFICADO_POR'];
-                                                $var8 = $row['FECHA_MODIFICACION'];
                                         ?>
                                                 <tr>
                                                     <td>
@@ -214,12 +212,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     <td class="text-center"><?php echo $var1; ?></td>
                                                     <td class="text-center"><?php echo $var3; ?></td>
                                                     <td class="text-center"><?php echo $var4; ?></td>
-                                                    <td class="text-center"><?php echo $var5; ?></td>
-                                                    <td class="text-center"><?php echo $var6; ?></td>
-                                                    <td class="text-center"><?php echo $var7; ?></td>
-                                                    <td class="text-center"><?php echo $var8; ?></td>
-
-
+                                
 
                                                     <!--INICIO DEL MODAL DE EDITAR -->
                                                     <div id="editar_tipo<?php echo $var1; ?>" class="modal fade" role="dialog">
@@ -242,7 +235,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                     Tipo Socio Economico</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                    <input type="text" value="<?php echo $var3; ?>" autocomplete = "off" class="form-control" maxlength="50" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                                                     name="edit_tipo_socio" id="edit_tipo_socio">
                                                                                 </div>
                                                                             </div>
@@ -250,7 +243,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="100" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                    <input type="text" value="<?php echo $var4; ?>" autocomplete = "off"class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" 
                                                                                      name="edit_descripcion" id="edit_descripcion">
                                                                                 </div>
                                                                             </div>
@@ -339,7 +332,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
    //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
       $('#tabla_tiposocio').DataTable({
-
         language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -351,7 +343,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar tiposocioeconomico:",
+        "search": "Buscar Tipo Socioeconomico:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
@@ -470,6 +462,42 @@ bitacora($codigoObjeto, $accion, $descripcion);
         cadena = cadena.trim();
         e.value = cadena;
     };
+
+    var guardar_tipo=document.getElementById("guardar_tipo"); //el nombre del id del campo y cambiar la variable 
+    guardar_tipo.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+
+    var guardar_descripcion=document.getElementById("guardar_descripcion"); //el nombre del id del campo y cambiar la variable 
+    guardar_descripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    var edit_tipo_socio=document.getElementById("edit_tipo_socio"); //el nombre del id del campo y cambiar la variable 
+    edit_tipo_socio.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+
+    var edit_descripcion=document.getElementById("edit_descripcion"); //el nombre del id del campo y cambiar la variable 
+    edit_descripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+  
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportetiposocioeconomico.php','_blank');
+      window.open(this.href,'_self');
+    }
 </script>
 
 <!--♠DianaRut *No me quiten los creditos modificado por any :( --> 

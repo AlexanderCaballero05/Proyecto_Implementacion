@@ -58,7 +58,7 @@
                           from tbl_inscripcion_cita c ,tbl_persona p
                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
                           AND c.CODIGO_ESTADO = '11';";
-                          $resul=$conn->query($query); 
+                          $resul=$conn->query($query);    
                            
                           while($row = $resul->fetch_assoc()){
                             $var1 = $row['PACIENTE'];

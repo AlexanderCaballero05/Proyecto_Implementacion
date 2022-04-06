@@ -12,6 +12,7 @@ class PDF extends FPDF {
 // Cabecera de página
 
 	function Header() {
+		date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
