@@ -39,16 +39,16 @@
                 <div class="col-md-4 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
-                      <input class="form-control"  type="time"  name="hora"  required >
+                      <input oninvalid="this.setCustomValidity('Ingrese una hora correcta')" class="form-control" required min="07:00" max= "16:00"  type="time"  name="hora"  required >
                         <div class="invalid-feedback">
-                        Llene este campo.
+                          Ingrese una hora correcta
                         </div>
                     </div>
                   </div>
                   <div class="col-md-4 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
                     <div class="form-group">
-                      <input class="form-control"   type="time"  name="hora_final"  required >
+                      <input  class="form-control" required min="08:00" max= "17:00"  type="time"  name="hora_final"  required >
                         <div class="invalid-feedback">
                         Llene este campo.
                         </div>
@@ -161,17 +161,26 @@
                       </div> 
                   </div>
                 </div><!--cierre de la modalidad  -->
-                <div class="col-md-4"><!--CORREO ELECTRONICO-->
+                <div class="col-md-4">
+                  <?php //
+                  $query = "SELECT * FROM tbl_seccion";
+                  $resultadod=$conn->query($query);                
+                  ?>
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
-                      <select class="form-control select2" id="" name="seccion" required >
-                       <option  selected disabled value="">--Seleccionar Seccion--</option>
-                       <option value="SECCIONA">SECCION A</option>
-                       <option value="SECCIONB">SECCION B </option>
-                       <option value ="SECCIONC">SECCION C </option>
-                       <option value ="SECCIOND">SECCION D </option>
-                       <option value ="SECCIONE">SECCION E </option>
-                       <option value ="SECCIONF">SECCION F </option>
+                    <select style="width: 100%"   class="form-control select2" required name="seccion"   >
+                        <option selected disabled value="" >--Seleccionar Seccion--</option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                            while($row = $resultadod->fetch_assoc()) { 
+                            $codigo = $row['CODIGO_SECCION'];
+                            $nombre = $row['NOMBRE'];
+                          ?>
+                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
+                        ?>
                       </select>
                       <div class="invalid-feedback">
                         Llene este campo.

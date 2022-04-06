@@ -99,10 +99,13 @@
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
-                                <a href="" data-toggle="modal">
-                                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;" class="btn btn-info"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button>
-                               </button>
-                               </a>
+
+                                <a>
+                                <form method="post"  action="Reportes_Prosecar/reporteIndividualEstudiante.php" target="_blank"> 
+                                <input type="hidden" name="ESTUDIANTE" value="<?php echo $var1 ?>">
+                                <button type='submit' title='Imprimir'  style="color:white; "class="btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                </form>
+                                </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -358,9 +361,12 @@
       window.open('Reportes_Prosecar/reporteEstudiantes.php','_blank');
       window.open(this.href,'_self');
     } 
-
-
-   
   </script>
 
+<script>
+    function Descargar1() {
+      window.open('Reportes_Prosecar/reporteIndividualEstudiante.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>
   
