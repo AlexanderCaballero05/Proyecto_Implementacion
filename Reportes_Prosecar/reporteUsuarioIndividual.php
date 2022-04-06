@@ -178,10 +178,7 @@ class PDF extends FPDF {
   $conexion=$data->conect(); 
   if (isset($_POST['imprimirreporteindividual'])) {
 	$ho=($_POST['imprimirreporteindividual']);
-	
-	 }
-  $data=new Conexion();
-  $conexion=$data->conect(); 
+}
 	$strquery ="SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
     e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
     FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
@@ -190,6 +187,7 @@ class PDF extends FPDF {
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
+
 
 
 

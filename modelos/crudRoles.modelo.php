@@ -5,7 +5,7 @@
   include_once 'conexion2.php';
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ROL
+
     if(isset($_POST['nombre_rol'])){
        try{
           if(isset($_POST['agregar_rol'])){
