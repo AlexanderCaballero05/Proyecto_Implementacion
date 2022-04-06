@@ -26,6 +26,7 @@ require_once "modelos/procesoConsulta.modelo.php";
 require_once "modelos/procesoPreClinica.modelo.php";
 require_once "modelos/ProcesoCitasMedicas.modelo.php";
 require_once "modelos/ProcesoExpedienteMedico.modelo.php";
+require_once "modelos/ProcesoExpedientePsicologico.modelo.php";
 require_once "modelos/procesoRecetaMedica.modelo.php";
 require_once "modelos/area.modelo.php";
 require_once "modelos/tiposangremodelo.php";

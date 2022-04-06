@@ -125,6 +125,7 @@ session_start();
          $_GET["ruta"] == "crudPreClinica" ||
          $_GET["ruta"] == "procesoRecetaMedica" ||
          $_GET["ruta"] == "procesoExpedienteMedico" ||
+         $_GET["ruta"] == "procesoExpedientePsicologico" ||
          $_GET["ruta"] == "Respaldo" ||
          $_GET["ruta"] == "crudmodalidad" ||
          $_GET["ruta"] == "crudtiposangre" ||

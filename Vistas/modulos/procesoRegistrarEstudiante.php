@@ -137,7 +137,7 @@
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -147,7 +147,7 @@
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="DISTRACTORES" class="control-label">Distractores</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -157,7 +157,7 @@
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="METAS" class="control-label">Metas</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>

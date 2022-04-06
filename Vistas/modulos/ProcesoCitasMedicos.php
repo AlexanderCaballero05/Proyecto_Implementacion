@@ -115,9 +115,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
 
-                                                                   
-
-
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-secondary"><span>
                                                                      <i class="nav-icon fas fa-eye mx-1"></i></span></button>
@@ -161,12 +158,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
                                                                         FROM tbl_estado es
-                                                                        WHERE  es.CODIGO_ESTADO <> 1 
-                                                                        and es.CODIGO_ESTADO <> 2 
-                                                                        and es.CODIGO_ESTADO <> 3 
-                                                                        and es.CODIGO_ESTADO <> 4
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 8;";
+                                                                        WHERE  es.CODIGO_ESTADO = 7;";
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
 
@@ -265,8 +257,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                                         </div>
                                                                                 </div>
-
-                                                                        
                                                                     </div>
                                                              
                                                                 </div> 
@@ -281,51 +271,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                             </div>
                                                         </div>
                                                     </div><!-- FIN DEL MODAL editar -->
-
-
-                                                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                                     <!-- inicio modal eliminar  -->   
                                                     <div id="ELIMINAR<?php echo $var1 ?>"   name="eliminar_cod_cita" id="eliminar_cod_cita"class="modal fade" role="dialog">

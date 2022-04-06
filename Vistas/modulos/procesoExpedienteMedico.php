@@ -41,10 +41,11 @@
 
                         // AND i.FECHA_CITA = CURDATE();";
 
-                        $query2 = "SELECT pe.CODIGO_PERSONA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
-                        FROM tbl_inscripcion_cita i, tbl_persona pe 
+                        $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE
+                        FROM tbl_inscripcion_cita i, tbl_persona pe
                         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND I.CODIGO_ESTADO = '9';";
+                        AND I.CODIGO_ESTADO = '9'
+                        AND i.AREA_CITA = '2'; ";
                        
                         $resul2=$conn->query($query2);                
                         ?>

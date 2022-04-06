@@ -97,7 +97,7 @@
                           <div class="col-sm-4 pl-4" id="grupo__clave_nueva">
                             <label for="" class="form-label">contraseña nueva</label>
                               <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
-                                          required  minlength="5" maxlength="30"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
+                              autocomplete = "off"    required  minlength="5" maxlength="30"  title="Configure con los valores solicitados" onkeyup="sinespacio(this); "
                                             >
                                         <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas y caracteres especiales y un numero.</p>
                                 <div class="invalid-feedback">
@@ -107,7 +107,7 @@
                           <div class="col-sm-4 pl-4" id="grupo__confirmar_clave">
                             <label for="" class="form-label">Confirmar contraseña</label>
                               <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
-                                          required minlength="5"  maxlength="30"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
+                              autocomplete = "off"  required minlength="5"  maxlength="30"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
                                             >
                                         <p class="formulario__input-error" >Ambas contraseñas deben ser iguales.</p>
                               <div class="invalid-feedback">
@@ -211,7 +211,7 @@
                           <div class="col-sm-3">
                             <label for="apellido" class="control-label">Direccion</label> <!--INICIO DIRECCION-->
                               <div class="form-group">
-                               <textarea class="form-control" type="textarea" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""><?php echo $var10; ?></textarea>
+                               <textarea class="form-control" type="text" name="direccion" id="DIRECCION" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""> <?php echo $var10; ?> </textarea>
                               </div>
                           </div> 
                         </div>
