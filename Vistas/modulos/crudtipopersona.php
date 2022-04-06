@@ -9,17 +9,21 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <head>
 
 </head>
-
+<body oncopy="return false" onpaste="return false">
+  
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO TIPO PERSONA </h4>
+        </section>
   
   <section class="content">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
            
                         <?php
                             include "conexionpdo.php";
@@ -43,28 +47,29 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <php
                              if ($permiso_registrar == 'SI'){
 
-                          ?>
+                            ?>
 
-            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar tipo persona</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar tipo persona</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>              
                             <php
                               }
                             ?>
           
           <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">TABLA TIPO DE PERSONAS</strong></h1>
+          <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST" class="needs-validation" novalidate ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_tipopersona" class="table table-bordered table-striped">
+                  <table id="tabla_tipopersona" class="table table-bordered table-striped" >
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                          <th>Codigo</th>
-                          <th>Nombre</th>
+                        <th class="text-center">Acción</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Nombre</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -114,7 +119,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   }
                                  ?>
                                 </a>
-                                <a href="#EDITARPREGUNTA<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARPERSONA<?php echo $var1; ?>" data-toggle="modal">
                                  <!-- Codigo de permiso para Actualizar -->
                                   <?php
                                   include "conexionpdo.php";
@@ -153,12 +158,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td class="text-center"><?php echo $var2; ?></td>
     
 
-                        <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
+                        <!--INICIO DEL MODAL DE EDITAR TIPO PERSONA-->
                         
-                          <div id="EDITARPREGUNTA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARPERSONA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Tipo de Persona</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -169,14 +174,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Tipo de Persona</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"  onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_persona" id="editar_persona">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onKeyDown="sinespacio(this);"  maxlength="20" minlength="5" onkeyup="mayus(this);" 
+                                           onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_persona" id="ediper" required="">
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                          </div>
                                         </div>
                           </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar" name="editar" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="editar" name="editartipoper" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -220,7 +229,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVA PREGUNTAL -->
+  <!--INICIO DEL MODAL DE AGREGAR UN NUEVo TIPO DE persona -->
   <div id="AGREGAR_TIPOPER" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
@@ -234,7 +243,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Nombre Tipo de personas</label>
-                                    <input  type="text"    class="form-control"  maxlength="50" minlength="5" onkeyup="mayus(this);"  autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese la pregunta" name="TIPO_PERSONA" id="TIPO_PERSONA" required ="">
+                                    <input  type="text"    class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"   autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese el tipo persona" 
+                                    name="TIPO_PERSONA" id="TIPER" required ="">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                     </div>
@@ -251,6 +261,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO PREGUNTA --> 
+   </body>
+
 
   <!-- Button trigger modal -->
 
@@ -308,3 +320,28 @@ bitacora($codigoObjeto,$accion,$descripcion);
         })
 })()
 </script>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportetipopersona.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+ <script>
+    
+    var tiper=document.getElementById("TIPER"); //el nombre del id del campo
+    tiper.addEventListener('keydown', function(keyboardEvent){
+  
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var ediper=document.getElementById("ediper"); //el nombre del id del campo
+    ediper.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+  </script>
+<script>
+    
+  </script>

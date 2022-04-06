@@ -24,7 +24,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 <head>
 
 </head>
-
+<body oncopy="return false" onpaste="return false">
+ 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -142,7 +143,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
             <div class="card-header text-center" style="background-color: #FEFEFE "><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">FAMILIARES REGISTRADOS </strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -254,7 +255,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Modal content  editar-->
-                    <form method="POST">
+                    <form method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Editar Familiar
                         </h4>
@@ -268,30 +269,46 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Estado Civil</label>
-                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_estado" id="editar_estado">
-                            </div>
+                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="10" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
+                                onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"  name="editar_estado" id="edifa" required="">
+                                <div class="invalid-feedback">
+                                       campo obligatorio.
+                                </div>
+                              </div>
                         </div>
                     
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Nivel Educativo</label>
-                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nivele" id="editar_nivele">
-                            </div>
+                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" maxlength="15" minlength="5"autocomplete = "off" type="text"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
+                                onKeyDown="sinespacio(this);"   onkeyup="mayus(this);" name="editar_nivele" id="edini" required="">
+                                <div class="invalid-feedback">
+                                       campo obligatorio.
+                                </div>
+                              </div>
                         </div>
                       </div>  
                     <div class="row"> 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Ingresos</label>
-                                <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" autocomplete = "off" type="text" onkeypress="return solonumeros(event);"  name="editar_ingresos" id="editar_ingresos">
-                            </div>
+                                <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" autocomplete = "off" type="text"  onkeypress="return solonumeros(event);" 
+                                 name="editar_ingresos" id="ediingre" onKeyDown="sinespacio(this);" required="">
+                                <div class="invalid-feedback">
+                                       campo obligatorio.
+                                </div>
+                              </div>
                         </div>
 
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Iglesia</label>
-                                <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" autocomplete = "off" type="text" onkeypress="return sololetras(event);"  name="editar_iglesia" id="editar_iglesia">
-                            </div>
+                                <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" autocomplete = "off" type="text"    
+                                onkeypress="return soloLetras(event);"  name="editar_iglesia" id="ediglesia" required="">
+                                <div class="invalid-feedback">
+                                       campo obligatorio.
+                                </div>
+                              </div>
                         </div>
                     </div> 
             <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
@@ -348,7 +365,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
   </section>
 <!-- Modal -->
-                
+</body>            
 <script>
     function Descargar() {
       window.open('Vistas/modulos/reportefamiliar.php','_blank');
@@ -387,3 +404,119 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   } );
 </script>
 
+<script>
+    
+    var edifa=document.getElementById("edifa"); //el nombre del id del campo
+    edifa.addEventListener('keydown', function(keyboardEvent){
+  
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var edini=document.getElementById("edini"); //el nombre del id del campo
+    edini.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var ediingre=document.getElementById("ediingre"); //el nombre del id del campo
+    ediingre.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var ediglesia=document.getElementById("ediglesia"); //el nombre del id del campo
+    ediglesia.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+  </script>
+ <script>
+function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ //funcion para solu numeros ingresar en el campo
+ function soloNumeros_tel(e){
+   var teclaPulsada=window.event ? window.event.keyCode:e.which;
+    // capturamos el contenido del input
+    var valor=document.getElementById("tele").value;
+    if(valor.length<9){
+      if(teclaPulsada==9){
+        return true;
+      }
+    // devolvemos true o false dependiendo de si es numerico o no
+    return /\d/.test(String.fromCharCode(teclaPulsada));
+    }else{
+    return false;
+    }
+  }
+   //funcion para quitar espacios
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+   //funcion sin espacios 
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
+  //otra funcion para quitar espacios :V
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+</script>
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+</script>

@@ -1,5 +1,5 @@
 <?php
-  
+  session_start();
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -30,7 +30,6 @@
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
-                        alert('Pregunta registrada correctamente');
                         window.location = 'crudpreguntas';
                         </script>";
                         include_once 'function_bitacora.php';
@@ -68,10 +67,10 @@
   //PARTE PARA EDITAR UNA PREGUNTA
   if(isset($_POST['id_pregunta'])){
     if(isset($_POST['editar'])){
-      $usuario=$_SESSION['vario']; 
-      $fechaActual = date('Y-m-d');  
       $codigo_pregunta = ($_POST['id_pregunta']);
       $editar_pregunta = ($_POST['editar_pregunta']);
+      $fechaActual = date('Y-m-d');  
+      $usuario = $_SESSION['vario']; 
       try{
        // 
        $sentencia = $db->prepare("SELECT * FROM tbl_preguntas where PREGUNTA = (?) and CODIGO_PREGUNTAS <> (?) ;");
@@ -95,7 +94,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡pregunta modificado exitosamente!');
               window.location = 'crudpreguntas';
               </script>";
               include_once 'function_bitacora.php';

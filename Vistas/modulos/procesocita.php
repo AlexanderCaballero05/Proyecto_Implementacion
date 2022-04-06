@@ -135,12 +135,19 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
+
+                             Llene este campo.
+                            </div>
+                        </div>
+                       
+
                               Llene este campo.
                             </div>
                             <div class="valid-feedback">
                               ¡Se ve bien!
                             </div>
                             
+
                     </div>
                     
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
@@ -291,11 +298,11 @@ $result3= $conn->query($query);
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
                         <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control" name="agregar_hora" id="agregar_hora">
-                        
-                     </div>
-                     <div class="invalid-feedback">
+                        <div class="invalid-feedback">
                              Llene este campo.
                             </div>
+                     </div>
+                    
                    </div>
                    <div class="col-sm-4 mb-3">
                         <div class="form-group">

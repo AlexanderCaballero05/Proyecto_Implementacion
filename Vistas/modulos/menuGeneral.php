@@ -534,7 +534,12 @@
                 <p>mantenimiento alergias</p>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a href="crudtiposangre" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>mantenimiento tipo sangre</p>
+              </a>
+            </li>
             <li class="nav-item">
 
               <a href="crudrecetamedica" class="nav-link">

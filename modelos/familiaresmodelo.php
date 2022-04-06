@@ -44,7 +44,6 @@
                         window.location = "procesoRegistrarFamiliares";
                         </script>';
 
-
             }else{
               echo '<script>
               alert("Error al crear el registro");
@@ -79,7 +78,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-              alert("Actualizacion Exitosa");
               window.location = "crudfamiliares";
               </script>';
               include_once 'function_bitacora.php';
@@ -90,7 +88,7 @@
               exit;
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar el rol!');
+              alert('¡Error al  intentar modificar el familiar!');
               window.location = 'crudfamiliares';
               </script>";
             }
