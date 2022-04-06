@@ -9,8 +9,8 @@
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
-
 </head>
+<body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -18,6 +18,11 @@
   </div>
   <section class="content">
     <div class="container-fluid">
+     <section class="content-header text-xl-center mb-3 btn-light">
+        <h1>
+            <h4>REGISTRAR TUTORIAS</h4>
+        </h1>     
+     </section>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -37,15 +42,15 @@
            <?php
            if($permiso_registrar == 'SI' ){
            ?> 
-            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoria</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoria</button>
            <?php
             }
            ?>
-           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
           <!-- Inicio del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información de Tutorias</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -53,10 +58,10 @@
                   <table id="tabla_tutoria" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th>
-                          <th class="text-center">ID</th>
-                          <th class="text-center">NOMBRE</th>
-                          <th class="text-center">AREA</th>
+                          <th class="text-center">Acción</th>
+                          <th class="text-center">Codigo</th>
+                          <th class="text-center">Nombre</th>
+                          <th class="text-center">Area</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -144,7 +149,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input required type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input  id="bloquear1" required type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
 
@@ -231,7 +236,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
+                                    <input id="bloquear" required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                    </div>
@@ -245,7 +250,7 @@
                               <label  class="control-label">Area</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
-                                      <option selected enable value=""> --Seleccione-- </option>
+                                      <option selected enable value=""> --Seleccionar Area-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
                                        while($row = $resultadod->fetch_assoc()) { 
@@ -272,8 +277,19 @@
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA Elaborado por Diana Rut --> 
   
-   <!--Funcion de la datatable -->
-
+</body>
+<script>
+  var texto=document.getElementById('bloquear');
+  texto.addEventListener('keydown', function(keyboardEvent) {
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+  });
+  var texto1 =document.getElementById('bloquear1');
+  texto1.addEventListener('keydown', function(keyboardEvent) {
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+  });
+</script>
 
 <script type="text/javascript"> 
   $(document).ready( function () {
@@ -302,7 +318,6 @@
       })
   } );
 </script>
-
   <script>
    function Descargar() {
       window.open('Reportes_Prosecar/reporteTutoria.php','_blank');
@@ -310,24 +325,19 @@
     }
   </script>
 
-
-
-
-
 <script>
-(function () {
-    'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
+  (function () {
+      'use strict'
+      var forms = document.querySelectorAll('.needs-validation')
+      Array.prototype.slice.call(forms)
+        .forEach(function (form) {
+          form.addEventListener('submit', function (event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })()
 </script>

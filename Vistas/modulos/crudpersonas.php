@@ -32,7 +32,11 @@ include_once "conexion3.php";
             <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
             </li>
             <li class="nav-item">
+
+            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Usuarios</a>
+
             <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
+
             </li>
           </ul>
         </div>

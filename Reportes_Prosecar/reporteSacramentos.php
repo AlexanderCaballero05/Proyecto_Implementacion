@@ -5,10 +5,8 @@ include('../Vistas/modulos/REPORTES/conexion/Conexion.php');
 class PDF extends FPDF {
 
 // Cabecera de página
-
 	function Header() {
 		date_default_timezone_set("America/Guatemala");
-		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',170,10,20);
 		$this->SetY(20);
 		$this->SetX(35);
@@ -16,7 +14,7 @@ class PDF extends FPDF {
 		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',12);
 		$this->SetX(73);
-		$this->Cell(45, 12, utf8_decode('Reporte de Tutorías '));
+		$this->Cell(45, 12, utf8_decode('Reporte de Sacramentos'));
 		$this->SetX(5);
 		$this->Ln(11);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
@@ -90,9 +88,10 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
-
-
-		
+			$this->Cell(15, 12, 'N', 1, 0, 'C', 1);
+			$this->Cell(40, 12, 'Nombre Sacramento', 1, 0, 'C', 1);
+			$this->Cell(90, 12, 'Descripción', 1, 1, 'C', 1);
+			
 		}
 
 		if ($setX == 100) {
@@ -166,20 +165,12 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT  t.NOMBRE as TUTORIA, t.CODIGO_AREA ,a.NOMBRE  AS AREA ,t.CODIGO_TUTORIA
-    FROM tbl_tutoria t ,tbl_area a
-    where t.CODIGO_AREA = a.CODIGO_AREA ";
-    
-    
-	
+	$strquery ="SELECT * from tbl_sacramento";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -191,12 +182,13 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(30);
+$pdf->SetX(22);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, utf8_decode("Nombre Tutoría"), 1, 0, 'C', 1);
-$pdf->Cell(75, 12, utf8_decode("Área"), 1, 1, 'C', 1);
+$pdf->Cell(50, 12, 'Nombre Sacramento', 1, 0, 'C', 1);
+$pdf->Cell(100, 12,utf8_decode("Descripción"), 1, 1, 'C', 1);
+
 
 
 
@@ -208,10 +200,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,50,75)); //???
+$pdf->SetWidths(array(15,50,100)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))) ,ucwords(strtolower(utf8_decode($data[$i]['AREA']))) ),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,(utf8_decode($data[$i]['DESCRIPCION'])),),22); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
