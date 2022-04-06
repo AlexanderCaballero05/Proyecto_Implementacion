@@ -1,0 +1,122 @@
+<?php
+session_start();
+ include_once "conexion3.php";
+ include_once "conexion.php";
+
+ $parametro ="NUM_MAX_PREGUNTAS";
+ $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+ $sentencia->execute(array($parametro));
+ $row=$sentencia->fetchColumn();
+ 
+ if($row>0){
+   $valor = $row;
+ }
+?> 
+
+<?php
+// se mando a llamar la variable de sesion antes declarada en usuario controlador
+             if (isset($_REQUEST['agregar_pregunta_usuario'])){
+                  $pregunta=($_POST['pregunta_usuario_individual']);
+
+                
+                  $usuario= $_SESSION['vario'];
+                  $respuesta=($_POST['respuesta_usuario_individual']);  
+
+                  //Consulta que trae el codigo del usuario
+                  $sentencia1 = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                  $sentencia1->execute(array($usuario));
+                  $cod_usuario=$sentencia1->fetchColumn();
+
+                  //Consulta que trae el numero de preguntas contestadas por el usuario
+                  $sentencia2 = $db->prepare("SELECT p.PAR_VALOR
+                  from tbl_usuario u, tbl_parametros_usuarios p 
+                  WHERE u.CODIGO_USUARIO = p.CODIGO_USUARIO
+                  AND P.CODIGO_PARAMETRO = 2
+                  AND u.NOMBRE_USUARIO = (?);");
+                  $sentencia2->execute(array($usuario));
+                  $valor_usuario=$sentencia2->fetchColumn();
+
+                  //Consulta que trae la pregunta contestada por el usuario para verficar que se repita
+               $consultar_pregun = "SELECT * FROM tbl_preguntas_usuarios r, tbl_usuario u
+                                       WHERE  r.CODIGO_USUARIO = u.CODIGO_USUARIO
+                                       AND r.CODIGO_PREGUNTAS = '$pregunta'
+                                       AND u.NOMBRE_USUARIO = '$usuario'";              
+                 
+                $existe1=$conn->query($consultar_pregun);
+                $row=$existe1->num_rows;
+
+
+                 if($row==1){ //aqui si es igual a 1 entonces encontro un registro 
+                    echo "<script>
+                     alert('No puede contestar la misma pregunta dos veces' );
+                     location.href ='crudPreguntasUsuarios';
+                     </script> ";
+                     exit;
+                 }
+                     if($valor==$valor_usuario){// verifica si el numero de preguntas contestadas por el usuario es igual al del parametro de preguntas
+                      echo "<script>
+                      alert('Ya constesto sus preguntas' );
+                      location.href ='crudPreguntasUsuarios';
+                      </script> ";
+                      exit;
+
+                 }else{
+
+                  $Insertar_pregunta = "INSERT INTO tbl_preguntas_usuarios(CODIGO_PREGUNTAS,CODIGO_USUARIO, RESPUESTA)
+                  VALUES ('$pregunta', '$cod_usuario' ,'$respuesta')";
+                  $Resultado1=$conn->query($Insertar_pregunta);
+
+                     $query = "UPDATE tbl_parametros_usuarios SET 
+                      PAR_VALOR=(PAR_VALOR+1)
+                      WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario') AND CODIGO_PARAMETRO = 2;";
+                      $dato=$conn->query($query);  
+                           
+                            //llamada de la fuction bitacora -->
+                         $codigoObjeto=1;
+                         $accion='Usuario ingreso a modificar preguntas';
+                         $descripcion= 'Usuario modifico las preguntas';
+                         bitacora($codigoObjeto, $accion,$descripcion);
+                        
+                        //si el parametro no es igual se envia a contestar la siguiente pregunta              
+                      echo "<script>
+                      alert('Pregunta contestada' );
+                      location.href ='crudPreguntasUsuarios';
+                      </script> ";
+
+                 } 
+                 
+               
+                 
+                                              
+                 }else {
+ 
+                }            
+  
+    
+?> 
+
+<?php
+if(isset($_POST['codigo_pregunta_usuario'])){
+   if(isset($_POST['ELIMINAR_PREGUNTA'])){ 
+   $codigo_pregunta_usuario = ($_POST['codigo_pregunta_usuario']);
+   //$codigo_pregunta = ($_POST['codigo_pregunta']);
+  $codigo_usuario = ($_POST['codigo_usuario']);
+
+         $eliminar_pregunta = "DELETE FROM tbl_preguntas_usuarios 
+         WHERE CODIGO_PREGUNTA_USUARIO = '$codigo_pregunta_usuario'; ";
+         $consulta_eliminar=$conn->query($eliminar_pregunta);
+
+         $query = "UPDATE tbl_parametros_usuarios SET 
+         PAR_VALOR=(PAR_VALOR-1)
+         WHERE CODIGO_USUARIO = $codigo_usuario
+         AND CODIGO_PARAMETRO = 2;";
+         $dato=$conn->query($query); 
+
+
+
+   }
+
+}
+
+?>
+

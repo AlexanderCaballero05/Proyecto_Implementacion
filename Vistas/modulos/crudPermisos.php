@@ -7,6 +7,9 @@
 
 <div class="content-wrapper">
   <div class="content-header">
+    <div class="text-center">
+      <h2>Permisos de usuarios</h2>
+    </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
@@ -41,8 +44,9 @@
                     if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>                
-           
+
                        <button  data-toggle="modal"  href="#agregar_permisos" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar permiso</button>
+                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
                     
                     <?php
                     }
@@ -51,7 +55,7 @@
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Permisos de usuarios</strong></h1>
+               <h1 class=" card-title text-center"></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -350,9 +354,9 @@
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX TIPO DE ROL-->
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Seleccionar Rol:</label>
+                                    <label for="txtcodigo_persona">Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
-                                        <option selected disabled value="">Elegir...</option>
+                                        <option selected disabled value="">Seleccionar rol...</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
                                         while($rowt = $resultadod->fetch_assoc()) { ?>
@@ -370,9 +374,9 @@
                                 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Seleccionar Modulo:</label>
+                                    <label for="txtcodigo_persona">Modulo:</label>
                                     <select class="form-control" name="MODUSUARIO" required="">
-                                        <option selected disabled value="">Elegir...</option>
+                                        <option selected disabled value="">Seleccionar modulo...</option>
                                                 <?php 
                                                   if ($resultador->num_rows > 0) {
                                                     while($rowr = $resultador->fetch_assoc()) { ?>
@@ -392,7 +396,7 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Insertar:</label>
                                     <select class="form-control" name="INSERTAR" required>
-                                        <option selected disabled value="">Elegir...</option>
+                                        <option selected disabled value="">Seleccionar...</option>
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -405,7 +409,7 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Eliminar:</label>
                                     <select class="form-control"name="ELIMINAR" required="">
-                                    <option selected disabled value="">Elegir...</option>
+                                    <option selected disabled value="">Seleccionar...</option>
 
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
@@ -418,7 +422,7 @@
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Modificar:</label>
                                     <select class="form-control"name="ACTUALIZAR" required="">
-                                    <option selected disabled value="">Elegir...</option>
+                                    <option selected disabled value="">Seleccionar...</option>
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -430,7 +434,7 @@
                                 <div class="input-group">
                                 <span class="input-group-append"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                                   <select class="form-control" name="MOSTRAR" required="">
-                                  <option selected disabled value="">Elegir...</option>
+                                  <option selected disabled value="">Seleccionar...</option>
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
                                   </select>
@@ -504,4 +508,12 @@
         })
 })()
 </script>
+
+
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportePermisos.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>
 

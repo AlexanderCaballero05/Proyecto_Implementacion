@@ -8,6 +8,7 @@ class PDF extends FPDF {
 // Cabecera de página
 
 	function Header() {
+		date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
@@ -105,8 +106,8 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->SetFont('Helvetica', 'B', 15);
+			$this->SetFont('Helvetica', 'B', 12);
+			$this->SetFont('Helvetica', 'B', 12);
 			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Nombre', 1, 0, 'C', 0);
 			$this->Cell(15, 8, 'Grado', 1, 0, 'C', 0);
@@ -116,8 +117,8 @@ class PDF extends FPDF {
 			$this->Cell(30, 8, 'Pasatiempos', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Distractores', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Metas', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'contenido_socie', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Contenido_tipo', 1, 1, 'C', 0);
+			$this->Cell(40, 8, 'Contenido socieco', 1, 0, 'C', 0);
+			$this->Cell(40, 8, 'Contenido tipo', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -233,8 +234,8 @@ $pdf->Cell(30, 12, 'Materias', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Pasatiempos', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Distractores', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Metas', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido_socie', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido_tipo', 1, 1, 'C', 1);
+$pdf->Cell(40, 12, 'Contenido socieco', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Contenido tipo', 1, 1, 'C', 1);
 
 
 
@@ -252,7 +253,7 @@ $pdf->SetWidths(array(10, 30, 15, 15,15,30,30,30,30,40,40)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($data[$i]['codigo_estudiante'], ucwords(strtolower(utf8_decode($data[$i]['nombre_estudiante']))),ucwords(strtolower(utf8_decode($data[$i]['GRADO_ACTUAL']))), ucwords(strtolower(utf8_decode($data[$i]['REPITENTE']))), utf8_decode($data[$i]['INDICE_ACADEMICO']), $data[$i]['MATE_BAJO_RENDI'], $data[$i]['PASATIEMPOS'] , $data[$i]['DISTRACTORES_ESCOLARES'] , $data[$i]['METAS'] , $data[$i]['tipo_contenido'] , $data[$i]['nombre_tipo_contenido']  ),6 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['nombre_estudiante'], $data[$i]['GRADO_ACTUAL'] , ucwords(strtolower(utf8_decode($data[$i]['REPITENTE']))), utf8_decode($data[$i]['INDICE_ACADEMICO']), $data[$i]['MATE_BAJO_RENDI'], $data[$i]['PASATIEMPOS'] , $data[$i]['DISTRACTORES_ESCOLARES'] , $data[$i]['METAS'] , $data[$i]['tipo_contenido'] , $data[$i]['nombre_tipo_contenido']  ),6 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

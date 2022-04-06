@@ -95,7 +95,7 @@ $result3= $conn->query($query);
                   ?>
                    <label for="txtcodigo_cita">Beneficiario</label>
                     <select  style="width: 100%;"  class="form-control select2" name="CODPACIENTE"  type="text" required >
-                      <option selected disabled value="">--Seleccionar Beneficiario--</option>
+                      <option selected disabled value="">--Seleccione  Beneficiario--</option>
                         <?php 
                           if ($resultado->num_rows > 0) {
                           while($row = $resultado->fetch_assoc()) { 
@@ -109,7 +109,7 @@ $result3= $conn->query($query);
                         ?>
                     </select>
                       <div class="invalid-feedback">
-                          Agregue un nombre!
+                          !Seleccione un campo!
                       </div>
                       <div class="valid-feedback">
                         ¡Se ve bien!
@@ -121,27 +121,26 @@ $result3= $conn->query($query);
                       $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
                       $filas_area= $conn->query($query);
                       ?>
-                        <div class="form-group">
                             <label for="txtcodigo_especialista">Area de la cita</label>
-                            <select class="form-control select2" name="area_cita" id="area_cita" required="">
-                            <option value= "10">--Seleccionar Area--</option>
+                            <select class="form-control select2" name="area_cita" id="area_cita" required>
+                            <option selected disabled value= "">--Seleccione una Area--</option>
                                 <?php
                                 if ($filas_area->num_rows > 0){
                                 while($row = $filas_area->fetch_assoc()){ 
-                                  
                                 ?>
                                 <option value="<?php echo $row['CODIGO_AREA'];?>"><?php echo $row['NOMBRE'];?></option>
                                 <?php
                                   }
                                   }
                                 ?>
-                                
                             </select>
-                            
-                        </div>
-                        <div class="invalid-feedback">
-                             Llene este campo.
+                            <div class="invalid-feedback">
+                              Llene este campo.
                             </div>
+                            <div class="valid-feedback">
+                              ¡Se ve bien!
+                            </div>
+                            
                     </div>
                     
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
@@ -152,7 +151,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Medica</label><!-- cita medica-->
                             <select class="form-control select2" name="es_medico" >
-                            <option value= "">--Selecionar Especialidad--</option>
+                            <option value= "">--Selecione Especialidad--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
                                 while($row = $resultado->fetch_assoc()){ 
@@ -177,7 +176,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Psicologica</label><!-- cita medica-->
                             <select class="form-control select2" name="es_psico"  >
-                            <option value= "">--Selecionar Especialidad Psicologica--</option>
+                            <option value= "">--Selecione Especialidad Psicologica--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
                                 while($row = $resultado->fetch_assoc()){ 
@@ -201,7 +200,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Tipos de Catequesis</label><!-- cita medica-->
                             <select class="form-control select2" name="es_espiritual"  >
-                            <option value= "">--Selecionar Catequesis--</option>
+                            <option value= "">--Selecione Catequesis--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
                                 while($row = $resultado->fetch_assoc()){ 
@@ -223,7 +222,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados citas</label>
                             <select class="form-control select2" >
-                            <option value= "">--Seleccionar Encargado--</option>
+                            <option value= "">--Seleccione Encargado--</option>
                             </select>
                            
                         </div>
@@ -232,7 +231,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
                             <select class="form-control select2" name="encargado_medico"  >
-                            <option value= "">--Seleccionar Encargado--</option>
+                            <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result1->num_rows > 0){
                                 while($row = $result1->fetch_assoc()){ 
@@ -252,7 +251,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
                             <select class="form-control select2" name="encargado_psicologo" >
-                            <option value= "">--Seleccionar Encargado--</option>
+                            <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result2->num_rows > 0){
                                 while($row = $result2->fetch_assoc()){ 
@@ -272,7 +271,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
                             <select class="form-control select2" name="encargado_catequesis" >
-                            <option value= "">--Seleccionar Encargado--</option>
+                            <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result3->num_rows > 0){
                                 while($row = $result3->fetch_assoc()){ 
@@ -368,11 +367,6 @@ $result3= $conn->query($query);
   }); // 
 </script>
 
-
-
-
-
-
 <script>
   (function () {
     'use strict'
@@ -388,7 +382,6 @@ $result3= $conn->query($query);
           form.classList.add('was-validated')
         }, false)
       })
-
   })()
 </script>
 <!-- Creado por Gissela y Any :( -->
