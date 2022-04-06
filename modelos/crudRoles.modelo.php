@@ -5,7 +5,6 @@
   include_once 'conexion2.php';
 ?>
 <?php
-
     if(isset($_POST['nombre_rol'])){
        try{
           if(isset($_POST['agregar_rol'])){
@@ -60,8 +59,6 @@
         return false;
        }
     }//FIN DEL IF DE REGISTAR UN ROL
-
-
 
   //PARTE PARA EDITAR UN ROLL
   if(isset($_POST['id_rol'])){
