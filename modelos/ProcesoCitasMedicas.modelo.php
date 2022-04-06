@@ -26,11 +26,7 @@
             </script>";
             
           }else{  
-            echo "<script> 
-            alert('Ocurrio algun error');
-            window.location = 'ProcesoCitasMedicos';
-            </script>";  
-            exit;
+           
     
           }
         }

@@ -22,14 +22,24 @@
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                 <a class="nav-link" style="color:#000000;" href="crudPreClinica">Ver Expedientes</a>
-              </li>
-              <li class="nav-item">
-                <a  class="nav-link active" aria-current="true" href="#"  style=" color:#000000;">Registrar expediente</a>
-              </li>
-            </ul>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Citas Psicologicas</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Expedientes Psicologicos</a>
+
+            </li>
+          </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate>
@@ -44,7 +54,7 @@
                         $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE
                         FROM tbl_inscripcion_cita i, tbl_persona pe
                         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND I.CODIGO_ESTADO = '9'
+                        AND I.CODIGO_ESTADO = '11'
                         AND i.AREA_CITA = '3'
                       
                         ;";

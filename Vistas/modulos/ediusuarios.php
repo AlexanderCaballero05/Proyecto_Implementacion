@@ -40,6 +40,7 @@ include_once "conexion3.php";
             <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
             </li>
           </ul>
+          </ul>
         </div>
         <div class="card-body">
     <div class="container-fluid">
@@ -69,11 +70,7 @@ include_once "conexion3.php";
                       <tbody class="text-center">
                         <?php
                         $query = "SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-
                         e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-
-                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-
                         FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
                         where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
                         u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA and
