@@ -1,5 +1,5 @@
 <?php
-  session_start();
+  
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';

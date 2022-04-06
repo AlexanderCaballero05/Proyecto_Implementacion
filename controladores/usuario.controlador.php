@@ -118,7 +118,6 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 } 
 else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==4){
     echo '<script>
-
     Swal.fire({
         type: "success",
         title: "!Usuario bloqueado, contacte al administrador!",
@@ -138,7 +137,7 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
 
 
 
-            $_SESSION['vario'] =$_POST["ingUsuario"];
+        $_SESSION['vario'] =$_POST["ingUsuario"];
             //llamada de la fuction bitacora -->
          $codigoObjeto=1;
          $accion='Intento de login fallido';
