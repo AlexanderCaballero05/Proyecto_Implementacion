@@ -75,25 +75,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="categoria" class="nav-link" >
+                  <a href="crudpersonas" class="nav-link" >
                    <i class="far fa-user nav-icon"></i>
-                    <p>Registrar Usuarios</p>
+                    <p>Proceso de Personas/Usuarios</p>
                   </a>
                 </li>
 
-                <li class="nav-item">
-                  <a href="ediusuarios" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-edit nav-icon"></i>
-                    <p>Mantenimiento usuarios</p>
-                  </a>
-                </li>
-
-                <li class="nav-item">
-                  <a href="crudpersonas" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-edit nav-icon"></i>
-                    <p>Mantenimiento personas</p>
-                  </a>
-                </li>
 
                 <li class="nav-item">
                   <a href="crudespecialidad" class="nav-link" > <!--modifique acuerdate -->
@@ -153,9 +140,10 @@
                 <li class="nav-item">
                   <a href="crudEstudiante"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Agregar estudiantes</p>
+                    <p>Proceso estudiantes</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
                   <a href="crudSacramentos"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
@@ -163,18 +151,21 @@
                   </a>
                 </li>
                  <!--<li class="nav-item">
+
+                 <li class="nav-item">
+
                   <a href=" " class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
-                </li> -->
-                <!--
+                </li> 
+                
                 <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > modifique acuerdate 
+                  <a href="crudtiposocioeconomico" class="nav-link" >
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo socieconomico</p>
                   </a>
-                </li>-->
+                </li>
                    
               </ul>
             </li>

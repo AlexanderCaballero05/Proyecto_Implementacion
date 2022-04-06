@@ -14,6 +14,7 @@ require_once "modelos/estado.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";
 require_once "modelos/crudPermisos.modelo.php";
 require_once "modelos/crudpreguntasmodelo.php";
+require_once "modelos/crudPreguntasUsuarios.modelo.php";
 require_once "modelos/crudmodalid.php";
 require_once "modelos/crudtipopersonamode.php";
 require_once "modelos/crudEstudiante.modelo.php";

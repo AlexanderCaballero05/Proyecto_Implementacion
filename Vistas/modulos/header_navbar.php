@@ -83,6 +83,15 @@
                                     <span class="menu-action-text pr-2" style="color:white">Perfil</span>
                                     </a>
 
+                                    <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item menu-action" onclick="location.href='crudPreguntasUsuarios'" >
+
+                                <i class="fas fa-user"></i>
+                                    <span class="menu-action-text pr-2" style="color:white">Preguntas de seguridad</span>
+                                    </a>
+                                    
+
                                 <div class="dropdown-divider"></div>
                                 
                                 <a class="dropdown-item menu-action" onclick="location.href='salir'" >
