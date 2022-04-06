@@ -93,7 +93,7 @@
               FROM tbl_preclinica pr, tbl_inscripcion_cita c
               WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
               AND c.CODIGO_ESTADO = '11'
-              AND pr.FECHA_CREACION = CURDATE();";
+              ";
               $resul=$conn->query($query); 
                
               while($row = $resul->fetch_assoc()){

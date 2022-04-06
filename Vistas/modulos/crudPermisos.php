@@ -8,7 +8,7 @@
 <div class="content-wrapper">
   <div class="content-header">
     <div class="text-center">
-      <h2>Permisos de usuarios</h2>
+      <h2>PERMISOS DE USUARIOS</h2>
     </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->

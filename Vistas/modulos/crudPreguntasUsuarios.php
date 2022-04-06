@@ -42,7 +42,7 @@ include_once 'conexionpdo.php';
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-hover">
@@ -197,9 +197,13 @@ include_once 'conexionpdo.php';
                    <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Respuesta:</label>
-                      <input type="text" name="respuesta_usuario_individual" id="respuesta_usuario_individual" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
-                         placeholder="respuesta de seguridad" required="">
+                      <input type="text" name="respuesta_usuario_individual" id="respuesta_usuario_individual" class="form-control" id="" onkeyup="mayus(this);" 
+                         placeholder="respuesta de seguridad" onkeypress="return soloLetras(event);" autocomplete = "off" required="">
                        </div>
+
+                       <div class="valid-feedback">
+                        ¡Se ve bien!
+                   </div>
                     </div>
                 </div> 
                     </div><!--FINAL DEL CARD BODY -->                       
@@ -335,6 +339,29 @@ $( function() {
     cadena = cadena.trim();
     e.value = cadena;
   };
+</script>
+
+
+<script>
+(function() {
+    'use strict'
+
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+            form.addEventListener('submit', function(event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+})()
 </script>
 
 <!--♠DianaRut *No me quiten los creditos :( -->
