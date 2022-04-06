@@ -40,6 +40,7 @@ include_once "conexion3.php";
             <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
             </li>
           </ul>
+          </ul>
         </div>
         <div class="card-body">
     <div class="container-fluid">

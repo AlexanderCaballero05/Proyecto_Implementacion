@@ -87,14 +87,7 @@
                     <i class="far fa-edit nav-icon"></i>
                     <p>Especialidades</p>
                   </a>
-                </li>
-              
-                <li class="nav-item">
-                  <a href="crudPreguntasUsuarios" class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
-                    <p>Preguntas Usuarios</p>
-                  </a>
-                </li>
+                </li>             
               </ul>
             </li>
          <?php
@@ -150,25 +143,16 @@
                     <p>Mantenimiento Sacramentos</p>
                   </a>
                 </li>
-                 <!--<li class="nav-item">
-
+                </li>
                  <li class="nav-item">
-
                   <a href=" " class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
-
-                </li> -->
-                
-                <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" >  
-
                 </li> 
                 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
-
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo socieconomico</p>
                   </a>
@@ -604,8 +588,8 @@
 
 
 
-         <!-- Menu de AREA PSICOLOGO -->
-         <li class="nav-item">
+          <!-- Menu de AREA PSICOLOGO -->
+          <li class="nav-item">
           <a href="#" class="nav-link">
             <i class=" nav-icon fas fa-briefcase"></i>
             <p>
@@ -616,7 +600,7 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="procesoConsulta" class="nav-link">
+              <a href="ProcesoCitasPsicologicas" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>Proceso de consultas</p>
               </a>
@@ -629,11 +613,7 @@
             </li>
 
             <li class="nav-item">
-
-              <a href="procesoExpedientePsicologico" class="nav-link">
-
-              <a href="procesoconsultapsicologia" class="nav-link">
-
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>Expedientes de pacientes</p>
               </a>
@@ -641,6 +621,7 @@
 
           </ul>
         </li>
+         
          
 
         <?php

@@ -29,14 +29,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Citas Psicologicas</a>
             </li>
-            
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
-
-            <a class="nav-link" style="color:#000000;" href="#crudPruebapsicometrica">Pruebas Psicometricas</a>
-
             <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
             </li>
             <li class="nav-item">
@@ -86,7 +85,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                         <?php
                                     
-                                        $query = "SELECT i.CODIGO_CITA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                                        $query = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA , CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
                                         FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
                                                                                 WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                                                                 AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
@@ -102,7 +101,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                 $var3 = $row['FECHA_CITA'];
                                                 $var4 = $row['HORARIO'];
                                                 $var5 = $row['nombre_estado'];
-                                               
+                                                $var6 = $row['CODIGO_PERSONA'];
                                         ?>
                                                 <tr>
                                                     <td>
@@ -194,7 +193,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="edit_cita"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                                                <button type="submit" name="enviar_cita_psicologica"  id = "enviar_cita_psicologica" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 
@@ -222,7 +221,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  
                                                                 <input type="text" value="<?php echo $var1; ?>" 
                                                                         hidden class="form-control"
-                                                                        name="codigo_enviar_cita" id="cod_edit_cita" >
+                                                                        name="codigo_cita_psicologica" id="codigo_cita_psicologica" >
+
+                                                                        <input type="text" value="<?php echo $var6; ?>" 
+                                                                        hidden class="form-control"
+                                                                        name="codigo_persona" id="codigo_persona" >
 
                                                                         
 
@@ -274,7 +277,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a consulta</button>
+                                                                <button type="submit" name="enviar_cita_psicologica"  id ="enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a consulta</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

@@ -14,18 +14,6 @@
             $antecedentes_personales = ($_POST['antecedentes_personales']);
             $antecedentes_clinicos = ($_POST['antecedentes_clinicos']);
          
-            $consulta_expediente = $db->prepare("SELECT CODIGO_PERSONA FROM TBL_EXPEDIENTE_PSICOLOGICO_UNICO WHERE CODIGO_PERSONA = (?);");
-            $consulta_expediente->execute(array($codigo_expediente_paciente));
-            $row=$consulta_expediente->fetchColumn();
-          
-        if($row>0){
-            echo "<script>
-                alert('Expediente ya se encuentra registrado');
-                window.location = 'procesoExpedientePsicologico'
-             </script>";
-
-        }else{ 
-            
 
 
             $insertar_expediente ="INSERT INTO TBL_EXPEDIENTE_PSICOLOGICO_UNICO (CODIGO_PERSONA, ANTECEDENTES_FAMILIARES , ANTECEDENTES_PERSONALES , ANTECEDENTES_CLINICOS) 
@@ -45,10 +33,10 @@
                         }//fin Para insertar neuroticos
     
                         echo "<script>
-                        window.location = 'procesoExpedientePsicologico'
+                        window.location = 'procesoconsultapsicologia'
                      </script>";
 
-        }
+        
 
             
 

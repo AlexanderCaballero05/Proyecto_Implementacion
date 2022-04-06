@@ -20,24 +20,25 @@
     </div><!-- /.container-fluid -->
   </div>
   <section class="content">
-              <div class="text-center font-weight-bold mb-3">
-                 <h2> Registro de familiares</h2>
-              </div>
     <div class="container-fluid">
-                <!-- Inicio del PROCESO inscripcion de estudiantes-->
+    <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>AGREGAR FAMILIARES</h4>
+          </h1>     
+      </section>
         <div class="card ">
-          <div class="card-header">
+        <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="true" href="procesoRegistrarFamiliares">Registrar familiares</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="crudfamiliares">Ver datos familiares</a>
+                <a class="nav-link active"  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
               </li>
             </ul>
-          </div>
+          </div><!--FIN DEL CARD HEADER -->
           <div class="card-body"><!--Cuerpo del card body principal -->
-          <div class="card-header bg-gradient-cyan"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
+          <div class="card-header"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Datos de familiares</strong></h2>
            </div></br>
          <form method="POST" class="needs-validation" novalidate>
@@ -50,10 +51,12 @@
                     $resultadod=$conn->query($query);                
                     ?>
 
-                  <!--<button  class="btn btn-secondary "  class="col-sm-1 col-form mt-3">Buscador</button>-->
-                  <div class="col-sm-3 order-2 pl-2 mt-3 mb-3">
+             <a href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+              </a>
+                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
                     <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR" id="" type="text" required >
-                    <option selected disabled value="">Buscar familiares...</option>
+                    <option selected disabled value=""> Buscar familiares...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -78,7 +81,7 @@
                 </div>
             </div> 
                   <div class="row">
-                      <div class="col-md-3"> <!--INICIO IDENTIDAD-->
+                      <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Estado civil</label> 
                           <div class="form-group">
                              <input class="form-control" type="text" maxlength="15" minlength="5" name="CIVIL" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" placeholder="Ejem: Soltero" onkeypress="return soloLetras(event);" placeholder="Ej: 1" required="" >
@@ -89,7 +92,7 @@
                       </div>
 
                     
-                        <div class="col-md-3"> <!--INICIO INDICE ACADEMICO-->
+                        <div class="col-md-4"> <!--INICIO INDICE ACADEMICO-->
                           <label for="identidad" class="control-label">Nivel educativo</label> 
                           <div class="form-group">
                             <input class="form-control" type="text" maxlength="15" minlength="5" name="NIVEL" onKeyDown="sinespacio(this);"  placeholder="Ejem: Primaria" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" required="" >
@@ -101,9 +104,12 @@
                         </div>
 
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
-                          <label for="MATERIAS" class="control-label">Ingresos mensuales Lps</label> 
-                          <div class="form-group">
+                          <label for="MATERIAS" class="control-label">Ingresos mensuales</label> 
+                          <div class="input-group">
                           <input class="form-control" type="text" minlength="8" maxlength="8"  name="INGRESOS" id="" onKeyDown="sinespacio(this);" placeholder="Ejemplo: 5000" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                          <div class="input-group-append">
+                              <span class="input-group-text">Lps</span>
+                            </div>
                                <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -113,7 +119,7 @@
                   </div>
 
                   <div class="row">
-                        <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+                        <div class="col-md-6 mt-2"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Nombre de iglesia</label> 
                           <div class="form-group">
                           <input class="form-control" type="text" name="IGLESIA" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="" required="" ></textarea>
