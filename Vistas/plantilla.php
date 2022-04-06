@@ -152,7 +152,7 @@ session_start();
          $_GET["ruta"] == "crudCargaAcademica" ||
 
 
-
+         $_GET["ruta"] == "procesoconsultapsicologia" ||
          $_GET["ruta"] == "crudinscripcioncita" ||
          $_GET["ruta"] == "procesocita" ||
          $_GET["ruta"] == "crudConsulta" ||

@@ -67,7 +67,7 @@ $result3= $conn->query($query);
     <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> REGISTRAR CITAS GENERALES
+              <h4> AGREGAR CITAS GENERALES
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -76,7 +76,7 @@ $result3= $conn->query($query);
                 <a class="nav-link" style="color:#000000;"  href="crudinscripcioncita">Ver Cita</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" aria-current="true" href="procesocita">Registrar Cita </a>
+                <a class="nav-link active"  style="color:#000000;" aria-current="true" href="procesocita">Agregar Cita </a>
               </li>
             </ul>
           </div>

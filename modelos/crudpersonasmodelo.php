@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -6,88 +7,79 @@
 <?php
  /// editar usario
  if(isset ($_POST['cod_personaguardar'])) {
-        $user=$_SESSION['vario'];
   if (isset($_POST['EDIT_PERSONA'])){
+        $user=$_SESSION['vario'];
         $codpersona = $_POST['cod_personaguardar'];
         $p_nombre = $_POST["p_nombre"];
         $s_nombre = $_POST["s_nombre"];
         $p_apellido = $_POST["p_apellido"];
         $s_apellido = $_POST["s_apellido"];
-        $dni = $_POST["dni"];
-        $sexo = $_POST["sexo"];
-        $tipo_persona= $_POST["cod_tip_per"];     
-        $f_nacimiento = $_POST["f_nacimiento"];
-        $lugar_n = $_POST["lugar_n"];
+        $dni = $_POST["dni"];    
         $correo = $_POST['correo'];
         $telefono =$_POST['telefono'];
         $direccion= $_POST['direccion'];
-        $fechaactual = strtotime(date("d-m-Y"));   
+        $fechaactual = (date("d-m-Y"));       
         try{
           // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
           $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
           $sentencia->execute(array($correo));
           $row=$sentencia->fetchColumn();
-          $CODIGO_PERSONA_CORREO = $row;
-          $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_correo_electronico WHERE correo_persona = ?;");
-          $sentencia->execute(array($correo));
-          $row=$sentencia->fetchColumn();
-          $CONTEOCORREO = $row;
-          // evaluemos si la IDENTIDAD existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
-          $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_persona WHERE dni = ?;");
+          $ID_PERSONA_CORREO = $row;
+           // evaluemos si el DNI existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
+          $sentencia = $db->prepare("SELECT tp.CODIGO_PERSONA  from tbl_persona tp where tp.DNI = ?;");
           $sentencia->execute(array($dni));
           $row=$sentencia->fetchColumn();
-          $CODIGO_PERSONA_IDENTIDAD = $row;
-          $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_persona WHERE dni = ?;");
-          $sentencia->execute(array($dni));
-          $row=$sentencia->fetchColumn();
-          $CONTEOIDENTIDAD = $row;
-          
-          if($CONTEOIDENTIDAD == 0 || $CODIGO_PERSONA_IDENTIDAD == $codpersona){
-            if($CONTEOCORREO == 0 || $CODIGO_PERSONA_CORREO == $codpersona){
-                try{
-                  $sql = "CALL sp_actualizar_personas('$p_nombre','$s_nombre','$p_apellido','$s_apellido','$dni','$f_nacimiento','$lugar_n','$sexo','$user','$fechaactual','$correo','$telefono','$codpersona','$tipo_persona','$direccion');" ;
-                    $consulta=$conn->query($sql);
-                      if ($consulta>0) {
-                            echo "<script>
-                              alert('Actualización Exitosa');
-                                 window.location = 'crudpersonas';
-                                  </script>";
-                                  include_once 'function_bitacora.php';
-                                  $codigoObjeto=14;
-                                  $accion='actualizo';
-                                  $descripcion= 'Se actualizo una persona ';
-                                  bitacora($codigoObjeto, $accion,$descripcion);
-                                }else{ 
-                                echo "<script>
-                            alert('Error al actualizar el registro');
-                            window.location = 'crudpersonas';
-                             </script>";
-                              }
-                                  return true;
-                                } catch(PDOException $e) {
-                            
-                                echo $e->getMessage();  
-                                    return false;
-                                }
-            }elseif ($CODIGO_PERSONA_CORREO <> $codpersona || $CONTEOCORREO>0) {
+          $ID_PERSONA_DNI = $row;
+          if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $codpersona){
+           if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $codpersona){   
+                //consulta para la table persona
+            $update_perfil = "UPDATE tbl_persona 
+            SET PRIMER_NOMBRE = '$p_nombre' ,
+                SEGUNDO_NOMBRE = '$s_nombre' ,
+                PRIMER_APELLIDO = '$p_apellido' ,
+                SEGUNDO_APELLIDO = '$s_apellido' ,
+                DNI = '$dni',
+                DIRECCION = '$direccion'
+                WHERE CODIGO_PERSONA = '$codpersona'; ";
+            $resultado11=$conn->query($update_perfil);
+            //consulta para la table correo
+            $update_correo = "UPDATE tbl_correo_electronico
+            SET CORREO_PERSONA = '$correo' 
+            WHERE CODIGO_PERSONA = '$codpersona'; ";
+            $resulta=$conn->query($update_correo);
+           //consulta para la table telefono
+            $update_telefono = "UPDATE tbl_telefono
+            SET NUMERO_TELEFONO = '$telefono' 
+            WHERE CODIGO_PERSONA = '$codpersona'; ";
+            $resultatel=$conn->query($update_telefono);
+            if($resultado11 > 0 && $resulta > 0 && $resultatel > 0){
               echo "<script>
-              alert('Ya existe una persona con el correo electrónico: $correo');
-                 window.location = 'crudpersonas';
-                  </script>";
-            }
-          }elseif($CODIGO_PERSONA_IDENTIDAD <> $codpersona || $CONTEOIDENTIDAD >0){
+              alert('Actualizacion exitosa');
+              window.location = 'crudpersonas';
+              </script>";
+          }else{
             echo "<script>
-            alert('Ya existe una persona con el número de identidad: $dni');
-               window.location = 'crudpersonas';
-                </script>";
-          }    
-          return true;
+            alert('!Actualizacion fallida!');
+            window.location = 'crudpersonas';
+           </script>";
+          }///FIN CONSULTA
+         } elseif($ID_PERSONA_DNI <> $codpersona){
+              echo "<script>
+              alert('Ya existe una persona con el DNI: $dni');
+             window.location = 'crudpersonas';
+              </script>";
+            }  // fin else dni
+          }elseif($ID_PERSONA_CORREO <> $codpersona){
+            echo "<script>
+            alert('Ya existe una persona con el correo: $correo');
+           window.location = 'crudpersonas';
+            </script>";
+          } // fin else correo 
+
         } catch(PDOException $e) {
-    
         echo $e->getMessage();  
             return false;
         }
-
   }  ///fin el hijo
 
  } //fin el padre 
@@ -115,7 +107,7 @@
           } else {
             try {
              $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-             mysqli_query($link, "DELETE FROM tbl_persona WHERE  CODIGo_PERSONA = '$cod' ");
+             mysqli_query($link, "DELETE FROM tbl_persona WHERE  CODIGO_PERSONA = '$cod' ");
              if(mysqli_affected_rows($link)>0){
                echo "<script>
                alert('¡PERSONA eliminada!');
@@ -130,7 +122,7 @@
              }else{
                echo "<script>
                alert('¡Error al eliminar la persona tiene relacion con otras tablas !');
-               window.location = 'crudPermisos';
+               window.location = 'crudpersonas';
                </script>";
                exit;
              }

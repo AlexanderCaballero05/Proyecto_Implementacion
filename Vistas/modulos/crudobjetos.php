@@ -14,7 +14,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
+
 <!--INICIO DEL MODAL DE Agregar -->
+<body oncopy="return false" onpaste="return false" >
 <div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -34,8 +36,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="30" minlength="10"  onkeyup="mayus(this);"  type="text"
-                                 name="nombre" id="nombre" required="">
+                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  type="text"
+                                 name="nombre" id="nombre" autocomplete = "off" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -46,7 +48,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
                                 <input type="text" class="form-control" onkeyup="mayus(this);"  type="text" 
-                                 name="descripcion" id="descripcion" required="">
+                                 name="descripcion" id="descripcion" autocomplete = "off" maxlength="100" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -67,13 +69,15 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 </div><!-- FIN DEL MODAL AGREGAR -->
 
-
+<body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-
+    <div class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO OBJETOS</h4>
+    </div>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -103,36 +107,31 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <?php 
                       if($permiso_registrar = 'SI'){
                      ?>
-                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
+                    <button type="button" class="btn btn-primary mb-3" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
                        Agregar objeto
                     </button>
                     <?php 
                       }
                      ?>
-                   
+                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Objetos</strong></h1>
+                           <!--  <h1 class=" card-title text-center"><strong style="color:black;">Objetos</strong></h1>-->
                         </div>
 
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
+                                <table id="tabla_objetos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Acción</th>
-                                            <th>ID</th>
-                                            <th>Nombre</th>
-                                            <th>Descripcion</th>
-                                            <th>Creado por</th>
-                                            <th>Fecha creacion</th>
-                                            <th>Modificado por</th>
-                                            <th>Fecha Modificación</th>
-
-                                        </tr>
+                                        <th class="text-center">Acción</th>
+                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Nombre</th>
+                                        <th class="text-center">Descripcion</th>
+                                      </tr>
                                     </thead>
                                     <tbody>
                                         <?php
@@ -143,12 +142,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                 $var1 = $row['CODIGO_OBJETO'];
                                                 $var3 = $row['NOMBRE'];
                                                 $var4 = $row['DESCRIPCION'];
-                                                $var5 = $row['CREADO_POR_USUARIO'];
-                                                $var6 = $row['FECHA_CREACION'];
-                                                $var7 = $row['MODIFICADO_POR'];
-                                                $var8 = $row['FECHA_MODIFICACION'];
-
-
                                         ?>
                                                 <tr>
                                                     <td>
@@ -221,13 +214,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     <td class="text-center"><?php echo $var1; ?></td>
                                                     <td class="text-center"><?php echo $var3; ?></td>
                                                     <td class="text-center"><?php echo $var4; ?></td>
-                                                    <td class="text-center"><?php echo $var5; ?></td>
-                                                    <td class="text-center"><?php echo $var6; ?></td>
-                                                    <td class="text-center"><?php echo $var7; ?></td>
-                                                    <td class="text-center"><?php echo $var8; ?></td>
-
-
-
+    
                                                     <!--INICIO DEL MODAL DE EDITAR -->
                                                     <div id="EDITAROBJETO<?php echo $var1; ?>" class="modal fade" role="dialog">
                                                         <div class="modal-dialog modal-lg">
@@ -250,16 +237,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="editnombre" id="editnombre">
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                    name="editnombre"autocomplete = "off" id="editnombre">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?>" class="form-control" maxlength="20" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                                                     name="editdescripcion" id="editdescripcion">
+                                                                                    <input type="text" value="<?php echo $var4; ?> "onkeyup="mayus(this);"  class="form-control" maxlength="100" minlength="5"  
+                                                                                     name="editdescripcion"autocomplete = "off" id="editdescripcion">
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -340,9 +327,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <!-- Control Sidebar -->
 </aside>
 </div><!-- ./wrapper -->
-
-
-
 
 
 
@@ -472,7 +456,73 @@ bitacora($codigoObjeto, $accion, $descripcion);
 })()
 
 
+  //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_objetos').DataTable({
 
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Objeto:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+
+
+   /////copiar y pegar y eso 
+  var nombre=document.getElementById("nombre"); //el nombre del id del campo y cambiar la variable 
+  nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+
+     /////copiar y pegar y eso 
+     var descripcion=document.getElementById("descripcion"); //el nombre del id del campo y cambiar la variable 
+     descripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    var editnombre=document.getElementById("editnombre"); //el nombre del id del campo y cambiar la variable 
+    editnombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    var editdescripcion=document.getElementById("editdescripcion"); //el nombre del id del campo y cambiar la variable 
+    editdescripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+    
+
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteobjetos.php','_blank');
+      window.open(this.href,'_self');
+    }
+
+   
 
 </script>
 

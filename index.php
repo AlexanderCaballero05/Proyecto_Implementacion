@@ -38,6 +38,7 @@ require_once "modelos/crudmedicamento.modelo.php";
 require_once "modelos/crudAlergia.modelo.php";
 require_once "modelos/familiaresmodelo.php";
 require_once "modelos/inscripcioncita.php";
+require_once "modelos/procesoconsultapsicologia.php";
 
 
 

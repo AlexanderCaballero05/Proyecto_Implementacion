@@ -34,7 +34,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Pruebas Psicometricas</a>
+            <a class="nav-link" style="color:#000000;" href="#crudPruebapsicometrica">Pruebas Psicometricas</a>
             </li>
           </ul>
         </div>
