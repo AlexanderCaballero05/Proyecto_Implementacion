@@ -63,12 +63,12 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                                <img class="img-profile rounded-circle" width="50 px" src="vistas/assets/dist/img/user8-128x128.jpg">
+                                <img class="img-profile rounded-circle" width="44 px" src="vistas/assets/dist/img/user8-128x128.jpg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in bg-gradient-blue"
+                            <div  class="dropdown-menu dropdown-menu-right  bg-gradient-blue"
                                 aria-labelledby="userDropdown">
-                              <div class="dropdown-item">
+                              <div  class="dropdown-item">
                                   <div class="dropdown-author" style="color:white"><?php echo $_SESSION['vario']; ?>
 
                                   </div>

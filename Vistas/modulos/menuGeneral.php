@@ -156,6 +156,12 @@
                     <p>Agregar estudiantes</p>
                   </a>
                 </li>
+                <li class="nav-item">
+                  <a href="crudSacramentos"class="nav-link">
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Mantenimiento Sacramentos</p>
+                  </a>
+                </li>
                  <!--<li class="nav-item">
                   <a href=" " class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
@@ -328,6 +334,12 @@
                 <a href="crudTutorias" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Registrar tutorias</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudSeccion" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Registrar Secciones</p>
                 </a>
               </li>
               <li class="nav-item">

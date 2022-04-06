@@ -2,19 +2,19 @@
 include_once "conexion.php";
 include_once "conexion3.php";
 ?>
-      <!--llamada de la fuction bitacora -->
-     <?php 
+    <!--llamada de la fuction bitacora -->
+  <?php 
   $codigoObjeto=14;
   $accion='Ingreso a la pantalla de mantenimiento usuarios';
   $descripcion= 'Ver los registros de los usuarios';
   bitacora($codigoObjeto, $accion,$descripcion);
-      ?>
+  ?>
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
-
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -22,6 +22,11 @@ include_once "conexion3.php";
   </div>
   
   <section class="content">
+     <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>VER USUARIOS</h4>
+          </h1>     
+      </section>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
@@ -40,31 +45,31 @@ include_once "conexion3.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-          <!-- jquery validation -->
+         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;"> Usuarios</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_usuarios" class="table table-bordered table-striped">
-                      <thead>
+                      <thead >
                         <tr>
-                          <th class="text-center">ACCION</th>
-                          <th class="text-center">PRIMER NOMBRE</th>
-                          <th class="text-center">PRIMER APELLIDO</th>
-                          <th class="text-center">NOMBRE USUARIO</th>
-                          <th class="text-center">CORREO ELECTRONICO</th>
-                          <th class="text-center">EESTADO</th>
-                          <th class="text-center">ROL</th>
-                          <th class="text-center">CONTRASEÑA</th>
+                          <th class="text-center">Acción</th>
+                          <th class="text-center">Primer Nombre</th>
+                          <th class="text-center">Primer Apellido</th>
+                          <th class="text-center">Nombre Usuario</th>
+                          <th class="text-center">Correo Electronico</th>
+                          <th class="text-center">Estado</th>
+                          <th class="text-center">Rol</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="text-center">
                         <?php
-                        $query = "SELECT p.CODIGO_PERSONA, u.USUARIO, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CONTRASENA, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
+                        $query = "SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
                         FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
                         where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
                         u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA and
@@ -80,7 +85,6 @@ include_once "conexion3.php";
                             $var15 = $row['correo_persona'];
                             $var7 = $row['ESTADO'];
                             $var8 = $row['ROLL'];
-                            $var9 = $row['CONTRASENA'];
                             $var13 = $row['CODIGO_ESTADO']; 
                             $var14 = $row['CODIGO_TIPO_ROL']; 
                         ?>
@@ -89,13 +93,21 @@ include_once "conexion3.php";
                             <div class="text-center" >
                               <div class="btn-group">
                                 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                               <a href="#ELIMINAR<?php echo $var2;?>" data-toggle="modal">
                                 <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+                                
+                                <a>
+                                <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
+                                <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2 ?>">
+                                <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                </a>
+                                
+                                
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -105,7 +117,6 @@ include_once "conexion3.php";
                           <td><?php echo $var15; ?></td>
                           <td><?php echo $var7; ?></td>
                           <td><?php echo $var8; ?></td>
-                          <td><?php echo $var9; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
@@ -127,7 +138,8 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Primer nombre</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" id="nombre_modi">
+                                          <input  type="text"  value ="<?php echo $var3; ?>"   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" id="nombre_modi">
+                                          
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
@@ -146,7 +158,8 @@ include_once "conexion3.php";
                                     <div class="row"> <!-- INICIO SEGUNDO ROW --> 
                                       
                                       <?php //--INICIO DEL ESTADO
-                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' ";
+                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' 
+                                       AND CODIGO_ESTADO <> '7'  AND CODIGO_ESTADO <> '8' AND CODIGO_ESTADO <> '9' AND CODIGO_ESTADO <> '10' AND CODIGO_ESTADO <> '11' ";
                                       $resultadod=$conn->query($query);                
                                       ?> 
                                       <div class="col-sm-6">
@@ -201,7 +214,7 @@ include_once "conexion3.php";
                                         <div class="input-group">
                                           <input type="password" class="form-control" id="clave_nueva<?php echo $var2?>" minlength="?>" maxlength="" name="clave_nueva">
                                           <div class="input-group-prepend">
-                                            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar2(<?php echo $var2?>)" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
+                                            <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar2(<?php echo $var2?>)" type="button"><span class="icon2 fa fa-eye-slash"></button></span>
                                           </div>
                                         </div>
                                       </div>
@@ -211,23 +224,23 @@ include_once "conexion3.php";
                                         <div class="input-group">
                                           <input type="password" class="form-control" id="confirmar_clave<?php echo $var2?>" minlength="?>" maxlength="" name="confirmar_clave"  >
                                           <div class="input-group-prepend">
-                                            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1(<?php echo $var2?>)" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
+                                            <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1(<?php echo $var2?>)" type="button"><span class="icon1 fa fa-eye-slash"></button></span>
                                           </div>
                                         </div>
                                       </div>
-
                                     </div>
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="ACT_PERSONA" name="ACT_PERSONA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="ACT_PERSONA" name="ACT_PERSONA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>  
+                                       
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                          <div id="ELIMINAR<?php echo $var2 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -236,8 +249,8 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var1; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -273,7 +286,7 @@ include_once "conexion3.php";
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
   </aside>
 </div><!--  -->
-
+</body>
 
 
 <script type="text/javascript"> 
@@ -305,6 +318,12 @@ include_once "conexion3.php";
   } );
 </script>
 
+<script>
+   function Descargar() {
+      window.open('Reportes_Prosecar/reporteUsuarios.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
 
 <script>//funcion que muestra/oculta el div de resetear contraseña
   function Mostar_div(e){
@@ -322,7 +341,7 @@ include_once "conexion3.php";
   }
 </script> 
 
-<script >
+<script  type="text/javascript">
   function mostrar1(e){
     var cambio1 = document.getElementById("confirmar_clave"+e);
     if(cambio1.type == "password"){
@@ -334,47 +353,19 @@ include_once "conexion3.php";
     }        
   }
 </script>
-
-<script>
+<script type="text/javascript">
   function mostrar2(e){
     var cambio2 = document.getElementById("clave_nueva"+e);
     if(cambio2.type == "password"){
         cambio2.type = "text";
-    $('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    $('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
     }else{
         cambio2.type = "password";
-    $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    $('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }        
   }
 </script>
-<script>
-  // Mostrar y ocultar contraseña para el input de confirmar contraseña
-  const mostrar_cla = document.querySelector(".ojo");
-  mostrar_cla.addEventListener('click',function(){
-    var cla = document.getElementById("confirmar_clave");
-    if(cla.type === "password"){
-       cla.type = "text";
-       $('.ojo').removeClass('nav-icon fas fa-eye-slash').addClass('nav-icon fas fa-eye');
-    }else{
-      cla.type ="password";
-      $('.ojo').removeClass('nav-icon fas fa-eye').addClass('nav-icon fas fa-eye-slash');
-    }
-  });
-</script>
-<script>
-  //Mostrar y ocultar la clave para el input de contrasena ,es lo mismo que arriba,pero no podian estar juntos,porque? pues solo se que no se puede :v
-  const mostrar = document.querySelector(".ojo1");
-  mostrar.addEventListener('click',function(){
-    var cla1 = document.getElementById("clave_nueva");
-    if(cla1.type === "password"){
-       cla1.type = "text";
-       $('.ojo1').removeClass('nav-icon fas fa-eye-slash').addClass('nav-icon fas fa-eye');
-    }else{
-      cla1.type ="password";
-      $('.ojo1').removeClass('nav-icon fas fa-eye').addClass('nav-icon fas fa-eye-slash');
-    }
-  });
-</script>
+
 
 <!--Ordenado y comentado para su mejor compresion -->
-<!-- Elaborado  y modificado  unicamente por ♠Diana Rut  -->
+<!-- Elaborado  y modificado  unicamente por ♠Diana Rut con ayuda de terceros(algunas cosas :v)  -->

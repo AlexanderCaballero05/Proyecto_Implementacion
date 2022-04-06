@@ -67,8 +67,7 @@ if(isset($_POST['tutor'])  ){
                                     $resul=$conn->query($insert);
                                     if($resul >0){
                                         echo "<script> 
-                                        alert('carga academica registrada correctamente');
-                                        window.location = 'procesoCargaAcademica';
+                                        window.location = 'crudCargaAcademica';
                                         </script>";
                                         exit;
                                         include_once 'function_bitacora.php';
@@ -133,7 +132,7 @@ if(isset($_POST['IDCARGA'])){
                
                 echo "<script> 
                 alert('La seccion y la clase ya esta creada ');
-                window.location = 'procesoCargaAcademica';
+                window.location = 'crudCargaAcademica';
                 </script>";
                 exit;
             }else{
@@ -143,7 +142,7 @@ if(isset($_POST['IDCARGA'])){
               if($consulta >0){
                  echo "<script>
                  alert('Ya existe esta carga ');
-                 window.location = 'procesoCargaAcademica';
+                 window.location = 'crudCargaAcademica';
                  </script>";
                 exit;
               }else{
@@ -158,7 +157,8 @@ if(isset($_POST['IDCARGA'])){
                         SECCION = '$seccion_modi'  ,
                         MODIFICADO_POR = '$usuario_modi' ,
                         FECHA_MODIFICACION = '$fecha_modi' ,
-                        CODIGO_PERSONA = '$tutor_modi' 
+                        CODIGO_PERSONA = '$tutor_modi' ,
+                        HORA_FINAL = '$hora_final_modi'
                         WHERE CODIGO_CARGA = '$codigo_carga';";   
                         
                        /* $daporfa = " CALL Sp_editar_carga('$tutoria_modi','$tutor_modi','$modalidad_modi','$seccion_modi','$fecha_inicio_modi','$fecha_final_modi','$usuario_modi'
@@ -167,8 +167,8 @@ if(isset($_POST['IDCARGA'])){
                         $row=$conn->query($corre);
                         if($row >0){
                             echo "<script>
-                            alert('Registro actualizado');
-                            window.location = 'procesoCargaAcademica';
+                            
+                            window.location = 'crudCargaAcademica';
                             </script>";
                             exit;
                         }else{
@@ -176,7 +176,7 @@ if(isset($_POST['IDCARGA'])){
                             var_dump($msg);
                             echo "<script>
                             alert('ERROR,NO SE PUEDE');
-                            window.location = 'procesoCargaAcademica';
+                            window.location = 'crudCargaAcademica';
                             </script>";
                             exit;
                             
@@ -217,7 +217,7 @@ if(isset($_POST['eliminar_carga'])){
             if($row >0){
                 echo "<script>
                 alert('¡No se puede eliminar este carga,esta relacionada!');
-                window.location = 'procesoCargaAcademica';
+                window.location = 'crudCargaAcademica';
                 </script>";
                 exit;
             }else{//Si no existe relación,se puede ir al mas allá :v (Eliminar)
@@ -227,7 +227,7 @@ if(isset($_POST['eliminar_carga'])){
                     if(mysqli_affected_rows($link)>0){
                         echo "<script>
                         alert('¡Carga eliminada!');
-                        window.location = 'procesoCargaAcademica';
+                        window.location = 'crudCargaAcademica';
                         </script>";
                         include_once 'function_bitacora.php';
                         $codigoObjeto=20;
@@ -238,7 +238,7 @@ if(isset($_POST['eliminar_carga'])){
                     }else{
                         echo "<script>
                         alert('Surgio algun error al intentar eliminar la carga,comunicarse con el administrador');
-                        window.location = 'procesoCargaAcademica';
+                        window.location = 'crudCargaAcademica';
                         </script>";
                         exit;
                     }

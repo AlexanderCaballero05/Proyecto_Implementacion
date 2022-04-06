@@ -4,7 +4,7 @@
  include "conexionpdo.php";
  
  $codigoObjeto=2;
- $accion='Ingreso a la tabla de roles';
+ $accion='Ingreso a la tabla de sacramentos';
  $descripcion= 'Usuario se autentifico ';
  bitacora($codigoObjeto, $accion,$descripcion);
  
@@ -21,7 +21,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>REGISTRAR ROLES</h4>
+            <h4>REGISTRAR SACRAMENTOS</h4>
         </h1>     
     </section>
       <div class="row">
@@ -45,7 +45,7 @@
           if($permiso_registrar == 'SI'){
           ?>
           
-          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar  Rol</button>
+          <button  data-toggle="modal"  href="#AGREGAR_SACRAMENTO" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar  Sacramento</button>
           <?php
            }
           ?>
@@ -60,7 +60,7 @@
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_roles" class="table table-bordered table-striped">
+                  <table id="tabla_sacramentos" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
@@ -71,12 +71,12 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM `tbl_roles`
-                        ORDER BY  CODIGO_TIPO_ROL ASC ;";
+                        $query = "SELECT * FROM `tbl_sacramento`
+                        ORDER BY  CODIGO_SACRAMENTO ASC ;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_TIPO_ROL'];
+                            $var1 = $row['CODIGO_SACRAMENTO'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
                         ?>
@@ -110,7 +110,6 @@
                                <?php
                                 }
                                ?><!--Fin del boton de eliminar -->
-                              <!--Codigo para asignar permiso del boton de editar -->
                               <?php
                                $usuario=$_SESSION['vario'];
                                //Evaluo si existe el tipo de Rol
@@ -130,7 +129,7 @@
                                 if($permiso_actualizar == 'SI')
                                 {
                               ?>
-                                <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARSACRAMENTO<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
                               <?php
@@ -142,35 +141,35 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                        <!--INICIO DEL MODAL DE EDITAR ROL -->
-                          <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
+                        <!--INICIO DEL MODAL DE EDITAR SACRAMENTO -->
+                          <div id="EDITARSACRAMENTO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar roles</h4>
+                                    <h4 class="text-center">Editar Sacramentos</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_rol" id="id_rol">
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_sacramento" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="40" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeyup="mayus(this);"  maxlength="40" minlength="10"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="200"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar_rol" name="editar_rol" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="editar_sacramento" name="editar_sacramento" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -185,14 +184,14 @@
                                   <h5 class="modal-title" id="exampleModalLabel"></h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEeliminar" method="POST">
+                                <form  method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el rol <?php echo $var2; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="sacramento_eliminar" >
+                                    <h4 class="text-center">¿Esta seguro de eliminar el sacramento? <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_ROL" id="ELIMINAR_ROL"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_SACRAMENTO"   class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -214,13 +213,13 @@
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ROL -->
-    <div id="AGREGAR_ROL" class="modal fade" role="dialog">
+  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO SACRAMENTO -->
+    <div id="AGREGAR_SACRAMENTO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form  method="POST"  class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Rol</h4>
+                        <h4 class="text-center">Agregar Sacramento</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -228,7 +227,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" required="">
+                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="10"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al sacramento" name="nombre_sacramento"required="">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                    </div>
@@ -237,7 +236,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="200"    autocomplete = "off" type="text"  placeholder="Ingrese una descripción del sacramento" name="descripcion_sacramento" id="descripcion_sacramento" required=""></textarea>
                                     <div class="invalid-feedback">
                                       campo obligatorio.
                                    </div>
@@ -247,12 +246,12 @@
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_rol" name="agregar_rol" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_sacramento" name="agregar_sacramento" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO SACRAMENTO --> 
    </body>
 
    <script>//previene que se mantenga una tecla pulsada
@@ -271,7 +270,7 @@
 
 <script type="text/javascript"> 
   $(document).ready( function () {
-      $('#tabla_roles').DataTable({
+      $('#tabla_sacramentos').DataTable({
         language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -283,7 +282,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Rol:",
+        "search": "Buscar Sacramento:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
@@ -298,7 +297,7 @@
 
   <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteRol.php','_blank');
+      window.open('Reportes_Prosecar/reporteSacramentos.php','_blank');
       window.open(this.href,'_self');
     }
   </script> 

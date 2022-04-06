@@ -2,26 +2,26 @@
 <?php
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
+date_default_timezone_set("America/Guatemala");
 class PDF extends FPDF {
 
 // Cabecera de página
 
 	function Header() {
-		date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
-		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',170,10,20);
+		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
-		$this->SetX(35);
+		$this->SetX(86);
 		$this->SetFont('Arial','B',14);
-		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-		$this->SetFont('Arial','',12);
-		$this->SetX(73);
-		$this->Cell(45, 12, utf8_decode('Reporte de Tutorías '));
+		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+		$this->SetFont('Arial','',16);
+		$this->SetX(110);
+		$this->Cell(160, 8, utf8_decode('Reporte Individual de Usuario'));
 		$this->SetX(5);
-		$this->Ln(11);
-		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
-        $this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->Ln(5);
+		$this->SetFont('Arial','',10);
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		
 		$this->Ln(10);
 	}
 
@@ -30,12 +30,15 @@ class PDF extends FPDF {
 	function Footer() {
 	// Posición: a 1,5 cm del final
 	$this->SetFont('helvetica', 'B', 9);
-	$this->SetY(-15);
-	$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-  
-	//$this->Line(10,287,200,287);
-	$this->Cell(170,0,utf8_decode('Prosecar © Todos los derechos reservados.'),0,0,'C');
-	$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	$this->SetY(-18);
+	$this->SetX(28);
+	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	
+	$this->SetX(27);
+	$this->Line(27,197,270,197);
+	
+	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+	$this->SetX(10);
 	
 	}
 
@@ -90,9 +93,16 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
-
-
-		
+	        $this->SetFillColor(72, 208, 234);
+            $this->SetFont('Helvetica', 'B', 12);
+            $this->Cell(12, 12, 'N', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Primer Nombre', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Primer Apellido', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Nombre Usuario', 1, 0, 'C', 1);
+            $this->Cell(55, 12, 'Correo Electronico', 1, 0, 'C', 1);
+            $this->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
+            $this->Cell(35, 12, 'Rol', 1, 1, 'C', 1);
+			$this->SetFont('Arial', '', 10);
 		}
 
 		if ($setX == 100) {
@@ -166,37 +176,47 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT  t.NOMBRE as TUTORIA, t.CODIGO_AREA ,a.NOMBRE  AS AREA ,t.CODIGO_TUTORIA
-    FROM tbl_tutoria t ,tbl_area a
-    where t.CODIGO_AREA = a.CODIGO_AREA ";
-    
-    
+  if (isset($_POST['imprimirreporteindividual'])) {
+	$ho=($_POST['imprimirreporteindividual']);
 	
+	 }
+  $data=new Conexion();
+  $conexion=$data->conect(); 
+	$strquery ="SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+    e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
+    FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
+    where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
+    u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA  and p.CODIGO_PERSONA = '$ho' ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
 // Creación del objeto de la clase heredada
 $pdf = new PDF(); //hacemos una instancia de la clase
 $pdf->AliasNbPages();
-$pdf->AddPage(''); //añade l apagina / en blanco
+$pdf->AddPage('L'); //añade l apagina / en blanco
 $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
+$pdf->SetFillColor(72, 208, 234);
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(30);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, utf8_decode("Nombre Tutoría"), 1, 0, 'C', 1);
-$pdf->Cell(75, 12, utf8_decode("Área"), 1, 1, 'C', 1);
+$pdf->Cell(12, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Primer Nombre', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Primer Apellido', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Nombre Usuario', 1, 0, 'C', 1);
+$pdf->Cell(55, 12, 'Correo Electronico', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, 'Rol', 1, 1, 'C', 1);
+
+
+
 
 
 
@@ -205,13 +225,14 @@ $pdf->Cell(75, 12, utf8_decode("Área"), 1, 1, 'C', 1);
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
 $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 
-$pdf->SetFont('Arial', '', 12);
+$pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,50,75)); //???
+$pdf->SetWidths(array(12, 40, 40, 40,55,30,35)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))) ,ucwords(strtolower(utf8_decode($data[$i]['AREA']))) ),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+
+	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['PRIMER_NOMBRE']))),ucwords((utf8_decode($data[$i]['PRIMER_APELLIDO']))), ucwords((utf8_decode($data[$i]['NOMBRE_USUARIO']))), utf8_decode($data[$i]['correo_persona']), $data[$i]['ESTADO'], $data[$i]['ROLL'] ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

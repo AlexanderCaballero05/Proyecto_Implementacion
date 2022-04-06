@@ -5,42 +5,40 @@
   include_once 'conexion2.php';
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ROL
-    if(isset($_POST['nombre_rol'])){
+//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR SECCION
+    if(isset($_POST['nombre_seccion'])){
        try{
-          if(isset($_POST['agregar_rol'])){
-               $nombre_rol = ($_POST['nombre_rol']);
-               $descripcion = ($_POST['descripcion_rol']);
-               $fechaActual = date('Y-m-d');
-               $usuario =$_SESSION['vario'];   
+          if(isset($_POST['agregar_seccion'])){
+               $nombre_seccion = ($_POST['nombre_seccion']);
+               $descripcion = ($_POST['descripcion_seccion']); 
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_roles WHERE NOMBRE = (?);");
-                  $consulta_rol->execute(array($nombre_rol));
-                  $row=$consulta_rol->fetchColumn();
+                  $consulta_seccion = $db->prepare("SELECT NOMBRE FROM tbl_seccion WHERE NOMBRE = (?);");
+                  $consulta_seccion->execute(array($nombre_seccion));
+                  $row=$consulta_seccion->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre del rol $nombre_rol ya se encuentra registrado');
-                    window.location = 'crudRoles';
+                    alert('El nombre de la sección $nombre_seccion ya se encuentra registrado');
+                    window.location = 'crudSeccion';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO tbl_roles( NOMBRE, DESCRIPCION, FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_rol','$descripcion','$fechaActual','$usuario'); ";
-                      $resul=$conn->query($query_rol);
+                      $query_seccion = "INSERT INTO TBL_SECCION(NOMBRE, DESCRIPCION) VALUES ('$nombre_seccion','$descripcion'); ";
+                      $resul=$conn->query($query_seccion);
                       if($resul >0){
                         echo "<script> 
-                        window.location = 'crudRoles';
+                        window.location = 'crudSeccion';
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=2;
+                        $codigoObjeto=33;
                         $accion='Registro';
-                        $descripcion= 'Se agrego un nuevo rol ';
+                        $descripcion= 'Se agrego un nueva seccion ';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
-                        window.location = 'crudRoles';
+                        window.location = 'crudSeccion';
                         </script>";
                         exit;
                       }
@@ -48,7 +46,7 @@
                     echo $e->getMessage(); 
                     return false;
                     }
-                  }//fin del else de si no existe el nombre del rol
+                  }//fin del else de si no existe el nombre 
               }catch(PDOException $e){
               echo $e->getMessage(); 
               return false;
@@ -59,49 +57,46 @@
         echo $e->getMessage(); 
         return false;
        }
-    }//FIN DEL IF DE REGISTAR UN ROL
+    }//
 
 
 
-  //PARTE PARA EDITAR UN ROLL
-  if(isset($_POST['id_rol'])){
-    if(isset($_POST['editar_rol'])){
-      $codigo_rol = ($_POST['id_rol']);
+  //PARTE PARA EDITAR UN SECCION
+  if(isset($_POST['id_seccion'])){
+    if(isset($_POST['editar_seccion'])){
+      $codigo_seccion = ($_POST['id_seccion']);
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
-      $fecha_modificacion = date('Y-m-d'); 
-      $user=$_SESSION['vario'];
-
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_roles where NOMBRE = (?) and CODIGO_TIPO_ROL <> (?) ;");
-       $sentencia->execute(array($editar_nombre,$codigo_rol));
+       $sentencia = $db->prepare("SELECT * FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
+       $sentencia->execute(array($editar_nombre,$codigo_seccion));
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe un rol con este mismo nombre: $editar_nombre');
-          window.location = 'crudRoles';
+          alert('Ya existe una sección con este mismo nombre: $editar_nombre');
+          window.location = 'crudSeccion';
           </script>";
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
-            WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
+            $sql = " UPDATE tbl_seccion SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion'
+            WHERE CODIGO_SECCION = '$codigo_seccion' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>              
-              window.location = "crudRoles";
+              window.location = "crudSeccion";
               </script>';
               include_once 'function_bitacora.php';
               $codigoObjeto=2;
               $accion='Modificacion';
-              $descripcion= 'Se edito un rol ';
+              $descripcion= 'Se edito una sección ';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar el rol!');
-              window.location = 'crudRoles';
+              alert('¡Error al  intentar modificar la seccion!');
+              window.location = 'crudSeccion';
               </script>";
             }
           }catch(PDOException $e){
@@ -114,12 +109,12 @@
         return false;
        }
     }
-  }//cierre del if principal
+  }
 
-//PARTE PARA ELIMINAR UN ROL
-if(isset($_POST['rol_eliminar'])){
-  if(isset($_POST['ELIMINAR_ROL'])){
-    $code = ($_POST['rol_eliminar']);//asigna a una variable el id del estado a eliminar
+//PARTE PARA ELIMINAR UN SECCION
+if(isset($_POST['seccion_eliminar'])){
+  if(isset($_POST['ELIMINAR_SECCION'])){
+    $code = ($_POST['seccion_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
       $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
       where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
@@ -127,29 +122,29 @@ if(isset($_POST['rol_eliminar'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar este rol,esta relacionado con otras tablas!');
-        window.location = 'crudRoles';
+        alert('¡No se puede eliminar la seccion,esta relacionado con carga!');
+        window.location = 'crudSeccion';
         </script>";
         exit;
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_roles WHERE  CODIGO_TIPO_ROL = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_seccion WHERE  CODIGO_SECCION = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Rol eliminado!');
-            window.location = 'crudRoles';
+            alert('¡Sección eliminado!');
+            window.location = 'crudSeccion';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=2;
             $accion='Eliminación';
-            $descripcion= 'Se elimino un rol ';
+            $descripcion= 'Se elimino una Sección ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar el rol!');
-            window.location = 'crudRoles';
+            alert('¡Error al eliminar la sección!');
+            window.location = 'crudSeccion';
             </script>";
             exit;
           }
@@ -163,8 +158,5 @@ if(isset($_POST['rol_eliminar'])){
      return false;
     }
   }
-}//Cirre del if padre
-
-
-//*****Elaborado por Diana Rut,no quiten creditos :v *******
+}
 ?>
