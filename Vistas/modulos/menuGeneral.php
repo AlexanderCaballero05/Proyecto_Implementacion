@@ -158,10 +158,17 @@
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
+
+                </li> -->
+                
+                <li class="nav-item">
+                  <a href="crudtiposocioeconomico" class="nav-link" >  
+
                 </li> 
                 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
+
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo socieconomico</p>
                   </a>
@@ -604,7 +611,7 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="ProcesoCitasPsicologicas" class="nav-link">
+              <a href="procesoConsulta" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>Proceso de consultas</p>
               </a>
@@ -617,7 +624,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="  " class="nav-link">
+              <a href="procesoconsultapsicologia" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>Expedientes de pacientes</p>
               </a>

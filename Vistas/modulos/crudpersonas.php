@@ -1,14 +1,17 @@
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
-
-
       $codigoObjeto=14;
       $accion='Ingreso a la pantalla de mantenimiento usuarios';
       $descripcion= 'Ver los registros de los usuarios';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
-
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportepersona.php','_blank');
+      window.open(this.href,'_self');
+    }
+</script>
 
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -20,13 +23,20 @@ include_once "conexion3.php";
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-
+    <div class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO PERSONAS</h4>
+    </div>
     <section class="content">
      <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
+
+            <li class="nav-item">
+            <a class=" nav-link " style="color:#000000;" href="categoria">Agregar Personas</a>
+
           <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
+
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
@@ -58,23 +68,21 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '14'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                           <?php 
                       if($permiso_registrar = 'SI'){
-                     ?>  
-                     <!--  
+                     ?> 
                       <a href="categoria"> 
                       <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-
-                    </a>
-                      -->
+                    </a> 
                     <?php 
                       }
                      ?> 
+                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
@@ -88,38 +96,42 @@ include_once "conexion3.php";
                                 <table id="tabla_personas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Acción</th>
-                                            <th>ID</th>
-                                            <th>Primer nombre</th>
-                                            <th>Segundo nombre</th>
-                                            <th>Primer Apellido</th>
-                                            <th>Segundo Apellido</th>
-                                            <th>Dni</th>
-                                            <th>Sexo</th>
-                                            <th>Fecha nacimiento</th>
-                                            <th>Lugar nacimiento</th>
-                                            <th>Dirección</th>
-                                            <th>Tipo de Persona</th>
-                                            <th>Telefono</th>
-                                            <th>Correo</th>
-                                            <th>Fecha de Modificación</th>
-                                            <th>Modificado por</th>
-                                            <th>Creado por </th>
-                                            
+                                            <th class="text-center">Acción</th>
+                                            <th class="text-center">ID</th>
+                                            <th class="text-center">Primer nombre</th>
+                                            <th class="text-center">Segundo nombre</th>
+                                            <th class="text-center">Primer Apellido</th>
+                                            <th class="text-center">Segundo Apellido</th>
+                                            <th class="text-center">Dni</th>
+                                            <th class="text-center">Sexo</th>
+                                            <th class="text-center">Fecha nacimiento</th>
+                                            <th class="text-center">Lugar nacimiento</th>
+                                            <th class="text-center">Dirección</th>
+                                            <th class="text-center">Tipo de Persona</th>
+                                            <th class="text-center">Telefono</th>
+                                            <th class="text-center">Correo</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                      <?php
-                        $query = "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,
-                        p.SEGUNDO_APELLIDO,p.DNI,p.CREADO_POR_USUARIO, p.FECHA_CREACION,
-                         p.MODIFICADO_POR, p.FECHA_MODIFICACION,p.SEXO,P.FECHA_NACIMIENTO, 
-                         P.LUGAR_NACIMIENTO, t.NUMERO_TELEFONO, c.correo_persona, DIRECCION,
-                        tt.NOMBRE as TIPO_PERSONA, tt.CODIGO_TIPO_PERSONA 
-                       FROM tbl_persona p 
-                       LEFT JOIN tbl_telefono t on p.CODIGO_PERSONA= t.CODIGO_PERSONA 
-                       LEFT JOIN tbl_correo_electronico c on p.CODIGO_PERSONA = c.CODIGO_PERSONA 
-                       LEFT JOIN tbl_tipo_persona TT on p.CODIGO_PERSONA = tt.CODIGO_TIPO_PERSONA 
-                       ORDER BY p.CODIGO_PERSONA ASC;";
+                        $query = "SELECT tp.CODIGO_PERSONA, 
+                        tp.PRIMER_NOMBRE , 
+                        tp.SEGUNDO_NOMBRE, 
+                        tp.PRIMER_APELLIDO,
+                        tp.SEGUNDO_APELLIDO,
+                        tp.DNI,
+                        tp.FECHA_NACIMIENTO , 
+                        tp.LUGAR_NACIMIENTO,
+                         tp.DIRECCION,
+                         tp.SEXO ,
+                         tt.NUMERO_TELEFONO ,
+                         ttp.NOMBRE , 
+                         tce.correo_persona
+                         from tbl_persona tp  
+                         left join   tbl_telefono tt  on tt.CODIGO_PERSONA =  tp.CODIGO_PERSONA   
+                         left  join  tbl_tipo_persona ttp  on ttp.CODIGO_TIPO_PERSONA  =  tp.CODIGO_PERSONA  
+                         left  join  tbl_correo_electronico tce  on tce.CODIGO_PERSONA   =  tp.CODIGO_PERSONA  
+                          where tp.CODIGO_PERSONA  > 1;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -132,13 +144,9 @@ include_once "conexion3.php";
                             $var8 = $row['SEXO'];
                             $var9 = $row['FECHA_NACIMIENTO'];
                             $var10 = $row['LUGAR_NACIMIENTO'];
-                            $var11 = $row['CODIGO_TIPO_PERSONA'];
-                            $var12 = $row['TIPO_PERSONA'];
+                            $var12 = $row['NOMBRE'];
                             $var13 = $row ['NUMERO_TELEFONO'];
                             $var14 = $row ['correo_persona'];
-                            $var15 = $row ['FECHA_MODIFICACION'];
-                            $var16 = $row['MODIFICADO_POR'];
-                            $var17 = $row['CREADO_POR_USUARIO'];
                             $var18 = $row['DIRECCION'];
                         ?>
                                         <tr>
@@ -176,9 +184,6 @@ include_once "conexion3.php";
                                             <td class="text-center"><?php echo $var12; ?></td>
                                             <td class="text-center"><?php echo $var13; ?></td>
                                             <td class="text-center"><?php echo $var14; ?></td>
-                                            <td class="text-center"><?php echo $var15; ?></td>
-                                            <td class="text-center"><?php echo $var16; ?></td>
-                                            <td class="text-center"><?php echo $var17; ?></td>
                                             <!--INICIO DEL MODAL DE EDITAR -->
                                             <div id="EDITARPERSONA<?php echo $var1; ?>" class="modal fade"
                                                 role="dialog">
@@ -275,10 +280,10 @@ include_once "conexion3.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona">Dni</label>
-                                                                            <input type="number"
+                                                                            <input type="text"
                                                                                 value="<?php echo $var7; ?>"
-                                                                                class="form-control" maxlength="20"
-                                                                                minlength="5"
+                                                                                class="form-control" maxlength="15" 
+                                                                                onkeypress="return solonumero(event)" 
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 name="dni" id="dni" required ="">
@@ -288,103 +293,17 @@ include_once "conexion3.php";
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <label for="cbx_persona"
-                                                                            class="control-label">Sexo</label>
-                                                                        <div class="form-group">
-                                                                            <select
-                                                                                class="form-control select2 select2-primary"
-                                                                                style="width: 100%;" name="sexo"
-                                                                                id="sexo" required="">
-                                                                                <option value="<?php echo $var8?>">
-                                                                                    <?php echo $var8;?></option>
-                                                                                <option value="M">M</option>
-                                                                                <option value="F">F</option>
-                                                                            </select>
-                                                                            <div class="invalid-feedback">
-                                                                             Eliga una opción.
-                                                                            </div>
-                                                                            <div class="valid-feedback">
-                                                                             ¡Se ve bien!
-                                                                          </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group">
-                                                                            <label for="txtnombre_usuario">Fecha
-                                                                                vencimiento</label>
-                                                                            <input type="date" class="form-control"
-                                                                                value="<?php echo $var9; ?>"
-                                                                                name="f_nacimiento" id="f_nacimiento" required ="">
-                                                                                <div class="invalid-feedback">
-                                                                                campo obligatorio.
-                                                                                </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Lugar
-                                                                                nacimiento</label>
-                                                                            <input type="text" class="form-control"
-                                                                                value="<?php echo $var10; ?>"
-                                                                                maxlength="20" minlength="5"
-                                                                                onKeyDown="sinespacio(this);"
-                                                                                onkeyup="mayus(this);"
-                                                                                autocomplete="off" type="text"
-                                                                                onkeypress="return soloLetras(event);"
-                                                                                name="lugar_n" id="lugar_n" required ="">
-                                                                                <div class="invalid-feedback">
-                                                                                 campo obligatorio.
-                                                                                 </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona">Dirección</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var18; ?>"
-                                                                             class="form-control"  name="direccion" id="direccion"
+                                                                             class="form-control" maxlength="500"  minlength="20"  name="direccion" id="direccion"
                                                                               onkeyup="mayus(this);" autocomplete = "off"
-                                                                               onkeypress="" placeholder="Ingrese Direccion" 
+                                                                               onkeypress="" 
                                                                                required="" >
                                                                                <div class="invalid-feedback">
                                                                              campo obligatorio.
                                                                               </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <?php
-                                                                     $query = "SELECT CODIGO_TIPO_PERSONA,NOMBRE FROM tbl_tipo_persona;";
-                                                                    $resultadod=$conn->query($query);                
-                                                                     ?>
-                                                                    <div class="col-sm-6">
-                                                                        <label for="cbx_persona"
-                                                                            class="control-label">Rol</label>
-                                                                        <div class="form-group">
-                                                                            <select
-                                                                                class="form-control select2 select2-primary"
-                                                                                style="width: 100%;" name="cod_tip_per"
-                                                                                id="cod_tip_per" required="">
-                                                                                <option value="<?php echo $var11?>">
-                                                                                    <?php echo $var12;?></option>
-                                                                                <?php 
-                                                                                if ($resultadod->num_rows > 0) {
-                                                                                    while($row = $resultadod->fetch_assoc()) { 
-                                                                                    $codigo_estado = $row['CODIGO_TIPO_PERSONA'];
-                                                                                    $estado = $row['NOMBRE'];
-                                                                                ?>
-                                                                                <option
-                                                                                    value="<?php echo $codigo_estado?>">
-                                                                                    <?php echo $estado;?></option>
-                                                                                <?php } 
-                                                                                 }?>
-                                                                            </select>
-                                                                            <div class="invalid-feedback">
-                                                                             Eliga una opción.
-                                                                            </div>
-                                                                            <div class="valid-feedback">
-                                                                            ¡Se ve bien!
-                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -392,8 +311,8 @@ include_once "conexion3.php";
                                                                             <label for="txtcodigo_persona">Correo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
-                                                                                class="form-control" maxlength="20"
-                                                                                minlength="5"
+                                                                                class="form-control" maxlength="50"
+                                                                                minlength="15"
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
@@ -408,13 +327,14 @@ include_once "conexion3.php";
                                                                             <label for="txtcodigo_persona">Telefono</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var13; ?>"
-                                                                             class="form-control" placeholder="99001100"
-                                                                                onkeyup="mayus(this);" maxlength="20" 
+                                                                             class="form-control" 
+                                                                                onkeyup="mayus(this);" maxlength="10" 
                                                                                 minlength="8"
                                                                                  onkeypress="return solonumero(event)"  
                                                                                  required onblur="quitarespacios(this);" 
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
+                                                                                 autocomplete = "off"
                                                                                 name="telefono" id="telefono">
                                                                                 <div class="invalid-feedback">
                                                                                 campo obligatorio.
@@ -443,7 +363,7 @@ include_once "conexion3.php";
 
                                                                         //llamar al procedimiento almacenado
                                                                         $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '14'));
                                                                         $row1=$evaluar_permiso_actualizar->fetchColumn();
                                                                         $permiso_actualizar =$row1; 
                                                                     
@@ -507,7 +427,7 @@ include_once "conexion3.php";
                                                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                                                     $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                                                    $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                                                    $evaluar_permiso_eliminar->execute(array($usuariomo, '14'));
                                                                     $row1=$evaluar_permiso_eliminar->fetchColumn();
                                                                     $permiso_eliminar =$row1; 
                                                                 }
@@ -608,12 +528,6 @@ include_once "conexion3.php";
 
 
 
-
-
-
-
-
-
 <script type="text/javascript">
 $(function() {
     $("#ESTADOUSUARIO").change(function() {
@@ -710,5 +624,148 @@ function quitarespacios(e) {
     e.value = cadena;
 };
 </script>
+
+<script>
+    
+    window.onload = function() {
+        var direccion = document.getElementById('direccion'); /// la variable se puede poner con el mismo nombre del id 
+        direccion.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      direccion.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var direccion=document.getElementById("direccion"); //el nombre del id del campo y cambiar la variable 
+    direccion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var p_nombre = document.getElementById('p_nombre'); /// la variable se puede poner con el mismo nombre del id 
+        p_nombre.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      p_nombre.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var p_nombre=document.getElementById("p_nombre"); //el nombre del id del campo y cambiar la variable 
+    p_nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var s_nombre = document.getElementById('s_nombre'); /// la variable se puede poner con el mismo nombre del id 
+        s_nombre.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      s_nombre.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var s_nombre=document.getElementById("s_nombre"); //el nombre del id del campo y cambiar la variable 
+    s_nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+     
+    window.onload = function() {
+        var p_apellido = document.getElementById('p_apellido'); /// la variable se puede poner con el mismo nombre del id 
+        p_apellido.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      p_apellido.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var p_apellido=document.getElementById("p_apellido"); //el nombre del id del campo y cambiar la variable 
+    p_apellido.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var s_apellido = document.getElementById('s_apellido'); /// la variable se puede poner con el mismo nombre del id 
+        s_apellido.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      s_apellido.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var s_apellido=document.getElementById("s_apellido"); //el nombre del id del campo y cambiar la variable 
+    s_apellido.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var dni = document.getElementById('dni'); /// la variable se puede poner con el mismo nombre del id 
+        dni.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      dni.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var dni=document.getElementById("dni"); //el nombre del id del campo y cambiar la variable 
+    dni.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var correo = document.getElementById('correo'); /// la variable se puede poner con el mismo nombre del id 
+        correo.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      correo.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var correo=document.getElementById("correo"); //el nombre del id del campo y cambiar la variable 
+    correo.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+    window.onload = function() {
+        var telefono = document.getElementById('telefono'); /// la variable se puede poner con el mismo nombre del id 
+        telefono.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
+        e.preventDefault();
+      }
+      telefono.oncopy = function(e) {// cambiar la variable
+        e.preventDefault();
+      }
+    }
+
+    var telefono=document.getElementById("telefono"); //el nombre del id del campo y cambiar la variable 
+    telefono.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+    keyboardEvent.preventDefault();
+    });
+
+  
+  </script>
+  
 
 <!--♠DianaRut *No me quiten los creditos  modificado por any :( -->
