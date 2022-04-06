@@ -14,6 +14,7 @@ require_once "modelos/estado.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";
 require_once "modelos/crudPermisos.modelo.php";
 require_once "modelos/crudpreguntasmodelo.php";
+require_once "modelos/crudPreguntasUsuarios.modelo.php";
 require_once "modelos/crudmodalid.php";
 require_once "modelos/crudtipopersonamode.php";
 require_once "modelos/crudEstudiante.modelo.php";
@@ -28,6 +29,8 @@ require_once "modelos/ProcesoExpedienteMedico.modelo.php";
 require_once "modelos/procesoRecetaMedica.modelo.php";
 require_once "modelos/area.modelo.php";
 require_once "modelos/tiposangremodelo.php";
+require_once "modelos/crudSacramento.modelo.php";
+require_once "modelos/crudSeccion.modelo.php";
 
 require_once "modelos/procesoMatricula.modelo.php";
 
@@ -38,6 +41,7 @@ require_once "modelos/crudmedicamento.modelo.php";
 require_once "modelos/crudAlergia.modelo.php";
 require_once "modelos/familiaresmodelo.php";
 require_once "modelos/inscripcioncita.php";
+require_once "modelos/procesoconsultapsicologia.php";
 
 
 

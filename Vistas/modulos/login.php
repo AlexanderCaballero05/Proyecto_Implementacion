@@ -22,7 +22,7 @@
          background-position: center center;
        }
   </style>
-  <body>
+  <body oncopy="return false" onpaste="return false">
     <div class="container w-50  mt-5 rounded shadow">
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-end">

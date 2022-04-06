@@ -1,7 +1,14 @@
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
+include_once 'conexionpdo.php';
+ include "conexionpdo.php";
+
+ ?>
+ <?php
+
 ?>
+
       <!--llamada de la fuction bitacora -->
      <?php 
       $codigoObjeto=1;
@@ -20,51 +27,71 @@ include_once "conexion3.php";
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  <section class="content-header text-xl-center mb-3 btn-light"> 
+          <h4> PREGUNTAS DE SEGURIDAD USUARIO  <i class="nav-icon fas fa"></i></h4>
+        </section>
   
   <section class="content">
     <div class="container-fluid">
+  <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Pregunta</button>
+
       <div class="row">
         <div class="col-md-12">
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información Preguntas_Usuarios</strong></h1>
+               <h1 class=" card-title text-center"></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-hover">
-                  <thead class="table-success">
+                  <thead class="text-center">
                         <tr>
                           <th>Acción</th>
-                          <th>ID</th>
                           <th>Pregunta</th>
                           <th>Nombre Usuario</th>
-                          <th>Respuesta</th>
+                          
                          </tr>
                       </thead>
                       <tbody>
+
+                                   <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>
+
                         <?php
-                        $query = "SELECT pu.CODIGO_PREGUNTA_USUARIO , p.PREGUNTA, u.NOMBRE_USUARIO, pu.RESPUESTA
-                        from tbl_usuario u, tbl_preguntas_usuarios pu, tbl_preguntas p
+                        //debo de colocar el id de la tabla para poder hacer el proceso de eliminar filas
+                        $query = "SELECT pu.CODIGO_PREGUNTA_USUARIO, u.CODIGO_USUARIO, p.PREGUNTA, u.NOMBRE_USUARIO, pu.RESPUESTA, pu.CODIGO_PREGUNTAS
+                        from tbl_usuario u, tbl_preguntas_usuarios pu, tbl_preguntas p, tbl_persona per
                         where u.CODIGO_USUARIO = pu.CODIGO_USUARIO
                         and p.CODIGO_PREGUNTAS = pu.CODIGO_PREGUNTAS
-                        ORDER BY pu.CODIGO_PREGUNTA_USUARIO ASC;";
+                        and u.CODIGO_PERSONA = per.CODIGO_PERSONA
+                        and per.CODIGO_PERSONA = '$cod_usuario'
+                        ORDER BY pu.CODIGO_PREGUNTAS ASC;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_PREGUNTA_USUARIO'];
+                            $var1 = $row['CODIGO_USUARIO'];
                             $var2 = $row['PREGUNTA'];
                             $var3 = $row['NOMBRE_USUARIO'];
-                            $var4 = $row['RESPUESTA'];
+                            $var4 = $row['CODIGO_PREGUNTAS'];
+                            $var5 = $row['CODIGO_PREGUNTA_USUARIO'];
                            
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                              <!--debo de colocar el id de la tabla para poder hacer el proceso de eliminar filas-->
+                               <a href="#ELIMINAR<?php echo $var5;?>" data-toggle="modal">
                                 <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
@@ -72,115 +99,29 @@ include_once "conexion3.php";
                               </div>
                             </div><!-- final del text-center -->
                           </td>
-                          <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
 
-                         
-                        <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPERSONA<?php echo $var1 ?>" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-lg">
-                              <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar informacion del usuario</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
-                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre Usuario</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtnombre_usuario">Contraseña</label>
-                                          <input type="text" class="form-control" value ="<?php echo $var3; ?>" maxlength="30"  minlength="8"  name="CONUSUARIO" id="CONUSUARIO" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" placeholder="Ingrese contraseña">
-                                        </div>
-                                      </div> 
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
-                                    <div class="row"> <!-- INICIO SEGUNDO ROW --> 
-                                      <?php
-                                      $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles;";
-                                      $resultadod=$conn->query($query);                
-                                      ?> 
-                                      <div class="col-sm-6">
-                                        <label for="cbx_persona" class="control-label">Rol</label>  
-                                        <div class="form-group">
-                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
-                                            <option value="<?php echo $var14?>"><?php echo $var8;?></option>
-                                            <?php 
-                                              if ($resultadod->num_rows > 0) {
-                                                while($row = $resultadod->fetch_assoc()) { 
-                                                $codigo_estado = $row['CODIGO_TIPO_ROL'];
-                                                $estado = $row['NOMBRE'];
-                                              ?>
-                                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                              <?php } 
-                                              }?>
-                                          </select> 
-                                        </div>  
-                                      </div> <!--FIN ROL--> 
-                                      <?php //--INICIO DEL ESTADO
-                                      $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' ";
-                                      $resultadod=$conn->query($query);                
-                                      ?> 
-                                      <div class="col-sm-6">
-                                        <label for="cbx_persona" class="control-label">Estado</label>  
-                                        <div class="form-group">
-                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
-                                            <option value="<?php echo $var13?>"><?php echo $var7;?></option>
-                                            <?php 
-                                              if ($resultadod->num_rows > 0) {
-                                                while($row = $resultadod->fetch_assoc()) { 
-                                                $codigo_estado = $row['CODIGO_ESTADO'];
-                                                $estado = $row['NOMBRE'];
-                                              ?>
-                                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                              <?php } 
-                                              }?>
-                                          </select> 
-                                        </div>  
-                                      </div> <!--FIN DE ESTADO--> 
-                                    </div> <!-- FIN ROW --> 
-
-                                    <div class="row">
-                                      <div class="col-sm-6">
-                                         <div class="form-group">
-                                            <label for="txtnombre_usuario">Fecha vencimiento</label>
-                                            <input type="date" class="form-control" value ="<?php echo $var11; ?>"   name="FECHA_VENCIMIENTO" id="FECHA_VENCIMIENTO">
-                                         </div>
-                                      </div>
-                                    </div>
-                                  </div><!--FINAL DEL CARD BODY -->                       
-                                  <div class="modal-footer ">
-                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="ACT_PERSONA" name="ACT_PERSONA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                </div>
-                              </form>
-                            </div>
-                          </div><!-- FIN DEL MODAL EDITAR -->  
-
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+         
+                              <!--debo de colocar el id de la tabla para poder hacer el proceso de eliminar filas-->
+                          <div id="ELIMINAR<?php echo $var5 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h5 class="modal-title" id="exampleModalLabel"></h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEeliminar" method="POST">
+                                <form id="" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var1; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var5; ?>" hidden class="form-control" name="codigo_pregunta_usuario" id="usuario_eliminar">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="codigo_usuario" id="usuario_eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar la pregunta?<?php echo $var2; ?></h4>
+                                    <input type="text" value ="<?php echo $var4; ?>" hidden class="form-control" name="codigo_pregunta" id="usuario_eliminar">
+                                    
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR" id="ELIMINAR"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_PREGUNTA" id="ELIMINAR"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -206,6 +147,71 @@ include_once "conexion3.php";
 
 
 <!-- Modal -->
+
+
+                    <?php
+                    include_once "conexion3.php";
+                    $query1= "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;";
+                    $resultado= $conn->query($query1);
+                    ?>
+<!-- Inicio para agregar preguntas usuario-->
+
+<div id="AGREGAR_PREGUNTA" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+            <form method="POST" class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Pregunta</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+
+
+                    <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                 <!--INICIO COMOBOX TIPO DE ROL-->
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">pregunta:</label>
+                                    <select class="form-control" name="pregunta_usuario_individual" required="">
+                                        <option selected disabled value="">Seleccionar preguntas...</option>
+                                        <?php //Muestra los datos de la tabla de preguntas en el select
+                              foreach($resultado as $pregunta){
+                              $valuep =$pregunta['CODIGO_PREGUNTAS'];
+                              $pre =  $pregunta['PREGUNTA'];
+                              ?>
+                              <option value="<?php echo $valuep?>"> <?php echo $pre;?></option>
+                              <?php
+                                }
+                              
+                              ?>
+                                    </select>
+                                             <div class="invalid-feedback">
+                                                Eliga una opción.
+                                             </div>
+                                </div>
+                            </div> <!--FIN DEL COMOBOX TIPO DE ROL-->
+                    </div>
+                    
+                    
+                   <div class="row">
+                   <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Respuesta:</label>
+                      <input type="text" name="respuesta_usuario_individual" id="respuesta_usuario_individual" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
+                         placeholder="respuesta de seguridad" required="">
+                       </div>
+                    </div>
+                </div> 
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    <div class="modal-footer ">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="agregar_pregunta_usuario" name="agregar_pregunta_usuario" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+          </form>
+          </div>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO PREGUNTA --> 
+
 
 
 

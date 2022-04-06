@@ -35,7 +35,6 @@ if(isset($_POST['codigo_paciente'])){
       if ($consulta>0  && $consulTITA >0 ){
         $conn->commit();
         echo "<script> 
-        alert('Pre-clinica registrada');
         window.location = 'procesoConsulta';
         </script>";  
         exit;

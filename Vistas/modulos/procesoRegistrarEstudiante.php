@@ -13,7 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
-
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -21,7 +21,7 @@
   </div>
   <section class="content">
               <div class="content-header text-xl-center mb-3 btn-light">
-               <h4>REGISTRAR DATOS ESTUDIANTES</h4>
+               <h4>AGREGAR ESTUDIANTE</h4>
               </div>
     <div class="container-fluid">
                 <!-- Inicio del PROCESO inscripcion de estudiantes-->
@@ -29,14 +29,14 @@
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" href="crudEstudiante">Ver Estudiantes</a>
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+            </li>
+              <li class="nav-item ">
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="#">Registrar Estudiantes</a>
-              </li>
-              <li class="nav-item">
-              <a class="nav-link"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
-              </li>
+                <a class="nav-link active" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+            </li>
             </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
@@ -49,15 +49,16 @@
 
             <div class="row mb-5 pl-3">
                     <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
+                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' / ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO, ' ',SEGUNDO_APELLIDO) AS NOMBRE
                     FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 4;";
                     $resultadod=$conn->query($query);                
                     ?>
-
-                  <button  class="btn btn-secondary "  class="col-sm-1 col-form">Buscador</button>
-                  <div class="col-sm-3 order-2 pl-2">
+             <a href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+              </a>
+                  <div class="col-sm-10 order-2 pl-2">
                     <select  style="width: 100%;"  class="form-control select2" name="CODPERSONA" id="" type="text" required >
-                    <option selected disabled value="">Buscar estudiante...</option>
+                    <option selected disabled value="">Buscar estudiantes...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
@@ -168,187 +169,141 @@
                         <h2 class="card-title"> <strong>Datos socioeconomicos</strong></h2>
                     </div></br>
 
-                           <?php
+                <div class="row pl-3">
+                     <!-- inicio del checkbox de dispositivos-->  
+                <div class="col-sm-3">
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Con que dispositivos cuenta?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
                               include_once "conexion3.php";
-                              $query1= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
-                              FROM tbl_contenido_socioeconomico s
-                              WHERE S.CODIGO_TIPOSOCIO = 1;";
+                              $query1= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 1;";
                               $result1= $conn->query($query1);
                            ?>
-
-                            <?php 
-                              include_once "conexion3.php";
-                              $query2= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
-                              FROM tbl_contenido_socioeconomico s
-                              WHERE S.CODIGO_TIPOSOCIO = 2; ";
-                              $result2= $conn->query($query2);
-                           ?>
-
-                            <?php
-                            
-                              include_once "conexion3.php";
-                              $query3= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
-                              FROM tbl_contenido_socioeconomico s
-                              WHERE S.CODIGO_TIPOSOCIO = 3; ";
-                              $result3= $conn->query($query3);
-                           ?>
-                              
-                            <?php
-                            
-                            include_once "conexion3.php";
-                            $query4= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
-                            FROM tbl_contenido_socioeconomico s
-                            WHERE S.CODIGO_TIPOSOCIO = 4; ";
-                            $result4= $conn->query($query4);
-                         ?>
-                <div class="row pl-3"><!--inicio de la fila de datos socieconomicos-->
-                       <!-- <div class="col-md-3"> 
-                          <label for="identidad" class="control-label">¿Con que dispositivos cuenta?</label> 
-                          <br>
-                          <div class="form-check form-check-inline">
-                             <?php  /*
-                                if ($result1->num_rows > 0){
-                                    while($row1 = $result1->fetch_assoc()){
-
-                              ?>
-                            
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="<?php echo $row1['CODIGO_TIPOSOCIO'];?>">
-                              <label class="form-check-label" for="inlineCheckbox1"><?php echo $row1['NOMBRE_TIPO'];?></label>
-
-                              <?php } 
-                                  }?>
-                            </div>
-                            <br>
-
-                            <div class="form-check form-check-inline">
-                            <?php
-                                if ($result2->num_rows > 0){
-                                    while($row1 = $result2->fetch_assoc()){
-
-                              ?>
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="<?php echo $row1['CODIGO_TIPOSOCIO'];?>">
-                              <label class="form-check-label" for="inlineCheckbox2"><?php echo $row1['NOMBRE_TIPO'];?></label>
-                              <?php } 
-                                  }?>
-                            </div>
-                            <br>
-
-                            <div class="form-check form-check-inline">
-                            <?php
-                                if ($result3->num_rows > 0){
-                                    while($row1 = $result3->fetch_assoc()){
-
-                              ?>
-                              <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="<?php echo $row1['CODIGO_TIPOSOCIO'];?>">
-                              <label class="form-check-label" for="inlineCheckbox3"><?php echo $row1['NOMBRE_TIPO'];?></label>
-                              <?php } 
-                                  } */?>
-                            </div>
-                        </div> CIERRE DEL ENCARAGADO -->
-
-                <div class="col-sm-3">
-                <label for="DISPOSITIVOS" class="control-label">¿Con que dispositivos cuenta?</label> 
-                  <select  style="width: 100%;"  class="form-control select2"  name="DISPOSITIVOS" type="text" aria-placeholder="Buscar" required="" >
-                     <option selected disabled value="">Elegir...</option>
                      <?php 
                         if ($result1->num_rows > 0) {
                         while($row1 = $result1->fetch_assoc()) { 
                         $codigo = $row1['CODIGO_CONTENIDO_SOCIOECONOMICO'];
                         $nombre = $row1['NOMBRE_TIPO'];
                         ?>
-                      <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="dispositivos[]" id="dispositivos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="dispositivos<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
                       <?php 
                       } 
                       }
                       ?>
-                      
-                    </select>
-                    <div class="invalid-feedback">
-                                  Eliga una opción.
+                     </div>
                    </div>
-                   <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
+                </div> <!-- fin del checkbox de dispositivos-->  
                         
-
-
-                        <div class="col-md-3"> 
-                          <label for="SERVICIOS" class="control-label">¿Qué servicios de internet utiliza?</label> 
-                          <select  style="width: 100%;"  class="form-control select2" name="SERVICIOS"  id="SERVICIOS" type="text" aria-placeholder="Buscar" required="" >
-                          <option selected disabled value="">Elegir...</option>
-                                  <?php 
+                <div class="col-sm-3"> <!--inicio del checkbox de servicios-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Qué servicios de internet utiliza?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query2= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 2;";
+                              $result2= $conn->query($query2);
+                           ?>
+                             <?php 
                                     if ($result2->num_rows > 0) {
                                     while($row2 = $result2->fetch_assoc()) { 
                                     $codigo = $row2['CODIGO_CONTENIDO_SOCIOECONOMICO'];
                                     $nombre = $row2['NOMBRE_TIPO'];
                                     ?>
-                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                  <?php 
-                                  } 
-                                  }
-                                  ?>
-                          </select>
-                          <div class="invalid-feedback">
-                                  Eliga una opción.
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="servicios[]" id="servicios<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="servicios<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
                    </div>
-                   <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                        
-                        </div><!--CIERRE DE LA TUTORIA -->
+                </div> <!--fin del checkbox de servicios--> 
 
 
-                        <div class="col-md-3"> 
-                          <label for="PROVEEDOR" class="control-label">¿Quién provee el ingreso familiar?</label> 
-                          <select  style="width: 100%;"  class="form-control select2" name="PROVEEDOR" id="PROVEEDOR" type="text" aria-placeholder="Buscar" required >
-                          <option selected disabled value="">Elegir...</option>
-                                  <?php 
+                <div class="col-sm-3"> <!--inicio del checkbox de proveedor-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Quién provee el ingreso familiar?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query3= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 3;";
+                              $result3= $conn->query($query3);
+                           ?>
+                                 <?php 
                                     if ($result3->num_rows > 0) {
                                     while($row3 = $result3->fetch_assoc()) { 
                                     $codigo = $row3['CODIGO_CONTENIDO_SOCIOECONOMICO'];
                                     $nombre = $row3['NOMBRE_TIPO'];
                                     ?>
-                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                  <?php 
-                                  } 
-                                  }
-                                  ?>
-                          </select>
-                          <div class="invalid-feedback">
-                                  Eliga una opción.
-                         </div>
-                   <div class="valid-feedback">
-                        ¡Se ve bien!
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="proveedor[]" id="proveedor<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="proveedor<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
                    </div>
-                         </div><!--CIERRE DEL  -->
+                </div> <!--fin del checkbox de proveedor--> 
 
-                         <div class="col-md-3"> 
-                          <label for="BASICOS" class="control-label">¿Servicios básicos cuenta en su casa?</label> 
-                      
-                          <select  stye="width: 100%;"  class="form-control select2" name="BASICOS" id="BASICOS" type="text" aria-placeholder="Buscar" required >
-                          <option selected disabled value="">Elegir...</option>
-                                  <?php 
+                <div class="col-sm-3"> <!--inicio del checkbox de basicos-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Servicios básicos cuenta en su casa?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query4= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 4;";
+                              $result4= $conn->query($query4);
+                           ?>
+                                 <?php 
                                     if ($result4->num_rows > 0) {
                                     while($row4 = $result4->fetch_assoc()) { 
                                     $codigo = $row4['CODIGO_CONTENIDO_SOCIOECONOMICO'];
                                     $nombre = $row4['NOMBRE_TIPO'];
                                     ?>
-                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                  <?php 
-                                  } 
-                                  }
-                                  ?>
-                          </select>
-
-                          <div class="invalid-feedback">
-                                  Eliga una opción.
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="basicos[]" id="basicos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="basicos<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
                    </div>
-                   <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div><!--CIERRE DEL  -->
-                  </div><!--FINAL DEL ROW Socieconomico-->
+                </div> <!--fin del checkbox de basicos--> 
+            </div><!--FINAL DEL ROW Socieconomico-->
                       
                       </br></br></br>
                       <div class="card-footer pr-2">
@@ -361,7 +316,7 @@
    </div><!-- CIerre del container fluid--> 
   </section>
 </div><!-- Cierre del div wraper -->
-
+</body>
 <script>
 (function() {
     'use strict'

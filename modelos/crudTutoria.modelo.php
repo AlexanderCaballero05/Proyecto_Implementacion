@@ -29,7 +29,6 @@
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
-                        alert('Tutoria registrada correctamente');
                         window.location = 'crudTutorias';
                         </script>";
                         exit;
@@ -90,7 +89,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Tutoria modificada exitosamente!');
               window.location = 'crudTutorias';
               </script>";
               include_once 'function_bitacora.php';
