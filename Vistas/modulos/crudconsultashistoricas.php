@@ -1,7 +1,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=4;
+ $codigoObjeto=32;
  $accion='Ingreso a mantenimiento preguntas';
  $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
 bitacora($codigoObjeto,$accion,$descripcion);
@@ -18,43 +18,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO PREGUNTAS </h4>
+              <h4>MANTENIMIENTO EXPEDIENTE DE CONSULTAS PSICOLOGICAS HISTORICAS  </h4>
         </section>
   
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-                         <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '4'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                          <?php
-                             if ($permiso_registrar == 'SI'){
-
-                          ?>
-            <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Pregunta</button>
+            
             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-                          <?php
-                              }
-                          ?>
-          
-          
+                         
           <!-- jquery validation -->
           <div class="card card-primary">
           <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -69,8 +42,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
-                          <th class="text-center">Código</th>
-                          <th class="text-center">Pregunta</th>
+                             <th class="text-center">Código</th>
+                             <th class="text-center">Paciente</th>
+                             <th class="text-center">Síntomas</th>
+                             <th class="text-center">Diagnóstico de ingreso</th>
+                             <th class="text-center">Diagnóstico de egreso</th>
+                             <th class="text-center">Observaciones</th>
                      
                           
                       
@@ -78,12 +55,24 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA from tbl_preguntas;";
+                        $query = "SELECT epc.CODIGO_EXPEDIENTE_PSICO, 
+                        CONCAT_WS(' ',tp.PRIMER_NOMBRE, tp.SEGUNDO_NOMBRE, tp.PRIMER_APELLIDO,tp.SEGUNDO_APELLIDO) AS PACIENTE, 
+                        epc.SINTOMAS, 
+                        epc.DIAGNOSTICO_INGRESO,
+                         epc.DIAGNOSTICO_EGRESO, 
+                        epc.OBSEVARCIONES FROM tbl_expediente_psicologico_consulta epc, 
+                        tbl_inscripcion_cita ic, tbl_persona tp
+                        where epc.CODIGO_CITA = ic.CODIGO_CITA and 
+                       ic.CODIGO_PERSONA = tp.CODIGO_PERSONA;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_PREGUNTAS'];
-                            $var2 = $row['PREGUNTA'];
+                            $var1 = $row['CODIGO_EXPEDIENTE_PSICO'];
+                             $var2 = $row['PACIENTE'];
+                             $var3 = $row['SINTOMAS'];
+                             $var4 = $row['DIAGNOSTICO_INGRESO'];
+                             $var5 = $row['DIAGNOSTICO_EGRESO'];
+                            $var6 = $row['OBSEVARCIONES'];
             
                          
                         ?>
@@ -91,37 +80,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                               <?php
-                                  include "conexionpdo.php";
-                                  $usuario=$_SESSION['vario'];
-                                  //Evaluo si existe el tipo de Rol
-                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                  FROM tbl_usuario 
-                                                                  WHERE NOMBRE_USUARIO = (?);");
-                                  $evaluar_usuario->execute(array($usuario));
-                                  $row=$evaluar_usuario->fetchColumn();
-                                  if($row > 0){
-                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                      $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '4'));
-                                      $row1=$evaluar_permiso_eliminar->fetchColumn();
-                                      $permiso_eliminar =$row1; 
-                                  }
-                                ?>  
-                                <?php
-                                    if ($permiso_eliminar == 'SI'){
-
-                                ?>
-                                <button id="ELIMINAR_PREGUNTA" name="ELIMINAR_PREGUNTA" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
-                               <?php
-                                  }
-                                ?>
-                               </a>
-                                <a href="#EDITARPREGUNTA<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARCONSULTA<?php echo $var1; ?>" data-toggle="modal">
                                 <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -136,7 +95,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                    //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '4'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                     
@@ -146,37 +105,78 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     if ($permiso_actualizar == 'SI'){
 
                                 ?>
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <button type='button' id="btnGuardar"  style="color:white;" class=" form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 <?php
                                   }
                                  ?> 
                               </a>
+                              <a>
+                                   <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteindividualconhistopsico.php" target="_blank"> 
+                                    <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
+                                    <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
-                          <td class="text-center"><?php echo $var2; ?></td>
-
+                           <td class="text-center"><?php echo $var2; ?></td>
+                           <td class="text-center"><?php echo $var3; ?></td>
+                           <td class="text-center"><?php echo $var4; ?></td>
+                           <td class="text-center"><?php echo $var5; ?></td>
+                        <td class="text-center"><?php echo $var6; ?></td>
+                                                
 
                           
 
                         <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
-                          <div id="EDITARPREGUNTA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARCONSULTA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form  method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar preguntas</h4>
+                                    <h4 class="text-center" >Editar consulta</h4>
+
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_pregunta" id="id_pregunta">
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_con" id="codi_con">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Preguntas</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"   maxlength="60" minlength="5"    autocomplete = "off" type="text"  
-                                          name="editar_pregunta" id="edipre" required="">
+                                          <label for="txtcodigo_persona">Sintomas</label>
+                                          <textarea type="text"  value ="<?php echo $var3; ?>" class="form-control"   maxlength="100" minlength="5"    autocomplete = "off" type="text"  
+                                          name="sintomas" id="sintom" required=""> <?php echo $var3?></textarea>
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                        </div>
+                          </div>
+                          <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Diagnostico de ingreso</label>
+                                          <textarea  type="text" class="form-control"   maxlength="200" minlength="5"    autocomplete = "off" type="text"  
+                                          name="dingreso" id="ingre" required=""><?php echo $var4?></textarea>
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                        </div>
+                          </div>
+                          
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Diagnostico Egreso</label>
+                                          <textarea  type="text"  value ="<?php echo $var5; ?>" class="form-control"   maxlength="200" minlength="5"    autocomplete = "off" type="text"  
+                                          name="diegreso" id="die" required=""> <?php echo $var5?> </textarea>
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                        </div>
+                          </div>
+                          <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Observaciones</label>
+                                          <textarea type="text"  class="form-control"   maxlength="600" minlength="5"    autocomplete = "off" type="text"  
+                                          name="observaciones" id="observe" required=""> <?php echo $var6?></textarea>
                                           <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -186,34 +186,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar" name="editar" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="edicon" name="edicon" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
                             
-                          <!--INCICIO DEL MODAL ELIMINAR   -->
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form id="FORMeliminar" method="POST">
-                                  <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="pregunta_eliminar" id="pregunta_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la pregunta? <?php echo $var2; ?></h4>
-                                </div> <!--fin el card body -->
-                                    <div class="modal-footer ">
-                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_PREGUNTA" id="ELIMINAR_PREGUNTA"  class="btn btn-primary">Si,eliminar</button>      
-                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                               </form>
-                               </div><!--fin del modal contener -->
-                            </div><!--fin del modal dialog -->
-                          </div><!--fin del modal de eliminar -->
                       </tr>             
                         <?php
                         }
@@ -244,7 +223,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control"  maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
+                                    <input  type="text"   class="form-control"  maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" onkeypress="return soloLetras(event);">
                                     <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -285,7 +264,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Pregunta:",
+        "search": "Buscar:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
@@ -325,7 +304,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 </script>
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reportepreguntas.php','_blank');
+      window.open('Reportes_Prosecar/reporteconsultahistoricapsico.php','_blank');
       window.open(this.href,'_self');
     }
   </script>

@@ -160,6 +160,7 @@ session_start();
          $_GET["ruta"] == "procesocita" ||
          $_GET["ruta"] == "crudConsulta" ||
          $_GET["ruta"] == "procesoConsulta" ||
+         $_GET["ruta"] == "crudconsultashistoricas" ||
 
          $_GET["ruta"] == "crudPermisos"){
 

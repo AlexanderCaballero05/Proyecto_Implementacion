@@ -123,9 +123,8 @@ if(isset($_POST['eliminar_tiposangre'])){
   if(isset($_POST['ELIMINAR_TIPOSANGRE'])){
     $codigo = ($_POST['eliminar_tiposangre']);//asigna a una variable el id del tipo de sangre a  eliminar
     try{
-        $relacion_tablas =  $db->prepare("SELECT  p.CODIGO_PRECLINICA, p.CODIGO_TIPO_SANGRE from  tbl_preclinica p, tbl_tipo_sangre tp
+        $relacion_tablas =  $db->prepare("SELECT  p.CODIGO_EXPEDIENTE, p.CODIGO_TIPO_SANGRE from  tbl_EXPEDIENTE_MEDICO p, tbl_tipo_sangre tp
         where p.CODIGO_TIPO_SANGRE = tp.CODIGO_TIPO_SANGRE and p.CODIGO_TIPO_SANGRE= (?);");
-      $relacion_tablas =  $db->prepare("SELECT CODIGO_TIPO_SANGRE  from  tbl_TIPO_SANGRE where CODIGO_TIPO_SANGRE = (?);");
       $relacion_tablas->execute(array($codigo));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -140,7 +139,6 @@ if(isset($_POST['eliminar_tiposangre'])){
           mysqli_query($link, "DELETE FROM tbl_tipo_sangre WHERE  CODIGO_TIPO_SANGRE = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Pregunta eliminada!');
             window.location = 'crudtiposangre';
             </script>";
             include_once 'function_bitacora.php';
@@ -152,7 +150,7 @@ if(isset($_POST['eliminar_tiposangre'])){
           }else{
             echo "<script>
             alert('¡Error al eliminar tipo de sangre!');
-            window.location = 'crudpreguntas';
+            window.location = 'crudtiposangre';
             </script>";
             exit;
           }

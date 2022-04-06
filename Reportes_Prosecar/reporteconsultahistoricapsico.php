@@ -1,4 +1,5 @@
 <?php
+
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
 
@@ -7,7 +8,7 @@ class PDF extends FPDF {
 // Cabecera de página
 
 	function Header() {
-		date_default_timezone_set("America/Guatemala");
+        date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
@@ -15,8 +16,8 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de familiares'));
+		$this->SetX(95);
+		$this->Cell(130, 8, utf8_decode('Reporte de Consultas psicologicas históricas'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -107,12 +108,12 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(80, 8, 'Nombre familiar', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Estado civil', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Nivel Educativo', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Ingresos', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Nombre iglesia', 1, 1, 'C', 0);
+			$this->Cell(25, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(50, 8, 'Paciente', 1, 0, 'C', 0);
+			$this->Cell(40, 8, utf8_decode('Síntomas'), 1, 0, 'C', 0);
+			$this->Cell(50, 8,utf8_decode('Diagnóstico de Ingreso'), 1, 0, 'C', 0);
+			$this->Cell(50, 8, utf8_decode('Diagnóstico de egreso'), 1, 0, 'C', 0);
+			$this->Cell(50, 8, 'Observaciones', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -189,9 +190,15 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT tf.CODIGO_PERSONA,  concat_ws(' ', tp.PRIMER_NOMBRE,tp.SEGUNDO_NOMBRE, tp.PRIMER_APELLIDO, tp.SEGUNDO_APELLIDO) as FAMILIAR, tf.ESTADO_CIVIL, tf.NIVEL_EDUCATIVO, tF.INGRESOS_DE_FAMILIAR,tf.NOMBRE_IGLESIA, tf.CODIGO_FAMILIAR 
-    from tbl_persona tp, tbl_familiar tf
-    where tp.CODIGO_PERSONA = tf.CODIGO_PERSONA ;";
+	$strquery ="SELECT epc.CODIGO_EXPEDIENTE_PSICO, 
+    CONCAT_WS(' ',tp.PRIMER_NOMBRE, tp.SEGUNDO_NOMBRE, tp.PRIMER_APELLIDO,tp.SEGUNDO_APELLIDO) AS PACIENTE, 
+    epc.SINTOMAS, 
+    epc.DIAGNOSTICO_INGRESO,
+     epc.DIAGNOSTICO_EGRESO, 
+    epc.OBSEVARCIONES FROM tbl_expediente_psicologico_consulta epc, 
+    tbl_inscripcion_cita ic, tbl_persona tp
+    where epc.CODIGO_CITA = ic.CODIGO_CITA and 
+   ic.CODIGO_PERSONA = tp.CODIGO_PERSONA;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -211,16 +218,15 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(25);
+$pdf->SetX(15);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(80, 12, 'Nombre familiar', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Estado civil', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Nivel educativo', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Ingresos', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Nombre iglesia', 1, 1, 'C', 1);
-
+$pdf->Cell(25, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Paciente', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, utf8_decode('Síntomas'), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode('Diagnóstico de Ingreso'), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode('Diagnóstico de egreso'), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Observaciones', 1, 1, 'C', 1);
 
 
 
@@ -233,11 +239,12 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 80, 30, 40,30,50,)); //???
+$pdf->SetWidths(array(25, 50, 40, 50,50,50)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FAMILIAR']))), ucwords(strtolower(utf8_decode($data[$i]['ESTADO_CIVIL']))),ucwords(strtolower(utf8_decode($data[$i]['NIVEL_EDUCATIVO']))), ucwords(strtolower(utf8_decode($data[$i]['INGRESOS_DE_FAMILIAR']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_IGLESIA']))),  ),25); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['PACIENTE']))), ucwords(strtolower(utf8_decode($data[$i]['SINTOMAS']))),ucwords(strtolower(utf8_decode($data[$i]['DIAGNOSTICO_INGRESO']))),
+	 ucwords(strtolower(utf8_decode($data[$i]['DIAGNOSTICO_EGRESO']))),ucwords(strtolower(utf8_decode($data[$i]['OBSEVARCIONES']))),   ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -126,7 +126,6 @@ if(isset($_POST['eliminar'])){
     try{
         $relacion_tablas =  $db->prepare("SELECT ca.CODIGO_CARGA, ca.CODIGO_MODALIDAD from  tbl_carga_academica ca  ,tbl_modalidad m
         where m.CODIGO_MODALIDA  = ca.CODIGO_MODALIDAD  and m.CODIGO_MODALIDA   = (?);");
-      $relacion_tablas =  $db->prepare("SELECT CODIGO_PREGUNTAS  from  tbl_preguntas where CODIGO_PREGUNTAS = (?);");
       $relacion_tablas->execute(array($codigo));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -141,19 +140,18 @@ if(isset($_POST['eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_modalidad WHERE  CODIGO_MODALIDA = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Pregunta eliminada!');
             window.location = 'crudmodalidad';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=19;
             $accion='Modificacion';
-            $descripcion= 'Se elimino una pregunta ';
+            $descripcion= 'Se elimino una modalidad ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar la pregunta!');
-            window.location = 'crudpreguntas';
+            alert('¡Error al eliminar la modalidad!');
+            window.location = 'crudmodalidad';
             </script>";
             exit;
           }

@@ -368,7 +368,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 </body>            
 <script>
     function Descargar() {
-      window.open('Vistas/modulos/reportefamiliar.php','_blank');
+      window.open('Reportes_Prosecar/reportefamiliar.php','_blank');;
       window.open(this.href,'_self');
     }
   </script>
