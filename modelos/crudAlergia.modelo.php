@@ -1,5 +1,4 @@
-
- <?php
+<?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
@@ -18,7 +17,7 @@
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre del rol $nombre_alergia ya se encuentra registrado');
+                    alert('El nombre de la alergia $nombre_alergia ya se encuentra registrado');
                     window.location = 'crudAlergias';
                     </script>";
                   exit;
@@ -28,7 +27,6 @@
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
-                        alert('Rol registrado correctamente');
                         window.location = 'crudAlergias';
                         </script>";
                         exit;
@@ -79,19 +77,17 @@
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe un rol con este mismo nombre: $editar_nombre');
+          alert('Ya existe una alergia con este mismo nombre: $editar_nombre');
           window.location = 'crudAlergias';
           </script>";
           exit;
         }else{
           try{
             $sql = " UPDATE tbl_alergias SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
-            WHERE CODIGO_TIPO_ROL = '$codigo_alergia' ";
+            WHERE CODIGO_ALERGIAS = '$codigo_alergia' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo '<script>
-              alert("Alergia actualizado,exitosamente");
-              
+              echo '<script>              
               window.location = "crudAlergias";
               </script>';
               include_once 'function_bitacora.php';
@@ -123,34 +119,34 @@ if(isset($_POST['alergia_eliminar'])){
   if(isset($_POST['ELIMINAR_ALER'])){
     $code = ($_POST['alergia_eliminar']);
     try{
-      $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
-      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
+      $relacion_tablas =  $db->prepare("SELECT a.CODIGO_ALERGIAS FROM tbl_alergias a ,tbl_personas_alergias pa
+      WHERE pa.CODIGO_ALERGIAS = a.CODIGO_ALERGIAS and a.CODIGO_ALERGIAS = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar este rol,esta relacionado con otras tablas!');
+        alert('¡No se puede eliminar,existe una relacion');
         window.location = 'crudAlergias';
         </script>";
         exit;
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_roles WHERE  CODIGO_TIPO_ROL = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_alergias WHERE  CODIGO_ALERGIAS = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Rol eliminado!');
+            alert('¡Alergia eliminado!');
             window.location = 'crudAlergias';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=2;
             $accion='Eliminación';
-            $descripcion= 'Se elimino un rol ';
+            $descripcion= 'Se elimino una alergia';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar el rol!');
+            alert('¡Error al eliminar la alergia!');
             window.location = 'crudAlergias';
             </script>";
             exit;

@@ -482,6 +482,13 @@
                 <p>Proceso de expedientes</p>
               </a>
             </li>
+
+            <li class="nav-item">
+              <a href="expedienteMedico" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Para ver EXPEDIENTE</p>
+              </a>
+            </li>
           </ul>
         </li>
 

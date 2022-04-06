@@ -121,7 +121,6 @@
                           </div>
                           </div>
                         </div>
-
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Presión Arterial</label> 
                           <div class="input-group ">
@@ -134,7 +133,6 @@
                               </div>
                           </div>
                         </div> 
-                      
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Nivel Respiración</label> 
                           <div class="input-group ">
@@ -146,8 +144,7 @@
                               Llene este campo.
                             </div>
                           </div>
-                        </div> 
-                                            
+                        </div>                 
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Pulso</label> 
                           <div class="input-group ">
@@ -160,7 +157,6 @@
                               </div>
                           </div>
                         </div> 
-
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Indice masa corporal</label> 
                           <div class="input-group ">
@@ -173,8 +169,6 @@
                               </div>
                           </div>
                         </div> 
-
-                      
                     </div><!--fin row -->
                     <br>
                  </br></br>
@@ -188,15 +182,6 @@
 </div>
 </body>
 
-
-
-
-  <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-</script>
 
 <script type="text/javascript">
   function filterFloat(evt,input){
