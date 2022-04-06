@@ -9,12 +9,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <head>
 
 </head>
+<body oncopy="return false" onpaste="return false">
+ 
 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO PREGUNTAS </h4>
+        </section>
   
   <section class="content">
     <div class="container-fluid">
@@ -43,7 +48,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-            <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Pregunta</button>
+            <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Pregunta</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                           <?php
                               }
                           ?>
@@ -51,39 +57,34 @@ bitacora($codigoObjeto,$accion,$descripcion);
           
           <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Preguntas</strong></h1>
+          <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+       
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
                   <table id="tabla_preguntas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                          <th>Codigo</th>
-                          <th>Pregunta</th>
-                          <th>Creado por Usuario</th>
-                          <th>Fecha de Creación</th>
-                          <th>Modificado por Usuario</th>
-                          <th>Fecha de Modificacion</th>
+                        <th class="text-center">Acción</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Pregunta</th>
+                     
                           
                       
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA,CREADO_POR_USUARIO, FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION from tbl_preguntas;";
+                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA from tbl_preguntas;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_PREGUNTAS'];
                             $var2 = $row['PREGUNTA'];
-                            $var3 = $row['CREADO_POR_USUARIO'];
-                            $var4 = $row['FECHA_CREACION'];
-                            $var5 = $row['MODIFICADO_POR'];
-                            $var6 = $row['FECHA_MODIFICACION'];
+            
                          
                         ?>
                         <tr>
@@ -155,10 +156,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
-                          <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
+
 
                           
 
@@ -166,7 +164,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITARPREGUNTA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form  method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar preguntas</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -177,7 +175,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Preguntas</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  name="editar_pregunta" id="editar_pregunta">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"   maxlength="60" minlength="5"    autocomplete = "off" type="text"  
+                                          name="editar_pregunta" id="edipre" required="">
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
                                         </div>
                           </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -242,7 +244,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregunta" required="">
+                                    <input  type="text"   class="form-control"  maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
                                     <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -259,6 +261,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO PREGUNTA --> 
+   </body>
 
   <!-- Button trigger modal -->
 
@@ -319,7 +322,113 @@ bitacora($codigoObjeto,$accion,$descripcion);
     })
 })()
 
+</script>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportepreguntas.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+
+  <script>
+        window.onload = function() {
+      var pregu= document.getElementById('pregu');// el id del input donde quieres aplicarlo
+      var edipre = document.getElementById('edipre');
+      pregu.onpaste = function(e) {
+        e.preventDefault();
+      }
+      edipre.onpaste = function(e) {
+        e.preventDefault();
+      }
+      pregu.oncopy = function(e) {
+        e.preventDefault();
+     }
+     edipre.oncopy = function(e) {
+        e.preventDefault();
+     }
+    }
+  </script>
+  <script>
+    var pregun=document.getElementById("pregu"); //el nombre del id del campo
+    pregun.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var edipreg=document.getElementById("edipre"); //el nombre del id del campo
+    edipreg.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+</script>
+
+  </script>
+
+  <script>
 
 
-
+  function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ //funcion para solu numeros ingresar en el campo
+ function soloNumeros_tel(e){
+   var teclaPulsada=window.event ? window.event.keyCode:e.which;
+    // capturamos el contenido del input
+    var valor=document.getElementById("tele").value;
+    if(valor.length<9){
+      if(teclaPulsada==9){
+        return true;
+      }
+    // devolvemos true o false dependiendo de si es numerico o no
+    return /\d/.test(String.fromCharCode(teclaPulsada));
+    }else{
+    return false;
+    }
+  }
+   //funcion para quitar espacios
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+   //funcion sin espacios 
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
+  //otra funcion para quitar espacios :V
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
 </script>

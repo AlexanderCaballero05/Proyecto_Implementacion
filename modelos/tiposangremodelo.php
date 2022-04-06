@@ -29,7 +29,6 @@
                       $resul=$conn->query($query_tiposangre);
                       if($resul >0){
                         echo "<script> 
-                        alert('Tipo de sangre registrado correctamente');
                         window.location = 'crudtiposangre';
                         </script>";
                         include_once 'function_bitacora.php';
@@ -94,7 +93,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Tipo modificado exitosamente!');
               window.location = 'crudtiposangre';
               </script>";
               include_once 'function_bitacora.php';

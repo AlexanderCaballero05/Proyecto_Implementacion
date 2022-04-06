@@ -31,7 +31,6 @@
                       $resul=$conn->query($query_modalidad);
                       if($resul >0){
                         echo "<script> 
-                        alert('Tipo modalidad registrado correctamente');
                         window.location = 'crudmodalidad';
                         </script>";
                         exit;
@@ -71,7 +70,7 @@
     if(isset($_POST['editar'])){
       $codigo_modalidad = ($_POST['id_editar']);
       $editar_modalidad = ($_POST['editar_modalidad']);
-      $editar_descripcion = ($_POST['editar_descripcion']);
+      $editar_descripcion = ($_POST['editar_descripcion1']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
 
@@ -93,7 +92,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-              alert("Modalidad actualizado,exitosamente");
               
               window.location = "crudmodalidad";
               </script>';
@@ -128,6 +126,7 @@ if(isset($_POST['eliminar'])){
     try{
         $relacion_tablas =  $db->prepare("SELECT ca.CODIGO_CARGA, ca.CODIGO_MODALIDAD from  tbl_carga_academica ca  ,tbl_modalidad m
         where m.CODIGO_MODALIDA  = ca.CODIGO_MODALIDAD  and m.CODIGO_MODALIDA   = (?);");
+      $relacion_tablas =  $db->prepare("SELECT CODIGO_PREGUNTAS  from  tbl_preguntas where CODIGO_PREGUNTAS = (?);");
       $relacion_tablas->execute(array($codigo));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -142,7 +141,7 @@ if(isset($_POST['eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_modalidad WHERE  CODIGO_MODALIDA = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Modalidad eliminada!');
+            alert('¡Pregunta eliminada!');
             window.location = 'crudmodalidad';
             </script>";
             include_once 'function_bitacora.php';

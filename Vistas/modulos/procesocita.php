@@ -76,7 +76,7 @@ $result3= $conn->query($query);
                 <a class="nav-link" style="color:#000000;"  href="crudinscripcioncita">Ver Cita</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" aria-current="true" href="procesocita">Registrar Cita </a>
+                <a class="nav-link active"  style="color:#000000;" aria-current="true" href="procesocita">Agregar Cita </a>
               </li>
             </ul>
           </div>
@@ -137,11 +137,11 @@ $result3= $conn->query($query);
                                 ?>
                                 
                             </select>
-                            
-                        </div>
-                        <div class="invalid-feedback">
+                            <div class="invalid-feedback">
                              Llene este campo.
                             </div>
+                        </div>
+                       
                     </div>
                     
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
@@ -292,11 +292,11 @@ $result3= $conn->query($query);
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
                         <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control" name="agregar_hora" id="agregar_hora">
-                        
-                     </div>
-                     <div class="invalid-feedback">
+                        <div class="invalid-feedback">
                              Llene este campo.
                             </div>
+                     </div>
+                    
                    </div>
                    <div class="col-sm-4 mb-3">
                         <div class="form-group">

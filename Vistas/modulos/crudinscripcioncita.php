@@ -27,7 +27,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class=" nav-link active" style="color:#000000;" href="#">Citas Medicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesocita">Registar Cita</a>
+            <a class="nav-link" style="color:#000000;" href="procesocita">Agregar Cita</a>
             </li>
           </ul>
         </div>
@@ -36,7 +36,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <div class="row">
                 <div class="col-md-12">
                     <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Cita</button>
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
                     </a>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     </br></br>

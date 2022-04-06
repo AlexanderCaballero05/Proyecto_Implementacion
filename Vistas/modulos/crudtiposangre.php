@@ -1,7 +1,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto = 33;
+ $codigoObjeto = 34;
  $accion='Ingreso crud tipo de sangre';
  $descripcion='Se visualiza los tipos de sangre';
 bitacora($codigoObjeto,$accion,$descripcion);
@@ -9,12 +9,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <head>
 
 </head>
+<body oncopy="return false" onpaste="return false">
+  
 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO TIPO SANGRE </h4>
+        </section>
   
   <section class="content">
     <div class="container-fluid">
@@ -34,7 +39,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '5'));
+                                $evaluar_permiso->execute(array($usuariomo, '34'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -43,7 +48,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-            <button  data-toggle="modal"  href="#AGREGAR_TIPOSANGRE" type='button' id="btnGuardar"  style="color:white;" class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tipo de Sangre</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TIPOSANGRE" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tipo de Sangre</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                           <?php
                               }
                           ?>
@@ -51,19 +57,20 @@ bitacora($codigoObjeto,$accion,$descripcion);
           
           <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Registro tipo de sangre</strong></h1>
+          <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+       
+            <form  method="POST"class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
                   <table id="tabla_tiposangre" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                          <th>Codigo</th>
-                          <th>Tipo</th>
+                        <th class="text-center">Acción</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Tipo</th>
                          
                           
                       
@@ -99,7 +106,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '5'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '34'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
@@ -129,7 +136,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                    //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '5'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '34'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                     
@@ -152,11 +159,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           
 
-                        <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
+                        <!--INICIO DEL MODAL DE EDITAR TIPOSANGRE -->
                           <div id="EDITARTIPOSANGRE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITARTIPOSANGRE" method="POST">
+                                <form id="FORMEDITARTIPOSANGRE" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar tipo de sangre</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -167,7 +174,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">tipo de sangre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"    autocomplete = "off"   name="editar_tiposangre" id="editar_tiposangre"onkeypress="return soloLetras(event);">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onKeyDown="sinespacio(this);" maxlength="20" minlength="5"  onkeyup="mayus(this);"  
+                                          autocomplete = "off"   name="editar_tiposangre" id="tisangre" required="">
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
                                         </div>
                           </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -218,7 +229,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVA PREGUNTAL -->
+  <!--INICIO DEL MODAL DE AGREGAR UN NUEVo TIPO DE SANGRE -->
   <div id="AGREGAR_TIPOSANGRE" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
@@ -232,7 +243,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Tipo de sangre</label>
-                                    <input  type="text"   class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text"  name="tiposangre" id="tiposangre" required="">
+                                    <input  type="text"   class="form-control"  maxlength="20" minlength="5" onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);" onkeyup="mayus(this);"  autocomplete = "off" type="text"  
+                                    name="tiposangre" id="sangretipo" required="">
                                     <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -249,6 +261,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO TIPO DE SANGRE --> 
+   </body>
 
   <!-- Button trigger modal -->
 <script>
@@ -302,4 +315,93 @@ bitacora($codigoObjeto,$accion,$descripcion);
         
       })
   } );
+</script>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportetiposangre.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+<script>
+  sangretipo=document.getElementById("sangretipo"); //el nombre del id del campo
+sangretipo.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+</script>
+<script>
+var tisangre=document.getElementById("tisangre"); //el nombre del id del campo
+tisangre.addEventListener('keydown', function(keyboardEvent) {
+  if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+  </script>
+  
+  <script>
+
+
+  function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?-";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ //funcion para solu numeros ingresar en el campo
+ function soloNumeros_tel(e){
+   var teclaPulsada=window.event ? window.event.keyCode:e.which;
+    // capturamos el contenido del input
+    var valor=document.getElementById("tele").value;
+    if(valor.length<9){
+      if(teclaPulsada==9){
+        return true;
+      }
+    // devolvemos true o false dependiendo de si es numerico o no
+    return /\d/.test(String.fromCharCode(teclaPulsada));
+    }else{
+    return false;
+    }
+  }
+   //funcion para quitar espacios
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+   //funcion sin espacios 
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
+  //otra funcion para quitar espacios :V
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
 </script>

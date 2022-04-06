@@ -9,12 +9,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
 <head>
 
 </head>
+<body oncopy="return false" onpaste="return false">
+ 
 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>MANTENIMIENTO MODALIDAD </h4>
+        </section>
+  
   
   <section class="content">
     <div class="container-fluid">
@@ -45,27 +51,29 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           ?>
 
-            <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Modalidad</button>
+            <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Modalidad</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                             <php
                               }
                             ?>
           
           <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;"> Tabla de Modalidad</strong></h1>
+          <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+       
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
                   <table id="tabla_Modalidad" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>ACCION</th>
-                          <th>CODIGO</th>
-                          <th>TIPO MODALIDAD</th>
-                          <th>DESCRIPCION</th>
+                        <th class="text-center">Acción</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Tipo modalidad</th>
+                          <th class="text-center">Descripcion</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -156,14 +164,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td class="text-center"><?php echo $var3; ?></td>
     
 
-                        <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
+                        <!--INICIO DEL MODAL DE EDITAR MODALIDAD-->
                         
-                          <div id="EDITARMODALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          
+                        <div id="EDITARMODALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Tipo de Persona</h4>
+                                    <h4 class="text-center">Editar Modalidad</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -173,7 +182,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona"> Modalidad</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"  onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_modalidad" id="editar_modalidad" required="">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
+                                           autocomplete = "off" type="text"  name="editar_modalidad" id="edimoda" required="">
                                           <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -182,7 +192,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion" required="">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"   onkeypress="return soloLetras(event);" 
+                                           autocomplete = "off" type="text"   name="editar_descripcion1" id="edidemoda" required="">
                                           <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -240,7 +251,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR_MODALIDAD" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITARMODA" method="POST">
+                <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">AGREGAR  MODALIDAD</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,7 +261,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Tipo de modalidad</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese modalidad" name="nombremodalidad" id="nombremodalidad" required="">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" 
+                                    placeholder="Ingrese modalidad" name="nombremodalidad" id ="moda" required="">
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -260,7 +272,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="150"     autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id="descripcionmodalidad" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                     placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id= "modali" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -275,8 +288,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO PREGUNTA --> 
-
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO modalidad --> 
+   </body>
 
 <script type="text/javascript"> 
   $(document).ready( function () {
@@ -324,3 +337,106 @@ bitacora($codigoObjeto,$accion,$descripcion);
       })
   })()
 </script>
+
+<script>
+  function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ //funcion para solu numeros ingresar en el campo
+ function soloNumeros_tel(e){
+   var teclaPulsada=window.event ? window.event.keyCode:e.which;
+    // capturamos el contenido del input
+    var valor=document.getElementById("tele").value;
+    if(valor.length<9){
+      if(teclaPulsada==9){
+        return true;
+      }
+    // devolvemos true o false dependiendo de si es numerico o no
+    return /\d/.test(String.fromCharCode(teclaPulsada));
+    }else{
+    return false;
+    }
+  }
+   //funcion para quitar espacios
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+   //funcion sin espacios 
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
+  //otra funcion para quitar espacios :V
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+</script>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportemodalidad.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+
+<script>
+    var moda=document.getElementById("moda"); //el nombre del id del campo
+moda.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var modali=document.getElementById("modali"); //el nombre del id del campo
+modali.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+</script>
+<script>
+var edimoda=document.getElementById("edimoda"); //el nombre del id del campo
+edimoda.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+var edidemoda=document.getElementById("edidemoda"); //el nombre del id del campo
+edidemoda.addEventListener('keydown', function(keyboardEvent) {
+    //Si se está repitiendo, ignorar
+    if (keyboardEvent.repeat)
+        keyboardEvent.preventDefault();
+});
+
+  </script>
+  
