@@ -96,7 +96,7 @@
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Temperatura</label> 
                           <div class="input-group ">
-                            <input type="text"  placeholder=" Ej:37.2" onkeypress="return TEMPE(event,this);" autocomplete = "off" required class="form-control"  name="temperatura" required>
+                            <input type="text"  placeholder=" Ej:37.2"  autocomplete = "off" required class="form-control"  name="temperatura" required>
                             <div class="input-group-append">
                               <span class="input-group-text">°C</span>
                             </div>

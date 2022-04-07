@@ -262,7 +262,7 @@
                     <div  class="col-sm-4 mb-2" id="cuarta_fila">
                       <label  class="control-label">Contraseña</label>
                       <div class="input-group mb-3">
-                        <input class="form-control"  minlength="8" maxlength="15"  onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
+                        <input class="form-control"  minlength="8" maxlength="15" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
                         <div class="input-group-append">
                           <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                         </div>

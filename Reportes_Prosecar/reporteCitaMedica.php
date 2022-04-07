@@ -182,8 +182,39 @@ try {
 } catch (PDOException $e) {
     echo "ERROR DE CONEXION DE: ".$e->getMessage();
 }
-             
-   $estudiante = '12';
+	$data1=new Conexion();
+	$conexion=$data1->conect();	
+	$consulti ="SELECT * FROM tbl_consulta_medica cm ,tbl_inscripcion_cita c
+	where 	cm.CODIGO_CITA = c.CODIGO_CITA and  cm.CODIGO_CITA = '38'";
+	$result1 = $conexion->prepare($consulti);
+	$result1->execute();
+	$data1 = $result1->fetchall(PDO::FETCH_ASSOC);
+
+	$consuta2 = "SELECT per.CODIGO_PERSONA, per.PRIMER_NOMBRE, GROUP_CONCAT(me.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT(re.INDICACIONES_RECETA) as indicaciones
+	FROM tbl_persona per, tbl_inscripcion_cita cita, tbl_consulta_medica consu, tbl_receta_medica re, tbl_medicamento me
+	WHERE per.CODIGO_PERSONA = cita.CODIGO_PERSONA
+	AND cita.CODIGO_CITA = consu.CODIGO_CITA
+	AND consu.CODIGO_CONSULTA = re.CODIGO_CONSULTA
+	AND re.CODIGO_MEDICAMENTO = me.CODIGO_MEDICAMENTO and cita.CODIGO_PERSONA ='$persona'";
+
+	$data=new Conexion();
+	$conexion=$data->conect();
+	$consulta_g = "SELECT exp.CODIGO_EXPEDIENTE,  san.TIPO as TIPO_SANGRE, exp.TRATAMIENTOS, exp.ENFERMEDADES, ale.NOMBRE as ALERGIAS, tra.TIPO as TRASTORNOS, apa.TIPO as APARIENCIA
+	FROM tbl_expediente_medico exp, tbl_persona per, tbl_personas_alergias alep, tbl_personas_transtornos trap, tbl_personas_apariencia apap, tbl_alergias ale, tbl_transtornos_corporales tra, tbl_apariencia_fisica apa, tbl_tipo_sangre san
+	WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
+	AND exp.CODIGO_EXPEDIENTE = alep.CODIGO_EXPEDIENTE_PERSONA
+	AND exp.CODIGO_EXPEDIENTE = trap.CODIGO_EXPEDIENTE
+	AND exp.CODIGO_EXPEDIENTE = apap.CODIGO_EXPEDIENTE
+	AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
+	AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
+	AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
+	AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '42'";
+	$result = $conexion->prepare($consulta_g);
+	$result->execute();
+	$data = $result->fetchall(PDO::FETCH_ASSOC);
+
+
+
    $area = '2';
    $estado ='12';
    $sentencia = $db->prepare(" SELECT CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
@@ -212,110 +243,86 @@ try {
 	 if($row>0){
 	   $fecha = $row;
 	}
-	$sentencia = $db->prepare(" SELECT c.CODIGO_CITA from tbl_inscripcion_cita c ,tbl_persona p ,tbl_area a
+	$sentencia = $db->prepare("SELECT c.CODIGO_CITA from tbl_inscripcion_cita c ,tbl_persona p ,tbl_area a
     where p.CODIGO_PERSONA = c.CODIGO_PERSONA
     AND c.CODIGO_ESTADO = (?) and  c.AREA_CITA = a.CODIGO_AREA  and a.CODIGO_AREA = (?)");
 	 $sentencia->execute(array($estado,$area));
 	 $row=$sentencia->fetchColumn();
 	 if($row>0){
-	   $cita = $row;
+		 $cita = $row;
+     
+	 
+	    $query = $db->prepare("SELECT pr.PESO
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row1=$sentencia->fetchColumn();
+		if($row>0){
+		  $peso = $row1;
+		}
+        
+		
+		$are ="2";
+        $query = $db->prepare("SELECT pr.MASA_CORPORAL
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row2=$sentencia->fetchColumn();
+		if($row2>0){
+		  $masa = $row2;
+		}
+
+
+
+		$query = $db->prepare("SELECT  pr.ESTATURA
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row3=$sentencia->fetchColumn();
+		if($row>0){
+		$estatura = $row3;
+		} 
+
+		$query = $db->prepare("SELECT pr.FRECUENCIA_CARDIACA
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row4=$sentencia->fetchColumn();
+		if($row4>0){
+		$FC = $row4;
+		} 
+	
+		$query = $db->prepare("SELECT  pr.TEMPERATURA
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row5=$sentencia->fetchColumn();
+		if($row5>0){
+		$temperatura = $row5;
+		}
+
+		$query = $db->prepare("SELECT  pr.FRECUENCIA_RESPIRATORIA
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row6=$sentencia->fetchColumn();
+		if($row6>0){
+		$FR = $row6;
+		}
+
+		$query = $db->prepare("SELECT  pr.PULSO
+		FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
+		AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
+		$sentencia->execute(array($area,$cita));
+		$row7=$sentencia->fetchColumn();
+		if($row7>0){
+		$pulso = $row7;
+		}
+
 	}
-    
-	$query = $db->prepare("SELECT pr.PESO
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $peso = $row;
-    }
-
-  
-
-	$query = $db->prepare("SELECT pr.MASA_CORPORAL
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $masa = $row;
-    }
 	
-	$query = $db->prepare("SELECT  pr.ESTATURA
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $estatura = $row;
-    } 
-
-	$query = $db->prepare("SELECT pr.FRECUENCIA_CARDIACA
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $FC = $row;
-    } 
-	
-	$query = $db->prepare("SELECT  pr.TEMPERATURA
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $temperatura = $row;
-    }
-
-	$query = $db->prepare("SELECT  pr.FRECUENCIA_RESPIRATORIA
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $FR = $row;
-    }
-
-	$query = $db->prepare("SELECT  pr.PULSO
-    FROM tbl_preclinica pr, tbl_inscripcion_cita c WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-    AND C.AREA_CITA = (?) and c.CODIGO_CITA = (?);");
-    $sentencia->execute(array($area,$cita));
-	$row=$sentencia->fetchColumn();
-	if($row>0){
-	  $pulso = $row;
-    }
-
-	$data=new Conexion();
-	$conexion=$data->conect();
-	$consulta_g = "SELECT exp.CODIGO_EXPEDIENTE,  san.TIPO as TIPO_SANGRE, exp.TRATAMIENTOS, exp.ENFERMEDADES, ale.NOMBRE as ALERGIAS, tra.TIPO as TRASTORNOS, apa.TIPO as APARIENCIA
-	FROM tbl_expediente_medico exp, tbl_persona per, tbl_personas_alergias alep, tbl_personas_transtornos trap, tbl_personas_apariencia apap, tbl_alergias ale, tbl_transtornos_corporales tra, tbl_apariencia_fisica apa, tbl_tipo_sangre san
-	WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
-	AND exp.CODIGO_EXPEDIENTE = alep.CODIGO_EXPEDIENTE_PERSONA
-	AND exp.CODIGO_EXPEDIENTE = trap.CODIGO_EXPEDIENTE
-	AND exp.CODIGO_EXPEDIENTE = apap.CODIGO_EXPEDIENTE
-	AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
-	AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
-	AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
-	AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '42'";
-	$result = $conexion->prepare($consulta_g);
-	$result->execute();
-	$data = $result->fetchall(PDO::FETCH_ASSOC);
 	      
-    $data1=new Conexion();
-	$conexion=$data1->conect();	
-	$consulti ="SELECT * FROM tbl_consulta_medica cm ,tbl_inscripcion_cita c
-	where 	cm.CODIGO_CITA = c.CODIGO_CITA and  cm.CODIGO_CITA = '38'";
-	$result1 = $conexion->prepare($consulti);
-	 $result1->execute();
-	$data1 = $result1->fetchall(PDO::FETCH_ASSOC);
-
-	$consuta2 = "SELECT per.CODIGO_PERSONA, per.PRIMER_NOMBRE, GROUP_CONCAT(me.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT(re.INDICACIONES_RECETA) as indicaciones
-	FROM tbl_persona per, tbl_inscripcion_cita cita, tbl_consulta_medica consu, tbl_receta_medica re, tbl_medicamento me
-	WHERE per.CODIGO_PERSONA = cita.CODIGO_PERSONA
-	AND cita.CODIGO_CITA = consu.CODIGO_CITA
-	AND consu.CODIGO_CONSULTA = re.CODIGO_CONSULTA
-	AND re.CODIGO_MEDICAMENTO = me.CODIGO_MEDICAMENTO and cita.CODIGO_PERSONA ='$persona'";
+ 
     
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
@@ -354,7 +361,7 @@ $pdf->SetX(20);
 $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(12, 10, 'Peso: ',0,0);
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(20, 10,$peso ." Lb" ,0,0);
+$pdf->Cell(20, 10, $peso ." Lb" ,0,0);
 $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(26, 10, 'Masa corporal: ',0,0);
 $pdf->SetFont('Arial','',10);
