@@ -23,6 +23,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         
   <section class="content">
     <div class="container-fluid">
+    <section class="content-header text-xl-center mb-3 btn-light">
+      <h1>
+          <h4> MATRICULA ACADÉMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+      </h1>
+    </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
@@ -69,7 +74,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                  ?>
 
                  <!-- boton para descargar el reporte -->
-                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
 
 
           <!-- jquery validation -->
@@ -85,27 +90,30 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead>
                         <tr>
                         <th>Acción</th>
-                          <th>Codigo Matricula</th>
-                          <th>Asignatura </th>
-                          <th>Seccion</th>
-                          <th>Hora</th>
-                          <th>Modalidad</th>
-                          <th>Nombre del Tutor</th>
-                          <th>Estudiante</th>
-                          <th>Grado Actual</th>
+                          <th class="text-center">Codigo Matricula</th>
+                          <th class="text-center">Asignatura </th>
+                          <th class="text-center">Seccion</th>
+                          <th class="text-center">Hora</th>
+                          <th class="text-center">Modalidad</th>
+                          <th class="text-center">Nombre del Tutor</th>
+                          <th class="text-center">Estudiante</th>
+                          <th class="text-center">Grado Actual</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php                      
-               $query = "SELECT  tma.CODIGO_MATRICULA, concat_ws (' ',tp.PRIMER_NOMBRE,' ',tp.PRIMER_APELLIDO) as ESTUDIANTE ,
-               (select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp.PRIMER_APELLIDO) from tbl_persona tp2
-               where tca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tt.NOMBRE as ASIGNATURA, tm.TIPO as MODALIDAD ,te.GRADO_ACTUAL,tca.SECCION,tca.HORA , tma.CREADO_POR_USUARIO, tma.FECHA_CREACION,tma.MODIFICADO_POR,tma.FECHA_MODIFICACION
-                from tbl_matricula_academica tma 
-               left join tbl_carga_academica tca on tma.CODIGO_CARGA = tca.CODIGO_CARGA 
-               left join tbl_tutoria tt on tt.CODIGO_TUTORIA = tca.CODIGO_TUTORIA 
-               left join tbl_modalidad tm on tm.CODIGO_MODALIDA =tca.CODIGO_MODALIDAD
-               left join tbl_estudiante te on te.CODIGO_ESTUDIANTE = tma.CODIGO_ESTUDIANTE 
-                left join tbl_persona tp on tp.CODIGO_PERSONA = te.CODIGO_PERSONA where te.CODIGO_PERSONA = tp.CODIGO_PERSONA;";
+               $query = "SELECT ma.CODIGO_MATRICULA, concat_ws (' ',p.PRIMER_NOMBRE,' ',p.PRIMER_APELLIDO) as ESTUDIANTE,
+               (select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp2.PRIMER_APELLIDO) from tbl_persona tp2
+                where ca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tu.NOMBRE as ASIGNATURA,
+                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA
+         FROM tbl_matricula_academica ma, tbl_carga_academica ca, tbl_seccion se, tbl_tutoria tu, 
+               tbl_modalidad mo, tbl_estudiante es, tbl_persona p
+         WHERE ma.CODIGO_CARGA = ca.CODIGO_CARGA
+           AND se.CODIGO_SECCION = ca.CODIGO_SECCION
+           AND tu.CODIGO_TUTORIA = ca.CODIGO_TUTORIA
+           AND mo.CODIGO_MODALIDA = ca.CODIGO_MODALIDAD
+           AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
+           AND p.CODIGO_PERSONA = es.CODIGO_PERSONA;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -182,6 +190,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   }
                                  ?> 
                               </a>
+                              <a>
+                                <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
+                                <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $var2 ?>">
+                                <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                </form>
+                                </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>

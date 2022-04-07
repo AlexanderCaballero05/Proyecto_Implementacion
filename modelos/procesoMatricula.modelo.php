@@ -38,13 +38,13 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
 
       if($resul >0){
         echo "<script> 
-        alert('Registro de matricula exitoso');
-        window.location = 'procesoMatricula';
+        
+        window.location = 'crudMatricula';
         </script>";
       }else{
         echo "<script> 
-        alert('Registro de matricula exitoso');
-        window.location = 'procesoMatricula';
+        
+        window.location = 'crudMatricula';
         </script>";
       }
 
@@ -69,13 +69,13 @@ if(isset($_POST['ma_eliminar'])){
           mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Materia eliminada!');
+            
             window.location = 'procesoMatricula';
             </script>";
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar la matricula!');
+            
             window.location = 'procesoMatricula';
             </script>";
             exit;
