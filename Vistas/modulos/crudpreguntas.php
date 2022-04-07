@@ -175,7 +175,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Preguntas</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"   maxlength="60" minlength="5"    autocomplete = "off" type="text"  
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeypress="return soloLetrascaracteres(event);"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  
                                           name="editar_pregunta" id="edipre" required="">
                                           <div class="invalid-feedback">
                                        campo obligatorio.
@@ -244,7 +244,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control"  maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
+                                    <input  type="text"   class="form-control" onkeypress="return soloLetrascaracteres(event);" maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
                                     <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -369,6 +369,22 @@ var edipreg=document.getElementById("edipre"); //el nombre del id del campo
 
 
   function soloLetras(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ function soloLetrascaracteres(e){
    key = e.keyCode || e.which;
    tecla = String.fromCharCode(key).toLowerCase();
    letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?";

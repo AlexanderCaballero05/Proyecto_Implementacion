@@ -211,7 +211,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                         <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" 
-                                                                        required max="<?php $hoy=date("Y"); echo $hoy;?>"  
+                                                                        min="<?= date("Y-m-d")?>" max="<?= date("2022-04-30")?>" 
                                                                         class="form-control" 
                                                                         name="edit_fecha_cita"  id="edit_fecha_cita">
                                                                     </div>
@@ -220,7 +220,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona"> Hora: </label>
                                                                             <input type="time"  value="<?php echo $var3; ?>" 
-                                                                            required min="09:00"autocomplete = "off" step="900" max= "17:00" step="1700"
+                                                                            required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"
                                                                             class="form-control" 
                                                                             name="edit_hora" id="edit_hora">
                                                                         </div>
