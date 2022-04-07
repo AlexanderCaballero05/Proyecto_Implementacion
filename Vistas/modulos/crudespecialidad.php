@@ -1,85 +1,43 @@
 <?php
-include_once "conexion.php";
-include_once "conexion3.php";
-
-
-$codigoObjeto = 25;
-$accion = 'Ingreso a la pantalla de mantenimiento de especialidad  ';
-$descripcion = 'Ver los registros de especialidad';
-bitacora($codigoObjeto, $accion, $descripcion);
+ include_once "conexion.php";
+ include_once "conexion3.php";
+ $codigoObjeto=19;
+ $accion='Ingreso a mantenimiento especialidad';
+ $descripcion='mantenimiento especialidad';
+bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 
-
 <head>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
+<?php 
+$fecha_actual = date("Y-m-d");
+  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
+  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
+
+?>
+
+<?php 
+if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
+  $_SESSION["bdesde"] = $_POST["bdesde"];
+  $_SESSION["bhasta"] = $_POST["bhasta"];
+
+}
+?>
+<head>
+
 </head>
-<!--INICIO DEL MODAL DE Agregar -->
-<div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!-- Modal content-->
-            <form method="POST" class="needs-validation" novalidate>
-
-                <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Crear información
-                         Especialidad</h4>
-
-                </div>
-                <div class="modal-body">
-                    <!--CUERPO DEL MODAL -->
-                    <div class="row">
-                        <!-- INICIO PRIMERA ROW -->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Nombre de la especialidad</label>
-                                <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_tipo_espe" id="guardar_tipo_espe" required="">
-                                 <div class="invalid-feedback">
-                                  campo obligatorio.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Descripcion</label>
-                                <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_descripcion_espe" id="guardar_descripcion_espe" required="">
-                                 <div class="invalid-feedback">
-                                  campo obligatorio.
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- FIN DE EL PRIMER ROW -->
-
-
-                </div>
-                <!--FINAL DEL CARD BODY -->
-                <div class="modal-footer ">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                    <button type="submit" name="guardar_espe"  id = "guardar_espe" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                </div>
-                <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-            </form>
-        </div>
-    </div>
-</div><!-- FIN DEL MODAL AGREGAR -->
-
-
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-        </div><!-- /.container-fluid -->
-    </div>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Codigo de permiso de insertar -->
-                    <?php
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div>
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-10">
+           
+                        <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -98,343 +56,385 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                            <php
+                             if ($permiso_registrar= 'SI'){
 
-                 
-                     <?php 
-                      if($permiso_registrar = 'ON'){
-                     ?>
-                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                        Agregar
-                        Especialidad
-                    </button>
-                    <?php 
-                      }
-                     ?>
-                   
-                    <!-- jquery validation -->
-                    <div class="card card-primary">
-                        <div class="card-header text-center" style="background-color: #0CCDE3">
-                            <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Especialidad</strong></h1>
-                        </div>
+                          ?>
 
-                        <!-- form start -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table id="example1" class="table table-bordered table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Acción</th>
+                         
+            <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Especialidad</button>
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                
+              </br></br>
+                <div class="row">
+                   <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
+                    <div class="col-sm-2">
+                      <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
+                    </div>
+                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
+                    <div class="col-sm-2">
+                      <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
+                    </div>
+                    <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
+                    
+                </div><!--fin de row -->
+                </br></br>
+                    
+                
+
+                </a>
+                <php
+                   }
+                 ?>
+          
+          <!-- jquery validation -->
+          <div class="card card-primary">
+            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;">Especialidad</strong></h1>
+            </div>
+            <form  method="POST"><!-- form start -->
+              <div class="card-body">
+                  
+                <div class="table-responsive">
+                  <table id="tabla_especialidad" class="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                        <th>Acción</th>
                                             <th>ID</th>
+                                            <th>Codigo Area</th>
                                             <th>Area</th>
                                             <th>Nombre especialidad</th>
                                             <th>Descripción</th>
-                                            
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                         $query = "SELECT e.CODIGO_ESPECIALIDAD, a.CODIGO_AREA,a.NOMBRE, e.NOMBRE_ESPECIALIDAD, e.DESCRIPCION
+                         FROM tbl_especialidad e, tbl_area a
+                         WHERE e.CODIGO_AREA= a.CODIGO_AREA ORDER BY  CODIGO_ESPECIALIDAD ASC ;";
+                         $result = $conn->query($query);
+                         if ($result->num_rows > 0) {
+                             while ($row = $result->fetch_assoc()) {
+                                 $var1 = $row['CODIGO_ESPECIALIDAD'];
+                                 $var2 = $row['CODIGO_AREA'];
+                                 $var3 = $row['NOMBRE'];
+                                 $var4 = $row['NOMBRE_ESPECIALIDAD'];
+                                 $var5 = $row['DESCRIPCION'];
+                        ?>
+                        <tr>
+                          <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                
+                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                               
+                               <!-- Codigo de permiso para Eliminar -->
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $query = "SELECT e.CODIGO_ESPECIALIDAD, a.NOMBRE as nombre_area, e.NOMBRE as nombre_especialidad, e.DESCRIPCION
-                                        FROM tbl_especialidad e, tbl_area a
-                                        WHERE e.CODIGO_AREA = a.CODIGO_AREA;";
-                                        $result = $conn->query($query);
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                $var1 = $row['CODIGO_ESPECIALIDAD'];
-                                                $var3 = $row['nombre_area'];
-                                                $var4 = $row['nombre_especialidad'];
-                                                $var5 = $row['DESCRIPCION'];
-                                                
-                                        ?>
-                                                <tr>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <div class="btn-group">
-                                                               <!-- Codigo de permiso para Eliminar -->
+                                  <?php
+                                  include "conexionpdo.php";
+                                  $usuario=$_SESSION['vario'];
+                                  //Evaluo si existe el tipo de Rol
+                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                                  FROM tbl_usuario 
+                                                                  WHERE NOMBRE_USUARIO = (?);");
+                                  $evaluar_usuario->execute(array($usuario));
+                                  $row=$evaluar_usuario->fetchColumn();
+                                  if($row > 0){
+                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
-                                                                <?php
-                                                                include "conexionpdo.php";
-                                                                $usuario=$_SESSION['vario'];
-                                                                //Evaluo si existe el tipo de Rol
-                                                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                                                FROM tbl_usuario 
-                                                                                                WHERE NOMBRE_USUARIO = (?);");
-                                                                $evaluar_usuario->execute(array($usuario));
-                                                                $row=$evaluar_usuario->fetchColumn();
-                                                                if($row > 0){
-                                                                    $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                      $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                      $row1=$evaluar_permiso_eliminar->fetchColumn();
+                                      $permiso_eliminar =$row1; 
+                                  }
+                                  ?>  
+                                  <php
+                                    if ($permiso_registrar= 'ON'){
 
-                                                                    $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                                                    $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
-                                                                    $row1=$evaluar_permiso_eliminar->fetchColumn();
-                                                                    $permiso_eliminar =$row1; 
-                                                                }
-                                                                ?>  <!-- fin del codigo para sustraer el permiso de eliminar-->
-                                                                <?php 
-                                                                if($permiso_eliminar= 'ON'){
-                                                                ?>
-                                                                <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button id="eliminar_tipo" name="eliminar_tipo" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                                                                    </button>
-                                                                </a>
-                                                                <?php 
-                                                                    }
-                                                                    ?>
-                                                                     <!-- Codigo de permiso para Actualizar -->
-                                                                    <?php
-                                                                    include "conexionpdo.php";
-                                                                    $usuario=$_SESSION['vario'];
-                                                                    //Evaluo si existe el tipo de Rol
-                                                                    $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                                                    FROM tbl_usuario 
-                                                                                                    WHERE NOMBRE_USUARIO = (?);");
-                                                                    $evaluar_usuario->execute(array($usuario));
-                                                                    $row=$evaluar_usuario->fetchColumn();
-                                                                    if($row > 0){
-                                                                        $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                  ?>
+                               <button id="ELIMINAR_ESPECIALIDAD" name="ELIMINAR_ESPECIALIDAD" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                               </button>
+                                 <php
+                                  }
+                                 ?>
+                                </a>
+                                <a href="#EDITARESPECIALIDAD<?php echo $var1; ?>" data-toggle="modal">
+                                 <!-- Codigo de permiso para Actualizar -->
+                                  <?php
+                                  include "conexionpdo.php";
+                                  $usuario=$_SESSION['vario'];
+                                  //Evaluo si existe el tipo de Rol
+                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                                  FROM tbl_usuario 
+                                                                  WHERE NOMBRE_USUARIO = (?);");
+                                  $evaluar_usuario->execute(array($usuario));
+                                  $row=$evaluar_usuario->fetchColumn();
+                                  if($row > 0){
+                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
-                                                                        //llamar al procedimiento almacenado
-                                                                        $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
-                                                                        $row1=$evaluar_permiso_actualizar->fetchColumn();
-                                                                        $permiso_actualizar =$row1; 
-                                                                    
-                                                                    }
-                                                                    ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
-                                                                     <?php 
-                                                                    if($permiso_actualizar= 'ON'){
-                                                                    ?>
-                                                                <a href="#editar_tipo<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white;" class="btn btn-warning"><span>
-                                                                            <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                                                </a>
-                                                                    <?php 
-                                                                        }
-                                                                        ?>
-                                                            </div>
-                                                        </div><!-- final del text-center -->
-                                                    </td>
-                                                    <td class="text-center"><?php echo $var1; ?></td>
+                                      //llamar al procedimiento almacenado
+                                      $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                      $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                      $permiso_actualizar =$row1; 
+                                    
+                                  }
+                                  ?>
+                                 <php
+                                    if ($permiso_registrar= 'SI'){
+
+                                  ?>
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <php
+                                  }
+                                 ?>
+                              
+                              </a>
+                              </div>
+                            </div><!-- final del text-center -->
+                          </td>
+                          <td class="text-center"><?php echo $var1; ?></td>
+                                                    <td class="text-center"><?php echo $var2; ?></td>
                                                     <td class="text-center"><?php echo $var3; ?></td>
                                                     <td class="text-center"><?php echo $var4; ?></td>
                                                     <td class="text-center"><?php echo $var5; ?></td>
 
+    
 
+                        
+                                        <!--INICIO DEL MODAL DE EDITA ESPECIALIDAD -->
+                          <div id="EDITARESPECIALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content"><!-- Modal content-->
+                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar Especialidad</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
+                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_especialidad" id="id_especialidad">
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Nombre Especialidad</label>
+                                          <input required type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="15" minlength="5"onKeyDown="sinespacio(this);"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_especialidad" id="editar_especialidad">
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Descripcion</label>
+                                          <input required type="text"  value ="<?php echo $var5; ?>" class="form-control"  maxlength="35" minlength="5" onkeyup="mayus(this);" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_descripcion" id="editar_descripcion">
+                                        </div>
+                                      </div>
 
-                                                    <!--INICIO DEL MODAL DE EDITAR -->
-                                                    <div id="editar_tipo<?php echo $var1; ?>" class="modal fade" role="dialog">
-                                                        <div class="modal-dialog modal-lg">
-                                                            <div class="modal-content">
-                                                                <!-- Modal content-->
-                                                                <form method="POST " class="needs-validation" novalidate>
-                                                                    <div class="modal-header" style="background-color: #0CCDE3">
-                                                                        <h4 class="text-center">Editar informacion de especialidad
-                                                                        </h4>
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <!--CUERPO DEL MODAL -->
-                                                                        <div class="row">
-                                                                            <!-- INICIO PRIMERA ROW -->
-                                                                            <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
-                                                                                 name="cod_edit_espe" id="cod_edit_espe" >
-                                                                                 
-                                                                            <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="txtcodigo_persona">
-                                                                                    Especialidad</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="edit_tipo_espe" id="edit_tipo_espe" required ="">
-                                                                                    <div class="invalid-feedback">
-                                                                                     campo obligatorio.
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="txtcodigo_persona">
-                                                                                        Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var5; ?>" class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                                                     name="edit_descripcion_espe" id="edit_descripcion_espe" required ="">
-                                                                                     <div class="invalid-feedback">
-                                                                                        campo obligatorio.
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div> <!-- FIN DE EL PRIMER ROW -->
-                                                                    </div>
-                                                                    <!--FINAL DEL CARD BODY -->
-                                                                    <div class="modal-footer ">
-                                                                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                        <button type="submit"  name="guar_e"  id="guar_e" class="btn btn-success"><span>
-                                                                                <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                                                                    </div>
-                                                                    <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div><!-- FIN DEL MODAL EDITAR -->
-
-                                                    <!-- inicio modal eliminar  -->   
-                                                    <div id="ELIMINAR<?php echo $var1 ?>"  
-                                                    name="eliminar_tipo_espe" id="eliminar_tipo_espe"class="modal fade" role="dialog">
-                                                    <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                        </div>
-                                                        <form id="FORMEeliminar" method="POST">
-                                                        <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_tipo_espe" id="eliminar_tipo_espe">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
-                                                        </div> <!--fin el card body -->
-                                                            <div class="modal-footer ">
-
-                                                            <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                                            <button type="submit"  
-                                                            name="eliminar_espe" id="eliminar_espe"  class="btn btn-primary">Si,eliminar</button>      
-                                                            </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                                    </form>
-                                                    </div><!--fin del modal contener -->
-                                                    </div><!--fin del modal dialog -->
-                                                </div><!--fin del modal de eliminar -->
-                                                    <!--fin del modal de eliminar -->
-                                                </tr>
-                                        <?php
-                                            }
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                      <div class="col-sm-12">
+                                        <?php //--INICIO DEL ESTADO
+                                        $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                        $resultadod=$conn->query($query);                
+                                       ?>
+                                       <label  class="control-label">Area</label>  
+                                       <div class="form-group">
+                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
+                                         <option value="<?php echo $var2?>"><?php echo $var3;?></option>
+                                          <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                          while($row = $resultadod->fetch_assoc()) { 
+                                          $codigo = $row['CODIGO_AREA'];
+                                          $area = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $area;?></option>
+                                        <?php } 
+                                         }?>
+                                        </select> 
+                                       </div>
+                                      </div>
+                                    </div> <!-- FIN DE EL PRIMER ROW --> 
+                                  </div><!--FINAL DEL CARD BODY -->                       
+                                  <div class="modal-footer ">
+                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                    <button type="submit" id="editare" name="editare" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                </div>
+                              </form>
                             </div>
-                            <!--fin del div de responsivi -->
-                        </div> <!-- /.card-body -->
+                          </div><!-- FIN DEL MODAL EDITAR -->  
+                            
+                            
+                          <!--INCICIO DEL MODAL ELIMINAR   -->
+                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form id="FORMeliminar" method="POST">
+                                  <div class="modal-body">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar" id="eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de especialidad <?php echo $var2; ?>?</h4>
+                                </div> <!--fin el card body -->
+                                    <div class="modal-footer ">
+                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                      <button type="submit"  name="ELIMINAR_ESPECIALIDAD" id="ELIMINAR_ESPECIALIDAD"  class="btn btn-primary">Si,eliminar</button>      
+                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                               </form>
+                               </div><!--fin del modal contener -->
+                            </div><!--fin del modal dialog -->
+                          </div><!--fin del modal de eliminar -->
+                      </tr>             
+                        <?php
+                        }
+                        }
+                        ?>
+                      </tbody>
+                  </table>
+                </div><!--fin del div de responsivi -->
+              </div> <!-- /.card-body -->
+            </form>
+          </div><!-- fINAL DEL card PRIMARY -->
+        </div><!--FINAL DE COL-M12-->
+      </div><!-- FINAL ROW PADRE -->
+    </div><!-- FINAL CONTAINER FLUID --> 
+  </section><!-- FINAL SECTION -->
 
-                    </div><!-- fINAL DEL card PRIMARY -->
+  <!--INICIO DEL MODAL DE AGREGAR UN NUEVA ESPECIALIDAD -->
+  <div id="AGREGAR_ESPECIALIDAD" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form id="FORMEDITARMODA" method="POST">
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">AGREGAR  ESPECIALIDAD</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtmodalidad">Nombre Especialidad</label>
+                                    <input  type="text"  class="form-control"  maxlength="15" minlength="5"  onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese especialidad" name="nombre_especialidad" id="nombre_especialidad" required="">
+                                    <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtmodalidad">Descripción</label>
+                                    <textarea  type="text"   class="form-control"  maxlength="35"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la especialidad" name="descripcion_especialidad" id="descripcion_especialidad" required=""></textarea>
+                                    <div class="invalid-feedback">
+                                  campo obligatorio.
+                                   </div>
+                                   <div class="col-sm-12">
+                              <?php //--INICIO DEL ESTADO
+                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                $resultadod=$conn->query($query);                
+                               ?>
+                              <label  class="control-label">Area</label>  
+                                <div class="form-group">
+                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
+                                      <option > --Seleccione-- </option>
+                                      <?php 
+                                       if ($resultadod->num_rows > 0) {
+                                       while($row = $resultadod->fetch_assoc()) { 
+                                       $codigo_area = $row['CODIGO_AREA'];
+                                       $area = $row['NOMBRE'];
+                                       ?>
+                                      <option value="<?php echo $codigo_area?>" ><?php echo $area;?></option>
+                                      <?php } 
+                                      }?>
+                                    </select> 
+                                </div>
+                            </div>
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="nueva_espe" name="nueva_espe" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
+            </form>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA Elaborado por Diana Rut --> 
+  
+   <!--Funcion de la datatable -->
+
+  <!-- Button trigger modal -->
 
 
-                <!--FINAL DE COL-M12-->
-            </div><!-- FINAL ROW PADRE -->
-        </div><!-- FINAL CONTAINER FLUID -->
-    </section><!-- FINAL SECTION -->
-
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-
-
-
-
-
-
-</div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-</div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-</div><!-- ./wrapper -->
-
-
-<script type="text/javascript">
-    $(function() {
-        $("#ESTADOUSUARIO").change(function() {
-            if ($(this).val() === "4") {
-                document.getElementById('CONUSUARIO').disable = true;
-
-            } else {
-                document.getElementById('CONUSUARIO').disable = false;
-
-            }
-        });
-    }); //este codigo si me costo 
-</script>
-
-
-
-<script type="text/javascript">
-    //funcion de mostrar el estilo de la datatable
-    $(function() {
-        $("#cbx_persona").change(function() {
-            if ($(this).val() === "2") {
-                document.getElementById("c").style.display = "block";
-            } else {
-                document.getElementById("c").style.display = "none";
-            }
-        });
-    });
-</script>
-
-
-<!-- funciones del sistema -->
+<!-- Modal -->
 <script>
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = ["8-37-39-46"];
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-            return false;
-        }
+    window.onload = function() {
+     var myinput = document.getElementByld('bloquear');// el id del input donde quieres aplicarlo
+     myinput.onpaste = function(e){
+       e.preventDefault();
+     }
+     myinput.oncopy = function(e){
+      e.preventDefault();
+     }
     }
-    //funcion para solu numeros ingresar en el campo
-    function soloNumeros_tel(e) {
-        var teclaPulsada = window.event ? window.event.keyCode : e.which;
-        // capturamos el contenido del input
-        var valor = document.getElementById("tele").value;
-        if (valor.length < 9) {
-            if (teclaPulsada == 9) {
-                return true;
-            }
-            // devolvemos true o false dependiendo de si es numerico o no
-            return /\d/.test(String.fromCharCode(teclaPulsada));
-        } else {
-            return false;
-        }
+  </script>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteespecialidad.php','_blank');
+      window.open(this.href,'_self');
     }
-    
-    
-    //funcion para poner mayusculas
+  </script>
+  
+
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+$(document).ready( function () {
+    $('#tabla_especialidad').DataTable();
+    language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Estudiante:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+} );
+
+//funcion para poner mayusculas
     function mayus(e) {
         e.value = e.value.toUpperCase();
     }
+
    
-    
-   
-</script>
-<script>
-(function() {
-    'use strict'
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
 
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-        .forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
 
-                form.classList.add('was-validated')
-            }, false)
-        })
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
 })()
+
+
+
+
 </script>

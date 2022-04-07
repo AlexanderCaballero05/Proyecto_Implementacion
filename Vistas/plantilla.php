@@ -163,7 +163,9 @@ session_start();
          $_GET["ruta"] == "crudConsulta" ||
          $_GET["ruta"] == "procesoConsulta" ||
          $_GET["ruta"] == "crudconsultashistoricas" ||
-
+         $_GET["ruta"] == "crudAparienciaFisica" ||
+       
+         $_GET["ruta"] == "crudExamenesMedicos" ||
          $_GET["ruta"] == "crudPermisos"){
 
       include_once "modulos/".$_GET["ruta"].".php";

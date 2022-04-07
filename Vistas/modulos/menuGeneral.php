@@ -494,6 +494,12 @@
                 <p>mantenimiento Medicamento</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="crudExamenesMedicos" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Examenes Medicos</p>
+              </a>
+            </li>
 
               <a href="procesoExpedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -503,7 +509,7 @@
 
 
             <li class="nav-item">
-              <a href="procesoExpedienteMedico" class="nav-link">
+              <a href="crudAparienciaFisica" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>mantenimiento apariencias fisicas</p>
               </a>
