@@ -8,7 +8,7 @@
   if(isset($_POST['identidad'])){
      try{
          if(isset($_POST['GUARDAR'])){
-            $usuario = $_SESSION['vario'];
+            $usuario = "Administrador";
              $identidad = ($_POST['identidad']);
              $primer_nombre = ($_POST['primer_nombre']);
              $segundo_nombre = ($_POST['segundo_nombre']);
@@ -89,7 +89,6 @@
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
                                   echo "<script> 
-                                    alert('Usuario registrado correctamente');
                                     location.href = 'crudpersonas';
                                     </script>";
                                     $codigoObjeto=1;
@@ -171,7 +170,6 @@
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
-                                  alert('Medico registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                   exit;
@@ -208,7 +206,7 @@
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
-                                  alert('Psicologo registrado correctamente');location.href = 'crudpersonas';</script>";
+                                  location.href = 'crudpersonas';</script>";
                                   exit;
                                 }else{
                                   echo "<script> 
@@ -242,7 +240,6 @@
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
-                                  alert('Catequista registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                   exit;
@@ -433,8 +430,7 @@
 
 <?php
   if(isset($_POST['CODUSUARIO'])) { 
-    session_start();
-    $userregis = ($_SESSION['vario']);
+    $userregis = "Administrador";
     if (isset($_POST['ACT_PERSONA'])){
       $CODUSUARIO = ($_POST['CODUSUARIO']);
       $USUARIO = ($_POST['NOMUSUARIO']); 
@@ -462,7 +458,6 @@
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script>
-                    alert('Actualización Exitosa');
                     window.location = 'ediusuarios';
                     </script>";
                   }else{
@@ -477,7 +472,6 @@
                         $consulta=$conn->query($sql);
                         if ($consulta>0) {
                           echo "<script>
-                          alert('Actualización Exitosa');
                           window.location = 'ediusuarios';
                           </script>";
                         }
@@ -525,7 +519,6 @@
         where u.CODIGO_USUARIO = h.CODIGO_USUARIO and  u.CODIGO_USUARIO = p.CODIGO_USUARIO and u.CODIGO_USUARIO = (?);");
         $query_tablas->execute(array($code));
         $row=$query_tablas->fetchColumn();
-         
           if($row >0){
            echo "<script>
            alert('¡No se puede eliminar este usuario,tiene relaciones!');

@@ -89,7 +89,7 @@ include_once "conexion3.php";
                             $var8 = $row['ROLL'];
                             $var13 = $row['CODIGO_ESTADO']; 
                             $var14 = $row['CODIGO_TIPO_ROL']; 
-                            $var15 = $row['CODIGO_USUARIO'];
+                            $var16 = $row['CODIGO_USUARIO'];
                         ?>
                         <tr>
                           <td>
@@ -155,7 +155,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Correo</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
+                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
