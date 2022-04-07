@@ -46,6 +46,12 @@ require_once "modelos/familiaresmodelo.php";
 require_once "modelos/inscripcioncita.php";
 require_once "modelos/procesoconsultapsicologia.php";
 
+require_once "modelos/crudTranstornos.modelo.php";
+require_once "modelos/crudPersonaEspecialidad.modelo.php";
+require_once "modelos/crudContenidoEconomico.modelo.php";
+require_once "modelos/crudExpedientePsicoUnico.modelo.php";
+require_once "modelos/procesoPlanTerapeutico.modelo.php";
+
 
 
 

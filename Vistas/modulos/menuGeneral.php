@@ -81,6 +81,13 @@
                   </a>
                 </li>
 
+                <li class="nav-item">
+                  <a href="crudPersonaEspecialidad" class="nav-link" > <!--modifique acuerdate -->
+                    <i class="far fa-edit nav-icon"></i>
+                    <p>Especialidades de Personas</p>
+                  </a>
+                </li>
+
 
                 <li class="nav-item">
                   <a href="crudespecialidad" class="nav-link" > <!--modifique acuerdate -->
@@ -143,13 +150,15 @@
                     <p>Mantenimiento Sacramentos</p>
                   </a>
                 </li>
-                </li>
-                 <li class="nav-item">
-                  <a href=" " class="nav-link">
+                
+
+                <li class="nav-item">
+                  <a href="crudContenidoEconomico" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>Tipo de contenido</p>
                   </a>
                 </li> 
+                 
                 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
@@ -501,7 +510,7 @@
               </a>
             </li>
 
-              <a href="procesoExpedienteMedico" class="nav-link">
+              <a href="crudTranstornos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>mantenimiento transtornos</p>
               </a>

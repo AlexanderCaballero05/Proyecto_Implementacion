@@ -29,7 +29,7 @@
                       $resul=$conn->query($query_estado);
                       if($resul >0){
                         echo "<script> 
-                        alert('Estado registrado correctamente');
+                          
                         window.location = 'estado';
                         </script>";
                         exit;
@@ -86,7 +86,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Estado modificado exitosamente!');
               window.location = 'estado';
               </script>";
               include_once 'function_bitacora.php';
@@ -123,7 +122,7 @@ if(isset($_POST['estado_eliminar'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar el estado,esta relacionado con otras tablas!');
+        alert('¡Error al eliminar un estado, relacionado con otras tablas!');
         window.location = 'estado';
         </script>";
         exit;
@@ -133,7 +132,7 @@ if(isset($_POST['estado_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_estado WHERE  CODIGO_ESTADO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Estado eliminado!');
+            
             window.location = 'estado';
             </script>";
             include_once 'function_bitacora.php';
