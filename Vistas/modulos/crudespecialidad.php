@@ -34,6 +34,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   
   <section class="content">
     <div class="container-fluid">
+    <h4 class="text-center">Mantenimiento informacion
+                        Especialidad</h4>
+
       <div class="row">
         <div class="col-md-10">
            
@@ -63,25 +66,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
                          
             <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Especialidad</button>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-                
-              </br></br>
-                <div class="row">
-                   <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
-                    </div>
-                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
-                    </div>
-                    <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
-                    
-                </div><!--fin de row -->
-                </br></br>
-                    
-                
-
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>  
                 </a>
                 <php
                    }
@@ -90,7 +75,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Especialidad</strong></h1>
+            
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -99,27 +84,23 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                   <table id="tabla_especialidad" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                                            <th>ID</th>
-                                            <th>Codigo Area</th>
-                                            <th>Area</th>
-                                            <th>Nombre especialidad</th>
-                                            <th>Descripción</th>
+                        <td class="text-center">Acción</th>
+                        <td class="text-center">Area</th>
+                        <td class="text-center">Especialidad</th>  
+                        <td class="text-center">Descripción</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                         $query = "SELECT e.CODIGO_ESPECIALIDAD, a.CODIGO_AREA,a.NOMBRE, e.NOMBRE_ESPECIALIDAD, e.DESCRIPCION
-                         FROM tbl_especialidad e, tbl_area a
-                         WHERE e.CODIGO_AREA= a.CODIGO_AREA ORDER BY  CODIGO_ESPECIALIDAD ASC ;";
+                         $query = "SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA from tbl_especialidad te ,tbl_area ta  
+                         where te.CODIGO_AREA  = ta.CODIGO_AREA ORDER BY te.CODIGO_ESPECIALIDAD ASC;";
                          $result = $conn->query($query);
                          if ($result->num_rows > 0) {
                              while ($row = $result->fetch_assoc()) {
                                  $var1 = $row['CODIGO_ESPECIALIDAD'];
-                                 $var2 = $row['CODIGO_AREA'];
-                                 $var3 = $row['NOMBRE'];
-                                 $var4 = $row['NOMBRE_ESPECIALIDAD'];
-                                 $var5 = $row['DESCRIPCION'];
+                                 $var2 = $row['especialidad'];
+                                 $var3 = $row['area'];
+                                 $var4 = $row['DESCRIPCION'];
                         ?>
                         <tr>
                           <td>
@@ -193,16 +174,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                               </div>
                             </div><!-- final del text-center -->
                           </td>
-                          <td class="text-center"><?php echo $var1; ?></td>
-                                                    <td class="text-center"><?php echo $var2; ?></td>
-                                                    <td class="text-center"><?php echo $var3; ?></td>
-                                                    <td class="text-center"><?php echo $var4; ?></td>
-                                                    <td class="text-center"><?php echo $var5; ?></td>
-
-    
-
-                        
-                                        <!--INICIO DEL MODAL DE EDITA ESPECIALIDAD -->
+                                  <td class="text-center"><?php echo $var3; ?></td>
+                                  <td class="text-center"><?php echo $var2; ?></td>
+                                  <td class="text-center"><?php echo $var4; ?></td>
+                          
+                          <!--INICIO DEL MODAL DE EDITA ESPECIALIDAD -->
                           <div id="EDITARESPECIALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
@@ -216,37 +192,34 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_especialidad" id="id_especialidad">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre Especialidad</label>
-                                          <input required type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="15" minlength="5"onKeyDown="sinespacio(this);"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_especialidad" id="editar_especialidad">
+                                            <label for="txtcodigo_persona">Especialidad</label>
+                                            <input type="text"
+                                                value="<?php echo $var2; ?>"
+                                                class="form-control" maxlength="50"
+                                                minlength="15"
+                                                onKeyDown="sinespacio(this);"
+                                                onkeyup="mayus(this);"
+                                                autocomplete="off" type="text"
+                                                name="editespecialidad" id="editespecialidad">
+                                                <div class="invalid-feedback">
+                                                campo obligatorio.
+                                                </div>
                                         </div>
-                                      </div>
+                                    </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripcion</label>
-                                          <input required type="text"  value ="<?php echo $var5; ?>" class="form-control"  maxlength="35" minlength="5" onkeyup="mayus(this);" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_descripcion" id="editar_descripcion">
+                                          <input required type="text"  value ="<?php echo $var4; ?>"
+                                           class="form-control"  maxlength="35"
+                                            minlength="5" onkeyup="mayus(this);" 
+                                            onkeyup="mayus(this);"  
+                                             autocomplete = "off" type="text"
+                                              onkeypress="return soloLetras(event);" 
+                                             name="editar_descripcion" id="editar_descripcion">
+                                          <div class="invalid-feedback">
+                                          campo obligatorio.
+                                          </div>
                                         </div>
-                                      </div>
-
-                                      <div class="col-sm-12">
-                                        <?php //--INICIO DEL ESTADO
-                                        $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
-                                        $resultadod=$conn->query($query);                
-                                       ?>
-                                       <label  class="control-label">Area</label>  
-                                       <div class="form-group">
-                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
-                                         <option value="<?php echo $var2?>"><?php echo $var3;?></option>
-                                          <?php 
-                                          if ($resultadod->num_rows > 0) {
-                                          while($row = $resultadod->fetch_assoc()) { 
-                                          $codigo = $row['CODIGO_AREA'];
-                                          $area = $row['NOMBRE'];
-                                          ?>
-                                        <option value="<?php echo $codigo?>" ><?php echo $area;?></option>
-                                        <?php } 
-                                         }?>
-                                        </select> 
-                                       </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -308,20 +281,32 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtmodalidad">Nombre Especialidad</label>
-                                    <input  type="text"  class="form-control"  maxlength="15" minlength="5"  onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese especialidad" name="nombre_especialidad" id="nombre_especialidad" required="">
-                                    <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
-
-                                </div>
-                            </div>
+                        <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="txtcodigo_persona">Especialidad</label>
+                                            <input type="text"
+                                                value=""
+                                                class="form-control" maxlength="40"
+                                                minlength="15"
+                                                onKeyDown="sinespacio(this);"
+                                                placeholder="Agregue  la especialidad"
+                                                onkeyup="mayus(this);"
+                                                autocomplete="off" type="text"
+                                                name="agregarespecialidad" id="agregarespecialidad">
+                                                <div class="invalid-feedback">
+                                                campo obligatorio.
+                                                </div>
+                                        </div>
+                                    </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="35"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la especialidad" name="descripcion_especialidad" id="descripcion_especialidad" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"
+                                      maxlength="35"   onkeyup="mayus(this);"  
+                                      autocomplete = "off" type="text"  
+                                      placeholder="Agregue una descripción de la especialidad" 
+                                      name="agregardescripcion"
+                                       id="agregardescripcion" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -332,7 +317,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                ?>
                               <label  class="control-label">Area</label>  
                                 <div class="form-group">
-                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
+                                    <select class="form-control select2 select2-primary"   
+                                    style="width: 100%;" name="codigo_area" id="codigo_area" 
+                                    required>
                                       <option > --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
@@ -384,9 +371,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_especialidad').DataTable();
-    language: {
+   $(document).ready( function () {
+      $('#tabla_especialidad').DataTable({
+
+        language: {
         "decimal": "",
         "emptyTable": "No hay información",
         "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
@@ -397,14 +385,18 @@ $(document).ready( function () {
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Estudiante:",
+        "search": "Buscar Especialidad:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
             "last": "Ultimo",
             "next": "Siguiente",
             "previous": "Anterior"
-} );
+        }
+      },
+        
+      })
+  } );
 
 //funcion para poner mayusculas
     function mayus(e) {

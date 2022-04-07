@@ -112,10 +112,9 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(10, 12, 'N', 1, 0, 'C', 0);
-			$this->Cell(30, 12, 'Codigo Area', 1, 0, 'C', 0);
-			$this->Cell(40, 12, 'Nombre Area', 1, 0, 'C', 0);
-			$this->Cell(50, 12, 'Nombre Especialidad', 1, 0, 'C', 0);
-			$this->Cell(50, 12, 'Descripcion', 1, 1, 'C', 0);
+			$this->Cell(30, 12, 'Area', 1, 0, 'C', 0);
+			$this->Cell(40, 12, 'Nombre ', 1, 0, 'C', 0);
+			$this->Cell(80, 12, 'Descripcion', 1, 1, 'C', 0);
 			
 			$this->SetFont('Arial', '', 12);
 			
@@ -193,9 +192,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-  $strquery ="SELECT e.CODIGO_ESPECIALIDAD, a.CODIGO_AREA,a.NOMBRE, e.NOMBRE_ESPECIALIDAD, e.DESCRIPCION
-  FROM tbl_especialidad e, tbl_area a
-  WHERE e.CODIGO_AREA= a.CODIGO_AREA ORDER BY  CODIGO_ESPECIALIDAD ASC ;";
+  $strquery ="SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA from tbl_especialidad te ,tbl_area ta  
+  where te.CODIGO_AREA  = ta.CODIGO_AREA ORDER BY te.CODIGO_ESPECIALIDAD ASC;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
     $data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -219,10 +217,9 @@ $pdf->SetX(65);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Codigo Area', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Nombre Area', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Nombre Especialidad', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(30, 12, 'Area', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(80, 12, 'Descripcion', 1, 1, 'C', 1);
 
 
 
@@ -234,11 +231,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 40, 50,50)); //???
+$pdf->SetWidths(array(10,30,40,80)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-
-	$pdf->Row(array($data[$i]['CODIGO_ESPECIALIDAD'], ucwords(strtolower(utf8_decode($data[$i]['CODIGO_AREA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_ESPECIALIDAD']))),$data[$i]['DESCRIPCION'], ),65 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['area']))), ucwords(strtolower(utf8_decode($data[$i]['especialidad']))), ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),  ),65); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA//EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 

@@ -89,7 +89,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         if($consulta >0){ 
                           echo "<script> 
 
-                          alert('Cita registrada exitosamente');
+                  
 
                           window.location = 'crudinscripcioncita';
                           </script>";
@@ -149,50 +149,51 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
  ///BOTON DE EDITAR 
 if (isset($_POST['cod_edit_cita'])){
   if(isset($_POST['edit_cita'])){
-    $cod_cita = $_POST['cod_edit_cita'];
-    $fecha_cita = $_POST['edit_fecha_cita'];
-    $hora_cita = $_POST['edit_hora'];
-    $user=$_SESSION['vario'];
-    $fechaactual = strtotime(date("Y-m-d")); 
-       try {
-        $consulta_estudiante = $db->prepare("SELECT tic.CODIGO_ESPECIALISTA  , tic.HORARIO , tic.FECHA_CITA  
+    $fecha= $_POST['edit_fecha_cita'];
+    $hora =$_POST['edit_hora'];
+    $estado =$_POST['MODUSUARIO'];
+    $cod =$_POST['cod_edit_cita'];
+    try{
+      $consulta_estudiante = $db->prepare("SELECT tic.CODIGO_ESPECIALISTA  , tic.HORARIO , tic.FECHA_CITA 
         from tbl_inscripcion_cita tic where tic.CODIGO_CITA =  ? and tic.HORARIO= ? and tic.FECHA_CITA = ? ;");
-        $consulta_estudiante->execute(array( $cod_cita,$hora_cita, $fecha_cita));
+        $consulta_estudiante->execute(array( $cod,$hora, $fecha));
         $row=$consulta_estudiante->fetchColumn();
-  
-         if ($row == 0){
-           $sql = "CALL  	sp_actualizar_inscripcion_cita
-           ('$fecha_cita','$hora_cita','$user','$cod_cita','$fechaactual');" ;
-           $consulta=$conn->query($sql);
-           if ($consulta > 0){
-            echo "<script>
-               window.location = 'crudinscripcioncita';
-                </script>";
-              $codigoObjeto=32;
-              $accion='Actualizacion';
-              $descripcion='Se vizualiza citas registradas';
-              bitacora($codigoObjeto,$accion,$descripcion);
-           }else{ 
-            echo "<script>
-            alert('Error al actualizar el registro');
-            window.location = 'crudinscripcioncita';
-            </script>";
-          }
-        }else{  
-          echo "<script>
-            alert('Error al debe buscar otra hora o fecha');
-            window.location = 'crudinscripcioncita';
-            </script>";
-            exit;   
-                 }
-  
-        }catch(PDOException $e){
+        if ($row == 0){
+          $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado' where CODIGO_CITA ='$cod' ;";
+          $consulta=$conn->query($sql);
+          if ($consulta > 0){
+           echo "<script>
+              window.location = 'crudinscripcioncita';
+               </script>";
+             $codigoObjeto=32;
+             $accion='Actualizacion';
+             $descripcion='Se vizualiza citas registradas';
+             bitacora($codigoObjeto,$accion,$descripcion);
+          }else{ 
+           echo "<script>
+           alert('Error al actualizar el registro');
+           window.location = 'crudinscripcioncita';
+           </script>";
+         }
+       }else{  
+         echo "<script>
+           alert('Error al debe buscar otra hora o fecha');
+           window.location = 'crudinscripcioncita';
+           </script>";
+           exit;   
+                }
+    }  catch(PDOException $e){
           echo $e->getMessage(); 
         return false;
-          }
-  
+          }  
   }
   }
+
+
+
+
+
+
 
   if (isset($_POST['cod_enviar_cita'])){
     if(isset($_POST['enviar_cita'])){

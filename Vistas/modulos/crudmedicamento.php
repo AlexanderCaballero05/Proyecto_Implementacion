@@ -237,7 +237,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     <label for="txtcodigo_persona">
                                                                                     Codigo del Medicamento</label>
                                                                                     <input type="text" value="<?php echo $var1; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
-                                                                                    name="edit_cod_medi" id="edit_codd_medi">
+                                                                                    name="edit_cod_medi" id="edit_codd_medi" disabled="">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
