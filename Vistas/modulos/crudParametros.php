@@ -24,6 +24,9 @@ include_once "conexion3.php";
   
   <section class="content">
     <div class="container-fluid">
+    <section class="content-header text-xl-center mb-3 btn-light"> 
+          <h4> PARÁMETROS  <i class=" nav-icon fas fa-shield-alt"></i></h4>
+        </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">

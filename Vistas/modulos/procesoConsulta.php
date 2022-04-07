@@ -93,6 +93,7 @@
               FROM tbl_preclinica pr, tbl_inscripcion_cita c
               WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
               AND c.CODIGO_ESTADO = '11'
+              AND C.AREA_CITA = '2';
               ";
               $resul=$conn->query($query); 
                
@@ -111,22 +112,31 @@
             <div class="col-sm-2 mb-3">
             <input type="text" name="codigopre" value="<?php echo $var9 ?>" Hidden>
                          <label for="" class="control-label">Peso</label> 
-                            <div class="form-group">
-                                <input type="text"  required class="form-control" name="peso" required value="<?php echo $var1 ?>" disabled ="disabled" >
+                         <div class="input-group ">
+                            <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" value="<?php echo  $var1 ?>" name="peso" disabled ="disabled" required >
+                            <div class="input-group-append">
+                              <span class="input-group-text">Lb</span>
                             </div>
+                          </div>
                         </div><!--fin del peso -->
 
                         <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">Estatura</label> 
-                            <div class="form-group">
-                                <input type="text"  required class="form-control"  name="estatura" required value="<?php echo $var2 ?>" disabled ="disabled">
+                          <div class="input-group ">
+                            <input type="text"   maxlength="5" autocomplete = "off" required class="form-control" value="<?php echo  $var2 ?>"  name="estatura" disabled ="disabled" required >
+                            <div class="input-group-append">
+                              <span class="input-group-text">M</span>
                             </div>
+                          </div>
                         </div><!--fin del la estatura -->
                         <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">temperatura</label> 
-                            <div class="form-group">
-                                <input type="text"  required class="form-control"  name="temperatura" required value="<?php echo $var3 ?>" disabled ="disabled" >
+                          <div class="input-group ">
+                            <input type="text"  value="<?php echo $var3 ?>" onkeypress="return TEMPE(event,this);" autocomplete = "off" required class="form-control"  name="temperatura" disabled ="disabled" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">°C</span>
                             </div>
+                          </div>
                         </div><!--fin del temperatura -->
                         <div  class="col-sm-4 mb-3">
                           <div class="form-group">
@@ -144,26 +154,38 @@
                      
                        <div  class="col-sm-2 mb-3">
                           <label for="" class="control-label">Presión Arterial</label> 
-                           <div class="form-group">
-                             <input class="form-control" type="text" name="FC" required value="<?php echo $var5 ?>" disabled ="disabled"> 
+                          <div class="input-group ">
+                            <input type="text"  maxlength="5"  name="FC"  value="<?php echo $var5 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">mm Hg</span>
                             </div>
+                          </div>
                         </div><!--fin de presion -->
                         <div class="col-md-2 mb-3"> <!--Nivel de respiracion-->
                           <label for="validationCustom03"  class="control-label">Nivel Respiración</label> 
-                          <div class="form-group">
-                            <input class="form-control"  type="text"  name="FR"  required value="<?php echo $var6 ?>" disabled ="disabled">
+                          <div class="input-group ">
+                            <input type="text"  onkeypress="return solonumeros(event);" maxlength="2" name="FR" value="<?php echo $var6 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">FR</span>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-2 mb-3"> <!--PULSO-->
                           <label for="validationCustom03"  class="control-label">Pulso</label> 
-                          <div class="form-group">
-                            <input class="form-control"  type="text"  name="pulso"  required value="<?php echo $var7 ?>" disabled ="disabled">
+                          <div class="input-group ">
+                            <input type="text"  onkeypress="return solonumeros(event);" maxlength="3" name="pulso" value="<?php echo $var7 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">lpm</span>
+                            </div>
                           </div>
                         </div>
                         <div class="col-md-4 mb-3"> <!--masica corporal-->
                           <label for="validationCustom03"  class="control-label">Indice masa corporal</label> 
-                          <div class="form-group">
-                            <input class="form-control"  type="text"  name="masa_corporal"  required value="<?php echo $var8 ?>" disabled ="disabled">
+                          <div class="input-group ">
+                            <input type="text"  maxlength="4"  name="masa_corporal" value="<?php echo $var8 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
+                            <div class="input-group-append">
+                              <span class="input-group-text">IMC</span>
+                            </div>
                           </div>
                         </div>
                       </div><!--fin del div de form-group-->
@@ -179,7 +201,7 @@
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Sintomas:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="500" minlength="5" name="sintomas2" id="sintomas2"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" name="sintomas2" id="sintomas2"   autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -188,7 +210,7 @@
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
+                          <textarea class="form-control" type="text"  name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -200,7 +222,7 @@
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Evolución:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" name="evolucion" id="evolucion" onKeyDown="sinespacio(this);"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text"  name="evolucion" id="evolucion"   autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -209,7 +231,7 @@
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico de egreso/ Hallazgos importantes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" name="diagnostico2" id="diagnostico2" onKeyDown="sinespacio(this);"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text"  name="diagnostico2" id="diagnostico2"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
