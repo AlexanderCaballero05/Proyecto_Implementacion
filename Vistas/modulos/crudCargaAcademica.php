@@ -45,7 +45,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-            </br>
+                <a href="procesoCargaAcademica" >
+                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
+                </a>
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+            </br></br>
             <div class="row">
                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
                     <div class="col-sm-2">
@@ -57,11 +61,6 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     </div>
                     <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Filtrar por Fecha</button>  
                 </div>
-                </br></br>
-                <a href="procesoCargaAcademica" >
-                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
-                </a>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                 
                 </br></br>
                 <?php 
@@ -113,24 +112,24 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                 <table id="tabla_carga" class="table table-bordered table-striped">
                     <thead >
                       <tr>
-                        <th class="text-center">ACCIONES</th>
-                        <th class="text-center">MODALIDAD</th>
-                        <th class="text-center">TUTORIA</th>
-                        <th class="text-center">TUTOR</th>
-                        <th class="text-center">SECCION</th>
-                        <th class="text-center">HORA INICIO</th>
-                        <th class="text-center">HORA FINAL</th>
-                        <th class="text-center">FECHA INICIO</th>
-                        <th class="text-center">FECHA FINAL</th>
+                        <th class="text-center">Acción</th>
+                        <th class="text-center">Modalidad</th>
+                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Tutor</th>
+                        <th class="text-center">Sección</th>
+                        <th class="text-center">Hora inicio</th>
+                        <th class="text-center">Hora final</th>
+                        <th class="text-center">Fecha inicio</th>
+                        <th class="text-center">Fecha final</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
-                      FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
+                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
+                      FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
                       WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-                      AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA";
+                      AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA AND c.CODIGO_SECCION = s.CODIGO_SECCION";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -146,6 +145,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         $var10 = $row['CODIGO_MODALIDAD'];
                         $var11 = $row['CODIGO_PERSONA'];
                         $var12 = $row['HORA_FINAL'];
+                        $var13 = $row['CODIGO_SECCION'];
                       ?>
                       <tr>
                         <td>
@@ -279,17 +279,26 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       </div>
                                     </div> 
                                     <div class="col-md-4"><!--seccion-->
+                                     <?php //
+                                      $query = "SELECT * FROM tbl_seccion";
+                                      $resultadod=$conn->query($query);                
+                                      ?>
                                       <label for="identidad" class="control-label">Sección:</label> 
                                       <div class="form-group">
-                                        <select class="form-control select2" id="" name="seccion1">
-                                        <option value="<?php echo $var5?>" ><?php echo $var5;?></option>
-                                          <option value="SECCIONA">SECCION A</option><!--se esta en proceso si dejarlo asi o no :v -->
-                                          <option value="SECCIONB">SECCION B </option>
-                                          <option value ="SECCIONC">SECCION C </option>
-                                          <option value ="SECCIOND">SECCION D </option>
-                                          <option value ="SECCIONE">SECCION E </option>
-                                          <option value ="SECCIONF">SECCION F </option>
-                                        </select>
+                                      <select style="width: 100%"   class="form-control select2" required name="seccion1" >
+                                      <option value="<?php echo $var13; ?>" ><?php echo $var5; ?></option> 
+                                        <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                            while($row = $resultadod->fetch_assoc()) { 
+                                            $codigo = $row['CODIGO_SECCION'];
+                                            $nombre = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                        <?php 
+                                        } 
+                                        }
+                                        ?>
+                                      </select>
                                       </div>
                                     </div>
                                     <div class="col-sm-4"> 

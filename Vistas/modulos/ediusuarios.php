@@ -47,6 +47,7 @@ include_once "conexion3.php";
       <div class="row">
         <div class="col-md-12">
          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+         <button  onclick="Descargar3()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>prueba</button>
 
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -69,7 +70,7 @@ include_once "conexion3.php";
                       </thead>
                       <tbody class="text-center">
                         <?php
-                        $query = "SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+                        $query = "SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
                         e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
                         FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
                         where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
@@ -88,6 +89,7 @@ include_once "conexion3.php";
                             $var8 = $row['ROLL'];
                             $var13 = $row['CODIGO_ESTADO']; 
                             $var14 = $row['CODIGO_TIPO_ROL']; 
+                            $var15 = $row['CODIGO_USUARIO'];
                         ?>
                         <tr>
                           <td>
@@ -161,7 +163,8 @@ include_once "conexion3.php";
                                       
                                       <?php //--INICIO DEL ESTADO
                                       $query = "SELECT * FROM tbl_estado WHERE  NOMBRE <>'NUEVO'  AND NOMBRE <> 'INDEFINIDO'  AND NOMBRE <> 'PENDIENTE' and NOMBRE <>'BLOQUEADO' 
-                                       AND CODIGO_ESTADO <> '7'  AND CODIGO_ESTADO <> '8' AND CODIGO_ESTADO <> '9' AND CODIGO_ESTADO <> '10' AND CODIGO_ESTADO <> '11' ";
+                                      AND CODIGO_ESTADO <> '7'  AND CODIGO_ESTADO <> '8' AND CODIGO_ESTADO <> '9' AND CODIGO_ESTADO <> '10' AND CODIGO_ESTADO <> '11'
+                                      AND CODIGO_ESTADO <> '12'   AND CODIGO_ESTADO <> '13' ";
                                       $resultadod=$conn->query($query);                
                                       ?> 
                                       <div class="col-sm-6">
@@ -320,9 +323,16 @@ include_once "conexion3.php";
   } );
 </script>
 
-<script>
+  <script>
    function Descargar() {
       window.open('Reportes_Prosecar/reporteUsuarios.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+
+<script>
+   function Descargar3() {
+      window.open('Reportes_Prosecar/reportecitaMedica.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
