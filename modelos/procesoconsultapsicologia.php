@@ -54,8 +54,8 @@
 <?php
 //agregar  
  if (isset ($_POST['sintomas3'] )){
-  session_start();
-  $usuario= $_SESSION['vario'];
+
+  
   $fechaActual= date('Y-m-d');
  if ( isset ($_POST['Guardar_Consulta3'])){   
   try {
@@ -64,19 +64,24 @@
     $Ingreso= ($_POST['Ingreso3']);
     $sintomas= ($_POST['sintomas3']);
     $codigocita2= ($_POST['codigocita3']); 
-    $estado=8 ;
+  
 
        $insert= "INSERT into tbl_expediente_psicologico_consulta (CODIGO_CITA, SINTOMAS,DIAGNOSTICO_INGRESO,
-       DIAGNOSTICO_EGRESO,OBSEVARCIONES,CREADO_POR,FECHA_CREACION) values ('$codigocita2','$sintomas','$Ingreso','$Egreso',
-       '$observaciones','$usuario','$fechaActual')";
+       DIAGNOSTICO_EGRESO,OBSEVARCIONES,FECHA_CREACION) values ('$codigocita2','$sintomas','$Ingreso','$Egreso',
+       '$observaciones','$fechaActual')";
         $consulta=$conn->query($insert);
-        $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo_cita2'";
-        $consult=$conn->query($update);
+        
+       
 
-        if ($consulta >0 && $consult >0 ){
+        if ($consulta >0){
+
+          $update = "UPDATE tbl_inscripcion_cita
+          set CODIGO_ESTADO = '12'  
+          where CODIGO_CITA = '$codigocita2';";
+
+         $consult=$conn->query($update);
         echo "<script> 
-        alert('Consulta Médica registrada exitosamente!');
-        window.location = 'procesoconsulta';
+        window.location = 'expedientePsicologico';
         </script>";  
         exit;
         }else{  

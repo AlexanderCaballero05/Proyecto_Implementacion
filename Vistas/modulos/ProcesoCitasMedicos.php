@@ -29,6 +29,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Citas Medicas</a>
             </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
             <li class="nav-item" disabled="disabled">
             <a class="nav-link" style="color:#000000;" href="#">Pre Clinica</a>
             </li>
@@ -40,7 +43,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             </li>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Expedientes Medicos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
           </ul>
         </div>
