@@ -239,7 +239,7 @@
                       </div>
                     </div><!--Fin de una fila -->
                     <br>
-                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
+                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
                     </form>   
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->

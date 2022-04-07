@@ -22,14 +22,27 @@
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                 <a class="nav-link" style="color:#000000;" href="crudPreClinica">  Ver Expedientes</a>
-              </li>
-              <li class="nav-item">
-                <a  class="nav-link active" aria-current="true" href="#"  style=" color:#000000;">Registrar expediente</a>
-              </li>
-            </ul>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Citas Medicas</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
+            <li class="nav-item" disabled="disabled">
+            <a class="nav-link" style="color:#000000;" href="#">Pre Clinica</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
+            </li>
+          </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate>
@@ -41,35 +54,31 @@
 
                         // AND i.FECHA_CITA = CURDATE();";
 
-                        $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE
+                        $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
                         FROM tbl_inscripcion_cita i, tbl_persona pe
                         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND I.CODIGO_ESTADO = '9'
+                        AND I.CODIGO_ESTADO = '10'
                         AND i.AREA_CITA = '2'; ";
                        
                         $resul2=$conn->query($query2);                
                         ?>
-                        <label for="" class="control-label">Paciente</label> 
-                        <div class="form-group">
-                            <select class="form-control select2" name="codigo_paciente_expediente"> 
-                                <option selected disabled value="">--Buscar Paciente--</option>
+                        
                                 <?php 
                                     if ($resul2->num_rows > 0) {
                                     while($row2 = $resul2->fetch_assoc()) { 
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                <option value="<?php echo $codigo2?>" ><?php echo $nombre2;?></option>
+                                 <label for="" class="control-label">Paciente</label> 
+                          <div class="form-group">
+                            <input  readonly class="form-control" value="<?php echo $nombre2;?>">
+                            <input  hidden name="codigo_paciente_expediente" value="<?php echo $codigo2;?>">
+                          </div>
                                 <?php 
                                 } 
                                 }
                                 ?>
-                                <div class="invalid-feedback">
-                                  campo obligatorio.
-                              </div>
-                            </select>
-                            
-                        </div>
+                             
                         </div><!--fin del paciente -->
 
                         <div  class="col-sm-2">

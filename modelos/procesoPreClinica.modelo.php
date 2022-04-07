@@ -7,8 +7,6 @@
 <?php
 //parte para agregar un nuveo registro
 if(isset($_POST['codigo_paciente'])){
-  session_start();
-  $usuario = $_SESSION['vario'];
   if(isset($_POST['Guardar_PreClinica'])){
     try{
       $codigo_cita = ($_POST['codigo_paciente']);
@@ -24,8 +22,8 @@ if(isset($_POST['codigo_paciente'])){
       $user = 'admin';
       $estado = "11";
       //
-      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `PESO`, `MASA_CORPORAL`, `ESTATURA`, `TEMPERATURA` ,`PULSO`,`CREADO_POR`, `FECHA_CREACION`,FRECUENCIA_CARDIACA, FRECUENCIA_RESPIRATORIA,`DESNUTRICION`)
-       VALUES ('$codigo_cita',  '$peso', '$masa_corporal', '$estatura', '$temperatura', '$pulso' ,'$usuario', '$fechaActual','$fc','$fr','$desnutricion') ";
+      $inser ="INSERT INTO tbl_preclinica (`CODIGO_CITA`, `PESO`, `MASA_CORPORAL`, `ESTATURA`, `TEMPERATURA` ,`PULSO`, `FECHA_CREACION`,FRECUENCIA_CARDIACA, FRECUENCIA_RESPIRATORIA,`DESNUTRICION`)
+       VALUES ('$codigo_cita',  '$peso', '$masa_corporal', '$estatura', '$temperatura', '$pulso' , '$fechaActual','$fc','$fr','$desnutricion') ";
       $consulta=$conn->query($inser);
       $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo_cita'";
       $consulTITA=$conn->query($update);
