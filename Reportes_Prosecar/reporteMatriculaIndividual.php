@@ -96,12 +96,12 @@ class PDF extends FPDF {
 	        $this->SetFillColor(72, 208, 234);
             $this->SetFont('Helvetica', 'B', 12);
             $this->Cell(12, 12, 'N', 1, 0, 'C', 1);
-            $this->Cell(40, 12, 'Primer Nombre', 1, 0, 'C', 1);
-            $this->Cell(40, 12, 'Primer Apellido', 1, 0, 'C', 1);
-            $this->Cell(40, 12, 'Nombre Usuario', 1, 0, 'C', 1);
-            $this->Cell(55, 12, 'Correo Electronico', 1, 0, 'C', 1);
-            $this->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-            $this->Cell(35, 12, 'Rol', 1, 1, 'C', 1);
+            $this->Cell(40, 12, 'Estudiante', 1, 0, 'C', 1);
+			$this->Cell(35, 12, 'Grado Actual', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Nombre del tutor', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Asignatura', 1, 0, 'C', 1);
+            $this->Cell(55, 12, 'Hora', 1, 0, 'C', 1);
+            $this->Cell(30, 12, 'Seccion', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 		}
 
@@ -179,11 +179,19 @@ class PDF extends FPDF {
   if (isset($_POST['imprimirmatriculaindividual'])) {
 	$ho=($_POST['imprimirmatriculaindividual']);
 }
-	$strquery ="SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-    e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-    FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
-    where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
-    u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA  and p.CODIGO_PERSONA = '$ho' ";
+	$strquery ="SELECT ma.CODIGO_MATRICULA, concat_ws (' ',p.PRIMER_NOMBRE,' ',p.PRIMER_APELLIDO) as ESTUDIANTE,
+	(select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp2.PRIMER_APELLIDO) from tbl_persona tp2
+	 where ca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tu.NOMBRE as ASIGNATURA,
+	 mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA
+     FROM tbl_matricula_academica ma, tbl_carga_academica ca, tbl_seccion se, tbl_tutoria tu, 
+	tbl_modalidad mo, tbl_estudiante es, tbl_persona p
+     WHERE ma.CODIGO_CARGA = ca.CODIGO_CARGA
+     AND se.CODIGO_SECCION = ca.CODIGO_SECCION
+     AND tu.CODIGO_TUTORIA = ca.CODIGO_TUTORIA
+     AND mo.CODIGO_MODALIDA = ca.CODIGO_MODALIDAD
+     AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
+     AND p.CODIGO_PERSONA = es.CODIGO_PERSONA
+     AND ma.CODIGO_MATRICULA = '$ho'; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -206,12 +214,12 @@ $pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(12, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Primer Nombre', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Primer Apellido', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Nombre Usuario', 1, 0, 'C', 1);
-$pdf->Cell(55, 12, 'Correo Electronico', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-$pdf->Cell(35, 12, 'Rol', 1, 1, 'C', 1);
+$pdf->Cell(40, 12, 'Estudiante', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, 'Grado Actual', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Nombre del tutor', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Asignatura', 1, 0, 'C', 1);
+$pdf->Cell(55, 12, 'Hora', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Seccion', 1, 1, 'C', 1);
 
 
 
@@ -226,11 +234,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(12, 40, 40, 40,55,30,35)); //???
+$pdf->SetWidths(array(12, 40, 35, 40,40,55,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['PRIMER_NOMBRE']))),ucwords((utf8_decode($data[$i]['PRIMER_APELLIDO']))), ucwords((utf8_decode($data[$i]['NOMBRE_USUARIO']))), utf8_decode($data[$i]['correo_persona']), $data[$i]['ESTADO'], $data[$i]['ROLL'] ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['ESTUDIANTE']))),ucwords((utf8_decode($data[$i]['GRADO_ACTUAL']))), ucwords((utf8_decode($data[$i]['NOMBRE_TUTOR']))), utf8_decode($data[$i]['ASIGNATURA']), $data[$i]['HORA'], $data[$i]['SECCION'] ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
