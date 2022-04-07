@@ -33,7 +33,8 @@ require_once "modelos/tiposangremodelo.php";
 require_once "modelos/crudSacramento.modelo.php";
 require_once "modelos/crudSeccion.modelo.php";
 require_once "modelos/crudconsultahistorica.php";
-
+require_once "modelos/crudAparienciaFisica.modelo.php";
+require_once "modelos/crudExamenesMedicos.modelo.php";
 require_once "modelos/procesoMatricula.modelo.php";
 
 
