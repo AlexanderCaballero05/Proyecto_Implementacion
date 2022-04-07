@@ -9,7 +9,7 @@ $descripcion = 'Ver los registros de especialidad';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
-
+<body oncopy="return false" onpaste="return false" >
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -32,7 +32,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <div class="form-group">
                               <label for="txtcodigo_persona">
                               Codigo del Medicamento</label>
-                              <input type="text"  class="form-control" maxlength="10"  autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
+                              <input type="text"  class="form-control" maxlength="10" onkeyup="mayus(this);" autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
                               name="agregar_cod_medi" id="agregar_codd_medi">
                           </div>
                       </div>
@@ -67,15 +67,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
 <div class="content-wrapper">
-    <div class="content-header">
-        <div class="container-fluid">
-        </div><!-- /.container-fluid -->
+  <div class="content-header">
+    <div class="text-center">
+      <h2>Medicamentos</h2>
     </div>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div>
+  
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
                     <!-- Codigo de permiso de insertar -->
                     <?php
                             include "conexionpdo.php";
@@ -101,19 +104,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <?php 
                       if($permiso_registrar = 'ON'){
                      ?>
-                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                        Agregar
-                        Medicamento
-                    </button>
-                    <?php 
+                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">Agregar Medicamento</button>
+        
+                   <?php 
                       }
                      ?>
                    
                     <!-- jquery validation -->
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Medicamentos </strong></h1>
+                            <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
                         </div>
 
                         <!-- form start -->
@@ -227,14 +229,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <!--CUERPO DEL MODAL -->
                                                                         <div class="row">
                                                                             <!-- INICIO PRIMERA ROW -->
-                                                                            <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
+                                                                            <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" 
                                                                                  name="cod_edit_med" id="cod_edit_med" >
                                                                                  
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                     Codigo del Medicamento</label>
-                                                                                    <input type="text" value="<?php echo $var1; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
+                                                                                    <input type="text" value="<?php echo $var1; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
                                                                                     name="edit_cod_medi" id="edit_codd_medi">
                                                                                 </div>
                                                                             </div>
@@ -311,7 +313,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             </div><!-- FINAL ROW PADRE -->
         </div><!-- FINAL CONTAINER FLUID -->
     </section><!-- FINAL SECTION -->
-
+                            </body>
     <!-- Button trigger modal -->
 
 
@@ -448,3 +450,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
       })
   } );
 </script>
+
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteMedicamento.php','_blank');
+      window.open(this.href,'_self');
+    } 
+    </script>

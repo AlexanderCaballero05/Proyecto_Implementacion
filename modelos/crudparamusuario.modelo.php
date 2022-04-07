@@ -13,61 +13,53 @@
 //PARTE PARA EDITAR UN PAr valor
 
 if(isset($_POST['id_paramusu'])){
-  $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
+ 
+
   if(isset($_POST['editar_paramusu'])){
+    //$usuario = $_SESSION['vario'];
     $codigo_paramusu = ($_POST['id_paramusu']);
     $editar_parvalor = ($_POST['editar_parvalor']);
+    $codigo_usuario= ($_POST['codigo_usuario']);
+    $codigo_parametro= ($_POST['codigo_parametro']);
+
     $fechaActual = date('Y-m-d');
-    try{
-     // 
-     $sentencia = $db->prepare("SELECT * FROM tbl_parametros_usuarios where PAR_VALOR = (?) and CODIGO_PARAM_USUARIO <> (?) ;");
-     $sentencia->execute(array($editar_parvalor,$codigo_paramusu));
-     $row=$sentencia->fetchColumn();
-      if($row>0){
-        echo "<script>
-        alert('Ya existe un Par Valor igual: $editar_parvalor');
-        window.location = 'parametrosusuario';
-        </script>";
-        exit;
-      }else{
+     
+      
         try{
           $sql = " UPDATE tbl_parametros_usuarios 
           SET PAR_VALOR = '$editar_parvalor',
-          MODIFICADO_POR = '$usuario',
           FECHA_MODIFICACION = '$fechaActual'  
-          WHERE CODIGO_PARAM_USUARIO = '$codigo_paramusu' ";
+          WHERE CODIGO_PARAM_USUARIO = '$codigo_paramusu'
+                AND CODIGO_USUARIO = '$codigo_usuario'
+                AND CODIGO_PARAMETRO = '$codigo_parametro' ";
           $consulta=$conn->query($sql);
           if ($consulta>0){
             echo "<script>
             alert('¡Par Valor modificado exitosamente!');
-            window.location = 'parametrosusuario';
+            window.location = 'crudparametrosusuario';
             </script>";
              //<!--llamada de la fuction bitacora -->
              $codigoObjeto=9;
              $accion='Editar parámetro';
              $descripcion= 'Se editó el registro de Par valor ya existente';
              bitacora($codigoObjeto, $accion,$descripcion);
-          }else{
+          //}else{
             echo "<script>
             alert('¡Error al intentar modificar Par Valor!');
-            window.location = 'parametrosusuario';
+            window.location = 'crudparametrosusuario';
             </script>";
                //<!--llamada de la fuction bitacora -->
-               $codigoObjeto=9;
-               $accion='Editar parámetro fallido';
-               $descripcion= 'Se intentó editar el registro de Par valor ya existente';
-               bitacora($codigoObjeto, $accion,$descripcion);
+               //$codigoObjeto=9;
+               //$accion='Editar parámetro fallido';
+               //$descripcion= 'Se intentó editar el registro de Par valor ya existente';
+               //bitacora($codigoObjeto, $accion,$descripcion);
 
-          }
+         }
         }catch(PDOException $e){
         echo $e->getMessage(); 
         return false;
         }//fin del try catch
-      }//fin del else
-    }catch(PDOException $e){
-      echo $e->getMessage(); 
-      return false;
-     }
+      
   }
 }//cierre del if principal
 
@@ -83,7 +75,7 @@ if(isset($_POST['paramusuario_eli'])){
       if(mysqli_affected_rows($link)>0){
         echo "<script>
         alert('¡Parametro Usuario eliminado!');
-        window.location = 'parametrosusuario';
+        window.location = 'crudparametrosusuario';
         </script>";
          //<!--llamada de la fuction bitacora -->
          $codigoObjeto=9;
@@ -94,7 +86,7 @@ if(isset($_POST['paramusuario_eli'])){
       }else{
         echo "<script>
         alert('¡Error al eliminar el parametro usuario!');
-        window.location = 'parametrosusuario';
+        window.location = 'crudparametrosusuario';
         </script>";
          //<!--llamada de la fuction bitacora -->
          $codigoObjeto=9;
