@@ -94,10 +94,10 @@ include_once "conexion3.php";
                   <table id="tabla_parametros" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>Acción</th>
-                          <th>ID</th>
-                          <th>Parametro</th>
-                          <th>Valor</th>
+                          <th class="text-center">Acción</th>
+                          <th class="text-center">ID</th>
+                          <th class="text-center">Parametro</th>
+                          <th class="text-center">Valor</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -291,7 +291,7 @@ include_once "conexion3.php";
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
                                     <div class="invalid-feedback">
                                      Llene este campo.
                                     </div>
@@ -367,6 +367,26 @@ include_once "conexion3.php";
     return false;
   }
  }
+
+//funcion para solo letras y algunos caracteres
+function soloLetrascaracteres(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "_áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+
+
  //funcion para solu numeros ingresar en el campo
  function soloNumeros_tel(e){
    var teclaPulsada=window.event ? window.event.keyCode:e.which;

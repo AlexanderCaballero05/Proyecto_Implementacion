@@ -117,18 +117,16 @@
                       </thead>
                       <tbody>
                         <?php                      
-               $query = "SELECT  t.NOMBRE as TUTORIA,
-                CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
-                 m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA ,c.FECHA_INICIO ,c.CODIGO_TUTORIA
-                 FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
-                 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-                 AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
-                 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA;";
+               $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO)
+               as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO
+               FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
+               WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+               AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA AND c.CODIGO_SECCION = s.CODIGO_SECCION;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                   $var1 = $row['TUTORIA'];
-                  $var2 = $row['TUTOR'];
+                  $var2 = $row['NOMBRE_COMPLETO'];
                   $var3 = $row['MODALIDAD'];
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
@@ -253,13 +251,13 @@
                       <tbody>
                         <?php                      
                $query = "SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE,
-               CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,
-                m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.CODIGO_CARGA 
-                FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
+               CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,m.TIPO as MODALIDAD,se.NOMBRE as SECCION , c.HORA, c.CODIGO_CARGA 
+                FROM tbl_carga_academica c, tbl_seccion se ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
                 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
                 AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
                 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
                 AND ma.CODIGO_CARGA = c.CODIGO_CARGA
+                AND c.CODIGO_SECCION = se.CODIGO_SECCION
                 AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante';";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
@@ -270,7 +268,7 @@
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
                   $var6 = $row['CODIGO_CARGA'];
-                  $var7 =  $row['CODIGO_TUTORIA'];
+                  //$var7 =  $row['CODIGO_TUTORIA'];
                   $var8 =  $row['CODIGO_MATRICULA'];
                   $var9 =  $row['CODIGO_ESTUDIANTE'];
 
@@ -290,7 +288,8 @@
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td> 
                           <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td> 
+                          <td class="text-center"><?php echo $var5; ?></td>
+                          <!-- <td class="text-center"><?php echo $var7; ?></td>   -->
 
                           <div id="ELIMINAR<?php echo $var8 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
