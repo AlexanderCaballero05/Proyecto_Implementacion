@@ -54,7 +54,6 @@
             $resultatel=$conn->query($update_telefono);
             if($resultado11 > 0 && $resulta > 0 && $resultatel > 0){
               echo "<script>
-              alert('Actualizacion exitosa');
               window.location = 'crudpersonas';
               </script>";
           }else{
@@ -110,7 +109,6 @@
              mysqli_query($link, "DELETE FROM tbl_persona WHERE  CODIGO_PERSONA = '$cod' ");
              if(mysqli_affected_rows($link)>0){
                echo "<script>
-               alert('¡PERSONA eliminada!');
                window.location = 'crudpersonas';
                </script>";
                include_once 'function_bitacora.php';

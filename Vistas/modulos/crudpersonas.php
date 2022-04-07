@@ -20,6 +20,7 @@ include_once "conexion3.php";
 
 <div class="content-wrapper">
     <div class="content-header">
+    <body oncopy="return false" onpaste="return false" >
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
@@ -329,7 +330,7 @@ include_once "conexion3.php";
                                                                              class="form-control" 
                                                                                 onkeyup="mayus(this);" maxlength="10" 
                                                                                 minlength="8"
-                                                                                 onkeypress="return solonumero(event)"  
+                                                                                onkeypress="return telfono(event,this);"
                                                                                  required onblur="quitarespacios(this);" 
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
@@ -576,20 +577,22 @@ function soloLetras(e) {
     }
 }
 //funcion para solu numeros ingresar en el campo
-function soloNumeros_tel(e) {
-    var teclaPulsada = window.event ? window.event.keyCode : e.which;
-    // capturamos el contenido del input
-    var valor = document.getElementById("tele").value;
-    if (valor.length < 9) {
-        if (teclaPulsada == 9) {
-            return true;
-        }
-        // devolvemos true o false dependiendo de si es numerico o no
-        return /\d/.test(String.fromCharCode(teclaPulsada));
-    } else {
-        return false;
+function telfono(evt,input){
+        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
+        var key = window.Event ? evt.which : evt.keyCode;   
+        var chark = String.fromCharCode(key);
+        var tempValue = input.value+chark;
+        var isNumber = (key >= 48 && key <= 57);
+        var isSpecial = (key == 8 || key == 13 || key == 0 ||  key == 46);
+        if(isNumber || isSpecial){
+            return filter(tempValue);
+        }        
+        return false;    
     }
-}
+    function filter(__val__){
+        var preg = /^([9,3,8]{1}[0-9]{0,7})$/; 
+        return (preg.test(__val__) === true);
+    }
 //funcion para quitar espacios
 function quitarespacios(e) {
     var cadena = e.value;

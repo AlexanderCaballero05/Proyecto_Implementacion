@@ -30,7 +30,6 @@
                 $resul=$conn->query($query_objeto);
                 if ($resul >0){
                   echo "<script> 
-                  alert('objeto registrado correctamente');
                   window.location = 'crudobjetos';
                   </script>";
                   exit;
@@ -71,6 +70,7 @@
         $edinombre_objeto = ($_POST['editnombre']);
         $edi_descripcion = ($_POST['editdescripcion']);
         $fecha_modificacion= date('Y-m-d');
+        session_start();
         $user = $_SESSION['vario'];
         try {
          $sentencia = $db->prepare("SELECT * FROM tbl_objeto where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");
@@ -89,7 +89,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡objeto modificado exitosamente!');
               window.location = 'crudobjetos';
               </script>";
               include_once 'function_bitacora.php';
@@ -142,7 +141,6 @@
               mysqli_query($link, "DELETE FROM tbl_objetos WHERE  CODIGO_OBJETO = '$code' ");
               if(mysqli_affected_rows($link)>0){
                 echo "<script>
-              alert('¡objeto eliminado!');
               window.location = 'crudobjetos';
               </script>";
               include_once 'function_bitacora.php';
