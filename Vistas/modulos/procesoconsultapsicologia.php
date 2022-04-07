@@ -25,22 +25,20 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
-          <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Citas Psicologicas</a>
             </li>
-            
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Expedientes Psicologicos</a>
-
+            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
             </li>
-            </ul>
+          </ul>
         </div>
         <div class="card-body">
         <body oncopy="return false" onpaste="return false" >
@@ -55,7 +53,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI, C.CODIGO_CITA
                           from tbl_inscripcion_cita c ,tbl_persona p
                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                          AND c.CODIGO_ESTADO = '11';";
+                          AND c.CODIGO_ESTADO = '11'
+                           ";
                           $resul=$conn->query($query); 
                           while($row = $resul->fetch_assoc()){
                             $var1 = $row['PACIENTE'];
@@ -179,7 +178,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar</button>
+                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->
