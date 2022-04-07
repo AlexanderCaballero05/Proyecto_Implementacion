@@ -10,48 +10,22 @@
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
-      <h2>MANTENIMIENTO DE ESTADOS</h2>
+      <h2>MANTENIMIENTO ESPECIALIDADES DE PERSONAS</h2>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
+  
   
   <section class="content">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-           
-        <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
-                    <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-
-                    ?> 
-                    <button  data-toggle="modal"  href="#AGREGAR_ESTADO" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estado</button>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-                    <?php 
-
-                      }
-                        
-                    ?> 
+        <a href="categoria" >
+        <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Especialidad</button>
+        </a>
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+          
+    
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -61,34 +35,35 @@
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_estados" class="table table-bordered table-striped">
+                  <table id="tabla_personaespecialidad" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
                           <th class="text-center">Id</th>
-                          <th class="text-center">Nombre del Estado</th>
-                          <th class="text-center">Descripción</th>
+                          <th class="text-center">Nombre del Especialista</th>
+                          <th class="text-center">Especialidad  </th>
                           
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT `CODIGO_ESTADO`, `NOMBRE`, `DESCRIPCION` FROM `tbl_estado`
-                        ORDER BY  CODIGO_ESTADO ASC ;";
+                        $query = "SELECT pe.CODIGO_PERSONA_ESPECIALIDAD, CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
+                        as CODIGO_PERSONA, e.NOMBRE as CODIGO_ESPECIALIDAD 
+                        FROM tbl_persona_especialidad pe, tbl_especialidad e, tbl_persona p 
+                        WHERE pe.codigo_especialidad = e.codigo_especialidad and pe.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+
+
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_ESTADO'];
-                            $var2 = $row['NOMBRE'];
-                            $var3 = $row['DESCRIPCION'];
-                           
-                         
+                            $var1 = $row['CODIGO_PERSONA_ESPECIALIDAD'];
+                            $var2 = $row['CODIGO_PERSONA'];
+                            $var3 = $row['CODIGO_ESPECIALIDAD'];
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
 
                               <?php
                             include "conexionpdo.php";
@@ -104,7 +79,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '32'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -128,7 +103,7 @@
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '32'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
@@ -137,22 +112,16 @@
                                 if ($permiso_eliminar == 'SI'){
                                     
                                 ?> 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ESTADO" name="ELIMINAR_ESTADO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
-                               </a>
+                              
+                         
                                <?php
                                 }
                                 ?>
-
-
+                               
                                <?php
                                 if ($permiso_actualizar == 'SI'){    
                                 ?> 
-
-                                <a href="#EDITARESTADO<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                </a>
+                              
                                 <?php
                                 }
                                 ?>
@@ -164,71 +133,23 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
+              
+                        
+
+                            <?php
+                              include_once "conexion3.php";
+                              $query2= "SELECT esp.CODIGO_ESPECIALIDAD ,esp.NOMBRE
+                              FROM tbl_especialidad esp
+                              WHERE esp.CODIGO_ESPECIALIDAD = 2;";
+                              $result2= $conn->query($query2);
+                           ?>
+
+                       
                          
+                          
 
-                        <!--INICIO DEL MODAL DE EDITAR ESTADO -->
-                          <div id="EDITARESTADO<?php echo $var1 ?>" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-md">
-                              <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar estados</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
-
-                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_estado" id="id_estado">
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20"   onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" required="">
-                                          <div class="invalid-feedback">
-                                            campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Descripcion</label>
-                                          <input  type="text"  value ="<?php echo $var3 	; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_descripcion" id="editardescripcion" required="">
-                                          <div class="invalid-feedback">
-                                            campo obligatorio.  
-                                        </div>
-                                       
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
-                                  </div><!--FINAL DEL CARD BODY --> 
-
-                                  <div class="modal-footer ">
-                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar_estado" name="editar_estado" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                </div>
-                              </form>
-                            </div>
-                          </div><!-- FIN DEL MODAL EDITAR -->  
-                            
-                          <!--INCICIO DEL MODAL ELIMINAR   -->
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form id="FORMEeliminar" method="POST">
-                                  <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estado_eliminar" id="estado_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estado <?php echo $var2; ?></h4>
-                                </div> <!--fin el card body -->
-                                    <div class="modal-footer ">
-                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_ESTADO" id="ELIMINAR_ESTADO"  class="btn btn-primary">Si,eliminar</button>      
-                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                               </form>
-                               </div><!--fin del modal contener -->
-                            </div><!--fin del modal dialog -->
-                          </div><!--fin del modal de eliminar -->
+                          
+                         
                       </tr>             
                         <?php
                         }
@@ -245,75 +166,26 @@
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTADO -->
-  <div id="AGREGAR_ESTADO" class="modal fade" role="dialog">
-       <div class="modal-dialog modal-md">
-           <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
-                    <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Nuevo Estado</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                    <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->  
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  class="form-control"  maxlength="20"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="nombre_estado" id="nombre_estado" required="">
-                                    <div class="invalid-feedback">
-                                     campo obligatorio.
-                                   </div>
-
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Descripción</label>
-                                    <input  type="text"   class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="descripcion_estado" id="descripcion_estado" required="">
-                                    <div class="invalid-feedback">
-                                      campo obligatorio.
-                                   </div>
-                                </div>
-                            </div>
-                        </div> <!-- FIN DE EL PRIMER ROW --> 
-                    </div><!--FINAL DEL CARD BODY -->                     
-                    <div class="modal-footer ">
-                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_estado" name="agregar_estado" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                </div>
-            </form>
-      </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTADO --> 
-
   <!-- Button trigger modal -->
 
 
 <!-- Modal -->
 
-<!-- funciones del sistema -->
-<script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
+
+<script type="text/javascript"> function solonumero(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla==8) return true;
+        else if (tecla==0||tecla==9)  return true;
+       // patron =/[0-9\s]/;// -> solo letras
+        patron =/[0-9\s]/;// -> solo numeros
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
     }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- </script>
+	</script>
 
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteEstado.php','_blank');
+      window.open('Reportes_Prosecar/reportePersonaEspecialidad.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
@@ -321,21 +193,21 @@
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
-    $('#tabla_estados').DataTable({
+    $('#tabla_personaespecialidad').DataTable({
       language:espanol
     });
 } );
-
+ 
  //Funcion para habilitar el de la tabla
  $( function() {
     $("#persona").change( function() {
         if ($(this).val() > 0 ) {
           document.getElementById('especialidad').style.display = "block";
-          document.getElementById('tabla_estados').style.display = "block";
+          document.getElementById('tabla_personaespecialidad').style.display = "block";
           
         } else{
           document.getElementById('especialidad').style.display = "none";
-          document.getElementById('tabla_estados').style.display = "none";
+          document.getElementById('tabla_personaespecialidad').style.display = "none";
            
         }
     });
@@ -585,6 +457,7 @@ let = espanol = {
         "renameTitle": "Cambiar Nombre Estado"
     }
 };
+
 
 
 </script>
