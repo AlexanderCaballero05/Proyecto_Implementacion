@@ -70,13 +70,42 @@ if(isset($_POST['ma_eliminar'])){
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             
-            window.location = 'procesoMatricula';
+            window.location = 'crudMatricula';
             </script>";
             exit;
           }else{
             echo "<script>
             
-            window.location = 'procesoMatricula';
+            window.location = 'crudMatricula';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       
+      }
+    
+  }
+}//Cirre del if padre
+
+if(isset($_POST['MatriEliminar'])){
+  if(isset($_POST['ELIMINARMATRICULA2'])){
+    $code = ($_POST['MatriEliminar']);//asigna a una variable el id del estado a eliminar
+    $estudiante = ($_POST['estudianteElim']);
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            
+            window.location = 'crudMatricula';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            
+            window.location = 'crudMatricula';
             </script>";
             exit;
           }

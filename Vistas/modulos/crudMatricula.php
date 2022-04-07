@@ -105,7 +105,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                $query = "SELECT ma.CODIGO_MATRICULA, concat_ws (' ',p.PRIMER_NOMBRE,' ',p.PRIMER_APELLIDO) as ESTUDIANTE,
                (select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp2.PRIMER_APELLIDO) from tbl_persona tp2
                 where ca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tu.NOMBRE as ASIGNATURA,
-                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA
+                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA, es.CODIGO_ESTUDIANTE
          FROM tbl_matricula_academica ma, tbl_carga_academica ca, tbl_seccion se, tbl_tutoria tu, 
                tbl_modalidad mo, tbl_estudiante es, tbl_persona p
          WHERE ma.CODIGO_CARGA = ca.CODIGO_CARGA
@@ -125,6 +125,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   $var6 = $row['GRADO_ACTUAL'];
                   $var7 = $row['SECCION'];
                   $var8 = $row['HORA'];
+                  $var9 = $row['CODIGO_ESTUDIANTE'];
                         ?>
                         <tr>
                           <td>
@@ -160,39 +161,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   }
                                 ?>
                                </a>
-                                <a href="#EDITARMATRICULA<?php echo $var1; ?>" data-toggle="modal">
-                                <?php
-                                  include "conexionpdo.php";
-                                  $usuario=$_SESSION['vario'];
-                                  //Evaluo si existe el tipo de Rol
-                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                  FROM tbl_usuario 
-                                                                  WHERE NOMBRE_USUARIO = (?);");
-                                  $evaluar_usuario->execute(array($usuario));
-                                  $row=$evaluar_usuario->fetchColumn();
-                                  if($row > 0){
-                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                   //llamar al procedimiento almacenado
-                                  $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
-                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
-                                  $permiso_actualizar =$row1; 
-                                    
-                                  }
-                                ?>
-                                <php
-                                    if ($permiso_registrar= 'ON'){
-
-                                ?>
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <php
-                                  }
-                                 ?> 
-                              </a>
                               <a>
-                                <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
-                                <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $var2 ?>">
+                                <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
+                                <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $var1 ?>">
                                 <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
@@ -246,12 +217,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 </div>
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="pregunta_eliminar" id="pregunta_eliminar">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="MatriEliminar" id="MatriEliminar">
+                                    <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudianteElim">
                                     <h4 class="text-center">¿Esta seguro de eliminar la matricula academica  <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_PREGUNTA" id="ELIMINAR_PREGUNTA"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINARMATRICULA2" id="ELIMINARMATRICULA2"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
