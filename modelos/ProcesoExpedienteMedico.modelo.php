@@ -14,19 +14,7 @@
             $tratamientos = ($_POST['tratamientos']);
             $enfermedades = ($_POST['enfermedades']);
          
-            $consulta_expediente = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_expediente_medico WHERE CODIGO_PERSONA = (?);");
-            $consulta_expediente->execute(array($codigo_expediente_paciente));
-            $row=$consulta_expediente->fetchColumn();
-          
-        if($row>0){
-            echo "<script>
-                alert('Expediente ya se encuentra registrado');
-                window.location = 'procesoExpedienteMedico'
-             </script>";
-
-        }else{ 
-            
-
+              
 
             $insertar_expediente ="INSERT INTO tbl_expediente_medico (CODIGO_PERSONA, CODIGO_TIPO_SANGRE, TRATAMIENTOS, ENFERMEDADES) 
                                                                 VALUES ('$codigo_expediente_paciente', '$tipo_sangre','$tratamientos', '$enfermedades')";
@@ -61,13 +49,19 @@
                                         $query_apariencia->execute(array($codigo, $apariencias));
                                         $conn->commit();
 
-                                    }            
+
+                                    }  
+                                    
+                        
+                                     echo "<script> 
+                                  window.location = 'procesoPreClinica';
+                                  </script>";
                                 } // fin para apariencias
             
-    
+                               
      
 
-        }
+        
 
             
 

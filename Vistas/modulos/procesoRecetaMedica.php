@@ -102,11 +102,7 @@
 
                   
 
-                    <?php
-                      $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
-                      FROM tbl_medicamento me; ";
-                      $resultado2=$conn->query($query1);
-                    ?>
+                    
 
 
                   <!--<button  class="btn btn-secondary "  class="col-sm-1 col-form mt-3">Buscador</button>-->
@@ -141,6 +137,11 @@
                    </div>
                 </div>
 
+                <?php
+                      $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
+                      FROM tbl_medicamento me; ";
+                      $resultado2=$conn->query($query1);
+                    ?>
                 <!--Datalist para agregar el medicamento-->
                 <div class="col-sm-6 order-2 pl-2 mt-3 mb-3">
                   <label for="identidad" class="control-label">Medicamento</label> 

@@ -24,15 +24,13 @@ include "conexionpdo.php";
 
 
             echo "<script>
-                    alert('receta insertada');
                     window.location = 'procesoRecetaMedica';
                     </script>";
                     exit;
 
             }else{ 
             echo "<script> 
-                    alert('error en el registro');
-                    window.location = 'procesoConsulta';
+                    window.location = 'procesoRecetaMedica';
                     </script>";  
                     exit;
 
@@ -53,7 +51,7 @@ include "conexionpdo.php";
 
 
                 echo "<script>
-                window.location = 'ProcesoCitasMedicos';
+                window.location = 'expedienteMedico';
                 </script>";
                 exit;
 
