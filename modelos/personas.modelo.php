@@ -333,7 +333,6 @@
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script>
-                    alert('Actualización Exitosa');
                     window.location = 'ediusuarios';
                     </script>";
                   }else{
@@ -348,7 +347,6 @@
                         $consulta=$conn->query($sql);
                         if ($consulta>0) {
                           echo "<script>
-                          alert('Actualización Exitosa');
                           window.location = 'ediusuarios';
                           </script>";
                         }

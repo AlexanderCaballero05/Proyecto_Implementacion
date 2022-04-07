@@ -241,14 +241,7 @@ class PDF extends FPDF {
 	   $correo = $fila2;
 	 }
 
-	 $sentencia = $db->prepare("SELECT t.NUMERO_TELEFONO 
-     FROM tbl_telefono t,tbl_persona p ,tbl_estudiante es
-           where t.CODIGO_PERSONA = p.CODIGO_PERSONA and  es.CODIGO_PERSONA = p.CODIGO_PERSONA  and es.CODIGO_ESTUDIANTE = (?) ");
-	 $sentencia->execute(array($estudiante));
-	 $fila2=$sentencia->fetchColumn();
-	 if($fila8>0){
-	   $telefono = $fila8;
-	 }
+	
 
    
 	 $sentencia = $db->prepare("SELECT GRADO_ACTUAL  FROM tbl_estudiante
@@ -319,11 +312,11 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
 $pdf->SetX(20);
-$pdf->SetFillColor(72, 208, 234);
+$pdf->SetFillColor(250, 250, 250);
 $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(38, 10, 'Nombres y Apellidos: ',0,0);
 $pdf->SetFont('Arial','',10);
-$pdf->Cell(90,10,utf8_decode($nombre)  ,0 );
+$pdf->Cell(80,10,utf8_decode($nombre)  ,0 );
 $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(33, 10,'Fecha Nacimiento:' ,0 );
 $pdf->SetFont('Arial','',10);
@@ -343,12 +336,10 @@ $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(33, 10,'Lugar y direccion:' ,0 );
 $pdf->SetFont('Arial','',10);
 $pdf->Cell(60, 10,$lugar ,0,0 );
-$pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(8, 10,'Celular:' ,0 );
-$pdf->Cell(20, 10,$telefono ,0,0 );
+
 
 $pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(50, 10,'Correo electronico:' ,0 );
+$pdf->Cell(40, 10,'Correo electronico:' ,0 );
 $pdf->SetFont('Arial','',10);
 $pdf->Cell(100, 10,$correo ,0,1 );
 $pdf->SetFont('Arial','',10);
@@ -371,22 +362,22 @@ $pdf->SetFont('Arial','',10);
 $pdf->Cell(5, 10,$res,0,1 );
 
 $pdf->Ln(8);
-$pdf->SetX(50);
+$pdf->SetX(20);
 $pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(60, 10,'Pasatiempos',1,0, 'C',1);
-$pdf->Cell(60, 10,'Distractores Escolares',1,0, 'C',1);
-$pdf->Cell(60, 10,'Metas',1,1, 'C',1);
+$pdf->Cell(80, 10,'Pasatiempos',1,0, 'C',1);
+$pdf->Cell(80, 10,'Distractores Escolares',1,0, 'C',1);
+$pdf->Cell(80, 10,'Metas',1,1, 'C',1);
 
 
 
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
-$pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
+$pdf->SetDrawColor(80, 80, 80); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
-$pdf->SetWidths(array(60,60,60)); 
+$pdf->SetWidths(array(80,80,80)); 
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array(ucwords(strtolower(utf8_decode($data[$i]['PASATIEMPOS']))) ,ucwords(strtolower(utf8_decode($data[$i]['DISTRACTORES_ESCOLARES']))) ,ucwords(strtolower(utf8_decode($data[$i]['METAS'])))  ),50); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array(ucwords(strtolower(utf8_decode($data[$i]['PASATIEMPOS']))) ,ucwords(strtolower(utf8_decode($data[$i]['DISTRACTORES_ESCOLARES']))) ,ucwords(strtolower(utf8_decode($data[$i]['METAS'])))  ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 

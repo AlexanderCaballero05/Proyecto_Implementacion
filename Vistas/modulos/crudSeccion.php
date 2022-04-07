@@ -156,7 +156,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5"    autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
