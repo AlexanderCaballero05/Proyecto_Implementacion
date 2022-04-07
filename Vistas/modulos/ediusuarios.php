@@ -89,7 +89,7 @@ include_once "conexion3.php";
                             $var8 = $row['ROLL'];
                             $var13 = $row['CODIGO_ESTADO']; 
                             $var14 = $row['CODIGO_TIPO_ROL']; 
-                            $var15 = $row['CODIGO_USUARIO'];
+                            $var16 = $row['CODIGO_USUARIO'];
                         ?>
                         <tr>
                           <td>
@@ -106,8 +106,9 @@ include_once "conexion3.php";
                                 
                                 <a>
                                 <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
-                                <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2 ?>">
-                                <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                  
+                                <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
+                                <button type='submit'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
                                 
@@ -155,7 +156,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Correo</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
+                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 

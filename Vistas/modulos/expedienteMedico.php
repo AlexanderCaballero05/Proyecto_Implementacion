@@ -253,7 +253,9 @@
                   </div>
 
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
-                  <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                  
+                   
+                  <button onclick="Descargar();"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                 </form>
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
@@ -276,7 +278,7 @@
 
   <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteRol.php','_blank');
+      window.open('Reportes_Prosecar/reporteCitaMedica.php','_blank');
       window.open(this.href,'_self');
     }
   </script> 

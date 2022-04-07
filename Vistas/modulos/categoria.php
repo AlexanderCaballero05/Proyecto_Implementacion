@@ -86,7 +86,7 @@
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label  class="control-label">Primer Nombre:</label> 
                         <div class="form-group">
-                          <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required="">
+                          <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required="">
                           <div class="invalid-feedback">
                              campo obligatorio.
                           </div>  
@@ -200,7 +200,7 @@
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
                         <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="email" maxlength="50"  id="correo" name="correo"  onKeyDown="sinespacio(this);"  required=""  >
+                          <input class="form-control" type="email" maxlength="50"  id="correo" name="correo" autocomplete = "off"  onKeyDown="sinespacio(this);"  required=""  >
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>
@@ -262,7 +262,7 @@
                     <div  class="col-sm-4 mb-2" id="cuarta_fila">
                       <label  class="control-label">Contraseña</label>
                       <div class="input-group mb-3">
-                        <input class="form-control"  minlength="8"  maxlength="<?php echo $max; ?>" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
+                        <input class="form-control"  minlength="8" maxlength="15" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
                         <div class="input-group-append">
                           <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                         </div>
