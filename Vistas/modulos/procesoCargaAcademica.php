@@ -39,7 +39,7 @@
                 <div class="col-md-4 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
-                      <input oninvalid="this.setCustomValidity('Ingrese una hora correcta')" class="form-control" required min="07:00" max= "16:00"  type="time"  name="hora"  required >
+                      <input oninvalid="this.setCustomValidity('Ingrese una hora correcta')" class="form-control" required  type="time"  name="hora"  required >
                         <div class="invalid-feedback">
                           Ingrese una hora correcta
                         </div>
@@ -168,7 +168,7 @@
                   ?>
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
-                    <select style="width: 100%"   class="form-control select2" required name="seccion"   >
+                    <select style="width: 100%"   class="form-control select2" required name="seccion" >
                         <option selected disabled value="" >--Seleccionar Seccion--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {

@@ -23,10 +23,12 @@ if(isset($_POST['tutor'])  ){
         $seccion = ($_POST['seccion']);//valor de numero
         $fecha = date('Y-m-d');
         $user=$_SESSION['vario'];
+        $anio = date("Y");
        try{
-             $query1 = mysqli_query($conn," SELECT CODIGO_TUTORIA, SECCION FROM tbl_carga_academica WHERE 
-             SECCION = '$seccion' AND CODIGO_TUTORIA = '$tutoria'");
-             $fila = mysqli_fetch_array($query1);
+             $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
+             CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?);'");
+             $query1->execute(array($seccion,$tutoria));
+             $fila = $query1->fetchColumn();
              if($fila > 0){
                  echo "<script> 
                  alert('Ya se encuentra registrada la asignatura y sección');
@@ -37,7 +39,7 @@ if(isset($_POST['tutor'])  ){
                  try{
                      //Si la carga tiene los mismos datos de una carga exsitente,
                      $sentencia = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica
-                     WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and SECCION =(?) AND   CODIGO_MODALIDAD = (?) ");
+                     WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and CODIGO_SECCION =(?) AND   CODIGO_MODALIDAD = (?) ");
                      $sentencia->execute(array($tutor,$tutoria,$hora,$fech_inicio,$seccion,$modalidad));
                      $row=$sentencia->fetchColumn();
                      if($row >0){ 
@@ -61,9 +63,9 @@ if(isset($_POST['tutor'])  ){
                             exit;
                             }else{
                                try{
-                                    $insert = " INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `SECCION`, 
-                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`) 
-                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final'); ";
+                                    $insert = " INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`) 
+                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio'); ";
                                     $resul=$conn->query($insert);
                                     if($resul >0){
                                         echo "<script> 
@@ -125,8 +127,8 @@ if(isset($_POST['IDCARGA'])){
         $usuario_modi = $_SESSION['vario'];
         $codigo_carga = ($_POST['IDCARGA']);
         try{
-            $query = mysqli_query($conn," SELECT CODIGO_TUTORIA, SECCION FROM tbl_carga_academica 
-            WHERE SECCION = '$seccion_modi' AND CODIGO_TUTORIA = '$tutoria_modi' and CODIGO_CARGA <> '$codigo_carga' ");
+            $query = mysqli_query($conn," SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica 
+            WHERE CODIGO_SECCION = '$seccion_modi' AND CODIGO_TUTORIA = '$tutoria_modi' and CODIGO_CARGA <> '$codigo_carga' ");
             $fila = mysqli_fetch_array($query);
             if($fila >0){ 
                
@@ -147,23 +149,19 @@ if(isset($_POST['IDCARGA'])){
                 exit;
               }else{
                     try{
-                        
                         $corre = "UPDATE `tbl_carga_academica` SET 
                         CODIGO_TUTORIA = '$tutoria_modi',  
                         HORA = '$hora_modi' , 
                         FECHA_INICIO = '$fecha_inicio_modi',
                         FECHA_FINAL = '$fecha_final_modi' , 
                         CODIGO_MODALIDAD = '$modalidad_modi' ,
-                        SECCION = '$seccion_modi'  ,
+                        CODIGO_SECCION = '$seccion_modi'  ,
                         MODIFICADO_POR = '$usuario_modi' ,
                         FECHA_MODIFICACION = '$fecha_modi' ,
                         CODIGO_PERSONA = '$tutor_modi' ,
                         HORA_FINAL = '$hora_final_modi'
                         WHERE CODIGO_CARGA = '$codigo_carga';";   
                         
-                       /* $daporfa = " CALL Sp_editar_carga('$tutoria_modi','$tutor_modi','$modalidad_modi','$seccion_modi','$fecha_inicio_modi','$fecha_final_modi','$usuario_modi'
-                        '$fecha_modi', '$codigo_carga','$hora_modi'); "; */
-
                         $row=$conn->query($corre);
                         if($row >0){
                             echo "<script>
