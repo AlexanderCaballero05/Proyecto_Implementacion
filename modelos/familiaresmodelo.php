@@ -99,7 +99,7 @@
       }
   }//cierre del if principal
 
-//PARTE PARA ELIMINAR UN ROL
+//PARTE PARA ELIMINAR UN Familiar
 if(isset($_POST['eliminarfami'])){
   if(isset($_POST['eliminar_fami'])){
     $code = ($_POST['eliminarfami']);//asigna a una variable el id del estado a eliminar
@@ -108,7 +108,6 @@ if(isset($_POST['eliminarfami'])){
           mysqli_query($link, "DELETE FROM tbl_familiar WHERE  CODIGO_FAMILIAR = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Dato eliminado!');
             window.location = 'crudfamiliares';
             </script>";
             include_once 'function_bitacora.php';

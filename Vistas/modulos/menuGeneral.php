@@ -625,7 +625,12 @@
                 <p>Expedientes de pacientes</p>
               </a>
             </li>
-
+            <li class="nav-item">
+              <a href="crudconsultashistoricas" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>Expediente Consulta historica </p>
+              </a>
+            </li>
           </ul>
         </li>
          

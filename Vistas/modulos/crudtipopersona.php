@@ -203,7 +203,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="persona_eliminar" id="persona_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la pregunta <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de persona <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

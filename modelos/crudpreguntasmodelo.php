@@ -127,13 +127,12 @@ if(isset($_POST['pregunta_eliminar'])){
     try{
         $relacion_tablas =  $db->prepare("SELECT  u.CODIGO_PREGUNTA_USUARIO, u.CODIGO_PREGUNTAS from  tbl_preguntas_usuarios u, tbl_preguntas p
         where p.CODIGO_PREGUNTAS = u.CODIGO_PREGUNTAS and p.CODIGO_PREGUNTAs = (?);");
-      $relacion_tablas =  $db->prepare("SELECT CODIGO_PREGUNTAS  from  tbl_preguntas where CODIGO_PREGUNTAS = (?);");
       $relacion_tablas->execute(array($codigo));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
         alert('¡No se puede eliminar esta, relacionado con otras tablas!');
-        window.location = 'preguntas';
+        window.location = 'crudpreguntas';
         </script>";
         exit;
       }else{
@@ -142,7 +141,6 @@ if(isset($_POST['pregunta_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_preguntas WHERE  CODIGO_PREGUNTAS = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Pregunta eliminada!');
             window.location = 'crudpreguntas';
             </script>";
             include_once 'function_bitacora.php';

@@ -118,7 +118,6 @@ if(isset($_POST['persona_eliminar'])){
     try{
         $relacion_tablas =  $db->prepare("SELECT  p.CODIGO_TIPO_PERSONA, p.CODIGO_PERSONA from  tbl_persona P, tbl_tipo_persona t
         where t.CODIGO_TIPO_PERSONA = P.CODIGO_TIPO_PERSONA and t.CODIGO_TIPO_PERSONA  = (?);");
-      $relacion_tablas =  $db->prepare("SELECT CODIGO_TIPO_PERSONA  from  tbl_tipo_persona where CODIGO_TIPO_PERSONA = (?);");
       $relacion_tablas->execute(array($codigo));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -133,7 +132,6 @@ if(isset($_POST['persona_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_tipo_persona WHERE CODIGO_TIPO_PERSONA = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Tipo de persona eliminada!');
             window.location = 'crudtipopersona';
             </script>";
             $codigoObjeto=12;
