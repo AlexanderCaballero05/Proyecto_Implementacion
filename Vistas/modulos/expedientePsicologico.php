@@ -44,25 +44,26 @@
           </ul>
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
-                <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-edit mx-1"></i></span>Crear Plan terapeutico</button>
 
                 <form method="POST" >
+                <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info btn mx-1 mb-2"><span><i class="nav-icon fas fa-edit mx-1"></i></span>Crear Plan terapeutico</button>
+
                   </br><strong class="form-check-label" >Datos Personales  Paciente</strong>
                   <hr> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
                          <label for="" class="control-label">Nombre Paciente</label>
                          <?php 
-                           $query = "SELECT p.CODIGO_PERSONA, p.DNI, c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                           as PACIENTE , p.FECHA_NACIMIENTO from tbl_inscripcion_cita c ,tbl_persona p ,tbl_area a
-                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                           AND c.CODIGO_ESTADO = '12' and  c.AREA_CITA = a.CODIGO_AREA  and a.CODIGO_AREA = 3 ";
+                           $query = "SELECT p.CODIGO_PERSONA, p.DNI, c.CODIGO_CITA as CODIGO_cita, con.CODIGO_EXPEDIENTE_PSICO as codigo_consulta, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE , p.FECHA_NACIMIENTO
+                           from tbl_inscripcion_cita c ,tbl_persona p ,tbl_area a, tbl_expediente_psicologico_consulta con
+                                                      where p.CODIGO_PERSONA = c.CODIGO_PERSONA
+                                                      AND c.CODIGO_ESTADO = '12' and  c.AREA_CITA = a.CODIGO_AREA  and a.CODIGO_AREA = 3  ";
                            $resul=$conn->query($query);                
                            ?>  
                               <?php 
                                    if ($resul->num_rows > 0) {
                                    while($row = $resul->fetch_assoc()) { 
-                                    $codigo_cita = $row['CODIGO'];
+                                    $codigo_cita = $row['CODIGO_cita'];
                                     $persona = $row['CODIGO_PERSONA'];
                                     $nombre_pa = $row['PACIENTE'];
                                     $dni = $row['DNI'];
@@ -71,7 +72,7 @@
                           <label for="" class="control-label">Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre_pa;?>">
-                            <input  hidden name="EXPEDIENTE_CITA" value="<?php echo $codigo_cita;?>">
+                            <input  hidden name="EXPEDIENTE_CITA_PSICOLOGICO" value="<?php echo $codigo_cita;?>">
                           </div>
                      </div>
                      <div  class="col-sm-4 mb-3">
@@ -200,7 +201,7 @@
                   </div><!-- fin row-->
                  
 
-                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
+                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
                   <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                 </form>
                 </div><!--fin card body -->

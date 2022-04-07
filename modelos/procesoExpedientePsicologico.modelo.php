@@ -44,3 +44,47 @@
 
 
 ?>
+
+<?php
+//CODIGO PARA ACTUALIZAR EL ESTADO DE INCRIPCION CITA A FINALIZADO  :)
+if(isset($_POST['EXPEDIENTE_CITA_PSICOLOGICO'])){
+    if(isset($_POST['FINALIZAR_EXPEDIENTE_PSICOLOGICO'])){
+        $codigo = ($_POST['EXPEDIENTE_CITA_PSICOLOGICO']);
+        $estado = "13";
+        $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo'";
+        $consulTITA=$conn->query($update);
+        if ($consulTITA >0 ){
+            echo "<script> 
+            window.location = 'ProcesoCitasPsicologicas';
+            </script>";  
+            exit;
+        }else{
+            echo "<script> 
+            window.location = 'ProcesoCitasPsicologicas';
+            </script>";  
+            exit;
+        }
+    }
+}
+?>
+
+
+<?php
+
+if(isset($_POST['Crear_plan_terapeutico'])){
+  $codigo = ($_POST['EXPEDIENTE_CITA_PSICOLOGICO']);
+  $estado = "14";
+        $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo'";
+        $consulTITA=$conn->query($update);
+        if ($consulTITA >0 ){
+            echo "<script> 
+            window.location = 'procesoPlanTerapeutico';
+            </script>";  
+            exit;
+        }
+  
+
+}
+
+
+?>

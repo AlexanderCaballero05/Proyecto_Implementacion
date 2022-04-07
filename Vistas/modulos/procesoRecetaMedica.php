@@ -88,7 +88,7 @@
                 
                  //AND con.FECHA_CREACION = CURDATE()
                     //QUERY PAR EL CODIGO DE CONSULTA
-                    $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, concat(pe.DNI, ' ', pe.PRIMER_NOMBRE, ' ', pe.PRIMER_APELLIDO) as PACIENTE
+                    $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
                     FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
                     WHERE con.CODIGO_CITA = i.CODIGO_CITA
                     AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA

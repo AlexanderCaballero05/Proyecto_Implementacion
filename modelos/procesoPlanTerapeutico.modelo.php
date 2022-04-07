@@ -7,42 +7,42 @@
 ?>
 
 <?php
-    if(isset($_POST['codigo_consulta_paciente'])){
+    if(isset($_POST['codigo_consulta'])){
         
             
-            $codigo_persona = ($_POST['codigo_consulta_paciente']);
-            $actividad = ($_POST['actividad']);
-            $tecnica = ($_POST['tecnica']);
-            $materiales = ($_POST['materiales']);
-            $tareas = ($_POST['tareas']);
-            $resultados = ($_POST['resultados']);
+            $codigo_consulta = ($_POST['codigo_consulta']);
+            $codigo_cita = ($_POST['codigo_cita']);
+            $actividad = ($_POST['Actividades']);
+            $tecnica = ($_POST['tecnicas']);
+            $materiales = ($_POST['Materiales']);
+            $tareas = ($_POST['Tareas']);
+            $resultados = ($_POST['Resultados']); 
          
-            $consulta_expediente = $db->prepare("SELECT CODIGO_PERSONA FROM TBL_PLAN_TERAPEUTICO WHERE CODIGO_PERSONA = (?);");
-            $consulta_expediente->execute(array($codigo_persona));
-            $row=$consulta_expediente->fetchColumn();
-          
-        if($row>0){
-            echo "<script>
-                alert('Expediente ya se encuentra registrado');
-                window.location = 'procesoPlanTerapeutico'
-             </script>";
-
-        }else{ 
-            
 
 
-            $insertar_expediente ="INSERT INTO TBL_PLAN_TERAPEUTICO (CODIGO_PERSONA, ACTIVIDAD , TECNICA , MATERIALES, TAREAS, RESULTADOS) 
-                                                                VALUES ('$codigo_persona', '$actividad','$tecnica', '$materiales','$resultados')";
-            $consulta=$conn->query($insertar_expediente);
-            $codigo= mysqli_insert_id($conn);
+            $insertar_plan ="INSERT INTO tbl_plan_terapeutico (CODIGO_CONSULTA, ACTIVIDAD , TECNICA , MATERIALES, TAREAS, RESULTADOS) 
+                                                                VALUES ('$codigo_consulta', '$actividad','$tecnica', '$materiales', '$tareas','$resultados')";
+           
+            $consulta=$conn->query($insertar_plan);
 
-            
-    
+                        if($consulta >0){
+
+                            $cambiar_estado = "UPDATE tbl_inscripcion_cita
+                            SET CODIGO_ESTADO = '13'
+                            WHERE CODIGO_CITA = ' $codigo_cita'";
+
+                            $consulta_estado =$conn->query($cambiar_estado);
+
+                            echo "<script>
+                            window.location = 'ProcesoCitasPsicologicas'
+                            </script>";
+
+                        }else{
                         echo "<script>
                         window.location = 'procesoPlanTerapeutico'
-                     </script>";
-
-        }
+                        </script>";
+                        }
+        
 
             
 
