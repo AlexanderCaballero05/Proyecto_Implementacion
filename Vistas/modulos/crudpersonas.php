@@ -78,7 +78,7 @@ include_once "conexion3.php";
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Personas</strong></h1>
+                            <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
                         </div>
 
                         <!-- form start -->
@@ -147,7 +147,7 @@ include_once "conexion3.php";
 
                                                         <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                                             <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO"
-                                                                type='button' class="btn btn-danger"
+                                                                type='button' class=" form-control btn btn-danger"
                                                                 data-dismiss="modal"><i
                                                                     class="nav-icon fas fa-trash"></i>
                                                             </button>
@@ -155,10 +155,18 @@ include_once "conexion3.php";
                                                         <a href="#EDITARPERSONA<?php echo $var1; ?>"
                                                             data-toggle="modal">
                                                             <button type='button' style="color:white;"
-                                                                class="btn btn-warning"><span>
+                                                                class=" form-control btn btn-warning"><span>
                                                                     <i
                                                                         class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                         </a>
+                                                         <a>
+                                                        <form method="post"  action="Reportes_Prosecar/reportePersonaIndividual.php" target="_blank"> 
+                                                        <input type="hidden" name="persona_enviar" value="<?php echo $var1 ?>">
+                                                        <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                                        </form>
+                                                        </a>
+
+
                                                     </div>
                                                 </div><!-- final del text-center -->
                                             </td>

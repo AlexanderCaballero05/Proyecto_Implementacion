@@ -75,3 +75,28 @@
 
 
 ?>
+
+
+<?php
+//CODIGO PARA ACTUALIZAR EL ESTADO DE INCRIPCION CITA A FINALIZADO  :)
+if(isset($_POST['EXPEDIENTE_CITA'])){
+    if(isset($_POST['FINALIZAR_EXPEDIENTE'])){
+        $codigo = ($_POST['EXPEDIENTE_CITA']);
+        $estado = "13";
+        $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo'";
+        $consulTITA=$conn->query($update);
+        if ($consulTITA >0 ){
+            echo "<script> 
+            window.location = 'ProcesoCitasMedicos';
+            </script>";  
+            exit;
+        }else{
+            echo "<script> 
+            alert('Ocurrio algun error,comuniquese con el admin :)');
+            window.location = 'ProcesoCitasMedicos';
+            </script>";  
+            exit;
+        }
+    }
+}
+?>
