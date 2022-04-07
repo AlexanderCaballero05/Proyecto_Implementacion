@@ -7,8 +7,8 @@
 <?php
 //AGREGAR NUEVO REGISTRO A LA TABLA DE CONSULTA
 if(isset($_POST['sintomas2'])){
-  session_start();
-  $usuario = $_SESSION['vario'];
+ 
+  
   $fechaActual = date('Y-m-d');
   if(isset($_POST['Guardar_Consulta2'])){
     try{
@@ -20,8 +20,8 @@ if(isset($_POST['sintomas2'])){
       $codigo_pre = ($_POST['codigopre']);
       $codigo_cita = ($_POST['codigocita2']);
       //
-      $inser ="INSERT INTO tbl_consulta_medica (`CODIGO_PRECLINICA`,`CODIGO_CITA`,`SINTOMAS`, `DIAGNOSTICO_INGRESO`, `EVOLUCION`, `DIAGNOSTICO_EGRESO`,`CREADO_POR_USUARIO`, `FECHA_CREACION`)
-       VALUES ('$codigo_pre','$codigo_cita','$sintomas', '$diagnostico1', '$evolucion', ' $diagnostico2', '$usuario', '$fechaActual') ";
+      $inser ="INSERT INTO tbl_consulta_medica (`CODIGO_PRECLINICA`,`CODIGO_CITA`,`SINTOMAS`, `DIAGNOSTICO_INGRESO`, `EVOLUCION`, `DIAGNOSTICO_EGRESO`, `FECHA_CREACION`)
+       VALUES ('$codigo_pre','$codigo_cita','$sintomas', '$diagnostico1', '$evolucion', ' $diagnostico2', '$fechaActual') ";
       $consulta=$conn->query($inser);
       $update = "UPDATE tbl_inscripcion_cita set CODIGO_ESTADO = '$estado'  where CODIGO_CITA = '$codigo_cita'";
       $consult=$conn->query($update);
@@ -31,14 +31,12 @@ if(isset($_POST['sintomas2'])){
       if ($consulta >0  && $consult >0 ){
         $conn->commit();
         echo "<script> 
-        alert('Consulta Médica registrada exitosamente!');
         window.location = 'procesoRecetaMedica';
         </script>";  
         exit;
       
       }else{  
         echo "<script> 
-        alert('Ocurrio algun error,comuniquese con el administrador');
         window.location = 'procesoConsulta';
         </script>";  
         exit;

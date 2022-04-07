@@ -33,7 +33,8 @@ include_once 'conexionpdo.php';
   
   <section class="content">
     <div class="container-fluid">
-  <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Pregunta</button>
+  <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"   style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Pregunta</button>
+  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
 
       <div class="row">
         <div class="col-md-12">
@@ -45,7 +46,7 @@ include_once 'conexionpdo.php';
             <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-hover">
+                  <table id="tabla_preguntas" class="table table-bordered table-striped">
                   <thead class="text-center">
                         <tr>
                           <th>Acción</th>
@@ -364,4 +365,33 @@ $( function() {
 })()
 </script>
 
-<!--♠DianaRut *No me quiten los creditos :( -->
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#tabla_preguntas').DataTable({
+
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar personas:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
+

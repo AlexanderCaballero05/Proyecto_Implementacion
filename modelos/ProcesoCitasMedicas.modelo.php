@@ -35,6 +35,8 @@
             $enviar_cita_medico = "UPDATE tbl_inscripcion_cita
             SET CODIGO_ESTADO = '10'
             WHERE CODIGO_CITA = '$codigo_cita_medica'";
+
+          $consulta_cita_medico =$conn->query($enviar_cita_medico);
             
           echo "<script>
                 window.location = 'procesoExpedienteMedico'

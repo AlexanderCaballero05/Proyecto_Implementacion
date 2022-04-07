@@ -84,7 +84,7 @@
                       <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Estado civil</label> 
                           <div class="form-group">
-                             <input class="form-control" type="text" maxlength="15" minlength="5" name="CIVIL" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" placeholder="Ejem: Soltero" onkeypress="return soloLetras(event);" placeholder="Ej: 1" required="" >
+                             <input class="form-control" type="text" maxlength="15" minlength="5" name="CIVIL" onkeyup="mayus(this);" placeholder="Ejem: Soltero" onkeypress="return soloLetras(event);" placeholder="Ej: 1" required="" >
                               <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -95,7 +95,7 @@
                         <div class="col-md-4"> <!--INICIO INDICE ACADEMICO-->
                           <label for="identidad" class="control-label">Nivel educativo</label> 
                           <div class="form-group">
-                            <input class="form-control" type="text" maxlength="15" minlength="5" name="NIVEL" onKeyDown="sinespacio(this);"  placeholder="Ejem: Primaria" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" required="" >
+                            <input class="form-control" type="text" maxlength="15" minlength="5" name="NIVEL" onkeyup="mayus(this);" placeholder="Ejem: Primaria" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" required="" >
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
