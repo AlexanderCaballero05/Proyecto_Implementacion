@@ -84,7 +84,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                         <?php
                                     
-                                        $query = "SELECT i.CODIGO_CITA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                                        $query = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
                                         FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
                                                                                 WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                                                                 AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
@@ -101,6 +101,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                 $var3 = $row['FECHA_CITA'];
                                                 $var4 = $row['HORARIO'];
                                                 $var5 = $row['nombre_estado'];
+                                                $var6 = $row['CODIGO_PERSONA'];
                                                
                                         ?>
                                                 <tr>
@@ -214,6 +215,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <input type="text" value="<?php echo $var1; ?>" 
                                                                         hidden class="form-control"
                                                                         name="codigo_enviar_cita" id="cod_edit_cita" >
+
+                                                                        <input type="text" value="<?php echo $var6; ?>" 
+                                                                        hidden class="form-control"
+                                                                        name="codigo_persona" id="codigo_persona" >
 
                                                                         
 
