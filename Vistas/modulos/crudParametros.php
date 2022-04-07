@@ -12,7 +12,8 @@ include_once "conexion3.php";
       ?>
       
 <head>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
 <div class="content-wrapper">
@@ -21,6 +22,24 @@ include_once "conexion3.php";
     </div><!-- /.container-fluid -->
   </div>
   
+  <section class="content">
+    <div class="container-fluid">
+        <div class="card">
+          <div class="card-header" style="background-color:#B3F2FF;">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link active"  style="color:#000000;" href="crudParametros">Parámetros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="parametrosusuario">Parámetros usuario</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+          </br> 
+<body oncopy="return false" onpaste="return false">
+  
+
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -51,18 +70,22 @@ include_once "conexion3.php";
                     {
                     ?>      
 
-                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3">Agregar Parametro</button>
+                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parámetro</button>
 
 
                    <?php
                     }
                     ?>
+
+                  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
+
+
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">PARÁMETROS</strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_parametros" class="table table-bordered table-striped">
@@ -72,26 +95,20 @@ include_once "conexion3.php";
                           <th>ID</th>
                           <th>Parametro</th>
                           <th>Valor</th>
-                          <th>Creado por</th>
-                          <th>Fecha de creación</th>
-                          <th>Modificado por</th>
-                          <th>Fecha de Modificación</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PARAMETRO, PARAMETRO, VALOR, CREADO_POR_USUARIO, FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION
-                                   FROM TBL_PARAMETROS;";
+                        $query = "SELECT p.CODIGO_PARAMETRO, p.PARAMETRO, p.VALOR
+                        FROM TBL_PARAMETROS p";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_PARAMETRO'];
                             $var2 = $row['PARAMETRO'];
                             $var3 = $row['VALOR'];
-                            $var4 = $row['CREADO_POR_USUARIO'];
-                            $var5 = $row['FECHA_CREACION'];
-                            $var6 = $row['MODIFICADO_POR'];
-                            $var7 = $row['FECHA_MODIFICACION'];
+                            
+                           
 
                             ?>
 
@@ -178,16 +195,12 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARAMETROS" method="POST">
+                                <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parámetros</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -201,12 +214,17 @@ include_once "conexion3.php";
                                           <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
                                         </div>
                                       </div>
+                                     
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Valor</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
+                                          <div class="invalid-feedback">
+                                           Llene este campo.
+                                          </div>
                                         </div>
                                       </div> 
+                                      
                                       </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
@@ -249,7 +267,7 @@ include_once "conexion3.php";
                   </table>
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
-            </form>
+            
           </div><!-- fINAL DEL card PRIMARY -->
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
@@ -260,7 +278,7 @@ include_once "conexion3.php";
   <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Parámetro</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -270,13 +288,21 @@ include_once "conexion3.php";
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
+                                    <div class="invalid-feedback">
+                                     Llene este campo.
+                                    </div>
                                 </div>
                             </div>
+                            
+                            
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtvalor">Valor</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param"></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"    autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param" required></textarea>
+                                    <div class="invalid-feedback">
+                                    Llene este campo.
+                                   </div>
                                 </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -294,6 +320,12 @@ include_once "conexion3.php";
 
 
 <!-- Modal -->
+                                </div><!--fin del modal contener -->
+              </div><!--fin del modal dialog -->
+          </div><!--fin del modal de eliminar -->          
+        </div><!--fIN DEL CARD GENERAL -->
+   </div><!-- CIerre del container fluid--> 
+  </section>
 
 
 
@@ -307,50 +339,11 @@ include_once "conexion3.php";
   </aside>
 </div><!-- ./wrapper -->
 
+</body><!-- Final del body -->
 
 
 
 
-
- 
-
-
-
-
- 
- 
-
-
-
-<script type="text/javascript"> 
-$( function() {
-    $("#ESTADOUSUARIO").change( function() {
-        if ($(this).val() === "4") {
-          document.getElementById('CONUSUARIO').disable = true;
-        
-        } else{
-          document.getElementById('CONUSUARIO').disable = false;
-         
-        }
-    });
- }); //este codigo si me costo 
-
-</script>
-
-
-
-<script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-  $( function() {
-    $("#cbx_persona").change( function() {
-        if ($(this).val() === "2") {
-           document.getElementById("c").style.display="block";
-        } else {
-            document.getElementById("c").style.display="none";
-        }
-    });
-  });
-</script>
 
                                   
 <!-- funciones del sistema -->
@@ -420,4 +413,292 @@ $( function() {
   };
 </script>
 
-<!--♠DianaRut *No me quiten los creditos :( -->
+
+<!-- Función para poder generar el reporte de la tabla -->
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteParametros.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
+
+
+<!-- función para no dejar espacios en blanco -->
+<script>
+
+$(document).ready(function() {
+    $('.hb').select2();
+});
+
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
+</script>
+
+
+<!-- Función para dejar la tabla en español -->
+<script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+$(document).ready( function () {
+    $('#tabla_parametros').DataTable({
+      language:espanol
+    });
+} );
+
+
+let = espanol = {
+    "processing": "Procesando...",
+    "lengthMenu": "Mostrar _MENU_ registros",
+    "zeroRecords": "No se encontraron resultados",
+    "emptyTable": "Ningún dato disponible en esta tabla",
+    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "search": "Buscar:",
+    "infoThousands": ",",
+    "loadingRecords": "Cargando...",
+    "paginate": {
+        "first": "Primero",
+        "last": "Último",
+        "next": "Siguiente",
+        "previous": "Anterior"
+    },
+    "aria": {
+        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sortDescending": ": Activar para ordenar la columna de manera descendente"
+    },
+    "buttons": {
+        "copy": "Copiar",
+        "colvis": "Visibilidad",
+        "collection": "Colección",
+        "colvisRestore": "Restaurar visibilidad",
+        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
+        "copySuccess": {
+            "1": "Copiada 1 fila al portapapeles",
+            "_": "Copiadas %ds fila al portapapeles"
+        },
+        "copyTitle": "Copiar al portapapeles",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Mostrar todas las filas",
+            "_": "Mostrar %d filas"
+        },
+        "pdf": "PDF",
+        "print": "Imprimir",
+        "renameState": "Cambiar nombre",
+        "updateState": "Actualizar",
+        "createState": "Crear Estado",
+        "removeAllStates": "Remover Estados",
+        "removeState": "Remover",
+        "savedStates": "Estados Guardados",
+        "stateRestore": "Estado %d"
+    },
+    "autoFill": {
+        "cancel": "Cancelar",
+        "fill": "Rellene todas las celdas con <i>%d<\/i>",
+        "fillHorizontal": "Rellenar celdas horizontalmente",
+        "fillVertical": "Rellenar celdas verticalmentemente"
+    },
+    "decimal": ",",
+    "searchBuilder": {
+        "add": "Añadir condición",
+        "button": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "clearAll": "Borrar todo",
+        "condition": "Condición",
+        "conditions": {
+            "date": {
+                "after": "Despues",
+                "before": "Antes",
+                "between": "Entre",
+                "empty": "Vacío",
+                "equals": "Igual a",
+                "notBetween": "No entre",
+                "notEmpty": "No Vacio",
+                "not": "Diferente de"
+            },
+            "number": {
+                "between": "Entre",
+                "empty": "Vacio",
+                "equals": "Igual a",
+                "gt": "Mayor a",
+                "gte": "Mayor o igual a",
+                "lt": "Menor que",
+                "lte": "Menor o igual que",
+                "notBetween": "No entre",
+                "notEmpty": "No vacío",
+                "not": "Diferente de"
+            },
+            "string": {
+                "contains": "Contiene",
+                "empty": "Vacío",
+                "endsWith": "Termina en",
+                "equals": "Igual a",
+                "notEmpty": "No Vacio",
+                "startsWith": "Empieza con",
+                "not": "Diferente de",
+                "notContains": "No Contiene",
+                "notStarts": "No empieza con",
+                "notEnds": "No termina con"
+            },
+            "array": {
+                "not": "Diferente de",
+                "equals": "Igual",
+                "empty": "Vacío",
+                "contains": "Contiene",
+                "notEmpty": "No Vacío",
+                "without": "Sin"
+            }
+        },
+        "data": "Data",
+        "deleteTitle": "Eliminar regla de filtrado",
+        "leftTitle": "Criterios anulados",
+        "logicAnd": "Y",
+        "logicOr": "O",
+        "rightTitle": "Criterios de sangría",
+        "title": {
+            "0": "Constructor de búsqueda",
+            "_": "Constructor de búsqueda (%d)"
+        },
+        "value": "Valor"
+    },
+    "searchPanes": {
+        "clearMessage": "Borrar todo",
+        "collapse": {
+            "0": "Paneles de búsqueda",
+            "_": "Paneles de búsqueda (%d)"
+        },
+        "count": "{total}",
+        "countFiltered": "{shown} ({total})",
+        "emptyPanes": "Sin paneles de búsqueda",
+        "loadMessage": "Cargando paneles de búsqueda",
+        "title": "Filtros Activos - %d",
+        "showMessage": "Mostrar Todo",
+        "collapseMessage": "Colapsar Todo"
+    },
+    "select": {
+        "cells": {
+            "1": "1 celda seleccionada",
+            "_": "%d celdas seleccionadas"
+        },
+        "columns": {
+            "1": "1 columna seleccionada",
+            "_": "%d columnas seleccionadas"
+        },
+        "rows": {
+            "1": "1 fila seleccionada",
+            "_": "%d filas seleccionadas"
+        }
+    },
+    "thousands": ".",
+    "datetime": {
+        "previous": "Anterior",
+        "next": "Proximo",
+        "hours": "Horas",
+        "minutes": "Minutos",
+        "seconds": "Segundos",
+        "unknown": "-",
+        "amPm": [
+            "AM",
+            "PM"
+        ],
+        "months": {
+            "0": "Enero",
+            "1": "Febrero",
+            "10": "Noviembre",
+            "11": "Diciembre",
+            "2": "Marzo",
+            "3": "Abril",
+            "4": "Mayo",
+            "5": "Junio",
+            "6": "Julio",
+            "7": "Agosto",
+            "8": "Septiembre",
+            "9": "Octubre"
+        },
+        "weekdays": [
+            "Dom",
+            "Lun",
+            "Mar",
+            "Mie",
+            "Jue",
+            "Vie",
+            "Sab"
+        ]
+    },
+    "editor": {
+        "close": "Cerrar",
+        "create": {
+            "button": "Nuevo",
+            "title": "Crear Nuevo Registro",
+            "submit": "Crear"
+        },
+        "edit": {
+            "button": "Editar",
+            "title": "Editar Registro",
+            "submit": "Actualizar"
+        },
+        "remove": {
+            "button": "Eliminar",
+            "title": "Eliminar Registro",
+            "submit": "Eliminar",
+            "confirm": {
+                "_": "¿Está seguro que desea eliminar %d filas?",
+                "1": "¿Está seguro que desea eliminar 1 fila?"
+            }
+        },
+        "error": {
+            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
+        },
+        "multi": {
+            "title": "Múltiples Valores",
+            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
+            "restore": "Deshacer Cambios",
+            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
+        }
+    },
+    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+    "stateRestore": {
+        "creationModal": {
+            "button": "Crear",
+            "name": "Nombre:",
+            "order": "Clasificación",
+            "paging": "Paginación",
+            "search": "Busqueda",
+            "select": "Seleccionar",
+            "columns": {
+                "search": "Búsqueda de Columna",
+                "visible": "Visibilidad de Columna"
+            },
+            "title": "Crear Nuevo Estado",
+            "toggleLabel": "Incluir:"
+        },
+        "emptyError": "El nombre no puede estar vacio",
+        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
+        "removeError": "Error al eliminar el registro",
+        "removeJoiner": "y",
+        "removeSubmit": "Eliminar",
+        "renameButton": "Cambiar Nombre",
+        "renameLabel": "Nuevo nombre para %s",
+        "duplicateError": "Ya existe un Estado con este nombre.",
+        "emptyStates": "No hay Estados guardados",
+        "removeTitle": "Remover Estado",
+        "renameTitle": "Cambiar Nombre Estado"
+    }
+} 
+
+</script>
