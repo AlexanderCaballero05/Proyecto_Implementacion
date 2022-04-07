@@ -41,12 +41,11 @@ if(isset($_POST['PERUSUARIO'])){
                     }else{
                           try{
 
-                              $sql= "INSERT INTO tbl_permisos (CODIGO_TIPO_ROL, CODIGO_OBJETO, INSERTAR, ELIMINAR, ACTUALIZAR, MOSTRAR, CREADO_POR, FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION)
-                                                       VALUES ('$perusuario','$modusuario','$insertar','$eliminar','$actualizar','$mostrar','$usuario','$fechaActual','','');";
+                              $sql= "INSERT INTO tbl_permisos (CODIGO_TIPO_ROL, CODIGO_OBJETO, INSERTAR, ELIMINAR, ACTUALIZAR, MOSTRAR,  FECHA_CREACION, MODIFICADO_POR, FECHA_MODIFICACION)
+                                                       VALUES ('$perusuario','$modusuario','$insertar','$eliminar','$actualizar','$mostrar','$fechaActual','','');";
                               $consulta=$conn->query($sql); 
                               if ($consulta>0) {
                                  echo "<script>
-                                alert('Registro Exitoso');
                                 window.location = 'crudPermisos';
                                  </script>";
                                  }else{
@@ -133,7 +132,7 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
 
                       if ($consulta>0) {
                         echo "<script>
-                       alert('Actuazalizacion Exitosa');
+                       
                        window.location = 'crudPermisos';
                         </script>";
                         }else{

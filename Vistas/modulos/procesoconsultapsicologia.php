@@ -30,13 +30,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class=" nav-link" style="color:#000000;" href="#">Citas Psicologicas</a>
             </li>
             <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
+            <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesoPlanTerapeutico">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
             </li>
           </ul>
         </div>

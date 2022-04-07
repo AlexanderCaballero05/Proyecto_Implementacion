@@ -20,7 +20,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <a href="procesoExpedientePsicologico" >
+        <a href="ProcesoCitasPsicologicas" >
         <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Expediente</button>
         </a>
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>

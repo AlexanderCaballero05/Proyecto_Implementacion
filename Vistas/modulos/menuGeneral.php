@@ -18,7 +18,7 @@
                 <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="perfilUsuario" class="d-block"><?php $usuario =$_SESSION['vario']; echo $usuario; ?></a>
+                <a href="perfilUsuario" class="d-block"><?php $usuario=$_SESSION['vario']; echo $usuario; ?></a>
             </div>
         </div>
       
@@ -432,9 +432,6 @@
                     {
                     ?> 
 
-
-
-
          <!-- Menu de AREA MEDICA -->
          <li class="nav-item">
           <a href="#" class="nav-link">
@@ -444,7 +441,6 @@
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-
           <ul class="nav nav-treeview">
            <li class="nav-item">
              <a href="ProcesoCitasMedicos"class="nav-link">
@@ -452,9 +448,6 @@
                 <p>Proceso consultas</p>
              </a>
            </li>
-
-           
-
             <li class="nav-item">
               <a href="expedienteMedico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -470,13 +463,13 @@
 
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class=" nav-icon fas fa-briefcase-medical "></i>
+            <i class="nav-icon fas fa-briefcase-medical"></i>
             <p>
               Mantenimiento medico
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
-
+          <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -491,12 +484,6 @@
             </li>
             <li class="nav-item">
 
-              <a href="crudrecetamedica" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>Receta Medica</p>
-              </a>
-            </li>
-
             <li class="nav-item">
               <a href="crudmedicamento" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -509,7 +496,7 @@
                 <p>Examenes Medicos</p>
               </a>
             </li>
-
+              <li>
               <a href="crudTranstornos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>mantenimiento transtornos</p>
@@ -525,7 +512,7 @@
             </li>
           </ul>
         </li>
-         
+                   
 
         <?php
           }
@@ -577,22 +564,16 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="crudPruebapsicometrica" class="nav-link">
+              <a href="crudconsultashistoricas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Pruebas Psicométricas</p>
+                <p>Consultas historicas </p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="crudExpedientePsicoUnico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Expedientes de pacientes</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="crudconsultashistoricas" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>Expediente Consulta historica </p>
+                <p>Expediente Unicos </p>
               </a>
             </li>
           </ul>
