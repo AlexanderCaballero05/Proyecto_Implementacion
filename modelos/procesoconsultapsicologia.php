@@ -3,6 +3,54 @@
   include_once 'conexion.php';
   include_once 'conexion2.php';
 ?>
+
+<?php
+    if(isset($_POST['codigo_cita_psicologica'])){
+        if(isset($_POST['enviar_cita_psicologica'])){ 
+        $codigo_cita_psicologica = ($_POST['codigo_cita_psicologica']);
+        //$estado_cita_medica = ($_POST['estado_cita_medica']);
+        $codigo_persona = ($_POST['codigo_persona']);
+
+            $consulta_expediente = $db->prepare("SELECT CODIGO_PERSONA FROM TBL_EXPEDIENTE_PSICOLOGICO_UNICO WHERE CODIGO_PERSONA = (?);");
+            $consulta_expediente->execute(array($codigo_persona));
+            $row=$consulta_expediente->fetchColumn();
+
+            if($row>0){
+              $enviar_cita_psicologica = "UPDATE tbl_inscripcion_cita
+                         SET CODIGO_ESTADO = '11'
+                         WHERE CODIGO_CITA = '$codigo_cita_psicologica'";
+
+               $consulta_cita_psicologica =$conn->query($enviar_cita_psicologica);
+
+               echo "<script> 
+            window.location = 'procesoconsultapsicologia';
+            </script>";
+  
+          }else{
+
+            $enviar_cita_psicologica = "UPDATE tbl_inscripcion_cita
+                         SET CODIGO_ESTADO = '11'
+                         WHERE CODIGO_CITA = '$codigo_cita_psicologica'";
+
+               $consulta_cita_psicologica =$conn->query($enviar_cita_psicologica);
+               
+            echo "<script>
+                  window.location = 'procesoExpedientePsicologico'
+               </script>";
+
+          }
+
+
+        
+
+        
+          
+        }
+
+
+    }
+?>
+
 <?php
 //agregar  
  if (isset ($_POST['sintomas3'] )){

@@ -3,7 +3,7 @@
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=2;
+ $codigoObjeto=28;
  $accion='Ingreso a la tabla de roles';
  $descripcion= 'Usuario se autentifico ';
  bitacora($codigoObjeto, $accion,$descripcion);
@@ -12,6 +12,7 @@
 
 <head>
 </head>
+<body oncopy="return false" onpaste="return false"></body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -19,6 +20,11 @@
   </div>
   <section class="content">
     <div class="container-fluid">
+    <section class="content-header text-xl-center mb-3 btn-light">
+        <h1>
+            <h4>REGISTRAR ALERGIAS</h4>
+        </h1>     
+    </section>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -31,26 +37,24 @@
           if($row > 0){
            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-           $evaluar_permiso->execute(array($usuariomo, '2'));
+           $evaluar_permiso->execute(array($usuariomo, '28'));
            $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
            }
-          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->   
-          <button  data-toggle="modal"  href="#AGREGAR_ALERGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Alergia</button>       
+          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->       
           <?php
-          
           if($permiso_registrar == 'SI'){
           ?>
-          
-          
+           
           <?php
            }
           ?>
-          
+          <button  data-toggle="modal"  href="#AGREGAR_ALERGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Alergia</button>
+          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>  
           <!-- Inicios del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información de los roles</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -59,10 +63,10 @@
                   <table id="tabla_roles" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th>
-                          <th class="text-center">CODIGO ALERGIA</th>
-                          <th class="text-center">NOMBRE ALERGIA</th>
-                          <th class="text-center">DESCRIPCION</th>
+                          <th class="text-center">Acción</th>
+                          <th class="text-center">Código Alergia</th>
+                          <th class="text-center">Nombre Alergia</th>
+                          <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -90,7 +94,7 @@
                                 if($row > 0){
                                   $usuariomo = $row;
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '2'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '28'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
@@ -98,13 +102,14 @@
                                <?php
                                  if($permiso_eliminar == 'SI'){
                                ?>                            
-                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR" name="ELIMINAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
-                               </a>
+                                
                                <?php
                                 }
                                ?><!--Fin del boton de eliminar -->
+                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINAR" name="ELIMINAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                               </button>
+                               </a>
                               <!--Codigo para asignar permiso del boton de editar -->
                               <?php
                                $usuario=$_SESSION['vario'];
@@ -115,7 +120,7 @@
                                if($row > 0){
                                   $usuariomo = $row;
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '28'));
                                   $row2=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row2; 
                                }
@@ -124,12 +129,13 @@
                                 if($permiso_actualizar == 'SI')
                                 {
                               ?>
-                                <a href="#EDITAR_ALERGIA<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                </a>
+                                
                               <?php
                                 }
                               ?>
+                              <a href="#EDITAR_ALERGIA<?php echo $var1; ?>" data-toggle="modal">
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -151,7 +157,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Alergia</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" >
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -222,7 +228,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Alergia</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="6"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" required="">
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="6"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" required="">
                                      <div class="invalid-feedback">
                                        campo obligatorio.
                                     </div>
@@ -249,6 +255,12 @@
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
    <!--Elaborado por Diana Rut y modificado por ella :v -->
   
+   <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteAlergia.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script> 
 
 <script type="text/javascript"> 
   $(document).ready( function () {
@@ -264,7 +276,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Rol:",
+        "search": "Buscar Alergia:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

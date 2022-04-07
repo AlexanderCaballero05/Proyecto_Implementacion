@@ -7,23 +7,10 @@
  $descripcion='Aqui se visualiza los familiares que se han registrado';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
-<?php 
-$fecha_actual = date("Y-m-d");
-  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
-  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
 
-?>
 
-<?php 
-if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
-  $_SESSION["bdesde"] = $_POST["bdesde"];
-  $_SESSION["bhasta"] = $_POST["bhasta"];
 
-}
-?>
-<head>
 
-</head>
 <body oncopy="return false" onpaste="return false">
  
 <div class="content-wrapper">
@@ -68,14 +55,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
           
   <section class="content">
     <div class="container-fluid">
+    <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>MANTENIMIENTO FAMILIARES</h4>
+          </h1>     
+      </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#"> Ver Familiares </a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="procesoRegistrarFamiliares"> Registrar Familiar </a>
+                <a class="nav-link"  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
               </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
@@ -83,19 +75,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="procesofamiliares" >
-                    <div class="row">
-                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-                        <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
-                        </div>
-                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-                        <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
-                        </div>
-                        <button type="submit" class="btn btn-primary"  name="filtrarfamiliar" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
-                   </div><!--fin de row -->
-
+                  
 
 
           <div class="card-body">
@@ -129,7 +109,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
               
                 <a href="procesoRegistrarFamiliares">
 
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Registrar Familiar</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Familiar</button>
                 </a>
                 <?php 
                       }

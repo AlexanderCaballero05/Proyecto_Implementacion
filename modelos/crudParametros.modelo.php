@@ -14,7 +14,7 @@
 
 //AGREGAR/REGISTRAR UN PARÁMETRO
     if(isset($_POST['parametro'])){
-       
+        //session_start();
         $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
        try{
           if(isset($_POST['agregar_param'])){
@@ -33,11 +33,11 @@
                   exit;
                   }else{
                     try{
-                      $query_param = " INSERT INTO `tbl_parametros`( `PARAMETRO`, `VALOR`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$nombre_param','$valor','$usuario','$fechaActual' ); ";
+                      $query_param = " INSERT INTO `tbl_parametros`( `PARAMETRO`,  `VALOR`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$nombre_param','$valor','$usuario','$fechaActual' ); ";
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
-                        alert('Parámetro registrado correctamente');
+                       
                         window.location = 'crudParametros';
                         </script>";
                         
@@ -50,7 +50,7 @@
 
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        
                         window.location = 'crudParametros';
                         </script>";
                         
@@ -81,7 +81,7 @@
 
   //EDITAR UN PARÁMETRO 
   if(isset($_POST['id_param'])){
-
+    //session_start();
     $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
 
     if(isset($_POST['Edit_parametro'])){
@@ -102,7 +102,7 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Parámetro modificado exitosamente!');
+              
               window.location = 'crudParametros';
               </script>";
               
@@ -113,7 +113,7 @@
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar el parámetro!');
+              
               window.location = 'crudParametros';
               </script>";
 
@@ -133,7 +133,7 @@
 
 //ELIMINAR UN PARÁMETRO 
 if(isset($_POST['param_eliminar'])){
-
+    //session_start();
     $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
 
   if(isset($_POST['ELIMINARPARAM'])){
@@ -162,7 +162,7 @@ if(isset($_POST['param_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_parametros WHERE  CODIGO_PARAMETRO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Parámetro eliminado!');
+            
             window.location = 'crudParametros';
             </script>";
 
@@ -174,7 +174,7 @@ if(isset($_POST['param_eliminar'])){
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar el parámetro!');
+           
             window.location = 'crudParametros';
             </script>";
             exit;

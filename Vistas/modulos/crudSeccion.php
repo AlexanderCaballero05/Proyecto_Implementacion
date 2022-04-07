@@ -3,7 +3,7 @@
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=33;
+ $codigoObjeto=22;
  $accion='Ingreso a la tabla de roles';
  $descripcion= 'Usuario se autentifico ';
  bitacora($codigoObjeto, $accion,$descripcion);
@@ -36,7 +36,7 @@
           if($row > 0){
            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-           $evaluar_permiso->execute(array($usuariomo, '33'));
+           $evaluar_permiso->execute(array($usuariomo, '22'));
            $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
            }
@@ -94,7 +94,7 @@
                                 if($row > 0){
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '33'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '22'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
@@ -120,7 +120,7 @@
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '33'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '22'));
                                   $row2=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row2; 
                                }

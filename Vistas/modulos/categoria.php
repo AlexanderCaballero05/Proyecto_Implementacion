@@ -51,12 +51,8 @@
      <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-
-            <a class=" nav-link active" style="color:#000000;" href="#">Agregar Personas</a>
-
+          <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
-
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
@@ -81,7 +77,7 @@
                       <div class="col-md-4"> <!--INICIO DNI-->
                         <label  class="control-label">Número de Identidad:</label> 
                         <div class="form-group">
-                          <input  onkeypress="return IDENTIDAD(event,this);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
+                          <input onkeypress="return numeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>                     
@@ -90,7 +86,7 @@
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label  class="control-label">Primer Nombre:</label> 
                         <div class="form-group">
-                          <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" required="">
+                          <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required="">
                           <div class="invalid-feedback">
                              campo obligatorio.
                           </div>  
@@ -443,12 +439,21 @@
     }
 </script>
 
+<script type="text/javascript">
+   function numeros(evt){
+    if(window.event){
+      keynum = evt.keyCode;
+    }else{
+      keynum = evt.which;
+    }
+    if((keynum >47  && keynum <58) || keynum == 8  || keynum ==13){
+      return true;
+    }else{
+      return false;
+    }
 
-
-
-
-
-
+   }
+  </script>
 
 <script type="text/javascript">
  $( function() {
