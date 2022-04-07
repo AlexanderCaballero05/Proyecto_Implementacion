@@ -74,13 +74,8 @@
         where tm.NOMBRE_MEDICAMENTO  = (?) and tm.DESCRIPCION <> (?);");
        $sentencia->execute(array($medicamento,$codigo));
        $row=$sentencia->fetchColumn();
-       if($row>0){
-        echo "<script>
-        alert('Ya existe un medicamento con este mismo nombre: $medicamento');
-        window.location = 'crudmedicamento';
-        </script>";
-        exit;
-       } else {
+       
+      
         try {
             $sql = "UPDATE tbl_medicamento tm set tm.CODIGO_MEDICAMENTO  = '$edi_cod' ,tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
             tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
@@ -106,7 +101,7 @@
                 echo $e->getMessage(); 
                 return false;
                         }
-       } // fin else 
+       // fin else 
       }catch(PDOException $e){
             echo $e->getMessage(); 
             return false;

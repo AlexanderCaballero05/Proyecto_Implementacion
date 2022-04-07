@@ -118,7 +118,7 @@ session_start();
          $_GET["ruta"] == "procesoRegistrarEstudiante" ||
          $_GET["ruta"] == "procesoRegistrarFamiliares" ||
          $_GET["ruta"] == "Formbitacora" ||
-         $_GET["ruta"] == "parametrosusuario" ||
+         $_GET["ruta"] == "crudparametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "area" ||
          $_GET["ruta"] == "procesoPreClinica" ||

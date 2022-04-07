@@ -8,7 +8,7 @@ require_once "modelos/crudespecialidad.modelo.php";
 require_once "modelos/crudobjetosmodelo.php";
 require_once "modelos/crudpersonasmodelo.php";
 require_once "modelos/crudsocioeconomicomodelo.php";
-require_once "modelos/paramusuario.modelo.php";
+require_once "modelos/crudparamusuario.modelo.php";
 require_once "modelos/crudRoles.modelo.php";
 require_once "modelos/estado.modelo.php";
 require_once "modelos/crudTutoria.modelo.php";

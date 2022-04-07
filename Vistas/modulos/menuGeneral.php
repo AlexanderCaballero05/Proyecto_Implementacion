@@ -719,7 +719,7 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="parametrosusuario" class="nav-link" > 
+              <a href="crudparametrosusuario" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
                   <p>Parametros usuarios</p>
               </a>

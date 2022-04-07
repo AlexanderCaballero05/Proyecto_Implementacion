@@ -5,9 +5,12 @@
 <head>
 
 </head>
-
+<body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
   <div class="content-header">
+    <div class="text-center">
+      <h2>Areas</h2>
+    </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
@@ -16,6 +19,8 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+
+        
            
         <?php
                             include "conexionpdo.php";
@@ -43,7 +48,7 @@
 
                     ?> 
                     <button  data-toggle="modal"  href="#AGREGAR_AREA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar nueva area </button>
-            
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     <?php 
 
                       }
@@ -52,7 +57,7 @@
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información de las Areas</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -61,14 +66,11 @@
                   <table id="tabla_area" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>EDITAR</th>
-                          <th>CODIGO AREA</th>
-                          <th>NOMBRE </th>
-                          <th>DESCRIPCION</th>
-                          <th>FECHA CREACION</th>
-                          <th>CREADO POR</th>
-                          <th>FECHA MODIFICACION</th>
-                          <th>MODIFICADO POR</th>
+                        <th class="text-center">EDITAR</th>
+                        <th class="text-center">CODIGO AREA</th>
+                        <th class="text-center">NOMBRE </th>
+                        <th class="text-center">DESCRIPCION</th>
+                         
                           
                         </tr>
                       </thead>
@@ -169,10 +171,7 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
+                      
                          
 
                         <!--INICIO DEL MODAL DE EDITAR AREA -->
@@ -190,13 +189,13 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -222,7 +221,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="area_eli" id="area_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la area<?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar la area  <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -247,6 +246,7 @@
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
+                      </body>
 
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTADO -->
   <div id="agregar_area" class="modal fade" role="dialog">
@@ -262,7 +262,8 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre de la area" name="nombre_area" id="nombre_area" required="">
+
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre de la area" name="nombre_area" id="nombre_area" required="">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                     </div>
@@ -271,7 +272,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la area" name="descripcion_area" id="descripcion_area" required="" onkeypress="return soloLetras(event);" ></textarea>
+                                    <textarea  type="text"  class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la area" name="descripcion_area" id="descripcion_area" required="" onkeypress="return soloLetras(event);" ></textarea>
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                     </div>
@@ -344,3 +345,15 @@
         })
 })()
 </script>
+</body>
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteArea.php','_blank');
+      window.open(this.href,'_self');
+    } 
+
+    //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+  </script>

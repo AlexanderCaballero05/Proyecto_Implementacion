@@ -15,8 +15,13 @@ include_once "conexion3.php";
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
+
+<body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
   <div class="content-header">
+    <div class="text-center">
+      <h2>Parametro usuarios</h2>
+    </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
@@ -25,48 +30,44 @@ include_once "conexion3.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+
+
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Parametros Usuarios</strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tabla_parametrosusu" class="table table-bordered table-striped">
+                  <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th>EDITAR</th>
-                          <th>CODIGO PARAM USUARIO</th>
-                          <th>CODIGO USUARIO</th>
-                          <th>NOMBRE USUARIO</th>
-                          <th>CODIGO PARAMETRO</th>
-                          <th>PARAMETRO</th>
-                          <th>PAR VALOR</th>
-                          <th>CREADO POR USUARIO</th>
-                          <th>FECHA CREACION</th>
-                          <th>MODIFICADO POR</th>
-                          <th>FECHA MODIFICACION</th>
+                          <th class="text-center">EDITAR</th>
+                          <th class="text-center">NOMBRE USUARIO</th>
+                          <th class="text-center">PARAMETRO</th>
+                          <th class="text-center">PAR VALOR</th>
+                         
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT a.CODIGO_PARAM_USUARIO, a.CODIGO_USUARIO, u.NOMBRE_USUARIO,a.CODIGO_PARAMETRO, p.PARAMETRO,a.PAR_VALOR, a.CREADO_POR_USUARIO, a.FECHA_CREACION, a.MODIFICADO_POR, a.FECHA_MODIFICACION 
+                        $query = "SELECT a.CODIGO_PARAM_USUARIO, a.CODIGO_USUARIO, u.NOMBRE_USUARIO,a.CODIGO_PARAMETRO, p.PARAMETRO,a.PAR_VALOR
                         FROM tbl_parametros_usuarios a ,tbl_parametros p, tbl_usuario u WHERE a.CODIGO_USUARIO = u.CODIGO_USUARIO AND a.CODIGO_PARAMETRO = p.CODIGO_PARAMETRO
                         ORDER BY a.CODIGO_PARAM_USUARIO;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_PARAM_USUARIO'];
-                            $var2 = $row['CODIGO_USUARIO'];
-                            $var3 = $row['NOMBRE_USUARIO'];
-                            $var4 = $row['CODIGO_PARAMETRO'];
-                            $var5 = $row['PARAMETRO'];
-                            $var6 = $row['PAR_VALOR'];
-                            $var7 = $row['CREADO_POR_USUARIO'];
-                            $var8 = $row['FECHA_CREACION'];
-                            $var9 = $row['MODIFICADO_POR'];
-                            $var10 = $row['FECHA_MODIFICACION']; 
+                           
+                            $var1 = $row['NOMBRE_USUARIO'];
+                            $var2 = $row['PARAMETRO'];
+                            $var3 = $row['PAR_VALOR'];
+                            $var4 = $row['CODIGO_USUARIO'];
+                            $var5 = $row['CODIGO_PARAMETRO'];
+                            $var6 = $row['CODIGO_PARAM_USUARIO']
+                           
                         ?>
 
 <?php
@@ -118,10 +119,10 @@ include_once "conexion3.php";
                                 
 
                                 <?php
-                                 if($permiso_eliminar == 'ON')
+                                 if($permiso_eliminar == 'SI')
                                  {
                                 ?>
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                               <a href="#ELIMINAR<?php echo $var6;?>" data-toggle="modal">
                                 <button id="ELIMINAR_PARAMETROUSUARIO" name="ELIMINAR_PARAMETROUSUARIO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
@@ -132,10 +133,10 @@ include_once "conexion3.php";
  
                                 
                                 <?php 
-                                if ($permiso_actualizar == 'ON')
+                                if ($permiso_actualizar == 'SI')
                                 {
                                 ?>
-                                <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARROL<?php echo $var6; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
 
@@ -149,17 +150,11 @@ include_once "conexion3.php";
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
-                          <td class="text-center"><?php echo $var8; ?></td>
-                          <td class="text-center"><?php echo $var9; ?></td>
-                          <td class="text-center"><?php echo $var10; ?></td>
+                          
                      
                           
                           <!--INICIO DEL MODAL DE EDITAR PAR VALOR -->
-                          <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARROL<?php echo $var6 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
@@ -169,11 +164,16 @@ include_once "conexion3.php";
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_paramusu" id="id_paramusu">
+                                    <input  type="text"  value ="<?php echo $var4; ?>" hidden class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="codigo_usuario" id="editar_parvalor">
+                                          <input  type="text"  value ="<?php echo $var5; ?>" hidden class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="codigo_parametro" id="editar_parvalor">
+
+                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="id_paramusu" id="id_paramusu">
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txt_parvalor">Par Valor</label>
-                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="editar_parvalor" id="editar_parvalor">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="editar_parvalor" id="editar_parvalor">
+                                        
+
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -227,6 +227,7 @@ include_once "conexion3.php";
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
+                      </body>
 
   <!-- Button trigger modal -->
 
@@ -244,19 +245,6 @@ include_once "conexion3.php";
   <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
   </aside>
 </div><!-- ./wrapper -->
-
-
-
-
-
- 
-
-
-
-
- 
- 
-
 
 
 <script type="text/javascript"> 
@@ -367,32 +355,10 @@ $( function() {
         return patron.test(te);
     }
 	</script>
- <!--Funcion de la datatable -->
- <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-  $(document).ready( function () {
-      $('#tabla_parametrosusu').DataTable({
-        language: {
-        "decimal": "",
-        "emptyTable": "No hay información",
-        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
-        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-        "infoPostFix": "",
-        "thousands": ",",
-        "lengthMenu": "Mostrar _MENU_ Entradas",
-        "loadingRecords": "Cargando...",
-        "processing": "Procesando...",
-        "search": "Buscar Parametros:",
-        "zeroRecords": "Sin resultados encontrados",
-        "paginate": {
-            "first": "Primero",
-            "last": "Ultimo",
-            "next": "Siguiente",
-            "previous": "Anterior"
-        }
-      },
-        
-      })
-  } );
-</script>
+
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteParametroUsuario.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>
