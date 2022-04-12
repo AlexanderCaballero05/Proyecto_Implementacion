@@ -116,6 +116,7 @@ $result3= $conn->query($query);
                       </div>
                   </div>
 
+
                    <div class="col-sm-3 mb-3">
                      <?php
                       $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
@@ -325,7 +326,7 @@ $result3= $conn->query($query);
 
  <script>
     $( function() {
-    $("#area_cita").change( function() {
+        $("#area_cita").change( function() {
         if ($(this).val() === "2") {//area medica
           document.getElementById('es_psico').style.display = "none";
           document.getElementById('encargado_catequesis').style.display = "none";
