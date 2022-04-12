@@ -251,7 +251,7 @@
                        }
                       ?>
                   </div>
-
+                  
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
                   
                    

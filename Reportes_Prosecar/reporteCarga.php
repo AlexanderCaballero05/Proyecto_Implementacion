@@ -194,11 +194,11 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT c.FECHA_CREACION,c.CODIGO_CARGA,t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-	as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.SECCION, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL
-	FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m 
+	$strquery ="SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
+	as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
+	FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
 	WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-	AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+	AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA AND c.CODIGO_SECCION = s.CODIGO_SECCION
 	AND c.FECHA_CREACION BETWEEN '$desde' AND '$hasta'; ";
 	
 	$result = $conexion->prepare($strquery);
@@ -225,7 +225,7 @@ $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Seccion', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Modalidad', 1, 0, 'C', 1);
+$pdf->Cell(32, 12, 'Modalidad', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Tutoria', 1, 0, 'C', 1);
 $pdf->Cell(55, 12, 'Tutor', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora Inicio', 1, 0, 'C', 1);
@@ -240,7 +240,7 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10,30, 30, 40, 55,25,30,30)); //???
+$pdf->SetWidths(array(10,30, 32, 40, 55,25,30,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 

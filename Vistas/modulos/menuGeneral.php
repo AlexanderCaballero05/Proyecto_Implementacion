@@ -30,14 +30,12 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="index" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Menu general
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
-          
-
                       <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -77,14 +75,14 @@
                 <li class="nav-item">
                   <a href="crudpersonas" class="nav-link" >
                    <i class="far fa-user nav-icon"></i>
-                    <p>Proceso de Personas/Usuarios</p>
+                    <p>Proceso Personas/Usuarios</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
                   <a href="crudPersonaEspecialidad" class="nav-link" > <!--modifique acuerdate -->
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Especialidades de Personas</p>
+                    <p>Especialidades Personas</p>
                   </a>
                 </li>
 
@@ -99,10 +97,7 @@
             </li>
          <?php
               }
-
            ?>
-
-
                       <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -154,15 +149,14 @@
 
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
+                   <i class="far fa-circle nav-icon"></i>
                     <p>Tipo de contenido</p>
                   </a>
                 </li> 
                  
-                
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
-                    <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                     <p>Tipo socieconomico</p>
                   </a>
                 </li>
@@ -174,7 +168,7 @@
               
         ?>
 
-<?php 
+   <?php 
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -266,13 +260,13 @@
                 </li>
                 <li class="nav-item">
                   <a href=" " class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                     <p>Familiares estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                     <p>Tipo de parentesco</p>
                   </a>
                 </li>
@@ -282,9 +276,6 @@
                     }
               
         ?>
-
-
-
 
                       <?php
                            include "conexionpdo.php";
@@ -307,7 +298,7 @@
                             ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
 
                     <?php 
-                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_mostrar == 'NO') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>        
            <!-- Menu de Carga Academica -->
@@ -379,7 +370,7 @@
                             ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
 
                     <?php 
-                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_mostrar == 'NO') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>   
           <!-- Menu de Matricula -->
@@ -456,10 +447,6 @@
             </li>
           </ul>
         </li>
-
-
-
-
 
         <li class="nav-item">
           <a href="#" class="nav-link">
@@ -579,18 +566,10 @@
           </ul>
         </li>
          
-         
-
         <?php
           }
           ?>
           
-
-
-
-
-
-
                     <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -627,51 +606,51 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="crudPermisos" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
+                <i class="far fa-circle nav-icon"></i>
                   <p>Permisos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
+                <i class="far fa-circle nav-icon"></i>
                   <p>Roles</p>
                 </a>
               </li>
               <li class="nav-item">
 
                 <a href="crudpreguntas" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Preguntas</p>
                 </a>
               </li>
               <li class="nav-item">
                   <a href="estado" class="nav-link" > 
-                    <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                     <p>Mantenimiento Estado</p>
                   </a>
                 </li>
              
               <li class="nav-item">
                 <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
-                   <i class="nav-icon fas fa-table"></i>
+                <i class="far fa-circle nav-icon"></i>
                    <p>Parametros</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Objetos</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="crudparametrosusuario" class="nav-link" > 
-                  <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Parametros usuarios</p>
               </a>
               </li>
               <li class="nav-item">
                 <a href="crudtipopersona" class="nav-link">
-                  <i class="nav-icon fas fa-table"></i>
+                <i class="far fa-circle nav-icon"></i>
                   <p>Tipo Persona</p>
                 </a>
               </li>
@@ -679,24 +658,15 @@
               </li>
               <li class="nav-item">
               <a href="area" class="nav-link" > 
-                  <i class="nav-icon fas fa-table"></i>
+                  <i class="far fa-circle nav-icon"></i>
                   <p>Area</p>
               </a>
               </li>
-
-
-
             </ul>
           </li>
-
-
               <?php
-
-                    }
+               }
               ?>
-
-
-
                     <?php
                            include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -786,4 +756,5 @@
      
     </div>
     <!-- /.sidebar -->
+    
 </aside>

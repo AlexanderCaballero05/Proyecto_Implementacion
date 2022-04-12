@@ -134,7 +134,6 @@ if(isset($_POST['rol_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_roles WHERE  CODIGO_TIPO_ROL = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Rol eliminado!');
             window.location = 'crudRoles';
             </script>";
             include_once 'function_bitacora.php';

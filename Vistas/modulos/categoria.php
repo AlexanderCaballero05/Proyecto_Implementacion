@@ -245,7 +245,7 @@
                           ?>
                       </div>
                     </div><!--fin row -->
-                    </br>
+                   
 
                     <div class="card-header" id="form_usuario">
                        <h2 class="card-title"> <strong>Registrar Usuario</strong></h2>
@@ -343,7 +343,7 @@
                          </div>
                       </div>
                     </div><!--Fin de otra fila :v -->
-                    </br>                    
+                                      
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                     </br> 
                   </div><!--Fin del card body del form -->
@@ -458,7 +458,7 @@
 <script type="text/javascript">
  $( function() {
     $("#tipo_persona").change( function() {
-        if ($(this).val() === "1" || $(this).val() === "2" ) {
+        if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9"  ) {
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
 

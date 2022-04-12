@@ -135,7 +135,6 @@ if(isset($_POST['tutoria_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_tutoria WHERE  CODIGO_TUTORIA = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Tutoria eliminada!');
             window.location = 'crudTutorias';
             </script>";
             include_once 'function_bitacora.php';

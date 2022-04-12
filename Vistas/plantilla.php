@@ -190,7 +190,7 @@ session_start();
 }else{
  ?>
 
- <body class="hold-transition sidebar-mini layout-fixed login-page register-page" style ="background-color:#000000;  ">
+ <body class="hold-transition sidebar-mini layout-fixed login-page register-page" >
  <?php
   include "Modulos/login.php";
 }

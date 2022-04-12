@@ -10,12 +10,16 @@
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
-      <h2>MANTENIMIENTO DE ESTADOS</h2>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
+    <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>MANTENIMIENTO DE ESTADOS</h4>
+          </h1>     
+      </section>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">

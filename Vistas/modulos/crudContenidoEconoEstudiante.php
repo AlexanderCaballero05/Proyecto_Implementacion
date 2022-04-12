@@ -46,7 +46,7 @@
           <!-- card de la tabla-->
           <div class="card "> 
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Información de los Estudiantes</strong></h1>
+               
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -55,11 +55,11 @@
                   <table id="tabla_estudiantes" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th>
+                          <th class="text-center">Acción</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">NOMBRE ESTUDIANTE</th>
-                          <th class="text-center">CONTENIDO SOCIO-ECONOMICO</th>
-                          <th class="text-center">NOMBRE TIPO CONTENIDO</th>
+                          <th class="text-center">Nombre estudiante</th>
+                          <th class="text-center">Contenido socio-economico</th>
+                          <th class="text-center">Nombre tipo contenido</th>
                           
                         </tr>
                       </thead>

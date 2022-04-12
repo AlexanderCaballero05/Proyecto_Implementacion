@@ -46,12 +46,15 @@ include_once "conexion3.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+        <a href="categoria"> 
+            <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+        </a>
          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-         <button  onclick="Descargar3()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>prueba</button>
+         
 
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
+          <div class="card ">
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -128,7 +131,7 @@ include_once "conexion3.php";
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center"> UsuarioS</h4>
+                                    <h4 class="text-center"> Usuarios</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -256,7 +259,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var6; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

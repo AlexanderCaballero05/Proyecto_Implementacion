@@ -21,7 +21,7 @@ class PDF extends FPDF {
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(64, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -110,7 +110,7 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
 			$this->Cell(50, 8, 'Rol usuario', 1, 0, 'C', 0);
-			$this->Cell(70, 8, 'Objeto', 1, 0, 'C', 0);
+			$this->Cell(75, 8, 'Objeto', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Insertar', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Eliminar', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Actualizar', 1, 0, 'C', 0);
@@ -215,12 +215,12 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(26);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Rol usuario', 1, 0, 'C', 1);
-$pdf->Cell(70, 12, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(75, 12, 'Objeto', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Insertar', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Eliminar', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Actualizar', 1, 0, 'C', 1);
@@ -237,11 +237,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15, 50, 70, 25,25,25,25)); //???
+$pdf->SetWidths(array(15, 50, 75, 25,25,25,25)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['ROL'], $data[$i]['NOMBRE'],ucwords(strtolower(utf8_decode($data[$i]['INSERTAR']))), ucwords(strtolower(utf8_decode($data[$i]['ELIMINAR']))),ucwords(strtolower(utf8_decode($data[$i]['ACTUALIZAR']))),ucwords(strtolower(utf8_decode($data[$i]['MOSTRAR']))),   ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['ROL'], $data[$i]['NOMBRE'],ucwords(strtolower(utf8_decode($data[$i]['INSERTAR']))), ucwords(strtolower(utf8_decode($data[$i]['ELIMINAR']))),ucwords(strtolower(utf8_decode($data[$i]['ACTUALIZAR']))),ucwords(strtolower(utf8_decode($data[$i]['MOSTRAR']))),   ),26); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

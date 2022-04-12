@@ -8,20 +8,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 
 <head>
-<?php 
-$fecha_actual = date("Y-m-d");
-  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
-  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
 
-?>
-
-<?php 
-if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
-  $_SESSION["bdesde"] = $_POST["bdesde"];
-  $_SESSION["bhasta"] = $_POST["bhasta"];
-
-}
-?>
 <head>
 
 </head>
@@ -33,12 +20,14 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   </div>
   
   <section class="content">
+   <section class="content-header text-xl-center mb-3 btn-light">
+        <h1>
+            <h4>MANTENIMIENTO ESPECIALIDADES</h4>
+        </h1>     
+    </section>
     <div class="container-fluid">
-    <h4 class="text-center">Mantenimiento informacion
-                        Especialidad</h4>
-
       <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-12">
            
                         <?php
                             include "conexionpdo.php";
@@ -64,10 +53,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
                           ?>
 
-                         
-            <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Especialidad</button>
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>  
-                </a>
+                          <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Especialidad</button>           
+                          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>  
+                
                 <php
                    }
                  ?>
@@ -276,7 +264,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITARMODA" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">AGREGAR  ESPECIALIDAD</h4>
+                        <h4 class="text-center">Agregar Especialidad</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -308,18 +296,22 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       name="agregardescripcion"
                                        id="agregardescripcion" required=""></textarea>
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                     campo obligatorio.
                                    </div>
-                                   <div class="col-sm-12">
-                              <?php //--INICIO DEL ESTADO
-                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
-                                $resultadod=$conn->query($query);                
-                               ?>
-                              <label  class="control-label">Area</label>  
+                                </div>
+                            </div> 
+
+
+                               <div class="col-sm-12">
+                                <?php //--INICIO DEL ESTADO
+                                  $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                  $resultadod=$conn->query($query);                
+                                ?>
+                                <label  class="control-label">Area</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   
-                                    style="width: 100%;" name="codigo_area" id="codigo_area" 
-                                    required>
+                                      style="width: 100%;" name="codigo_area" id="codigo_area" 
+                                      required>
                                       <option > --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
@@ -332,22 +324,22 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       }?>
                                     </select> 
                                 </div>
-                            </div>
+                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
-                    
+                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
                         <button type="submit" id="nueva_espe" name="nueva_espe" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO TUTORIA Elaborado por Diana Rut --> 
-  
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO --> 
+  </div>
    <!--Funcion de la datatable -->
 
-  <!-- Button trigger modal -->
-
+  
+</body>
 
 <!-- Modal -->
 <script>

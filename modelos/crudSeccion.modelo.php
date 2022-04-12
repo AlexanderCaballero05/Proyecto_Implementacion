@@ -132,7 +132,6 @@ if(isset($_POST['seccion_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_seccion WHERE  CODIGO_SECCION = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Sección eliminado!');
             window.location = 'crudSeccion';
             </script>";
             include_once 'function_bitacora.php';

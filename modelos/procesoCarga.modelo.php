@@ -224,7 +224,6 @@ if(isset($_POST['eliminar_carga'])){
                     mysqli_query($link, "DELETE FROM tbl_carga_academica WHERE  CODIGO_CARGA = '$codigo_eliminar' ");
                     if(mysqli_affected_rows($link)>0){
                         echo "<script>
-                        alert('¡Carga eliminada!');
                         window.location = 'crudCargaAcademica';
                         </script>";
                         include_once 'function_bitacora.php';
