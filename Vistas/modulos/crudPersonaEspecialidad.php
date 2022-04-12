@@ -10,13 +10,17 @@
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
-      <h2>MANTENIMIENTO ESPECIALIDADES DE PERSONAS</h2>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   
   <section class="content">
+     <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>MANTENIMIENTO ESPECIALIDADES DE PERSONAS</h4>
+          </h1>     
+      </section>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -39,7 +43,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Id</th>
+                          <th class="text-center">ID</th>
                           <th class="text-center">Nombre del Especialista</th>
                           <th class="text-center">Especialidad  </th>
                           
@@ -83,8 +87,6 @@
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
-                                
-                               
                             }
                             ?> 
 
@@ -112,7 +114,10 @@
                                 if ($permiso_eliminar == 'SI'){
                                     
                                 ?> 
-                              
+                              <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                               </button>
+                               </a>
                          
                                <?php
                                 }
@@ -121,7 +126,9 @@
                                <?php
                                 if ($permiso_actualizar == 'SI'){    
                                 ?> 
-                              
+                               <a href="#EDITARROL<?php echo $var1; ?>" data-toggle="modal">
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                </a>
                                 <?php
                                 }
                                 ?>
@@ -165,7 +172,7 @@
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
-
+  </div>
   <!-- Button trigger modal -->
 
 

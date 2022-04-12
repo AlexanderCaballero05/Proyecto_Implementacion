@@ -55,16 +55,16 @@
                   <table id="tabla_estudiantes" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th>
+                          <th class="text-center">Acción</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">NOMBRE</th>
-                          <th class="text-center">APELLIDO</th>
-                          <th class="text-center">GRADO ACTUAL</th>
-                          <th class="text-center">REPITENTE</th>
-                          <th class="text-center">INDICE ACADEMICO</th>
-                          <th class="text-center">PASATIEMPOS</th>
-                          <th class="text-center">DISTRACTORES ESCOLARES</th>
-                          <th class="text-center">METAS</th>
+                          <th class="text-center">Nombre</th>
+                          <th class="text-center">Apellido</th>
+                          <th class="text-center">Grado actual</th>
+                          <th class="text-center">Repitente</th>
+                          <th class="text-center">Indice académico</th>
+                          <th class="text-center">Pasatiempos</th>
+                          <th class="text-center">Distractores escolares</th>
+                          <th class="text-center">Metas</th>
                           
                         </tr>
                       </thead>

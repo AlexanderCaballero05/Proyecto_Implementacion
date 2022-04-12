@@ -8,51 +8,32 @@ class PDF extends FPDF {
 
 	function Header() {
 		date_default_timezone_set("America/Guatemala");
-		//$this->Image('img/triangulosrecortados.png',0,0,50);
-		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
+		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',170,10,20);
 		$this->SetY(20);
-		$this->SetX(86);
+		$this->SetX(35);
 		$this->SetFont('Arial','B',14);
-		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-		$this->SetFont('Arial','',14);
-		$this->SetX(110);
-		$this->Cell(140, 12, utf8_decode('Reporte de Contenido Socioeconomico'));
+		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+		$this->SetFont('Arial','',12);
+		$this->SetX(73);
+		$this->Cell(45, 12, utf8_decode('Reporte contenido socieconomico'));
 		$this->SetX(5);
-		$this->Ln(5);
+		$this->Ln(11);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
-		$this->SetFont('Arial','',10);
-		$this->Cell(65, 5, "Fecha: ". date("d/m/Y | g:i:a"), 0, 1, "C");
-		
+        $this->SetFont('Arial','',10);
+		$this->Cell(56, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
 		$this->Ln(10);
 	}
 
 // Pie de página
 
 	function Footer() {
-	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
-	$this->SetY(-18);
-	$this->SetX(28);
-	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	// $this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R',);
-	$this->SetX(27);
-	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
-	$this->SetX(10);
-	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
+		$this->SetFont('helvetica', 'B', 9);
+		$this->SetY(-15);
+		$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
+	  
+		//$this->Line(10,287,200,287);
+		$this->Cell(170,0,utf8_decode('Prosecar © Todos los derechos reservados.'),0,0,'C');
+		$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 
 	}
 
@@ -196,27 +177,23 @@ class PDF extends FPDF {
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
 // Creación del objeto de la clase heredada
 $pdf = new PDF(); //hacemos una instancia de la clase
 $pdf->AliasNbPages();
-$pdf->AddPage('L'); //añade l apagina / en blanco
+$pdf->AddPage(''); //añade l apagina / en blanco
 $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(50);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(80, 12, 'Tipo del Contenido Socioeconomico', 1, 0, 'C', 1);
-$pdf->Cell(130, 12, 'Nombre del Contenido Socioeconomico', 1, 1, 'C', 1);
+$pdf->Cell(13, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(70, 12, 'Tipo contenido Socioeconomico', 1, 0, 'C', 1);
+$pdf->Cell(84, 12, 'Nombre contenido Socioeconomico', 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -226,12 +203,12 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 80, 130)); //???
+$pdf->SetWidths(array(13, 70, 84)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
 
-	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['TIPO']))),  ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TIPO'])))  ),50 ); 
+	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['TIPO']))),  ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TIPO'])))  ),20 ); 
 	
 }   
 

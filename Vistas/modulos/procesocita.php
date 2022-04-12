@@ -82,9 +82,7 @@ $result3= $conn->query($query);
           </div>
           <div class="card-body">  
             <form   method="POST" class="needs-validation" novalidate>
-
-              <div class="row">
-                <div class="col-sm-5 mb-3">
+                <div class="row pl-2 mb-3 mt-4">
                  <?php
                   $query= "SELECT concat_ws (' ' ,tp.PRIMER_NOMBRE, tp.PRIMER_APELLIDO ) 
                   as BENEFICIARIO  , tp.CODIGO_PERSONA ,tp.CODIGO_TIPO_PERSONA
@@ -93,7 +91,11 @@ $result3= $conn->query($query);
                   and tp.CODIGO_TIPO_PERSONA <> 8 and tp.CODIGO_TIPO_PERSONA <> 3 and tp.CODIGO_TIPO_PERSONA <> 2 and tp.CODIGO_TIPO_PERSONA <> 1";
                   $resultado = $conn->query($query);
                   ?>
-                   <label for="txtcodigo_cita">Beneficiario</label>
+                  <a href="categoria">
+                  <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-2"></i></span>  Agregar persona </button>
+                 </a>
+                 <div class="col-sm-9">
+                   <!-- <label for="txtcodigo_cita">Beneficiario</label>-->
                     <select  style="width: 100%;"  class="form-control select2" name="CODPACIENTE"  type="text" required >
                       <option selected disabled value="">--Seleccione  Beneficiario--</option>
                         <?php 
@@ -115,6 +117,9 @@ $result3= $conn->query($query);
                         ¡Se ve bien!
                       </div>
                   </div>
+                </div> 
+               
+                <div class="row">
 
 
                    <div class="col-sm-3 mb-3">
@@ -217,8 +222,8 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
-              </div><!--fin row -->        
-                 <div class="row"> <!--Solo esta para ver de forma visual,no se manda insertar ni nada -->
+         <!--     </div>fin row -->        
+                   <!--Solo esta para ver de forma visual,no se manda insertar ni nada -->
                     <div  id="mostrar_ecita" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados citas</label>
@@ -228,7 +233,7 @@ $result3= $conn->query($query);
                            
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
+                    <div style ="display:none;" id="encargado_medico" class="col-sm-4 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
                             <select class="form-control select2" name="encargado_medico"  >
@@ -248,7 +253,7 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_psico" class="col-sm-5 mb-3">
+                    <div style ="display:none;" id="encargado_psico" class="col-sm-4 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
                             <select class="form-control select2" name="encargado_psicologo" >
@@ -268,7 +273,7 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_catequesis" class="col-sm-5 mb-3"><!-- area espiritual-->
+                    <div style ="display:none;" id="encargado_catequesis" class="col-sm-4 mb-3"><!-- area espiritual-->
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
                             <select class="form-control select2" name="encargado_catequesis" >
@@ -298,7 +303,7 @@ $result3= $conn->query($query);
                              Llene este campo.
                             </div>
                    </div>
-                   <div class="col-sm-4 mb-3">
+                   <div class="col-sm-3 mb-3">
                         <div class="form-group">
 
                             <label for="fecha" class="form-label">Fecha de la cita </label>

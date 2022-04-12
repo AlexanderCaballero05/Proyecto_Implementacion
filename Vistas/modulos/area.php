@@ -9,13 +9,17 @@
 <div class="content-wrapper">
   <div class="content-header">
     <div class="text-center">
-      <h2>Areas</h2>
     </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
+      <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>MANTENIMIENTO AREAS</h4>
+          </h1>     
+      </section>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -47,7 +51,8 @@
                     {
 
                     ?> 
-                    <button  data-toggle="modal"  href="#AGREGAR_AREA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar nueva area </button>
+                    
+                    <button  data-toggle="modal" href="#AGREGAR_AREA"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar area</button>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     <?php 
 
@@ -66,10 +71,10 @@
                   <table id="tabla_area" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th class="text-center">EDITAR</th>
-                        <th class="text-center">CODIGO AREA</th>
-                        <th class="text-center">NOMBRE </th>
-                        <th class="text-center">DESCRIPCION</th>
+                        <th class="text-center">Acción</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Nombre Area</th>
+                        <th class="text-center">Descripción</th>
                          
                           
                         </tr>

@@ -121,7 +121,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #FEFEFE "><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">FAMILIARES REGISTRADOS </strong></h1>
+               
             </div>
             <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">

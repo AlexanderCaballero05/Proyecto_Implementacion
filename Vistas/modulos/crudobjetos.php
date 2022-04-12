@@ -107,8 +107,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <?php 
                       if($permiso_registrar = 'SI'){
                      ?>
+                     
                     <button type="button" class="btn btn-primary mb-3" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                       Agregar objeto
+                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar objeto
                     </button>
                     <?php 
                       }
@@ -274,7 +275,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="cod_objeto_eliminar" id="cod_objeto_eliminar">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
+                                                            <h4 class="text-center">¿Esta seguro de eliminar este objeto <?php echo $var3; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 

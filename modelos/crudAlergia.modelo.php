@@ -135,7 +135,6 @@ if(isset($_POST['alergia_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_alergias WHERE  CODIGO_ALERGIAS = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            alert('¡Alergia eliminado!');
             window.location = 'crudAlergias';
             </script>";
             include_once 'function_bitacora.php';

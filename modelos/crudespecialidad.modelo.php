@@ -17,7 +17,7 @@
         $row=$consulta->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('El nombre del rol $especialidad ya se encuentra registrado');
+          alert('El nombre de la especialidad $especialidad ya se encuentra registrado');
           window.location = 'crudespecialidad';
           </script>";
         exit;
@@ -25,11 +25,8 @@
           try{
             $query = " INSERT INTO tbl_especialidad( NOMBRE,CODIGO_AREA, DESCRIPCION) VALUES ('$especialidad','$area','$descripcion'); ";
             $resul=$conn->query($query);
-            var_dump($query);
-            return;
             if($resul >0){
               echo "<script> 
-              alert('El nombre del rol $especialidad ya se encuentra registrado');
               window.location = 'crudespecialidad';
               </script>";
               exit;
@@ -51,9 +48,9 @@
           }
         } //fin else 
       }catch(PDOException $e){
-                    echo $e->getMessage(); 
-                    return false;
-                    }
+       echo $e->getMessage(); 
+       return false;
+      }
 
  }// fin  if 
 
@@ -68,7 +65,7 @@
     $row=$sentencia->fetchColumn();
      if($row>0){
        echo "<script>
-       alert('Ya existe un rol con este mismo nombre: $especialidad');
+       alert('Ya existe una especialidad con este mismo nombre: $especialidad');
        window.location = 'crudespecialidad';
        </script>";
        exit;
@@ -89,14 +86,14 @@
           exit;
         }else{
           echo "<script>
-          alert('¡Error al  intentar modificar el rol!');
+          alert('¡Error al modificar la especialidad!');
           window.location = 'crudespecialidad';
           </script>";
         }
       }catch(PDOException $e){
       echo $e->getMessage(); 
       return false;
-             }
+        }
       }
   }catch(PDOException $e){
     echo $e->getMessage(); 
@@ -108,12 +105,11 @@
 
  //PARTE PARA ELIMINAR UNA ESPECIALIDAD
  if(isset($_POST['eliminar'])){
-   if(isset($_POST['ELIMINAR_ESPECIALIDAD'])){
+   if(isset($_POST['ELIMINAR_ESPECIALIDAD'])){ 
      $codigo = ($_POST['eliminar']);//asigna a una variable el id de la pregunta a  eliminar
-     try{
-         $relacion_tablas =  $db->prepare("SELECT a.CODIGO_AREA, e.CODIGO_ESPECIALIDAD from  tbl_area a  ,tbl_especialidad e
-         where e.CODIGO_AREA = a.CODIGO_AREA  and e.CODIGO_ESPECIALIDAD   = (?);");
-       $relacion_tablas =  $db->prepare("SELECT CODIGO_ESPECIALIDAD  from  tbl_ESPECIALIDAD where CODIGO_ESPECIALIDAD = (?);");
+     try{   //prueben tan siquiera lo que hacen en la base -_- ,no solo copien!!
+         $relacion_tablas =  $db->prepare("SELECT pe.CODIGO_ESPECIALIDAD from tbl_persona_especialidad pe ,tbl_especialidad es 
+         where pe.CODIGO_ESPECIALIDAD = es.CODIGO_ESPECIALIDAD and  es.CODIGO_ESPECIALIDAD =(?);");
        $relacion_tablas->execute(array($codigo));
        $row = $relacion_tablas->fetchColumn();
        if($row >0){
@@ -128,7 +124,6 @@
            mysqli_query($link, "DELETE FROM tbl_especialidad WHERE  CODIGO_ESPECIALIDAD = '$codigo' ");
            if(mysqli_affected_rows($link)>0){
              echo "<script>
-             alert('¡especialidad eliminada!');
              window.location = 'crudespecialidad';
              </script>";
              include_once 'function_bitacora.php';

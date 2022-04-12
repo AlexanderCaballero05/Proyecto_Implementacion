@@ -78,9 +78,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
 
           <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">Matricula Academica </strong></h1>
+          <div class="card ">
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -155,7 +155,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     if ($permiso_registrar= 'SI'){
 
                                 ?>
-                                <button id="ELIMINAR_MATRICULA" name="ELIMINAR_MATRICULA" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                <button id="ELIMINAR_MATRICULA" name="ELIMINAR_MATRICULA" type='button'   class=" form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                <php
                                   }

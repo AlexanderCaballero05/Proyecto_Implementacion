@@ -15,15 +15,16 @@
        body{
            background-color:#E8E8E1;
           
+          
        }
        .bg{
         background-size: cover;
-         background-image:url(assets/imagenes/fondo_login.jpg);
+         background-image:url(assets/imagenes/prosecar.PNG);
          background-position: center center;
        }
   </style>
   <body oncopy="return false" onpaste="return false">
-    <div class="container w-50  mt-5 rounded shadow">
+    <div class="container w-50   rounded shadow">
         <div class="row align-items-stretch">
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-end">
               <!--ESPACIO DONDE ESTA COLOCADA LA IMAGEN -->
@@ -32,19 +33,26 @@
                  <h3 class="fw-bold text-center py-4">INICIAR SESIÓN</h3>
                  </br>
                 <!--LOGIN USUARIO -->
-                <form method="POST">
+                <form method="POST" class="needs-validation" novalidate>
           
 
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" aria-label="Username" aria-describedby="basic-addon1" onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <div class="invalid-tooltip">
+                         Llene este campo
+                      </div>
                   </div>
                   <div class="input-group mb-4">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
                       <input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"   minlength="8" maxlength="30" required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
+                      <div class="invalid-tooltip">
+                        Llene este campo
+                      </div>
                   </div>
+                 </br>
                   <div class="d-grid">
-                      <button name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
+                      <button style="border-radius: 20px;" name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
                      <span><a style="color:black; text-decoration:none" href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
@@ -137,4 +145,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     -->
   </body>
+  <script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 </html>

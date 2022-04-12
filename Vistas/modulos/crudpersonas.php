@@ -76,8 +76,8 @@ include_once "conexion3.php";
                      ?> 
                      <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     <!-- jquery validation -->
-                    <div class="card card-primary">
-                        <div class="card-header text-center" style="background-color: #0CCDE3">
+                    <div class="card">
+                        <div class="card-header text-center" >
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                             <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
                         </div>

@@ -148,7 +148,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar roles</h4>
+                                    <h4 class="text-center">Editar Roles</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->

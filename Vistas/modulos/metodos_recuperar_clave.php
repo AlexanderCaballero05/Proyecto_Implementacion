@@ -12,15 +12,10 @@
   </head>
   <body>
   <style>
-       body{
+        body{
            background-color:#E8E8E1;
-           background: linear-gradient(to right,#F9DD94);
        }
        .bg{
-        background-size: cover;
-         background-image:url(../assets/imagenes/fondo2.png);
-         background-position: center center;
-         max-width: 70%;
          display: inline-block;
        }
   </style>
@@ -30,7 +25,7 @@
             <div  class="col bg  d-none d-lg-block col-md-5 col-lg-6 col-xl-6 rounded-end">
                 <!--ESPACIO DONDE ESTA COLOCADA LA IMAGEN -->
             </div>
-            <div class="col bg-white  p-4 rounded-end">
+            <div class="col bg-white p-4 rounded-end" >
                 <div class="card-header ">
                    <h3  class="fw-bold text-center py-1">Recuperacion de contrase&ntilde;a </h3>
                </div></br>
