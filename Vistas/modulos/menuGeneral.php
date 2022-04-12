@@ -448,12 +448,7 @@
                 <p>Proceso consultas</p>
              </a>
            </li>
-            <li class="nav-item">
-              <a href="expedienteMedico" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>Ver espedientes</p>
-              </a>
-            </li>
+            
           </ul>
         </li>
 
@@ -766,6 +761,16 @@
                         <i class=" nav-icon fas fa-cloud-download-alt"></i>
                         <p>
                           Respaldo y Restauración
+                          <i class="fas fa-angle-left right"></i>
+                        </p>
+                      </a>
+                    </li>
+
+                    <li class="nav">
+                      <a href="RespaldoProsecar" class="nav-link bg-gradient-navy">
+                        <i class=" nav-icon fas fa-cloud-download-alt"></i>
+                        <p>
+                          Restauración
                           <i class="fas fa-angle-left right"></i>
                         </p>
                       </a>
