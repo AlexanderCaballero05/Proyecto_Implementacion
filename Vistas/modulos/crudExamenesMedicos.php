@@ -330,7 +330,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="35"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del examen" name="descripcion_examen" id="descripcion_examen" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="500"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del examen" name="descripcion_examen" id="descripcion_examen" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>

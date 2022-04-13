@@ -21,7 +21,7 @@ if(isset($_POST['agregar_tipo'])){
              $row=$consulta_estado->fetchColumn();
              if($row>0){
                echo "<script>
-               alert('El nombre del estado $agregar_tipo ya se encuentra registrado');
+               alert('El nombre del transtorno $agregar_tipo ya se encuentra registrado');
                window.location = 'crudTranstornos';
                </script>";
              exit;
@@ -95,52 +95,40 @@ if(isset($_POST['agregar_tipo'])){
       }
   }//cierre del if principal
 
-  //PARTE PARA ELIMINAR UN TRANTORNO
+//PARTE PARA ELIMINAR UNA TRANSTORNO
 if(isset($_POST['transtorno_eliminar'])){
   if(isset($_POST['ELIMINAR_TRANSTORNO'])){
-    $code = ($_POST['transtorno_eliminar']);//asigna a una variable el id del estado a eliminar
+    $code = $_POST['transtorno_eliminar'];//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT CODIGO_TRANSTORNO, TIPO
-      FROM tbl_transtornos_corporales;");
-      $relacion_tablas->execute(array($code));
-      $row = $relacion_tablas->fetchColumn();
-      if($row >0){
+      $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+      mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
+      if(mysqli_affected_rows($link)>0){
         echo "<script>
-        alert('Transtorno se encuentra en función, no se puede eliminar!');
+        
+        window.location = 'crudTranstornos';
+        </script>";
+        include_once 'function_bitacora.php';
+        $codigoObjeto=1;
+        $accion='Modificacion';
+        $descripcion= 'Se elimino un transtorno ';
+        bitacora($codigoObjeto, $accion,$descripcion);
+        exit;
+      }else{
+        echo "<script>
+        alert('¡Error al eliminar el transtorno!');
         window.location = 'crudTranstornos';
         </script>";
         exit;
-      }else{
-        try{
-          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
-          if(mysqli_affected_rows($link)>0){
-            echo "<script>
-            window.location = 'crudTranstornos';
-            </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un Trantorno ';
-            bitacora($codigoObjeto, $accion,$descripcion);
-            exit;
-          }else{
-            echo "<script>
-            alert('¡Error al eliminar el Transtorno!');
-            window.location = 'crudTranstornos';
-            </script>";
-            exit;
-          }
-        }catch(PDOException $e){
-        echo $e->getMessage(); 
-        return false;
-       }
       }
     }catch(PDOException $e){
-     echo $e->getMessage(); 
-     return false;
-    }
+    echo $e->getMessage(); 
+    return false;
+   }
   }
-}//Cerre del if padre
+}
+
+//Cerre del if padre
+
+
 //*****Elaborado por Carlos Amador ,no quiten creditos :v *******
-?>
+?> 

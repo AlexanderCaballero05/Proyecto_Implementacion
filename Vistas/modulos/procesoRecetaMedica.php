@@ -58,84 +58,86 @@
            
           
 
-            <div class="row pl-3 mb-3">
+           
+         <div class="row pl-3 ">
+         <?php
+    $usuario= $_SESSION['vario'];
+    $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+    FROM tbl_usuario u, tbl_persona p 
+    WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+    AND NOMBRE_USUARIO = (?);");
+    $sentencia1->execute(array($usuario));
+    $cod_usuario=$sentencia1->fetchColumn();
+    ?>
+   <?php   
+      $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE , i.FECHA_CITA
+      FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
+      WHERE con.CODIGO_CITA = i.CODIGO_CITA
+      AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+      AND i.CODIGO_ESTADO = esta.CODIGO_ESTADO
+      AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+      AND es.CODIGO_PERSONA = '$cod_usuario'
+      AND esta.CODIGO_ESTADO = '8';";
+      $resultadocon=$conn->query($query); 
+
+      ?>
+      <?php
+      if ($resultadocon->num_rows > 0) {
+        while($row = $resultadocon->fetch_assoc()) { 
+        $codigocon = $row['CODIGO_CONSULTA'];
+        $codigocita = $row['CODIGO_CITA'];
+        $nombrecon = $row['PACIENTE'];   
+        $fecha_cita = $row['FECHA_CITA'];            
+    ?>
+
+         <div class="col-sm-3 mb-3">
+          <label for="" class="form-label">Fecha de receta</label>
+          <input class="form-control" type="text" hidden value="<?php echo $fecha_cita?>" name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+          <input class="form-control" type="text" readonly value="<?php echo $fecha_cita?>" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+
+      </div>
 
 
-              <div class="col-sm-3">
-                <label for="" class="form-label">Fecha de receta</label>
-                 <input class="form-control" type="date" min="<?= date("Y-m-d")?>" max="<?= date("Y-m-d")?>"  name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+<!--Inicio del paciente -->
+<div class="col-sm-6  mb-3">
 
+    <label for="" class="control-label">Paciente</label> 
+    <div class="form-group">
+       <input  readonly class="form-control" value="<?php echo $nombrecon;?>">
+       <input type="text" name="codigo_consulta" hidden  value="<?php echo $codigocon?>" > 
+       <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_cita">    
+    </div>
+    <?php 
+      } 
+      }
+     ?>
+</div><!--fin del paciente -->
+       <div class="col-sm-3 mb-3">
+          <?php
+            $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
+            FROM tbl_medicamento me; ";
+            $resultado2=$conn->query($query1);
+          ?>
+            <div class="form-group">
+              <label for="" class="control-label">Tipo de receta</label>
+              <select class="form-control select2 " required id="recetas" required> 
+                <option selected disabled value="">--Seleccione--</option>
+                <option  value="1">--Receta medica--</option>
+                <option  value="2">--Examen medico--</option>
+                
+              </select>
+              <div class="invalid-feedback">
+                Llene este campo.
               </div>
-
             </div>
+       </div>  
 
-            <div class="row mb-5 pl-3">
+       
+         
 
-            <?php
-              $usuario= $_SESSION['vario'];
-
-              //Consulta que trae el codigo del usuario
-              $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
-              FROM tbl_usuario u, tbl_persona p 
-              WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
-              AND NOMBRE_USUARIO = (?);");
-              $sentencia1->execute(array($usuario));
-              $cod_usuario=$sentencia1->fetchColumn();
-
-              ?>
-                
-                    <?php   
-                
-                 //AND con.FECHA_CREACION = CURDATE()
-                    //QUERY PAR EL CODIGO DE CONSULTA
-                    $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
-                    FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
-                    WHERE con.CODIGO_CITA = i.CODIGO_CITA
-                    AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                    AND i.CODIGO_ESTADO = esta.CODIGO_ESTADO
-                    AND I.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                    AND es.CODIGO_PERSONA = '$cod_usuario'
-                    AND esta.CODIGO_ESTADO = '8';";
-                    $resultadocon=$conn->query($query);                
-                    ?>
+</div><!--fin row para no perderse -->
 
 
-                  
-
-                    
-
-
-                  <!--<button  class="btn btn-secondary "  class="col-sm-1 col-form mt-3">Buscador</button>-->
-                <div class="col-sm-6 order-2 pl-2 mt-3 mb-3">
-                  <label for="identidad" class="control-label">Nombre del paciente</label> 
-                    <select  style="width: 100%;"  type="text" class="form-control select2" name="codigo_consulta" id="codigo_consulta">
-                    <option selected disabled value="">Buscar paciente...</option>
-                        <?php 
-                          if ($resultadocon->num_rows > 0) {
-                          while($row = $resultadocon->fetch_assoc()) { 
-                          $codigocon = $row['CODIGO_CONSULTA'];
-                          $codigocita = $row['CODIGO_CITA'];
-                          $nombrecon = $row['PACIENTE'];
-
-                          
-                          ?>
-                        <option value="<?php echo $codigocon?>" ><?php echo $nombrecon;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select>
-
-                      <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_cita">
-                          
-                      <div class="invalid-feedback">
-                          Agregue un nombre!
-                      </div>
-
-                    <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
 
                 <?php
                       $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
