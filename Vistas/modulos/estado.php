@@ -3,23 +3,18 @@
  include_once "conexion3.php";
 ?>
 <head>
-
 </head>
 
 <body oncopy="return false" onpaste="return false"> 
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
+      <h2>MANTENIMIENTO DE ESTADOS</h2>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
-    <section class="content-header text-xl-center mb-3 btn-light">
-          <h1>
-              <h4>MANTENIMIENTO DE ESTADOS</h4>
-          </h1>     
-      </section>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -68,7 +63,7 @@
                   <table id="tabla_estados" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">Acción</th>
+                        <th class="text-center">Acción</th>
                           <th class="text-center">Id</th>
                           <th class="text-center">Nombre del Estado</th>
                           <th class="text-center">Descripción</th>
@@ -77,15 +72,15 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT `CODIGO_ESTADO`, `NOMBRE`, `DESCRIPCION` FROM `tbl_estado`
-                        ORDER BY  CODIGO_ESTADO ASC ;";
-                        $result = $conn->query($query);
-                        if ($result->num_rows > 0) {
-                          while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_ESTADO'];
-                            $var2 = $row['NOMBRE'];
-                            $var3 = $row['DESCRIPCION'];
-                           
+                         $query = "SELECT `CODIGO_ESTADO`, `NOMBRE`, `DESCRIPCION` FROM `tbl_estado`
+                         ORDER BY  CODIGO_ESTADO ASC ;";
+                         $result = $conn->query($query);
+                         if ($result->num_rows > 0) {
+                           while($row = $result->fetch_assoc()) {
+                             $var1 = $row['CODIGO_ESTADO'];
+                             $var2 = $row['NOMBRE'];
+                             $var3 = $row['DESCRIPCION'];
+                                 
                          
                         ?>
                         <tr>
@@ -168,39 +163,39 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
+                          
                          
 
-                        <!--INICIO DEL MODAL DE EDITAR ESTADO -->
+                        <!--INICIO DEL MODAL DE EDITAR TRANSTORNO -->
                           <div id="EDITARESTADO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar estados</h4>
+                                    <h4 class="text-center">Editar Estado</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
-
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_estado" id="id_estado">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20"   onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" required="">
-                                          <div class="invalid-feedback">
-                                            campo obligatorio.
-                                          </div>
+                                          <label for="txtcodigo_persona">Tipo</label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="50"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" required="">
                                         </div>
                                       </div>
+                                      </div>
+
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripcion</label>
-                                          <input  type="text"  value ="<?php echo $var3 	; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_descripcion" id="editardescripcion" required="">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="200"  onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_descripcion" id="editardescripcion" required="">
                                           <div class="invalid-feedback">
                                             campo obligatorio.  
                                         </div>
-                                       
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
+                                        </div>
+                                      
+                                      </div>
                                   </div><!--FINAL DEL CARD BODY --> 
 
                                   <div class="modal-footer ">
@@ -210,10 +205,11 @@
                                 </div>
                               </form>
                             </div>
-                          </div><!-- FIN DEL MODAL EDITAR -->  
+                          </div><!-- FIN DEL MODAL EDITAR -->   
                             
-                          <!--INCICIO DEL MODAL ELIMINAR   -->
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                                                   <!--INICIO DEL MODAL ELIMINAR   -->
+                           <!--INCICIO DEL MODAL ELIMINAR   -->
+                           <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -223,7 +219,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estado_eliminar" id="estado_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estado <?php echo $var2; ?></h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el estado <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -232,8 +228,8 @@
                                </form>
                                </div><!--fin del modal contener -->
                             </div><!--fin del modal dialog -->
-                          </div><!--fin del modal de eliminar -->
-                      </tr>             
+                          </div><!--fin del modal de eliminar -->                      
+                          </tr>             
                         <?php
                         }
                         }
@@ -249,8 +245,8 @@
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTADO -->
-  <div id="AGREGAR_ESTADO" class="modal fade" role="dialog">
+ <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTADO -->
+ <div id="AGREGAR_ESTADO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">

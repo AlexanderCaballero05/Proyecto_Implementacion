@@ -1,7 +1,8 @@
 <?php
- include_once "conexion.php";
- include_once "conexion3.php";
- include_once  "conexionpdo.php";
+include_once "conexion.php";
+include_once "conexion3.php";
+include_once 'conexionpdo.php';
+ include "conexionpdo.php";
 ?>
 <head>
  
@@ -29,9 +30,6 @@
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
-            <li class="nav-item" disabled="disabled">
-            <a class="nav-link" style="color:#000000;" href="#">Pre Clinica</a>
-            </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
             </li>
@@ -50,15 +48,27 @@
                     <hr>
                     <div class= "row"> 
                         <div  class="col-sm-4">
+                                   <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>
                         <?php 
 
-                        // AND i.FECHA_CITA = CURDATE();";
-
-                        $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
-                        FROM tbl_inscripcion_cita i, tbl_persona pe
-                        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND I.CODIGO_ESTADO = '10'
-                        AND i.AREA_CITA = '2'; ";
+                        $query2 = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                AND i.CODIGO_ESTADO = '15' 
+                                                                and  i.AREA_CITA = '2'
+                                                                AND i.FECHA_CITA = CURDATE();";
                        
                         $resul2=$conn->query($query2);                
                         ?>

@@ -15,12 +15,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 <!--INICIO DEL MODAL DE Agregar -->
-<div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ADDOBJETO" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <!-- Modal content-->
             <form method="POST">
-
                 <div class="modal-header" style="background-color: #0CCDE3">
                     <h4 class="text-center">Crear información de Medicamentos</h4>
                 </div>

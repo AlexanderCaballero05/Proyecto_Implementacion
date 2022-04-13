@@ -31,6 +31,7 @@ include_once "conexion3.php";
       <div class="row">
         <div class="col-md-12">
 
+        <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parámetro</button>
 
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
 
@@ -191,7 +192,7 @@ include_once "conexion3.php";
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
 
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="paramusuario_eli" id="paramusuario_eli"class="modal fade" role="dialog">
+                          <div id="ELIMINAR<?php echo $var6 ?>"  name="paramusuario_eli" id="paramusuario_eli"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -200,8 +201,8 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="paramusuario_eli" id="paramusuario_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="paramusuario_eli" id="paramusuario_eli">
+                                    <h4 class="text-center">¿Esta seguro de eliminar este parametro? a <?php echo $var1; ?></h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
 

@@ -291,19 +291,19 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
-                                $evaluar_permiso_mostrar->execute(array($usuariomo, '28'));
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '32'));
                                 $row1=$evaluar_permiso_mostrar->fetchColumn();
                                 $permiso_mostrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
 
                     <?php 
-                    if ($permiso_mostrar == 'NO') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>        
            <!-- Menu de Carga Academica -->
            <li class="nav-item">
-            <a href="#" class="nav-link bg-success">
+            <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-edit"></i>
               <p>
                 Carga Academica
@@ -363,14 +363,14 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
-                                $evaluar_permiso_mostrar->execute(array($usuariomo, '29'));
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '33'));
                                 $row1=$evaluar_permiso_mostrar->fetchColumn();
                                 $permiso_mostrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
 
                     <?php 
-                    if ($permiso_mostrar == 'NO') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>   
           <!-- Menu de Matricula -->
@@ -433,6 +433,12 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+          <li class="nav-item">
+             <a href="procesoCitaspPreclinica"class="nav-link">
+               <i class="far fa-edit nav-icon"></i>
+                <p>Proceso de Preclinica</p>
+             </a>
+           </li>
            <li class="nav-item">
              <a href="ProcesoCitasMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>

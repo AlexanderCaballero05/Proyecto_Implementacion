@@ -162,4 +162,4 @@ if(isset($_POST['estado_eliminar'])){
 
 
 //*****Elaborado por Carlos Amador,no quiten creditos :v *******
-?>      
+?>   
