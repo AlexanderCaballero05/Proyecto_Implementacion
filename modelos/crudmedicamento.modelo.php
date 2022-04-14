@@ -31,7 +31,7 @@
                $resul=$conn->query($query_medicamento);
                if ($resul >0){
                    echo "<script> 
-                   window.location = 'procesoRecetaMedica';
+                   window.location = 'crudmedicamento';
                    </script>";
                    exit;
                    include_once 'function_bitacora.php';

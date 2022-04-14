@@ -57,7 +57,6 @@ if(isset($_POST['nombre_examen'])){
               return false;
               }
             }//fin del if de verificar si hay datos
-
        }catch(PDOException $e){
         echo $e->getMessage(); 
         return false;

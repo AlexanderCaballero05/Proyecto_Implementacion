@@ -254,7 +254,6 @@
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ROL --> 
    </body>
-
    <script>//previene que se mantenga una tecla pulsada
       var texto=document.getElementById('bloquear');
       texto.addEventListener('keydown', function(keyboardEvent) {
