@@ -247,4 +247,34 @@ if (isset($_POST['cod_edit_cita'])){
       }      
    
 ?>
+<?php
+ if(isset ($_POST['codigo_persona'])){
+    if(isset ($_POST['REGISTRAR_CITA_PACIENTE'])){
+      $codigo_persona = $_POST['codigo_persona'];
+      $codigo_medico = $_POST['codigo_medico'];
+      $fecha_cita = $_POST['fecha_cita'];
+      $hora_cita = $_POST['hora_cita'];
+      $area_cita = "2";
+      $estado = "5";
+      $fechaactual = date('Y-m-d'); 
+      $user = "Admin";
+
+      $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
+      $consulta=$conn->query($insertar);
+      if($consulta >0){ 
+          echo "<script> window.location = 'crudPacientesMedicos';</script>";
+          $codigoObjeto=32;
+          $accion='Registro';
+          $descripcion='Se vizualiza citas registradas';
+          bitacora($codigoObjeto,$accion,$descripcion);
+           exit;
+      }else{
+        echo "<script> window.location = 'crudPacientesMedicos';</script>";
+        exit;
+      }
+
+    }
+ }
+
+?>
 <!-- modificado por Gissela y Any :( -->

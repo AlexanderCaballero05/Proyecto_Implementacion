@@ -43,6 +43,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudPacientesMedicos">Lista de pacientes</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
@@ -120,7 +123,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class=" form-control btn btn-success"><span>
-                                                                     Mandar a consulta</span></button>
+                                                                     Atender</span></button>
                                                               </a>
 
 
@@ -265,7 +268,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_consulta"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a consulta</button>
+                                                                <button type="submit" name="enviar_consulta"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender consulta</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

@@ -9,6 +9,9 @@
 <?php
     if(isset($_POST['codigo_paciente_expediente'])){
         
+        date_default_timezone_set("America/Guatemala");
+        $Fechaactual=  date('Y-m-d'); 
+
             $codigo_expediente_paciente = ($_POST['codigo_paciente_expediente']);
             $tipo_sangre = ($_POST['tipo_sangre']);
             $tratamientos = ($_POST['tratamientos']);
@@ -16,8 +19,8 @@
          
               
 
-            $insertar_expediente ="INSERT INTO tbl_expediente_medico (CODIGO_PERSONA, CODIGO_TIPO_SANGRE, TRATAMIENTOS, ENFERMEDADES) 
-                                                                VALUES ('$codigo_expediente_paciente', '$tipo_sangre','$tratamientos', '$enfermedades')";
+            $insertar_expediente ="INSERT INTO tbl_expediente_medico (CODIGO_PERSONA, CODIGO_TIPO_SANGRE, CODIGO_ESTADO, TRATAMIENTOS, ENFERMEDADES, FECHA_CREACION) 
+                                                                VALUES ('$codigo_expediente_paciente', '$tipo_sangre','2','$tratamientos', '$enfermedades', '$Fechaactual')";
             $consulta=$conn->query($insertar_expediente);
             $codigo= mysqli_insert_id($conn);
 
