@@ -6,7 +6,21 @@ $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
+<?php 
+date_default_timezone_set("America/Guatemala");
+$fecha_actual = date("Y-m-d");
+  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
+  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
 
+?>
+
+<?php 
+if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
+  $_SESSION["bdesde"] = $_POST["bdesde"];
+  $_SESSION["bhasta"] = $_POST["bhasta"];
+
+}
+?>
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -43,11 +57,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <div class="row">
                         <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
                         <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
+                        <input class="form-control" type="date" id="bd-desde" max="<?= date("Y-m-d") ?>"name="desde" value="<?php echo $_SESSION['bdesde']?>" />
                         </div>
                         <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
                         <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-desde" name="desde" value="" />
+                        <input class="form-control" type="date" id="bd-hasta"  max="<?= date("Y-m-d") ?>" name="hasta" value="<?php echo $_SESSION['bhasta']?>"/>
                         </div>
                         <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
                    </div><!--fin de row -->
@@ -200,6 +214,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <?php
+                                                                date_default_timezone_set("America/Guatemala");
+                                                                $Fechaactual=  date('Y-m-d'); 
+                                                                $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
+                                                                ?>
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
@@ -211,7 +230,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                         <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" 
-                                                                        min="<?= date("Y-m-d")?>" max="<?= date("2022-04-30")?>" 
+                                                                        min="<?= $Fechaactual?>" max="<?= $fechamaxima?>" 
                                                                         class="form-control" 
                                                                         name="edit_fecha_cita"  id="edit_fecha_cita">
                                                                     </div>
