@@ -50,6 +50,7 @@ include_once 'conexionpdo.php';
                   <thead class="text-center">
                         <tr>
                           <th>Acción</th>
+                          <th>Id</th>
                           <th>Pregunta</th>
                           <th>Nombre Usuario</th>
                           
@@ -100,6 +101,7 @@ include_once 'conexionpdo.php';
                               </div>
                             </div><!-- final del text-center -->
                           </td>
+                          <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
 

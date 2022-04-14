@@ -218,7 +218,7 @@ include_once "conexion3.php";
                                         </div>
                                       </div>
                                      
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Valor</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>

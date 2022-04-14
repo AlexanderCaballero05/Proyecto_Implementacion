@@ -23,17 +23,11 @@
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                 <a class="nav-link" style="color:#000000;" href="#">Citas Medicas</a>
-              </li>
-              <li class="nav-item">
-                <a  class="nav-link active" aria-current="true" href="#"  style=" color:#000000;">Pre Clinica</a>
-              </li>
-              <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
-            </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Citas Medicas</a>
+            </li>
+            <li class="nav-item" disabled="disabled">
+            <a class="nav-link active" style="color:#000000;" href="#">Pre Clinica</a>
             </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
@@ -172,7 +166,7 @@
                     </div><!--fin row -->
                     <br>
                  </br></br>
-                <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Enviar a Consulta</button>
+                <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Registrar pre-clinica</button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->

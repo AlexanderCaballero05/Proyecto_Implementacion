@@ -54,7 +54,7 @@
                                     
                         
                                      echo "<script> 
-                                  window.location = 'procesoPreClinica';
+                                  window.location = 'procesoConsulta';
                                   </script>";
                                 } // fin para apariencias
             

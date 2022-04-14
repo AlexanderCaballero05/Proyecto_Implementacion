@@ -33,14 +33,14 @@ if(isset($_POST['codigo_paciente'])){
       if ($consulta>0  && $consulTITA >0 ){
         $conn->commit();
         echo "<script> 
-        window.location = 'procesoConsulta';
+        window.location = 'procesoCitaspPreclinica';
         </script>";  
         exit;
       
       }else{  
         echo "<script> 
         alert('Ocurrio algun error,comuniquese con el admin :)');
-        window.location = 'procesoPreClinica';
+        window.location = 'procesoCitaspPreclinica';
         </script>";  
         exit;
 

@@ -1,6 +1,7 @@
 <?php
- include_once "conexion.php";
- include_once "conexion3.php";
+include_once "conexion.php";
+include_once "conexion3.php";
+include_once 'conexionpdo.php';
  include "conexionpdo.php";
  
  $codigoObjeto=23;
@@ -30,17 +31,22 @@
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="#">Citas Medicas</a>
+          <li class="nav-item">
+          <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Citas Medicas</a>
             </li>
-            <li class="nav-item" disabled="disabled">
-            <a class="nav-link" style="color:#000000;" href="#">Pre Clinica</a>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Consultas Medicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link " style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
           </ul>
           </div>
@@ -52,12 +58,28 @@
             
             
             <div class="row mb-8">
+                                  <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>   
                     <div class="col">
                     <?php 
-                          $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI, C.CODIGO_CITA
-                          from tbl_inscripcion_cita c ,tbl_persona p
-                          where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                          AND c.CODIGO_ESTADO = '11';";
+                          $query ="SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                          FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                  WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                  AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                  AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                  AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                  AND i.CODIGO_ESTADO = '15' 
+                                                                  and  i.AREA_CITA = '2'
+                                                                  AND i.FECHA_CITA = CURDATE();" ;
+
                           $resul=$conn->query($query);    
                            
                           while($row = $resul->fetch_assoc()){
@@ -90,10 +112,15 @@
             <div class="form-group">
               <?php
               $query = "SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL, pr.CODIGO_PRECLINICA
-              FROM tbl_preclinica pr, tbl_inscripcion_cita c
-              WHERE pr.CODIGO_CITA = c.CODIGO_CITA 
-              AND c.CODIGO_ESTADO = '11'
-              AND C.AREA_CITA = '2';
+              FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_preclinica pr
+                                  WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                   AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                   AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                   AND  pr.CODIGO_CITA = i.CODIGO_CITA
+                                   AND es.CODIGO_PERSONA = '$cod_usuario'
+                                   AND i.CODIGO_ESTADO = '15' 
+                                   and  i.AREA_CITA = '2'
+                                   AND i.FECHA_CITA = CURDATE();;
               ";
               $resul=$conn->query($query); 
                
