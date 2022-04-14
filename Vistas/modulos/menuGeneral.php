@@ -232,7 +232,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
-                                $evaluar_permiso_mostrar->execute(array($usuariomo, '26'));
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '33'));
                                 $row1=$evaluar_permiso_mostrar->fetchColumn();
                                 $permiso_mostrar =$row1;             
                             }
@@ -291,7 +291,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
-                                $evaluar_permiso_mostrar->execute(array($usuariomo, '32'));
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '28'));
                                 $row1=$evaluar_permiso_mostrar->fetchColumn();
                                 $permiso_mostrar =$row1;             
                             }
@@ -425,7 +425,7 @@
 
          <!-- Menu de AREA MEDICA -->
          <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
             <p>
               Area Medica
@@ -445,12 +445,18 @@
                 <p>Proceso consultas</p>
              </a>
            </li>
+           <li class="nav-item">
+             <a href="crudPacientesMedicos"class="nav-link">
+               <i class="far fa-edit nav-icon"></i>
+                <p>Lista de pacientes Medicos</p>
+             </a>
+           </li>
             
           </ul>
         </li>
 
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-briefcase-medical"></i>
             <p>
               Mantenimiento medico

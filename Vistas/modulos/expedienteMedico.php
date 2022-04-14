@@ -264,12 +264,14 @@ include_once 'conexionpdo.php';
                                                                 AND rec.CODIGO_CONSULTA = '$codigo_consulta'
                                                                   AND i.FECHA_CITA = CURDATE() ";
                        $resul=$conn->query($consulta);
+
                       ?>
                       <?php
                        if ($resul->num_rows > 0) {
                          while($row = $resul->fetch_assoc()) { 
                          $medicamentos = $row['medicamentos'];
                          $indicaciones = $row['indicaciones'];
+                         $medicamento = 'Nombre medicamentos';
                         ?> 
                                 <?php 
 
@@ -296,7 +298,7 @@ include_once 'conexionpdo.php';
                                   <div  class="col-sm-3 mb-3">
                                     <label  class="form-label">Medicamentos recetados</label>
                                     <div class="form-group">
-                                        <textarea  readonly class="form-control"><?php echo $medicamentos;  ?></textarea>
+                                        <textarea  readonly class="form-control"><?php echo $medicamento.': '.$medicamentos;  ?></textarea>
                                     </div>
                                 </div>
                                 <div  class="col-sm-3 mb-3">

@@ -134,19 +134,6 @@
 
          <form method="POST" class="needs-validation" novalidate>
 
-
-
-            <?php
-                        date_default_timezone_set("America/Guatemala");
-                        $Fechaactual=  date('Y-m-d'); 
-                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
-                        ?>
-              <div class="col-sm-3">
-                <label for="" class="form-label">Fecha de receta</label>
-                 <input class="form-control" type="date" min="<?= $Fechaactual?>" max="<?= $Fechaactual?>"  name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
-
-
-
          <div class="row pl-3 ">
          <?php
           $usuario= $_SESSION['vario'];
@@ -206,7 +193,6 @@
               </select>
               <div class="invalid-feedback">
                 Llene este campo.
-
               </div>
             </div>
        </div>  
