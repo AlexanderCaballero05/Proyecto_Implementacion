@@ -303,12 +303,18 @@ $result3= $conn->query($query);
                              Llene este campo.
                             </div>
                    </div>
+                   <?php
+                        date_default_timezone_set("America/Guatemala");
+                        $Fechaactual=  date('Y-m-d'); 
+                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
+                        ?>
+
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
 
                             <label for="fecha" class="form-label">Fecha de la cita </label>
-                            <input type="date" min="<?= date("Y-m-d")?>" 
-                            max="<?= date("2022-04-30")?>"
+                            <input type="date" min= "<?= $Fechaactual?>" 
+                            max="<?= date("$fechamaxima")?>"
                             class="form-control" 
                             name="agregar_fecha_cita" id="agregar_fecha_cita" required>
                             <div class="invalid-feedback">

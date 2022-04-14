@@ -1,8 +1,8 @@
 <?php
- include_once "conexion1.php";
- include_once "conexion3.php";
+include_once "conexion.php";
+include_once "conexion3.php";
+include_once 'conexionpdo.php';
  include "conexionpdo.php";
-
 
  
  $codigoObjeto=2;
@@ -26,35 +26,53 @@
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
                     <ul class="nav nav-tabs card-header-tabs">
-                       <li class="nav-item">
-                            <a class="nav-link" style="color:#000000;" href="#">Citas Medicas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a  class="nav-link " aria-current="true" href="#"  style=" color:#000000;">Pre Clinica</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
-                        </li>
-                        <li class="nav-item">
-                           <a class="nav-link active" style="color:#000000;" href="#">Expedientes Medicos</a>
-                        </li>
+                    <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Citas Medicas</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="#">Informe de Consulta</a>
+            </li>
                     </ul>
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
                 <form method="POST" >
-                  </br><strong class="form-check-label" >Datos Personales  Paciente</strong>
+                <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                      <strong class="form-check-label pt-2 pb-2 px-2" >Datos de paciente</strong>
+                  </div>
+
                   <hr> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
-                         <label for="" class="control-label">Nombre Paciente</label>
+                     <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>   
                          <?php 
-                           $query = "SELECT p.CODIGO_PERSONA, p.DNI, c.CODIGO_CITA as CODIGO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                           as PACIENTE , p.FECHA_NACIMIENTO from tbl_inscripcion_cita c ,tbl_persona p ,tbl_area a
-                           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                           AND c.CODIGO_ESTADO = '12' and  c.AREA_CITA = a.CODIGO_AREA  and a.CODIGO_AREA = 2 ";
+                           $query = "SELECT i.CODIGO_CITA as CODIGO, i.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado, pe.FECHA_NACIMIENTO
+                           FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                   WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                   AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                   AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                   AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                   AND i.CODIGO_ESTADO = '12' 
+                                                                   and  i.AREA_CITA = '2'
+                                                                   AND i.FECHA_CITA = CURDATE();";
                            $resul=$conn->query($query);                
                            ?>  
                               <?php 
@@ -90,7 +108,12 @@
                     }
                  ?>
                   </div><!--fin row -->
-                  <strong class="form-check-label" >Datos generales Expediente</strong>
+                  
+
+                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                      <strong class="form-check-label pt-2 pb-2 px-2" >Expediente Paciente</strong>
+                  </div>
+
                   <hr> 
                   <div class="row">
                       <?php
@@ -135,8 +158,7 @@
                           </div>
                      </div>
                   </div>
-                  <strong class="form-check-label" >Datos generales Expediente</strong>
-                  <hr> 
+                 
                   <div class="row">
                        <div class="col-sm-4 mb-3">
                             <label  class="form-label">Alergias</label>
@@ -161,26 +183,31 @@
                        }
                       ?>
                   </div><!--fin row -->
-                  <strong class="form-check-label">Información de la consulta</strong>
+                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                      <strong class="form-check-label pt-2 pb-2 px-2" >informacion de consulta</strong>
+                  </div>
                   <hr> 
                   <div class="row">
                       <?php
-                       $codigo='12';
-                       $area='2';
-                       $consultar = $db->prepare("SELECT c.CODIGO_CITA  from tbl_inscripcion_cita c  ,tbl_area a
-                       where  c.CODIGO_ESTADO = (?) and  c.AREA_CITA = a.CODIGO_AREA  and a.CODIGO_AREA = (?);");
-                       $consultar->execute(array($codigo,$area));
-                       $row=$consultar->fetchColumn();
-                       if($row >0 ){
-                          $cita = $row;
-                       }
-                       $consulti ="SELECT * FROM tbl_consulta_medica cm ,tbl_inscripcion_cita c
-                       where 	cm.CODIGO_CITA = c.CODIGO_CITA and  cm.CODIGO_CITA = '$cita'";
+                    
+                       $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
+                                 FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
+                      WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                        AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                          AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                            AND con.CODIGO_CITA = i.CODIGO_CITA
+                              AND es.CODIGO_PERSONA = '$cod_usuario'
+                                AND i.CODIGO_ESTADO = '12' 
+                                  AND  i.AREA_CITA = '2'
+                                    AND con.CODIGO_CITA = '$codigo_cita'
+                                      AND i.FECHA_CITA = CURDATE();";
                         $resul=$conn->query($consulti);
+
                       ?>
                       <?php 
                          if ($resul->num_rows > 0) {
                          while($row = $resul->fetch_assoc()) { 
+                         $codigo_consulta = $row['CODIGO_CONSULTA'];
                          $sintomas = $row['SINTOMAS'];
                          $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
                          $evolucion = $row['EVOLUCION'];
@@ -216,16 +243,26 @@
                        }
                       ?>
                   </div><!-- fin row-->
-                  <strong class="form-check-label">Información de la receta</strong>
+                  <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                      <strong class="form-check-label pt-2 pb-2 px-2" >Informacion de receta</strong>
+                  </div>
                   <hr> 
                   <div class="row">
                       <?php
-                       $consulta = "SELECT per.CODIGO_PERSONA, per.PRIMER_NOMBRE, GROUP_CONCAT(me.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT(re.INDICACIONES_RECETA) as indicaciones
-                       FROM tbl_persona per, tbl_inscripcion_cita cita, tbl_consulta_medica consu, tbl_receta_medica re, tbl_medicamento me
-                       WHERE per.CODIGO_PERSONA = cita.CODIGO_PERSONA
-                       AND cita.CODIGO_CITA = consu.CODIGO_CITA
-                       AND consu.CODIGO_CONSULTA = re.CODIGO_CONSULTA
-                       AND re.CODIGO_MEDICAMENTO = me.CODIGO_MEDICAMENTO and cita.CODIGO_PERSONA ='$persona'";
+                       $consulta = "SELECT rec.CODIGO_CONSULTA, GROUP_CONCAT('/ ',med.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT('/ ',rec.INDICACIONES_RECETA) as indicaciones
+                       FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con, tbl_receta_medica rec, tbl_medicamento med
+                                             WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                               AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                 AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                   AND con.CODIGO_CITA = i.CODIGO_CITA
+                                                    AND con.CODIGO_CONSULTA = rec.CODIGO_CONSULTA
+                                                      AND rec.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
+                                                        AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                          AND i.CODIGO_ESTADO = '12' 
+                                                            AND  i.AREA_CITA = '2'
+                                                              AND con.CODIGO_CITA = '$codigo_cita' 
+                                                                AND rec.CODIGO_CONSULTA = '$codigo_consulta'
+                                                                  AND i.FECHA_CITA = CURDATE() ";
                        $resul=$conn->query($consulta);
                       ?>
                       <?php
@@ -234,22 +271,63 @@
                          $medicamentos = $row['medicamentos'];
                          $indicaciones = $row['indicaciones'];
                         ?> 
-                     <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Medicamentos recetados</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control"><?php echo $medicamentos;  ?></textarea>
-                          </div>
-                      </div>
-                      <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Observaciones medicamentos</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $indicaciones;?></textarea>
-                          </div>
-                      </div>
+                                <?php 
+
+                                    if($medicamentos == '' && $indicaciones == '') {
+                                        $ninguno = 'Ninguno';
+
+                                ?>
+                                <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Medicamentos recetados</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
+                                    </div>
+                                </div>
+                                <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Indicaciones medicamentos</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
+                                    </div>
+                                </div>
+                                <?php
+                                    }else{
+
+                                ?>
+                                  <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Medicamentos recetados</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control"><?php echo $medicamentos;  ?></textarea>
+                                    </div>
+                                </div>
+                                <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Indicaciones medicamentos</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control" ><?php echo $indicaciones;?></textarea>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                                    <?php
+                                        
+                                        
+                                        }
+                                    ?>
+                        
+
+
+
                       <?php
+                      
                        }
                        }
                       ?>
+
+                      
                   </div>
                   
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>

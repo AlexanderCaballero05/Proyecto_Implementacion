@@ -54,10 +54,15 @@
                         </div>
                     </div>
                   </div>
+                  <?php
+                        date_default_timezone_set("America/Guatemala");
+                        $Fechaactual=  date('Y-m-d'); 
+                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 3 month"));
+                        ?>
                   <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                      <input class="form-control" required min="09:00:00"  step="1800" max= "17:00:00"  type="date"  name="fecha_inicio" required>
+                      <input class="form-control" min= "<?= $Fechaactual?>"   max= "<?=  $fechamaxima?>"  type="date"  name="fecha_inicio" required>
                        <div class="invalid-feedback">
                          Llene este campo.
                         </div>
