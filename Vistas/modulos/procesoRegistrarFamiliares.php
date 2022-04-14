@@ -46,7 +46,7 @@
             <div class="row mb-5 pl-3">
                 
                     <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
+                    $query = "SELECT CODIGO_PERSONA, CONCAT_WS(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
                     FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 7;";
                     $resultadod=$conn->query($query);                
                     ?>

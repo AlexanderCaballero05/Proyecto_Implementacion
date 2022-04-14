@@ -241,10 +241,15 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
                                       </div>
                                     </div>
+                                    <?php
+                                    date_default_timezone_set("America/Guatemala");
+                                    $Fechaactual=  date('Y-m-d'); 
+                                    $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 3 month"));
+                                    ?>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Inicio:</label>
-                                        <input  type="date"  value ="<?php echo $var7; ?>" class="form-control" name="fecha_inicio1" >
+                                        <input  type="date"  value ="<?php echo $var7; ?>"  min= "<?= $Fechaactual?>"   max= "<?=  $fechamaxima?>" class="form-control" name="fecha_inicio1" >
                                       </div>
                                     </div>
                                   </div><!--fin row -->
