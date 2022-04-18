@@ -68,12 +68,13 @@
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
+                          $var6 = $row['CODIGO_PERSONA'];
                           $var1 = $row['FECHA_CREACION'];
                           $var2 = $row['CODIGO_EXPEDIENTE'];
                           $var3 = $row['PACIENTE'];
                           $var4 = $row['DNI'];
                           $var5 = $row['ESTADO'];
-                          $var6 = $row['CODIGO_PERSONA'];
+                          
                           
                       ?>
                       <tr>
@@ -106,8 +107,8 @@
                                   </a>
 
                                   <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank">
-                                     <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
+                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
+                                     <input type="hidden" name="expediente" value="<?php echo $var6?>">
                                      <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
