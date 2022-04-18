@@ -466,13 +466,13 @@
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+              <i class="far fa-circle nav-icon"></i>
                 <p>mantenimiento alergias</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudtiposangre" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+               <i class="far fa-circle nav-icon"></i>
                 <p>mantenimiento tipo sangre</p>
               </a>
             </li>
@@ -480,19 +480,19 @@
 
             <li class="nav-item">
               <a href="crudmedicamento" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+               <i class="far fa-circle nav-icon"></i>
                 <p>mantenimiento Medicamento</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudExamenesMedicos" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+               <i class="far fa-circle nav-icon"></i>
                 <p>Examenes Medicos</p>
               </a>
             </li>
               <li>
               <a href="crudTranstornos" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+               <i class="far fa-circle nav-icon"></i>
                 <p>mantenimiento transtornos</p>
               </a>
             </li>
@@ -500,7 +500,7 @@
 
             <li class="nav-item">
               <a href="crudAparienciaFisica" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
+               <i class="far fa-circle nav-icon"></i>
                 <p>mantenimiento apariencias fisicas</p>
               </a>
             </li>

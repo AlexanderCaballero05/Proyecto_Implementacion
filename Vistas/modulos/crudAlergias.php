@@ -50,7 +50,8 @@
            }
           ?>
           <button  data-toggle="modal"  href="#AGREGAR_ALERGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Alergia</button>
-          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>  
+          <button  onclick="Descargar3()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>  
+          <button  onclick="Descargar1()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button> 
           <!-- Inicios del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -260,7 +261,17 @@
       window.open('Reportes_Prosecar/reporteAlergia.php','_blank');
       window.open(this.href,'_self');
     }
+    function Descargar1() {
+      window.open('Vistas/REPORTE.php','_blank');
+      window.open(this.href,'_self');
+    }
   </script> 
+  <script>
+    function Descargar3() {
+      window.open('Reportes_Prosecar/reporteCitaMedica.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
 
 <script type="text/javascript"> 
   $(document).ready( function () {

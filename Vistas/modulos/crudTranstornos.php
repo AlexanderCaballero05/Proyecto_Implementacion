@@ -9,13 +9,18 @@
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
-      <h2>MANTENIMIENTO DE TRANSTORNOS</h2>
+
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
     <div class="container-fluid">
+    <section class="content-header text-xl-center mb-3 btn-light">
+        <h1>
+            <h4>MANTENIMIENTO DE TRASTORNOS</h4>
+        </h1>     
+    </section>
       <div class="row">
         <div class="col-md-12">
            
@@ -44,7 +49,7 @@
                     {
 
                     ?> 
-                    <button  data-toggle="modal"  href="#AGREGAR_NOPATOLOGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Transtorno</button>
+                    <button  data-toggle="modal"  href="#AGREGAR_NOPATOLOGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Trastorno</button>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     <?php 
 
@@ -238,7 +243,7 @@
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Nuevo Transtorno</h4>
+                        <h4 class="text-center">Nuevo Trastorno</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -264,11 +269,7 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO TRANSTORNO --> 
-
-  <!-- Button trigger modal -->
-
-
-<!-- Modal -->
+</div>
 
 <!-- funciones del sistema -->
 <script>

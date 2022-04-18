@@ -295,34 +295,8 @@ session_start();
     });
 });
 </script>
-<script type="text/javascript">
-function mostr() {
-  document.getElementById("vi").style.display="block";
-}
-function ocultar() {
-  document.getElementById("vi").style.display="none";
-}
-</script>
-<script type="text/javascript">
-function mostrarr() {
-  document.getElementById("vii").style.display="block";
-}
-function ocultarr() {
-  document.getElementById("vii").style.display="none";
-}
-</script>
-<script type="text/javascript">
-function mostrarrr() {
-  document.getElementById("viii").style.display="block";
-}
-function ocultarrr() {
-  document.getElementById("viii").style.display="none";
-}
-</script>
-<script type="text/javascript">
- function mayus(e) {
-   e.value = e.value.toUpperCase();
- }
+
+
 </script>
 <script type="text/javascript"> function solonumeros(e) {
        tecla = (document.all) ? e.keyCode : e.which;
