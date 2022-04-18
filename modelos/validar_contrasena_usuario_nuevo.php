@@ -7,7 +7,8 @@ include_once "conexion.php";
 <?php
 if(isset($_SESSION['vario'])) {
     $nomUser=$_SESSION['vario'];
-    $contraActual=($_POST['contraAnte']);
+    $contraActual=crypt($_POST['contraAnte'],'$2a$07$usesomesillystringforsalt$');
+   
 
     try{   
           //$sentencia_sp =$db->prepare("CALL Sp_obtener_cod_usuario(?,?);"); //llamar al procedimiento almacenado con la fucion prepare de PHP
@@ -25,6 +26,7 @@ if(isset($_SESSION['vario'])) {
                     if(isset($_POST['GUARDARCONTRA'])){
                         $contraNueva =($_POST['clave_nueva']);
                         $contraConfirm =($_POST['confirmar_clave']);
+                        $pass= crypt($contraNueva,'$2a$07$usesomesillystringforsalt$');
                         $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";/*se le asigana expresion regular
                         que valida que la contraseña tenga minimo una letra mayuscula,minuscula,codigo especial y numeros  */
                             if($contraNueva<>$contraConfirm){
@@ -40,7 +42,8 @@ if(isset($_SESSION['vario'])) {
                                 if(preg_match($expre,$contraNueva)){
                                     //se puede mandar a laas otras validaciones
                                     try{
-                                        $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$contraNueva' AND CODIGO_USUARIO = '$mostrarUser';";
+                                       
+                                        $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$pass' AND CODIGO_USUARIO = '$mostrarUser';";
                                         $datos=$conn->query($sentencia);
                                         $row=$datos->num_rows;
                                         if($row>0){ //si la contraseña es la misma que tiene en el sistema
@@ -50,7 +53,8 @@ if(isset($_SESSION['vario'])) {
                                         }
                                         else{ //si la contraseña es diferente de la que tiene en el sistema
                                             try{
-                                                $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$mostrarUser'  AND CONTRASEÑA = '$contraNueva';";
+                                                
+                                                $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$mostrarUser'  AND CONTRASEÑA = '$pass';";
                                                 $busqueda=$conn->query($buscarclave);
                                                 $fila=$busqueda->num_rows;
                                                 if($fila>0){
@@ -60,14 +64,15 @@ if(isset($_SESSION['vario'])) {
                                                 }
                                                 else{
                                                     try{ //insert en la tabla de historial de contraseñas la nueva contraseña por el usario
+                                                        
                                                         $insert = "INSERT INTO tbl_ms_hist_contraseña (CODIGO_USUARIO,CONTRASEÑA,CREADO_POR_USUARIO)
-                                                        VALUES ('$mostrarUser','$contraNueva','$mostrarUser')";
+                                                        VALUES ('$mostrarUser','$pass','$mostrarUser')";
                                                         $resultado=$conn->query($insert);
                                                         
                                                         if($resultado>0){
                                                         //actualiza la tabla de tbl_usuario el campo de la contraseña el campo de modificado por
                                                             $update = "UPDATE tbl_usuario u
-                                                            SET u.CONTRASENA = '$contraNueva',
+                                                            SET u.CONTRASENA = '$pass',
                                                             u.CODIGO_ESTADO = 2
                                                             WHERE u.NOMBRE_USUARIO ='$nomUser'";
                                                    

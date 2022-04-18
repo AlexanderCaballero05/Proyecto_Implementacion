@@ -35,8 +35,8 @@
                         }else{
 
                           if(preg_match($expre,$contraNueva)){
-
-                                $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$contraNueva' AND CODIGO_USUARIO = '$mostrarUser';";
+                            $pass=crypt($contraNueva,'$2a$07$usesomesillystringforsalt$');
+                                $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$pass' AND CODIGO_USUARIO = '$mostrarUser';";
                                 $datos=$conn->query($sentencia);
                                 $row=$datos->num_rows;
                                 if($row>0){ //si la contraseña es la misma que tiene en el sistema
@@ -45,7 +45,7 @@
                                     </script>";
                                 }else{
 
-                                    $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$mostrarUser'  AND CONTRASEÑA = '$contraNueva';";
+                                    $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$mostrarUser'  AND CONTRASEÑA = '$pass';";
                                     $busqueda=$conn->query($buscarclave);
                                     $fila=$busqueda->num_rows;
                                     if($fila>0){
@@ -55,14 +55,14 @@
                                     }else{
 
                                       $insert = "INSERT INTO tbl_ms_hist_contraseña (CODIGO_USUARIO,CONTRASEÑA,CREADO_POR_USUARIO)
-                                                        VALUES ('$mostrarUser','$contraNueva','$mostrarUser')";
+                                                        VALUES ('$mostrarUser','$pass','$mostrarUser')";
                                                         $resultado=$conn->query($insert);
 
 
                                                         if($resultado>0){
                                                           //actualiza la tabla de tbl_usuario el campo de la contraseña el campo de modificado por
                                                               $update = "UPDATE tbl_usuario u
-                                                              SET u.CONTRASENA = '$contraNueva'
+                                                              SET u.CONTRASENA = '$pass'
                                                               WHERE u.NOMBRE_USUARIO ='$nomUser'";
                                                      
                                                               $resul=$conn->query($update);

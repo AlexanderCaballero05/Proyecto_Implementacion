@@ -37,19 +37,26 @@
                       </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="Usuario-recuperar"><i class="fas fa-user"></i></span>
-                        <input required type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username" aria-describedby="basic-addon1" minlength="6" maxlength="15" onkeyup="mayus(this);">
+                        <input required type="text" name="usuario"
+                         class="form-control"  placeholder="Ingresa el usuario"
+                          aria-label="Username" aria-describedby="basic-addon1" minlength="6" 
+                          maxlength="15" onkeyup="mayus(this);">
                     </div>
 
                     <div class="d-grid gap-2">
-                       <button type="submit" name="correo" id="correo"  class="btn btn-light border-secondary" type="button">
+                       <button type="submit" name="correo" id="correo" 
+                        class="btn btn-light border-secondary" type="button">
                            Recuperar contrase&ntilde;a por correo
                        </button>
 
-                       <button type="submit" name="recu" id="recu" class="btn btn-light border-secondary" type="button">
+                       <button type="submit" name="recu" id="recu" 
+                       class="btn btn-light border-secondary" type="button">
                              Recuperar via preguntas secretas
                        </button>
 
-                       <button type="reset" onclick="location.href='../../index.php'" class="btn btn-block btn-warning btn-flat">
+                       <button type="reset" 
+                       onclick="location.href='../../index.php'" 
+                       class="btn btn-block btn-warning btn-flat">
                         <strong>Cancelar</strong> 
                      </button>
                      

@@ -38,26 +38,37 @@
 
                   <div class="input-group mb-4">
                       <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingUsuario" id="ingUsuario" 
+                      class="form-control" placeholder="Ingresa tu nombre de usuario" 
+                      autocomplete = "off"  onkeypress="return soloLetras(event);" 
+                      minlength="3" maxlength="20" onkeyup="mayus(this);" required 
+                      onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                       <div class="invalid-tooltip">
                          Llene este campo
                       </div>
                   </div>
                   <div class="input-group mb-4">
-                      <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="ingPassword" id="ingPassword" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"   minlength="8" maxlength="30" required onblur="quitarespacios(this);" onkeyup="sinespacio(this);">
+                      <span  class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
+                      <input type="password" name="ingPassword" id="ingPassword" 
+                      class="form-control" placeholder="Ingresa tu contrase&ntilde;a"
+                       aria-label="Username" aria-describedby="basic-addon1"   
+                       minlength="8" maxlength="30" required onblur="quitarespacios(this);"
+                        onkeyup="sinespacio(this);">
                       <div class="invalid-tooltip">
                         Llene este campo
                       </div>
                   </div>
                  </br>
                   <div class="d-grid">
-                      <button style="border-radius: 20px;" name = "btningresar" type="submit" class="btn btn-danger btn-block">INGRESAR</button>
+                      <button style="border-radius: 20px;" name = "btningresar" 
+                      type="submit" class="btn btn-danger btn-block">INGRESAR</button>
                   </div>
                   <div class=" text-center my-3"> 
-                     <span><a style="color:black; text-decoration:none" href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
+                     <span><a style="color:black; text-decoration:none"
+                      href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
                      </br>
-                     <span><a style=" text-decoration:none" href="vistas/modulos/auto_registro.php">Registrate </a></span>
+                     <span><a style=" text-decoration:none" 
+                     href="vistas/modulos/auto_registro.php">Regístrate </a></span>
                    </div>
                    <?php
 

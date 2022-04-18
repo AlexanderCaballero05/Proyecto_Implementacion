@@ -19,6 +19,7 @@ $correo = $_POST['ingcorreo'];
 //DATOS PARA LA TABLA DE USUARIOS
 $usuario = $_POST['ingusuario'];
 $contrasena = $_POST['ingcontrasena'];
+$pass=crypt($contrasena,'$2a$07$usesomesillystringforsalt$');
 $fecha_vencimiento = date("Y-m-d",strtotime($fechaActual."+ 60 days"));
 
 // VERIFICAR LOS DATOS NO EXISTAN EN LA BASE DE DATOS ANTES DE INSERTAR LOS DATOS
@@ -67,7 +68,7 @@ if(isset($_POST['btnregistrar'])){
   $resultado=$conn->query( $querycorreo);
 
 
-  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA, FECHA_VENCIMIENTO, FECHA_CREACION) VALUES  ('$codigo','$usuario','6','3','$contrasena','$fecha_vencimiento','$fechaActual')";
+  $queryregisusuario = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA, NOMBRE_USUARIO, CODIGO_ESTADO, CODIGO_TIPO_ROL,CONTRASENA, FECHA_VENCIMIENTO, FECHA_CREACION) VALUES  ('$codigo','$usuario','6','3','$pass','$fecha_vencimiento','$fechaActual')";
   $resultado=$conn->query( $queryregisusuario);
   
   

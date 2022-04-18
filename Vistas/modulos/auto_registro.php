@@ -87,7 +87,7 @@
                     <div class="row mb-4">
                     <div class="col">
                        <label for="telefono" class="form-label">Número de teléfono:</label>
-                       <input type="text" name="telefono" class="form-control" placeholder="99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="20" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                       <input type="text" name="telefono" class="form-control" placeholder="EJEM.99001100" aria-label="Número de teléfono" onkeyup="mayus(this);" maxlength="20" minlength="8" onkeypress="return solonumero(event)"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                     </div>
                      <div class="col">
                      <label for="telefono" class="form-label">Dirección:</label>
@@ -144,7 +144,7 @@
                   <div class="col">
                   <div class="input-group mb-4" id="grupo__clave_nueva">
                       <span  class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  id="clave_nueva" name="clave_nueva" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="9" >
+                      <input type="password" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  id="clave_nueva" name="clave_nueva" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="" >
                       <p class="formulario__input-error">La contraseña tiene que tener mayusculas,minisculas y caracteres especiales.</p>
                   </div>
                   </div>
@@ -152,7 +152,7 @@
                   <div class="col">
                   <div class="input-group mb-4" id="grupo__confirmar_clave">
                       <span    class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="15" >
+                      <input name = "ingcontrasena" type="password" class="form-control" placeholder="Confirma tu contrase&ntilde;a"  id="confirmar_clave" name="confirmar_clave" required onblur="quitarespacios(this);"  onkeyup="sinespacio(this);" required="" minlength="8" maxlength="" >
                       <p class="formulario__input-error">La contraseña tiene que coincidir con la contraseña anterior.</p>
                   </div>
                   </div>
