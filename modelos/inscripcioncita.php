@@ -147,48 +147,65 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 
   //con lo de ditar no toque,porque ya les daba y no tengo el procediemiento :v ,ya eso ustedes lo terminan 
  ///BOTON DE EDITAR 
-if (isset($_POST['cod_edit_cita'])){
-  if(isset($_POST['edit_cita'])){
-    $fecha= $_POST['edit_fecha_cita'];
-    $hora =$_POST['edit_hora'];
-    $estado =$_POST['MODUSUARIO'];
-    $cod =$_POST['cod_edit_cita'];
-    try{
-      $consulta_estudiante = $db->prepare("SELECT tic.CODIGO_ESPECIALISTA  , tic.HORARIO , tic.FECHA_CITA 
-        from tbl_inscripcion_cita tic where tic.CODIGO_CITA =  ? and tic.HORARIO= ? and tic.FECHA_CITA = ? ;");
-        $consulta_estudiante->execute(array( $cod,$hora, $fecha));
-        $row=$consulta_estudiante->fetchColumn();
-        if ($row == 0){
-          $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado' where CODIGO_CITA ='$cod' ;";
-          $consulta=$conn->query($sql);
-          if ($consulta > 0){
-           echo "<script>
-              window.location = 'crudinscripcioncita';
-               </script>";
-             $codigoObjeto=32;
-             $accion='Actualizacion';
-             $descripcion='Se vizualiza citas registradas';
-             bitacora($codigoObjeto,$accion,$descripcion);
-          }else{ 
-           echo "<script>
-           alert('Error al actualizar el registro');
-           window.location = 'crudinscripcioncita';
-           </script>";
-         }
-       }else{  
-         echo "<script>
-           alert('Error al debe buscar otra hora o fecha');
-           window.location = 'crudinscripcioncita';
-           </script>";
-           exit;   
-                }
-    }  catch(PDOException $e){
+ if (isset($_POST['cod_edit_cita2'])){
+  if(isset($_POST['edit_cita1'])){
+    $fecha= $_POST['edit_fecha_cita1'];
+    $hora =$_POST['edit_hora1'];
+    $estado =$_POST['estado_edit1'];
+    $cod =$_POST['cod_edit_cita2'];
+     try {
+      $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
+       $sentencia ->execute(array($cod));
+       $ESPECIALISTAS = $sentencia->fetchALL();
+        foreach ( $ESPECIALISTAS AS $RESULTADOS){
+           $personas = $RESULTADOS['CODIGO_PERSONA'];
+           $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
+        
+         $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$cod));
+          $row=$sentencia_paciente->fetchColumn();
+          if($row >0){
+            echo "<script>
+                alert('El ya tiene una cita registrada  a esa fecha ');
+               window.location = 'crudinscripcioncita';
+                </script>";
+                exit;
+          }else {
+            $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$cod));
+           $row=$sentencia_especialista->fetchColumn();
+           if($row >0){
+             echo "<script>
+                 alert('El ya tiene una cita registrada a esa fecha ');
+                window.location = 'crudinscripcioncita';
+                 </script>";
+                 exit;
+           } else {
+            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado' where CODIGO_CITA ='$cod' ;";
+            $consulta=$conn->query($sql);
+            if ($consulta > 0){
+             echo "<script>
+                window.location = 'crudinscripcioncita';
+                 </script>";
+               $codigoObjeto=32;
+               $accion='Actualizacion';
+               $descripcion='Se vizualiza citas registradas';
+               bitacora($codigoObjeto,$accion,$descripcion);
+               
+               }
+          }
+
+          } // fin else 
+      }///  fin foreach
+     }catch(PDOException $e){
           echo $e->getMessage(); 
         return false;
-          }  
+          } 
   }
   }
-
 
 
 
