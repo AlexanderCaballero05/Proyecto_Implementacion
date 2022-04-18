@@ -209,7 +209,12 @@
                                 <p>Agregar Cita </p>
                               </a>
                             </li>
-                           
+                            <li class="nav-item">
+                              <a href="crudcitasgenerales"class="nav-link">
+                                <i class="far fa-edit nav-icon"></i>
+                                <p>Mantenimiento Citas </p>
+                              </a>
+                            </li>
                           </ul>
                         </li>
                     

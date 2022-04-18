@@ -108,7 +108,7 @@ session_start();
          $_GET["ruta"] == "crudtiposocioeconomico" ||
          $_GET["ruta"] == "estado" ||
          $_GET["ruta"] == "crudfamiliares" ||
-         
+         $_GET["ruta"] == "crudcitasgenerales" ||
          $_GET["ruta"] == "crudEstudiante" ||
          $_GET["ruta"] == "crudContenidoEconoEstudiante" ||
          $_GET["ruta"] == "crudRoles" ||
