@@ -48,8 +48,11 @@
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
 
+
+               
+                
+                <!--Form del archivo expediente -->
                 <form method="POST" id="form">
-                  <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
 
                
                <hr>
@@ -239,6 +242,21 @@
                  <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
 
                 </form>
+                <!--fin form del archivo expediente-->
+
+                 <!--form para el reporte de la consulta-->
+                 <a> 
+                  <form action="Reportes_Prosecar/reporteConsultaPsicologica.php" method="POST"> 
+                  <div class="row"> 
+                    <input hidden name="codigo_cita_reporte" value="<?php echo $codigo_cita;?>">  
+                    <input type="text" name="id_persona"  hidden value="<?php echo $persona ?>">
+                    <input type="hidden" name="id_usuario" value="<?php echo $cod_usuario ?>">
+                  </div>
+                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                  </form>
+
+                </a>
+                <!--fin form para el reporte de la consulta-->
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 
