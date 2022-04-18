@@ -26,9 +26,10 @@
                     }
                     else{ 
                         if(preg_match($expre,$clave)){
+                            $pass=crypt($clave,'$2a$07$usesomesillystringforsalt$');
                             //se puede mandar a laas otras validaciones
                             try{
-                                $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$clave' AND CODIGO_USUARIO = '$usuari';";
+                                $sentencia ="SELECT * FROM tbl_usuario WHERE CONTRASENA = '$pass' AND CODIGO_USUARIO = '$usuari';";
                                 $datos=$conn->query($sentencia);
                                 $row=$datos->num_rows;
                                 if($row>0){ //si la contraseña es la misma que tiene en el sistema
@@ -38,7 +39,7 @@
                                 }
                                 else{ //si la contraseña es diferente de la que tiene en el sistema
                                     try{
-                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASEÑA = '$clave';";
+                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASEÑA = '$pass';";
                                         $busqueda=$conn->query($buscarclave);
                                         $fila=$busqueda->num_rows;
                                         if($fila>0){
@@ -49,12 +50,12 @@
                                         else{
                                             try{ //insert en la tabla de historial de contraseñas la nueva contraseña por el usario
                                                 $insert = "INSERT INTO tbl_ms_hist_contraseña (CODIGO_USUARIO,CONTRASEÑA,CREADO_POR_USUARIO)
-                                                VALUES ('$usuari','$clave','$usuari')";
+                                                VALUES ('$usuari','$pass','$usuari')";
                                                 $resultado=$conn->query($insert);
                                                 
                                                 if($resultado>0){
                                                 //actualiza la tabla de tbl_usuario el cmapo de la contraseña el campo de modificado por
-                                                    $update = "UPDATE tbl_usuario SET CONTRASENA ='$clave',
+                                                    $update = "UPDATE tbl_usuario SET CONTRASENA ='$pass',
                                                      MODIFICADO_POR ='$usuari'
                                                     WHERE NOMBRE_USUARIO = '$usuario' ";
                                                     $resul=$conn->query($update);

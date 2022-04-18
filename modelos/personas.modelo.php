@@ -24,7 +24,7 @@
              $direccion = ($_POST['direccion']);
              $nombre_usuario = ($_POST['nombre_usuario']);
              $estado = "1";  
-             $contrasena = ($_POST['contrasena']);
+             $contrasena = crypt($_POST['contrasena'],'$2a$07$usesomesillystringforsalt$');
              $fechaActual = date('Y-m-d');  
              $especialidad_medico = ($_POST['medico']);   
              $especialidad_psicologo = ($_POST['psicologo']); 
@@ -340,7 +340,8 @@
                     </script>";
                     }else{
                       if(preg_match($expre,$connueva)){
-                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO','$connueva');" ;
+                        $pass= crypt($connueva,'$2a$07$usesomesillystringforsalt$');
+                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass';" ;
                         $consulta=$conn->query($sql);
                         if ($consulta>0) {
                           echo "<script>
@@ -428,129 +429,5 @@
   }
 ?> 
 
-<?php
-  if(isset($_POST['CODUSUARIO'])) { 
-    $userregis = "Administrador";
-    if (isset($_POST['ACT_PERSONA'])){
-      $CODUSUARIO = ($_POST['CODUSUARIO']);
-      $USUARIO = ($_POST['NOMUSUARIO']); 
-      $PASS = ($_POST['clave_nueva']);
-      $CONFIRMA = ($_POST['confirmar_clave']);
-      $ROL = ($_POST['ROLUSUARIO']);
-      $ESTADO = ($_POST['ESTADOUSUARIO']);
-      $correo_mofi = ($_POST['correo_modi']);
-      $nombre_modi = ($_POST['nombre_modi']);
-      $apellido_modi = ($_POST['apellido_modi']);
-      $connueva = ($_POST['clave_nueva']);
-      $confconn = ($_POST['confirmar_clave']);
-      $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
-
-          try{
-            // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
-            $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
-            $sentencia->execute(array($correo_mofi));
-            $row=$sentencia->fetchColumn();
-            $ID_PERSONA_CORREO = $row;
-            if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
-                try{
-                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$ROL','$userregis');" ;
-                $consulta=$conn->query($sql);
-                if ($consulta>0) {
-                  if (empty($connueva) and empty($confconn)) {
-                    echo "<script>
-                    window.location = 'ediusuarios';
-                    </script>";
-                  }else{
-                    if($connueva<>$confconn){
-                      echo "<script>
-                    alert('Las contraseñas no son iguales');
-                    window.location = 'ediusuarios';
-                    </script>";
-                    }else{
-                      if(preg_match($expre,$connueva)){
-                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO','$connueva');" ;
-                        $consulta=$conn->query($sql);
-                        if ($consulta>0) {
-                          echo "<script>
-                          window.location = 'ediusuarios';
-                          </script>";
-                        }
-                      }else{
-                        echo "<script>
-                        alert('La contraseña que ingreso no es segura');
-                        window.location = 'ediusuarios';
-                        </script>";
-                      }
-                    }
-                  }
-                }else{ 
-                echo "<script>
-                alert('Error al actualizar el registro');
-                window.location = 'ediusuarios';
-                </script>";
-                }
-                return true;
-                } catch(PDOException $e) {
-                echo $e->getMessage();  
-                return false;
-                }
-            }elseif($ID_PERSONA_CORREO <> $CODUSUARIO){ 
-            echo "<script>
-            alert('Ya existe una persona con el número de telefono: $correo_mofi');
-           window.location = 'ediusuarios';
-            </script>";
-            }//if del correo :v
-            return true;
-          } catch(PDOException $e) {
-          echo $e->getMessage();  
-          return false;
-          }
-  }//if padre
-}//if padre del padre :v
 
   
-  //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR
-  if(isset($_POST['usuario_eliminar'])){
-    if(isset($_POST['ELIMINAR'])){
-      $code = ($_POST['usuario_eliminar']);
-      try{
-        $query_tablas =  $db->prepare("SELECT  u.CODIGO_PERSONA  from  
-        tbl_usuario  u ,tbl_ms_hist_contraseña h, tbl_preguntas_usuarios p
-        where u.CODIGO_USUARIO = h.CODIGO_USUARIO and  u.CODIGO_USUARIO = p.CODIGO_USUARIO and u.CODIGO_USUARIO = (?);");
-        $query_tablas->execute(array($code));
-        $row=$query_tablas->fetchColumn();
-          if($row >0){
-           echo "<script>
-           alert('¡No se puede eliminar este usuario,tiene relaciones!');
-           window.location = 'ediusuarios';
-           </script>";
-           exit;
-          }else{
-             try{
-              $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-              mysqli_query($link, "DELETE FROM tbl_usuario WHERE  CODIGO_USUARIO = '$code' AND CODIGO_USUARIO <>1");
-              
-              if(mysqli_affected_rows($link)>0){
-                  echo "<script>
-                  alert('¡Usuario eliminado!');
-                  window.location = 'ediusuarios';
-                  </script>";
-                  exit;
-              }else{
-                echo "<script>
-                alert('¡No se puede eliminar este usuario!');
-                window.location = 'ediusuarios';
-                </script>";
-                exit;
-              }
-             }catch(PDOException $e) {
-             echo $e->getMessage();  
-             return false; }
-          }//fin del else
-        return true; //FIN DEL ELSE
-      }catch(PDOException $e) {
-       echo $e->getMessage();  
-       return false; }
-    }
-  }
-  ?> 

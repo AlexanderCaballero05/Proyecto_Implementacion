@@ -57,20 +57,24 @@
                    <div class="form-group mb-3" >
                             <label>Contrase&ntilde;a anterior:</label>
                             <input type="password"  name="contraAnte" class="form-control" 
-                            required minlength="5" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
+                            required minlength="5" maxlength="<?php echo "$valor"?>"
+                             title="Configure con los valores solicitados" 
+                             onkeyup="sinespacio(this);"
                             >
                             <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.</p>
                             </div>
                     <div class="form-group mb-3" id="grupo__clave_nueva">
                         <label>Contrase&ntilde;a:</label>
-                        <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
+                        <input  type="password" id="clave_nueva"
+                         name="clave_nueva" class="form-control" 
                           required  minlength="5" maxlength="<?php echo "$valor"?>"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
                            >
                         <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas y caracteres especiales y un numero.</p>
                     </div>
                     <div class="form-group mb-3" id="grupo__confirmar_clave">
                         <label>Confirmar contrase&ntilde;a:</label>
-                        <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
+                        <input  type="password" id="confirmar_clave" 
+                        name="confirmar_clave" class="form-control"
                          required minlength="5"  maxlength="<?php echo "$valor"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);"
                            >
                         <p class="formulario__input-error" >Ambas contraseñas deben ser iguales.</p>
