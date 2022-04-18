@@ -7,7 +7,8 @@
 ?>
 
 <?php
-    if(isset($_POST['codigo_consulta'])){
+
+    if(isset($_POST['GUARDAR_PLAN'])){
         
             
             $codigo_consulta = ($_POST['codigo_consulta']);
@@ -28,13 +29,13 @@
                         if($consulta >0){
 
                             $cambiar_estado = "UPDATE tbl_inscripcion_cita
-                            SET CODIGO_ESTADO = '13'
+                            SET CODIGO_ESTADO = '16'
                             WHERE CODIGO_CITA = ' $codigo_cita'";
 
                             $consulta_estado =$conn->query($cambiar_estado);
 
                             echo "<script>
-                            window.location = 'ProcesoCitasPsicologicas'
+                            window.location = 'procesoPlanTerapeuticoInforme'
                             </script>";
 
                         }else{
@@ -47,6 +48,29 @@
             
 
     }
+
+
+?>
+
+
+<?php
+//codigo que valida si se decide cancelar registrar el plan
+if(isset($_POST['cancelar_plan'])){
+    $codigo_cita = ($_POST['codigo_cita']);
+
+    $cambiar_estado = "UPDATE tbl_inscripcion_cita
+    SET CODIGO_ESTADO = '12'
+    WHERE CODIGO_CITA = ' $codigo_cita'";
+
+        $consulta_estado =$conn->query($cambiar_estado);
+
+        echo "<script>
+        window.location = 'expedientePsicologico'
+        </script>";
+
+
+
+}
 
 
 ?>

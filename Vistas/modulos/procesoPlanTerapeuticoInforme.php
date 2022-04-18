@@ -30,16 +30,19 @@
             <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class="nav-link" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="#">Informe de plan</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
@@ -48,11 +51,8 @@
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
 
-                <form method="POST" id="form">
-                  <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-
+                <form method="POST"id="form">
                
-               <hr>
 
                 <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
                       <h5>Datos de paciente</h5>
@@ -77,7 +77,7 @@
                                                                    AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
                                                                    AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                                    AND es.CODIGO_PERSONA = '$cod_usuario'
-                                                                   AND i.CODIGO_ESTADO = '12' 
+                                                                   AND i.CODIGO_ESTADO = '16' 
                                                                    and  i.AREA_CITA = '3'
                                                                    AND i.FECHA_CITA = CURDATE();";
                            $resul=$conn->query($query);                
@@ -115,62 +115,7 @@
                     }
                  ?>
                   </div><!--fin row -->
-                  <HR>
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <h5>Expediente Paciente</h3>
-                  </div>
-                  <hr>
-
-                  <div class="row">
-                      <?php
-                       $consulta = "SELECT exp.CODIGO_EXPEDIENTE, concat(per.PRIMER_NOMBRE,' ',per.PRIMER_APELLIDO) as nombr, exp.ANTECEDENTES_FAMILIARES, exp.ANTECEDENTES_PERSONALES, exp.ANTECEDENTES_CLINICOS, GROUP_CONCAT(sin.TIPO) as TIPO
-                       FROM tbl_expediente_psicologico_unico exp, tbl_persona per, tbl_personas_sintomas psin, tbl_sintomas_neuroticos sin            			       
-                       WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
-                       AND exp.CODIGO_EXPEDIENTE = psin.CODIGO_EXPEDIENTE
-                       AND psin.CODIGO_SINTOMA_NEUROTICO = sin.CODIGO_SINTOMA_NEUROTICO
-                       AND exp.CODIGO_PERSONA = '$persona'";
-                       $resul=$conn->query($consulta);
-                      ?>
-                      <?php 
-                         if ($resul->num_rows > 0) {
-                         while($row = $resul->fetch_assoc()) { 
-                         $sangre = $row['ANTECEDENTES_FAMILIARES'];
-                         $tratamientos = $row['ANTECEDENTES_PERSONALES'];
-                         $enfermedades = $row['ANTECEDENTES_CLINICOS'];
-                         $alergias = $row['TIPO'];
-                         
-                        ?>   
-                     <div class="col-sm-3 mb-3">
-                         <label for="" class="control-label">Antecedentes Familiares</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $sangre ;?></textarea>
-                          </div>
-                     </div>
-                     <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Antecedentes Personales</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $tratamientos ;?></textarea>
-                          </div>
-                     </div>
-                     <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Antecedentes clinicos</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $enfermedades;?></textarea>
-                          </div>
-                     </div>
-                     <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Sintomas neuroticos</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $alergias;?></textarea>
-                          </div>
-                     </div>
-                
-                       
-                       <?php
-                       }
-                       }
-                      ?>
-                  </div><!--fin row -->
+            
 
                   <hr>
                   <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
@@ -187,7 +132,7 @@
                                                 AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                   AND con.CODIGO_CITA = i.CODIGO_CITA
                                                     AND es.CODIGO_PERSONA = '$cod_usuario'
-                                                      AND i.CODIGO_ESTADO = '12' 
+                                                      AND i.CODIGO_ESTADO = '16' 
                                                         AND  i.AREA_CITA = '3'
                                                           AND con.CODIGO_CITA = '$codigo_cita'
                                                             AND i.FECHA_CITA = CURDATE();";
@@ -200,6 +145,7 @@
                          $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
                          $evolucion = $row['OBSEVARCIONES'];
                          $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
+                         $codigo_consulta = $row['CODIGO_EXPEDIENTE_PSICO'];
                          
                         ?> 
                       <div  class="col-sm-3 mb-3">
@@ -232,19 +178,92 @@
                       ?>
                   </div><!-- fin row-->
                  
+                  <hr>
+                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                     <h5>Informacion de plan terapéutico</h5> 
+                  </div>
+                  <hr> 
+                    
+                  <div class="row">
+                      <?php
+                       $consulti ="SELECT plan.CODIGO_CONSULTA , plan.ACTIVIDAD, plan.TECNICA, plan.MATERIALES, plan.TAREAS, plan.RESULTADOS
+                       FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_expediente_psicologico_consulta con, tbl_plan_terapeutico plan
+                                             WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                               AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                 AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                   AND con.CODIGO_CITA = i.CODIGO_CITA
+                                                    AND con.CODIGO_EXPEDIENTE_PSICO = plan.CODIGO_CONSULTA
+                                                        AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                          AND i.CODIGO_ESTADO = '16' 
+                                                            AND  i.AREA_CITA = '3'
+                                                              AND con.CODIGO_CITA = '$codigo_cita' 
+                                                                AND plan.CODIGO_CONSULTA = '$codigo_consulta'
+                                                                  AND i.FECHA_CITA = CURDATE();";
+                        $resul=$conn->query($consulti);
+                      ?>
+                      <?php 
+                         if ($resul->num_rows > 0) {
+                         while($row = $resul->fetch_assoc()) { 
+                         $actividad = $row['ACTIVIDAD'];
+                         $tecnica = $row['TECNICA'];
+                         $materiales = $row['MATERIALES'];
+                         $tareas = $row['TAREAS'];
+                         $resultados = $row['RESULTADOS'];
+                         
+                        ?> 
+                      <div  class="col-sm-3 mb-3">
+                         <label  class="form-label">Actividades</label>
+                          <div class="form-group">
+                             <textarea  type="textarea" readonly class="form-control" ><?php echo $actividad;?></textarea>
+                          </div>
+                      </div>
+                      <div  class="col-sm-3 mb-3">
+                         <label  class="form-label">Tecnicas</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $tecnica ; ?></textarea>
+                          </div>
+                      </div>
+                      <div  class="col-sm-3 mb-3">
+                         <label  class="form-label">Materiales</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $materiales; ?></textarea>
+                          </div>
+                      </div>
+                      <div  class="col-sm-3 mb-3">
+                         <label  class="form-label">Tareas</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $tareas; ?></textarea>
+                          </div>
+                      </div>
 
-                  <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
-                  Crear Plan terapeutico
-               </button>
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
+                    </div><!-- fin row-->
+
+                    <div class="row">
+                      <div  class="col-sm-3 mb-3">
+                         <label  class="form-label">Resultados</label>
+                          <div class="form-group">
+                             <textarea  type="textarea" readonly class="form-control" ><?php echo $resultados;?></textarea>
+                          </div>
+                      </div>
+
+                      
+                     
+                  </div>
+                  <?php
+                       }
+                       }
+                      ?>
+                  <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+               <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
 
                 </form>
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 
     </section><!-- FINAL SECTION -->
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
+
+<!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+  <script>
  var isSubmitting = false
 
 $(document).ready(function () {

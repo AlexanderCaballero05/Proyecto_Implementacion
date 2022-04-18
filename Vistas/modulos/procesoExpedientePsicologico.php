@@ -1,7 +1,8 @@
 <?php
- include_once "conexion.php";
- include_once "conexion3.php";
- include_once  "conexionpdo.php";
+include_once "conexion.php";
+include_once "conexion3.php";
+include_once 'conexionpdo.php';
+ include "conexionpdo.php";
 ?>
 <head>
  
@@ -9,7 +10,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body>
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -23,11 +24,11 @@
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas Psicologicas</a>
+         <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
             </li>
-            <li class="nav-item active">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
@@ -38,49 +39,62 @@
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
-             <form method="POST" class="needs-validation" novalidate>
+             <form method="POST" class="needs-validation" novalidate id="form">
                     <strong>Datos generales de expediente</strong>
                     <hr>
                     <div class= "row"> 
                         <div  class="col-sm-8">
+                        <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>
                         <?php 
 
                         // AND i.FECHA_CITA = CURDATE();";
 
-                        $query2 = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE
-                        FROM tbl_inscripcion_cita i, tbl_persona pe
-                        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                        AND I.CODIGO_ESTADO = '11'
-                        AND i.AREA_CITA = '3'
+                        $query2 = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                AND i.CODIGO_ESTADO = '11' 
+                                                                and  i.AREA_CITA = '3'
+                                                                AND i.FECHA_CITA = CURDATE()
                       
                         ;";
                        
                         $resul2=$conn->query($query2);                
                         ?>
-                        <label for="" class="control-label">Nombre Paciente</label> 
-                        <div class="form-group">
-                            <select class="form-control select2" name="codigo_paciente_expediente_psicologico"> 
-                                <option selected disabled value="">--Buscar Paciente--</option>
+                        
                                 <?php 
                                     if ($resul2->num_rows > 0) {
                                     while($row2 = $resul2->fetch_assoc()) { 
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                <option value="<?php echo $codigo2?>" ><?php echo $nombre2;?></option>
+                                     <label for="" class="control-label">Paciente</label> 
+                          <div class="form-group">
+                            <input  readonly class="form-control" value="<?php echo $nombre2;?>">
+                            <input  hidden name="codigo_paciente_expediente_psicologico" value="<?php echo $codigo2;?>">
+                          </div>
                                 <?php 
                                 } 
                                 }
                                 ?>
-                                <div class="invalid-feedback">
-                                  campo obligatorio.
-                              </div>
-                            </select>
-                            
-                        </div>
+                               
                         </div><!--fin del paciente -->
 
                        
@@ -168,6 +182,59 @@
   </section>
 </div>
 </div>
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+</body>
+
 
 
 

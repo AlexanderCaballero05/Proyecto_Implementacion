@@ -84,13 +84,13 @@ if(isset($_POST['EXPEDIENTE_CITA'])){
         $consulTITA=$conn->query($update);
         if ($consulTITA >0 ){
             echo "<script> 
-            window.location = 'ProcesoCitasMedicos';
+            window.location = 'crudPacientesMedicos';
             </script>";  
             exit;
         }else{
             echo "<script> 
             alert('Ocurrio algun error,comuniquese con el admin :)');
-            window.location = 'ProcesoCitasMedicos';
+            window.location = 'crudPacientesMedicos';
             </script>";  
             exit;
         }

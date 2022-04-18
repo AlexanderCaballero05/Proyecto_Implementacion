@@ -48,7 +48,7 @@
             <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" id="form"><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -319,6 +319,25 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTUDIANTE --> 
+   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
    </body>
   <!-- Button trigger modal -->
 

@@ -67,7 +67,7 @@
         <div class="row"><!-- COLUMNA PRINCIPAL -->
           <div class="col-md-12"> <!-- COLUMNA DE REGISTRO DE PERSONAS -->
             <div class="card card-primary ">
-               <form id="FORMPERSONAS" method="POST" class="needs-validation" novalidate >
+               <form method="POST" class="needs-validation" novalidate id="form">
                   <div class="card-body">
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title"> <strong>Datos Generales persona</strong></h2>
@@ -355,9 +355,62 @@
         </div>
       </div>
     </div>
+   
     </section> <!-- Fin del section principal -->
 </div>
 </div>
+
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
 <script> 

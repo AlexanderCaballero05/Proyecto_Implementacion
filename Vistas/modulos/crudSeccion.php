@@ -10,8 +10,10 @@
  
 ?>
 <head>
+
+
 </head>
-<body oncopy="return false" onpaste="return false"> 
+<body oncopy="return false" onpaste="return false" > 
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -145,7 +147,7 @@
                           <div id="EDITARSECCION<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form  method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Sección</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -217,7 +219,7 @@
     <div id="AGREGAR_SECCION" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form  method="POST"  class="needs-validation" novalidate>
+                <form method="POST"  class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Sección</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -252,6 +254,26 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO  --> 
+   
+   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('form').data('initial-state', $('form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('form').serialize() != $('form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
    </body>
 
    <script>//previene que se mantenga una tecla pulsada
@@ -317,3 +339,5 @@
       })
   })()
 </script>
+
+

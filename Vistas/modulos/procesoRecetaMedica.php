@@ -14,7 +14,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
-                   
+
+
+
 
     <div id="AGREGAR_EXAMEN" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
@@ -96,7 +98,8 @@
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR UN MEDICAMENTO --> 
-
+   
+   <body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
     <div class="content-header">
     <div class="container-fluid">
@@ -111,28 +114,35 @@
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                 <a class="nav-link" style="color:#000000;" href="#">Citas Medicas</a>
-              </li>
-              <li class="nav-item">
-                <a  class="nav-link" aria-current="true" href="#"  style=" color:#000000;">Pre Clinica</a>
-              </li>
-              <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
 
             <li class="nav-item">
-            <a  class="nav-link active" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
             </li>
-            </ul>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="#">Recetas Medicas</a>
+            </li>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            </li>
+          </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
           <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Registro de recetas medicas</strong></h2>
            </div></br>
 
-         <form method="POST" class="needs-validation" novalidate>
+         <form method="POST" class="needs-validation" novalidate id="form">
 
          <div class="row pl-3 ">
          <?php
@@ -145,7 +155,7 @@
           $cod_usuario=$sentencia1->fetchColumn();
           ?>
         <?php   
-            $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE , i.FECHA_CITA
+            $query = "SELECT con.CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE  , i.FECHA_CITA
             FROM tbl_consulta_medica con, tbl_inscripcion_cita i, tbl_persona pe ,tbl_persona_especialidad es, tbl_estado esta
             WHERE con.CODIGO_CITA = i.CODIGO_CITA
             AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
@@ -287,6 +297,60 @@
    </div><!-- CIerre del container fluid--> 
   </section>
 </div><!-- Cierre del div wraper -->
+
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+</body>
+
 
 
 <!--Para el que vea este archivo perdon tando desmadre :'v  -->
