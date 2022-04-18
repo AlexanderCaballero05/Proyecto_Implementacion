@@ -104,8 +104,8 @@
                                   </a>
 
                                   <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank">
-                                     <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
+                                     <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
+                                     <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var6?>">
                                      <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
