@@ -249,7 +249,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Estado Civil</label>
-                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="10" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
+                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="30" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
                                 onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"  name="editar_estado" id="edifa" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
@@ -260,7 +260,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Nivel Educativo</label>
-                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" maxlength="15" minlength="5"autocomplete = "off" type="text"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
+                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" maxlength="20" minlength="5"autocomplete = "off" type="text"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
                                 onKeyDown="sinespacio(this);"   onkeyup="mayus(this);" name="editar_nivele" id="edini" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
@@ -273,7 +273,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Ingresos</label>
                                 <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" autocomplete = "off" type="text"  onkeypress="return solonumeros(event);" 
-                                 name="editar_ingresos" id="ediingre" onKeyDown="sinespacio(this);" required="">
+                                 name="editar_ingresos" id="ediingre" minlength="2" maxlength="6" onKeyDown="sinespacio(this);" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
                                 </div>
@@ -284,7 +284,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Iglesia</label>
                                 <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" autocomplete = "off" type="text"    
-                                onkeypress="return soloLetras(event);"  name="editar_iglesia" id="ediglesia" required="">
+                                autocomplete = "off" type="text" onkeyup="mayus(this);" 
+                                onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"  name="editar_iglesia" id="ediglesia" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
                                 </div>
@@ -344,6 +345,25 @@ bitacora($codigoObjeto,$accion,$descripcion);
  
 
   </section>
+  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+  <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('form').data('initial-state', $('form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('form').serialize() != $('form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 <!-- Modal -->
 </body>            
 <script>
@@ -451,6 +471,9 @@ function soloLetras(e){
     e.value = cadena;
   };
   //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
   function mayus(e) {
     e.value = e.value.toUpperCase();
   }

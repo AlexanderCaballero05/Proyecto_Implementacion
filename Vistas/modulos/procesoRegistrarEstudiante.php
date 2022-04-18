@@ -42,14 +42,14 @@
           <div class="card-body"><!--Cuerpo del card body principal -->
           <!-- TITULO ENCABEZADO DATOS PERSONALES -->
             
-         <form method="POST" class="needs-validation" novalidate>
+         <form method="POST" class="needs-validation" novalidate id="form">
             <strong>Datos escolares</strong>
             <hr>
             </br>
 
             <div class="row mb-5 pl-3">
                     <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT_WS(DNI, ' / ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO, ' ',SEGUNDO_APELLIDO) AS NOMBRE
+                    $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
                     FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 4;";
                     $resultadod=$conn->query($query);                
                     ?>
@@ -310,51 +310,33 @@
 
                            <button type="submit"  id="GUARDARPERSONA" name="GUARDARPERSONA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                       </div>
+                      
           </form>
+          
           </div>
         </div>
    </div><!-- CIerre del container fluid-->
 
   </section>
 </div><!-- Cierre del div wraper -->
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
 
-</body>
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
 
+    $('#form').data('initial-state', $('#form').serialize());
 
-<script src="../../js/mensajes.alerta.js"></script>
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
 
-<script>
-(function() {
-    'use strict'
-
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
-
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-        .forEach(function(form) {
-            form.addEventListener('submit', function(event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-
-                form.classList.add('was-validated')
-            }, false)
-        })
-})()
-</script>
-
-<script>
-window.addEventListener("beforeunload", (evento) => {
-    if (true) {
-        evento.preventDefault();
-        evento.returnValue = "";
-        return "";
-    }else{
-      return "";
-    }
-});
 
 function window_mouseout( obj, evt, fn ) {
 
@@ -377,13 +359,84 @@ var from         = event.relatedTarget || event.toElement;
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
 
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
 if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
 
     // Haz lo que quieras aquí
-    alert( 'Algunos cambios hechos pueden no ser guardados' );
-    // localStorage.setItem( 'leftWindow', true );
+    alert( '!Estas a punto de salir!' );
+    localStorage.setItem( 'leftWindow', true );
 }
 } );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+
+   </body>
+
+   <script>//previene que se mantenga una tecla pulsada
+      var texto=document.getElementById('bloquear');
+      texto.addEventListener('keydown', function(keyboardEvent) {
+        if (keyboardEvent.repeat)
+            keyboardEvent.preventDefault();
+      });
+      var texto1 =document.getElementById('bloquear1');
+      texto1.addEventListener('keydown', function(keyboardEvent) {
+        if (keyboardEvent.repeat)
+            keyboardEvent.preventDefault();
+      });
+  </script>
+
+
+<script type="text/javascript"> 
+  $(document).ready( function () {
+      $('#tabla_seccion').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Sección:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+      })
+  } );
 </script>
+
+  <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteSeccion.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script> 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+
+
+
+

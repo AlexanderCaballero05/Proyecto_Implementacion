@@ -40,14 +40,13 @@
 
             if($insert_consulta > 0){
                 echo '<script>
-                        alert("Registro Exito");
-                        window.location = "procesoRegistrarFamiliares";
+                        window.location = "crudfamiliares";
                         </script>';
 
             }else{
               echo '<script>
               alert("Error al crear el registro");
-              window.location = "procesoRegistrarFamiliares";
+              window.location = "crudfamiliares";
               </script>';
 
            }

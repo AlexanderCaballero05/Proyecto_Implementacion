@@ -14,6 +14,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -41,12 +42,12 @@
           <div class="card-header"> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title" > <strong>Datos de familiares</strong></h2>
            </div></br>
-         <form method="POST" class="needs-validation" novalidate>
+         <form method="POST" class="needs-validation" novalidate id="form">
 
             <div class="row mb-5 pl-3">
                 
                     <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT_WS(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
+                    $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO, SEGUNDO_APELLIDO) AS NOMBRE
                     FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 7;";
                     $resultadod=$conn->query($query);                
                     ?>
@@ -106,7 +107,7 @@
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Ingresos mensuales</label> 
                           <div class="input-group">
-                          <input class="form-control" type="text" minlength="8" maxlength="8"  name="INGRESOS" id="" onKeyDown="sinespacio(this);" placeholder="Ejemplo: 5000" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
+                          <input class="form-control" type="text" minlength="2" maxlength="6"  name="INGRESOS" id="" onKeyDown="sinespacio(this);" placeholder="Ejemplo: 5000" autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
                           <div class="input-group-append">
                               <span class="input-group-text">Lps</span>
                             </div>
@@ -141,8 +142,64 @@
           </div>
         </div>
    </div><!-- CIerre del container fluid--> 
+   
   </section>
 </div><!-- Cierre del div wraper -->
+  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+  <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+</body>
+
+
+
 
 <script type="text/javascript">// funcion que convierte en mayuscula lo que se vaya ingresando.
 
@@ -257,4 +314,9 @@ function quitarespacios(e) {
             }, false)
         })
 })()
+
+
+function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
 </script>

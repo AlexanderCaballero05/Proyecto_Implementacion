@@ -16,7 +16,7 @@ include_once 'conexionpdo.php';
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body>
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -31,13 +31,13 @@ include_once 'conexionpdo.php';
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas Medicas</a>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
+
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Consultas Medicas</a>
             </li>
@@ -48,10 +48,13 @@ include_once 'conexionpdo.php';
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            </li>
           </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
-          <form class=" needs-validation" novalidate method="POST">
+          <form class=" needs-validation" novalidate method="POST" id="form">
             
             <h5>Datos del Paciente</h5>
             <hr>
@@ -70,7 +73,7 @@ include_once 'conexionpdo.php';
                                     ?>   
                     <div class="col">
                     <?php 
-                          $query ="SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                          $query ="SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE ,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
                           FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
                                                                   WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                                                   AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
@@ -278,10 +281,60 @@ include_once 'conexionpdo.php';
                       </div>
                       </div>
   </section><!-- FINAL SECTION -->
+  
+   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   <script>
+ var isSubmitting = false
 
- 
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
 
- 
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+</body>
+
   <script>
 
 $(document).ready(function() {

@@ -63,7 +63,7 @@ $result3= $conn->query($query);
 ?>
 
 
-
+<body>
     <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light">
@@ -81,7 +81,7 @@ $result3= $conn->query($query);
             </ul>
           </div>
           <div class="card-body">  
-            <form   method="POST" class="needs-validation" novalidate>
+            <form method="POST" class="needs-validation" novalidate id="form">
                 <div class="row pl-2 mb-3 mt-4">
                  <?php
                   $query= "SELECT concat_ws (' ' ,tp.PRIMER_NOMBRE, tp.PRIMER_APELLIDO ) 
@@ -333,6 +333,61 @@ $result3= $conn->query($query);
   </section>
   </div><!--fin del form group -->
 <!-- Cierre del div wraper -->
+
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+
+
+</body>
 
 
  <script>

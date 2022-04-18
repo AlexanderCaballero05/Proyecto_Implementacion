@@ -126,6 +126,7 @@ session_start();
          $_GET["ruta"] == "procesoRecetaMedica" ||
          $_GET["ruta"] == "procesoExpedienteMedico" ||
          $_GET["ruta"] == "crudPacientesMedicos" ||
+         $_GET["ruta"] == "crudPacientesPsicologicos" ||
          $_GET["ruta"] == "procesoExpedientePsicologico" ||
          $_GET["ruta"] == "Respaldo" ||
          $_GET["ruta"] == "RespaldoProsecar" ||
@@ -165,7 +166,7 @@ session_start();
          $_GET["ruta"] == "crudExpedientePsicoUnico" ||
          $_GET["ruta"] == "crudContenidoEconomico" ||
          $_GET["ruta"] == "procesoPlanTerapeutico" ||
-
+         $_GET["ruta"] == "procesoPlanTerapeuticoInforme" ||
          $_GET["ruta"] == "procesoconsultapsicologia" ||
          $_GET["ruta"] == "crudinscripcioncita" ||
          $_GET["ruta"] == "procesocita" ||

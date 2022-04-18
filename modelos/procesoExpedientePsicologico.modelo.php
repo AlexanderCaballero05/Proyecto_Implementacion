@@ -13,11 +13,14 @@
             $antecedentes_familiares = ($_POST['antecedentes_familiares']);
             $antecedentes_personales = ($_POST['antecedentes_personales']);
             $antecedentes_clinicos = ($_POST['antecedentes_clinicos']);
+            date_default_timezone_set("America/Guatemala");
+            $Fechaactual=  date('Y-m-d'); 
+
          
 
 
-            $insertar_expediente ="INSERT INTO TBL_EXPEDIENTE_PSICOLOGICO_UNICO (CODIGO_PERSONA, ANTECEDENTES_FAMILIARES , ANTECEDENTES_PERSONALES , ANTECEDENTES_CLINICOS) 
-                                                                VALUES ('$codigo_expediente_paciente', '$antecedentes_familiares','$antecedentes_personales', '$antecedentes_clinicos')";
+            $insertar_expediente ="INSERT INTO TBL_EXPEDIENTE_PSICOLOGICO_UNICO (CODIGO_PERSONA, CODIGO_ESTADO, ANTECEDENTES_FAMILIARES , ANTECEDENTES_PERSONALES , ANTECEDENTES_CLINICOS, FECHA_CREACION) 
+                                                                VALUES ('$codigo_expediente_paciente', '2', '$antecedentes_familiares','$antecedentes_personales', '$antecedentes_clinicos', '$Fechaactual')";
             $consulta=$conn->query($insertar_expediente);
             $codigo= mysqli_insert_id($conn);
 
@@ -55,12 +58,12 @@ if(isset($_POST['EXPEDIENTE_CITA_PSICOLOGICO'])){
         $consulTITA=$conn->query($update);
         if ($consulTITA >0 ){
             echo "<script> 
-            window.location = 'ProcesoCitasPsicologicas';
+            window.location = 'crudPacientesPsicologicos';
             </script>";  
             exit;
         }else{
             echo "<script> 
-            window.location = 'ProcesoCitasPsicologicas';
+            window.location = 'crudPacientesPsicologicos';
             </script>";  
             exit;
         }

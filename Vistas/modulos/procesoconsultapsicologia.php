@@ -13,6 +13,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
+
+<body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
@@ -26,11 +28,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas Psicologicas</a>
+         <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class="nav-link"  style="color:#000000;" href="#">Registrar expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Consultas Psicologicas</a>
@@ -41,28 +43,47 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            </li>
           </ul>
         </div>
         <div class="card-body">
         <body oncopy="return false" onpaste="return false" >
-        <form method="POST" class="needs-validation" novalidate >
+        <form method="POST" class="needs-validation" novalidate id="form">
             
             <h5>Datos del Paciente</h5>
             <hr>
                       
             <div class="row mb-8">
+                                    <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>   
                     <div class="col">
                     <?php 
-                          $query = "SELECT  CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as PACIENTE, p.DNI, C.CODIGO_CITA
-                          from tbl_inscripcion_cita c ,tbl_persona p
-                          where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-                          AND c.CODIGO_ESTADO = '11'
+                          $query = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA,  CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE ,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
+                          FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+                                                                  WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                                                  AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                                                  AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                                                  AND es.CODIGO_PERSONA = '$cod_usuario'
+                                                                  AND i.CODIGO_ESTADO = '11' 
+                                                                  and  i.AREA_CITA = '3'
+                                                                  AND i.FECHA_CITA = CURDATE();
                            ";
                           $resul=$conn->query($query); 
                           while($row = $resul->fetch_assoc()){
                             $var1 = $row['PACIENTE'];
                             $var2 = $row['DNI'];
                             $var3 = $row['CODIGO_CITA'];
+                            $codigo_paciente = $row['CODIGO_PERSONA'];
                           
                           ?>
                       <input type="text" name="codigocita3" value="<?php echo $var3?>" hidden>
@@ -83,14 +104,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <!--INICIO COMBOBOX -->
              <div class="form-group">
              <?php
-              $query = "SELECT tepu.ANTECEDENTES_FAMILIARES ,tepu.ANTECEDENTES_PERSONALES,tepu.ANTECEDENTES_CLINICOS,  
-              group_concat(tsn.TIPO) as NEUROTICOS , tepu.CODIGO_EXPEDIENTE 
-              from tbl_expediente_psicologico_unico tepu 
-              left join tbl_personas_sintomas   tps    on tps.CODIGO_EXPEDIENTE  =  tepu.CODIGO_EXPEDIENTE 
-              left join tbl_sintomas_neuroticos tsn    on tsn.CODIGO_SINTOMA_NEUROTICO = tps.CODIGO_SINTOMA_NEUROTICO 
-              left join tbl_persona             tp     on tepu.CODIGO_PERSONA =tp.CODIGO_PERSONA 
-              left join tbl_inscripcion_cita    tic    on tp.CODIGO_PERSONA  = tic.CODIGO_PERSONA 
-              left join tbl_expediente_psicologico_consulta tepc  on tepc.CODIGO_CITA = tic.CODIGO_CITA ";
+              $query = "SELECT exp.CODIGO_EXPEDIENTE, exp.ANTECEDENTES_FAMILIARES, exp.ANTECEDENTES_PERSONALES, exp.ANTECEDENTES_CLINICOS, GROUP_CONCAT(sin.TIPO) as NEUROTICOS
+              FROM tbl_expediente_psicologico_unico exp, tbl_persona per, tbl_personas_sintomas psin, tbl_sintomas_neuroticos sin            			       
+              WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
+              AND exp.CODIGO_EXPEDIENTE = psin.CODIGO_EXPEDIENTE
+              AND psin.CODIGO_SINTOMA_NEUROTICO = sin.CODIGO_SINTOMA_NEUROTICO
+              AND exp.CODIGO_PERSONA = '$codigo_paciente';" ;
               $resul2=$conn->query($query); 
                
               while($row2 = $resul2->fetch_assoc()){
@@ -136,7 +155,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     ?> <!--METER EL CICLO TODO LOS TEXTOS Y DENTRO DEL ROW PRINCIPAL-->
              </div><!--fin del div de row DE EXPEDIENTE-->
                     
-                    <h5>Consulta</h5>
+                    <h5>Datos de consulta</h5>
                     <hr>
                     <div class="row">
                       <div class="col-md-6"> 
@@ -194,6 +213,59 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       </div>
                       </div>
   </section><!-- FINAL SECTION -->
+
+   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   <script>
+ var isSubmitting = false
+
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+
+
+function window_mouseout( obj, evt, fn ) {
+
+if ( obj.addEventListener ) {
+
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+
+window_mouseout( document, 'mouseout', event => {
+
+event = event ? event : window.event;
+
+var from         = event.relatedTarget || event.toElement;
+
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+
+if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+
+    // Haz lo que quieras aquí
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+</body>
 
  
 

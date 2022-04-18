@@ -25,9 +25,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Citas Psicologicas</a>
+        <ul class="nav nav-tabs card-header-tabs">
+         <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en espera</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
@@ -40,6 +40,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudPacientesPsicologicos">Lista de pacientes</a>
             </li>
           </ul>
         </div>
@@ -90,7 +93,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
                                                                                 AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                                                 AND es.CODIGO_PERSONA = '$cod_usuario'
-                                                                                AND i.CODIGO_ESTADO = '9' ;" ;
+                                                                                AND i.CODIGO_ESTADO = '9' 
+                                                                                AND i.AREA_CITA = '3'
+                                                                                AND I.FECHA_CITA = CURDATE();" ;
                                       
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
@@ -110,16 +115,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                   
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white;" class="btn btn-warning"><span>
+                                                                    <button type='button' style="color:white;" class="form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
 
                                                                    
 
 
-                                                              <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white;" class="btn btn-secondary"><span>
-                                                                     <i class="nav-icon fas fa-eye mx-1"></i></span></button>
+                                                                <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
+                                                                    <button type='button' style="color:white;" class=" form-control btn btn-success"><span>
+                                                                     Atender</span></button>
                                                               </a>
 
 
@@ -276,7 +281,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_psicologica"  id ="enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a consulta</button>
+                                                                <button type="submit" name="enviar_cita_psicologica"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender consulta</button>
+
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

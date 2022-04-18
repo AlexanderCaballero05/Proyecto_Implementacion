@@ -45,9 +45,22 @@ include "conexionpdo.php";
         SET CODIGO_ESTADO = '12'
         WHERE CODIGO_CITA = ' $codigo_cita'";
         $consulta_estado =$conn->query($cambiar_estado);
+        
         echo "<script> window.location = 'expedienteMedico'; </script>"; exit;
     }
 ?>
+
+<?php
+
+
+?>
+
+
+
+
+
+
+
 <?php
 //CODIGO PARA AGREGAR UN EXAMEN  NUEVO DENTRO DE LA PANTALLA RECETAS MEDICAS 
  if(isset($_POST['nombre_examen'])){
