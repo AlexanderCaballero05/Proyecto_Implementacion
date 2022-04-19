@@ -6,9 +6,7 @@ date_default_timezone_set("America/Guatemala");
 <?php
 include('conexion.php');
 include('conexion2.php'); 
-if (isset($_POST['expediente'])) {
-	$persona =($_POST['expediente']);
-   }  
+  
 ?>
 <!doctype html>
 <html lang="en">
@@ -27,7 +25,6 @@ if (isset($_POST['expediente'])) {
     border-collapse: collapse;
     border: 0.5px solid #AFB5B8;
     background-color:#FFFF;
-
   }
   th,td{
     padding:8px;
@@ -86,9 +83,9 @@ if (isset($_POST['expediente'])) {
     min-height: 40px;
   }
   .c2{
-    width: 49.5%;
+    width: 33%;
     margin:2px;
-    min-width: 49.5%;
+    min-width: 33%;
     min-height: 200px;
 
   }
@@ -98,41 +95,101 @@ if (isset($_POST['expediente'])) {
   <body>
     <header>
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Historial medico del paciente</p>
+      <p  style="text-align: center; font-size: 18px;">Reporte medico del paciente</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-    
-   
-
    <footer>
       <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
    </footer>
    <main>
     <fieldset>
       <?php
-      $query = "SELECT  p.DNI, p.FECHA_NACIMIENTO,CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE 
-      FROM tbl_persona p ,tbl_expediente_medico ex
-           where ex.CODIGO_PERSONA = p.CODIGO_PERSONA AND ex.CODIGO_PERSONA = '$persona' ";
-    $resul=$conn->query($query);  
-    if($resul->num_rows > 0){
-      while($row = $resul->fetch_assoc()){
-        $nombre = $row['NOMBRE'];
-        $dni = $row['DNI'];
-        $fecha = $row['FECHA_NACIMIENTO'];
-        $fechaEntera = strtotime($fecha);
-        $f = date("Y");
-        $anio = date("Y", $fechaEntera);
-        $edad = $f - $anio;
-
-      }
-    }
+      $query = "SELECT i.CODIGO_CITA as CODIGO, i.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE,  pe.DNI, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado, pe.FECHA_NACIMIENTO
+      FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
+      WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+      AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+      AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+      AND i.CODIGO_ESTADO = '12' 
+      and  i.AREA_CITA = '2'
+      AND i.FECHA_CITA = CURDATE();";
+        $resul=$conn->query($query);  
+        if ($resul->num_rows > 0) {
+            while($row = $resul->fetch_assoc()) { 
+             $codigo_cita = $row['CODIGO'];
+             $persona = $row['CODIGO_PERSONA'];
+             $nombre_pa = $row['PACIENTE'];
+             $dni = $row['DNI'];
+             $fecha = $row['FECHA_NACIMIENTO'];
+             $fechaEntera = strtotime($fecha);
+             $f = date("Y");
+             $anio = date("Y", $fechaEntera);
+             $edad = $f - $anio;
+            }  
+            }
       ?>      
       <legend>  Datos Personales Paciente</legend><br>
-      <label  ><b>Nombre completo:</b> </label><?php  echo ucwords(strtolower($nombre)); ?> <br>
+      <label  ><b>Nombre completo:</b> </label><?php  echo ucwords(strtolower($nombre_pa)); ?> <br>
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
+      <label  ><b>Codigo de la cita: </b></label><?php echo $codigo_cita;?><br>
     </fieldset>
     <br>
+
+    <fieldset>
+     <legend>Datos pre-clinica</legend>
+     <br>
+     <table>
+         <?php
+          $pre ="SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL, pr.CODIGO_PRECLINICA
+          FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_preclinica pr
+          WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+          AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+          AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+          AND  pr.CODIGO_CITA = i.CODIGO_CITA
+          and  i.AREA_CITA = '2'
+          AND i.CODIGO_CITA ='$codigo_cita'";
+          $resul=$conn->query($pre);
+          if($resul-> num_rows > 0){
+            while($row = $resul->fetch_assoc()){
+                $var1 = $row['PESO'];
+                $var2 = $row['ESTATURA'];
+                $var3 = $row['TEMPERATURA'];
+                $var4 = $row['DESNUTRICION'];
+                $var5 = $row['FRECUENCIA_CARDIACA'];
+                $var6 = $row['FRECUENCIA_RESPIRATORIA'];
+                $var7 = $row['PULSO'];
+                $var8 = $row['MASA_CORPORAL'];
+         ?>
+      <tbody>
+       <thead>
+           <tr>
+               <th>Peso</th>
+               <th>Estatura</th>
+               <th>Temperatura</th>
+               <th>Masa corporal</th>
+               <th>FC</th>
+               <th>FR</th>
+               <th>Pulso</th>
+           </tr>
+       </thead>
+          <tr>
+              <td style="text-align: center;"  ><?php echo $var1 ." lb"; ?></td>
+              <td style="text-align: center;"><?php echo $var2." m"; ?></td>
+              <td style="text-align: center;"><?php echo $var3." °C"; ?></td>
+              <td style="text-align: center;"><?php echo $var8 ." Imc"; ?></td>
+              <td style="text-align: center;"><?php echo $var5." fc"; ?></td>
+              <td style="text-align: center;"><?php echo $var6." fr"; ?></td>
+              <td style="text-align: center;"><?php echo $var7." lpm"; ?></td>
+          </tr>
+          <?php
+            } 
+            }
+          ?>
+      </tbody>
+
+     </table>
+    </fieldset>
+      <br>
     <fieldset>
       <legend>Expediente clinico</legend>
     <br>
@@ -186,108 +243,113 @@ if (isset($_POST['expediente'])) {
     </fieldset>
     <br>
       <?php
-        $consulti = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA, con.SINTOMAS, 
-        con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO, pre.PESO, pre.MASA_CORPORAL, pre.ESTATURA, 
-        pre.TEMPERATURA, pre.PULSO, pre.FRECUENCIA_CARDIACA, pre.FRECUENCIA_RESPIRATORIA, pre.DESNUTRICION, 
-        GROUP_CONCAT(med.NOMBRE_MEDICAMENTO) AS NOMBRE_MEDICAMENTO, GROUP_CONCAT(exa.EXAMEN_MEDICO) as NOMBRE_EXAMEN
-          FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_preclinica pre,
-         tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med
-                WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
-                AND i.CODIGO_CITA = pre.CODIGO_CITA
-                AND con.CODIGO_CITA = i.CODIGO_CITA
-                AND con.CODIGO_PRECLINICA = pre.CODIGO_PRECLINICA
-                AND con.CODIGO_CONSULTA = recp.CODIGO_CONSULTA
-                AND recp.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
-                AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
-                AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO
-                      AND  i.AREA_CITA = '2'
-                        AND pe.CODIGO_PERSONA= '$persona'
-                        GROUP BY con.CODIGO_CONSULTA;";
-        $resul=$conn->query($consulti);
+        $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
+        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
+        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+          AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+            AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+              AND con.CODIGO_CITA = i.CODIGO_CITA
+                  AND i.CODIGO_ESTADO = '12' 
+                    AND  i.AREA_CITA = '2'
+                      AND con.CODIGO_CITA = '$codigo_cita'
+                        AND i.FECHA_CITA = CURDATE();";
+          $resul=$conn->query($consulti);
       ?>
-      
-      
       <?php
         if ($resul->num_rows > 0) {
-          while($row = $resul->fetch_assoc()) { 
-          $codigo_consulta = $row['CODIGO_CONSULTA'];
-          $sintomas = $row['SINTOMAS'];
-          $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
-          $evolucion = $row['EVOLUCION'];
-          $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
-          $fecha = $row['FECHA_CREACION'];
-
-          $peso = $row['PESO'];
-          $estatura = $row['ESTATURA'];
-          $masa = $row['MASA_CORPORAL'];
-          $pulso = $row['PULSO'];
-          $tempe = $row['TEMPERATURA'];
-          $fc = $row['FRECUENCIA_CARDIACA'];
-          $fr = $row['FRECUENCIA_RESPIRATORIA'];
-          $desnutricion = $row['DESNUTRICION'];
-          $medicamentos = $row['NOMBRE_MEDICAMENTO'];
-          $examenes = $row['NOMBRE_EXAMEN'];
+            while($row = $resul->fetch_assoc()) { 
+            $codigo_consulta = $row['CODIGO_CONSULTA'];
+            $sintomas = $row['SINTOMAS'];
+            $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
+            $evolucion = $row['EVOLUCION'];
+            $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
       ?>
-      
-      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas medicas paciente  <?php echo $fecha; ?> </legend><br><hr>
-      <div>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
-      </div>
-      <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-      <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($evolucion)) ?></textarea></div>
-      <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
-
-      <div id="caja3">
-      <legend style="background-color: #ffff; color:#000000;"> Datos recetas/Examenes</legend><br><hr>
-        <div class="c2" id=caja2><label>Medicamentos Recetados</label>
-        <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
-        </div>
-        <div class="c2" id=caja2><label>Examenes Recetados</label>
-        <textarea   ><?php  echo ucwords(strtolower($examenes));?></textarea>
-        </div>
-      </div>
-      </div>
-
-      <div id="caja3">
-        <legend style="background-color: #ffff; color:#000000;">Datos pre-clinica</legend><br><hr>
-        <div class="c1" id=caja1><label>Peso</label>
-        <textarea ><?php echo $peso." lb"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Temperatura</label>
-        <textarea  ><?php echo $tempe."°C"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Estatura</label>
-        <textarea  ><?php echo $estatura."m"?></textarea>
-        </div>
-        </div>
-        <div  class="c1" id=caja2><label>FC</label>
-        <textarea ><?php echo $fc."fc"?></textarea>
-        </div>
-        </div>
-        <div class="c1" id=caja2><label>FR</label>
-        <textarea ><?php echo $fr."fc"?></textarea>
-        </div>
-        </div>
-        <div class="c1" id=caja2><label>Pulso</label>
-        <textarea ><?php echo $pulso."lpm"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Masita</label>
-        <textarea ><?php echo $masa."Imc"?></textarea>
-        </div>
-      </div>
-      
-        
-    <?php
-       }
+       <legend style="background-color: #ffff; color:#000000;">Información consulta:</legend><br><hr>
+       <div>
+          <div class="c" id="caja2" ><label>Sintomas</label> <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> </div>
+          <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
+          <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($evolucion)) ?></textarea></div>
+          <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+       </div>
+      <?php 
+       } 
        }
       ?>
+      <?php
+      $consulta = "SELECT rec.CODIGO_CONSULTA, med.NOMBRE_MEDICAMENTO as medicamentos, rec.INDICACIONES_RECETA as indicaciones ,rec.OBSERVACIONES
+        FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con, tbl_receta_medica rec, tbl_medicamento med
+        WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+        AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+        AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+        AND con.CODIGO_CITA = i.CODIGO_CITA
+        AND con.CODIGO_CONSULTA = rec.CODIGO_CONSULTA
+        AND rec.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
+        AND i.CODIGO_ESTADO = '12' 
+        AND  i.AREA_CITA = '2'
+        AND con.CODIGO_CITA = '$codigo_cita' 
+        AND rec.CODIGO_CONSULTA = '$codigo_consulta'
+        AND i.FECHA_CITA = CURDATE() ";
+      $resul=$conn->query($consulta);
+      if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+        $medicamentos = $row['medicamentos'];
+        $indicaciones = $row['indicaciones'];
+        $observacion = $row['OBSERVACIONES'];
+        ?>
+      <div id="caja3">
+            <legend style="background-color: #ffff; color:#000000;">Datos recetas medicamentos</legend><br><hr>
+            <div class="c2" id=caja2><label>Medicamento:</label>
+              <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
+            </div>
+            <div class="c2" id=caja2><label>Indicaciones:</label>
+              <textarea ><?php  echo ucwords(strtolower($indicaciones)) ?></textarea>
+            </div>
+            <div class="c2" id=caja2><label>Observaciones:</label>
+              <textarea   ><?php  echo ucwords(strtolower($observacion));?></textarea>
+            </div>
+      </div><br>
+      <?php
+        }
+        }
+      ?>
 
-      
-
-
-
+      <div id="caja3">
+          <?php
+           $consulti ="SELECT  med.EXAMEN_MEDICO as examen, rec.INDICACIONES as indicaciones ,rec.OBSERVACIONES
+           FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_examenes_pacientes  rec, tbl_examenes_medicos med
+           WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+           AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+           AND con.CODIGO_CITA = i.CODIGO_CITA
+           AND con.CODIGO_CONSULTA = rec.CODIGO_CONSULTA
+           AND rec.CODIGO_EXAMEN_MEDICO = med.CODIGO_EXAMEN_MEDICO
+           AND i.CODIGO_ESTADO = '12' 
+           AND  i.AREA_CITA = '2'
+           AND con.CODIGO_CITA = '$codigo_cita' 
+           AND rec.CODIGO_CONSULTA = '$codigo_consulta'
+           AND i.FECHA_CITA = CURDATE() ";
+           $resul=$conn->query($consulti);
+           if ($resul->num_rows > 0) {
+             while($row = $resul->fetch_assoc()) { 
+             $examen= $row['examen'];
+             $indicacion = $row['indicaciones'];
+             $observa = $row['OBSERVACIONES'];
+             ?>
+          
+           <legend style="background-color: #ffff; color:#000000;">Datos examenes recetados</legend><br><hr>
+            <div class="c2" id=caja2><label>Medicamento:</label>
+              <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
+            </div>
+            <div class="c2" id=caja2><label>Indicaciones:</label>
+              <textarea ><?php  echo ucwords(strtolower($indicaciones)) ?></textarea>
+            </div>
+            <div class="c2" id=caja2><label>Observaciones:</label>
+              <textarea   ><?php  echo ucwords(strtolower($observa));?></textarea>
+            </div>
+      </div>
+      <?php 
+        } 
+        }
+      ?>
 
    </main>
 

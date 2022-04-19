@@ -231,12 +231,6 @@
 </div>
 
 
-<script>
-    function Descargar() {
-      window.open('Reportes_Prosecar/reportePreClinica.php','_blank');
-      window.open(this.href,'_self');
-    }
-  </script>
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
