@@ -102,7 +102,7 @@ include_once 'conexionpdo.php';
                         <div class="col-sm-4">
                          <label for="antecedentes_familiares" class="control-label">Antecedentes Psicologicos familiares</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="antecedentes_familiares" id="antecedentes_familiares" autocomplete = "off">  </textarea>
+                            <textarea class="form-control" type="text" name="antecedentes_familiares" id="antecedentes_familiares" autocomplete = "off" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -121,7 +121,7 @@ include_once 'conexionpdo.php';
                     <div class="col-sm-4">
                          <label for="antecedentes_personales" class="control-label">Antecedentes Psicologicos personales</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="antecedentes_personales" id="antecedentes_personales" autocomplete = "off"> </textarea>
+                            <textarea class="form-control" type="text" name="antecedentes_personales" id="antecedentes_personales" autocomplete = "off" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -131,7 +131,7 @@ include_once 'conexionpdo.php';
                       <div class="col-sm-4">
                          <label for="antecedentes_clinicos" class="control-label">Antecedentes clinicos</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="antecedentes_clinicos" id="antecedentes_clinicos" autocomplete= "off"></textarea>
+                            <textarea class="form-control" type="text" name="antecedentes_clinicos" id="antecedentes_clinicos" autocomplete= "off" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>

@@ -130,7 +130,8 @@ include_once 'conexionpdo.php';
                        AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
                        AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
                        AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
-                       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'";
+                       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'
+                       GROUP by exp.CODIGO_PERSONA ";
                        $resul=$conn->query($consulta);
                       ?>
                       <?php 
@@ -373,14 +374,11 @@ include_once 'conexionpdo.php';
 
 
                                     <?php
-                                        
+                                        }
                                         }
                                     ?>
 
-                      <?php
-                       }
-                       }
-                      ?>
+                    
                   </div>
                   
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
