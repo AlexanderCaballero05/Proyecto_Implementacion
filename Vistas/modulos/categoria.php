@@ -163,12 +163,25 @@
                          </div>
                       </div>
                       <div class="col-md-4"><!--INICIO SEXO--> 
+                       <?php
+                        $query = "SELECT CODIGO_SEXO, SEXO FROM TBL_SEXO;";
+                        $resultado=$conn->query($query);
+                       ?>
                          <label for="cbx_persona" class="control-label">Sexo:</label>
                          <div class="form-group">
                             <select class="form-control"   style="width: 100%;" name="sexo" id="TIPOPERSONA" required="">
                               <option selected disabled value="">--Seleccionar Sexo--</option>
-                              <option value="1">FEMENINO</option>
-                              <option  value="2">MASCULINO</option>
+                              <?php 
+                                if ($resultado->num_rows > 0) {
+                                while($row = $resultado->fetch_assoc()) { 
+                                $codigo = $row['CODIGO_SEXO'];
+                                $sexo = $row['SEXO'];
+                                ?>
+                                <option value="<?php echo $codigo?>" ><?php echo $sexo;?></option>
+                                <?php 
+                                 } 
+                                 }
+                                ?>
                             </select>
                             <div class="invalid-feedback">
                                 Elija una opción.

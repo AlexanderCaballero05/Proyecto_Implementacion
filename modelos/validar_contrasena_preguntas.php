@@ -39,7 +39,7 @@
                                 }
                                 else{ //si la contraseña es diferente de la que tiene en el sistema
                                     try{
-                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASEÑA = '$pass';";
+                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASENA = '$pass';";
                                         $busqueda=$conn->query($buscarclave);
                                         $fila=$busqueda->num_rows;
                                         if($fila>0){
@@ -49,7 +49,7 @@
                                         }
                                         else{
                                             try{ //insert en la tabla de historial de contraseñas la nueva contraseña por el usario
-                                                $insert = "INSERT INTO tbl_ms_hist_contraseña (CODIGO_USUARIO,CONTRASEÑA,CREADO_POR_USUARIO)
+                                                $insert = "INSERT INTO tbl_ms_hist_contrasena (CODIGO_USUARIO,CONTRASENA,CREADO_POR_USUARIO)
                                                 VALUES ('$usuari','$pass','$usuari')";
                                                 $resultado=$conn->query($insert);
                                                 
