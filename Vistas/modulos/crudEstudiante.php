@@ -101,8 +101,8 @@
                                 </a>
 
                                 <a>
-                                <form method="post"  action="Reportes_Prosecar/reporteIndividualEstudiante.php" target="_blank"> 
-                                <input type="hidden" name="ESTUDIANTE" value="<?php echo $var1 ?>">
+                                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
+                                <input type="text" hidden name="reporte_estudiante" value="<?php echo $var1 ?>">
                                 <button type='submit' title='Imprimir'  style="color:white; "class="btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
@@ -382,10 +382,5 @@ $(document).ready(function () {
     } 
   </script>
 
-<script>
-    function Descargar1() {
-      window.open('Reportes_Prosecar/reporteIndividualEstudiante.php','_blank');
-      window.open(this.href,'_self');
-    } 
-  </script>
+
   
