@@ -27,7 +27,7 @@ $ite = "CODIGO_PARAMETRO";
 $val =1;
 $respuesta = ModeloUsuarios::MdlMostrarUsuarios($tabla, $item, $valor);
 $respu = ModeloUsuarios::MdlMostrarparametros($ta, $ite, $val);
-$contra =crypt($_POST["ingPassword"],'$2a$07$usesomesillystringforsalt$' );
+$contra = $_POST["ingPassword"];
 
 if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 2)
 {
