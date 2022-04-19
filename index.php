@@ -36,7 +36,7 @@ require_once "modelos/crudconsultahistorica.php";
 require_once "modelos/crudAparienciaFisica.modelo.php";
 require_once "modelos/crudExamenesMedicos.modelo.php";
 require_once "modelos/procesoMatricula.modelo.php";
-
+require_once "modelos/crudcitasgeneralesmodelo.php";
 
 //require_once "modelos/crudrecetamedica.modelo.php";
 require_once "modelos/crudmedicamento.modelo.php";
