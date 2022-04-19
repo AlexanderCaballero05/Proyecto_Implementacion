@@ -253,10 +253,24 @@
                        }
                        }
                       ?>
-                  <button   href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
 
                 </form>
+
+                 <!--form para el reporte de la consulta-->
+                 <a> 
+                  <form action="Reportes_Prosecar/reporteConsultaPlanTerapeutico.php" method="POST"> 
+                  <div class="row"> 
+                    <input hidden name="codigo_cita_reporte_Plan" value="<?php echo $codigo_cita;?>">  
+                    <input type="text" name="id_persona_plan"  hidden value="<?php echo $persona ?>">
+                    <input type="hidden" name="id_usuario_plan" value="<?php echo $cod_usuario ?>">
+                    <input type="hidden" name="codigo_consulta_reporte_Plan" value="<?php echo $codigo_consulta ?>">
+                  </div>
+                      <button  type="submit" name ="reporte_consulta_psicologica_plan"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                  </form>
+
+                </a>
+                <!--fin form para el reporte de la consulta-->
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 

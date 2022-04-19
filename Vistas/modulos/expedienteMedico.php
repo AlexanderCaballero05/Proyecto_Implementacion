@@ -253,20 +253,22 @@ include_once 'conexionpdo.php';
                   <hr> 
                   <div class="row">
                       <?php
-                       $consulta = "SELECT rec.CODIGO_CONSULTA, GROUP_CONCAT('/ ',med.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT('/ ',rec.INDICACIONES_RECETA) as indicaciones
-                       FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con, tbl_receta_medica rec, tbl_medicamento med
+                       $consulta = "SELECT rec.CODIGO_CONSULTA, GROUP_CONCAT('/ ',med.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT('/ ',rec.INDICACIONES_RECETA) as indicaciones, GROUP_CONCAT('/ ',exa.EXAMEN_MEDICO) as examenes, GROUP_CONCAT('/ ',exap.INDICACIONES) as indicaciones_examen
+                       FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con, tbl_receta_medica rec, tbl_medicamento med, tbl_examenes_medicos exa, tbl_examenes_pacientes exap
                                              WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                                AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
                                                  AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                    AND con.CODIGO_CITA = i.CODIGO_CITA
                                                     AND con.CODIGO_CONSULTA = rec.CODIGO_CONSULTA
                                                       AND rec.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
+                                                      AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
+                                                      AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO
                                                         AND es.CODIGO_PERSONA = '$cod_usuario'
                                                           AND i.CODIGO_ESTADO = '12' 
                                                             AND  i.AREA_CITA = '2'
                                                               AND con.CODIGO_CITA = '$codigo_cita' 
                                                                 AND rec.CODIGO_CONSULTA = '$codigo_consulta'
-                                                                  AND i.FECHA_CITA = CURDATE() ";
+                                                                  AND i.FECHA_CITA = CURDATE(); ";
                        $resul=$conn->query($consulta);
 
                       ?>
@@ -275,8 +277,15 @@ include_once 'conexionpdo.php';
                          while($row = $resul->fetch_assoc()) { 
                          $medicamentos = $row['medicamentos'];
                          $indicaciones = $row['indicaciones'];
-                         $medicamento = 'Nombre medicamentos';
+                         $examenes = $row['examenes'];
+                         $indicaciones_examen = $row['indicaciones_examen'];
+                         
+                         //Estas son variables establecidas con sus datos
+                         $medicamento = 'Nombre medicamento(s)';
+                         $examen = 'Nombre examen(es)';
                         ?> 
+
+                        <!--Codigo para mostrar los medicamentos en el expediente-->
                                 <?php 
 
                                     if($medicamentos == '' && $indicaciones == '') {
@@ -312,19 +321,53 @@ include_once 'conexionpdo.php';
                                     </div>
                                 </div>
 
-
-
-
-
-
-
                                     <?php
-                                        
-                                        
                                         }
                                     ?>
-                        
+                                     <!--fin deCodigo para mostrar los medicamentos en el expediente-->
 
+
+                                      <!--Inicio de Codigo para mostrar los examenes en el expediente-->
+                                    <?php
+                                    if($examenes == '' && $indicaciones_examen == ''){
+                                        $ninguno = 'Ninguno';
+
+                                    ?>
+
+                                    <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Examenes recetados</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
+                                    </div>
+                                </div>
+                                <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Indicaciones examnes</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
+                                    </div>
+                                </div>
+
+                                    <?php
+                                    }else{ 
+
+                                    ?>
+
+                                    <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Examenes recetados</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control"><?php echo $examen.': '.$examenes;  ?></textarea>
+                                    </div>
+                                </div>
+                                <div  class="col-sm-3 mb-3">
+                                    <label  class="form-label">Indicaciones examenes</label>
+                                    <div class="form-group">
+                                        <textarea  readonly class="form-control" ><?php echo $indicaciones_examen;?></textarea>
+                                    </div>
+                                </div>
+
+                                    <?php
+                                    }
+                                    ?>
 
 
                       <?php
