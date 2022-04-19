@@ -71,7 +71,8 @@
                       $fechaActual = date('Y-m-d'); 
                       $fecha_vencimiento = date("d-m-Y",strtotime($fechaActual."+'$60'+ days")); 
                       try{ //Se evalua el tipo de persona,dependiendo de que tipo es se llenan en sus correspondientes tablas
-                         if(($tipo_persona == "1") 	|| ($tipo_persona == "2") ){
+                        
+                         if($tipo_persona == "1" ){// Para registrar tipo de persona administrador
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
@@ -81,8 +82,9 @@
                               window.location = 'crudpersonas';
                               </script>";
                               exit;
-                             }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar ,por fin!!!
+                             }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar 
                               try{
+                                $rol= "1";
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena');" ;
@@ -107,7 +109,42 @@
                                 echo $e->getMessage(); 
                                 return false;
                               }
-                            }//fin del else de insertar personas
+                            }//fin del else de insertar administrador
+                          }else if($tipo_persona == "2"){ //Para tutores uwu
+                            try{
+                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia->execute(array($nombre_usuario));
+                              $row=$sentencia->fetchColumn();
+                              if($row>0){// si hay registros con el mismo nombre 
+                                echo "<script>
+                                alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
+                                window.location = 'crudpersonas';
+                                </script>";
+                                exit;
+                              }else{
+                                $rol= "2";
+                                $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                                '$estado','$rol','$contrasena');" ;
+                                 $consulta=$conn->query($insert);
+                                if($resultado = mysqli_fetch_assoc($consulta)>0 ){
+                                  echo "<script> 
+                                  location.href = 'crudpersonas';
+                                  </script>";
+                                  exit;
+                                }else{
+                                  echo "<script> 
+                                  alert('No se puede registrar al tutor');
+                                  location.href = 'crudpersonas';
+                                  </script>";
+                                  exit;
+                                }
+                              }
+                            }catch(PDOException $e){
+                            echo $e->getMessage(); 
+                            return false;
+                            }//Fin de registrar tutor
+
                           }elseif($tipo_persona == "4" ){ //para estudiantes
                            try{
                               $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
@@ -382,7 +419,7 @@
 }//if padre del padre :v
 
   
-  //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR
+  //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR,no funciona del todo bien :v asi que si pueden tocar
   if(isset($_POST['usuario_eliminar'])){
     if(isset($_POST['ELIMINAR'])){
       $code = ($_POST['usuario_eliminar']);

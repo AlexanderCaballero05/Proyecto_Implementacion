@@ -195,7 +195,7 @@ include_once 'conexionpdo.php';
                       <?php
                     
                        $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
-                                 FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
+                      FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
                       WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                         AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
                           AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
@@ -311,39 +311,39 @@ include_once 'conexionpdo.php';
                                         <textarea  readonly class="form-control" ><?php echo $indicaciones;?></textarea>
                                     </div>
                                 </div>
-
-
-
-
-
-
-
                                     <?php
-                                        
                                         
                                         }
                                     ?>
-                        
-
-
-
                       <?php
-                      
                        }
                        }
                       ?>
-
-                      
                   </div>
                   
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-arrow-right mx-1"></i></span>Cierre</button>
+                  <a >
+                    <form method="POST"  action="Vistas/reporte_medico.php" target="_blank"> 
+                     <input type="hidden" name="persona" value="<?php echo $persona?>">
+                     <input type="hidden" name="codigo_cita" value="<?php echo $codigo_cita?>">
+                     <input type="hidden" name="consulta" value="<?php echo $codigo_consulta?>">
+                     <button  onclick="Descargar1()" type="submit" id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                    </form>
+                    </a>
                   
-                  <button onclick="Descargar();"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                 </form>
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 
     </section><!-- FINAL SECTION -->
+
+
+    <script>
+   function Descargar1() {
+      window.open('Vistas/reporte_medico.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
  var isSubmitting = false
@@ -410,10 +410,5 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
       });
   </script>
 
-  <script>
-    function Descargar() {
-      window.open('Reportes_Prosecar/reporteCitaMedica.php','_blank');
-      window.open(this.href,'_self');
-    }
-  </script> 
+
 
