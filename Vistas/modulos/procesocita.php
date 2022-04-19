@@ -27,7 +27,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
   </div>
 <!-- trae los query los especialiastas por area,ya por especialidad es vanidad :v-->
 <?php
-$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'espeecialialidad:', te.NOMBRE )  
+$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPECIALIDAD:', te.NOMBRE )  
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
@@ -39,7 +39,7 @@ $result1= $conn->query($query);
 ?>
 
 <?php
-$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'espeecialialidad:', te.NOMBRE )  
+$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPECIALIDAD:', te.NOMBRE )  
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
@@ -51,7 +51,7 @@ $result2= $conn->query($query);
 ?>
 
 <?php
-$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'espeecialialidad:', te.NOMBRE )  
+$query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPECIALIDAD:', te.NOMBRE )  
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
@@ -111,7 +111,7 @@ $result3= $conn->query($query);
                         ?>
                     </select>
                       <div class="invalid-feedback">
-                          !Seleccione un campo!
+                      Llene este campo.
                       </div>
                       <div class="valid-feedback">
                         ¡Se ve bien!
@@ -233,7 +233,7 @@ $result3= $conn->query($query);
                            
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_medico" class="col-sm-4 mb-3">
+                    <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
                             <select class="form-control select2" name="encargado_medico"  >
@@ -253,7 +253,7 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_psico" class="col-sm-4 mb-3">
+                    <div style ="display:none;" id="encargado_psico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
                             <select class="form-control select2" name="encargado_psicologo" >
@@ -273,7 +273,7 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
-                    <div style ="display:none;" id="encargado_catequesis" class="col-sm-4 mb-3"><!-- area espiritual-->
+                    <div style ="display:none;" id="encargado_catequesis" class="col-sm-5 mb-3"><!-- area espiritual-->
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
                             <select class="form-control select2" name="encargado_catequesis" >
@@ -297,11 +297,11 @@ $result3= $conn->query($query);
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
                         <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control" name="agregar_hora" id="agregar_hora">
-                        
-                     </div>
-                     <div class="invalid-feedback">
-                             Llene este campo.
+                        <div class="invalid-feedback">
+                             Horario valido de 9:00 a.m. a 5:00 p.m.
                             </div>
+                     </div>
+                    
                    </div>
                    <?php
                         date_default_timezone_set("America/Guatemala");
@@ -318,7 +318,7 @@ $result3= $conn->query($query);
                             class="form-control" 
                             name="agregar_fecha_cita" id="agregar_fecha_cita" required>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                             fecha invalida.
                             </div>
                         </div>
                       </div>

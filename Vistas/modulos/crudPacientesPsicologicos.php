@@ -62,7 +62,9 @@
                     <?php
                       $query = "SELECT pe.CODIGO_PERSONA, pe.DNI, es.NOMBRE AS ESTADO, CONCAT_WS(' ',pe.PRIMER_NOMBRE, pe.SEGUNDO_NOMBRE, pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) AS PACIENTE,   ex.CODIGO_EXPEDIENTE, ex.FECHA_CREACION
                       FROM tbl_expediente_psicologico_unico ex ,tbl_persona pe , tbl_estado es
-                      WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA and es.CODIGO_ESTADO = ex.CODIGO_ESTADO";
+                      WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA
+                       and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
+                       and es.CODIGO_ESTADO = '2'";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -211,7 +213,7 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="REGISTRAR_CITA_PACIENTE"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registra cita</button>
+                                  <button type="submit" name="REGISTRAR_CITA_PACIENTE_PSICOLOGICO"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registra cita</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>

@@ -286,7 +286,7 @@ if (isset($_POST['cod_edit_cita'])){
 <?php
 //Codigo para la inscripcion cita por parte de un usuario psicologo
  if(isset ($_POST['codigo_paciente_psicologo'])){
-    if(isset ($_POST['REGISTRAR_CITA_PACIENTE'])){
+    if(isset ($_POST['REGISTRAR_CITA_PACIENTE_PSICOLOGICO'])){
       $codigo_persona = $_POST['codigo_paciente_psicologo'];
       $codigo_medico = $_POST['codigo_psicologo'];
       $fecha_cita = $_POST['fecha_cita'];
