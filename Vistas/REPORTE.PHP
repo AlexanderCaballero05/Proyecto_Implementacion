@@ -62,8 +62,8 @@ if (isset($_POST['expediente'])) {
   footer {
    position: fixed; 
    bottom: 0.5cm; 
-   left: 0cm; 
-   right: 0cm;
+   left: 3cm; 
+   right: 3cm;
    height: 1cm;
   }
    header {
@@ -77,13 +77,13 @@ if (isset($_POST['expediente'])) {
     width: 24.5%;
     margin:2px;
     min-width: 24.5%;
-    min-height: 200px;
+    min-height: 40%;
   }
   .c1{
     width: 12%;
     margin:10px;
     max-width: 12%;
-    min-height: 40px;
+    min-height: 15px;
   }
   .c2{
     width: 49.5%;
@@ -93,19 +93,26 @@ if (isset($_POST['expediente'])) {
 
   }
     </style>
+    <style>
+   .pagenum:before {
+        content: counter(page);
+    }
+</style>
     <title>Reporte paciente uwu</title>
   </head>
   <body>
     <header>
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
       <p  style="text-align: center; font-size: 18px;">Historial medico del paciente</p>
-      <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
+       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
    
 
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+    <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+      <label >Página<span  class="pagenum"></label></p>
+      
    </footer>
    <main>
     <fieldset>
@@ -147,7 +154,8 @@ if (isset($_POST['expediente'])) {
        AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
        AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
        AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
-       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'";
+       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'
+       GROUP by exp.CODIGO_PERSONA ;";
        $resul=$conn->query($consulta);
        if ($resul->num_rows > 0) {
         while($row = $resul->fetch_assoc()) { 
@@ -185,6 +193,7 @@ if (isset($_POST['expediente'])) {
     </table>
     </fieldset>
     <br>
+    <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas medicas paciente   </legend><br><hr>
       <?php
         $consulti = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA, con.SINTOMAS, 
         con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO, pre.PESO, pre.MASA_CORPORAL, pre.ESTATURA, 
@@ -229,67 +238,67 @@ if (isset($_POST['expediente'])) {
           $medicamentos = $row['NOMBRE_MEDICAMENTO'];
           $examenes = $row['NOMBRE_EXAMEN'];
       ?>
-      
-      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas medicas paciente  <?php echo $fecha; ?> </legend><br><hr>
-      <div>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
-      </div>
-      <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-      <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($evolucion)) ?></textarea></div>
-      <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
-
       <div id="caja3">
-      <legend style="background-color: #ffff; color:#000000;"> Datos recetas/Examenes</legend><br><hr>
+      <p>Datos pre-clinica <?php echo $fecha;?></p><hr><br>
+      <table style="border-collapse: collapse;  border: 0.4px solid #FFFF;">
+        <thead >
+           <tr>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">Peso</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">Estatura</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">Temperatura</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">Masa </th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">FC</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">FR</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;">Pulso</th>
+           </tr>
+        </thead>
+        <tbody>
+        <td  style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"  ><?php echo $peso ." lb"; ?></td>
+              <td  style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><?php echo $estatura." m"; ?></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;" ><?php echo $tempe." °C"; ?></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;" ><?php echo $masa ." Imc"; ?></td>
+              <td  style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: center;"><?php echo $fc." fc"; ?></td>
+              <td  style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;" ><?php echo $fr." fr"; ?></td>
+              <td  style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><?php echo $pulso." lpm"; ?></td>
+        </tbody>
+      </table>
+      </div>
+      <br>
+      
+      <div id="caja3">
+        <p>Consulta medica<?php echo $fecha;?></p><hr><br>
+        <div class="c" id="caja2" ><label>Sintomas</label> 
+          <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
+        </div>
+        <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
+        <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($evolucion)) ?></textarea></div>
+        <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+      </div>
+      <div id="caja3">
+        <legend style="background-color: #ffff; color:#000000;"> Datos recetas/Examenes</legend><br><hr>
         <div class="c2" id=caja2><label>Medicamentos Recetados</label>
         <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
         </div>
         <div class="c2" id=caja2><label>Examenes Recetados</label>
-        <textarea   ><?php  echo ucwords(strtolower($examenes));?></textarea>
+         <textarea   ><?php  echo ucwords(strtolower($examenes));?></textarea>
         </div>
       </div>
-      </div>
+      <br>
 
-      <div id="caja3">
-        <legend style="background-color: #ffff; color:#000000;">Datos pre-clinica</legend><br><hr>
-        <div class="c1" id=caja1><label>Peso</label>
-        <textarea ><?php echo $peso." lb"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Temperatura</label>
-        <textarea  ><?php echo $tempe."°C"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Estatura</label>
-        <textarea  ><?php echo $estatura."m"?></textarea>
-        </div>
-        </div>
-        <div  class="c1" id=caja2><label>FC</label>
-        <textarea ><?php echo $fc."fc"?></textarea>
-        </div>
-        </div>
-        <div class="c1" id=caja2><label>FR</label>
-        <textarea ><?php echo $fr."fc"?></textarea>
-        </div>
-        </div>
-        <div class="c1" id=caja2><label>Pulso</label>
-        <textarea ><?php echo $pulso."lpm"?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Masita</label>
-        <textarea ><?php echo $masa."Imc"?></textarea>
-        </div>
-      </div>
       
-        
     <?php
        }
        }
       ?>
 
-      
 
 
+    
 
 
    </main>
+   
+   
 
     
   </body>
@@ -303,9 +312,12 @@ $html = ob_get_clean();
 
 
 $dompdf = new Dompdf();
-
 $options = $dompdf->getOptions();
 $options->set(array('isRemoteEnabled' => true));
+$options->set(array('isPhpEnabled' => true));
+
+
+
 $dompdf ->setOptions($options);
 
 $dompdf ->loadHtml($html);
@@ -313,6 +325,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("Reporte_historialMedico.pdf", array("Attachment" => false));
 echo $dompdf->output();
 ?>

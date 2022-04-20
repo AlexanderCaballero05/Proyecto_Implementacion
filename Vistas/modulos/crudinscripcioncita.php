@@ -36,9 +36,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
-          <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Citas Medicas</a>
+            <a class=" nav-link" style="color:#000000;" href="crudcitasgenerales">Citas Generales</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="crudinscripcioncita">Citas Hoy</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="procesocita">Agregar Cita</a>

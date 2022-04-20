@@ -21,6 +21,20 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
     <section class="content">
        <div class="card"> 
+       <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="crudcitasgenerales">Citas Generales</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudinscripcioncita">Citas Hoy</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="procesocita">Agregar Cita</a>
+            </li>
+          </ul>
+        </div>
+
         <div class="card-body">
         <div class="container-fluid">
             <div class="row">
@@ -131,8 +145,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     }
                                                                     ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                      <?php 
-                                                                    if($permiso_actualizar= 'ON'){
+                                                                    if($permiso_actualizar= 'ON' and $var6 == 'PENDIENTE'){
                                                                     ?>
+
+                                                            
+
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
@@ -143,10 +160,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         ?>
 
 
-                                                              <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white; background-color:#3DC2F6;" class="btn "><span>
-                                                                     <i class="nav-icon fas fa-eye mx-1"></i></span></button>
-                                                              </a>
+                                                             
 
 
                                                             </div>
@@ -222,7 +236,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         and es.CODIGO_ESTADO <> 11
                                                                         and es.CODIGO_ESTADO <> 10
                                                                         and es.CODIGO_ESTADO <> 9
-                                                                        and es.CODIGO_ESTADO <> 6;";
+                                                                        and es.CODIGO_ESTADO <> 6
+                                                                        and es.CODIGO_ESTADO <> 16;";
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
 
@@ -236,7 +251,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
+                                                                                           
+                                                                                           <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
                                                                                         <?php } 
                                                                                             }?>
                                                                             </select>
