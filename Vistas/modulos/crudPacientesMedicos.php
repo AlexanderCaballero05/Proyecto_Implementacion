@@ -150,7 +150,7 @@
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Hora cita:</label>
-                                          <input type="time"  class="form-control" name="hora_cita" required>
+                                    <input type="time" required min="09:00:00"  step="1800" max= "19:00:00"  step="1800"class="form-control" name="hora_cita" id="agregar_hora">
                                         </div>
                                          <div class="invalid-feedback">
                                             Llene este campo.
@@ -190,9 +190,17 @@
                                         </div>
                                        </div>
                                        <div class="col-sm-3">
+                                       <?php
+                                          date_default_timezone_set("America/Guatemala");
+                                          $Fechaactual=  date('Y-m-d'); 
+                                          $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
+                                          ?>
                                           <div class="form-group">
-                                              <label for="txtcodigo_persona">Fecha cita:</label>
-                                              <input type="date" class="form-control" name="fecha_cita" required>
+                                              <label for="fecha" class="form-label">Fecha de la cita </label>
+                                                <input type="date" min= "<?= $Fechaactual?>" 
+                                                max="<?= date("$fechamaxima")?>"
+                                                class="form-control" 
+                                                name="fecha_cita" required>
                                           </div>
                                           <div class="invalid-feedback">
                                                 Llene este campo.

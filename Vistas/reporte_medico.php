@@ -74,7 +74,7 @@ include('conexion2.php');
     width: 24.5%;
     margin:2px;
     min-width: 24.5%;
-    min-height: 200px;
+    
   }
   .c1{
     width: 12%;
@@ -89,6 +89,9 @@ include('conexion2.php');
     min-height: 200px;
 
   }
+  .pagenum:before {
+        content: counter(page);
+    }
     </style>
     <title>Reporte paciente uwu</title>
   </head>
@@ -99,7 +102,8 @@ include('conexion2.php');
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+      <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -132,6 +136,61 @@ include('conexion2.php');
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
       <label  ><b>Codigo de la cita: </b></label><?php echo $codigo_cita;?><br>
+    </fieldset>
+    <br>
+
+    <fieldset>
+      <legend>Expediente clinico</legend>
+     
+    <br>
+    <table>
+    <?php
+       $consulta = "SELECT exp.CODIGO_EXPEDIENTE, concat(per.PRIMER_NOMBRE,' ',per.PRIMER_APELLIDO) as nombre, san.TIPO as TIPO_SANGRE, exp.TRATAMIENTOS, exp.ENFERMEDADES, ale.NOMBRE as ALERGIAS, tra.TIPO as TRASTORNOS, apa.TIPO as APARIENCIA
+       FROM tbl_expediente_medico exp, tbl_persona per, tbl_personas_alergias alep, tbl_personas_transtornos trap, tbl_personas_apariencia apap, tbl_alergias ale, tbl_transtornos_corporales tra, tbl_apariencia_fisica apa, tbl_tipo_sangre san
+       WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
+       AND exp.CODIGO_EXPEDIENTE = alep.CODIGO_EXPEDIENTE_PERSONA
+       AND exp.CODIGO_EXPEDIENTE = trap.CODIGO_EXPEDIENTE
+       AND exp.CODIGO_EXPEDIENTE = apap.CODIGO_EXPEDIENTE
+       AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
+       AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
+       AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
+       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'
+       GROUP by exp.CODIGO_PERSONA ;";
+       $resul=$conn->query($consulta);
+       if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+        $var1 = $row['TIPO_SANGRE'];
+        $var2 = $row['TRATAMIENTOS'];
+        $var3 = $row['ENFERMEDADES'];
+        $var4 = $row['ALERGIAS'];
+        $var5 = $row['TRASTORNOS'];
+        $var6 = $row['APARIENCIA'];
+        ?>
+      <thead>
+         <tr>
+           <th>Tipo sangre</th>
+           <th>Tratamientos</th>
+           <th>Enfermedades</th>
+           <th>Alergias</th>
+           <th>Trastornos</th>
+           <th>Enfermedades</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+         <td ><?php echo ucwords(strtolower($var1)); ?></td>
+         <td ><?php echo ucwords(strtolower($var2)); ?></td>
+         <td ><?php echo ucwords(strtolower($var3)); ?></td>
+         <td ><?php echo ucwords(strtolower($var4)); ?></td>
+         <td ><?php echo ucwords(strtolower($var5));?></td>
+         <td ><?php echo ucwords(strtolower($var6));?></td>
+         </tr>
+         <?php
+           }
+           }
+         ?>
+      </tbody>
+    </table>
     </fieldset>
     <br>
 
@@ -188,60 +247,10 @@ include('conexion2.php');
       </tbody>
 
      </table>
+     
     </fieldset>
       <br>
-    <fieldset>
-      <legend>Expediente clinico</legend>
-    <br>
-    <table>
-    <?php
-       $consulta = "SELECT exp.CODIGO_EXPEDIENTE, concat(per.PRIMER_NOMBRE,' ',per.PRIMER_APELLIDO) as nombre, san.TIPO as TIPO_SANGRE, exp.TRATAMIENTOS, exp.ENFERMEDADES, ale.NOMBRE as ALERGIAS, tra.TIPO as TRASTORNOS, apa.TIPO as APARIENCIA
-       FROM tbl_expediente_medico exp, tbl_persona per, tbl_personas_alergias alep, tbl_personas_transtornos trap, tbl_personas_apariencia apap, tbl_alergias ale, tbl_transtornos_corporales tra, tbl_apariencia_fisica apa, tbl_tipo_sangre san
-       WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
-       AND exp.CODIGO_EXPEDIENTE = alep.CODIGO_EXPEDIENTE_PERSONA
-       AND exp.CODIGO_EXPEDIENTE = trap.CODIGO_EXPEDIENTE
-       AND exp.CODIGO_EXPEDIENTE = apap.CODIGO_EXPEDIENTE
-       AND alep.CODIGO_ALERGIAS = ale.CODIGO_ALERGIAS
-       AND trap.CODIGO_TRANSTORNO = tra.CODIGO_TRANSTORNO
-       AND apap.CODIGO_APARIENCIA = apa.CODIGO_APARIENCIA
-       AND exp.CODIGO_TIPO_SANGRE = san.CODIGO_TIPO_SANGRE and exp.CODIGO_PERSONA = '$persona'";
-       $resul=$conn->query($consulta);
-       if ($resul->num_rows > 0) {
-        while($row = $resul->fetch_assoc()) { 
-        $var1 = $row['TIPO_SANGRE'];
-        $var2 = $row['TRATAMIENTOS'];
-        $var3 = $row['ENFERMEDADES'];
-        $var4 = $row['ALERGIAS'];
-        $var5 = $row['TRASTORNOS'];
-        $var6 = $row['APARIENCIA'];
-        ?>
-      <thead>
-         <tr>
-           <th>Tipo sangre</th>
-           <th>Tratamientos</th>
-           <th>Enfermedades</th>
-           <th>Alergias</th>
-           <th>Trastornos</th>
-           <th>Enfermedades</th>
-         </tr>
-      </thead>
-      <tbody>
-         <tr>
-         <td ><?php echo ucwords(strtolower($var1)); ?></td>
-         <td ><?php echo ucwords(strtolower($var2)); ?></td>
-         <td ><?php echo ucwords(strtolower($var3)); ?></td>
-         <td ><?php echo ucwords(strtolower($var4)); ?></td>
-         <td ><?php echo ucwords(strtolower($var5));?></td>
-         <td ><?php echo ucwords(strtolower($var6));?></td>
-         </tr>
-         <?php
-           }
-           }
-         ?>
-      </tbody>
-    </table>
-    </fieldset>
-    <br>
+    
       <?php
         $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
         FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
@@ -337,7 +346,7 @@ include('conexion2.php');
           
            <legend style="background-color: #ffff; color:#000000;">Datos examenes recetados</legend><br><hr>
             <div class="c2" id=caja2><label>Medicamento:</label>
-              <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
+              <textarea ><?php  echo ucwords(strtolower($examen)) ?></textarea>
             </div>
             <div class="c2" id=caja2><label>Indicaciones:</label>
               <textarea ><?php  echo ucwords(strtolower($indicaciones)) ?></textarea>
@@ -372,9 +381,11 @@ $dompdf ->setOptions($options);
 
 $dompdf ->loadHtml($html);
 
+
 $dompdf->setPaper('letter');
 $dompdf->render();
 
 $dompdf->stream("reporte.pdf", array("Attachment" => false));
 echo $dompdf->output();
 ?>
+
