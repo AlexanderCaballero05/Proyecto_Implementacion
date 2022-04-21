@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <section class="content-header text-xl-center mb-3 btn-light"> 
-                <h4> EXPEDIENTE PSICOLOGICO PACIENTE <i class="nav-icon fas fa-stethoscope"></i></h4>
+                <h4> PlAN TERAPEUTICO PACIENTE <i class="nav-icon fas fa-stethoscope"></i></h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -148,28 +148,33 @@
                          $codigo_consulta = $row['CODIGO_EXPEDIENTE_PSICO'];
                          
                         ?> 
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Sintomas</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $sintomas;?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Diagnostico Ingreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_ingreso ; ?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Observaciones</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $evolucion; ?></textarea>
-                          </div>
-                      </div>
-                      <div  class="col-sm-3 mb-3">
+                    </div>
+
+                      <div class="row">
+                      
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Diagnostico de egreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_egreso; ?></textarea>
+                          </div>
+                      </div>
+
+                      <div  class="col-sm-6 mb-3">
+                         <label  class="form-label">Observaciones</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $evolucion; ?></textarea>
                           </div>
                       </div>
                       <?php
@@ -211,35 +216,41 @@
                          $resultados = $row['RESULTADOS'];
                          
                         ?> 
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Actividades</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $actividad;?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Tecnicas</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $tecnica ; ?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
+
+               </div> <!--fin del row-->
+               
+               <div class="row">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Materiales</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $materiales; ?></textarea>
                           </div>
+                  
+                 
                       </div>
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Tareas</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $tareas; ?></textarea>
                           </div>
                       </div>
 
-                    </div><!-- fin row-->
+              </div><!-- fin row-->
 
                     <div class="row">
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Resultados</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $resultados;?></textarea>
@@ -316,13 +327,13 @@ var from         = event.relatedTarget || event.toElement;
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
 
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
+    localStorage.setItem( 'leftWindow', true );
 }
 } );
   </script>

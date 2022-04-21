@@ -6,6 +6,7 @@ date_default_timezone_set("America/Guatemala");
 <?php
 include('conexion.php');
 include('conexion2.php'); 
+
 if (isset($_POST['expediente'])) {
 	$persona =($_POST['expediente']);
    }  

@@ -120,6 +120,7 @@ session_start();
          $_GET["ruta"] == "Formbitacora" ||
          $_GET["ruta"] == "crudparametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
+         $_GET["ruta"] == "crudTutoriasTutor" ||
          $_GET["ruta"] == "area" ||
          $_GET["ruta"] == "procesoPreClinica" ||
          $_GET["ruta"] == "crudPreClinica" ||
@@ -157,6 +158,7 @@ session_start();
          $_GET["ruta"] == "crudpreguntas" ||
          $_GET["ruta"] == "procesoMatricula" ||
          $_GET["ruta"] == "crudMatricula" ||
+         $_GET["ruta"] == "crudAlumnosMatricula" ||
          $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||

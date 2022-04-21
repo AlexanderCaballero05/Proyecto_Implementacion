@@ -32,8 +32,8 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
       </script>";
 
      }else{
-      $matricula = " INSERT INTO `tbl_matricula_academica`( `CODIGO_CARGA`, `CODIGO_ESTUDIANTE`,`FECHA_MATRICULA`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) 
-      VALUES ('$CARGA','$ESTUDIANTE','$fechaActual','$usuario','$fechaActual' ); ";
+      $matricula = " INSERT INTO `tbl_matricula_academica`( `CODIGO_CARGA`, `CODIGO_ESTUDIANTE`, OBSERVACION ,`FECHA_MATRICULA`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) 
+      VALUES ('$CARGA','$ESTUDIANTE', '9','$fechaActual','$usuario','$fechaActual' ); ";
       $resul=$conn->query($matricula);
 
       if($resul >0){
@@ -117,3 +117,36 @@ if(isset($_POST['MatriEliminar'])){
     
   }
 }//Cirre del if padre
+
+?>
+
+
+<?php
+if(isset($_POST['MODIFICAR_CALIFICACION'])){
+    $codigo_matricula = $_POST['codigo_matricula_alumno'];
+    $codigo_estado = $_POST['codigo_estado'];
+
+
+    $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
+                              SET OBSERVACION = '$codigo_estado' 
+                              WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
+    $Respuesta=$conn->query($consulta_matricula);
+
+    if($Respuesta>0){
+      echo "<script>
+      window.location = 'crudAlumnosMatricula';
+      </script>";
+
+    }else{
+      echo "<script>
+      window.location = 'crudAlumnosMatricula';
+      </script>";
+
+    }
+
+
+
+}
+
+
+?>

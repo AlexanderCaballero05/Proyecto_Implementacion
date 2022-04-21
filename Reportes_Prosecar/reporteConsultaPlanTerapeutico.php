@@ -219,9 +219,7 @@ if (isset($_POST['id_persona_plan'])) {
       
       <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas psicologicas paciente  <?php echo $fecha; ?> </legend><br><hr>
       <div>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
-      </div>
+      <div class="c" id="caja2" ><label>Sintomas</label> <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> </div>
       <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
       <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($observaciones)) ?></textarea></div>
       <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
@@ -232,28 +230,16 @@ if (isset($_POST['id_persona_plan'])) {
       <div id="caja3">
         <legend style="background-color: #ffff; color:#000000;">Datos Plan terapeutico</legend><br><hr>
         
-        <div class="c1" id=caja1><label>Actividades</label>
-        <textarea ><?php echo $actividades?></textarea>
-        </div>
-        <div class="c1" id=caja2><label>Resultados</label>
-        <textarea  ><?php echo $resultados?></textarea>
-        </div>
-        
-        </div>
+        <div class="c" id=caja2> <label>Actividades</label> <textarea ><?php echo $actividades?></textarea> </div>
+        <div class="c" id=caja2><label>Resultados</label> <textarea  ><?php echo $resultados?></textarea></div>
+        <div class="c" id=caja2><label>Tecnicas</label><textarea ><?php echo $tecnicas?></textarea></div>
+        <div class="c" id=caja2><label>Tareas</label><textarea ><?php echo $tareas?></textarea></div>
+       </div>
 
-        <div class="c1" id=caja2><label>Tecnicas</label>
-        <textarea ><?php echo $tecnicas."fc"?></textarea>
+       <div id="caja3">
+        <div class="c" id=caja2><label>Materiales</label><textarea><?php echo $materiales?></textarea></div>
         </div>
-        
-        <div class="c1" id=caja2><label>Tareas</label>
-        <textarea ><?php echo $tareas."lpm"?></textarea>
-        </div>
-        
-        <div class="c1" id=caja2><label>Materiales</label>
-        <textarea ><?php echo $materiales."Imc"?></textarea>
-        </div>
-       
-      </div>
+      
       
         
     <?php

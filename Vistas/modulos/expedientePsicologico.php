@@ -142,42 +142,50 @@
                          $enfermedades = $row['ANTECEDENTES_CLINICOS'];
                          $alergias = $row['TIPO'];
                          
-                        ?>   
-                     <div class="col-sm-3 mb-3">
+                        ?>  
+                         <div  class="col-sm-6 mb-3">
+                         <label  class="form-label">Sintomas neuroticos</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $alergias;?></textarea>
+                          </div>
+                     </div> 
+                     <div class="col-sm-6 mb-3">
                          <label for="" class="control-label">Antecedentes Familiares</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $sangre ;?></textarea>
                           </div>
                      </div>
-                     <div  class="col-sm-3 mb-3">
+                    
+
+                  </div><!--fin row -->
+
+                  <div class="row">
+
+                     <div class="col-sm-6 mb-3">
                          <label  class="form-label">Antecedentes Personales</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $tratamientos ;?></textarea>
                           </div>
                      </div>
-                     <div  class="col-sm-3 mb-3">
+
+                     <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Antecedentes clinicos</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $enfermedades;?></textarea>
                           </div>
                      </div>
-                     <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Sintomas neuroticos</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $alergias;?></textarea>
-                          </div>
-                     </div>
+                    
                 
                        
                        <?php
                        }
                        }
                       ?>
-                  </div><!--fin row -->
+                  </div>
 
                   <hr>
                   <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                     <h5>Informacion de consulta</h5> 
+                     <h5>Datos de consulta</h5> 
                   </div>
                   <hr> 
 
@@ -205,35 +213,42 @@
                          $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
                          
                         ?> 
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Sintomas</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $sintomas;?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
+                      <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Diagnostico Ingreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_ingreso ; ?></textarea>
                           </div>
                       </div>
-                      <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Observaciones</label>
-                          <div class="form-group">
-                             <textarea  readonly class="form-control" ><?php echo $evolucion; ?></textarea>
-                          </div>
-                      </div>
-                      <div  class="col-sm-3 mb-3">
+                    
+                  </div><!-- fin row-->
+
+                  <div class="row">
+                  <div  class="col-sm-6 mb-3">
                          <label  class="form-label">Diagnostico de egreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_egreso; ?></textarea>
                           </div>
                       </div>
+
+                      <div  class="col-sm-6 mb-3">
+                         <label  class="form-label">Observaciones</label>
+                          <div class="form-group">
+                             <textarea  readonly class="form-control" ><?php echo $evolucion; ?></textarea>
+                          </div>
+                      </div>
+                      
                       <?php
                        }
                        }
                       ?>
-                  </div><!-- fin row-->
+
+                  </div>
                  
 
                   <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
@@ -301,13 +316,13 @@ var from         = event.relatedTarget || event.toElement;
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
 
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+if (!leftWindow  && (!from || from.nodeName === 'HTML') ) {
 
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
+    localStorage.setItem( 'leftWindow', true );
 }
 } );
   </script>

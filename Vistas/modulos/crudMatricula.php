@@ -97,7 +97,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <th class="text-center">Modalidad</th>
                           <th class="text-center">Nombre del Tutor</th>
                           <th class="text-center">Estudiante</th>
-                          <th class="text-center">Grado Actual</th>
+                          <th class="text-center">Estado de la matricula</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -105,15 +105,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
                $query = "SELECT ma.CODIGO_MATRICULA, concat_ws (' ',p.PRIMER_NOMBRE,' ',p.PRIMER_APELLIDO) as ESTUDIANTE,
                (select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp2.PRIMER_APELLIDO) from tbl_persona tp2
                 where ca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tu.NOMBRE as ASIGNATURA,
-                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA, es.CODIGO_ESTUDIANTE
+                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA, es.CODIGO_ESTUDIANTE, est.NOMBRE as ESTADO_MATRICULA
          FROM tbl_matricula_academica ma, tbl_carga_academica ca, tbl_seccion se, tbl_tutoria tu, 
-               tbl_modalidad mo, tbl_estudiante es, tbl_persona p
+               tbl_modalidad mo, tbl_estudiante es, tbl_persona p, tbl_estado est
          WHERE ma.CODIGO_CARGA = ca.CODIGO_CARGA
            AND se.CODIGO_SECCION = ca.CODIGO_SECCION
            AND tu.CODIGO_TUTORIA = ca.CODIGO_TUTORIA
            AND mo.CODIGO_MODALIDA = ca.CODIGO_MODALIDAD
            AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
-           AND p.CODIGO_PERSONA = es.CODIGO_PERSONA;";
+           AND p.CODIGO_PERSONA = es.CODIGO_PERSONA
+           AND est.CODIGO_ESTADO = ma.OBSERVACION;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -126,6 +127,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   $var7 = $row['SECCION'];
                   $var8 = $row['HORA'];
                   $var9 = $row['CODIGO_ESTUDIANTE'];
+                  $var10 = $row['ESTADO_MATRICULA'];
                         ?>
                         <tr>
                           <td>
@@ -177,7 +179,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td class="text-center"><?php echo $var5; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td>
+                          <td class="text-center"><?php echo $var10; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
                           <div id="EDITARMATRICULA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">

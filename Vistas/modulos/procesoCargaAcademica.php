@@ -192,6 +192,22 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-sm-2 mb-3"> 
+                    <?php //
+                    $query = "SELECT * FROM tbl_tutoria";
+                    $resultadod=$conn->query($query);                
+                    ?>
+                    <label for="identidad" class="control-label">Periodo:</label> 
+                    <div class="input-group ">
+                            <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" placeholder=" Ej: 3 " name="periodo" required >
+                            <div class="input-group-append">
+                              <span class="input-group-text">Meses</span>
+                            </div>
+                             <div class="invalid-feedback">
+                                 Llene este campo.
+                              </div>
+                          </div>
+                  </div><!--CIERRE DEL PERIODO -->
               </div><!--Fin del row -->
               </br></br></br>
               <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Carga Academica</button>
