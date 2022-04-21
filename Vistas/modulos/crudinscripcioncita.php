@@ -53,7 +53,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
             <div class="row">
                 <div class="col-md-12">
                     <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
                     </a>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     </br></br>
@@ -99,7 +99,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <div class="card ">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">CITAS GENERALES PROSECAR</strong></h1>
+                            <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">
@@ -107,15 +107,15 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                 <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ACCION</th>
+                                            <th class="text-center">Acción</th>
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">FECHA CITA</th>
-                                            <th class="text-center">HORA</th>
-                                            <th class="text-center">BENEFICIARIO</th>
-                                            <th class="text-center">ENCARGADO DE CITA</th>
-                                            <th class="text-center">ESPECIALIDAD</th>
-                                            <th class="text-center">AREA</th>
-                                            <th class="text-center">ESTADO DE CITA</th>
+                                            <th class="text-center">Fecha cita</th>
+                                            <th class="text-center">Hora</th>
+                                            <th class="text-center">Beneficiario</th>
+                                            <th class="text-center">Encargado de cita</th>
+                                            <th class="text-center">Especialidad</th>
+                                            <th class="text-center">Área</th>
+                                            <th class="text-center">Estado de cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
