@@ -260,13 +260,13 @@ var from         = event.relatedTarget || event.toElement;
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
 
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+if (!leftWindow  && (!from || from.nodeName === 'HTML') ) {
 
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
+     localStorage.setItem( 'leftWindow', true );
 }
 } );
   </script>

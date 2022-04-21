@@ -382,6 +382,8 @@ if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
     alert( '!Estas a punto de salir!' );
     // localStorage.setItem( 'leftWindow', true );
 }
+
+} ); 
 } ); */
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->

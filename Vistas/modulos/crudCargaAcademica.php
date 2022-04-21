@@ -121,12 +121,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Hora final</th>
                         <th class="text-center">Fecha inicio</th>
                         <th class="text-center">Fecha final</th>
+                        <th class="text-center">Periodo</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION
+                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO
                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
                       WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
                       AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA AND c.CODIGO_SECCION = s.CODIGO_SECCION";
@@ -146,6 +147,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         $var11 = $row['CODIGO_PERSONA'];
                         $var12 = $row['HORA_FINAL'];
                         $var13 = $row['CODIGO_SECCION'];
+                        $var14 = $row['PERIODO'];
+
                       ?>
                       <tr>
                         <td>
@@ -216,6 +219,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <td class="text-center"><?php echo $var12; ?></td>
                         <td class="text-center"><?php echo $var7; ?></td>
                         <td class="text-center"><?php echo $var8; ?></td>
+                        <td class="text-center"><?php echo $var14; ?></td>
                         
 
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">

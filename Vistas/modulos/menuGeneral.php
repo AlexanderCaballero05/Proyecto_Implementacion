@@ -400,7 +400,55 @@
           <?php
           }
           ?>
+                  <?php
+                           include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '38'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>   
+
+                   <!-- Menu de AREA DE TUTOR -->
+                     <li class="nav-item">
+                        <a href="#" class="nav-link">
+                          <i class=" nav-icon fas fa-briefcase"></i>
+                          <p>
+                            Gestion Tutor
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="crudTutoriasTutor" class="nav-link">
+                              <i class="far fa-edit nav-icon"></i>
+                              <p>Proceso tutorias</p>
+                            </a>
+                          </li>         
+                        </ul>
+                      </li>
+
+
+                      <?php
+                        }
+                        ?>
 
 
                      <?php

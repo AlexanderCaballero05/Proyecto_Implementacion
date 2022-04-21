@@ -24,7 +24,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <form method="POST" class="needs-validation" novalidate>
 
                 <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Crear informacion
+                    <h4 class="text-center">Agregar
                         objetos</h4>
 
                 </div>
@@ -36,7 +36,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  type="text"
+                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeyup="mayus(this);"  type="text"
                                  name="nombre" id="nombre" autocomplete = "off" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.

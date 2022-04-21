@@ -24,6 +24,7 @@ if(isset($_POST['tutor'])  ){
         $fecha = date('Y-m-d');
         $user=$_SESSION['vario'];
         $anio = date("Y");
+        $periodo = ($_POST['periodo']);
        try{
              $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
              CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?);'");
@@ -64,8 +65,8 @@ if(isset($_POST['tutor'])  ){
                             }else{
                                try{
                                     $insert = " INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
-                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`) 
-                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio'); ";
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`) 
+                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
                                     $resul=$conn->query($insert);
                                     if($resul >0){
                                         echo "<script> 
@@ -255,3 +256,20 @@ if(isset($_POST['eliminar_carga'])){
 ?>
 
 
+<?php
+
+if(isset($_POST['codigo_carga_matricula'])){
+
+    $_SESSION['carga'] = $_POST['codigo_carga_matricula'];
+
+
+    echo "<script>
+    window.location = 'crudAlumnosMatricula';
+    </script>";
+    exit;
+
+
+
+}
+
+?>
