@@ -40,7 +40,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <div class="row">
                 <div class="col-md-12">
                     <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
                     </a>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                    </br></br>
@@ -72,7 +72,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      ?>
                    
                     <div class="card ">
-                    <div class="modal-header" style="background-color: #0CCDE3">
+                    <div class="modal-header" >
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                         </div>
                         <!-- form start -->
@@ -81,14 +81,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ACCION</th>
-                                            <th class="text-center">FECHA CITA</th>
-                                            <th class="text-center">HORA</th>
-                                            <th class="text-center">BENEFICIARIO</th>
-                                            <th class="text-center">ENCARGADO DE CITA</th>
-                                            <th class="text-center">ESPECIALIDAD</th>
-                                            <th class="text-center">AREA</th>
-                                            <th class="text-center">ESTADO DE CITA</th>
+                                            <th class="text-center">Acción</th>
+                                            <th class="text-center">Fecha cita</th>
+                                            <th class="text-center">Hora</th>
+                                            <th class="text-center">Beneficiario</th>
+                                            <th class="text-center">Encargado cita</th>
+                                            <th class="text-center">Especialidad</th>
+                                            <th class="text-center">Área</th>
+                                            <th class="text-center">Estado cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -165,11 +165,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                             </div>
                                                         </div><!-- final del text-center -->
-                                                    </td>
+                                                    </td> 
                                                     <td class="text-center"><?php echo $var2; ?></td>
                                                     <td class="text-center"><?php echo $var3; ?></td>
-                                                    <td class="text-center"><?php echo $var4; ?></td>
-                                                    <td class="text-center"><?php echo $var5; ?></td>
+                                                    <td class="text-center"><?php echo ucwords(strtolower($var4)); ?></td>
+                                                    <td class="text-center"><?php echo ucwords(strtolower($var5));?></td>
                                                     <td class="text-center"><?php echo $var8; ?></td>
                                                     <td class="text-center"><?php echo $var7; ?></td>
                                                     <td class="text-center"><?php echo $var6; ?></td>

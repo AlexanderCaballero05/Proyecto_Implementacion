@@ -20,6 +20,9 @@
     <div class="container-fluid">
 
     <section class="content">
+       <section class="content-header text-xl-center mb-3 btn-light">
+              <h4> MTRICULAR ALUMNOS<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+        </section>
     <div class="container-fluid">
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -44,11 +47,11 @@
                       where  p.CODIGO_PERSONA = es.CODIGO_PERSONA";
                       $resultado=$conn->query($query);
                     ?>
-                    <button  type="submit" name="BOTON_BUSCAR"  id= "BOTON_BUSCAR" class="btn btn-primary " class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Buscador</button>
+                    
                     <div class="col-sm-4">
                     <div class="form-group">
                       <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="BUSCA_ESTUDIANTE"  required>
-                        <option selected enable value="">Seleccione</option> <!--Lo mismo que el de arriba :v -->
+                        <option selected enable value="">Seleccione alumno</option> <!--Lo mismo que el de arriba :v -->
                         <?php 
                           if ($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) { 
@@ -62,7 +65,11 @@
                         ?>
                       </select>
                    </div>
+                   
               </div>
+                  <div class="col-sm-4">
+                     <button  type="submit" name="BOTON_BUSCAR"  id= "BOTON_BUSCAR" class="btn btn-primary " class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Buscador</button>
+                   </div>
               </form>
             </div>
            </br> 
@@ -85,10 +92,12 @@
                }
               }
             ?>
-
-            <div class="col-md-4 mb-3">
-                <input hidden class="form-control" value="<?php echo $COD_ES; ?> ">
-                <input class="form-control" value="<?php echo $NOMBRE_ES; ?> ">
+            <div class="row">
+              <label class="px-4">Estudiante:</label>
+              <div class="col-md-4 mb-3">
+                  <input hidden class="form-control" value="<?php echo $COD_ES; ?> ">
+                  <input disabled class="form-control" value="<?php echo $NOMBRE_ES; ?> ">
+              </div>
              </div>
 
             

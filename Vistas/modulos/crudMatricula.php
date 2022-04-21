@@ -37,6 +37,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" active href="procesoMatricula">Matricula</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" active href="listadoTutoriasMatriculadas">Lista de clases</a>
+              </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
           <div class="card-body">

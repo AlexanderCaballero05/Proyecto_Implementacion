@@ -53,13 +53,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ACCION</th>
+                                            <th class="text-center">Acción</th>
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">FECHA CITA</th>
-                                            <th class="text-center">HORA</th>
-                                            <th class="text-center">MEDICO</th>
-                                            <th class="text-center">BENEFICIARIO</th>
-                                            <th class="text-center">ESTADO DE CITA</th>
+                                            <th class="text-center">Fecha cita</th>
+                                            <th class="text-center">Hora</th>
+                                            <th class="text-center">Medico</th>
+                                            <th class="text-center">Paciente</th>
+                                            <th class="text-center">Estado cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -220,7 +220,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                         
 
-                                                                        <h2 class="text-center">Informacion de cita</h2>
+                                                                        <h2 class="text-center">Información de cita</h2>
                                                                         <br>
                                                                     <div class="row"> 
                                             
@@ -242,7 +242,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="row"> 
                                                                             <div class="col-sm-12">
                                                                                         <div class="form-group">
-                                                                                        <p><b class="p-1">Beneficiario:</b> <?php echo $var2; ?></p>
+                                                                                        <p><b class="p-1">Paciente:</b> <?php echo $var2; ?></p>
                                                                                         </div>
                                                                                 </div>
 
@@ -256,7 +256,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="row"> 
                                                                             <div class="col-sm-6">
                                                                                         <div class="form-group">
-                                                                                        <p><b class="p-1">estado: </b> <?php echo $var5; ?></p>
+                                                                                        <p><b class="p-1">Estado: </b> <?php echo $var5; ?></p>
 
                                                                                         </div>
                                                                                 </div>

@@ -144,6 +144,7 @@ session_start();
          $_GET["ruta"] == "crudSeccion" ||
          $_GET["ruta"] == "expedienteMedico" ||
          $_GET["ruta"] == "expedientePsicologico" ||
+         $_GET["ruta"] == "listadoTutoriasMatriculadas" ||
          
 
          $_GET["ruta"] == "crudCitasPsicologicas" ||
