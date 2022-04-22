@@ -78,8 +78,6 @@
 
   //EDITAR  
   if(isset($_POST['id_parentes'])){
-    //session_start();
-    $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
 
     if(isset($_POST['Edit_parentesco'])){
       $codigo_paren = ($_POST['id_parentes']);
@@ -96,7 +94,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Ese registro de parentesco ya existe!')
               window.location = 'crudParentesco';
               </script>";
               
@@ -107,7 +104,7 @@
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
-              
+              alert('¡Ese registro de parentesco ya existe!')
               window.location = 'crudParentesco';
               </script>";
 

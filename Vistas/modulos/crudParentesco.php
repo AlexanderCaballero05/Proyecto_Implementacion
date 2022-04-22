@@ -203,7 +203,7 @@ include_once "conexion3.php";
                           <div id="EDITARPARENTESCO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
+                                <form id="FORMEDITPARENTESCO" method="POST" class=" needs-validation">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parentesco</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -214,7 +214,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Código: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var1; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_cod" id="Edit_cod" required>
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var1; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="id_parentes" id="id_parentes" required>
                                           <div class="invalid-feedback">
                                            Llene este campo.
                                           </div>
