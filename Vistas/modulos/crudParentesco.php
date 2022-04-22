@@ -11,10 +11,8 @@ include_once "conexion3.php";
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
       
-<head>
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> Para que funcione el selecrt2 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  -->
-</head>
+ <head>
+</head>  
 
 <div class="content-wrapper">
   <div class="content-header">
@@ -25,16 +23,22 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> PARÁMETROS  <i class=" nav-icon fas fa-shield-alt"></i></h4>
+          <h4> PARENTESCO CON EL ESTUDIANTE  </h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
+          <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" href="crudParametros">Parámetros</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="parametrosusuario">Parámetros usuario</a>
+                <a class="nav-link "  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active"  style="color:#000000;" href="procesoRegistrarFamiliares"> Parentesco </a>
               </li>
             </ul>
           </div>
@@ -73,7 +77,7 @@ include_once "conexion3.php";
                     {
                     ?>      
 
-                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parámetro</button>
+                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parentesco</button>
 
 
                    <?php
@@ -91,27 +95,23 @@ include_once "conexion3.php";
             <form  method="POST" ><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="tabla_parametros" class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
+                  <table id="tabla_parentesco" class="table table-bordered table-striped table-hover">
+                      <thead class="table">
+                        <tr><!--fila del encabezado de la tabla -->
                           <th class="text-center">Acción</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">Parametro</th>
-                          <th class="text-center">Valor</th>
+                          <th class="text-center">Parentesco</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT p.CODIGO_PARAMETRO, p.PARAMETRO, p.VALOR
-                        FROM TBL_PARAMETROS p";
+                        $query = "SELECT CODIGO_PARENTESCO, NOMBRE AS PARENTESCO
+                        FROM TBL_PARENTESCO;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_PARAMETRO'];
-                            $var2 = $row['PARAMETRO'];
-                            $var3 = $row['VALOR'];
-                            
-                           
+                            $var1 = $row['CODIGO_PARENTESCO'];
+                            $var2 = $row['PARENTESCO'];
 
                             ?>
 
@@ -197,7 +197,7 @@ include_once "conexion3.php";
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
-                          <td class="text-center"><?php echo $var3; ?></td>
+                          
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
@@ -205,7 +205,7 @@ include_once "conexion3.php";
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Parámetros</h4>
+                                    <h4 class="text-center">Editar Parentesco</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -213,14 +213,25 @@ include_once "conexion3.php";
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_parametro">Parámetro</label>
+                                          <label for="txtcodigo_parametro">Familiar: </label>
                                           <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
                                         </div>
                                       </div>
                                      
-                                      <div class="col-sm-12">
+                                      <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtnombre_usuario">Valor</label>
+                                          <label for="txtnombre_usuario">Estudiante: </label>
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var4; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
+                                          <div class="invalid-feedback">
+                                           Llene este campo.
+                                          </div>
+                                        </div>
+                                      </div> 
+
+
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtnombre_usuario">Parentesco: </label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
                                           <div class="invalid-feedback">
                                            Llene este campo.
@@ -251,7 +262,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el registro de parentesco de  <?php echo $var2; ?> ?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -283,31 +294,113 @@ include_once "conexion3.php";
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Parámetro</h4>
+                        <h4 class="text-center">Agregar Parentesco</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                        <div class="row"><!-- INICIO PRIMERA ROW -->
+                        
+                        
+                        <!-- ***********BUSCAR AL FAMILIAR*********** -->
+                       <label for="">Familiar: </label>
                             <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
-                                    <div class="invalid-feedback">
-                                     Llene este campo.
-                                    </div>
-                                </div>
+                                <?php //
+                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
+                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 7;";
+                    $resultadod=$conn->query($query);                
+                    ?>
+
+             <a href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+              </a>
+              
+                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
+                    <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR2" id="" type="text" required >
+                    <option selected disabled value=""> Buscar familiares...</option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                          while($row = $resultadod->fetch_assoc()) { 
+                          $codigo = $row['CODIGO_PERSONA'];
+                          $nombre = $row['NOMBRE'];
+                          
+                          ?>
+                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
+                        ?>
+                      </select>
+                          
+                      <div class="invalid-feedback">
+                          Agregue un nombre!
+                      </div>
+
+                      <div class="valid-feedback">
+                        ¡Se ve bien!
+                   </div>
+                </div>
                             </div>
                             
-                            
+
+
+                            <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
+
+                            <label for="">Estudiante:</label>
                             <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtvalor">Valor</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    autocomplete = "off" type="text"  placeholder="Ingrese el valor del parámetro" name="valor_param" id="valor_param" required></textarea>
-                                    <div class="invalid-feedback">
-                                    Llene este campo.
-                                   </div>
-                                </div>
+                            <?php //
+                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
+                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 4;";
+                    $resultadod=$conn->query($query);                
+                    ?>
+
+             <a href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+              </a>
+                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
+                    <select  style="width: 100%;"  class="form-control select2" name="CODpEstudiante" id="" type="text" required >
+                    <option selected disabled value=""> Buscar familiares...</option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                          while($row = $resultadod->fetch_assoc()) { 
+                          $codigo = $row['CODIGO_PERSONA'];
+                          $nombre = $row['NOMBRE'];
+                          
+                          ?>
+                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
+                        ?>
+                      </select>
+                          
+                      <div class="invalid-feedback">
+                          Agregue un nombre!
+                      </div>
+
+                      <div class="valid-feedback">
+                        ¡Se ve bien!
+                   </div>
+                </div>
                             </div>
+
+
+                            <div class="col-sm-4 order-2 pl-2 mt-2 mb-2">
+                      <label for="">¿Es encargado del estudiante?</label>
+                    <select  style="width: 100%;"  class="form-control" name="encargadoES" id="" type="text" required >
+                        <option selected disabled value=""> Seleccionar la opción...</option>
+                        <option value="SI" >SI</option>
+                        <option value="NO" >NO</option>
+                      </select>
+                          
+                      <div class="invalid-feedback">
+                         seleccione una opción!
+                      </div>
+
+                      <div class="valid-feedback">
+                        ¡Se ve bien!
+                   </div>
+                </div>
+            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
@@ -440,7 +533,7 @@ function soloLetrascaracteres(e){
 <!-- Función para poder generar el reporte de la tabla -->
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteParametros.php','_blank');
+      window.open('Reportes_Prosecar/reporteParentesco.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
@@ -475,7 +568,7 @@ $(document).ready(function() {
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
-    $('#tabla_parametros').DataTable({
+    $('#tabla_parentesco"').DataTable({
       language:espanol
     });
 } );

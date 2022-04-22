@@ -264,13 +264,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href=" " class="nav-link">
+                  <a href="crudFamiliaresEstudiantes" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                    <p>Familiares estudiantes</p>
+                    <p>Relación familiares-estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                  <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="far fa-circle nav-icon"></i>
                     <p>Tipo de parentesco</p>
                   </a>
