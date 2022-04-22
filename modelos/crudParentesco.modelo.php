@@ -9,49 +9,46 @@
   
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR PARÁMETROS
+//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR PARENTESCO
 
 
-//AGREGAR/REGISTRAR UN PARÁMETRO
-    if(isset($_POST['parametro'])){
-        //session_start();
-        $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
+//AGREGAR/REGISTRAR 
+    if(isset($_POST['parentesco'])){
+        
        try{
-          if(isset($_POST['agregar_param'])){
-               $nombre_param = ($_POST['parametro']);
-               $valor = ($_POST['valor_param']);
-               $fechaActual = date('Y-m-d');   
+          if(isset($_POST['agregar_paren'])){
+               $nombre_paren = ($_POST['parentesco']);  
               try{ 
-                  $consulta_nom = $db->prepare("SELECT PARAMETRO FROM tbl_parametros WHERE PARAMETRO = (?);");
-                  $consulta_nom->execute(array($nombre_param));
+                  $consulta_nom = $db->prepare("SELECT NOMBRE FROM tbl_parentesco WHERE NOMBRE = (?);");
+                  $consulta_nom->execute(array($nombre_paren));
                   $row=$consulta_nom->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de parámetro $nombre_param ya se encuentra registrado');
-                    window.location = 'crudFamiliaresEstudiantes';
+                    alert('El nombre de parentesco de $nombre_paren ya se encuentra registrado');
+                    window.location = 'crudParentesco';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_param = " INSERT INTO `tbl_parametros`( `PARAMETRO`,  `VALOR`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$nombre_param','$valor','$usuario','$fechaActual' ); ";
-                      $resul=$conn->query($query_param);
+                      $query_paren= " INSERT INTO `tbl_parentesco`( `NOMBRE` ) VALUES ('$nombre_paren'); ";
+                      $resul=$conn->query($query_paren);
                       if($resul >0){
                         echo "<script> 
                        
-                        window.location = 'crudFamiliaresEstudiantes';
+                        window.location = 'crudParentesco';
                         </script>";
                         
 
                         //<!--llamada de la fuction bitacora -->
                         $codigoObjeto=3;
-                        $accion='Insertar parámetro';
-                        $descripcion= 'Agregó/insertó un nuevo parámetro';
+                        $accion='Insertar parentesco';
+                        $descripcion= 'Agregó/insertó un nuevo parentesco';
                         bitacora($codigoObjeto, $accion,$descripcion);
 
                       }else{
                         echo "<script> 
                         
-                        window.location = 'crudFamiliaresEstudiantes';
+                        window.location = 'crudParentesco';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->
@@ -79,48 +76,45 @@
 
 
 
-  //EDITAR UN PARÁMETRO 
-  if(isset($_POST['id_param'])){
+  //EDITAR  
+  if(isset($_POST['id_parentes'])){
     //session_start();
     $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
 
-    if(isset($_POST['Edit_parametro'])){
-      $codigo_param = ($_POST['id_param']);
-      $editar_valor = ($_POST['Edit_valor']);
-      $fechaActual = date('Y-m-d');
+    if(isset($_POST['Edit_parentesco'])){
+      $codigo_paren = ($_POST['id_parentes']);
+      $editar_nombrep = ($_POST['Edit_paren']);
       try{
        //   
-       $sentencia = $db->prepare("SELECT * FROM tbl_parametros where PARAMETRO = (?) and CODIGO_PARAMETRO <> (?) ;");
-       $sentencia->execute(array($editar_valor ,$codigo_param));
+       $sentencia = $db->prepare("SELECT * FROM tbl_parentesco where NOMBRE = (?) and CODIGO_PARENTESCO <> (?) ;");
+       $sentencia->execute(array($editar_nombrep ,$codigo_paren));
        $row=$sentencia->fetchColumn();
          
-            $sql = " UPDATE tbl_parametros 
-            SET VALOR = '$editar_valor',
-                MODIFICADO_POR = '$usuario',
-                FECHA_MODIFICACION = '$fechaActual'
-            WHERE CODIGO_PARAMETRO = '$codigo_param' ";
+            $sql = " UPDATE tbl_parentesco 
+            SET NOMBRE = '$editar_nombrep',
+            WHERE CODIGO_PARENTESCO = '$codigo_paren' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              
-              window.location = 'crudFamiliaresEstudiantes';
+              alert('¡Ese registro de parentesco ya existe!')
+              window.location = 'crudParentesco';
               </script>";
               
               //<!--llamada de la fuction bitacora -->
               $codigoObjeto=3;
-              $accion='Editar parámetro';
-              $descripcion= 'Se editó el registro de un parámetro ya existente';
+              $accion='Editar parantesco';
+              $descripcion= 'Se editó el registro de un parantesco ya existente';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
               
-              window.location = 'crudFamiliaresEstudiantes';
+              window.location = 'crudParentesco';
               </script>";
 
               //<!--llamada de la fuction bitacora -->
               $codigoObjeto=3;
-              $accion='Editar parámetro fallido';
-              $descripcion= 'Se intentó editar el registro de un parámetro ya existente';
+              $accion='Editar parantesco fallido';
+              $descripcion= 'Se intentó editar el registro de un parantesco ya existente';
               bitacora($codigoObjeto, $accion,$descripcion);
             }
 
@@ -132,57 +126,55 @@
   }
 
 //ELIMINAR UN PARÁMETRO 
-if(isset($_POST['param_eliminar'])){
-    //session_start();
-    $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
+if(isset($_POST['paren_eliminar'])){
 
-  if(isset($_POST['ELIMINARPARAM'])){
-    $code = ($_POST['param_eliminar']);//asigna a una variable el id del estado a eliminar
+  if(isset($_POST['ELIMINARPAREN'])){
+    $code = ($_POST['paren_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT a.CODIGO_PARAMETRO, a.CODIGO_PARAM_USUARIO
-       from tbl_parametros_usuarios a ,tbl_parametros p 
-       where p.CODIGO_PARAMETRO = a.CODIGO_PARAMETRO and p.CODIGO_PARAMETRO = (?);;");
+      $relacion_tablas =  $db->prepare("SELECT p.CODIGO_PARENTESCO, fe.CODIGO_FAM_EST
+      FROM tbl_parentesco p, tbl_familiares_estudiante fe
+      WHERE p.CODIGO_PARENTESCO = fe.CODIGO_PARENTESCO and p.CODIGO_PARENTESCO = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar este parámetro,esta relacionado con otras tablas!');
-        window.location = 'crudFamiliaresEstudiantes';
+        alert('¡No se puede eliminar este parantesco,esta relacionado con otras tablas!');
+        window.location = 'crudParentesco';
         </script>";
         
         //<!--llamada de la fuction bitacora -->
         $codigoObjeto=3;
-        $accion='No eliminar parámetro';
-        $descripcion= 'Intento de invalido de eliminar parametro';
+        $accion='No eliminar parantesco';
+        $descripcion= 'Intento de invalido de eliminar parantesco';
         bitacora($codigoObjeto, $accion,$descripcion); 
 
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_parametros WHERE  CODIGO_PARAMETRO = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_parentesco WHERE  CODIGO_PARENTESCO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             
-            window.location = 'crudFamiliaresEstudiantes';
+            window.location = 'crudParentesco';
             </script>";
 
             //<!--llamada de la fuction bitacora -->
             $codigoObjeto=3;
-            $accion='Eliminar parámetro';
-            $descripcion= 'Se eliminó un registro de parámetro';
+            $accion='Eliminar parantesco';
+            $descripcion= 'Se eliminó un registro de parentesco';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
            
-            window.location = 'crudFamiliaresEstudiantes';
+            window.location = 'crudParentesco';
             </script>";
             exit;
 
             //<!--llamada de la fuction bitacora -->
             $codigoObjeto=3;
-            $accion='Eliminar parámetro fallido';
-            $descripcion= 'Falló eliminar el registro de parámetro';
+            $accion='Eliminar parentesco fallido';
+            $descripcion= 'Falló eliminar el registro de parentesco';
             bitacora($codigoObjeto, $accion,$descripcion);
           }
         }catch(PDOException $e){

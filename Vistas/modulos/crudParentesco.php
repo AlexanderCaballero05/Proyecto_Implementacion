@@ -168,7 +168,7 @@ include_once "conexion3.php";
                                {
                             ?>
 
-                               <a href="#ELIMINARPARAMETRO<?php echo $var1;?>" data-toggle="modal">
+                               <a href="#ELIMINARPARENTESCO<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINARPARAM" name="ELIMINARPARAM" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
@@ -184,7 +184,7 @@ include_once "conexion3.php";
                                 {
                                 ?>
 
-                                <a href="#EDITARPARAMETRO<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARPARENTESCO<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
 
@@ -200,7 +200,7 @@ include_once "conexion3.php";
                           
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARPARENTESCO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
@@ -209,19 +209,12 @@ include_once "conexion3.php";
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_parametro">Familiar: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
-                                        </div>
-                                      </div>
+                                    <div class="row"><!-- INICIO PRIMERA ROW -->
                                      
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtnombre_usuario">Estudiante: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var4; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
+                                          <label for="txtnombre_usuario">Código: </label>
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var1; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_cod" id="Edit_cod" required>
                                           <div class="invalid-feedback">
                                            Llene este campo.
                                           </div>
@@ -232,7 +225,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtnombre_usuario">Parentesco: </label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_paren" id="Edit_paren" required>
                                           <div class="invalid-feedback">
                                            Llene este campo.
                                           </div>
@@ -243,7 +236,7 @@ include_once "conexion3.php";
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="Edit_parametro" name="Edit_parametro" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="Edit_parentesco" name="Edit_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -252,7 +245,7 @@ include_once "conexion3.php";
 
 
                           <!--MODAL ELIMINAR -->
-                          <div id="ELIMINARPARAMETRO<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                          <div id="ELIMINARPARENTESCO<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -261,12 +254,12 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="paren_eliminar" id="paren_eliminar">
                                     <h4 class="text-center">¿Esta seguro de eliminar el registro de parentesco de  <?php echo $var2; ?> ?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINARPARAM" id="ELIMINARPARAM"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINARPAREN" id="ELIMINARPAREN"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -298,114 +291,23 @@ include_once "conexion3.php";
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->
-                        
-                        
-                        <!-- ***********BUSCAR AL FAMILIAR*********** -->
-                       <label for="">Familiar: </label>
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
-                                <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 7;";
-                    $resultadod=$conn->query($query);                
-                    ?>
-
-             <a href="categoria">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-              </a>
-              
-                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR2" id="" type="text" required >
-                    <option selected disabled value=""> Buscar familiares...</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                          
-                          ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select>
-                          
-                      <div class="invalid-feedback">
-                          Agregue un nombre!
-                      </div>
-
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="txtparametro">Parentesco</label>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parentesco" name="parentesco" id="parentesco" required>
+                                    <div class="invalid-feedback">
+                                     Llene este campo.
+                                    </div>
+                                </div>
                             
-
-
-                            <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
-
-                            <label for="">Estudiante:</label>
-                            <div class="col-sm-12">
-                            <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 4;";
-                    $resultadod=$conn->query($query);                
-                    ?>
-
-             <a href="categoria">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-              </a>
-                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpEstudiante" id="" type="text" required >
-                    <option selected disabled value=""> Buscar familiares...</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                          
-                          ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select>
-                          
-                      <div class="invalid-feedback">
-                          Agregue un nombre!
-                      </div>
-
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
+                            
                             </div>
-
-
-                            <div class="col-sm-4 order-2 pl-2 mt-2 mb-2">
-                      <label for="">¿Es encargado del estudiante?</label>
-                    <select  style="width: 100%;"  class="form-control" name="encargadoES" id="" type="text" required >
-                        <option selected disabled value=""> Seleccionar la opción...</option>
-                        <option value="SI" >SI</option>
-                        <option value="NO" >NO</option>
-                      </select>
-                          
-                      <div class="invalid-feedback">
-                         seleccione una opción!
-                      </div>
-
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
-            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_param" name="agregar_param" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_paren" name="agregar_paren" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
