@@ -169,7 +169,7 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, CREADO_POR, FECHA_MODIFICACION, MODIFICADO_POR
+	$strquery ="SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, FECHA_MODIFICACION, MODIFICADO_POR
     FROM tbl_area  WHERE CODIGO_AREA 
     ORDER BY CODIGO_AREA;";
 	$result = $conexion->prepare($strquery);

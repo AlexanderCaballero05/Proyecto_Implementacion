@@ -81,7 +81,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, CREADO_POR, FECHA_MODIFICACION, MODIFICADO_POR
+                        $query = "SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, FECHA_MODIFICACION, MODIFICADO_POR
                         FROM tbl_area  WHERE CODIGO_AREA 
                         ORDER BY CODIGO_AREA";
                         $result = $conn->query($query);
@@ -91,9 +91,8 @@
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
                             $var4 = $row['FECHA_CREACION'];
-                            $var5 = $row['CREADO_POR'];
-                            $var6 = $row['FECHA_MODIFICACION']; 
-                            $var7 = $row['MODIFICADO_POR'];
+                            $var5 = $row['FECHA_MODIFICACION']; 
+                            $var6 = $row['MODIFICADO_POR'];
                            
                         ?>
                         <tr>
