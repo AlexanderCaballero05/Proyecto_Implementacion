@@ -231,7 +231,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var2; ?>?</h4>
+                                                            <h4 class="text-center">¿Esta seguro de eliminar la apariencia <?php echo $var2;?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 

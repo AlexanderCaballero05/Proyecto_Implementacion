@@ -138,7 +138,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
-                                            <th class="text-center">Codigo</th>
+                                            <th class="text-center">Número</th>
                                             <th class="text-center">Familiar</th>
                                             <th class="text-center">Estado Civil</th>
                                             <th class="text-center">Nivel Educativo</th>
@@ -257,7 +257,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Estado Civil</label>
                                 <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="30" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
-                                onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"  name="editar_estado" id="edifa" required="">
+                                onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_estado" id="edifa" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
                                 </div>
@@ -292,7 +292,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <label for="txtcodigo_persona">Iglesia</label>
                                 <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" autocomplete = "off" type="text"    
                                 autocomplete = "off" type="text" onkeyup="mayus(this);" 
-                                onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"  name="editar_iglesia" id="ediglesia" required="">
+                                onkeypress="return soloLetras(event);"  onkeyup="mayus(this);"  name="editar_iglesia" id="ediglesia" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
                                 </div>
@@ -320,7 +320,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <form id="FORMEeliminar" method="POST">
                             <div class="modal-body">
                                 <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="eliminarfami" id="eliminarfami">
-                                <h4 class="text-center">¿Esta seguro de eliminar estos campos?</h4>
+                                <h4 class="text-center">¿Esta seguro de eliminar los datos de <?php echo $var2 ?>?</h4>
                             </div> <!--fin el card body eliminar -->
                             <div class="modal-footer ">
                                 <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

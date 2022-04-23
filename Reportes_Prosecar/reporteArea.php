@@ -13,7 +13,7 @@ class PDF extends FPDF {
 		$this->SetX(35);
 		$this->SetFont('Arial','B',14);
 		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-		$this->SetFont('Arial','',14);
+		$this->SetFont('Arial','',16);
 		$this->SetX(73);
 		$this->Cell(45, 12, utf8_decode('Reporte de areas'));
 		$this->SetX(5);
@@ -169,8 +169,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, CREADO_POR, FECHA_MODIFICACION, MODIFICADO_POR
-    FROM tbl_area  WHERE CODIGO_AREA 
+	$strquery ="SELECT CODIGO_AREA, NOMBRE, DESCRIPCION
+    FROM tbl_area
     ORDER BY CODIGO_AREA;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();

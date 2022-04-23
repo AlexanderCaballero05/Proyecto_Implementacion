@@ -258,6 +258,15 @@
                   <a href="crudfamiliares"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
 
+                    <p>Proceso de familiares</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento de parentesco</p>
+
+
                     <p>Agregar familiares</p>
                   </a>
                 </li>

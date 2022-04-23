@@ -261,6 +261,7 @@ if(isset($_POST['eliminar_carga'])){
 if(isset($_POST['codigo_carga_matricula'])){
 
     $_SESSION['carga'] = $_POST['codigo_carga_matricula'];
+    $_SESSION['tutoria'] = $_POST['name_matricula'];
 
 
     echo "<script>

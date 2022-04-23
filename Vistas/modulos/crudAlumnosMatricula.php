@@ -15,7 +15,7 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTA DE AlUMNOS<i class="nav-icon fas fa-stethoscope"></i> </h4>
+              <h4> LISTA DE AlUMNOS <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo $_SESSION['tutoria'] ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -29,6 +29,8 @@
           </ul>
         </div>
         <div class="card-body">
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
           <div class="row">
             <div class="col-md-12">
             <form  method="POST">
@@ -115,6 +117,7 @@
                             <div class="btn-group">
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
+                                  $_SESSION['tutoria'] = $var2;
                                   $usuario=$_SESSION['vario'];
                                   //Evaluo si existe el tipo de Rol
                                   $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
@@ -138,12 +141,7 @@
                                    <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observacion</span></button>
                                   </a>
 
-                                  <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
-                                     <input type="hidden" name="expediente" value="<?php echo $var6?>">
-                                     <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
-                                     </form>
-                                 </a>
+                                  
                             </div>
                           </div><!--fin del text-center -->
                         </td>

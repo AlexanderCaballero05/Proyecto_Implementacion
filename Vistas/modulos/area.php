@@ -17,7 +17,7 @@
   <section class="content">
       <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>MANTENIMIENTO AREAS</h4>
+              <h4>MANTENIMIENTO ÁREAS</h4>
           </h1>     
       </section>
     <div class="container-fluid">
@@ -73,7 +73,7 @@
                         <tr>
                         <th class="text-center">Acción</th>
                         <th class="text-center">ID</th>
-                        <th class="text-center">Nombre Area</th>
+                        <th class="text-center">Nombre Área</th>
                         <th class="text-center">Descripción</th>
                          
                           
@@ -81,7 +81,7 @@
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_AREA, NOMBRE, DESCRIPCION, FECHA_CREACION, CREADO_POR, FECHA_MODIFICACION, MODIFICADO_POR
+                        $query = "SELECT CODIGO_AREA, NOMBRE, DESCRIPCION
                         FROM tbl_area  WHERE CODIGO_AREA 
                         ORDER BY CODIGO_AREA";
                         $result = $conn->query($query);
@@ -90,10 +90,7 @@
                             $var1 = $row['CODIGO_AREA'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
-                            $var4 = $row['FECHA_CREACION'];
-                            $var5 = $row['CREADO_POR'];
-                            $var6 = $row['FECHA_MODIFICACION']; 
-                            $var7 = $row['MODIFICADO_POR'];
+                  
                            
                         ?>
                         <tr>
@@ -185,7 +182,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Area</h4>
+                                    <h4 class="text-center">Editar área </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -226,7 +223,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="area_eli" id="area_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la area  <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el área   <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
