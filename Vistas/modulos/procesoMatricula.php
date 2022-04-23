@@ -235,8 +235,18 @@
               </div> <!-- /.card-body -->
             </form>
           </div><!-- fINAL DEL card PRIMARY -->
-          
           <br>
+          <div class="row"><!-- boton para descargar la "forma 03" -->
+           <div class="col-md-12">
+            <!-- boton para descargar el reporte -->
+            <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
+            <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_estudiante ?>">
+            <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            </form>
+           </div><!-- cierre del col-md-12 -->
+          </div><!-- cierre del botón -->
+          
+
           <div class="card">
             <div class="card-header text-center" style="background-color:#3FCDFD " id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;">ClASES MATRICULADAS </strong></h1>
@@ -357,7 +367,12 @@
   </section>
 <!-- Cierre del div wraper -->
                       
-
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteMatricula.php','_blank');
+      window.open(this.href,'_self');
+    }
+</script>
       
         
       
