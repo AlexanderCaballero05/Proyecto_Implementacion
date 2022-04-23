@@ -80,17 +80,22 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="crudPersonaEspecialidad" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-edit nav-icon"></i>
-                    <p>Especialidades Personas</p>
+                  <a href="crudparametrosusuario" class="nav-link" > 
+                  <i class="nav-icon fas fa-table"></i>
+                      <p>Mantenimiento de Parametros usuarios</p>
                   </a>
-                </li>
-
+              </li>
+              <li class="nav-item">
+                <a href="crudtipopersona" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Tipo Persona</p>
+                </a>
+              </li>
 
                 <li class="nav-item">
                   <a href="crudespecialidad" class="nav-link" > <!--modifique acuerdate -->
-                    <i class="far fa-edit nav-icon"></i>
-                    <p>Especialidades</p>
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento Especialidades</p>
                   </a>
                 </li>             
               </ul>
@@ -135,13 +140,13 @@
                 <li class="nav-item">
                   <a href="crudEstudiante"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Proceso estudiantes</p>
+                    <p>Proceso de estudiantes</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
                   <a href="crudSacramentos"class="nav-link">
-                    <i class="far fa-edit nav-icon"></i>
+                  <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento Sacramentos</p>
                   </a>
                 </li>
@@ -149,15 +154,15 @@
 
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
-                   <i class="far fa-circle nav-icon"></i>
-                    <p>Tipo de contenido</p>
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento Tipo de contenido</p>
                   </a>
                 </li> 
                  
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Tipo socieconomico</p>
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento Tipo socieconomico</p>
                   </a>
                 </li>
                    
@@ -204,15 +209,9 @@
                           </a>
                           <ul class="nav nav-treeview">
                             <li class="nav-item">
-                              <a href="crudinscripcioncita"class="nav-link">
-                                <i class="far fa-edit nav-icon"></i>
-                                <p>Agregar Cita </p>
-                              </a>
-                            </li>
-                            <li class="nav-item">
                               <a href="crudcitasgenerales"class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>
-                                <p>Mantenimiento Citas </p>
+                                <p>Proceso de Citas </p>
                               </a>
                             </li>
                           </ul>
@@ -260,19 +259,13 @@
                 <li class="nav-item">
                   <a href="crudfamiliares"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Agregar familiares</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href=" " class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Familiares estudiantes</p>
+                    <p>Proceso de familiares</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Tipo de parentesco</p>
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento de parentesco</p>
                   </a>
                 </li>
               </ul>
@@ -317,30 +310,32 @@
             </a>
 
             <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a href="crudCargaAcademica" class="nav-link">
+                <i class="far fa-edit nav-icon"></i>
+                  <p>Proceso carga academica</p>
+                </a>
+              </li>
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar tutorias</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento tutorias</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudSeccion" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar Secciones</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento Secciones</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudmodalidad" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Registrar modalidad</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento modalidad</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="crudCargaAcademica" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Carga academica</p>
-                </a>
-              </li>
+              
             </ul>
           </li> <!--fin Menu de Carga Academica -->
           
@@ -390,7 +385,7 @@
           <ul class="nav nav-treeview">
               <li class="nav-item">
               <a href="crudMatricula" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                 <i class="far fa-edit nav-icon"></i>
                   <p>Proceso de matricula</p>
                 </a>
               </li>
@@ -430,7 +425,7 @@
                         <a href="#" class="nav-link">
                           <i class=" nav-icon fas fa-briefcase"></i>
                           <p>
-                            Gestion Tutor
+                            Gestion de Tutorias
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -513,48 +508,48 @@
             <i class="nav-icon fas fa-briefcase-medical"></i>
             <p>
               Mantenimiento medico
-              <i class="fas fa-angle-left right"></i>
+              <i class="nav-icon "></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-                <p>mantenimiento alergias</p>
+              <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento alergias</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudtiposangre" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-                <p>mantenimiento tipo sangre</p>
+              <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento tipo sangre</p>
               </a>
             </li>
             <li class="nav-item">
 
             <li class="nav-item">
               <a href="crudmedicamento" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-                <p>mantenimiento Medicamento</p>
+               <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento Medicamentos</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudExamenesMedicos" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-                <p>Examenes Medicos</p>
+               <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento Examenes</p>
               </a>
             </li>
               <li>
               <a href="crudTranstornos" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-                <p>mantenimiento transtornos</p>
+              <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento transtornos</p>
               </a>
             </li>
 
 
             <li class="nav-item">
               <a href="crudAparienciaFisica" class="nav-link">
-               <i class="far fa-circle nav-icon"></i>
-                <p>mantenimiento apariencias fisicas</p>
+              <i class="nav-icon fas fa-table"></i>
+                <p>Mantenimiento apariencias fisicas</p>
               </a>
             </li>
           </ul>
@@ -610,19 +605,20 @@
                 <p>Proceso de consultas</p>
               </a>
             </li>
+                    
             <li class="nav-item">
-              <a href="crudconsultashistoricas" class="nav-link">
+              <a href="crudExpedientePsicoUnico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Consultas historicas </p>
+                <p>Lista de pacientes </p>
               </a>
             </li>
 
             <li class="nav-item">
-              <a href="crudExpedientePsicoUnico" class="nav-link">
+              <a href="" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Expediente Unicos </p>
+                <p>Mantenimiento sintomas</p>
               </a>
-            </li>
+            </li> 
           </ul>
         </li>
          
@@ -666,60 +662,49 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="crudPermisos" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                  <p>Permisos</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Permisos</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                  <p>Roles</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Roles</p>
                 </a>
               </li>
               <li class="nav-item">
 
                 <a href="crudpreguntas" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Preguntas</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Preguntas</p>
                 </a>
               </li>
               <li class="nav-item">
                   <a href="estado" class="nav-link" > 
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Mantenimiento Estado</p>
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento de Estados</p>
                   </a>
                 </li>
              
               <li class="nav-item">
                 <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
-                <i class="far fa-circle nav-icon"></i>
-                   <p>Parametros</p>
+                <i class="nav-icon fas fa-table"></i>
+                   <p>Mantenimiento de Parametros</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Objetos</p>
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Objetos</p>
                 </a>
               </li>
-              <li class="nav-item">
-              <a href="crudparametrosusuario" class="nav-link" > 
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Parametros usuarios</p>
-              </a>
-              </li>
-              <li class="nav-item">
-                <a href="crudtipopersona" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                  <p>Tipo Persona</p>
-                </a>
-              </li>
+            
 
               </li>
               <li class="nav-item">
               <a href="area" class="nav-link" > 
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Area</p>
+              <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Areas</p>
               </a>
               </li>
             </ul>

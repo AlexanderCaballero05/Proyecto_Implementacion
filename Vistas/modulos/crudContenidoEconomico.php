@@ -17,7 +17,7 @@
   <section class="content">
      <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>MANTENIMIENTO DE CONTENIDO SOCIOECONOMICO</h4>
+              <h4>MANTENIMIENTO DE CONTENIDO SOCIOECONÓMICO</h4>
           </h1>     
       </section>
     <div class="container-fluid">
@@ -68,8 +68,8 @@
                         <tr>
                           <th class="text-center">Acción</th>
                           <th class="text-center">ID</th>
-                          <th class="text-center">Tipo del Contenido Socioeconomico</th>
-                          <th class="text-center">Nombre del Contenido Socioeconomico</th>
+                          <th class="text-center">Tipo del Contenido socioeconómico</th>
+                          <th class="text-center">Nombre del Contenido socioeconómico</th>
                           
                         </tr>
                       </thead>
@@ -210,7 +210,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="contenido_eliminar" id="contenido_eliminar">
-                                    <h4 class="text-center">¿Esta seguro que desea eliminar el contenido de <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro que desea eliminar el contenido <?php echo $var3; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -248,14 +248,14 @@
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar nuevo Contenido</h4>
+                        <h4 class="text-center">Agregar Contenido</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Tipo de Contenido Socioeconomico</label>
+                                    <label for="txtcodigo_persona">Tipo de Contenido socioeconómico</label>
                                     <select class="form-control" name="codigo_contenido" id="codigo_contenido">
 
                                      <option value="">Seleccionar nombre de campo...</option>
@@ -278,7 +278,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre del Contenido Socioeconomico  </label>
+                                    <label for="txtcodigo_persona">Nombre del Contenido socioeconómico  </label>
                                     <textarea  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="contenido_nombre" id="contenido_nombre" required=""></textarea>
                                     <div class="invalid-feedback">
                                       campo obligatorio.

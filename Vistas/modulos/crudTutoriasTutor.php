@@ -14,7 +14,7 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTA DE TUTORIAS DEL TUTOR<i class="nav-icon fas fa-stethoscope"></i> </h4>
+              <h4>LISTA DE TUTORIAS DEL TUTOR  <p style="font-style: italic; color:chocolate"><?php echo $_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -27,7 +27,10 @@
             </li>
           </ul>
         </div>
+        
         <div class="card-body">
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
           <div class="row">
             <div class="col-md-12">
             <form  method="POST">
@@ -40,6 +43,7 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+                        <th class="text-center">Numero</th>
                         <th class="text-center">Tutoria</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
@@ -73,7 +77,9 @@
 
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
+                        $contador = 0;
                         while($row = $result->fetch_assoc()) {
+                          $contador = $contador +1;
                           $var1 = $row['NOMBRE_TUTORIA'];
                           $var2 = $row['SECCION'];
                           $var3 = $row['HORA'];
@@ -84,6 +90,7 @@
                           
                       ?>
                       <tr>
+                        <td class="text-center"><?php echo $contador; ?></td>
                         <td class="text-center"><?php echo $var1; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>                      
                         <td class="text-center"><?php echo $var3; ?></td>
@@ -95,6 +102,8 @@
                             <div class="btn-group">
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
+
+                                  
                                   $usuario=$_SESSION['vario'];
                                   //Evaluo si existe el tipo de Rol
                                   $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
@@ -116,116 +125,16 @@
                                   ?>
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
+                                    <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
+
                                    <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista alumnos</span></button>
                                   </form>
-                                  
-
-                                  <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
-                                     <input type="hidden" name="expediente" value="<?php echo $var6?>">
-                                     <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
-                                     </form>
-                                 </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>
                        
                         
-                        <div id="AGREGAR_CITA<?php echo $var1 ?>" class="modal fade" role="dialog">
-                          <div class="modal-dialog modal-lg">
-                            <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
-                                <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="text-center">Programar cita </h4>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                  <div class="row"><!-- INICIO PRIMERA ROW --> 
-                                        <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_persona">
-                                  </div><!--fin row -->
-                                  <div class="row">
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre del paciente:</label>
-                                          <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-3">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">DNI:</label>
-                                          <input type="text"   class="form-control"readonly value ="<?php echo $var4; ?>" >
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-3">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Hora cita:</label>
-                                    <input type="time" required min="09:00:00"  step="1800" max= "19:00:00"  step="1800"class="form-control" name="hora_cita" id="agregar_hora">
-                                        </div>
-                                         <div class="invalid-feedback">
-                                            Llene este campo.
-                                         </div>
-                                      </div>
-                                  </div><!--fin row -->
-                                  <div class="row">
-                                      <div class="col-sm-9 mb-3">
-                                       <?php
-                                        $query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'Especialidad:', te.NOMBRE )  
-                                        as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
-                                        from tbl_persona tp ,
-                                        tbl_persona_especialidad tpe,
-                                        tbl_especialidad  te 
-                                        where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 2
-                                        ";
-                                        $result1= $conn->query($query);
-                                        ?>
-                                         <div class="form-group">
-                                            <label for="txtcodigo_especialista">Medico</label>
-                                            <select class="form-control select2" name="codigo_medico" required>
-                                                <option selected disabled value= "">--Seleccione un Medico--</option>
-                                                 <?php
-                                                    if ($result1->num_rows > 0){
-                                                    while($row = $result1->fetch_assoc()){ 
-                                                    ?>
-                                                    <option value="<?php echo $row['CODIGO_PERSONA_ESPECIALIDAD'];?>"><?php echo $row['ESPECIALISTA'];?></option>
-                                                    <?php
-                                                    }
-                                                    }
-                                                    ?>
-                                            </select>
-                                            <div class="invalid-feedback">
-                                                Llene este campo.
-                                            </div>
-                                        </div>
-                                       </div>
-                                       <div class="col-sm-3">
-                                       <?php
-                                          date_default_timezone_set("America/Guatemala");
-                                          $Fechaactual=  date('Y-m-d'); 
-                                          $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
-                                          ?>
-                                          <div class="form-group">
-                                              <label for="fecha" class="form-label">Fecha de la cita </label>
-                                                <input type="date" min= "<?= $Fechaactual?>" 
-                                                max="<?= date("$fechamaxima")?>"
-                                                class="form-control" 
-                                                name="fecha_cita" required>
-                                          </div>
-                                          <div class="invalid-feedback">
-                                                Llene este campo.
-                                            </div>
-                                        </div>
-                                  </div><!--fin row -->
-                                  
-                                </div><!--fin modal body -->
-                                <div class="modal-footer ">
-                                  <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="REGISTRAR_CITA_PACIENTE"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registra cita</button>
-                                </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                              </form>
-                            </div>
-                          </div>
-                        </div><!--fin modal AGREGAR -->
+                        
                       </tr>
                       <?php
                         }
@@ -264,7 +173,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Paciente:",
+        "search": "Buscar tutoria:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

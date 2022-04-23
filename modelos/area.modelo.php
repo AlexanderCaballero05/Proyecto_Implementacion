@@ -26,11 +26,10 @@
                   exit;
                   }else{
                     try{
-                      $query_area = " INSERT INTO `tbl_area`( `NOMBRE`, `DESCRIPCION`, `FECHA_CREACION`, `CREADO_POR`) VALUES ('$nombre_area','$descripcion','$fechaActual','$usuario'); ";
+                      $query_area = " INSERT INTO `tbl_area`( `NOMBRE`, `DESCRIPCION`, `FECHA_CREACION`, `CREADO_POR_USUARIO`) VALUES ('$nombre_area','$descripcion','$fechaActual','$usuario'); ";
                       $resul=$conn->query($query_area);
                       if($resul >0){
                         echo "<script> 
-                        alert('La area ya registrado correctamente');
                         window.location = 'area';
                         </script>";
                         exit;
@@ -94,7 +93,6 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Area ha sido modificado exitosamente!');
               window.location = 'area';
               </script>";
               include_once 'function_bitacora.php';
@@ -129,13 +127,12 @@ if(isset($_POST['area_eli'])){
       mysqli_query($link, "DELETE FROM tbl_area WHERE  CODIGO_AREA = $code");
       if(mysqli_affected_rows($link)>0){
         echo "<script>
-        alert('¡Area eliminado!');
         window.location = 'area';
         </script>";
          //<!--llamada de la fuction bitacora -->
          $codigoObjeto=9;
          $accion='Eliminar Area';
-         $descripcion= 'Se eliminó la area';
+         $descripcion= 'Se eliminó el area';
          bitacora($codigoObjeto, $accion,$descripcion);
         exit;
       }else{

@@ -20,7 +20,7 @@ if(isset($_POST['apariencia'])){
                   $row=$consulta_modalidad->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('el examen  $nombre_apariencia ya se encuentra registrado');
+                    alert('El nombre $nombre_apariencia ya se encuentra registrado');
                     window.location = 'crudAparienciaFisica';
                     </script>";
                   exit;
@@ -30,7 +30,6 @@ if(isset($_POST['apariencia'])){
                       $resul=$conn->query($query_modalidad);
                       if($resul >0){
                         echo "<script> 
-                        alert('Apariencia registrada correctamente');
                         window.location = 'crudAparienciaFisica';
                         </script>";
                         exit;
@@ -91,7 +90,6 @@ if(isset($_POST['apariencia'])){
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-              alert("Apariencia fisica actualizada,exitosamente");
               
               window.location = "crudAparienciaFisica";
               </script>';
