@@ -23,7 +23,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>REGISTRAR SECCIONES</h4>
+            <h4>MANTENIMIENTO DE SECCIONES</h4>
         </h1>     
     </section>
       <div class="row">
@@ -189,7 +189,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="seccion_eliminar" >
-                                    <h4 class="text-center">¿Esta seguro de eliminar la sección<?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar la sección<?php echo $var2?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

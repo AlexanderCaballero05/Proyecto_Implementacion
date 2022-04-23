@@ -1,30 +1,58 @@
 <?php
- include_once "conexion.php";
- include_once "conexion3.php";
-?>
-<head>
-</head>
+include_once "conexion.php";
+include_once "conexion3.php";
 
-<body oncopy="return false" onpaste="return false"> 
+?>
+      <!--llamada de la fuction bitacora -->
+     <?php 
+      $codigoObjeto=3;
+      $accion='Ingreso a la pantalla de mantenimiento parámetros';
+      $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
+      bitacora($codigoObjeto, $accion,$descripcion);
+      ?>
+      
+ <head>
+</head>  
+
 <div class="content-wrapper">
   <div class="content-header">
-  <div class="text-center">
-
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>MANTENIMIENTO DE TRASTORNOS</h4>
-        </h1>     
-    </section>
+    <section class="content-header text-xl-center mb-3 btn-light"> 
+          <h4> PARENTESCO CON EL ESTUDIANTE  </h4>
+        </section>
+        <div class="card">
+          <div class="card-header" style="background-color:#B3F2FF;">
+          <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active"  style="color:#000000;" href="procesoRegistrarFamiliares"> Parentesco </a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
+          </br> 
+<body oncopy="return false" onpaste="return false">
+  
+
+  <section class="content">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-           
-        <?php
+
+                    <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -38,7 +66,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '36'));
+                                $evaluar_permiso->execute(array($usuariomo, '3'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -47,52 +75,47 @@
                     <?php 
                     if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
+                    ?>      
 
-                    ?> 
-                    <button  data-toggle="modal"  href="#AGREGAR_NOPATOLOGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Trastorno</button>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-                    <?php 
+                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parentesco</button>
 
-                      }
-                        
-                    ?> 
+
+                   <?php
+                    }
+                    ?>
+
+                  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
+
+
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
-                  
                 <div class="table-responsive">
-                  <table id="tabla_Transtornos" class="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                        <th class="text-center">Acción</th>
-                                            <th class="text-center">Id</th>
-                                            <th class="text-center">Tipo de Transtorno</th>
-                          
+                  <table id="tabla_parentesco" class="table table-bordered table-striped table-hover">
+                      <thead class="table">
+                        <tr><!--fila del encabezado de la tabla -->
+                          <th class="text-center">Acción</th>
+                          <th class="text-center">ID</th>
+                          <th class="text-center">Parentesco</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                         $query = "SELECT np.CODIGO_TRANSTORNO, np.TIPO
-                         FROM tbl_transtornos_corporales np;";
-                         $result = $conn->query($query);
-                         if ($result->num_rows > 0) {
-                             while ($row = $result->fetch_assoc()) {
-                                 $var1 = $row['CODIGO_TRANSTORNO'];
-                                 $var2 = $row['TIPO'];
-                                 
-                         
-                        ?>
-                        <tr>
-                          <td>
-                            <div class="text-center" >
-                              <div class="btn-group">
-                                
+                        $query = "SELECT CODIGO_PARENTESCO, NOMBRE AS PARENTESCO
+                        FROM TBL_PARENTESCO;";
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                          while($row = $result->fetch_assoc()) {
+                            $var1 = $row['CODIGO_PARENTESCO'];
+                            $var2 = $row['PARENTESCO'];
 
-                              <?php
+                            ?>
+
+                            <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -106,7 +129,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '36'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '3'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -114,8 +137,6 @@
                                
                             }
                             ?> 
-
-
 
                             <?php
                             include "conexionpdo.php";
@@ -130,35 +151,46 @@
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '36'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '3'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
                             ?> 
-                                <?php
-                                if ($permiso_eliminar == 'SI'){
-                                    
-                                ?> 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_TRANSTORNO" name="ELIMINAR_TRANSTORNO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                            
+                       
+                        <tr>
+                          <td>
+                            <div class="text-center" >
+                              <div class="btn-group">
+                                
+                              <?php
+                              if($permiso_eliminar == 'SI')
+                               {
+                            ?>
+
+                               <a href="#ELIMINARPARENTESCO<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINARPARAM" name="ELIMINARPARAM" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+
+
                                <?php
                                 }
+                               ?>
+
+
+                               <?php 
+                                if ($permiso_actualizar == 'SI')
+                                {
                                 ?>
 
-
-                               <?php
-                                if ($permiso_actualizar == 'SI'){    
-                                ?> 
-
-                                <a href="#EDITARNOPATOLOGIA<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#EDITARPARENTESCO<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
-                                <?php
+
+                                <?php 
                                 }
                                 ?>
-
 
                               </div>
                             </div><!-- final del text-center -->
@@ -166,42 +198,54 @@
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           
-                         
-
-                        <!--INICIO DEL MODAL DE EDITAR TRANSTORNO -->
-                          <div id="EDITARNOPATOLOGIA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                        
+                        <!--INICIO DEL MODAL DE EDITAR -->
+                          <div id="EDITARPARENTESCO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITPARENTESCO" method="POST" class=" needs-validation">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Trastorno</h4>
+                                    <h4 class="text-center">Editar Parentesco</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="EDITARNOPATOLOGIA" id="EDITARNOPATOLOGIA">
-                                      <div class="col-sm-12">
+                                    <div class="row"><!-- INICIO PRIMERA ROW -->
+                                     
+                                      <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Tipo</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_tipo" id="editar_tipo" required="">
+                                          <label for="txtnombre_usuario">Código: </label>
+                                          <input  type="text" disabled = "disabled" value ="<?php echo $var1; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="id_parentes" id="id_parentes" required>
+                                          <div class="invalid-feedback">
+                                           Llene este campo.
+                                          </div>
                                         </div>
-                                      </div>
-                                      </div>
-                                      
-                                  </div><!--FINAL DEL CARD BODY --> 
+                                      </div> 
 
+
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtnombre_usuario">Parentesco: </label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_paren" id="Edit_paren" required>
+                                          <div class="invalid-feedback">
+                                           Llene este campo.
+                                          </div>
+                                        </div>
+                                      </div> 
+                                      
+                                      </div> <!-- FIN DE EL PRIMER ROW --> 
+                                  </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar_nopatologia" name="editar_nopatologia" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit" id="Edit_parentesco" name="Edit_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
                             </div>
-                          </div><!-- FIN DEL MODAL EDITAR -->   
-                            
-                                                   <!--INICIO DEL MODAL ELIMINAR   -->
-                           <!--INCICIO DEL MODAL ELIMINAR   -->
-                           <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+                          </div><!-- FIN DEL MODAL EDITAR -->  
+
+
+                          <!--MODAL ELIMINAR -->
+                          <div id="ELIMINARPARENTESCO<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
@@ -210,18 +254,18 @@
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="transtorno_eliminar" id="transtorno_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar trastorno <?php echo $var2; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="paren_eliminar" id="paren_eliminar">
+                                    <h4 class="text-center">¿Esta seguro de eliminar el registro de parentesco de  <?php echo $var2; ?> ?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_TRANSTORNO" id="ELIMINAR_TRANSTORNO"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINARPAREN" id="ELIMINARPAREN"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
                             </div><!--fin del modal dialog -->
-                          </div><!--fin del modal de eliminar -->                      
-                          </tr>             
+                          </div><!--fin del modal de eliminar -->
+                      </tr>             
                         <?php
                         }
                         }
@@ -230,47 +274,76 @@
                   </table>
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
-            </form>
+            
           </div><!-- fINAL DEL card PRIMARY -->
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO TRASNTORNO -->
-  <div id="AGREGAR_NOPATOLOGIA" class="modal fade" role="dialog">
+  <!--INICIO DEL MODAL DE AGREGAR PARAMETRO -->
+  <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">AgregarTrastorno</h4>
+                        <h4 class="text-center">Agregar Parentesco</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
+                    </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Tipo</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="agregar_tipo" id="agregar_tipo" required="">
+                                    <label for="txtparametro">Parentesco</label>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parentesco" name="parentesco" id="parentesco" required>
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
-                                   </div>
-
+                                     Llene este campo.
+                                    </div>
                                 </div>
+                            
+                            
                             </div>
-                           
                         </div> <!-- FIN DE EL PRIMER ROW --> 
-                    </div><!--FINAL DEL CARD BODY -->                     
+                    </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_patologia" name="agregar_patologia" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_paren" name="agregar_paren" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO TRANSTORNO --> 
-</div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO PARAMETRO -->
 
+  <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+                                </div><!--fin del modal contener -->
+              </div><!--fin del modal dialog -->
+          </div><!--fin del modal de eliminar -->          
+        </div><!--fIN DEL CARD GENERAL -->
+   </div><!-- CIerre del container fluid--> 
+  </section>
+
+
+
+</div><!-- /.content-wrapper -->
+  <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+  </div><!-- /.content-wrapper -->
+  <aside class="control-sidebar control-sidebar-dark"><!-- Control Sidebar -->
+  </aside>
+</div><!-- ./wrapper -->
+
+</body><!-- Final del body -->
+
+
+
+
+
+                                  
 <!-- funciones del sistema -->
 <script>
   function soloLetras(e){
@@ -289,40 +362,120 @@
     return false;
   }
  }
- </script>
 
+//funcion para solo letras y algunos caracteres
+function soloLetrascaracteres(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "_áéíóúabcdefghijklmnñopqrstuvwxyz";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+
+
+ //funcion para solu numeros ingresar en el campo
+ function soloNumeros_tel(e){
+   var teclaPulsada=window.event ? window.event.keyCode:e.which;
+    // capturamos el contenido del input
+    var valor=document.getElementById("tele").value;
+    if(valor.length<9){
+      if(teclaPulsada==9){
+        return true;
+      }
+    // devolvemos true o false dependiendo de si es numerico o no
+    return /\d/.test(String.fromCharCode(teclaPulsada));
+    }else{
+    return false;
+    }
+  }
+   //funcion para quitar espacios
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+   //funcion sin espacios 
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
+  //otra funcion para quitar espacios 
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+</script>
+
+
+<!-- Función para poder generar el reporte de la tabla -->
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteTranstornos.php','_blank');
+      window.open('Reportes_Prosecar/reporteParentesco.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
 
+
+<!-- función para no dejar espacios en blanco -->
+<script>
+
+$(document).ready(function() {
+    $('.hb').select2();
+});
+
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
+</script>
+
+
+<!-- Función para dejar la tabla en español -->
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
 $(document).ready( function () {
-    $('#tabla_Transtornos').DataTable({
+    $('#tabla_parentesco"').DataTable({
       language:espanol
     });
 } );
 
- //Funcion para habilitar el de la tabla
- $( function() {
-    $("#persona").change( function() {
-        if ($(this).val() > 0 ) {
-          document.getElementById('especialidad').style.display = "block";
-          document.getElementById('tabla_Transtornos').style.display = "block";
-          
-        } else{
-          document.getElementById('especialidad').style.display = "none";
-          document.getElementById('tabla_Transtornos').style.display = "none";
-           
-        }
-    });
-  });
 
-
-//todo lo que tenga que ver con el datatable se verá en español
 let = espanol = {
     "processing": "Procesando...",
     "lengthMenu": "Mostrar _MENU_ registros",
@@ -564,7 +717,6 @@ let = espanol = {
         "removeTitle": "Remover Estado",
         "renameTitle": "Cambiar Nombre Estado"
     }
-};
-
+} 
 
 </script>

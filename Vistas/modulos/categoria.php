@@ -523,7 +523,7 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
 
 <script type="text/javascript">
  $( function() {
-    $("#tipo_persona").change( function() {
+    $("#tipo_persona").change( function() {//tutor administrador y enfermero
         if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9"  ) {
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
@@ -534,7 +534,7 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
-        } else if ($(this).val() === "4" ){
+        } else if ($(this).val() === "4" ){//estudiante
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -543,7 +543,7 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
            document.getElementById('cuarta_fila').style.display = "none";
            document.getElementById('titulo').style.display = "block";
            document.getElementById('sacramentos').style.display = "block";
-        }else if ($(this).val() === "7"){ 
+        }else if ($(this).val() === "7"){ //es para un familiar
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
@@ -553,7 +553,7 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
           document.getElementById('primera_fila').style.display = "none";
           document.getElementById('cuarta_fila').style.display = "none";
 
-        }else if($(this).val() ===  "5" ){
+        }else if($(this).val() ===  "5" ){//para medico
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";

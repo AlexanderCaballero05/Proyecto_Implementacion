@@ -69,7 +69,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
               <li class="nav-item">
                 <a class="nav-link"  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link "  style="color:#000000;" href="crudParentesco"> Parentesco </a>
+              </li>
             </ul>
+            
           </div><!--FIN DEL CARD HEADER -->
           <div class="card-body">
         <div class="container-fluid">
