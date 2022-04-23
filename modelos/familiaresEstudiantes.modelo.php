@@ -13,25 +13,26 @@
 
 
 //AGREGAR/REGISTRAR UN PARÁMETRO
-    if(isset($_POST['CODPARENTESCO'])){
+    if(isset($_POST['FAMILIAR3'])){
        try{
           if(isset($_POST['agregar_relfam'])){
-               $nombre_param = ($_POST['parametro']);
-               $valor = ($_POST['valor_param']);
-               $fechaActual = date('Y-m-d');   
+               $familiar = ($_POST['FAMILIAR3']);
+               $parentesco = ($_POST['CODPARENTESCO2']);
+               $estudiante = ($_POST['CODfamEstudiante']);
+               $encargado = ($_POST['encargadoES']);  
               try{ 
-                  $consulta_nom = $db->prepare("SELECT PARAMETRO FROM tbl_parametros WHERE PARAMETRO = (?);");
-                  $consulta_nom->execute(array($nombre_param));
+                  $consulta_nom = $db->prepare("SELECT CODIGO_ESTUDIANTE, CODIGO_FAMILIAR FROM tbl_familiares_estudiante WHERE CODIGO_ESTUDIANTE = (?) AND CODIGO_FAMILIAR = (?) ;");
+                  $consulta_nom->execute(array($familiar));
                   $row=$consulta_nom->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de parámetro $nombre_param ya se encuentra registrado');
+                    alert('Esta relación ya existe');
                     window.location = 'crudFamiliaresEstudiantes';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_param = " INSERT INTO `tbl_parametros`( `PARAMETRO`,  `VALOR`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$nombre_param','$valor','$usuario','$fechaActual' ); ";
+                      $query_param = " INSERT INTO `TBL_FAMILIARES_ESTUDIANTE`( `CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`,  `CODIGO_PARENTESCO`, `ENCARGADO` ) VALUES ('$estudiante','$familiar','$parentesco','$encargado' ); ";
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
@@ -42,20 +43,20 @@
 
                         //<!--llamada de la fuction bitacora -->
                         $codigoObjeto=3;
-                        $accion='Insertar parámetro';
+                        $accion='Insertar familiar - estudiante';
                         $descripcion= 'Agregó/insertó un nuevo parámetro';
                         bitacora($codigoObjeto, $accion,$descripcion);
 
                       }else{
                         echo "<script> 
-                        
+                        alert('Error para insertar!');
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->
                         $codigoObjeto=3;
-                        $accion='Registro fallido de parámetro';
-                        $descripcion= 'Se intentó insertar un nuevo parámetro';
+                        $accion='Registro fallido de familiares_estudiantes';
+                        $descripcion= 'Se intentó insertar en la tabla familiares_estudiante';
                         bitacora($codigoObjeto, $accion,$descripcion);
                       }
                     }catch(PDOException $e){
@@ -77,11 +78,9 @@
 
 
 
-  //EDITAR UN PARÁMETRO 
+  //EDITAR 
   if(isset($_POST['id_param'])){
-    //session_start();
-    $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
-
+    
     if(isset($_POST['Edit_parametro'])){
       $codigo_param = ($_POST['id_param']);
       $editar_valor = ($_POST['Edit_valor']);
@@ -129,7 +128,7 @@
     }
   }
 
-//ELIMINAR UN PARÁMETRO 
+//ELIMINAR  
 if(isset($_POST['param_eliminar'])){
     //session_start();
     $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado

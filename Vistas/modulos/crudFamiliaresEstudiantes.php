@@ -331,7 +331,7 @@ include_once "conexion3.php";
               </a>
               
                   <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpFAMILIAR2" id="" type="text" required >
+                    <select  style="width: 100%;"  class="form-control select2" name="FAMILIAR3" id="" type="text" required >
                     <option selected disabled value=""> Buscar familiares...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -368,7 +368,7 @@ include_once "conexion3.php";
                     ?>
               
                   <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODPARENTESCO" id="CODPARENTESCO" type="text" required >
+                    <select  style="width: 100%;"  class="form-control select2" name="CODPARENTESCO2" id="CODPARENTESCO2" type="text" required >
                     <option selected disabled value=""> Buscar Parentesco...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -410,7 +410,7 @@ include_once "conexion3.php";
               <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
               </a>
                   <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODpEstudiante" id="" type="text" required >
+                    <select  style="width: 100%;"  class="form-control select2" name="CODfamEstudiante" id="CODfamEstudiante" type="text" required >
                     <option selected disabled value=""> Buscar Estudiantes...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
