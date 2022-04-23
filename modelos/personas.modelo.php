@@ -145,6 +145,42 @@
                             return false;
                             }//Fin de registrar tutor
 
+                          }else if($tipo_persona == "9" ){//para enfermeras y enfermeros si existen :v
+                            try{
+                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia->execute(array($nombre_usuario));
+                              $row=$sentencia->fetchColumn();
+                              if($row>0){// si hay registros con el mismo nombre 
+                                echo "<script>
+                                alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
+                                window.location = 'crudpersonas';
+                                </script>";
+                                exit;
+                              }else{
+                                $rol= "7"; //roll de enfermero
+                                $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
+                                '$estado','$rol','$contrasena');" ;
+                                 $consulta=$conn->query($insert);
+                                if($resultado = mysqli_fetch_assoc($consulta)>0 ){
+                                  echo "<script> 
+                                  location.href = 'crudpersonas';
+                                  </script>";
+                                  exit;
+                                }else{
+                                  echo "<script> 
+                                  alert('No se puede registrar al tutor');
+                                  location.href = 'crudpersonas';
+                                  </script>";
+                                  exit;
+                                }
+                              }
+                            }catch(PDOException $e){
+                            echo $e->getMessage(); 
+                            return false;
+                            }//fin regisrtrar enfermeros
+
+
                           }elseif($tipo_persona == "4" ){ //para estudiantes
                            try{
                               $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
@@ -257,7 +293,7 @@
 
                             }
                             
-                          }else if($tipo_persona == "8"){
+                          }else if($tipo_persona == "8"){//para insertar un catequiste,comenta Diana Rut :v
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
@@ -269,7 +305,7 @@
                               exit;
                             }else{
                               try{
-                                $rol ="3";
+                                $rol ="8";
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena','$especialidad_catequista');" ;
@@ -292,7 +328,7 @@
                             }
                           }else{
                             try{
-                              //Insertar  personas mortales ok no :v ,demas personas no importantes del sistema
+                              //Insertar  personas mortales ok no :v ,demas personas no importantes del sistema :)
                               $rol = "3";
                               $insert_persona = "CALL Sp_insertar_personas_normales('$primer_nombre','$segundo_nombre','$primer_apellido',
                               '$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo');" ;

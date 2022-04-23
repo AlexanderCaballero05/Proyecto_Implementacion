@@ -3,7 +3,7 @@ include_once "conexion.php";
 include_once "conexion3.php";
 
 
-$codigoObjeto = 25;
+$codigoObjeto = 35;
 $accion = 'Ingreso a la pantalla de mantenimiento de especialidad  ';
 $descripcion = 'Ver los registros de especialidad';
 bitacora($codigoObjeto, $accion, $descripcion);
@@ -20,7 +20,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="modal-content">
             <form method="POST">
                 <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Crear información de Medicamentos</h4>
+                    <h4 class="text-center">Registrar Medicamentos</h4>
                 </div>
                 <div class="modal-body">
                     <!--CUERPO DEL MODAL -->
@@ -46,7 +46,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
-                                    Descripcion</label>
+                                    Descripción</label>
                                 <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="agregar_med_desc" id="agregar_med_desc">
                             </div>
@@ -67,13 +67,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
 <div class="content-wrapper">
   <div class="content-header">
     <div class="text-center">
-      <h2>Medicamentos</h2>
+      
     </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
+  <section class="content-header text-xl-center mb-3 btn-light">
+        <h1>
+            <h4>MANTENIMIENTO MEDICAMENTOS</h4>
+        </h1>     
+    </section>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -92,7 +97,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '35'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -100,16 +105,17 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                  
                      <?php 
-                      if($permiso_registrar = 'ON'){
+                      if($permiso_registrar == 'SI'){
                      ?>
-                    <button type="button" class="btn btn-primary m-2" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">Agregar Medicamento</button>
-        
+                     <button  data-toggle="modal"  href="#ADDOBJETO" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar medicamento</button>
+                    
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                    <?php 
                       }
                      ?>
                    
                     <!-- jquery validation -->
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                    
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #0CCDE3">
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -120,7 +126,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tbl_medicamentos" class="table table-bordered table-striped">
-                                    <thead>
+                                    <thead class="text-center">
                                         <tr>
                                             <th>Acción</th>
                                             <th>ID</th>
@@ -279,7 +285,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var2; ?>?</h4>
+                                                            <h4 class="text-center">¿Esta seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 

@@ -24,7 +24,7 @@ include_once "conexion3.php";
   <section class="content">
      <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>VER USUARIOS</h4>
+              <h4>MANTENIMIENTO USUARIOS</h4>
           </h1>     
       </section>
    <div class="card"> 

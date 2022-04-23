@@ -24,8 +24,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <form method="POST">
 
                 <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Crear información
-                         Tipo de Socio Economico</h4>
+                    <h4 class="text-center">
+                     Agregar tipo socioeconomico</h4>
 
                 </div>
                 <div class="modal-body">
@@ -43,7 +43,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
-                                    Descripcion</label>
+                                    Descripción</label>
                                 <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="guardar_descripcion"autocomplete = "off" id="guardar_descripcion">
                             </div>
@@ -70,7 +70,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO TIPO DE DATOS SOCIOECONOMICOS</h4>
+              <h4>MANTENIMIENTO TIPO SOCIOECONOMICO</h4>
     </div>
 
     <section class="content">
@@ -103,7 +103,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       if($permiso_registrar == 'SI'){
                      ?>
                     <button type="button" style="color:white;"class="btn btn-primary mb-3" data-toggle="modal" data-target="#ADDOBJETO">
-                        Agregar
+                    <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar
                         Tipo Socioeconomico
                     </button>
                     <?php 
@@ -221,7 +221,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <!-- Modal content-->
                                                                 <form method="POST">
                                                                     <div class="modal-header" style="background-color: #0CCDE3">
-                                                                        <h4 class="text-center">Editar informacion Tipo Socio Economico
+                                                                        <h4 class="text-center">Editar Tipo Socio Economico
                                                                         </h4>
                                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                     </div>
@@ -242,7 +242,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
-                                                                                        Descripcion</label>
+                                                                                        Descripción</label>
                                                                                     <input type="text" value="<?php echo $var4; ?>" autocomplete = "off"class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" 
                                                                                      name="edit_descripcion" id="edit_descripcion">
                                                                                 </div>
@@ -273,7 +273,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_tipo_socio" id="eliminar_tipo_socio">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var1; ?>?</h4>
+                                                            <h4 class="text-center">¿Esta seguro de eliminar este tipo socioeconomico <?php echo $var3; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
