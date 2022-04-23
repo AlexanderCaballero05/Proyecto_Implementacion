@@ -174,7 +174,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Transtorno</h4>
+                                    <h4 class="text-center">Editar Trastorno</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -211,7 +211,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="transtorno_eliminar" id="transtorno_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estado? <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar trastorno <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -243,7 +243,7 @@
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Nuevo Trastorno</h4>
+                        <h4 class="text-center">AgregarTrastorno</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->

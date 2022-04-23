@@ -251,7 +251,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro? <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
