@@ -13,11 +13,9 @@
 
 
 //AGREGAR/REGISTRAR UN PARÁMETRO
-    if(isset($_POST['parametro'])){
-        //session_start();
-        $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
+    if(isset($_POST['CODPARENTESCO'])){
        try{
-          if(isset($_POST['agregar_param'])){
+          if(isset($_POST['agregar_relfam'])){
                $nombre_param = ($_POST['parametro']);
                $valor = ($_POST['valor_param']);
                $fechaActual = date('Y-m-d');   
