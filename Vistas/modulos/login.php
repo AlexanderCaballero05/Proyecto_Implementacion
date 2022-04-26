@@ -26,7 +26,7 @@
   <body oncopy="return false" onpaste="return false">
     <div class="container w-50   rounded shadow">
         <div class="row align-items-stretch">
-            <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-end">
+            <div class="col bg d-none d-lg-block col-md-5  col-sm-6 col-lg-5 col-xl-6 rounded-end">
               <!--ESPACIO DONDE ESTA COLOCADA LA IMAGEN -->
             </div>
             <div class="col bg-white p-4 rounded-end">

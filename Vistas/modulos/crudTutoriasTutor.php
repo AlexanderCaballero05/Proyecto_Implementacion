@@ -26,7 +26,7 @@
             <a class=" nav-link" style="color:#000000;" href="#">Lista de alumnos</a>
             </li>
           </ul>
-        </div>
+        
         <?php
                     $usuario= $_SESSION['vario'];
 
@@ -47,6 +47,8 @@
         <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
         </form>
 
+
+      
           <div class="row">
             <div class="col-md-12">
             <form  method="POST">
@@ -70,7 +72,9 @@
                     </thead>
                     <tbody>
 
+
                    
+
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_TUTORIA, t.NOMBRE as NOMBRE_TUTORIA , c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO
                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
@@ -91,8 +95,6 @@
                           $var4 = $row['PERIODO'];
                           $var5 = $row['ANIO'];
                           $codigo_carga = $row['CODIGO_CARGA'];
-                          
-                          
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $contador; ?></td>
@@ -101,12 +103,12 @@
                         <td class="text-center"><?php echo $var3; ?></td>
                         <td class="text-center"><?php echo $var4; ?></td>
                         <td class="text-center"><?php echo $var5; ?></td>
-
                         <td>
                           <div class="text-center">
                             <div class="btn-group">
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
+
                                         include "conexionpdo.php";
                                         $usuario=$_SESSION['vario'];
                                           //Evaluo si existe el tipo de Rol
@@ -127,6 +129,27 @@
                                  
                                             
                                         
+
+                                  $usuario=$_SESSION['vario'];
+                                  //Evaluo si existe el tipo de Rol
+                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                                  $evaluar_usuario->execute(array($usuario));
+                                  $row=$evaluar_usuario->fetchColumn();
+                                  if($row > 0){
+                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                      $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
+                                      $row2=$evaluar_permiso_actualizar->fetchColumn();
+                                      $permiso_actualizar =$row2; 
+                                  }
+                                  ?>
+                                  <?php
+                                    if($permiso_actualizar == 'SI'){
+                                  ?>
+                                  <?php
+                                    }
+                                  ?>
+
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
                                     <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
@@ -138,9 +161,6 @@
                             </div>
                           </div><!--fin del text-center -->
                         </td>
-                       
-                        
-                        
                       </tr>
                       <?php
                         }
@@ -194,6 +214,14 @@
 </script>
 
 <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/tutoriasTutor.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script> 
+
+
+<script>
   (function () {
       'use strict'
       var forms = document.querySelectorAll('.needs-validation')
@@ -210,10 +238,12 @@
     })()
 </script>
 
+
 <script>
     function Descargar() {
       window.open('Reportes_Prosecar/reporteTutoriasTutor.php','_blank');
       window.open(this.href,'_self');
     } 
   </script>
+
 

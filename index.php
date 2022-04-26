@@ -53,7 +53,7 @@ require_once "modelos/crudPersonaEspecialidad.modelo.php";
 require_once "modelos/crudContenidoEconomico.modelo.php";
 require_once "modelos/crudExpedientePsicoUnico.modelo.php";
 require_once "modelos/procesoPlanTerapeutico.modelo.php";
-
+require_once "modelos/crudsintomasneuroticosmodelo.php";
 
 
 

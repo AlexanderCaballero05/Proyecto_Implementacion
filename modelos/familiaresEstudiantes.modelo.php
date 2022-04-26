@@ -11,6 +11,7 @@
 //FUNCIONES DEL CRUD 
 
 
+
 //AGREGAR/REGISTRAR UN PARENTESCO
     if(isset($_POST['EstudianteParentesco'])){
         //session_start();
@@ -29,13 +30,16 @@
                   if($row>0){
                     echo "<script>
                     alert('el familiar ya se encuentra relacionado');
+=
                     window.location = 'crudFamiliaresEstudiantes';
                     </script>";
                   exit;
                   }else{
                     try{
+
                       $query_param = "INSERT INTO `tbl_familiares_estudiante` (`CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`, `CODIGO_PARENTESCO`) 
                       VALUES ('$EstudianteParentesco', '$familiar_parentesco', '$Parentesco');";
+
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
@@ -45,16 +49,17 @@
                         
 
                         //<!--llamada de la fuction bitacora -->
-                       
+    
 
                       }else{
                         echo "<script> 
                         alert'error'
+
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->
-                       
+
                       }
                     }catch(PDOException $e){
                     echo $e->getMessage(); 
@@ -75,11 +80,9 @@
 
 
 
-  //EDITAR UN PARÁMETRO 
+  //EDITAR 
   if(isset($_POST['id_param'])){
-    //session_start();
-    $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
-
+    
     if(isset($_POST['Edit_parametro'])){
       $codigo_param = ($_POST['id_param']);
       $editar_valor = ($_POST['Edit_valor']);
@@ -127,7 +130,7 @@
     }
   }
 
-//ELIMINAR UN PARÁMETRO 
+//ELIMINAR  
 if(isset($_POST['param_eliminar'])){
     //session_start();
     $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado

@@ -257,12 +257,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="crudfamiliares"class="nav-link">
+                  <a href="procesoRegistrarFamiliares"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
                     <p>Proceso de familiares</p>
                   </a>
                 </li>
                 <li class="nav-item">
+
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento de parentesco</p>
@@ -699,7 +700,7 @@
             </li>
 
             <li class="nav-item">
-              <a href="" class="nav-link">
+              <a href="crudsintomasneuroticos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                 <p>Mantenimiento sintomas</p>
               </a>

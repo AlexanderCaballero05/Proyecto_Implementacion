@@ -90,7 +90,7 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 12);
             $this->Cell(20, 12, 'N', 1, 0, 'C', 1);
-            $this->Cell(60, 12, 'Nombre del Transtorno', 1, 1, 'C', 1);
+            $this->Cell(80, 12, 'Nombre del Transtorno', 1, 1, 'C', 1);
 			
 		
 		}
@@ -191,7 +191,7 @@ $pdf->SetX(50);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(20, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, 'Nombre del Transtorno', 1, 1, 'C', 1);
+$pdf->Cell(80, 12, 'Nombre del Transtorno', 1, 1, 'C', 1);
 
 
 
@@ -203,7 +203,7 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(20,60)); //???
+$pdf->SetWidths(array(20,80)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['TIPO']))) ),50 ); 
