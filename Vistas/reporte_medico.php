@@ -18,7 +18,7 @@ include('conexion2.php');
     <!-- Bootstrap CSS -->
     <style type="text/css">
   fieldset {
-    background-color: #FBFBFB;
+    background-color: #F7F9FA;
   }
   table ,th,td{
     width: 100%;
@@ -71,34 +71,31 @@ include('conexion2.php');
     height: 4cm;
   }
   .c{
-    width: 24.5%;
+    width: 706px;
     margin:2px;
-    min-width: 24.5%;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid #404141;
     
   }
-  .c1{
-    width: 12%;
-    margin:10px;
-    max-width: 12%;
-    min-height: 40px;
-  }
-  .c2{
-    width: 33%;
-    margin:2px;
-    min-width: 33%;
-    min-height: 200px;
 
+  .c2{
+    width: 706px;
+    margin:2px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid #404141;
   }
   .pagenum:before {
         content: counter(page);
     }
     </style>
-    <title>Reporte paciente uwu</title>
+    <title>Reporte paciente</title>
   </head>
   <body>
     <header>
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Reporte medico del paciente</p>
+      <p  style="text-align: center; font-size: 19px;">Reporte medico del paciente</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
@@ -178,12 +175,12 @@ include('conexion2.php');
       </thead>
       <tbody>
          <tr>
-         <td ><?php echo ucwords(strtolower($var1)); ?></td>
-         <td ><?php echo ucwords(strtolower($var2)); ?></td>
-         <td ><?php echo ucwords(strtolower($var3)); ?></td>
-         <td ><?php echo ucwords(strtolower($var4)); ?></td>
-         <td ><?php echo ucwords(strtolower($var5));?></td>
-         <td ><?php echo ucwords(strtolower($var6));?></td>
+         <td ><?php echo utf8_decode(strtolower($var1)); ?></td>
+         <td ><?php echo utf8_decode(strtolower($var2)); ?></td>
+         <td ><?php echo utf8_decode(strtolower($var3)); ?></td>
+         <td ><?php echo utf8_decode(strtolower($var4)); ?></td>
+         <td ><?php echo utf8_decode(strtolower($var5));?></td>
+         <td ><?php echo utf8_decode(strtolower($var6));?></td>
          </tr>
          <?php
            }
@@ -194,10 +191,10 @@ include('conexion2.php');
     </fieldset>
     <br>
 
-    <fieldset>
-     <legend>Datos pre-clinica</legend>
+    <fieldset style="background-color: #F7F9FA;">
+     <legend>Datos preclinica</legend>
      <br>
-     <table>
+     <table style="border-collapse: collapse;  border: 0.4px solid #FFFF; background-color: #F7F9FA;">
          <?php
           $pre ="SELECT pr.PESO, pr.ESTATURA, pr.TEMPERATURA, pr.DESNUTRICION, pr.FRECUENCIA_CARDIACA,pr.FRECUENCIA_RESPIRATORIA, pr.PULSO, pr.MASA_CORPORAL, pr.CODIGO_PRECLINICA
           FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_preclinica pr
@@ -219,33 +216,32 @@ include('conexion2.php');
                 $var7 = $row['PULSO'];
                 $var8 = $row['MASA_CORPORAL'];
          ?>
-      <tbody>
-       <thead>
+       <thead style="background-color: #F7F9FA;">
            <tr>
-               <th>Peso</th>
-               <th>Estatura</th>
-               <th>Temperatura</th>
-               <th>Masa corporal</th>
-               <th>FC</th>
-               <th>FR</th>
-               <th>Pulso</th>
+           <th style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: left;">Peso</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">Estatura</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">Temperatura</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">Masa </th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">FC</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">FR</th>
+             <th style="border-collapse: collapse;  border: 0.4px solid #FFFF;text-align: left;">Pulso</th>
            </tr>
        </thead>
+       <tbody style="background-color: #F7F9FA;">
           <tr>
-              <td style="text-align: center;"  ><?php echo $var1 ." lb"; ?></td>
-              <td style="text-align: center;"><?php echo $var2." m"; ?></td>
-              <td style="text-align: center;"><?php echo $var3." °C"; ?></td>
-              <td style="text-align: center;"><?php echo $var8 ." Imc"; ?></td>
-              <td style="text-align: center;"><?php echo $var5." fc"; ?></td>
-              <td style="text-align: center;"><?php echo $var6." fr"; ?></td>
-              <td style="text-align: center;"><?php echo $var7." lpm"; ?></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var1 ." lb"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var2." m"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var3." °C"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var8 ." Imc"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var5." fc"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var6." fr"; ?></div></td>
+              <td style="border-collapse: collapse;  border: 0.4px solid #FFFF; text-align: center;"><div style=" border:1px solid #404141; padding:2px;"><?php echo $var7." lpm"; ?></div></td>
           </tr>
           <?php
             } 
             }
           ?>
       </tbody>
-
      </table>
      
     </fieldset>
@@ -273,12 +269,12 @@ include('conexion2.php');
             $evolucion = $row['EVOLUCION'];
             $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
       ?>
-       <legend style="background-color: #ffff; color:#000000;">Información consulta:</legend><br><hr>
+       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; "><label style="font-size: 18px;">Información de la consulta<?php echo $fecha;?></label></div><br>
        <div>
-          <div class="c" id="caja2" ><label>Sintomas</label> <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> </div>
-          <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-          <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($evolucion)) ?></textarea></div>
-          <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+          <div class="c" ><label><b>Sintomas: </b></label> <?php  echo ucwords(strtolower($sintomas)) ?> </div>
+          <div class="c" > <label><b>Diagnostico Ingreso: </b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))?></div>
+          <div class="c" > <label><b>Evolución: </b></label><?php echo  ucwords(strtolower($evolucion)) ?></div>
+          <div class="c" > <label><b>Diagnostico Egreso: </b></label><?php echo ucwords(strtolower($diagnostico_egreso))?></div>
        </div>
       <?php 
        } 
@@ -306,15 +302,15 @@ include('conexion2.php');
         $observacion = $row['OBSERVACIONES'];
         ?>
       <div id="caja3">
-            <legend style="background-color: #ffff; color:#000000;">Datos recetas medicamentos</legend><br><hr>
-            <div class="c2" id=caja2><label>Medicamento:</label>
-              <textarea ><?php  echo ucwords(strtolower($medicamentos)) ?></textarea>
+            <legend style="background-color: #ffff; color:#000000;">Datos medicamentos recetados</legend><br><hr>
+            <div class="c2" ><label><b>Nombre del medicamento: </b></label>
+              <?php  echo ucwords(strtolower($medicamentos)) ?>
             </div>
-            <div class="c2" id=caja2><label>Indicaciones:</label>
-              <textarea ><?php  echo ucwords(strtolower($indicaciones)) ?></textarea>
+            <div class="c2" ><label><b>Indicaciones del medicamento: </b></label>
+              <?php  echo ucwords(strtolower($indicaciones)) ?>
             </div>
-            <div class="c2" id=caja2><label>Observaciones:</label>
-              <textarea   ><?php  echo ucwords(strtolower($observacion));?></textarea>
+            <div class="c2" ><label><b>Observaciones del medicamento: </b></label>
+              <?php  echo ucwords(strtolower($observacion));?>
             </div>
       </div><br>
       <?php
@@ -344,15 +340,15 @@ include('conexion2.php');
              $observa = $row['OBSERVACIONES'];
              ?>
           
-           <legend style="background-color: #ffff; color:#000000;">Datos examenes recetados</legend><br><hr>
-            <div class="c2" id=caja2><label>Medicamento:</label>
-              <textarea ><?php  echo ucwords(strtolower($examen)) ?></textarea>
+           <p>Datos examenes recetados</p><hr><br>
+            <div class="c2"><label><b>Nombre del examen: </b></label>
+              <?php  echo ucwords(strtolower($examen)) ?>
             </div>
-            <div class="c2" id=caja2><label>Indicaciones:</label>
-              <textarea ><?php  echo ucwords(strtolower($indicaciones)) ?></textarea>
+            <div class="c2"><label><b>Indicaciones del examen: </b></label>
+              <?php  echo ucwords(strtolower($indicaciones)) ?>
             </div>
-            <div class="c2" id=caja2><label>Observaciones:</label>
-              <textarea   ><?php  echo ucwords(strtolower($observa));?></textarea>
+            <div class="c2"><label><b>Observaciones del examen: </b></label>
+              <?php  echo ucwords(strtolower($observa));?>
             </div>
       </div>
       <?php 

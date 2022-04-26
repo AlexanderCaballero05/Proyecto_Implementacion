@@ -229,10 +229,10 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(6);
+$pdf->SetX(5);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(10, 11, 'N', 1, 0, 'C', 1); 
+$pdf->Cell(15, 11, 'N', 1, 0, 'C', 1); 
 $pdf->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
 $pdf->Cell(30, 11, 'DNI', 1, 0, 'C', 1);
 $pdf->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
@@ -255,14 +255,14 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10,42,30,32,32,20,15,22,32,45)); //cambiar
+$pdf->SetWidths(array(15,42,30,32,32,20,15,22,32,45)); //cambiar
 
 for ($i = 0; $i < count($data); $i++) {
 
 	$pdf->Row(array($i + 1, $data[$i]['PERSONA'],ucwords(strtolower(utf8_decode($data[$i]['DNI']))),ucwords(strtolower(utf8_decode($data[$i]['FECHA_NACIMIENTO'])))
     ,ucwords(strtolower(utf8_decode($data[$i]['LUGAR_NACIMIENTO']))),ucwords(strtolower(utf8_decode($data[$i]['DIRECCION'])))  
     ,ucwords(strtolower(utf8_decode($data[$i]['SEXO']))) ,ucwords(strtolower(utf8_decode($data[$i]['NUMERO_TELEFONO']))) 
-    ,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['correo_persona']))) ,),6); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+    ,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['correo_persona']))) ,),5); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

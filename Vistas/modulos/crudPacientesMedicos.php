@@ -42,12 +42,14 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
             <form  method="POST">
               <div class= "card">
                  <div class="card-header text-center" style="background-color: #F7F8F9;">
                     <h5 class=" card-title text-center"><strong style="color:black;"></strong></h5>
                  </div>
               <div class="card-body">
+                
                 <div class="table-responsive">
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
@@ -238,6 +240,12 @@
 <div>
 </div>
 
+  <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportePacientesMedicina.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script>
 
 
 <script type="text/javascript"> 

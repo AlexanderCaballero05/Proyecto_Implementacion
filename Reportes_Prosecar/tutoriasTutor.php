@@ -5,16 +5,18 @@ include('../Vistas/modulos/REPORTES/conexion/Conexion.php');
 class PDF extends FPDF {
 
 // Cabecera de página
+
 	function Header() {
 		date_default_timezone_set("America/Guatemala");
+		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',170,10,20);
 		$this->SetY(20);
 		$this->SetX(35);
 		$this->SetFont('Arial','B',14);
 		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',12);
-		$this->SetX(83);
-		$this->Cell(45, 12, utf8_decode('Reporte de Sacramentos'));
+		$this->SetX(80);
+		$this->Cell(45, 12, utf8_decode('Reporte de listado de Tutorías del tutor '));
 		$this->SetX(5);
 		$this->Ln(11);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
@@ -88,10 +90,9 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(15, 12, 'N', 1, 0, 'C', 1);
-			$this->Cell(40, 12, 'Nombre Sacramento', 1, 0, 'C', 1);
-			$this->Cell(90, 12, 'Descripción', 1, 1, 'C', 1);
-			
+
+
+		
 		}
 
 		if ($setX == 100) {
@@ -165,12 +166,19 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT * from tbl_sacramento";
+	$strquery ="SELECT c.CODIGO_CARGA, c.CODIGO_TUTORIA, t.NOMBRE as NOMBRE_TUTORIA , c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO
+    FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
+    WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+    AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+    AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+    AND c.CODIGO_SECCION = s.CODIGO_SECCION
+    AND c.CODIGO_PERSONA = '6';";
+    
+    
+	
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
-
-
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -182,28 +190,30 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(22);
+$pdf->SetX(15);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Nombre Sacramento', 1, 0, 'C', 1);
-$pdf->Cell(100, 12,utf8_decode("Descripción"), 1, 1, 'C', 1);
-
+$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, utf8_decode("Nombre Tutoría"), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode("seccion"), 1, 0, 'C', 1);
+$pdf->Cell(18, 12, utf8_decode("Año"), 1, 0, 'C', 1);
+$pdf->Cell(18, 12, utf8_decode("Periodo"), 1, 0, 'C', 1);
+$pdf->Cell(20, 12, utf8_decode("Hora"), 1, 1, 'C', 1);
 
 
 
 // -------TERMINA----ENCABEZADO------------------
 
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
-$pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
+$pdf->SetDrawColor(10,40,50,18,18,20); //color de linea  rgb
 
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,50,100)); //???
+$pdf->SetWidths(array(10,40,50,18,18,20)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,(utf8_decode($data[$i]['DESCRIPCION'])),),22); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TUTORIA']))) ,ucwords(strtolower(utf8_decode($data[$i]['SECCION']))),$data[$i]['ANIO'],$data[$i]['PERIODO'],utf8_decode($data[$i]['HORA']) ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

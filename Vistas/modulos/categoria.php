@@ -77,7 +77,7 @@
                       <div class="col-md-4"> <!--INICIO DNI-->
                         <label  class="control-label">Número de Identidad:</label> 
                         <div class="form-group">
-                          <input onkeypress="return numeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
+                          <input onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>                     
@@ -390,43 +390,26 @@ $(document).ready(function () {
         }
     });
 })
-
-
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
 
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
 let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    localStorage.setItem( 'leftWindow', true );
-}
 } );
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
-<script> 
+<script> //previene que se deje la tecla como loca pulsada
   var texto=document.getElementById('identidad');
   texto.addEventListener('keydown', function(keyboardEvent) {
     if (keyboardEvent.repeat)
@@ -464,7 +447,7 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
 
 <!--funciones de mostrar y no imputs como contraseña y telefono -->
 <script type="text/javascript">
-  function mostrar1(){
+  function mostrar1(){//funcion que muestra la contraseña :)
   var cambio1 = document.getElementById("contrasena");
   if(cambio1.type == "password"){
       cambio1.type = "text";
@@ -486,9 +469,8 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
    }
  </script>
 
- <script type="text/javascript">
+ <script type="text/javascript">//para validar que solo ingrese un numero al inicio 8,93
     function telfono(evt,input){
-        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
         var key = window.Event ? evt.which : evt.keyCode;   
         var chark = String.fromCharCode(key);
         var tempValue = input.value+chark;
@@ -505,23 +487,9 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
     }
 </script>
 
-<script type="text/javascript">
-   function numeros(evt){
-    if(window.event){
-      keynum = evt.keyCode;
-    }else{
-      keynum = evt.which;
-    }
-    if((keynum >47  && keynum <58) || keynum == 8  || keynum ==13){
-      return true;
-    }else{
-      return false;
-    }
-
-   }
-  </script>
 
 <script type="text/javascript">
+  //FUNCIONES PARA MOSTRAR LOS CAMPOS DE USUARIOS (Se puede optimizar,pero hata implementacion)
  $( function() {
     $("#tipo_persona").change( function() {//tutor administrador y enfermero
         if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9"  ) {
@@ -563,15 +531,16 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
 
-        }else if($(this).val() ===  "6" ){
+        }else if($(this).val() ===  "6" ){// para psicologo
           document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('sacramentos').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
           
-        }else if($(this).val() ===  "8"){
+        }else if($(this).val() ===  "8"){//para catequista
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
@@ -600,5 +569,6 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
               }, false)
           })
   })()
+  //Toda la pantalla elaborada por Diana Rut ,lo que este medio desastre,yo no lo hice : )
 </script>
 

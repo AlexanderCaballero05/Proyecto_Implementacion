@@ -27,10 +27,8 @@
             </li>
           </ul>
         </div>
-        
         <div class="card-body">
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-
           <div class="row">
             <div class="col-md-12">
             <form  method="POST">
@@ -53,10 +51,8 @@
                       </tr>
                     </thead>
                     <tbody>
-
                     <?php
                     $usuario= $_SESSION['vario'];
-
                     //Consulta que trae el codigo del usuario
                     $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
                     FROM tbl_usuario u, tbl_persona p 
@@ -86,8 +82,6 @@
                           $var4 = $row['PERIODO'];
                           $var5 = $row['ANIO'];
                           $codigo_carga = $row['CODIGO_CARGA'];
-                          
-                          
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $contador; ?></td>
@@ -96,14 +90,11 @@
                         <td class="text-center"><?php echo $var3; ?></td>
                         <td class="text-center"><?php echo $var4; ?></td>
                         <td class="text-center"><?php echo $var5; ?></td>
-
                         <td>
                           <div class="text-center">
                             <div class="btn-group">
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
-
-                                  
                                   $usuario=$_SESSION['vario'];
                                   //Evaluo si existe el tipo de Rol
                                   $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
@@ -126,15 +117,11 @@
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
                                     <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
-
                                    <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista alumnos</span></button>
                                   </form>
                             </div>
                           </div><!--fin del text-center -->
                         </td>
-                       
-                        
-                        
                       </tr>
                       <?php
                         }
@@ -188,6 +175,14 @@
 </script>
 
 <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/tutoriasTutor.php','_blank');
+      window.open(this.href,'_self');
+    }
+  </script> 
+
+
+<script>
   (function () {
       'use strict'
       var forms = document.querySelectorAll('.needs-validation')
@@ -203,4 +198,4 @@
         })
     })()
 </script>
-<!-- Elaborado por Diana Rut  -->
+

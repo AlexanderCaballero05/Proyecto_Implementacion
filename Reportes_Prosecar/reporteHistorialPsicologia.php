@@ -59,9 +59,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
   @page {
     margin: 0cm 0cm;
   }
-  textarea{
-    padding:6px;
-  }
+
   footer {
    position: fixed; 
    bottom: 1cm; 
@@ -77,25 +75,14 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
     right: 0cm;
     height: 4cm;
   }
-  .c{
-    width: 24.5%;
-    margin:2px;
-    min-width: 24.5%;
-    min-height: 200px;
-  }
   .c1{
-    width: 49.5%;
+    width: 706px;
     margin:2px;
-    max-width: 49.5%;
-    min-height: 50px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid #404141;
   }
-  .c2{
-    width:32.8%;
-    margin:2px;
-
-    min-width: 32.8%;
   
-  }
   .pagenum:before {
         content: counter(page);
     }
@@ -188,7 +175,6 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
     </table>
     </fieldset>
     <br>
-    <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas psicologicas paciente</legend><hr>
       <?php
         $consulti = "SELECT con.FECHA_CREACION, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.DIAGNOSTICO_EGRESO, con.OBSEVARCIONES,
          pla.ACTIVIDAD, pla.TECNICA, pla.MATERIALES, pla.TAREAS, pla.RESULTADOS
@@ -218,9 +204,6 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
           $resultados = $row['RESULTADOS'];
          
       ?>
-      
-      
-     
       <?php 
 
       if($actividades == '' and $tecnicas == '' and $materiales == '' and $tareas == '' and $resultados == ''){
@@ -231,38 +214,39 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
 
 
     <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
-      <p><b>Consultas psicologicas</b><?php echo $fecha; ?></p><hr><br>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
+    <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Cita psicologica paciente <?php echo $fecha;?></label></div>
+      <p><b>Datos consulta psicologica</b></p><hr><br>
+      <div class="c1"  ><label><b>Sintomas</b></label> 
+        <?php  echo ucwords(strtolower($sintomas)) ?>
       </div>
-      <div class="c" id="caja2" > <label>Diagnóstico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-      <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($observaciones)) ?></textarea></div>
-      <div class="c" id="caja2" > <label>Diagnóstico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+      <div class="c1"  > <label><b>Diagnóstico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
+      <div class="c1"  > <label><b>Evolución</b></label> <?php echo  ucwords(strtolower($observaciones)) ?></div>
+      <div class="c1"  > <label><b>Diagnóstico Egreso</b></label> <?php echo ucwords(strtolower($diagnostico_egreso))?></div>
       <div>
      <br>
       
       
       <div class="caja3"> 
-        <p><b>Datos plan terapéutico </b><?php echo $fecha; ?></p><hr><br>
-        <div class="c1" id=caja1><label>Actividades a realizar</label>
-            <textarea ><?php  echo ucwords(strtolower($plan)); ?></textarea>
+        <p>Datos plan terapéutico </p><hr><br>
+        <div class="c1" ><label><b><b>Actividades a realizar: </b></label>
+            <?php  echo ucwords(strtolower($plan)); ?>
         </div>
-        <div class="c1" id=caja2><label>Resultados</label>
+        <div class="c1" ><label><b>Resultados: </b></label>
          
-          <textarea  ><?php echo ucwords(strtolower($plan));?></textarea>
+          <?php echo ucwords(strtolower($plan));?>
         </div><br>
    
       
-        <div class="c2" id=caja1><label>Técnicas</label> 
-          <textarea ><?php echo ucwords(strtolower($plan));?></textarea>
+        <div class="c1" ><label><b>Técnicas: </b></label> 
+          <?php echo ucwords(strtolower($plan));?>
           </div>
           
-          <div class="c2" id=caja2><label>Tareas</label>
-          <textarea ><?php echo ucwords(strtolower($plan));?></textarea>
+          <div class="c1" ><label><b>Tareas: </b></label>
+          <?php echo ucwords(strtolower($plan));?>
           </div>
           
-          <div class="c2" id=caja2><label>Materiales</label>
-          <textarea ><?php echo ucwords(strtolower($plan));?></textarea>
+          <div class="c1" ><b><label>Materiales: </b></label>
+          <?php echo ucwords(strtolower($plan));?>
           </div>
       </div>
       </div>
@@ -273,39 +257,40 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
       ?>
 
 <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
-      <p><b>Consultas psicologicas</b><?php echo $fecha; ?></p><hr><br>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
+<div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB;"><label style="font-size: 18px;">Cita psicologica paciente <?php echo $fecha;?></label></div>
+      <p><b>Datos consulta psicologica</b></p><hr><br>
+      <div class="c1" ><label><b>Sintomas</b></label> 
+        <?php  echo ucwords(strtolower($sintomas)) ?> 
       </div>
-      <div class="c" id="caja2" > <label>Diagnóstico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-      <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($observaciones)) ?></textarea></div>
-      <div class="c" id="caja2" > <label>Diagnóstico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+      <div class="c1" > <label><b>Diagnóstico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
+      <div class="c1" > <label><b>Evolución</b></label> <?php echo  ucwords(strtolower($observaciones)) ?></div>
+      <div class="c1" > <label><b>Diagnóstico Egreso</b></label> <?php echo ucwords(strtolower($diagnostico_egreso))?></div>
       <div>
      <br>
 
 
 
       <div class="caja3"> 
-      <p><b>Datos plan terapéutico  </b><?php echo $fecha; ?></p><hr><br>
-        <div class="c1" id=caja1><label>Actividades a realizar</label>
-            <textarea ><?php  echo ucwords(strtolower($actividades)); ?></textarea>
+      <p><b>Datos plan terapéutico  </b></p><hr><br>
+        <div class="c1" ><label><b>Actividades a realizar: </b></label>
+            <?php  echo ucwords(strtolower($actividades)); ?>
         </div>
-        <div class="c1" id=caja2><label>Resultados</label>
+        <div class="c1" ><label><b>Resultados: </b></label>
          
-          <textarea  ><?php echo ucwords(strtolower($resultados));?></textarea>
+          <?php echo ucwords(strtolower($resultados));?>
         </div>
         
       <div id="caja3">
-        <div class="c2" id=caja2><label>Técnicas</label>
-          <textarea ><?php echo ucwords(strtolower($tecnicas));?></textarea>
+        <div class="c1" ><label><b>Técnicas: </b></label>
+          <?php echo ucwords(strtolower($tecnicas));?>
           </div>
           
-          <div class="c2" id=caja2><label>Tareas</label>
-          <textarea ><?php echo ucwords(strtolower($tareas));?></textarea>
+          <div class="c1" ><label><b>Tareas: </b></label>
+          <?php echo ucwords(strtolower($tareas));?>
           </div>
           
-          <div class="c2" id=caja2><label>Materiales</label>
-          <textarea ><?php echo ucwords(strtolower($materiales));?></textarea>
+          <div class="c1" ><label><b>Materiales: </b></label>
+          <?php echo ucwords(strtolower($materiales));?>
           </div>
       </div><br>
       </div>
