@@ -80,7 +80,6 @@ if (isset($_POST['expediente'])) {
     padding: 10px;
     margin: 8px;
     border: 1px solid #404141;
-    
   }
   .c2{
     width: 706px;
@@ -237,7 +236,7 @@ if (isset($_POST['expediente'])) {
           $examenes = $row['NOMBRE_EXAMEN'];
       ?>
       <div id="caja3">
-       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; "><label style="font-size: 18px;">Consulta medica fecha: <?php echo $fecha;?></label></div>
+       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Consulta medica fecha: <?php echo $fecha;?></label></div>
       <p>Datos de preclínica </p><hr><br>
       <table style="border-collapse: collapse;  border: 0.4px solid #FFFF;">
         <thead >
