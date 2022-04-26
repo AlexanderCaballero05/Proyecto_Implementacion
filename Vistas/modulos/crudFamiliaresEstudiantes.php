@@ -76,10 +76,8 @@ include_once "conexion3.php";
                     {
                     ?>      
 
-
                     <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Relación Familiar-Estudiante</button>
                   <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-
 
                   <?php
                     }
@@ -301,7 +299,7 @@ include_once "conexion3.php";
   </section><!-- FINAL SECTION -->
 
   <!--INICIO DEL MODAL DE RELACIÓN DE ESTUDIANTES Y FAMILIARES -->
-  <div id="agregar_relfam" class="modal fade" role="dialog">
+  <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
@@ -320,7 +318,6 @@ include_once "conexion3.php";
                                             $resultadod=$conn->query($query);                
                                             ?>
                         <!-- ***********BUSCAR AL FAMILIAR*********** -->
-
                                    <a href="categoria">
                                       <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
                                       </a>
@@ -356,45 +353,6 @@ include_once "conexion3.php";
                       </div> 
 
 
-           <!-- ***********BUSCAR PARENTESCO*********** -->
-           <label for="">Parentesco: </label>
-                            <div class="col-sm-12">
-                                <?php //
-                    $query = "SELECT CODIGO_PARENTESCO, NOMBRE
-                              FROM TBL_PARENTESCO;";
-                    $resultadod=$conn->query($query);                
-                    ?>
-              
-                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODPARENTESCO2" id="CODPARENTESCO2" type="text" required >
-                    <option selected disabled value=""> Buscar Parentesco...</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PARENTESCO'];
-                          $nombre = $row['NOMBRE'];
-                          
-                          ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select>
-                          
-                      <div class="invalid-feedback">
-                          Agregue un nombre!
-                      </div>
-
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
-          </div>
-                            
-
-
-
                             <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
          <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
                            
@@ -409,7 +367,6 @@ include_once "conexion3.php";
                  <label for="">Estudiante:</label>
                   <div class="col-sm-12">
                     <select  style="width: 100%;"  class="form-control select2" name="EstudianteParentesco" required="" >
-
                     <option selected disabled value=""> Buscar Estudiantes...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -459,9 +416,7 @@ include_once "conexion3.php";
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-
                         <button type="submit" name="familiar_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
