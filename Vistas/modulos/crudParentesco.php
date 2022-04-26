@@ -25,34 +25,7 @@ include_once "conexion3.php";
     <section class="content-header text-xl-center mb-3 btn-light"> 
           <h4> PARENTESCO CON EL ESTUDIANTE  </h4>
         </section>
-        <div class="card">
-          <div class="card-header" style="background-color:#B3F2FF;">
-          <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" href="procesoRegistrarFamiliares"> Parentesco </a>
-              </li>
-            </ul>
-          </div>
-          <div class="card-body">
-          </br> 
-<body oncopy="return false" onpaste="return false">
-  
-
-  <section class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-12">
-
-                    <?php
+        <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -66,7 +39,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '3'));
+                                $evaluar_permiso->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -78,14 +51,22 @@ include_once "conexion3.php";
                     ?>      
 
                     <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parentesco</button>
-
-
-                   <?php
+                  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                  <?php
                     }
                     ?>
+        <div class="card">
+          <div class="card-body">
+          </br> 
+<body oncopy="return false" onpaste="return false">
+  
 
-                  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
 
+          
 
 
           <!-- jquery validation -->
@@ -129,7 +110,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -151,7 +132,7 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }

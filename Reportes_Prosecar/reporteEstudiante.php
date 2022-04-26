@@ -115,6 +115,13 @@ if (isset($_POST['reporte_estudiante'])) {
     min-height: 200px;
 
   }
+
+  .espacio{
+    padding-left: 4px;
+    padding-right: 4px;
+
+  }
+
     </style>
     <title>Reporte paciente uwu</title>
   </head>
@@ -133,16 +140,27 @@ if (isset($_POST['reporte_estudiante'])) {
    <main>
     <fieldset>
       <?php
-      $query = "SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE, p.DNI, p.FECHA_NACIMIENTO 
-      FROM tbl_persona p ,tbl_estudiante es
+      $query = "SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE, p.DNI, 
+      concat_ws(' ', p.LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO) as LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO, tel.NUMERO_TELEFONO, co.CORREO_PERSONA, se.SEXO ,p.DIRECCION
+      FROM tbl_persona p ,tbl_estudiante es, tbl_telefono tel, tbl_correo_electronico co, tbl_sexo se
            where es.CODIGO_PERSONA = p.CODIGO_PERSONA
-           AND CODIGO_ESTUDIANTE = '$persona' ";
+           AND p.CODIGO_PERSONA = tel.CODIGO_PERSONA
+           AND p.CODIGO_PERSONA = co.CODIGO_PERSONA
+           AND p.SEXO = se.CODIGO_SEXO
+           AND CODIGO_ESTUDIANTE = '$persona'
+           GROUP BY es.CODIGO_ESTUDIANTE";
     $resul=$conn->query($query);  
     if($resul->num_rows > 0){
       while($row = $resul->fetch_assoc()){
         $nombre = $row['NOMBRE'];
         $dni = $row['DNI'];
+        $sexo = $row['SEXO'];
         $fecha = $row['FECHA_NACIMIENTO'];
+        $lugar = $row['LUGAR_NACIMIENTO'];
+        $telefono = $row['NUMERO_TELEFONO'];
+        $correo = $row['CORREO_PERSONA'];
+        $direccion = $row['DIRECCION'];
+
         $fechaEntera = strtotime($fecha);
         $f = date("Y");
         $anio = date("Y", $fechaEntera);
@@ -151,11 +169,19 @@ if (isset($_POST['reporte_estudiante'])) {
       }
     }
       ?>      
-      <legend>  Datos Personales Paciente</legend><br>
-      <label  ><b>Nombre completo:</b> </label><?php  echo ucwords(strtolower($nombre)); ?> <br>
-      <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
-      <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
+      <legend>  Datos Personales Estudiante</legend><br>
+      <label style="margin-bottom: 100px;" ><b>Nombre completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
+      <label style="margin-bottom: 30px;" ><b>Lugar y fecha de nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
+      <label style="padding-right: 80px;" ><b>DNI: </b><?php echo $dni; ?></label>
+      <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
+      <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
+      <label style="padding-right: 85px;" ><b>Telefono: </b><?php echo $telefono; ?></label>
+      <label ><b>Correo: </b><?php echo $correo; ?></label><br>
+      <label style="margin-bottom: 30px;" ><b>Direccion:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
+
     </fieldset>
+    <br>
+
     <br>
     <fieldset>
       <legend>Datos Escolares</legend>
@@ -169,19 +195,19 @@ if (isset($_POST['reporte_estudiante'])) {
        $resul=$conn->query($consulta);
        if ($resul->num_rows > 0) {
         while($row = $resul->fetch_assoc()) { 
-        $var1 = $row['GRADO_ACTUAL'];
-        $var2 = $row['REPITENTE'];
-        $var3 = $row['INDICE_ACADEMICO'];
-        $var4 = $row['MATE_BAJO_RENDI'];
-        $var5 = $row['PASATIEMPOS'];
-        $var6 = $row['DISTRACTORES_ESCOLARES'];
-        $var7 = $row['METAS'];
+          $var1 = $row['GRADO_ACTUAL'];
+          $var2 = $row['REPITENTE'];
+          $var3 = $row['INDICE_ACADEMICO'];
+          $var4 = $row['MATE_BAJO_RENDI'];
+          $var5 = $row['PASATIEMPOS'];
+          $var6 = $row['DISTRACTORES_ESCOLARES'];
+          $var7 = $row['METAS'];
        
         ?>
       <thead>
          <tr>
-           <th>Grado Actual</th>
-           <th>Reitente</th>
+         <th>Grado Actual</th>
+           <th>Repitente</th>
            <th>Indice Academico</th>
            <th>Materias</th>
            <th>Pasatiempos</th>
@@ -192,9 +218,9 @@ if (isset($_POST['reporte_estudiante'])) {
       </thead>
       <tbody>
          <tr>
-         <td ><?php echo ucwords(strtolower($var1)); ?></td>
-         <td ><?php echo ucwords(strtolower($var2)); ?></td>
-         <td ><?php echo ucwords(strtolower($var3)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($var1)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($var2)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($var3)); ?></td>
          <td ><?php echo ucwords(strtolower($var4)); ?></td>
          <td ><?php echo ucwords(strtolower($var5)); ?></td>
          <td ><?php echo ucwords(strtolower($var6)); ?></td>
@@ -209,6 +235,7 @@ if (isset($_POST['reporte_estudiante'])) {
     </table>
     </fieldset>
     <br>
+  
 
 
 
@@ -291,7 +318,292 @@ if (isset($_POST['reporte_estudiante'])) {
       </tbody>
     </table>
     </fieldset>
-     
+     <br>
+<!--formacion espritual-->
+     <fieldset>
+       <legend>Formacion espiritual</legend>
+       <br>
+       <table>
+       <?php
+       $consulta = "SELECT est.CODIGO_ESTUDIANTE, GROUP_CONCAT(' ',sac.NOMBRE) as sacramentos
+       FROM tbl_persona per, tbl_estudiante est, tbl_sacramento_persona psa, tbl_sacramento sac
+       WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
+             AND per.CODIGO_PERSONA = psa.CODIGO_PERSONA
+             AND psa.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
+             AND est.CODIGO_ESTUDIANTE = '$persona'
+             group by psa.CODIGO_PERSONA
+                      ";
+       $resul=$conn->query($consulta);
+       if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+          $sacramentos = $row['sacramentos'];
+        ?>
+         <thead>
+           <tr>
+             <th>Iglesia asistente</th>
+             <th>Sacramentos realizados</th>
+           </tr>
+         </thead>
+         <tbody>
+          <tr>
+            <td style="text-align: center"><?php echo $Iglesiaa = "Santa Teresa de Jesús"?></td>
+            <td><?php echo  ucwords(strtolower($sacramentos));?></td>
+          </tr>
+          <?php
+           }
+           }
+         ?>
+         </tbody>
+       </table>
+     </fieldset>
+<!--fin de formacion espritual-->
+<br>
+<br>
+    <fieldset>
+
+      <legend>Situacion familiar (Personas con quienes vive)</legend>
+    <br>
+    <table>
+    <thead>
+         <tr>
+         <th>Nombre Apellido</th>
+           <th>Edad</th>
+           <th>Estado civil</th>
+           <th>Parentesco</th>
+           <th>Nivel educativo</th>
+           <th>Ingresos Mensuales</th>
+           <th>Iglesia asiste</th>
+          
+         </tr>
+      </thead>
+    <?php
+       $consulta = "SELECT fest.CODIGO_FAMILIAR_ESTUDIANTE, fam.CODIGO_FAMILIAR,  concat_ws(' ', per.PRIMER_NOMBRE, per.PRIMER_APELLIDO) as FAMILIAR, fam.ESTADO_CIVIL, fam.NIVEL_EDUCATIVO, fam.INGRESOS_DE_FAMILIAR, fam.NOMBRE_IGLESIA, par.NOMBRE as PARENTESCO
+       from tbl_persona per, tbl_familiar fam, tbl_estudiante est, tbl_familiares_estudiante fest, tbl_parentesco par
+       WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
+       AND fest.CODIGO_ESTUDIANTE = est.CODIGO_ESTUDIANTE
+       AND fest.CODIGO_FAMILIAR = fam.CODIGO_FAMILIAR
+       AND fest.CODIGO_PARENTESCO = par.CODIGO_PARENTESCO
+       AND fest.CODIGO_ESTUDIANTE = '$persona'
+       GROUP by fam.CODIGO_FAMILIAR;
+";
+       $resul=$conn->query($consulta);
+       if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+          $nombre = $row['FAMILIAR'];
+          $edad = $row['INGRESOS_DE_FAMILIAR'];
+          $estadocivil = $row['ESTADO_CIVIL'];
+          $Parentesco = $row['PARENTESCO'];
+          $Nivel = $row['NIVEL_EDUCATIVO'];
+          $Ingresos = $row['INGRESOS_DE_FAMILIAR'];
+          $Iglesia = $row['NOMBRE_IGLESIA'];
+       
+        ?>
+
+      
+      
+      <tbody>
+         <tr>
+         <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
+         <td style="text-align: center" ><?php echo ucwords(strtolower($Parentesco)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($Nivel)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($Ingresos)); ?></td>
+         <td style="text-align: center"><?php echo ucwords(strtolower($Iglesia)); ?></td>
+         
+         </tr>
+         <?php
+           }
+           }
+         ?>
+      </tbody>
+    </table>
+    </fieldset>
+    <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+    <fieldset>
+      <legend>Tutorias que ha cursado</legend>
+      <br>
+      <table>
+        <thead>
+          <tr>
+                        <th class="text-center">Numero</th>
+                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Grado</th>
+                        <th class="text-center">Año</th>
+                        <th class="text-center">periodo</th>
+                        <th class="text-center">observacion</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+               <?php
+                      $query = "SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA
+                      FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
+                      WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+                      AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+                      AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+                      AND c.CODIGO_SECCION = s.CODIGO_SECCION
+                      AND c.CODIGO_CARGA = mat.CODIGO_CARGA
+                      AND mat.CODIGO_ESTUDIANTE = est.CODIGO_ESTUDIANTE
+                      AND mat.OBSERVACION = esta.CODIGO_ESTADO
+                      AND est.CODIGO_PERSONA = per.CODIGO_PERSONA
+                      AND mat.CODIGO_ESTUDIANTE = '$persona'; ";
+                      
+                      $result = $conn->query($query);
+                      if ($result->num_rows > 0) {
+                          $contador=0;
+                        while($row = $result->fetch_assoc()) {
+                          $contador=$contador+1;
+                          $var2 = $row['NOMBRE_TUTORIA'];
+                          $var3 = $row['SECCION'];
+                          $var4 = $row['ANIO'];
+                          $var5 = $row['PERIODO'];
+                          $var6 = $row['ESTADO_MATRICULA'];
+                          
+                      ?>
+                   <tr>
+                        <td style="text-align: center"><?php echo $contador; ?></td>
+                        <td style="text-align: center"><?php echo  ucwords(strtolower($var2)); ?></td>                      
+                        <td style="text-align: center"><?php echo  ucwords(strtolower($var3)); ?></td>
+                        <td style="text-align: center"><?php echo  ucwords(strtolower($var4)); ?></td>
+                        <td style="text-align: center"><?php echo  ucwords(strtolower($var5)); ?></td>
+                        <td style="text-align: center"><?php echo  ucwords(strtolower($var6)); ?></td>
+                   </tr>
+                    <?php
+                        }
+                        }
+                      ?>
+        </tbody>
+      </table>
+    </fieldset>
+    <br>
+<!------------------------------------- Are medica------------------------------------------------->
+    <fieldset>
+      <legend>Expediente en Area Medica</legend>
+      <br>
+      <table>
+          <thead>
+                <tr>
+                  <th class="text-center">Codigo expediente</th>
+                  <th class="text-center">Fecha creación</th>
+                  <th class="text-center">Estado</th>
+                  <th class="text-center">Cantidad de citas</th>
+                </tr>
+          </thead>
+          <tbody>
+            <?php
+               $sentencia = $db->prepare("SELECT ex.CODIGO_CONSULTA
+               FROM tbl_consulta_medica ex ,tbl_persona pe , tbl_estudiante est, tbl_inscripcion_cita cita
+               WHERE cita.CODIGO_PERSONA = pe.CODIGO_PERSONA
+               and ex.CODIGO_CITA = cita.CODIGO_CITA
+               and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
+               and est.CODIGO_ESTUDIANTE = (?); " );
+                $sentencia->execute(array($persona));
+                $row1=$sentencia->fetchColumn();
+                if($row1>0){
+                  $basicos = $row1;
+                }
+            ?>
+          <?php
+       $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
+       FROM tbl_expediente_medico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
+       WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
+       and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
+       and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
+       and est.CODIGO_ESTUDIANTE = '$persona';
+";
+       $resul=$conn->query($consulta);
+       if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+          $nombre = $row['CODIGO_EXPEDIENTE'];
+          $edad = $row['FECHA_CREACION'];
+          $estadocivil = $row['ESTADO'];
+        ?>
+            <tr>
+
+            <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($row1)); ?></td>
+
+            </tr>
+          </tbody>
+          <?php
+                        }
+                        }
+                      ?>
+      </table>
+
+
+    </fieldset>
+<!--fin de -- Are medica-->
+<br>
+<!---------------------------------------------------- Are Psicologica------------------------------------------------>
+    <fieldset>
+      <legend>Expediente en Area Psicologica</legend>
+      <br>
+      <table>
+          <thead>
+                <tr>
+                  <th class="text-center">Codigo expediente</th>
+                  <th class="text-center">Fecha creación</th>
+                  <th class="text-center">Estado</th>
+                  <th class="text-center">Cantidad de citas</th>
+                </tr>
+          </thead>
+          <tbody>
+            <?php
+               $sentencia = $db->prepare("SELECT ex.CODIGO_EXPEDIENTE_PSICO
+               FROM tbl_expediente_psicologico_consulta ex ,tbl_persona pe , tbl_estudiante est, tbl_inscripcion_cita cita
+               WHERE cita.CODIGO_PERSONA = pe.CODIGO_PERSONA
+               and ex.CODIGO_CITA = cita.CODIGO_CITA
+               and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
+               and est.CODIGO_ESTUDIANTE = (?); " );
+                $sentencia->execute(array($persona));
+                $row11=$sentencia->fetchColumn();
+                if($row1>0){
+                  $basicos = $row1;
+                }
+            ?>
+          <?php
+       $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
+       FROM tbl_expediente_psicologico_unico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
+       WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
+       and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
+       and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
+       and est.CODIGO_ESTUDIANTE = '$persona';
+";
+       $resul=$conn->query($consulta);
+       if ($resul->num_rows > 0) {
+        while($row = $resul->fetch_assoc()) { 
+          $nombre = $row['CODIGO_EXPEDIENTE'];
+          $edad = $row['FECHA_CREACION'];
+          $estadocivil = $row['ESTADO'];
+        ?>
+            <tr>
+
+            <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
+            <td style="text-align: center"><?php echo ucwords(strtolower($row1)); ?></td>
+
+            </tr>
+          </tbody>
+          <?php
+                        }
+                        }
+                      ?>
+      </table>
+
+
+    </fieldset>
 
 
 

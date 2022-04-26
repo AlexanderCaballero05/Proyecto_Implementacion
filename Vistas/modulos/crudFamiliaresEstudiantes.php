@@ -39,9 +39,6 @@ include_once "conexion3.php";
               <li class="nav-item">
                 <a class="nav-link active"  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="crudParentesco"> Parentesco </a>
-              </li>
             </ul>
           </div>
           <div class="card-body">
@@ -68,7 +65,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '3'));
+                                $evaluar_permiso->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -79,22 +76,21 @@ include_once "conexion3.php";
                     {
                     ?>      
 
-                    <button  data-toggle="modal"  href="#agregar_relfam" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Relación Familiar-Estudiante</button>
 
-
-                   <?php
-                    }
-                    ?>
-
+                    <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Relación Familiar-Estudiante</button>
                   <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
 
+
+                  <?php
+                    }
+                    ?>
 
 
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
             </div>
-            <form  method="POST" ><!-- form start -->
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_familiaresEstudiantes" class="table table-bordered table-striped">
@@ -109,7 +105,7 @@ include_once "conexion3.php";
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT  fe.CODIGO_FAM_EST,
+                        $query = "SELECT  fe.CODIGO_FAMILIAR_ESTUDIANTE,
                         (select concat_ws (' ',tp2.PRIMER_NOMBRE, ' ',tp2.SEGUNDO_NOMBRE,' ',tp2.PRIMER_APELLIDO,' ',tp2.SEGUNDO_APELLIDO) from tbl_persona tp2
                          where fa.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as FAMILIAR, pa.NOMBRE as PARENTESCO,
                          CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE
@@ -121,7 +117,7 @@ include_once "conexion3.php";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
-                            $var1 = $row['CODIGO_FAM_EST'];
+                            $var1 = $row['CODIGO_FAMILIAR_ESTUDIANTE'];
                             $var2 = $row['FAMILIAR'];
                             $var3 = $row['PARENTESCO'];
                             $var4 = $row['ESTUDIANTE'];
@@ -144,7 +140,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -166,7 +162,7 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '3'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
@@ -314,48 +310,50 @@ include_once "conexion3.php";
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->
+                      <div class="row mb-2"><!-- INICIO PRIMERA ROW -->
                         
-                        
+                                             <?php //
+                                            $query = "SELECT	fam.CODIGO_FAMILIAR,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                                            FROM tbl_persona per, tbl_familiar fam
+                                            WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
+                                            AND per.CODIGO_TIPO_PERSONA = 7;";
+                                            $resultadod=$conn->query($query);                
+                                            ?>
                         <!-- ***********BUSCAR AL FAMILIAR*********** -->
-                       <label for="">Familiar: </label>
-                            <div class="col-sm-12">
-                                <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 7;";
-                    $resultadod=$conn->query($query);                
-                    ?>
 
-             <a href="categoria">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-              </a>
-              
-                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="FAMILIAR3" id="" type="text" required >
-                    <option selected disabled value=""> Buscar familiares...</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                          
-                          ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select>
-                          
-                      <div class="invalid-feedback">
-                          Agregue un nombre!
-                      </div>
+                                   <a href="categoria">
+                                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+                                      </a>
+                              
+                                      <div class="col-sm-12">
+                                      <label for="">Familiar: </label>
+                                          <div class="col-sm-12 mt-2 mb-4">
+                                            <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco" required="" >
+                                            <option selected disabled value=""> Buscar familiares...</option>
+                                                <?php 
+                                                  if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo = $row['CODIGO_FAMILIAR'];
+                                                  $nombre = $row['NOMBRE'];
+                                                  
+                                                  ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                <?php 
+                                                } 
+                                                }
+                                                ?>
+                                              </select>
+                                                  
+                                              <div class="invalid-feedback">
+                                                  Agregue un nombre!
+                                              </div>
 
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
-          </div>
+                                              <div class="valid-feedback">
+                                                ¡Se ve bien!
+                                               </div>
+                                </div>
+                            </div>
+                      </div> 
 
 
            <!-- ***********BUSCAR PARENTESCO*********** -->
@@ -396,26 +394,27 @@ include_once "conexion3.php";
                             
 
 
-                            <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
 
-                            <label for="">Estudiante:</label>
-                            <div class="col-sm-12">
+                            <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
+         <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
+                           
                             <?php //
-                    $query = "SELECT CODIGO_PERSONA, CONCAT(DNI, ' ',PRIMER_NOMBRE, ' ',SEGUNDO_NOMBRE,' ',PRIMER_APELLIDO) AS NOMBRE
-                    FROM tbl_persona WHERE CODIGO_TIPO_PERSONA = 4;";
+                    $query = "SELECT  est.CODIGO_ESTUDIANTE,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                    FROM tbl_persona per, tbl_estudiante est
+                    WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
+                    AND per.CODIGO_TIPO_PERSONA = 4;";
                     $resultadod=$conn->query($query);                
                     ?>
 
-             <a href="categoria">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-              </a>
-                  <div class="col-sm-8 order-2 pl-2 mt-2 mb-2">
-                    <select  style="width: 100%;"  class="form-control select2" name="CODfamEstudiante" id="CODfamEstudiante" type="text" required >
+                 <label for="">Estudiante:</label>
+                  <div class="col-sm-12">
+                    <select  style="width: 100%;"  class="form-control select2" name="EstudianteParentesco" required="" >
+
                     <option selected disabled value=""> Buscar Estudiantes...</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
+                          $codigo = $row['CODIGO_ESTUDIANTE'];
                           $nombre = $row['NOMBRE'];
                           
                           ?>
@@ -434,31 +433,35 @@ include_once "conexion3.php";
                         ¡Se ve bien!
                    </div>
                 </div>
-                            </div>
 
 
-                            <div class="col-sm-4 order-2 pl-2 mt-2 mb-2">
-                      <label for="">¿Es encargado del estudiante?</label>
-                    <select  style="width: 100%;"  class="form-control" name="encargadoES" id="" type="text" required >
-                        <option selected disabled value=""> Seleccionar la opción...</option>
-                        <option value="SI" >SI</option>
-                        <option value="NO" >NO</option>
-                      </select>
                           
-                      <div class="invalid-feedback">
-                         seleccione una opción!
-                      </div>
-
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
-                   </div>
-                </div>
-            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
+                          <?php
+                            $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
+                            FROM tbl_parentesco pa";
+                            $parentesco=$conn->query($querypare)
+                          ?>
+                        <div class="row mb-5">
+                          <div class="col-sm-12">
+                            <label>Parentesco</label>
+                            <select class="form-control select2" name="parentesco" required="">
+                              <option selected disabled value="">Seleccione el parentesco...</option>
+                                       <?php 
+                                        if ($parentesco->num_rows > 0) {
+                                        while($rowt = $parentesco->fetch_assoc()) { ?>
+                                        <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
+                                      <?php } 
+                                              }?>
+                            </select>
+                          </div>
+                        </div>
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_relfam" name="agregar_relfam" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+
+                        <button type="submit" name="familiar_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
@@ -620,254 +623,30 @@ $(document).ready(function() {
 <!-- Función para dejar la tabla en español -->
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_familiaresEstudiantes').DataTable({
-      language:espanol
-    });
-} );
+  $(document).ready( function () {
+      $('#tabla_familiaresEstudiantes').DataTable({
 
-
-let = espanol = {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "infoThousands": ",",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-        "first": "Primero",
-        "last": "Último",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    },
-    "aria": {
-        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-        "copy": "Copiar",
-        "colvis": "Visibilidad",
-        "collection": "Colección",
-        "colvisRestore": "Restaurar visibilidad",
-        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-        "copySuccess": {
-            "1": "Copiada 1 fila al portapapeles",
-            "_": "Copiadas %ds fila al portapapeles"
-        },
-        "copyTitle": "Copiar al portapapeles",
-        "csv": "CSV",
-        "excel": "Excel",
-        "pageLength": {
-            "-1": "Mostrar todas las filas",
-            "_": "Mostrar %d filas"
-        },
-        "pdf": "PDF",
-        "print": "Imprimir",
-        "renameState": "Cambiar nombre",
-        "updateState": "Actualizar",
-        "createState": "Crear Estado",
-        "removeAllStates": "Remover Estados",
-        "removeState": "Remover",
-        "savedStates": "Estados Guardados",
-        "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-        "cancel": "Cancelar",
-        "fill": "Rellene todas las celdas con <i>%d<\/i>",
-        "fillHorizontal": "Rellenar celdas horizontalmente",
-        "fillVertical": "Rellenar celdas verticalmentemente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-            "date": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "notBetween": "No entre",
-                "notEmpty": "No Vacio",
-                "not": "Diferente de"
-            },
-            "number": {
-                "between": "Entre",
-                "empty": "Vacio",
-                "equals": "Igual a",
-                "gt": "Mayor a",
-                "gte": "Mayor o igual a",
-                "lt": "Menor que",
-                "lte": "Menor o igual que",
-                "notBetween": "No entre",
-                "notEmpty": "No vacío",
-                "not": "Diferente de"
-            },
-            "string": {
-                "contains": "Contiene",
-                "empty": "Vacío",
-                "endsWith": "Termina en",
-                "equals": "Igual a",
-                "notEmpty": "No Vacio",
-                "startsWith": "Empieza con",
-                "not": "Diferente de",
-                "notContains": "No Contiene",
-                "notStarts": "No empieza con",
-                "notEnds": "No termina con"
-            },
-            "array": {
-                "not": "Diferente de",
-                "equals": "Igual",
-                "empty": "Vacío",
-                "contains": "Contiene",
-                "notEmpty": "No Vacío",
-                "without": "Sin"
-            }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-        "clearMessage": "Borrar todo",
-        "collapse": {
-            "0": "Paneles de búsqueda",
-            "_": "Paneles de búsqueda (%d)"
-        },
-        "count": "{total}",
-        "countFiltered": "{shown} ({total})",
-        "emptyPanes": "Sin paneles de búsqueda",
-        "loadMessage": "Cargando paneles de búsqueda",
-        "title": "Filtros Activos - %d",
-        "showMessage": "Mostrar Todo",
-        "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },
-        "rows": {
-            "1": "1 fila seleccionada",
-            "_": "%d filas seleccionadas"
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Familiar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
         }
-    },
-    "thousands": ".",
-    "datetime": {
-        "previous": "Anterior",
-        "next": "Proximo",
-        "hours": "Horas",
-        "minutes": "Minutos",
-        "seconds": "Segundos",
-        "unknown": "-",
-        "amPm": [
-            "AM",
-            "PM"
-        ],
-        "months": {
-            "0": "Enero",
-            "1": "Febrero",
-            "10": "Noviembre",
-            "11": "Diciembre",
-            "2": "Marzo",
-            "3": "Abril",
-            "4": "Mayo",
-            "5": "Junio",
-            "6": "Julio",
-            "7": "Agosto",
-            "8": "Septiembre",
-            "9": "Octubre"
-        },
-        "weekdays": [
-            "Dom",
-            "Lun",
-            "Mar",
-            "Mie",
-            "Jue",
-            "Vie",
-            "Sab"
-        ]
-    },
-    "editor": {
-        "close": "Cerrar",
-        "create": {
-            "button": "Nuevo",
-            "title": "Crear Nuevo Registro",
-            "submit": "Crear"
-        },
-        "edit": {
-            "button": "Editar",
-            "title": "Editar Registro",
-            "submit": "Actualizar"
-        },
-        "remove": {
-            "button": "Eliminar",
-            "title": "Eliminar Registro",
-            "submit": "Eliminar",
-            "confirm": {
-                "_": "¿Está seguro que desea eliminar %d filas?",
-                "1": "¿Está seguro que desea eliminar 1 fila?"
-            }
-        },
-        "error": {
-            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-        },
-        "multi": {
-            "title": "Múltiples Valores",
-            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
-            "restore": "Deshacer Cambios",
-            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-        }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-        "creationModal": {
-            "button": "Crear",
-            "name": "Nombre:",
-            "order": "Clasificación",
-            "paging": "Paginación",
-            "search": "Busqueda",
-            "select": "Seleccionar",
-            "columns": {
-                "search": "Búsqueda de Columna",
-                "visible": "Visibilidad de Columna"
-            },
-            "title": "Crear Nuevo Estado",
-            "toggleLabel": "Incluir:"
-        },
-        "emptyError": "El nombre no puede estar vacio",
-        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
-        "removeError": "Error al eliminar el registro",
-        "removeJoiner": "y",
-        "removeSubmit": "Eliminar",
-        "renameButton": "Cambiar Nombre",
-        "renameLabel": "Nuevo nombre para %s",
-        "duplicateError": "Ya existe un Estado con este nombre.",
-        "emptyStates": "No hay Estados guardados",
-        "removeTitle": "Remover Estado",
-        "renameTitle": "Cambiar Nombre Estado"
-    }
-} 
-
+      },
+        
+      })
+  } );
 </script>

@@ -46,12 +46,36 @@ include_once "conexion3.php";
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
+
+        <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '25'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                          <?php 
+                      if($permiso_registrar == 'SI'){
+                     ?> 
         <a href="categoria"> 
             <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
         </a>
          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
          
-
+         <?php 
+                      }
+                     ?>
           <div class="card ">
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                
@@ -94,15 +118,77 @@ include_once "conexion3.php";
                             $var14 = $row['CODIGO_TIPO_ROL']; 
                             $var16 = $row['CODIGO_USUARIO'];
                         ?>
+
+
+
+
+                            <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '14'));
+                                $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                $permiso_actualizar =$row1; 
+                               
+                            }
+                            ?> 
+
+
+
+                            <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '14'));
+                                $row1=$evaluar_permiso_eliminar->fetchColumn();
+                                $permiso_eliminar =$row1; 
+                            }
+                            ?> 
+
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
+
+                              <?php
+                                 if($permiso_eliminar == 'SI')
+                                 {
+                              ?>                     
                                 
                                <a href="#ELIMINAR<?php echo $var2;?>" data-toggle="modal">
                                 <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
+
+
+                               <?php
+                                  }
+                                 ?>
+
+
+                                   <?php 
+                                     if ($permiso_actualizar == 'SI')
+                                      {
+                                     ?>
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
@@ -115,7 +201,9 @@ include_once "conexion3.php";
                                 </form>
                                 </a>
                                 
-                                
+                                <?php
+                                  }
+                                 ?>
                               </div>
                             </div><!-- final del text-center -->
                           </td>

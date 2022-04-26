@@ -47,7 +47,30 @@
                       where  p.CODIGO_PERSONA = es.CODIGO_PERSONA";
                       $resultado=$conn->query($query);
                     ?>
-                    
+                     
+                     <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '23'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                          <?php
+                             if ($permiso_registrar == 'SI'){
+
+                          ?>
                     <div class="col-sm-4">
                     <div class="form-group">
                       <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="BUSCA_ESTUDIANTE"  required>
@@ -71,6 +94,10 @@
                      <button  type="submit" name="BOTON_BUSCAR"  id= "BOTON_BUSCAR" class="btn btn-primary " class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Buscador</button>
                    </div>
               </form>
+
+                       <?php
+                        }
+                        ?>
             </div>
            </br> 
            

@@ -6,6 +6,7 @@
 
 <?php 
 if(isset($_POST['PERUSUARIO'])){
+  session_start();
     $usuario=$_SESSION['vario'];
     
     try{
@@ -98,6 +99,7 @@ if(isset($_POST['PERUSUARIO'])){
 //Inicio de validacion para modificar permisos
 
 if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
+  session_start();
   $usuario=$_SESSION['vario'];
       try{
         $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
@@ -124,7 +126,7 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
                                                 ELIMINAR ='$eliminar',
                                                 ACTUALIZAR='$actualizar',
                                                 MOSTRAR ='$mostrar',
-                                                MODIFICADO_POR='$usuario',
+                                                MODIFICADO_POR='$$usuariomo',
                                                 FECHA_MODIFICACION='$fechaActual'
                                                 WHERE CODIGO_TIPO_ROL = '$codigoTipo'
                                                 AND   CODIGO_OBJETO = '$codigoObjeto'";

@@ -43,22 +43,22 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '41'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                            <php
-                             if ($permiso_registrar= 'SI'){
+                            <?php
+                             if ($permiso_registrar == 'SI'){
 
-                          ?>
+                             ?>
 
                           <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Especialidad</button>           
                           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>  
                 
-                <php
-                   }
-                 ?>
+                            <?php
+                              }
+                            ?>
           
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -95,7 +95,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="text-center" >
                               <div class="btn-group">
                                 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
+                             
                                
                                <!-- Codigo de permiso para Eliminar -->
 
@@ -112,22 +112,24 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '41'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
                                   ?>  
-                                  <php
-                                    if ($permiso_registrar= 'ON'){
+                                  <?php
+                                    if ($permiso_eliminar == 'SI'){
 
                                   ?>
+
+                              <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                <button id="ELIMINAR_ESPECIALIDAD" name="ELIMINAR_ESPECIALIDAD" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
-                                 <php
+                               </a>
+
+                                 <?php
                                   }
                                  ?>
-                                </a>
-                                <a href="#EDITARESPECIALIDAD<?php echo $var1; ?>" data-toggle="modal">
                                  <!-- Codigo de permiso para Actualizar -->
                                   <?php
                                   include "conexionpdo.php";
@@ -143,22 +145,24 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                       //llamar al procedimiento almacenado
                                       $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '41'));
                                       $row1=$evaluar_permiso_actualizar->fetchColumn();
                                       $permiso_actualizar =$row1; 
                                     
                                   }
                                   ?>
-                                 <php
-                                    if ($permiso_registrar= 'SI'){
+                                 <?php
+                                    if ($permiso_actualizar == 'SI'){
 
                                   ?>
+                                <a href="#EDITARESPECIALIDAD<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <php
+                              </a>
+
+                                <?php
                                   }
                                  ?>
                               
-                              </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>

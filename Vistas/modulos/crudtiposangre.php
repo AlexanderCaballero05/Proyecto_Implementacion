@@ -48,8 +48,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-            <button  data-toggle="modal"  href="#AGREGAR_TIPOSANGRE" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tipo de Sangre</button>
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                            <button  data-toggle="modal"  href="#AGREGAR_TIPOSANGRE" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tipo de Sangre</button>
+                            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                           <?php
                               }
                           ?>
@@ -92,7 +92,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="text-center" >
                               <div class="btn-group">
                                 
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -115,13 +114,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     if ($permiso_eliminar == 'SI'){
 
                                 ?>
+                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_TIPOSANGRE" name="ELIMINAR_TIPOSANGRE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
+                               </a>
+
                                <?php
                                   }
                                 ?>
-                               </a>
-                                <a href="#EDITARTIPOSANGRE<?php echo $var1; ?>" data-toggle="modal">
+
                                 <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -146,11 +147,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     if ($permiso_actualizar == 'SI'){
 
                                 ?>
+                                <a href="#EDITARTIPOSANGRE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                              </a>
+
                                 <?php
                                   }
                                  ?> 
-                              </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>

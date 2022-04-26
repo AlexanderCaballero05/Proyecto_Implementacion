@@ -45,11 +45,39 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
+            <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '20'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+
+                    <?php 
+                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>  
                 <a href="procesoCargaAcademica" >
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
             </br></br>
+                  <?php
+                    }
+                    ?>
+          <!--
             <div class="row">
                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
                     <div class="col-sm-2">
@@ -61,7 +89,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     </div>
                     <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Filtrar por Fecha</button>  
                 </div>
-                
+                  -->
                 </br></br>
                 <?php 
                     if(isset($_POST['excel'])){
@@ -162,7 +190,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                 if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '2'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '20'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                                 }
@@ -170,13 +198,14 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                 <?php
                                     if($permiso_eliminar == 'SI'){
                                 ?> 
-                                <?php
-                                  }
-                                ?><!--Fin del boton de eliminar -->
+                               <!--Fin del boton de eliminar -->
                                 <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                   <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class=" form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
                                 </a>
                                 <!--Codigo para asignar permiso del boton de editar -->
+                                <?php
+                                  }
+                                ?>
                                 <?php
                                   $usuario=$_SESSION['vario'];
                                   //Evaluo si existe el tipo de Rol
@@ -187,7 +216,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                       //llamar al procedimiento almacenado
                                       $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
+                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '20'));
                                       $row2=$evaluar_permiso_actualizar->fetchColumn();
                                       $permiso_actualizar =$row2; 
                                   }
@@ -197,17 +226,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     {
                                   ?>
                                   
-                                  <?php
-                                    }
-                                  ?>
+                               
                                   <a href="#EDITACARGA<?php echo $var1; ?>" data-toggle="modal">
                                     <button type='button' id="btnGuardar"  style="color:white;"class=" form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                     </a>
                                  <a>
+                               
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
                                     <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
                                 </a>
+                                <?php
+                                    }
+                                  ?>
                             </div>
                           </div><!--fin del text-center -->
                         </td>

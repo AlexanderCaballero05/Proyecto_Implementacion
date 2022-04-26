@@ -52,25 +52,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
-                    </a>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-                    </br></br>
-                    <div class="row">
-                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-                        <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-desde" max="<?= date("Y-m-d") ?>"name="desde" value="<?php echo $_SESSION['bdesde']?>" />
-                        </div>
-                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-                        <div class="col-sm-2">
-                        <input class="form-control" type="date" id="bd-hasta"  max="<?= date("Y-m-d") ?>" name="hasta" value="<?php echo $_SESSION['bhasta']?>"/>
-                        </div>
-                        <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
-                   </div><!--fin de row -->
-                   </br></br>
-                    <!-- Codigo de permiso de insertar -->
-                    <?php
+                   <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -84,17 +66,40 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '48'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->       
                      <?php 
-                      if($permiso_registrar = 'ON'){
+                      if($permiso_registrar == 'SI'){
                      ?>
+                    <a href="procesocita" >
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
+                    </a>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                    </br></br>
                     <?php 
                       }
                      ?>
+                     <!--
+                    <div class="row">
+                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
+                        <div class="col-sm-2">
+                        <input class="form-control" type="date" id="bd-desde" max="<?= date("Y-m-d") ?>"name="desde" value="<?php echo $_SESSION['bdesde']?>" />
+                        </div>
+                        <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
+                        <div class="col-sm-2">
+                        <input class="form-control" type="date" id="bd-hasta"  max="<?= date("Y-m-d") ?>" name="hasta" value="<?php echo $_SESSION['bhasta']?>"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Generar</button>  
+                    -->
+                   </div><!--fin de row -->
+
+                   </br></br>
+                    <!-- Codigo de permiso de insertar -->
+                    
+                    
                    
                     <div class="card ">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
@@ -167,30 +172,30 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
                                                                         //llamar al procedimiento almacenado
                                                                         $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '48'));
                                                                         $row1=$evaluar_permiso_actualizar->fetchColumn();
                                                                         $permiso_actualizar =$row1; 
                                                                     
                                                                     }
                                                                     ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                      <?php 
-                                                                    if($permiso_actualizar= 'ON'){
+                                                                    if($permiso_actualizar == 'SI'){
                                                                     ?>
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
 
-                                                                    <?php 
-                                                                        }
-                                                                        ?>
+                                                                   
 
 
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white; background-color:#3DC2F6;" class="btn "><span>
                                                                      <i class="nav-icon fas fa-eye mx-1"></i></span></button>
                                                               </a>
-
+                                                                     <?php 
+                                                                        }
+                                                                        ?>
 
                                                             </div>
                                                         </div><!-- final del text-center -->

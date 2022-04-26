@@ -36,7 +36,7 @@
           if($row > 0){
            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-           $evaluar_permiso->execute(array($usuariomo, '2'));
+           $evaluar_permiso->execute(array($usuariomo, '45'));
            $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
            }
@@ -46,11 +46,10 @@
           ?>
           
           <button  data-toggle="modal"  href="#AGREGAR_SACRAMENTO" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar  Sacramento</button>
+          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
           <?php
            }
           ?>
-          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-          
           <!-- Inicios del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -95,7 +94,7 @@
                                 if($row > 0){
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '2'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '45'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
@@ -120,7 +119,7 @@
                                   $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                   //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '45'));
                                   $row2=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row2; 
                                }

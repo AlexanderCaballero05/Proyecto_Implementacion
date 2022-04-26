@@ -4,35 +4,42 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
-  include_once "modelos/Conexionpdo.php";
-  include_once 'function_bitacora.php';
+  include_once "Conexionpdo.php";
   
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR PARÁMETROS
+//FUNCIONES DEL CRUD 
 
 
-//AGREGAR/REGISTRAR UN PARÁMETRO
-    if(isset($_POST['FAMILIAR3'])){
+
+//AGREGAR/REGISTRAR UN PARENTESCO
+    if(isset($_POST['EstudianteParentesco'])){
+        //session_start();
        try{
-          if(isset($_POST['agregar_relfam'])){
-               $familiar = ($_POST['FAMILIAR3']);
-               $parentesco = ($_POST['CODPARENTESCO2']);
-               $estudiante = ($_POST['CODfamEstudiante']);
-               $encargado = ($_POST['encargadoES']);  
+          if(isset($_POST['familiar_parentesco'])){
+               $familiar_parentesco = ($_POST['FamiliarParentesco']);
+               $EstudianteParentesco = ($_POST['EstudianteParentesco']);
+               $Parentesco = ($_POST['parentesco']);
+
               try{ 
-                  $consulta_nom = $db->prepare("SELECT CODIGO_ESTUDIANTE, CODIGO_FAMILIAR FROM tbl_familiares_estudiante WHERE CODIGO_ESTUDIANTE = (?) AND CODIGO_FAMILIAR = (?) ;");
-                  $consulta_nom->execute(array($familiar));
+                  $consulta_nom = $db->prepare("SELECT CODIGO_FAMILIAR 
+                                                  FROM tbl_familiares_estudiante 
+                                                  WHERE CODIGO_FAMILIAR = (?);");
+                  $consulta_nom->execute(array($familiar_parentesco));
                   $row=$consulta_nom->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('Esta relación ya existe');
+                    alert('el familiar ya se encuentra relacionado');
+=
                     window.location = 'crudFamiliaresEstudiantes';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_param = " INSERT INTO `TBL_FAMILIARES_ESTUDIANTE`( `CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`,  `CODIGO_PARENTESCO`, `ENCARGADO` ) VALUES ('$estudiante','$familiar','$parentesco','$encargado' ); ";
+
+                      $query_param = "INSERT INTO `tbl_familiares_estudiante` (`CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`, `CODIGO_PARENTESCO`) 
+                      VALUES ('$EstudianteParentesco', '$familiar_parentesco', '$Parentesco');";
+
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
@@ -42,22 +49,17 @@
                         
 
                         //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Insertar familiar - estudiante';
-                        $descripcion= 'Agregó/insertó un nuevo parámetro';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+    
 
                       }else{
                         echo "<script> 
-                        alert('Error para insertar!');
+                        alert'error'
+
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Registro fallido de familiares_estudiantes';
-                        $descripcion= 'Se intentó insertar en la tabla familiares_estudiante';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+
                       }
                     }catch(PDOException $e){
                     echo $e->getMessage(); 

@@ -41,15 +41,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '40'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                            <php
-                             if ($permiso_registrar= 'SI'){
+                            <?php
+                             if ($permiso_registrar == 'SI'){
 
-                          ?>
+                             ?>
 
                          
             <button  data-toggle="modal"  href="#AGREGAR" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Apariencia</button>
@@ -60,7 +60,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                 
 
                 </a>
-                <php
+                <?php
                    }
                  ?>
           
@@ -95,21 +95,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-                               
-                               
-                                 <!-- fin del codigo para sustraer el permiso de eliminar-->
-                                                                <?php 
-                                                                if($permiso_eliminar= 'ON'){
-                                                                ?>
-                                                                <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button id="eliminar_medic" name="eliminar_medic" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                                                                    </button>
-                                                                </a>
-                                                                <?php 
-                                                                    }
-                                                                    ?>
-                                  <?php
+                              <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
                                   //Evaluo si existe el tipo de Rol
@@ -122,20 +108,26 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '40'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
                                   ?>  
-                                  <php
-                                    if ($permiso_registrar= 'ON'){
-
-                                  
-                                  }
-                                 ?>
-                                </a>
-                                <a href="#EDITAREXAMEN<?php echo $var1; ?>" data-toggle="modal">
-                                 <!-- Codigo de permiso para Actualizar -->
+                                
+                               
+                               
+                                 <!-- fin del codigo para sustraer el permiso de eliminar-->
+                                                                <?php 
+                                                                if($permiso_eliminar == 'SI'){
+                                                                ?>
+                                                                <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
+                                                                    <button id="eliminar_medic" name="eliminar_medic" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                                                    </button>
+                                                                </a>
+                                                                <?php 
+                                                                    }
+                                                                    ?>
+                                                                     <!-- Codigo de permiso para Actualizar -->
                                   <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -150,18 +142,21 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                       //llamar al procedimiento almacenado
                                       $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '40'));
                                       $row1=$evaluar_permiso_actualizar->fetchColumn();
                                       $permiso_actualizar =$row1; 
                                     
                                   }
                                   ?>
-                                 <php
-                                    if ($permiso_registrar= 'SI'){
+
+                                 <?php
+                                    if ($permiso_actualizar == 'SI'){
 
                                   ?>
+                                </a>
+                                <a href="#EDITAREXAMEN<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <php
+                                <?php
                                   }
                                  ?>
                               

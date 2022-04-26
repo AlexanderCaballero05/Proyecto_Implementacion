@@ -35,7 +35,7 @@
                         exit;
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                       
                         window.location = 'estado';
                         </script>";
                         exit;
