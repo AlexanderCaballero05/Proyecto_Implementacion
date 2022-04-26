@@ -52,9 +52,7 @@
                     <button  data-toggle="modal"  href="#AGREGAR_NOPATOLOGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Trastorno</button>
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                     <?php 
-
                       }
-                        
                     ?> 
           <!-- jquery validation -->
           <div class="card card-primary">
@@ -109,13 +107,8 @@
                                 $evaluar_permiso_actualizar->execute(array($usuariomo, '36'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
-                                
-                                
-                               
                             }
                             ?> 
-
-
 
                             <?php
                             include "conexionpdo.php";

@@ -306,10 +306,38 @@
             </div><!--FINAL DEL ROW Socieconomico-->
                       
                       </br></br></br>
+
+                      <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '16'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                          <?php
+                             if ($permiso_registrar == 'SI'){
+
+                          ?>
                       <div class="card-footer pr-2">
 
                            <button type="submit"  id="GUARDARPERSONA" name="GUARDARPERSONA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                       </div>
+
+                      <?php
+                        }
+                        ?>
                       
           </form>
           

@@ -39,13 +39,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <a href="procesocita" >
-                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
-                    </a>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
-                   </br></br>
-                    <!-- Codigo de permiso de insertar -->
-                    <?php
+                <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -59,14 +53,21 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '48'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de insertar.-->       
                      <?php 
-                      if($permiso_registrar = 'ON'){
+                      if($permiso_registrar == 'SI'){
                      ?>
+                    <a href="procesocita" >
+                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
+                    </a>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                   </br></br>
+                    <!-- Codigo de permiso de insertar -->
+                       
                     <?php 
                       }
                      ?>
@@ -138,14 +139,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                         //llamar al procedimiento almacenado
                                                                         $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '48'));
                                                                         $row1=$evaluar_permiso_actualizar->fetchColumn();
                                                                         $permiso_actualizar =$row1; 
                                                                     
                                                                     }
                                                                     ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                      <?php 
-                                                                    if($permiso_actualizar= 'ON' and $var6 == 'PENDIENTE'){
+                                                                    if($permiso_actualizar == 'SI' and $var6 == 'PENDIENTE'){
                                                                     ?>
 
                                                             

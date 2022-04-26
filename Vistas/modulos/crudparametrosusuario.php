@@ -31,10 +31,36 @@ include_once "conexion3.php";
       <div class="row">
         <div class="col-md-12">
 
+        <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                $evaluar_permiso->execute(array($usuariomo, '9'));
+                                $row1=$evaluar_permiso->fetchColumn();
+                                $permiso_registrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+
+                    <?php 
+                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>     
+
         <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parámetro</button>
-
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-
+                  <?php
+                    }
+                    ?>
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -71,7 +97,7 @@ include_once "conexion3.php";
                            
                         ?>
 
-<?php
+                        <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -94,7 +120,7 @@ include_once "conexion3.php";
                             }
                             ?> 
 
-<?php
+                            <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol

@@ -27,9 +27,25 @@
             </li>
           </ul>
         </div>
+        <?php
+                    $usuario= $_SESSION['vario'];
+
+                    //Consulta que trae el codigo del usuario
+                    $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                    FROM tbl_usuario u, tbl_persona p 
+                    WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                    AND NOMBRE_USUARIO = (?);");
+                    $sentencia1->execute(array($usuario));
+                    $cod_usuario=$sentencia1->fetchColumn();
+
+                    ?>
         
         <div class="card-body">
-        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+
+        <form method="POST" action="Reportes_Prosecar/reporteTutoriasTutor.php" target="_blank">
+         <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor">
+        <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        </form>
 
           <div class="row">
             <div class="col-md-12">
@@ -54,18 +70,7 @@
                     </thead>
                     <tbody>
 
-                    <?php
-                    $usuario= $_SESSION['vario'];
-
-                    //Consulta que trae el codigo del usuario
-                    $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
-                    FROM tbl_usuario u, tbl_persona p 
-                    WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
-                    AND NOMBRE_USUARIO = (?);");
-                    $sentencia1->execute(array($usuario));
-                    $cod_usuario=$sentencia1->fetchColumn();
-
-                    ?>
+                   
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_TUTORIA, t.NOMBRE as NOMBRE_TUTORIA , c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO
                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
@@ -102,33 +107,34 @@
                             <div class="btn-group">
                                 <!--Codigo para asignar permiso del boton de editar -->
                                 <?php
-
-                                  
-                                  $usuario=$_SESSION['vario'];
-                                  //Evaluo si existe el tipo de Rol
-                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
-                                  $evaluar_usuario->execute(array($usuario));
-                                  $row=$evaluar_usuario->fetchColumn();
-                                  if($row > 0){
-                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-                                      $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                      $evaluar_permiso_actualizar->execute(array($usuariomo, '2'));
-                                      $row2=$evaluar_permiso_actualizar->fetchColumn();
-                                      $permiso_actualizar =$row2; 
-                                  }
-                                  ?>
-                                  <?php
-                                    if($permiso_actualizar == 'SI'){
-                                  ?>
-                                  <?php
-                                    }
-                                  ?>
+                                        include "conexionpdo.php";
+                                        $usuario=$_SESSION['vario'];
+                                          //Evaluo si existe el tipo de Rol
+                                          $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                                          $evaluar_usuario->execute(array($usuario));
+                                          $row=$evaluar_usuario->fetchColumn();
+                                          if($row > 0){
+                                          $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                                          $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                                          $evaluar_permiso->execute(array($usuariomo, '24'));
+                                          $row1=$evaluar_permiso->fetchColumn();
+                                            $permiso_registrar =$row1;             
+                                          }
+                                          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->       
+                                          <?php
+                                          if($permiso_registrar == 'SI'){
+                                          ?>
+                                 
+                                            
+                                        
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
                                     <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
-
                                    <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista alumnos</span></button>
                                   </form>
+                                  <?php
+                                           }
+                                        ?>
                             </div>
                           </div><!--fin del text-center -->
                         </td>
@@ -203,4 +209,11 @@
         })
     })()
 </script>
-<!-- Elaborado por Diana Rut  -->
+
+<script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reporteTutoriasTutor.php','_blank');
+      window.open(this.href,'_self');
+    } 
+  </script>
+

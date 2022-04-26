@@ -4,36 +4,38 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
-  include_once "modelos/Conexionpdo.php";
-  include_once 'function_bitacora.php';
+  include_once "Conexionpdo.php";
   
 ?>
 <?php
-//FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR PARÁMETROS
+//FUNCIONES DEL CRUD 
 
 
-//AGREGAR/REGISTRAR UN PARÁMETRO
-    if(isset($_POST['parametro'])){
+//AGREGAR/REGISTRAR UN PARENTESCO
+    if(isset($_POST['EstudianteParentesco'])){
         //session_start();
-        $usuario=$_SESSION['vario']; //variable que trae el usuario que está logeado
        try{
-          if(isset($_POST['agregar_param'])){
-               $nombre_param = ($_POST['parametro']);
-               $valor = ($_POST['valor_param']);
-               $fechaActual = date('Y-m-d');   
+          if(isset($_POST['familiar_parentesco'])){
+               $familiar_parentesco = ($_POST['FamiliarParentesco']);
+               $EstudianteParentesco = ($_POST['EstudianteParentesco']);
+               $Parentesco = ($_POST['parentesco']);
+
               try{ 
-                  $consulta_nom = $db->prepare("SELECT PARAMETRO FROM tbl_parametros WHERE PARAMETRO = (?);");
-                  $consulta_nom->execute(array($nombre_param));
+                  $consulta_nom = $db->prepare("SELECT CODIGO_FAMILIAR 
+                                                  FROM tbl_familiares_estudiante 
+                                                  WHERE CODIGO_FAMILIAR = (?);");
+                  $consulta_nom->execute(array($familiar_parentesco));
                   $row=$consulta_nom->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de parámetro $nombre_param ya se encuentra registrado');
+                    alert('el familiar ya se encuentra relacionado');
                     window.location = 'crudFamiliaresEstudiantes';
                     </script>";
                   exit;
                   }else{
                     try{
-                      $query_param = " INSERT INTO `tbl_parametros`( `PARAMETRO`,  `VALOR`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) VALUES ('$nombre_param','$valor','$usuario','$fechaActual' ); ";
+                      $query_param = "INSERT INTO `tbl_familiares_estudiante` (`CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`, `CODIGO_PARENTESCO`) 
+                      VALUES ('$EstudianteParentesco', '$familiar_parentesco', '$Parentesco');";
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
@@ -43,22 +45,16 @@
                         
 
                         //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Insertar parámetro';
-                        $descripcion= 'Agregó/insertó un nuevo parámetro';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                       
 
                       }else{
                         echo "<script> 
-                        
+                        alert'error'
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Registro fallido de parámetro';
-                        $descripcion= 'Se intentó insertar un nuevo parámetro';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                       
                       }
                     }catch(PDOException $e){
                     echo $e->getMessage(); 

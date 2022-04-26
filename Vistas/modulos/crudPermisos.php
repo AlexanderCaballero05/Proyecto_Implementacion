@@ -97,7 +97,6 @@
                             $var9 = $row['MOSTRAR'];
                            
                         ?>
-
                             <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -115,8 +114,6 @@
                                 $evaluar_permiso_actualizar->execute(array($usuariomo, '5'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
-                                
-                                
                                
                             }
                             ?> 
@@ -195,6 +192,15 @@
               <!--------------------------------------------------------------
                           INICIO DEL MODAL DE EDITAR PERMISO
                --------------------------------------------------------------->
+
+                            <?php
+                          include "conexion1.php";
+                          $queryr = "SELECT o.CODIGO_OBJETO
+                                      FROM tbl_objetos o;";
+                          $resultador=$conn->query($queryr);
+                          ?>  
+
+                             
                           <div id="EditarPermiso<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
@@ -229,6 +235,7 @@
                                           </select>
                                         </div>
                                       </div>
+                                                 
                                             <!--Inicio combobox insertar -->
                                       <div class="col-sm-12">
                                         <div class="form-group">
@@ -276,7 +283,10 @@
                                         </div>
 
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
+
+            
                                   </div><!--FINAL DEL CARD BODY -->
+                                 
 
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>

@@ -1,3 +1,5 @@
+   
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral">
 
@@ -257,38 +259,13 @@
                 <li class="nav-item">
                   <a href="crudfamiliares"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-
                     <p>Proceso de familiares</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
-                  <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de parentesco</p>
-
-
-                    <p>Agregar familiares</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="crudFamiliaresEstudiantes" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Relación familiares-estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
-                  <i class="far fa-circle nav-icon"></i>
-                    <p>Tipo de parentesco</p>
-
-                    <p>Proceso de familiares</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="crudtiposocioeconomico" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento de parentesco</p>
-
                   </a>
                 </li>
               </ul>
@@ -469,7 +446,64 @@
                         ?>
 
 
-                     <?php
+                     
+
+
+
+
+
+
+
+               <?php
+                           include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '49'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?> 
+              <!--Menu de enfermero-->
+             <li class="nav-item">
+          <a href="#" class="nav-link bg-gradient-navy">
+            <i class=" nav-icon fas fa-briefcase-medical "></i>
+            <p>
+              Area Medica
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <li class="nav-item">
+             <a href="procesoCitaspPreclinica"class="nav-link">
+               <i class="far fa-edit nav-icon"></i>
+                <p>Proceso de Preclinica</p>
+             </a>
+           </li>
+          </ul>
+        </li>
+          <!-- fin Menu de enfermero-->
+
+         <?php
+          }
+          ?>
+
+
+                   <?php
                            include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -493,7 +527,6 @@
                     if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?> 
-
          <!-- Menu de AREA MEDICA -->
          <li class="nav-item">
           <a href="#" class="nav-link bg-gradient-navy">
@@ -504,12 +537,41 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
+                     <?php
+                           include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '50'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?> 
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
                 <p>Proceso de Preclinica</p>
              </a>
            </li>
+
+           <?php
+          }
+          ?>
+
            <li class="nav-item">
              <a href="ProcesoCitasMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>

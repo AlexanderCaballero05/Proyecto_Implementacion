@@ -23,36 +23,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-                         <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                          ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                          <php
-                             if ($permiso_registrar= 'ON'){
-
-                          ?>
-            <!-- <button  data-toggle="modal"  href="Vistas/modulos/procesoMatricula.php" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3">Agregar Matricula</button> -->
-                          <php
-                              }
-                          ?>
-
-
-          
   <section class="content">
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
@@ -72,9 +42,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
               <li class="nav-item">
                 <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="crudParentesco"> Parentesco </a>
-              </li>
             </ul>
             
           </div><!--FIN DEL CARD HEADER -->
@@ -88,8 +55,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
           <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-                <a href="procesofamiliares">
-                <?php
+                       <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -103,7 +69,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '1'));
+                                $evaluar_permiso->execute(array($usuariomo, '43'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -111,20 +77,23 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                  
                      <?php 
-                      if($permiso_registrar = 'SI'){
+                      if($permiso_registrar == 'SI'){
                      ?>
+               
               
                 <a href="procesoRegistrarFamiliares">
 
                 <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Familiar</button>
                 </a>
-                <?php 
-                      }
-                     ?>
+               
                  <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                 <button hidden  onclick="Descargar1()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3" > <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>PDF Familiar</button>
               
                 </a>
+
+                <?php 
+                      }
+                     ?>
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #FEFEFE "><!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -181,22 +150,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '43'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
                                 ?>  
-                                <php
-                                    if ($permiso_registrar= 'ON'){
 
-                                ?>
-                                <button id="ELIMINAR_FAMILIAR" name="ELIMINAR_FAMILIAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
-                               <php
-                                  }
-                                ?>
-                               </a>
-                                <a href="#EDITARFAMILIAR<?php echo $var1; ?>" data-toggle="modal">
                                 <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -211,21 +170,44 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                    //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '43'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                     
                                   }
                                 ?>
-                                <php
-                                    if ($permiso_registrar= 'ON'){
+                               
+
+
+                                <?php
+                                if ($permiso_eliminar == 'SI'){
 
                                 ?>
+                                <button id="ELIMINAR_FAMILIAR" name="ELIMINAR_FAMILIAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                               </button>
+
+                              
+
+                               </a>
+
+                               <?php
+                                  }
+                                ?>
+
+
+                                <?php
+                                    if ($permiso_actualizar == 'SI'){
+
+                                ?>
+                                <a href="#EDITARFAMILIAR<?php echo $var1; ?>" data-toggle="modal">
+                                
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <php
+                                
+                              </a>
+
+                                <?php
                                   }
                                  ?> 
-                              </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>

@@ -259,7 +259,7 @@ if(isset($_POST['eliminar_carga'])){
 <?php
 
 if(isset($_POST['codigo_carga_matricula'])){
-
+    session_start();
     $_SESSION['carga'] = $_POST['codigo_carga_matricula'];
     $_SESSION['tutoria'] = $_POST['name_matricula'];
 
