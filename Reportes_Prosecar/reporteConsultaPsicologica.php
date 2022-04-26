@@ -76,24 +76,13 @@ if (isset($_POST['id_persona'])) {
     height: 4cm;
   }
   .c{
-    width: 24.5%;
+    width: 706px;
     margin:2px;
-    min-width: 24.5%;
-    min-height: 200px;
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid #404141;
   }
-  .c1{
-    width: 12%;
-    margin:10px;
-    max-width: 12%;
-    min-height: 40px;
-  }
-  .c2{
-    width: 49.5%;
-    margin:2px;
-    min-width: 49.5%;
-    min-height: 200px;
-
-  }
+  
     </style>
     <title>Reporte paciente uwu</title>
   </head>
@@ -212,12 +201,12 @@ if (isset($_POST['id_persona'])) {
       
       <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas psicologicas paciente  <?php echo $fecha; ?> </legend><br><hr>
       <div>
-      <div class="c" id="caja2" ><label>Sintomas</label> 
-        <textarea ><?php  echo ucwords(strtolower($sintomas)) ?></textarea> 
+      <div class="c"  ><label><b>Sintomas: </b></label> 
+        <?php  echo ucwords(strtolower($sintomas)) ?> 
       </div>
-      <div class="c" id="caja2" > <label>Diagnostico Ingreso</label> <textarea ><?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></textarea></div>
-      <div class="c" id="caja2" > <label>Evolución</label> <textarea  ><?php echo  ucwords(strtolower($observaciones)) ?></textarea></div>
-      <div class="c" id="caja2" > <label>Diagnostico Egreso</label> <textarea  ><?php echo ucwords(strtolower($diagnostico_egreso))?></textarea></div>
+      <div class="c"  > <label><b>Diagnostico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
+      <div class="c"  > <label><b>Evolución</b></label> <?php echo  ucwords(strtolower($observaciones)) ?></div>
+      <div class="c"  > <label><b>Diagnostico Egreso</b></label> <?php echo ucwords(strtolower($diagnostico_egreso))?></div>
 
       </div>
       
