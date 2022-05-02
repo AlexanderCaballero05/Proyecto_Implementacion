@@ -872,7 +872,7 @@
                       </a>
                     </li>
 
-                    <li class="nav">
+                    <!-- <li class="nav">
                       <a href="RespaldoProsecar" class="nav-link bg-gradient-navy">
                         <i class=" nav-icon fas fa-cloud-download-alt"></i>
                         <p>
@@ -880,7 +880,7 @@
                           <i class="fas fa-angle-left right"></i>
                         </p>
                       </a>
-                    </li>
+                    </li>-->
                     <?php
                     }
                       ?>

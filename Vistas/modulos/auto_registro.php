@@ -1,3 +1,9 @@
+<?php
+
+  include_once "conexionpdo.php";
+  include_once "conexion3.php";
+  
+  ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -100,12 +106,25 @@
                        <label for="dni" class="form-label">DNI:</label>
                        <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" minlength="13" maxlength="13" onkeypress="return solonumero(event)">
                     </div>
+                    <?php
+                        $query = "SELECT CODIGO_SEXO, SEXO FROM TBL_SEXO;";
+                        $resultado=$conn->query($query);
+                       ?>
                      <div class="col">
                          <label for="sexo" class="form-label">Sexo:</label>
                          <select name="sexo" class="form-select">
-                             <option value="">--Seleccionar--</option>
-                             <option value="f">Femenino</option>
-                             <option value="m">Masculino</option>
+                         <option selected disabled value="">--Seleccionar--</option>
+                              <?php 
+                                if ($resultado->num_rows > 0) {
+                                while($row = $resultado->fetch_assoc()) { 
+                                $codigo = $row['CODIGO_SEXO'];
+                                $sexo = $row['SEXO'];
+                                ?>
+                                <option value="<?php echo $codigo?>" ><?php echo $sexo;?></option>
+                                <?php 
+                                 } 
+                                 }
+                                ?>
                           </select>
                     </div>
                     </div>
