@@ -1,5 +1,4 @@
 <?php
-session_start();
 include("conexion.php");
 include("function_bitacora.php");
 //DATOS PARA LA TABLA PERSONA
@@ -12,6 +11,7 @@ $fecha = $_POST['fechana'];
 $lugar = $_POST['lugarna'];
 $fechaActual = date('Y-m-d');
 $sexo = $_POST['sexo'];
+$direccion = $_POST['direccion'];
 //DATOS PARA LA TABLA TELEFONO
 $telefono = $_POST['telefono'];
 //TABLA CORREO QUE ESTA RELACIONADO CON PERSONAS
@@ -50,13 +50,12 @@ try{
 
 if(isset($_POST['btnregistrar'])){
   try {
-
+  
   //ENCRIPTAR LA CONTRASEÑA
   //$contrasena = password_hash($contrasena, PASSWORD_DEFAULT); //encripta la contraseña usando la misma variable de contraseña
-  $queryregistrarp = "INSERT INTO TBL_PERSONA(PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO, FECHA_INSCRIPCION, CODIGO_TIPO_PERSONA, CREADO_POR_USUARIO, FECHA_CREACION, FECHA_MODIFICACION, SEXO)
-   VALUES('$primernombre','$segundonombre','$primerapellido','$segundoapellido','$dni','$fecha','$lugar', '$fechaActual','3','NO DEFINIDO', '$fechaActual','$fechaActual','$sexo')";
-  $resultado=$conn->query( $queryregistrarp);
-  
+   $registrar = "INSERT INTO tbl_persona (`PRIMER_NOMBRE`, `SEGUNDO_NOMBRE`, `PRIMER_APELLIDO`, `SEGUNDO_APELLIDO`, `DNI`, `SEXO`, `FECHA_NACIMIENTO`, `LUGAR_NACIMIENTO`, `DIRECCION`, `FECHA_INSCRIPCION`, `CODIGO_TIPO_PERSONA`, `FECHA_CREACION`) VALUES
+                                          ('$primernombre','$segundonombre','$primerapellido','$segundoapellido','$dni','$sexo','$fecha','$lugar','$direccion','$fechaActual','3','$fechaActual')";
+    $resultado=$conn->query( $registrar);
   //CODIGO PERSONA: para poder relacionar las otras tablas de correo y usuario con el código de persona
   $codigo = mysqli_insert_id($conn);
 
@@ -75,7 +74,6 @@ if(isset($_POST['btnregistrar'])){
 
   $conn->commit();
   echo "<script>
-  alert('Registro Exitoso');
   window.location = '../index';
    </script>";
 

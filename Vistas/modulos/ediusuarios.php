@@ -264,15 +264,10 @@ include_once "conexion3.php";
                                         <div class="form-group">
                                           <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
                                             <option value="<?php echo $var13?>"><?php echo $var7;?></option>
-                                            <?php 
-                                              if ($resultadod->num_rows > 0) {
-                                                while($row = $resultadod->fetch_assoc()) { 
-                                                $codigo_estado = $row['CODIGO_ESTADO'];
-                                                $estado = $row['NOMBRE'];
-                                              ?>
-                                              <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                              <?php } 
-                                              }?>
+                                            <option value="2">ACTIVO</option>
+                                            <option value="3">INACTIVO</option>
+                                            <option value="1">NUEVO</option>
+                                            <option value="4">BLOQUEADO</option>
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
