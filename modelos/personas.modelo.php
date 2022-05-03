@@ -182,7 +182,7 @@
                             }//fin regisrtrar enfermeros
 
 
-                          }elseif($tipo_persona == "4" ){ //para estudiantes
+                          }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes(porque se les pego la gana hacerlos estudiantes :v)
                            try{
                               $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
                               FECHA_INSCRIPCION,CODIGO_TIPO_PERSONA,CREADO_POR_USUARIO,SEXO,DIRECCION)
@@ -196,6 +196,10 @@
                                //inserta en  correo
                               $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO(CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
                               $resultado2=$conn->query($querycorreo);
+                              //insertar el usuario para el estudiante
+                              $rol ="8";
+                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena');";
+                              $resultado3 = $conn->query($query_user);
 
                               if (is_array($_POST['sacramento'])) {
                                 foreach ($_POST['sacramento'] as $sacramento){
@@ -206,7 +210,7 @@
                                 $row1=$sentencia->fetchColumn();
                               }
                                 $conn->commit();
-                              if($resultado>0  &&  $resultado1 >0  &&  $resultado2 > 0  ){ 
+                              if($resultado>0  &&  $resultado1 >0  &&  $resultado2 > 0 &&  $resultado3 > 0 ){ 
                                 echo "<script> 
                                 location.href = 'crudpersonas';
                                 </script>";

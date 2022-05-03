@@ -890,7 +890,7 @@
 
 
          </li>  
-         </u><!--final del item menu principal-->
+         </ul><!--final del item menu principal-->
 
       </nav>
       <!-- /.sidebar-menu -->

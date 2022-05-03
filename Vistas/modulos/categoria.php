@@ -37,8 +37,7 @@
 <body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
     <div class="content-header">
-      <div class="container-fluid">
-      </div>
+      
     </div>
     <!-- Main content -->
     <section class="content">
@@ -258,6 +257,7 @@
                           ?>
                       </div>
                     </div><!--fin row -->
+                    </br>
                    
 
                     <div class="card-header" id="form_usuario">
@@ -361,9 +361,7 @@
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
@@ -393,10 +391,11 @@
         </div>
       </div>
     </div>
-   
     </section> <!-- Fin del section principal -->
-</div>
-</div>
+  </div>
+ </div>
+</body>
+
 
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
@@ -531,11 +530,13 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
-          document.getElementById('form_usuario').style.display = "none";
           document.getElementById('primera_fila').style.display = "none";
            document.getElementById('cuarta_fila').style.display = "none";
            document.getElementById('titulo').style.display = "block";
            document.getElementById('sacramentos').style.display = "block";
+           document.getElementById('form_usuario').style.display = "block";
+           document.getElementById('primera_fila').style.display = "block";
+          document.getElementById('cuarta_fila').style.display = "block";
         }else if ($(this).val() === "7"){ //es para un familiar
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";

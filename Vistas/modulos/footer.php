@@ -1,6 +1,8 @@
-<footer class="main-footer text-center">
 
-  <strong>Copyright &copy; 2022-2023 <a href="">Infomatica Administrativa UNAH</a>.</strong>
-    Todos los derechos reservados.
 
+  <footer class="main-footer text-center">
+  <div class="float-right d-none d-sm-block">
+  
+  </div>
+ <strong>Copyright &copy; 2022  <a href="https://www.facebook.com/unahoficial"> UNIVERSIDAD NACIONAL AUTONOMA DE HONDURAS </a>.</strong> Todos los derechos reservados.
 </footer>
