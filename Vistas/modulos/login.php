@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,9 +11,7 @@
   </head>
   <style>
        body{
-           background-color:#E8E8E1;
-          
-          
+        background-color:#E8E8E1;
        }
        .bg{
         background-size: cover;
@@ -34,26 +30,17 @@
                  </br>
                 <!--LOGIN USUARIO -->
                 <form method="POST" class="needs-validation" novalidate>
-          
-
-                  <div class="input-group mb-4">
-                      <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                      <input type="text" name="ingUsuario" id="ingUsuario" 
-                      class="form-control" placeholder="Ingresa tu nombre de usuario" 
-                      autocomplete = "off"  onkeypress="return soloLetras(event);" 
-                      minlength="3" maxlength="20" onkeyup="mayus(this);" required 
-                      onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                  <div class="input-group mb-4"><!--Para ingresar el nombre de usuario -->
+                      <span class="input-group-text" ><i class="fas fa-user"></i></span>
+                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                       <div class="invalid-tooltip">
                          Llene este campo
                       </div>
                   </div>
-                  <div class="input-group mb-4">
-                      <span  class="input-group-text" id=""><i class="fas fa-lock"></i></span> 
-                      <input type="password" name="ingPassword" id="ingPassword" 
-                      class="form-control" placeholder="Ingresa tu contrase&ntilde;a"
-                       aria-label="Username" aria-describedby="basic-addon1"   
-                       minlength="8" maxlength="30" required onblur="quitarespacios(this);"
-                        onkeyup="sinespacio(this);">
+                  <div class="input-group mb-3"><!--Para ingresar la contraseña -->
+                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    <input type="password" name="ingPassword" id="contra" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"   minlength="8" maxlength="30" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
+                    <span class="input-group-text" onclick="mostrar1()"><i class=" icon1 fa fa-eye-slash"></i></span>
                       <div class="invalid-tooltip">
                         Llene este campo
                       </div>
@@ -65,31 +52,41 @@
                   </div>
                   <div class=" text-center my-3"> 
                      <span><a style="color:black; text-decoration:none"
-                      href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu usuario o contrase&ntilde;a? </a></span>
-                     </br>
-                     <span><a style=" text-decoration:none" 
-                     href="vistas/modulos/auto_registro.php">Regístrate </a></span>
+                      href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu contrase&ntilde;a? </a></span>
+                     <br>
+                     <div class="mt-2"><a style=" text-decoration:none" 
+                     href="vistas/modulos/auto_registro.php">Autoregistro</a></div>
                    </div>
                    <?php
-
-     $login = new ControladorUsuarios();
-     $login -> ctrIngresoUsuario();
-
-            ?>
-
-
+                   //alguna funcion para el controlador
+                   $login = new ControladorUsuarios();
+                   $login -> ctrIngresoUsuario();
+                  ?>
               </form>
             </div>
         </div>
     <div>
 
+<!--Codigo de algunas validaciones para la entrada de datos ,elaborado por Diana Rut  -->
+ <script  type="text/javascript">
+   //codigo para mostrar la contraseña
+  function mostrar1(){
+    var cambio1 = document.getElementById("contra");
+    if(cambio1.type == "password"){
+        cambio1.type = "text";
+    $('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
+    }else{
+        cambio1.type = "password";
+    $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
+    }        
+  }
+</script>
     <script>
       function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
        especiales = ["8-37-39-46"];
-
        tecla_especial = false
        for(var i in especiales){
         if(key == especiales[i]){
@@ -97,64 +94,42 @@
           break;
         }
       }
-
       if(letras.indexOf(tecla)==-1 && !tecla_especial){
         return false;
       }
     }
   </script>
-
-
     <script type="text/javascript">
-  
         function mayus(e) {
           e.value = e.value.toUpperCase();
          }
     </script>
-
-
     <script type="text/javascript">
-
         function sinespacio(e) {
-
         var cadena =  e.value;
         var limpia = "";
         var parts = cadena.split(" ");
         var length = parts.length;
-
           for (var i = 0; i < length; i++) {
               nuevacadena = parts[i];
               subcadena = nuevacadena.trim();
-
           if(subcadena != "") {
              limpia += subcadena + " ";
-                }
+            }
           }
         limpia = limpia.trim();
         e.value = limpia;
-
          };
      </script>
 
  <script type="text/javascript">
-
     function quitarespacios(e) {
-
       var cadena =  e.value;
       cadena = cadena.trim();
-
       e.value = cadena;
-
     };
-
   </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
-    -->
   </body>
   <script>
   (function () {
