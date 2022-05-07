@@ -55,10 +55,55 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
    }catch(PDOException $e){
     echo $e->getMessage(); 
     return false;
-   }
-}//FIN DEL IF DE REGISTAR
+   }//FIN DEL IF DE REGISTAR MATRIULA ACADEMICA
 
+} else if(isset($_POST['AGREGAR_MATRICULA_ESPIRITUAL'])){ //IF PARA REGISTAR MATRIULA ESPIRITUAL
+  isset($_POST['ID_ESTUDIANTE']);
+     $ESTUDIANTE = ($_POST['ID_ESTUDIANTE']);
+     $CARGA =  ($_POST['CODIGO_CARGA']);
+     $usuario = $_SESSION['vario']; //variable que trae el usuario que está logeado
+     $fechaActual = date('Y-m-d');  
+     $tutoria = ($_POST['CATEQUESIS']);
+  try{
+    $consulta = "";
+    $consulta = $db->prepare("SELECT ma.CODIGO_CARGA ,ma.CODIGO_ESTUDIANTE, ca.CODIGO_TUTORIA 
+    from tbl_carga_academica ca ,tbl_matricula_academica ma
+    where ca.CODIGO_CARGA = ma.CODIGO_CARGA and ca.CODIGO_TUTORIA = (?) and ma.CODIGO_ESTUDIANTE = (?)");
+    $consulta ->execute(array($tutoria,$ESTUDIANTE));
+    $row = $consulta->fetchColumn();
 
+    if($row > 0){
+     echo "<script> 
+     alert('No puede adicionar esta clase,ya la tiene matriculada');
+     window.location = 'procesoMatricula';
+     </script>";
+
+    }else{
+     $matricula = " INSERT INTO `tbl_matricula_academica`( `CODIGO_CARGA`, `CODIGO_ESTUDIANTE`, OBSERVACION ,`FECHA_MATRICULA`, `CREADO_POR_USUARIO`,  `FECHA_CREACION` ) 
+     VALUES ('$CARGA','$ESTUDIANTE', '9','$fechaActual','$usuario','$fechaActual' ); ";
+     $resul=$conn->query($matricula);
+
+     if($resul >0){
+       echo "<script> 
+       
+       window.location = 'crudMatricula';
+       </script>";
+     }else{
+       echo "<script> 
+       
+       window.location = 'crudMatricula';
+       </script>";
+     }
+
+    }
+
+     
+     
+  }catch(PDOException $e){
+   echo $e->getMessage(); 
+   return false;
+  } //FIN DEL IF DE REGISTAR MATRIULA ESPIRITUAL
+}
 
 if(isset($_POST['ma_eliminar'])){
   if(isset($_POST['ELIMINAR_MATRICULA'])){

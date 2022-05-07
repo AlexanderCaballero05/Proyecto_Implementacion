@@ -11,24 +11,26 @@
 <?php
 //**CODIGO PARA INSERTAR DATOS EN LA TABLA CARGA ACADEMICA ,en mayucula para que se vea bien :v */
 
-if(isset($_POST['tutor'])  ){
+if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es academica
     if(isset($_POST['GUARDAR_CARGA'])){
         $hora = ($_POST['hora']);
         $hora_final = ($_POST['hora_final']);
         $fech_inicio = ($_POST['fecha_inicio']);
         $fecha_final = ($_POST['fecha_final']);
-        $tutor = ($_POST['tutor']);
-        $tutoria = ($_POST['tutoria']);
+        $tutor_academico = ($_POST['tutor_academico']);
+        $tutoria_academica = ($_POST['tutorias_academicas']);
         $modalidad = ($_POST['modalidad']);
         $seccion = ($_POST['seccion']);//valor de numero
         $fecha = date('Y-m-d');
         $user=$_SESSION['vario'];
         $anio = date("Y");
         $periodo = ($_POST['periodo']);
+        $area = ($_POST['area_tutoria']);
+
        try{
              $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
              CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?);'");
-             $query1->execute(array($seccion,$tutoria));
+             $query1->execute(array($seccion,$tutoria_academica));
              $fila = $query1->fetchColumn();
              if($fila > 0){
                  echo "<script> 
@@ -41,7 +43,7 @@ if(isset($_POST['tutor'])  ){
                      //Si la carga tiene los mismos datos de una carga exsitente,
                      $sentencia = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica
                      WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and CODIGO_SECCION =(?) AND   CODIGO_MODALIDAD = (?) ");
-                     $sentencia->execute(array($tutor,$tutoria,$hora,$fech_inicio,$seccion,$modalidad));
+                     $sentencia->execute(array($tutor_academico,$tutoria_academica,$hora,$fech_inicio,$seccion,$modalidad));
                      $row=$sentencia->fetchColumn();
                      if($row >0){ 
                         echo "<script> 
@@ -50,10 +52,10 @@ if(isset($_POST['tutor'])  ){
                         </script>";
                         exit;
                     }else{
-                        //si el tutor tiene una diferente clase de la que esta registandro ,pero si que esa clase este en el mismo horario que esta intentando agregar
+                        //si el tutor tiene una diferente clase de la que esta registrado ,pero si que esa clase este en el mismo horario que esta intentando agregar
                         $sentencia2 = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica 
                         WHERE CODIGO_PERSONA = (?) AND CODIGO_TUTORIA <> (?)  and HORA = (?) and FECHA_INICIO = (?)");
-                        $sentencia2->execute(array($tutor,$tutoria,$hora,$fech_inicio));
+                        $sentencia2->execute(array($tutor_academico,$tutoria_academica,$hora,$fech_inicio));
                         $row=$sentencia2->fetchColumn();
                         try{
                             if($row >0){
@@ -64,11 +66,13 @@ if(isset($_POST['tutor'])  ){
                             exit;
                             }else{
                                try{
-                                    $insert = " INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
+                                   if($area == 1){ 
+                                    $insert = "INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
                                     `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`) 
-                                    VALUES ('$tutoria','$tutor','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
+                                    VALUES ('$tutoria_academica','$tutor_academico','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
                                     $resul=$conn->query($insert);
-                                    if($resul >0){
+        
+
                                         echo "<script> 
                                         window.location = 'crudCargaAcademica';
                                         </script>";
@@ -78,14 +82,19 @@ if(isset($_POST['tutor'])  ){
                                         $accion='Registro';
                                         $descripcion= 'Se asigno una carga academica ';
                                         bitacora($codigoObjeto, $accion,$descripcion);
-                        
-                                    }else{
-                                        echo "<script> 
-                                        alert('No se puede agregar por alguna extraña razon');
-                                        window.location = 'procesoCargaAcademica';
-                                        </script>";
-                                        exit;
-                                    }
+
+                                   }else{
+                                    echo "<script> 
+                                    window.location = 'crudCargaAcademica';
+                                    </script>";
+                                    exit;
+                                    include_once 'function_bitacora.php';
+                                    $codigoObjeto=20;
+                                    $accion='Registro';
+                                    $descripcion= 'error intente de nuevo';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                   }
+                                   
                                }catch(PDOException $e){
                                echo $e->getMessage(); 
                                return false;
@@ -106,7 +115,114 @@ if(isset($_POST['tutor'])  ){
         return false;
         }
     } //if secundario
-}//if principal
+
+}else if(isset($_POST['tutorias_espirituales'])  ){//if cuando una tutoria es espiritual
+    if(isset($_POST['GUARDAR_CARGA'])){
+        $hora = ($_POST['hora']);
+        $hora_final = ($_POST['hora_final']);
+        $fech_inicio = ($_POST['fecha_inicio']);
+        $fecha_final = ($_POST['fecha_final']);
+         $tutor_espiritual = ($_POST['tutor_espiritual']);
+         $tutoria_espritual = ($_POST['tutorias_espirituales']);
+        $modalidad = ($_POST['modalidad']);
+        $seccion = ($_POST['seccion']);//valor de numero
+        $fecha = date('Y-m-d');
+        $user=$_SESSION['vario'];
+        $anio = date("Y");
+        $periodo = ($_POST['periodo']);
+        $area = ($_POST['area_tutoria']);
+
+       try{
+             $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
+             CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?);'");
+             $query1->execute(array($seccion,$tutoria_espritual));
+             $fila = $query1->fetchColumn();
+             if($fila > 0){
+                 echo "<script> 
+                 alert('Ya se encuentra registrada la asignatura y sección');
+                 window.location = 'procesoCargaAcademica';
+                 </script>";
+                 exit;
+             }else{
+                 try{
+                     //Si la carga tiene los mismos datos de una carga exsitente,
+                     $sentencia = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica
+                     WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and CODIGO_SECCION =(?) AND   CODIGO_MODALIDAD = (?) ");
+                     $sentencia->execute(array($tutor_espiritual,$tutoria_espritual,$hora,$fech_inicio,$seccion,$modalidad));
+                     $row=$sentencia->fetchColumn();
+                     if($row >0){ 
+                        echo "<script> 
+                        alert('No se puede asignar la carga,el tutor ya tiene asignada una clase a la misma hora');
+                        window.location = 'procesoCargaAcademica';
+                        </script>";
+                        exit;
+                    }else{
+                        //si el tutor tiene una diferente clase de la que esta registrado ,pero si que esa clase este en el mismo horario que esta intentando agregar
+                        $sentencia2 = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica 
+                        WHERE CODIGO_PERSONA = (?) AND CODIGO_TUTORIA <> (?)  and HORA = (?) and FECHA_INICIO = (?)");
+                        $sentencia2->execute(array($tutor_espiritual,$tutoria_espritual,$hora,$fech_inicio));
+                        $row=$sentencia2->fetchColumn();
+                        try{
+                            if($row >0){
+                                echo "<script> 
+                                alert('No se puede asignar la carga,ya tine una clase a esta hora');
+                                window.location = 'procesoCargaAcademica';
+                                </script>";
+                            exit;
+                            }else{
+                               try{
+                                  if($area ==4 ){
+                                    $insert2 = "INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`) 
+                                    VALUES ('$tutoria_espritual','$tutor_espiritual','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
+                                    $resul2=$conn->query($insert2);
+        
+
+                                        echo "<script> 
+                                        window.location = 'crudCargaAcademica';
+                                        </script>";
+                                        exit;
+                                        include_once 'function_bitacora.php';
+                                        $codigoObjeto=20;
+                                        $accion='Registro';
+                                        $descripcion= 'Se asigno una carga academica ';
+                                        bitacora($codigoObjeto, $accion,$descripcion);
+
+
+                                   }else{
+                                    echo "<script> 
+                                    window.location = 'crudCargaAcademica';
+                                    </script>";
+                                    exit;
+                                    include_once 'function_bitacora.php';
+                                    $codigoObjeto=20;
+                                    $accion='Registro';
+                                    $descripcion= 'error intente de nuevo';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+
+                                   }
+                                   
+                               }catch(PDOException $e){
+                               echo $e->getMessage(); 
+                               return false;
+                               }
+                            }
+                        }catch(PDOException $e){
+                        echo $e->getMessage(); 
+                        return false;
+                        }
+                    }//fin else
+                 }catch(PDOException $e){
+                  echo $e->getMessage(); 
+                  return false;
+                }
+            }//fin del else
+       }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+        }
+    } //if secundario
+}
 //****FIN DEL INSERT DE CARGA ACADEMICA****** */
 
 

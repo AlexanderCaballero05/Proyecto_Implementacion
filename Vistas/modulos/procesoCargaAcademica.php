@@ -18,25 +18,28 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-          <h4> REGISTRAR CARGA ACADEMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> AGREGAR CARGA ACADÉMICA/ESPIRITUAL  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                 <a class="nav-link"  style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Carga academica</a>
-              </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
+            </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
           <div class="card-body"><!--Cuerpo del card body principal -->
             </br>
             <form  class=" needs-validation" novalidate id="FORMREGISTRAR" method="POST">
               <div class="row">
-                <div class="col-md-4 mb-3"> <!--HORA-->
+                <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
                       <input oninvalid="this.setCustomValidity('Ingrese una hora correcta')" class="form-control" required  type="time"  name="hora"  required >
@@ -45,7 +48,7 @@
                         </div>
                     </div>
                   </div>
-                  <div class="col-md-4 mb-3"> <!--HORA-->
+                  <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
                     <div class="form-group">
                       <input  class="form-control" required min="08:00" max= "17:00"  type="time"  name="hora_final"  required >
@@ -59,7 +62,7 @@
                         $Fechaactual=  date('Y-m-d'); 
                         $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 3 month"));
                         ?>
-                  <div class="col-md-4 mb-3"> <!--FECHA INICIO-->
+                  <div class="col-md-3 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
                       <input class="form-control" min= "<?= $Fechaactual?>"   max= "<?=  $fechamaxima?>"  type="date"  name="fecha_inicio" required>
@@ -68,10 +71,8 @@
                         </div>
                     </div>
                   </div>
-              </div><!--Cierre del row general -->
-              <div class="row">
 
-                 <div class="col-md-4 mb-3"> <!--FECHA FINAL-->
+                  <div class="col-md-3 mb-3"> <!--FECHA FINAL-->
                     <label  class="control-label">Fecha final:</label> 
                     <div class="form-group">
                       <input class="form-control" type="date"  name="fecha_final" required>
@@ -80,42 +81,53 @@
                         </div>
                     </div>
                   </div>
-                  
-                <div class="col-md-4 mb-3"> <!--Fila para el encargado-->
-                  <?php 
-                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <div class="form-group">
-                    <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor" id="tutor" required >
-                      <option selected disabled value="">--Seleccionar Tutor--</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutor = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
+              </div><!--Cierre del row general -->
+
+
+
+
+
+
+              <div class="row">
+
+                 <div class="col-md-3 mb-3"> <!--columna para selecionar el area-->
+                 <?php
+                      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  
+                      where CODIGO_AREA <> 6
+                      AND CODIGO_AREA <> 2
+                      AND CODIGO_AREA <> 3";
+                      $filas_area= $conn->query($query);
                       ?>
-                    </select> 
-                     <div class="invalid-feedback">
+                    <div class="form-group">
+                    <label  class="control-label">Area de la tutoria:</label> 
+                     <select class="form-control select2"  name="area_tutoria" id="area_tutoria" required>
+                       <option selected disable value="">--Seleccione un Area--</option>
+                       <?php
+                          if($filas_area->num_rows >0){ 
+                            while($filas=$filas_area->fetch_assoc()){ 
+                       ?>
+                       <option value="<?php echo $filas['CODIGO_AREA'];?>"><?php echo $filas['NOMBRE'];?></option>
+                        <?php
+                          }
+                        }
+                        ?>
+                     </select>
+                       <div class="invalid-feedback">
                          Llene este campo.
-                     </div>
-                  </div>
-                </div><!--CIERRE DEL ENCARAGADO -->
-                <div class="col-md-4"> 
+                        </div>
+                    </div>
+                  </div><!--fin de columna para selecionar el area-->
+
+                  <div style ="display:none;" id="tutorias_academicas" class="col-md-3"> <!--inicio seleccionar tutoria academica-->
                     <?php //
-                    $query = "SELECT * FROM tbl_tutoria";
+                    $query = "SELECT CODIGO_TUTORIA, NOMBRE
+                     FROM tbl_tutoria
+                     WHERE CODIGO_AREA = 1";
                     $resultadod=$conn->query($query);                
                     ?>
-                    <label for="identidad" class="control-label">Tutoria:</label> 
+                    <label for="identidad" class="control-label">Nombre Tutoria:</label> 
                     <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" required name="tutoria"   >
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas">
                         <option selected disabled value="" >--Seleccionar Tutoria--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -133,7 +145,93 @@
                           Llene este campo.
                         </div>
                     </div>
-                  </div><!--CIERRE DE LA TUTORIA -->
+                  </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
+
+                  <div style ="display:none;" id="tutorias_espirituales" class="col-md-3"> <!--inicio seleccionar tutoria espirituales-->
+                    <?php //
+                    $query = "SELECT CODIGO_TUTORIA, NOMBRE
+                     FROM tbl_tutoria
+                     WHERE CODIGO_AREA = 4";
+                    $resultadod=$conn->query($query);                
+                    ?>
+                    <label for="identidad" class="control-label">Nombre Tutoria:</label> 
+                    <div class="form-group">
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales">
+                        <option selected disabled value="" >--Seleccionar Tutoria--</option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                            while($row = $resultadod->fetch_assoc()) { 
+                            $codigo_tutoria = $row['CODIGO_TUTORIA'];
+                            $nombre = $row['NOMBRE'];
+                          ?>
+                        <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
+                        ?>
+                      </select> 
+                      <div class="invalid-feedback">
+                          Llene este campo.
+                        </div>
+                    </div>
+                  </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
+                  
+                <div style="display:none" id="tutores_academicos" class="col-md-6 mb-3"> <!--Fila para tutores academicos-->
+                  <?php 
+                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
+                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
+                  $resultadod=$conn->query($query);                
+                  ?>
+                  <div class="form-group">
+                    <label  class="control-label">Encargado-Tutor:</label>
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico">
+                      <option selected disabled value="">--Seleccionar Tutor--</option>
+                      <?php 
+                        if ($resultadod->num_rows > 0) {
+                          while($row = $resultadod->fetch_assoc()) { 
+                          $codigo_tutor = $row['CODIGO_PERSONA'];
+                          $nombre = $row['NOMBRE'];
+                        ?>
+                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                    </select> 
+                     <div class="invalid-feedback">
+                         Llene este campo.
+                     </div>
+                  </div>
+                </div><!--CIERRE DE tutores academico-->
+
+                  
+                <div style="display:none" id="tutores_espirituales" class="col-md-6 mb-3"> <!--Fila para tutores_espirituales-->
+                  <?php 
+                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
+                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
+                  $resultadod=$conn->query($query);                
+                  ?>
+                  <div class="form-group">
+                    <label  class="control-label">Encargado-Tutor:</label>
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor">
+                      <option selected disabled value="">--Seleccionar Tutor--</option>
+                      <?php 
+                        if ($resultadod->num_rows > 0) {
+                          while($row = $resultadod->fetch_assoc()) { 
+                          $codigo_tutor = $row['CODIGO_PERSONA'];
+                          $nombre = $row['NOMBRE'];
+                        ?>
+                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                    </select> 
+                     <div class="invalid-feedback">
+                         Llene este campo.
+                     </div>
+                  </div>
+                </div><!--CIERRE DE tutores academico-->
 
                 
               </div><!--FINAL DEL ROW -->
@@ -173,7 +271,7 @@
                   ?>
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
-                    <select style="width: 100%"   class="form-control select2" required name="seccion" >
+                    <select style="width: 100%"   class="form-control select2" name="seccion" required>
                         <option selected disabled value="" >--Seleccionar Seccion--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -235,7 +333,7 @@
                     {
                     ?>  
               </br></br></br>
-              <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Carga Academica</button>
+              <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                   <?php
                     }
                     ?>
@@ -248,6 +346,27 @@
 </div>
 </div>
 </body>
+
+    <script>
+      $(function(){//inicio de primera llave
+        $("#area_tutoria").change(function(){//inicio de segunda llave
+          if($(this).val() == "1"){//para seleccionar el area academica
+            document.getElementById('tutorias_academicas').style.display ="block";
+            document.getElementById('tutores_academicos').style.display ="block";
+            document.getElementById('tutorias_espirituales').style.display ="none";
+            document.getElementById('tutores_espirituales').style.display ="none";
+
+          }else if($(this).val() ==="4"){
+            document.getElementById('tutorias_espirituales').style.display ="block";
+            document.getElementById('tutores_espirituales').style.display ="block";
+            document.getElementById('tutorias_academicas').style.display ="none";
+            document.getElementById('tutores_academicos').style.display ="none";
+
+          }
+        });//cierre de segunda llave
+      });//cierre primera llave
+    </script>
+
 
  <script>
     (function () { 

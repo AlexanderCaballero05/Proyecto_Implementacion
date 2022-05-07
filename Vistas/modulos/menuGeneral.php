@@ -364,7 +364,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
-                                $evaluar_permiso_mostrar->execute(array($usuariomo, '33'));
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '29'));
                                 $row1=$evaluar_permiso_mostrar->fetchColumn();
                                 $permiso_mostrar =$row1;             
                             }
@@ -376,7 +376,7 @@
                     ?>   
           <!-- Menu de Matricula -->
           <li class="nav-item">
-          <a href="#" class="nav-link bg-success">
+          <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-school"></i>
             <p>
               Matricula
@@ -421,12 +421,12 @@
                     {
                     ?>   
 
-                   <!-- Menu de AREA DE TUTOR -->
+                   <!-- Menu de AREA DE TUTOR academico-->
                      <li class="nav-item">
-                        <a href="#" class="nav-link">
+                     <a href="#" class="nav-link bg-gradient-navy">
                           <i class=" nav-icon fas fa-briefcase"></i>
                           <p>
-                            Gestion de Tutorias
+                            Area Academica
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -435,7 +435,57 @@
                           <li class="nav-item">
                             <a href="crudTutoriasTutor" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias</p>
+                              <p>Proceso tutorias academicas</p>
+                            </a>
+                          </li>         
+                        </ul>
+                      </li>
+
+
+                      <?php
+                        }
+                        ?>
+
+<?php
+                           include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '52'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>   
+
+                   <!-- Menu de AREA DE TUTOR espiritual -->
+                     <li class="nav-item">
+                     <a href="#" class="nav-link bg-gradient-navy">
+                          <i class=" nav-icon fas fa-briefcase"></i>
+                          <p>
+                            Area Espiritual
+                            <i class="fas fa-angle-left right"></i>
+                          </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+                          <li class="nav-item">
+                            <a href="crudTutorEspiritual" class="nav-link">
+                              <i class="far fa-edit nav-icon"></i>
+                              <p>Proceso tutorias esprituales</p>
                             </a>
                           </li>         
                         </ul>
@@ -447,14 +497,13 @@
                         ?>
 
 
-                     
 
 
 
 
 
 
-
+            
                <?php
                            include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -676,7 +725,7 @@
 
           <!-- Menu de AREA PSICOLOGO -->
           <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase"></i>
             <p>
               Area Psicologica

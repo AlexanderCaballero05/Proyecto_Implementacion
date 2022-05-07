@@ -25,7 +25,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-          <h4> MATRICULA ACADÉMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> MATRICULA ACADÉMICA/ESPIRITUAL <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
         <div class="card">

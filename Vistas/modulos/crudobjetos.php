@@ -36,8 +36,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeyup="mayus(this);"  type="text"
-                                 name="nombre" id="nombre" autocomplete = "off" required="">
+                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text"
+                                 name="nombre" id="nombre" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -239,8 +239,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="editnombre"autocomplete = "off" id="editnombre">
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                    name="editnombre" autocomplete = "off" id="editnombre">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">

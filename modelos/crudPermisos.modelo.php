@@ -6,7 +6,6 @@
 
 <?php 
 if(isset($_POST['PERUSUARIO'])){
-  session_start();
     $usuario=$_SESSION['vario'];
     
     try{

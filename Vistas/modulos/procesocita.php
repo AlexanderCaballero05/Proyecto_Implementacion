@@ -132,7 +132,7 @@ $result3= $conn->query($query);
                       ?>
                             <label for="txtcodigo_especialista">Area de la cita</label>
                             <select class="form-control select2" name="area_cita" id="area_cita" required>
-                            <option selected disabled value= "">--Seleccione una Area--</option>
+                            <option selected disabled value= "">--Seleccione un Area--</option>
                                 <?php
                                 if ($filas_area->num_rows > 0){
                                 while($row = $filas_area->fetch_assoc()){ 
@@ -177,6 +177,7 @@ $result3= $conn->query($query);
                             </div>
                         </div>
                     </div>
+                    
                     <div  style ="display:none;" id="es_psico" class="col-sm-4  mb-3">
                         <?php
                         $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 3 ";

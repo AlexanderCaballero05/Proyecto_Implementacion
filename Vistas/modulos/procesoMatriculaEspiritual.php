@@ -31,19 +31,19 @@
                 <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matricula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar matricula academica</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar matricula academica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar matricula espiritual</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar matricula espiritual</a>
               </li>
             </ul>
           </div>
           <div class="card-body">
           </br> 
 
-          <form method="POST" action="procesoMatricula">
+          <form method="POST" action="procesoMatriculaEspiritual">
             <div class="row mb-4">
-              <form method="POST" action="procesoMatricula">
+              <form method="POST" action="procesoMatriculaEspiritual">
                      <?php
                       $query = "SELECT es.CODIGO_ESTUDIANTE, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as NOMBRE
                       FROM tbl_estudiante es , tbl_persona p 
@@ -81,10 +81,10 @@
                         <?php 
                           if ($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) { 
-                            $codigo_estudiante = $row['CODIGO_ESTUDIANTE'];
+                            $codigo_es = $row['CODIGO_ESTUDIANTE'];
                             $nombre_Estudiante = $row['NOMBRE'];
                           ?>
-                        <option value="<?php echo $codigo_estudiante?>"><?php echo $nombre_Estudiante;?></option>
+                        <option value="<?php echo $codigo_es?>"><?php echo $nombre_Estudiante;?></option>
                         <?php
                         }
                         }
@@ -110,10 +110,10 @@
 
            <?php
             if( isset($_POST['BOTON_BUSCAR'])){
-              $codigo_estudiante = $_POST['BUSCA_ESTUDIANTE'];
+              $codigo_es = $_POST['BUSCA_ESTUDIANTE'];
               $query = "SELECT es.CODIGO_ESTUDIANTE, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as NOMBRE
               FROM tbl_estudiante es , tbl_persona p 
-              where p.CODIGO_PERSONA = es.CODIGO_PERSONA AND  es.CODIGO_ESTUDIANTE = '$codigo_estudiante' ;";
+              where p.CODIGO_PERSONA = es.CODIGO_PERSONA AND  es.CODIGO_ESTUDIANTE = '$codigo_es' ;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -135,7 +135,7 @@
 
           <div class="card ">
             <div class="card-header text-center" style="background-color: #3FCDFD"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">CARGA ACADEMICA PARA MATRICULAR </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">CARGA ESPIRITUAL PARA MATRICULAR </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -145,8 +145,8 @@
                       <thead>
                         <tr>
                           <th class="text-center">ACCION</th> 
-                          <th class="text-center">ASIGNATURA</th>
-                          <th class="text-center">NOMBRE DEL TUTOR</th>
+                          <th class="text-center">CATEQUESIS</th>
+                          <th class="text-center">NOMBRE DEL CATEQUISTA</th>
                           <th class="text-center">MODALIDAD</th>
                           <th class="text-center">SECCION</th>
                           <th class="text-center">HORA</th> 
@@ -163,7 +163,7 @@
                AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
                AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
                AND c.CODIGO_SECCION = s.CODIGO_SECCION
-               AND t.CODIGO_AREA = 1;";
+               AND t.CODIGO_AREA = 4;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -180,8 +180,8 @@
                         <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                <a href="#MODAL_MATRICULA<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
+                                <a href="#MODAL<?php echo $var1; ?>" data-toggle="modal">
+                                <button type='button' name="btnmatricular_espritual" id="btnmatricular_espritual"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular catequesis</button>
                               </a>
                               </div>
                             </div><!-- final del text-center -->
@@ -193,22 +193,22 @@
                           <td class="text-center"><?php echo $var6; ?></td> 
                           <td class="text-center"><?php echo $var7; ?></td> 
 
-                          <div id="MODAL_MATRICULA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="MODAL<?php echo $var1; ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMESTUDIANTE" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Matricular Tutoria</h4>
+                                    <h4 class="text-center">Matricular catequesis</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                  <strong>información de la clase</strong>
+                                  <strong>información de la catequesis</strong>
                                     </hr> 
                                     <div class="row"><!-- INICIO PRIMERA ROW --> 
-                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="ID_CARGA" id="ID_CARGA"><!--este es el importante -->
+                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="CODIGO_CARGA" id="ID_CARGA"><!--este es el importante -->
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">TUTOR</label>
+                                          <label for="txtcodigo_persona">CATEQUISTA</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
@@ -226,8 +226,8 @@
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">TUTORIA</label>
-                                          <input hidden type="text" name="tutoria" value ="<?php echo $var8; ?>" >
+                                          <label for="txtcodigo_persona">CATEQUESIS</label>
+                                          <input hidden type="text" name="CATEQUESIS" value ="<?php echo $var8; ?>" >
                                           <input  type="text"  value ="<?php echo $var1; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
                                         </div>
@@ -250,7 +250,7 @@
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit"  name="AGREGAR_MATRICULA" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Matricular</button>      
+                                    <button type="submit"  name="AGREGAR_MATRICULA_ESPIRITUAL" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Matricular</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -273,7 +273,7 @@
            <div class="col-md-12">
             <!-- boton para descargar el reporte -->
             <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
-            <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_estudiante ?>">
+            <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_es ?>">
             <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
             </form>
            </div><!-- cierre del col-md-12 -->
@@ -282,7 +282,7 @@
 
           <div class="card">
             <div class="card-header text-center" style="background-color:#3FCDFD " id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">ClASES MATRICULADAS </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">CATEQUESIS MATRICULADAS </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -292,8 +292,8 @@
                       <thead>
                         <tr>
                           <th class="text-center"> ACCION</th> 
-                          <th class="text-center"> ASIGNATURA</th>
-                          <th class="text-center"> NOMBRE DEL TUTOR</th>
+                          <th class="text-center">CATEQUESIS</th>
+                          <th class="text-center"> NOMBRE DEL CATEQUISTA</th>
                           <th class="text-center"> MODALIDAD</th>
                           <th class="text-center"> Seccion</th>
                           <th class="text-center"> Hora</th>                     
@@ -310,8 +310,8 @@
                 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
                 AND ma.CODIGO_CARGA = c.CODIGO_CARGA
                 AND c.CODIGO_SECCION = se.CODIGO_SECCION
-                AND t.CODIGO_AREA = 1
-                AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante';";
+                AND t.CODIGO_AREA = 4
+                AND ma.CODIGO_ESTUDIANTE = '$codigo_es'; ";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
@@ -321,11 +321,10 @@
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
                   $var6 = $row['CODIGO_CARGA'];
-                  //$var7 =  $row['CODIGO_TUTORIA'];
                   $var8 =  $row['CODIGO_MATRICULA'];
                   $var9 =  $row['CODIGO_ESTUDIANTE'];
+                  ?>
 
-                        ?>
                         <tr>
                           <td>
                             <div class="text-center" >
@@ -342,7 +341,7 @@
                           <td class="text-center"><?php echo $var3; ?></td> 
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var5; ?></td>
-                          <!-- <td class="text-center"><?php echo $var7; ?></td>   -->
+                        
 
                           <div id="ELIMINAR<?php echo $var8 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
