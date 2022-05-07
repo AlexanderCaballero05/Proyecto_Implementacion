@@ -14,7 +14,7 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>LISTA DE TUTORIAS <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ACADEMICO ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
+              <h4>LISTA DE TUTORIAS  <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ESPIRITUAL ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -116,7 +116,7 @@
                                           if($row > 0){
                                           $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                           $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                          $evaluar_permiso->execute(array($usuariomo, '24'));
+                                          $evaluar_permiso->execute(array($usuariomo, '53'));
                                           $row1=$evaluar_permiso->fetchColumn();
                                             $permiso_registrar =$row1;             
                                           }

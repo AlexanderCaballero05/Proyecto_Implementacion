@@ -199,6 +199,7 @@ class PDF extends FPDF {
 	FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
 	WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
 	AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA AND c.CODIGO_SECCION = s.CODIGO_SECCION
+	AND t.CODIGO_AREA  = 1 
 	AND c.FECHA_CREACION BETWEEN '$desde' AND '$hasta'; ";
 	
 	$result = $conexion->prepare($strquery);
@@ -244,7 +245,7 @@ $pdf->SetWidths(array(10,30, 32, 40, 55,25,30,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1,$data[$i]['SECCION'], ucwords(strtolower(utf8_decode($data[$i]['MODALIDAD']))),ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_COMPLETO']))), utf8_decode($data[$i]['HORA']), $data[$i]['FECHA_INICIO'], $data[$i]['FECHA_FINAL']   ),20 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['SECCION']))), ucwords(strtolower(utf8_decode($data[$i]['MODALIDAD']))),ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_COMPLETO']))), utf8_decode($data[$i]['HORA']), $data[$i]['FECHA_INICIO'], $data[$i]['FECHA_FINAL']   ),20 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -123,6 +123,8 @@ session_start();
          $_GET["ruta"] == "crudparametrosusuario" ||
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "crudTutoriasTutor" ||
+         $_GET["ruta"] == "crudTutorEspiritual" ||
+    
          $_GET["ruta"] == "area" ||
          $_GET["ruta"] == "procesoPreClinica" ||
          $_GET["ruta"] == "crudPreClinica" ||
@@ -160,11 +162,14 @@ session_start();
          $_GET["ruta"] == "crudPermisos" ||
          $_GET["ruta"] == "crudpreguntas" ||
          $_GET["ruta"] == "procesoMatricula" ||
+         $_GET["ruta"] == "procesoMatriculaEspiritual" ||
          $_GET["ruta"] == "crudMatricula" ||
          $_GET["ruta"] == "crudAlumnosMatricula" ||
          $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
+         $_GET["ruta"] == "crudCargaEspiritual" ||
+         
 
          $_GET["ruta"] == "crudTranstornos" ||
          $_GET["ruta"] == "crudPersonaEspecialidad" ||
