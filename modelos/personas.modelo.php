@@ -20,7 +20,7 @@
              $tipo_persona = ($_POST['tipo_persona']);
              $sexo = ($_POST['sexo']);
              $telefono = ($_POST['telefono']);
-             $otro_telefono = ($_POST['otro_telefono']);
+            // $otro_telefono = ($_POST['otro_telefono']);
              $correo = ($_POST['correo']);
              $direccion = ($_POST['direccion']);
              $nombre_usuario = ($_POST['nombre_usuario']);
@@ -181,7 +181,6 @@
                             return false;
                             }//fin regisrtrar enfermeros
 
-
                           }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes(porque se les pego la gana hacerlos estudiantes :v)
                            try{
                               $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
@@ -197,7 +196,7 @@
                               $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO(CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
                               $resultado2=$conn->query($querycorreo);
                               //insertar el usuario para el estudiante
-                              $rol ="8";
+                              $rol ="8";// rol del estudiante
                               $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena');";
                               $resultado3 = $conn->query($query_user);
 
@@ -229,7 +228,7 @@
                             }
                             //CODIGO PARA INSERTAR UN MEDICO CON SU ESPECIALIDAD
                           }elseif( ($tipo_persona == "5") ){
-                            $rol = "5";
+                            $rol = "5";//rol de medico
                             try{
                               $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
@@ -276,7 +275,7 @@
                               exit;
                             }else{
                               try{
-                                $rol= "4";
+                                $rol= "4";//rol del psicologo
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena','$especialidad_psicologo');" ;
@@ -295,9 +294,7 @@
                               echo $e->getMessage(); 
                               return false;
                               }
-
                             }
-                            
                           }else if($tipo_persona == "8"){//para insertar un catequiste,comenta Diana Rut :v
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
@@ -310,7 +307,7 @@
                               exit;
                             }else{
                               try{
-                                $rol ="8";
+                                $rol ="6";//rol de catequista
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
                                 '$estado','$rol','$contrasena','$especialidad_catequista');" ;
@@ -457,7 +454,7 @@
           return false;
           }
   }//if padre
-}//if padre del padre :v
+}
 
   
   //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR,no funciona del todo bien :v asi que si pueden tocar
@@ -506,6 +503,3 @@
     }
   }
 ?> 
-
-
-  
