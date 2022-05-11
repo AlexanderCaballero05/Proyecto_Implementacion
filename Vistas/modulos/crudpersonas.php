@@ -12,7 +12,6 @@ include_once "conexion3.php";
       window.open(this.href,'_self');
     }
 </script>
-
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -25,7 +24,7 @@ include_once "conexion3.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO PERSONAS</h4>
+       <h4>MANTENIMIENTO PERSONAS</h4>
     </div>
     <section class="content">
      <div class="card"> 
@@ -51,9 +50,7 @@ include_once "conexion3.php";
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
@@ -77,6 +74,35 @@ include_once "conexion3.php";
                     <?php 
                       }
                      ?> 
+                     <div class="row"><!--Inicio del codigo del filtrado de personas -->
+                         <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Filtrar por:</label>
+                        <div class="col-sm-3">
+                        <?php 
+                            $query = "SELECT * FROM tbl_roles WHERE CODIGO_TIPO_ROL BETWEEN 1 AND 8;";
+                            $resul=$conn->query($query);                
+                        ?>
+                        <form method="POST" action="crudpersonas">
+                            <select class="form-control" id="buscar" required>
+                               <option selected disabled value="" >--Seleccione--</option>
+                               <?php 
+                                if ($resul->num_rows > 0) {
+                                    while($row = $resul->fetch_assoc()) { 
+                                    $user = $row['CODIGO_TIPO_PERSONA'];
+                                    $nombre = $row['NOMBRE'];
+                                ?>  
+                                <option value="<?php echo $user?>" ><?php echo $nombre;?></option>
+                                <?php 
+                                } 
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-1">
+                          <button type="submit"  name="generar" class=" form-control btn btn-info b"> Generar</button>
+                        </div>
+                     </form>
+                     </div>
+                     <br>
                     <div class="card">
                         <div class="card-header text-center" >
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -106,7 +132,7 @@ include_once "conexion3.php";
                                         </tr>
                                     </thead>
                                     <tbody>
-                     <?php
+                        <?php
                         $query = "SELECT p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
                         FROM TBL_PERSONA p, tbl_telefono tl, tbl_tipo_persona t, tbl_correo_electronico c
                         WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
@@ -128,87 +154,61 @@ include_once "conexion3.php";
                             $var13 = $row ['NUMERO_TELEFONO'];
                             $var14 = $row ['CORREO_PERSONA'];
                             $var18 = $row['DIRECCION'];
-                        ?>
-
-
-                                <?php
+                            ?>
+                            <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
                                 $evaluar_permiso_actualizar->execute(array($usuariomo, '25'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
-                               
                             }
                             ?> 
-
-
-
                             <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
                                 $evaluar_permiso_eliminar->execute(array($usuariomo, '25'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
                             ?> 
-
                                         <tr>
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-
                                                        <?php
                                                         if($permiso_eliminar == 'SI')
                                                         {
                                                         ?>
-
-                                                       
-
                                                         <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                                             <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO"
-                                                                type='button' class=" form-control btn btn-danger"
-                                                                data-dismiss="modal"><i
-                                                                    class="nav-icon fas fa-trash"></i>
+                                                                type='button' class=" form-control btn btn-danger"data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                                             </button>
                                                         </a>
-
-
                                                         <?php
-                                                            }
+                                                        }
                                                             ?>
-
-
                                                             <?php 
                                                             if ($permiso_actualizar == 'SI')
                                                             {
                                                             ?>
                                                         <a href="#EDITARPERSONA<?php echo $var1; ?>"
                                                             data-toggle="modal">
-                                                            <button type='button' style="color:white;"
-                                                                class=" form-control btn btn-warning"><span>
-                                                                    <i
-                                                                        class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                                            <button type='button' style="color:white;" class=" form-control btn btn-warning"><span><i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                         </a>
                                                          <a>
                                                         <form method="post"  action="Reportes_Prosecar/reportePersonaIndividual.php" target="_blank"> 
@@ -217,9 +217,8 @@ include_once "conexion3.php";
                                                         </form>
                                                         </a>
                                                         <?php
-                                                            }
-                                                            ?>
-
+                                                        }
+                                                        ?>
                                                     </div>
                                                 </div><!-- final del text-center -->
                                             </td>
@@ -405,20 +404,16 @@ include_once "conexion3.php";
                                                                     include "conexionpdo.php";
                                                                     $usuario=$_SESSION['vario'];
                                                                     //Evaluo si existe el tipo de Rol
-                                                                    $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                                                    FROM tbl_usuario 
-                                                                                                    WHERE NOMBRE_USUARIO = (?);");
+                                                                    $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                                                                     $evaluar_usuario->execute(array($usuario));
                                                                     $row=$evaluar_usuario->fetchColumn();
                                                                     if($row > 0){
                                                                         $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                                                         //llamar al procedimiento almacenado
                                                                         $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
                                                                         $evaluar_permiso_actualizar->execute(array($usuariomo, '14'));
                                                                         $row1=$evaluar_permiso_actualizar->fetchColumn();
                                                                         $permiso_actualizar =$row1; 
-                                                                    
                                                                     }
                                                                     ?>
                                                                    <!-- fin del codigo para sustraer el permiso de actualizar-->
@@ -426,15 +421,12 @@ include_once "conexion3.php";
                                                                     if($permiso_actualizar = 'SI'){
                                                                     ?>
                                                                 <button type="submit" id="EDIT_PERSONA"
-                                                                    name="EDIT_PERSONA" class="btn btn-success"><span>
-                                                                <i
-                                                                class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                                                    name="EDIT_PERSONA" class="btn btn-success"><span><i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                                                                 <?php 
                                                                 }
                                                                 ?> 
                                                             </div>
                                                             <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                                          
                                                         </form>
                                                 </div>
                                                 </div>
@@ -470,9 +462,7 @@ include_once "conexion3.php";
                                                                 include "conexionpdo.php";
                                                                 $usuario=$_SESSION['vario'];
                                                                 //Evaluo si existe el tipo de Rol
-                                                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                                                FROM tbl_usuario 
-                                                                                                WHERE NOMBRE_USUARIO = (?);");
+                                                                $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                                                                 $evaluar_usuario->execute(array($usuario));
                                                                 $row=$evaluar_usuario->fetchColumn();
                                                                 if($row > 0){
@@ -488,8 +478,7 @@ include_once "conexion3.php";
                                                                <?php 
                                                                 if($permiso_eliminar = 'SI'){
                                                                 ?>
-                                                                <button type="submit" name="ELIMINAR_PERSONA" id="ELIMINAR"
-                                                                    class="btn btn-primary">Si,eliminar</button>
+                                                                <button type="submit" name="ELIMINAR_PERSONA" id="ELIMINAR" class="btn btn-primary">Si,eliminar</button>
                                                                     <?php 
                                                                 }
                                                                 ?> 
@@ -512,7 +501,6 @@ include_once "conexion3.php";
                             </div>
                             <!--fin del div de responsivi -->
                         </div> <!-- /.card-body -->
-
                     </div><!-- fINAL DEL card PRIMARY -->
                 </div>
 
@@ -523,12 +511,6 @@ include_once "conexion3.php";
         </div>
      </div>
     </section><!-- FINAL SECTION -->
-
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-
 
 
 
@@ -547,12 +529,10 @@ include_once "conexion3.php";
 </div><!-- ./wrapper -->
 
 
-
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
+   //funcion de cambiar el idioma
   $(document).ready( function () {
       $('#tabla_personas').DataTable({
-
         language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -577,38 +557,6 @@ include_once "conexion3.php";
       })
   } );
 </script>
-
-
-
-<script type="text/javascript">
-$(function() {
-    $("#ESTADOUSUARIO").change(function() {
-        if ($(this).val() === "4") {
-            document.getElementById('CONUSUARIO').disable = true;
-
-        } else {
-            document.getElementById('CONUSUARIO').disable = false;
-
-        }
-    });
-}); //este codigo si me costo 
-</script>
-
-
-
-<script type="text/javascript">
-//funcion de mostrar el estilo de la datatable
-$(function() {
-    $("#cbx_persona").change(function() {
-        if ($(this).val() === "2") {
-            document.getElementById("c").style.display = "block";
-        } else {
-            document.getElementById("c").style.display = "none";
-        }
-    });
-});
-</script>
-
 
 <!-- funciones del sistema -->
 <script>
@@ -690,14 +638,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var direccion=document.getElementById("direccion"); //el nombre del id del campo y cambiar la variable 
     direccion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var p_nombre = document.getElementById('p_nombre'); /// la variable se puede poner con el mismo nombre del id 
         p_nombre.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -707,14 +653,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var p_nombre=document.getElementById("p_nombre"); //el nombre del id del campo y cambiar la variable 
     p_nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var s_nombre = document.getElementById('s_nombre'); /// la variable se puede poner con el mismo nombre del id 
         s_nombre.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -724,15 +668,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var s_nombre=document.getElementById("s_nombre"); //el nombre del id del campo y cambiar la variable 
     s_nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
-     
     window.onload = function() {
         var p_apellido = document.getElementById('p_apellido'); /// la variable se puede poner con el mismo nombre del id 
         p_apellido.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -742,14 +683,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var p_apellido=document.getElementById("p_apellido"); //el nombre del id del campo y cambiar la variable 
     p_apellido.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var s_apellido = document.getElementById('s_apellido'); /// la variable se puede poner con el mismo nombre del id 
         s_apellido.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -759,14 +698,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var s_apellido=document.getElementById("s_apellido"); //el nombre del id del campo y cambiar la variable 
     s_apellido.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var dni = document.getElementById('dni'); /// la variable se puede poner con el mismo nombre del id 
         dni.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -776,14 +713,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var dni=document.getElementById("dni"); //el nombre del id del campo y cambiar la variable 
     dni.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var correo = document.getElementById('correo'); /// la variable se puede poner con el mismo nombre del id 
         correo.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -793,14 +728,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var correo=document.getElementById("correo"); //el nombre del id del campo y cambiar la variable 
     correo.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
     window.onload = function() {
         var telefono = document.getElementById('telefono'); /// la variable se puede poner con el mismo nombre del id 
         telefono.onpaste = function(e) { // cambiar la variable  y no se puede repetir las variables 
@@ -810,15 +743,12 @@ function quitarespacios(e) {
         e.preventDefault();
       }
     }
-
     var telefono=document.getElementById("telefono"); //el nombre del id del campo y cambiar la variable 
     telefono.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
     keyboardEvent.preventDefault();
     });
-
-  
   </script>
   
 
