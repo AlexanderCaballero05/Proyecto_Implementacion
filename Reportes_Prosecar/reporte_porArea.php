@@ -1,5 +1,9 @@
 <?php
+session_start();
+$area1 = $_SESSION['area'];
+?>
 
+<?php
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
 
@@ -8,7 +12,6 @@ class PDF extends FPDF {
 // Cabecera de página
 
 	function Header() {
-		date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
@@ -16,12 +19,14 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(115);
-		$this->Cell(100, 8, utf8_decode('Reporte general de  personas'));
+		$this->SetX(125
+	
+	);
+		$this->Cell(170, 8, utf8_decode('Reporte de cita'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
-		$this->Cell(45, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -30,29 +35,16 @@ class PDF extends FPDF {
 
 	function Footer() {
 	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 10);
+	$this->SetFont('helvetica', 'B', 9);
 	$this->SetY(-18);
 	$this->SetX(28);
-	$this->Cell(100,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 	
-	$this->SetX(6);
-	$this->Line(6,200,290,200);
+	$this->SetX(27);
+	$this->Line(27,197,270,197);
 	
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
-	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
 
 	}
 
@@ -106,20 +98,17 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 10);
-			$this->SetFont('Helvetica', 'B', 10);
-			$this->Cell(11, 11, 'N', 1, 0, 'C', 1); 
-			$this->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
-			$this->Cell(28, 11, 'DNI', 1, 0, 'C', 1);
-			$this->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
-			$this->Cell(32, 11, 'Lugar Nacimiento', 1, 0, 'C', 1);
-			$this->Cell(30, 11, 'Direccion', 1, 0, 'C', 1);
-			$this->Cell(15, 11, 'Genero', 1, 0, 'C', 1);
-			$this->Cell(20, 11, 'Telefono', 1, 0, 'C', 1);
-			$this->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);
-			$this->Cell(45, 11, 'Correo', 1, 1, 'C', 1);
+			$this->SetFont('Helvetica', 'B', 15);
+			$this->SetFont('Helvetica', 'B', 12);
+			$this->Cell(25, 12, 'Codigo', 1, 0, 'C', 1);
+			$this->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
+			$this->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
+			$this->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
+			$this->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Area', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
-		
+			
 		}
 
 		if ($setX == 100) {
@@ -193,23 +182,23 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) as PERSONA, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
-	FROM TBL_PERSONA p, tbl_telefono tl, tbl_tipo_persona t, tbl_correo_electronico c
-	WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
-	AND tl.CODIGO_PERSONA = p.CODIGO_PERSONA
-	AND c.CODIGO_PERSONA = p.CODIGO_PERSONA 
-    AND p.CODIGO_PERSONA  > 1;";
+	$strquery ="SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+	MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as NOMBRE_ESTADO, ar.NOMBRE as NOMBRE_AREA, espe.NOMBRE as nombre_especialidad
+	FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe                                   
+	WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
+	AND ic.AREA_CITA = ar.CODIGO_AREA
+	AND ic.CODIGO_ESTADO = est.CODIGO_ESTADO
+	AND IC.AREA_CITA = a.CODIGO_AREA
+	AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
+	AND E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD
+	AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA  
+	AND ic.AREA_CITA = '$area1';";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
-
 // Creación del objeto de la clase heredada
 $pdf = new PDF(); //hacemos una instancia de la clase
 $pdf->AliasNbPages();
@@ -218,42 +207,34 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(6);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
-$pdf->SetFont('Helvetica', 'B', 10);
-$pdf->Cell(11, 11, 'N', 1, 0, 'C', 1); 
-$pdf->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
-$pdf->Cell(28, 11, 'DNI', 1, 0, 'C', 1);
-$pdf->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
-$pdf->Cell(32, 11, 'Lugar Nacimiento', 1, 0, 'C', 1);
-$pdf->Cell(30, 11, 'Direccion', 1, 0, 'C', 1);
-$pdf->Cell(15, 11, 'Genero', 1, 0, 'C', 1);
-$pdf->Cell(20, 11, 'Telefono', 1, 0, 'C', 1);
-$pdf->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);
-$pdf->Cell(45, 11, 'Correo', 1, 1, 'C', 1);
-
+$pdf->SetFont('Helvetica', 'B', 12);
+$pdf->Cell(25, 12, 'Codigo', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
+$pdf->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Area', 1, 1, 'C', 1);
 
 
 
 
 // -------TERMINA----ENCABEZADO------------------
-
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
 $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 
 $pdf->SetFont('Arial', '', 10);
+
 //El ancho de las celdas
-$pdf->SetWidths(array(11,42,28,32,32,30,15,20,30,45)); //cambiar
+$pdf->SetWidths(array(25, 25, 25, 60,50,30,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['PERSONA']))),ucwords(strtolower(utf8_decode($data[$i]['DNI']))),ucwords(strtolower(utf8_decode($data[$i]['FECHA_NACIMIENTO'])))
-    ,ucwords(strtolower(utf8_decode($data[$i]['LUGAR_NACIMIENTO']))),ucwords(strtolower(utf8_decode($data[$i]['DIRECCION'])))  
-    ,ucwords(strtolower(utf8_decode($data[$i]['SEXO']))) ,ucwords(strtolower(utf8_decode($data[$i]['NUMERO_TELEFONO']))) 
-    ,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['CORREO_PERSONA']))) ,),6); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['FECHA_CITA'], $data[$i]['HORARIO'],ucwords(strtolower(utf8_decode($data[$i]['PACIENTE']))), ucwords(strtolower(utf8_decode($data[$i]['MEDICO']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_ESTADO']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_AREA']))),   ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
 
 $pdf->Output();
-?>

@@ -10,9 +10,12 @@
 <div class="content-wrapper">
   <div class="content-header">
   <div class="text-center">
-      <h2>EXPEDIENTE PSICÓLOGICO UNICO</h2>
+      
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
+    <section class="content-header text-xl-center mb-3 btn-light">
+              <h4>EXPEDIENTE PSICOLOGICO UNICO </h4>
+        </section>
   </div>
   
   
@@ -235,8 +238,8 @@
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
-
-  <!-- Button trigger modal -->
+</div>
+</body>
 
 
 <!-- Modal -->

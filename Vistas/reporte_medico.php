@@ -78,6 +78,11 @@ include('conexion2.php');
     border: 1px solid #404141;
     
   }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
 
   .c2{
     width: 706px;
@@ -93,10 +98,11 @@ include('conexion2.php');
     <title>Reporte paciente</title>
   </head>
   <body>
-    <header>
+  <header>
+    <img src="LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 19px;">Reporte medico del paciente</p>
-      <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
+      <p  style="text-align: center; font-size: 20px;">Reporte medico del paciente</p>
+       <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
      <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
@@ -129,7 +135,7 @@ include('conexion2.php');
             }
       ?>      
       <legend>  Datos Personales Paciente</legend><br>
-      <label  ><b>Nombre completo:</b> </label><?php  echo ucwords(strtolower($nombre_pa)); ?> <br>
+      <label  ><b>Nombre completo:</b> </label><?php  echo utf8_decode(ucwords(strtolower($nombre_pa))); ?> <br>
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
       <label  ><b>Codigo de la cita: </b></label><?php echo $codigo_cita;?><br>
@@ -177,7 +183,7 @@ include('conexion2.php');
          <tr>
          <td ><?php echo utf8_decode(strtolower($var1)); ?></td>
          <td ><?php echo utf8_decode(strtolower($var2)); ?></td>
-         <td ><?php echo utf8_decode(strtolower($var3)); ?></td>
+         <td ><?php echo utf8_decode($var3); ?></td>
          <td ><?php echo utf8_decode(strtolower($var4)); ?></td>
          <td ><?php echo utf8_decode(strtolower($var5));?></td>
          <td ><?php echo utf8_decode(strtolower($var6));?></td>
@@ -269,12 +275,12 @@ include('conexion2.php');
             $evolucion = $row['EVOLUCION'];
             $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
       ?>
-       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; "><label style="font-size: 18px;">Información de la consulta<?php echo $fecha;?></label></div><br>
+       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Información de la consulta<?php echo $fecha;?></label></div><br>
        <div>
-          <div class="c" ><label><b>Sintomas: </b></label> <?php  echo ucwords(strtolower($sintomas)) ?> </div>
-          <div class="c" > <label><b>Diagnostico Ingreso: </b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))?></div>
-          <div class="c" > <label><b>Evolución: </b></label><?php echo  ucwords(strtolower($evolucion)) ?></div>
-          <div class="c" > <label><b>Diagnostico Egreso: </b></label><?php echo ucwords(strtolower($diagnostico_egreso))?></div>
+          <div class="c" ><label><b>Sintomas: </b></label> <?php  echo (strtolower($sintomas)) ?> </div>
+          <div class="c" > <label><b>Diagnostico Ingreso: </b></label> <?php  echo (strtolower($diagnostico_ingreso))?></div>
+          <div class="c" > <label><b>Evolución: </b></label><?php echo  (strtolower($evolucion)) ?></div>
+          <div class="c" > <label><b>Diagnostico Egreso: </b></label><?php echo (strtolower($diagnostico_egreso))?></div>
        </div>
       <?php 
        } 
@@ -302,15 +308,15 @@ include('conexion2.php');
         $observacion = $row['OBSERVACIONES'];
         ?>
       <div id="caja3">
-            <legend style="background-color: #ffff; color:#000000;">Datos medicamentos recetados</legend><br><hr>
-            <div class="c2" ><label><b>Nombre del medicamento: </b></label>
-              <?php  echo ucwords(strtolower($medicamentos)) ?>
+            <legend style="background-color: #ffff; color:#000000;">Datos de medicamentos </legend><br><hr>
+            <div class="c" ><label><b>Nombre del medicamento: </b></label>
+              <?php  echo utf8_decode(strtolower($medicamentos)) ?>
             </div>
-            <div class="c2" ><label><b>Indicaciones del medicamento: </b></label>
-              <?php  echo ucwords(strtolower($indicaciones)) ?>
+            <div class="c" ><label><b>Indicaciones del medicamento: </b></label>
+              <?php  echo utf8_decode(strtolower($indicaciones)) ?>
             </div>
-            <div class="c2" ><label><b>Observaciones del medicamento: </b></label>
-              <?php  echo ucwords(strtolower($observacion));?>
+            <div class="c" ><label><b>Observaciones del medicamento: </b></label>
+              <?php  echo utf8_decode(strtolower($observacion));?>
             </div>
       </div><br>
       <?php
@@ -339,16 +345,15 @@ include('conexion2.php');
              $indicacion = $row['indicaciones'];
              $observa = $row['OBSERVACIONES'];
              ?>
-          
-           <p>Datos examenes recetados</p><hr><br>
+           <p>Datos de examenes </p><hr><br>
             <div class="c2"><label><b>Nombre del examen: </b></label>
-              <?php  echo ucwords(strtolower($examen)) ?>
+              <?php  echo utf8_decode(strtolower($examen)) ?>
             </div>
             <div class="c2"><label><b>Indicaciones del examen: </b></label>
-              <?php  echo ucwords(strtolower($indicaciones)) ?>
+              <?php  echo utf8_decode(strtolower($indicaciones)) ?>
             </div>
             <div class="c2"><label><b>Observaciones del examen: </b></label>
-              <?php  echo ucwords(strtolower($observa));?>
+              <?php  echo utf8_decode(strtolower($observa));?>
             </div>
       </div>
       <?php 

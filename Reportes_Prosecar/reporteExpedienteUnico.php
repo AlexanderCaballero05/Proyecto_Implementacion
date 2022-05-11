@@ -15,8 +15,8 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',14);
-		$this->SetX(120);
-		$this->Cell(130, 12, utf8_decode('Reporte Expediente Unico'));
+		$this->SetX(108);
+		$this->Cell(130, 12, utf8_decode('Reporte Expediente Unico pacientes'));
 		$this->SetX(5);
 		$this->Ln(5);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
@@ -41,17 +41,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
 
 
 	}
@@ -107,11 +96,11 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 12);
-            $this->Cell(10, 12, 'N', 1, 0, 'C', 1);
-            $this->Cell(40, 12, 'Paciente', 1, 0, 'C', 1);
-            $this->Cell(60, 12, 'Antecedentes Familiares', 1, 0, 'C', 1);
-            $this->Cell(60, 12, 'Antecedentes Personales', 1, 0, 'C', 1);
-            $this->Cell(60, 12, 'Antecedentes Clinicos', 1, 1, 'C', 1);
+            $this->Cell(12, 12, 'N', 1, 0, 'C', 1);
+            $this->Cell(65, 12, 'Paciente', 1, 0, 'C', 1);
+            $this->Cell(62, 12, 'Antecedentes Familiares', 1, 0, 'C', 1);
+            $this->Cell(62, 12, 'Antecedentes Personales', 1, 0, 'C', 1);
+            $this->Cell(62, 12, 'Antecedentes Clinicos', 1, 1, 'C', 1);
                         
 		
 		}
@@ -194,11 +183,6 @@ class PDF extends FPDF {
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
-
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
 // Creación del objeto de la clase heredada
@@ -209,14 +193,14 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(40);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Paciente', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, 'Antecedentes Familiares', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, 'Antecedentes Personales', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, 'Antecedentes Clinicos', 1, 1, 'C', 1);
+$pdf->Cell(12, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(65, 12, 'Paciente', 1, 0, 'C', 1);
+$pdf->Cell(62, 12, 'Antecedentes Familiares', 1, 0, 'C', 1);
+$pdf->Cell(62, 12, 'Antecedentes Personales', 1, 0, 'C', 1);
+$pdf->Cell(62, 12, 'Antecedentes Clinicos', 1, 1, 'C', 1);
 // -------TERMINA----ENCABEZADO------------------
 
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
@@ -225,11 +209,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 40, 60, 60, 60)); //???
+$pdf->SetWidths(array(12, 65, 62, 62, 62)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['CODIGO_PERSONA']))), $data[$i]['ANTECEDENTES_FAMILIARES'], $data[$i]['ANTECEDENTES_PERSONALES'], $data[$i]['ANTECEDENTES_CLINICOS']   ),40 ); 
+	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['CODIGO_PERSONA']))), utf8_decode($data[$i]['ANTECEDENTES_FAMILIARES']), utf8_decode($data[$i]['ANTECEDENTES_PERSONALES']), utf8_decode($data[$i]['ANTECEDENTES_CLINICOS'])   ),20 ); 
 		
 	
 }   

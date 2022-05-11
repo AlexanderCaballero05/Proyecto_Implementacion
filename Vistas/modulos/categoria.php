@@ -69,7 +69,7 @@
                <form method="POST" class="needs-validation" novalidate id="form">
                   <div class="card-body">
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> <strong>Datos Generales persona</strong></h2>
+                      <h2 class="card-title"> Datos Generales persona</h2>
                     </div></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
