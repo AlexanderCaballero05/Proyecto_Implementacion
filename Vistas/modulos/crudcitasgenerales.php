@@ -386,14 +386,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
-                                                $var1 = $row['CODIGO_CITA'];
-                                                $var2 = $row['FECHA_CITA'];
-                                                $var3 = $row['HORARIO'];
-                                                $var4 = $row['PACIENTE'];
-                                                $var5 = $row['MEDICO'];
-                                                $var6 = $row['nombre_estado'];
-                                                $var7 = $row['nombre_area'];
-                                                $var8 = $row['nombre_especialidad'];
+                                            $var1 = $row['CODIGO_CITA'];
+                                            $var2 = $row['FECHA_CITA'];
+                                            $var3 = $row['HORARIO'];
+                                            $var4 = $row['PACIENTE'];
+                                            $var5 = $row['MEDICO'];
+                                            $var6 = $row['nombre_estado'];
+                                            $var7 = $row['nombre_area'];
+                                            $var8 = $row['nombre_especialidad'];
                                         ?>
                                                 <tr>
                                                     <td>

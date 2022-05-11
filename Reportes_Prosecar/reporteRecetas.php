@@ -203,13 +203,6 @@ include('conexion2.php');
         }
       ?>
     
-
-
-     
-
-   
-   
-
    </main>
 
     <!--Elaborado por Diana Rut  -->
