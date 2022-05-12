@@ -106,6 +106,9 @@ session_start();
          $_GET["ruta"] == "crudpersonas" ||
          $_GET["ruta"] == "crudobjetos" ||
          $_GET["ruta"] == "crudtiposocioeconomico" ||
+         $_GET["ruta"] == "historialmatriculaestudiante" ||
+         $_GET["ruta"] == "citasespiritualesestudiante" ||
+         $_GET["ruta"] == "citaspsicologicaestudiante" ||
          $_GET["ruta"] == "estado" ||
          $_GET["ruta"] == "crudfamiliares" ||
          $_GET["ruta"] == "crudcitasgenerales" ||
@@ -147,13 +150,8 @@ session_start();
          $_GET["ruta"] == "expedienteMedico" ||
          $_GET["ruta"] == "expedientePsicologico" ||
          $_GET["ruta"] == "listadoTutoriasMatriculadas" ||
-         
-
          $_GET["ruta"] == "crudCitasPsicologicas" ||
-         
          $_GET["ruta"] == "crudPruebapsicometrica" ||
-
-
          $_GET["ruta"] == "mostrarPreguntasUsuarios" ||
          $_GET["ruta"] == "categoria" ||
          $_GET["ruta"] == "crudPreguntasUsuarios" ||
@@ -165,7 +163,7 @@ session_start();
          $_GET["ruta"] == "crudtipopersona" ||
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
-
+         $_GET["ruta"] == "matriculaestudiantes" ||
          $_GET["ruta"] == "crudTranstornos" ||
          $_GET["ruta"] == "crudPersonaEspecialidad" ||
          $_GET["ruta"] == "crudExpedientePsicoUnico" ||
@@ -179,7 +177,7 @@ session_start();
          $_GET["ruta"] == "procesoConsulta" ||
          $_GET["ruta"] == "crudconsultashistoricas" ||
          $_GET["ruta"] == "crudAparienciaFisica" ||
-       
+         $_GET["ruta"] == "citasestudiantes" ||
          $_GET["ruta"] == "crudExamenesMedicos" ||
          $_GET["ruta"] == "crudsintomasneuroticos" ||
          $_GET["ruta"] == "crudPermisos"){

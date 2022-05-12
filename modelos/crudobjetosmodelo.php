@@ -70,7 +70,6 @@
         $edinombre_objeto = ($_POST['editnombre']);
         $edi_descripcion = ($_POST['editdescripcion']);
         $fecha_modificacion= date('Y-m-d');
-        session_start();
         $user = $_SESSION['vario'];
         try {
          $sentencia = $db->prepare("SELECT * FROM tbl_objeto where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");

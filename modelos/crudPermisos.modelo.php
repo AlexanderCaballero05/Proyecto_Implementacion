@@ -1,12 +1,10 @@
 <?php
   include_once "modelos/conexion.php";
   include_once "modelos/Conexionpdo.php";
-  
 ?>
 
 <?php 
 if(isset($_POST['PERUSUARIO'])){
-  session_start();
     $usuario=$_SESSION['vario'];
     
     try{

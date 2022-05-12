@@ -7,7 +7,6 @@
 ?>
                  
 <head>
-
 </head>
 <div class="content-wrapper">
   <div class="content-header">
@@ -31,7 +30,6 @@
         <div class="card-body">
                  <?php
                     $usuario= $_SESSION['vario'];
-
                     //Consulta que trae el codigo del usuario
                     $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
                     FROM tbl_usuario u, tbl_persona p 
@@ -48,8 +46,6 @@
          <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_informe">
         <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
         </form>
-
-
           <div class="row">
             <div class="col-md-12">
             <form  method="POST">
@@ -74,12 +70,9 @@
                       </tr>
                     </thead>
                     <tbody>
-
-                    
-
-                      <?php
-                          $codigo_carga  = $_SESSION['carga'];
-                      ?>
+                    <?php
+                        $codigo_carga  = $_SESSION['carga'];
+                    ?>
                     <?php
                       $query = "SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA
                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
@@ -106,10 +99,7 @@
                           $var4 = $row['ANIO'];
                           $var5 = $row['PERIODO'];
                           $var6 = $row['ESTADO_MATRICULA'];
-                          $codigo_matricula = $row['CODIGO_MATRICULA'];
-
-                          
-                          
+                          $codigo_matricula = $row['CODIGO_MATRICULA'];                          
                       ?>
                       <tr>
                         <td class="text-center"><?php echo $contador; ?></td>
@@ -135,7 +125,7 @@
                                     if($row > 0){
                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                     $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                    $evaluar_permiso->execute(array($usuariomo, '24'));
+                                    $evaluar_permiso->execute(array($usuariomo, '23'));
                                     $row1=$evaluar_permiso->fetchColumn();
                                       $permiso_registrar =$row1;             
                                     }
