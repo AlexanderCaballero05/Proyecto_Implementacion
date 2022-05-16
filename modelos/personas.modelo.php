@@ -9,7 +9,7 @@
   if(isset($_POST['identidad'])){
      try{
          if(isset($_POST['GUARDAR'])){
-            $usuario = "Administrador";
+             $usuario = $_SESSION['vario'];
              $identidad = ($_POST['identidad']);
              $primer_nombre = ($_POST['primer_nombre']);
              $segundo_nombre = ($_POST['segundo_nombre']);
@@ -30,6 +30,7 @@
              $especialidad_medico = ($_POST['medico']);   
              $especialidad_psicologo = ($_POST['psicologo']); 
              $especialidad_catequista =   ($_POST['catequista']); 
+             $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
             try{ 
                 $consulta = $db->prepare("SELECT DNI FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
                 $consulta->execute(array($identidad));
@@ -126,7 +127,7 @@
                                 $rol= "2";
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena');" ;
+                                '$estado','$rol','$contrasena','$foto');" ;
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
@@ -197,10 +198,10 @@
                               $resultado2=$conn->query($querycorreo);
                               //insertar el usuario para el estudiante
                               $rol ="8";// rol del estudiante
-                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena');";
+                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA,CREADO_POR,IMAGEN)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena','$usuario','$foto');";
                               $resultado3 = $conn->query($query_user);
 
-                              if (is_array($_POST['sacramento'])) {
+                              if (is_array($_POST['sacramento'])) {//codigo para insertar los sacramentos ,es diferente porque es con checbox
                                 foreach ($_POST['sacramento'] as $sacramento){
                                   $sentencia = $db->prepare(" CALL Sp_insertar_sacramentos(?,?);");
                                   $sentencia->execute(array($sacramento,$codigo));
@@ -242,7 +243,7 @@
                               }else{
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_medico');" ;
+                                '$estado','$rol','$contrasena','$especialidad_medico','$foto');" ;
                                 $consul =$conn->query($insert_medico);
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
@@ -278,7 +279,7 @@
                                 $rol= "4";//rol del psicologo
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_psicologo');" ;
+                                '$estado','$rol','$contrasena','$especialidad_psicologo','$foto');" ;
                                 $consul =$conn->query($insert_medico);
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
@@ -295,7 +296,7 @@
                               return false;
                               }
                             }
-                          }else if($tipo_persona == "8"){//para insertar un catequiste,comenta Diana Rut :v
+                          }else if($tipo_persona == "8"){//Para insertar un catequiste :)
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
@@ -310,9 +311,8 @@
                                 $rol ="6";//rol de catequista
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_catequista');" ;
+                                '$estado','$rol','$contrasena','$especialidad_catequista','$foto');" ;
                                 $consul =$conn->query($insert_medico);
-  
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
                                   location.href = 'crudpersonas';
@@ -351,9 +351,7 @@
                             echo $e->getMessage(); 
                             return false;
                             }
-
-                          }
-                         //cierre del else de tipos de usuario
+                          }//cierre del else de tipos de usuario
                       }catch (PDOException $e) {
                         echo $e->getMessage(); 
                         return false;
@@ -372,8 +370,8 @@
         return false;
         } //fin del try catch principal
     }
-      //fin del if de comprobar que el DNI no esta vacio
-
+    //fin del if de comprobar que el DNI no esta vacio
+//Ordenado y comentado para su comprension persona que revise este codigo 
 
 
 //************EDITAR USUARIO************ */
@@ -404,50 +402,39 @@
                 $consulta=$conn->query($sql);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
-                    echo "<script>
-                    window.location = 'ediusuarios';
-                    </script>";
-                  }else{
+                    echo "<script> window.location = 'ediusuarios'; </script>";
+                  }else{ //Si las contraseñas son diferentes ,no permitira que se registre
                     if($connueva<>$confconn){
                       echo "<script>
-                    alert('Las contraseñas no son iguales');
-                    window.location = 'ediusuarios';
-                    </script>";
+                      alert('Las contraseñas no son iguales');window.location = 'ediusuarios'; </script>";
                     }else{
-                      if(preg_match($expre,$connueva)){
+                      if(preg_match($expre,$connueva)){ //evalua la expresion regular,que define una contraseña segura :3
                         $pass= crypt($connueva,'$2a$07$usesomesillystringforsalt$');
-                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass';" ;
+                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass';" ; //Al cumplir con los requerimientos ,se llama al procedimiento alamcenado y se actualiza la contraseña
                         $consulta=$conn->query($sql);
                         if ($consulta>0) {
-                          echo "<script>
-                          window.location = 'ediusuarios';
-                          </script>";
+                          echo "<script>window.location = 'ediusuarios';</script>";
                         }
                       }else{
                         echo "<script>
-                        alert('La contraseña que ingreso no es segura');
-                        window.location = 'ediusuarios';
-                        </script>";
+                        alert('La contraseña que ingreso no es segura');window.location = 'ediusuarios';</script>";
                       }
                     }
                   }
-                }else{ 
-                echo "<script>
-                alert('Error al actualizar el registro');
-                window.location = 'ediusuarios';
-                </script>";
+                }else{ //En caso que surja algun error que no se puede manejar saldra el mensaje que no se pudo actualizar 
+                  echo "<script>
+                  alert('Error al actualizar el registro');window.location = 'ediusuarios';</script>";
                 }
                 return true;
-                } catch(PDOException $e) {
-                echo $e->getMessage();  
-                return false;
+                }catch(PDOException $e) {
+                  echo $e->getMessage();  
+                  return false;
                 }
-            }elseif($ID_PERSONA_CORREO <> $CODUSUARIO){ 
-            echo "<script>
-            alert('Ya existe una persona con el número de telefono: $correo_mofi');
-           window.location = 'ediusuarios';
-            </script>";
-            }//if del correo 
+            }elseif($ID_PERSONA_CORREO <> $CODUSUARIO){  //validacion que si el numero de telefono a existe
+              echo "<script>
+              alert('Ya existe una persona con el número de telefono: $correo_mofi');
+              window.location = 'ediusuarios';</script>";
+              }//if del correo 
             return true;
           } catch(PDOException $e) {
           echo $e->getMessage();  
@@ -503,3 +490,4 @@
     }
   }
 ?> 
+<!-- Elaborado por Diana Rut -->

@@ -1,5 +1,8 @@
  <!-- Navbar -->
-
+ <?php
+  include_once "conexion.php";
+  include_once "conexion3.php";
+ ?>
 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
@@ -62,8 +65,18 @@
       <li class="dropdown no-arrow nav-item">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
-                                <img class="img-profile rounded-circle" width="44 px" src="vistas/assets/dist/img/user8-128x128.jpg">
+                                <?php 
+                                 $nomUser= $_SESSION['vario'];
+                                 $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
+                                 $result = $conn->query($query);
+                                 if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        $var12 = $row['imagen'];
+                                    }
+                                 }
+                                ?>
+                                <img style="width:24px; heigth:29px;"  class="user-img" src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
+                               <!-- <img class="img-profile rounded-circle" width="44 px" src="vistas/assets/dist/img/user8-128x128.jpg"> -->
                             </a>
                             <!-- Dropdown - User Information -->
                             <div  class="dropdown-menu dropdown-menu-right  bg-gradient-blue"

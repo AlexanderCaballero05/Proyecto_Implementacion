@@ -73,7 +73,7 @@
           
           <!-- jquery validation -->
           <div class="card ">
-            <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"></h1>
             </div>
             <form  method="POST" id="form"><!-- form start -->

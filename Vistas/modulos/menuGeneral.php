@@ -1,4 +1,7 @@
-   
+<?php
+  include_once "conexion.php";
+  include_once "conexion3.php";
+ ?>
 
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral">
@@ -12,11 +15,37 @@
     <!-- Sidebar -->
     <div class="sidebar">
 
-        <!-- Sidebar user (optional) -->
+        <!-- parte de la foto de perfil y nombre de usuario :3-->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-                <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
-            </div>
+          <?php 
+            $nomUser= $_SESSION['vario'];
+            $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
+            $result = $conn->query($query);
+            if ($result->num_rows > 0) {
+              while($row = $result->fetch_assoc()) {
+              $var12 = $row['imagen'];
+              ?>
+              <?php
+               }
+              ?>
+              <div class="image">
+                <img style="width:35px ; heigth:33px"  class="img-circle elevation-1" alt="Imagen usuario"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
+                 <!--  <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image"> -->
+              </div>
+              
+             <?php
+            }else if ($result->num_rows < 0){
+             ?>
+              <div class="image">
+              <img src="vistas/assets/dist/img/usuario.PNG" class="img-circle elevation-2" alt="imagen del usiaro">
+               <!--<img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="yghg Image"> -->
+              </div>
+
+             <?php
+            }
+          ?>
+          
+            
             <div class="info">
                 <a href="perfilUsuario" class="d-block"><?php $usuario=$_SESSION['vario']; echo $usuario; ?></a>
             </div>
