@@ -14,12 +14,40 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- 
+ include "conexionpdo.php";
  $codigoObjeto=2;
  $accion='Ingreso a la tabla de roles';
  $descripcion= 'Usuario se autentifico ';
  bitacora($codigoObjeto, $accion,$descripcion);
  
+?>
+
+<?php
+  $Fechaactual ="FECHAINICIAL"; ///Se llama a los parametros de la base de datos 
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $horainicial="HORA_INICIO_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array( $horainicial));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horainicio = $row;
+  }
+?>
+<?php
+  $horafinal="HORA_FINAL_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($horafinal));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horafinalcarga = $row;
+  }
 ?>
 <div class="content-wrapper">
   <div class="content-header">
@@ -277,32 +305,42 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1"
+                                         min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>">
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" 
+                                        min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"  >
                                       </div>
                                     </div>
-                                    <?php
-                                    date_default_timezone_set("America/Guatemala");
-                                    $Fechaactual=  date('Y-m-d'); 
-                                    $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 3 month"));
+                                    <?php  
+                                          date_default_timezone_set("America/Guatemala");/* Establece una zona horaria para la fecha actual  */
+                                          $Fechaactual=  date("$valor"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                          $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
                                     ?>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Inicio:</label>
-                                        <input  type="date"  value ="<?php echo $var7; ?>"  min= "<?= $Fechaactual?>"   max= "<?=  $fechamaxima?>" class="form-control" name="fecha_inicio1" >
+                                        <input  type="date"  value ="<?php echo $var7; ?>"   min= "<?= date ($valor)?>"  
+                                        max= "<?=  $fechamaxima?>" class="form-control" name="fecha_inicio1" >
                                       </div>
                                     </div>
-                                  </div><!--fin row -->
-                                  <div class="row">
+                                  </div>
+                                  <?php  
+                                        date_default_timezone_set("America/Guatemala");
+                                        $Fechaactual1=  date("$valor"); 
+                                        $fechamaxima1= date("$valor",strtotime($Fechaactual1."+ 6 month"));
+                                  ?>
+                                    
+                                    <div class="row">
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Final:</label>
-                                        <input  type="date"  value ="<?php echo $var8; ?>" class="form-control" name="fecha_final1" >
+                                        <input  type="date"  value ="<?php echo $var8; ?>" class="form-control" name="fecha_final1" 
+                                        min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima1?>"  >
                                       </div>
                                     </div>
                                     <div class="col-sm-4">

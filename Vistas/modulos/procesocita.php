@@ -2,10 +2,39 @@
 include_once "conexion.php";
 include_once "conexion3.php";
 include "conexionpdo.php";
+include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
 $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
+?>
+<!-- Selecciona el prametro de la base de datos para la fecha y hora de la cita  :v-->
+<?php
+  $Fechaactual ="FECHAINICIAL";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $hora ="HORA_INICIO_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
+?>
+<?php
+  $hora1 ="HORA_FINAL_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora1));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor2 = $row;
+  }
 ?>
 
 <head>
@@ -300,29 +329,30 @@ $result3= $conn->query($query);
                    <div class="col-sm-3  mb-3">
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
-                        <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control" name="agregar_hora" id="agregar_hora">
-                        <div class="invalid-feedback">
-                             Horario valido de 9:00 a.m. a 5:00 p.m.
-                            </div>
+                        <input type="time"  min= "<?= ($valor1)?>" step="1800"   max= "<?= ($valor2)?>" 
+                         class="form-control" name="agregar_hora" id="agregar_hora">
+                        <div class="invalid-feedback" required>
+                             Horario valido de 9:00 a.m. a 17:00 p.m.
+                        </div>
                      </div>
                     
                    </div>
-                   <?php
-                        date_default_timezone_set("America/Guatemala");
-                        $Fechaactual=  date('Y-m-d'); 
-                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
-                        ?>
+                   <?php  
+                        date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
+                        $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                        $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                   ?>
 
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
 
                             <label for="fecha" class="form-label">Fecha de la cita </label>
-                            <input type="date" min= "<?= $Fechaactual?>" 
-                            max="<?= date("$fechamaxima")?>"
+                            <input type="date" min= "<?= date ($valor)?>" 
+                            max="<?= date($fechamaxima)?>"                             
                             class="form-control" 
                             name="agregar_fecha_cita" id="agregar_fecha_cita" required>
                             <div class="invalid-feedback">
-                             fecha invalida.
+                              fecha invalida.
                             </div>
                         </div>
                       </div>

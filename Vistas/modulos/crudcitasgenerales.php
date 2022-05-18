@@ -2,12 +2,39 @@
 session_start();
 include_once "conexion.php";
 include_once "conexion3.php";
+include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
 $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
-
+<?php
+  $Fechaactual ="FECHAINICIAL";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $hora ="HORA_INICIO_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
+?>
+<?php
+  $hora1 ="HORA_FINAL_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora1));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor2 = $row;
+  }
+?>
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -75,7 +102,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                               $query = "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
                               $resul=$conn->query($query);                
                               ?>
-                             <form method="POST" action="crudcitasgenerales">
+                             <form method="POST" >
                                 <select class="form-control" name="BUSCAR" required>
                                    <option selected disabled value="" >--Seleccione--</option>
                                    <?php 
@@ -208,25 +235,37 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </div>
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
+                                                                <?php  
+                                                                    date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
+                                                                    $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                                                    $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                                                                ?>
                                                                 <div class="row"> <!-------- INICIO PRIMERA ROW editar -----------> 
-                                                                    <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_cita2" id="cod_edit_cita2" >
+                                                                <input type="text" value="<?php echo $var1; ?>" 
+                                                                        hidden class="form-control"
+                                                                        name="cod_edit_cita2" id="cod_edit_cita2" >
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
-                                                                            <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" min="<?= date("Y-m-d")?>" max="<?= date("2022-04-30")?>" 
-                                                                            class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1">
+                                                                            <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" 
+                                                                            min= "<?= date ($valor)?>" max="<?= date($fechamaxima)?>" 
+                                                                            class="form-control" 
+                                                                            name="edit_fecha_cita1"  id="edit_fecha_cita1">
                                                                         </div>
                                                                         <div class="invalid-feedback">
-                                                                           campo obligatorio
+                                                                                campo obligatorio
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <div class="form-group">
+                                                                    <div class="form-group">
                                                                             <label for="txtcodigo_persona"> Hora: </label>
-                                                                            <input type="time"  value="<?php echo $var3; ?>" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control"  name="edit_hora1" id="edit_hora1">
+                                                                            <input type="time"  value = "<?php echo $var3; ?>" 
+                                                                            required min= "<?= ($valor1)?>"   max= "<?=( $valor2)?>" 
+                                                                            class="form-control" 
+                                                                            name="edit_hora1" id="edit_hora1">
                                                                         </div>
                                                                         <div class="invalid-feedback">
-                                                                            campo obligatorio
+                                                                            Horario valido de 9:00 a.m. a 17:00 p.m.
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -256,7 +295,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
                                                                             <select class="form-control" name="estado_edit1" id="estado_edit1" required="">
-                                                                             <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
+                                                                             <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?>--Seleccione...</option>
                                                                                 <?php 
                                                                                  if ($resultador->num_rows > 0) {
                                                                                     while($rowr = $resultador->fetch_assoc()) { ?>
@@ -442,7 +481,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                            <form method="POST">
+                                                            <form method="POST" class="needs-validation" >
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita  
                                                                     </h4>
@@ -450,13 +489,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </div>
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
+                                                                <?php  
+                                                                    date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
+                                                                    $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                                                    $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                                                                ?>
                                                                 <div class="row"> <!-------- INICIO PRIMERA ROW editar -----------> 
                                                                     <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_cita2" id="cod_edit_cita2" >
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
-                                                                            <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" min="<?= date("Y-m-d")?>" max="<?= date("2022-04-30")?>" 
-                                                                            class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1">
+                                                                            <input type="date" value="<?php echo $var2; ?>"  min= "<?= date ($valor)?>" max="<?= date($fechamaxima)?>" 
+                                                                            class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1" required ="">
                                                                         </div>
                                                                         <div class="invalid-feedback">
                                                                            campo obligatorio
@@ -465,7 +509,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona"> Hora: </label>
-                                                                            <input type="time"  value="<?php echo $var3; ?>" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"class="form-control"  name="edit_hora1" id="edit_hora1">
+                                                                            <input type="time"  value="<?php echo $var3; ?>" required min= "<?= ($valor1)?>"   max= "<?= ($valor2)?>" class="form-control"  name="edit_hora1" id="edit_hora1">
                                                                         </div>
                                                                         <div class="invalid-feedback">
                                                                             campo obligatorio
@@ -527,7 +571,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
+                                                                <form method="POST" class="needs-validation">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Ver Cita  </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -666,7 +710,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
   } );
 </script>
 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
 
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
   
 

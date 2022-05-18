@@ -1,6 +1,7 @@
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
+include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
 $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
@@ -20,6 +21,33 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   $_SESSION["bhasta"] = $_POST["bhasta"];
 
 }
+?>
+<?php
+  $Fechaactual ="FECHAINICIAL";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $hora ="HORA_INICIO_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
+?>
+<?php
+  $hora1 ="HORA_FINAL_ATENCIONCITA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora1));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor2 = $row;
+  }
 ?>
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -216,43 +244,51 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
+                                                                <form method="POST"  class="needs-validation" >
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita  
                                                                     </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
-                                                                <?php
-                                                                date_default_timezone_set("America/Guatemala");
-                                                                $Fechaactual=  date('Y-m-d'); 
-                                                                $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));
+                                                                <?php  
+                                                                    date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
+                                                                    $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                                                    $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                                                                 ?>
+
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
-                                                                    <div class="row"> 
+                                                            <div class="row"> 
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
-                                                                    name="cod_edit_cita" id="cod_edit_cita" >
+                                                                    name="cod_edit_cita" id="cod_edit_cita">
                                                                     <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
-                                                                        <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" 
-                                                                        min="<?= $Fechaactual?>" max="<?= $fechamaxima?>" 
+                                                                        <input type="date"autocomplete = "off" value="<?php echo $var2;?>" 
+                                                                        min= "<?= date ($valor)?>"  max="<?= date($fechamaxima)?>" 
                                                                         class="form-control" 
                                                                         name="edit_fecha_cita"  id="edit_fecha_cita">
+                                                                    </div>
+                                                                    <div class="invalid-feedback">
+                                                                    fecha invalida.
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label for="txtcodigo_persona"> Hora: </label>
-                                                                            <input type="time"  value="<?php echo $var3; ?>" 
-                                                                            required min="09:00:00"  step="1800" max= "17:00:00"  step="1800"
+                                                                            <input type="time"  value = "<?php echo $var3; ?>" 
+                                                                            required min= "<?= ($valor1)?>"   max= "<?= ( $valor2)?>" 
                                                                             class="form-control" 
-                                                                            name="edit_hora" id="edit_hora">
+                                                                            name="edit_hora" id="edit_hora1">
                                                                         </div>
+                                                                        <div class="invalid-feedback">
+                                                                            Horario valido de 9:00 a.m. a 17:00 p.m.
+                                                                        </div>
+                                                                        
                                                                 </div>
-                                                                </div> 
+                                                            </div> 
                                                                 <?php
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
@@ -271,7 +307,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
-                                                                            <select class="form-control" name="MODUSUARIO" required="">
+                                                                            <select class="form-control" name="estado_edit" required >
                                                                                 <option selected disabled autocomplete = "off" value="">--Seleccione...</option>
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
@@ -463,7 +499,23 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
       })
   } );
 </script>
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
 
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
 
   

@@ -43,7 +43,7 @@ if (isset($_POST['cod_edit_cita2'])){
             $consulta=$conn->query($sql);
             if ($consulta > 0){
              echo "<script>
-                window.location = 'crudicitasgenerales';
+                window.location = 'crudcitasgenerales';
                  </script>";
                $codigoObjeto=32;
                $accion='Actualizacion';

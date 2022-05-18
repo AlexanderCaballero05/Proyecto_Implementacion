@@ -2,6 +2,34 @@
  include_once "conexion.php";
  include_once "conexion3.php";
  include_once  "conexionpdo.php";
+ include "conexionpdo.php";
+?>
+<?php
+  $Fechaactual ="FECHAINICIAL";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $horainicial="HORA_INICIO_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array( $horainicial));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horainicio = $row;
+  }
+?>
+<?php
+  $horafinal="HORA_FINAL_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($horafinal));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horafinalcarga = $row;
+  }
 ?>
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
@@ -42,7 +70,7 @@
                 <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
-                      <input oninvalid="this.setCustomValidity('Ingrese una hora correcta')" class="form-control" required  type="time"  name="hora"  required >
+                    <input class="form-control"  type="time" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"    name="hora"  required >
                         <div class="invalid-feedback">
                           Ingrese una hora correcta
                         </div>
@@ -51,32 +79,39 @@
                   <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
                     <div class="form-group">
-                      <input  class="form-control" required min="08:00" max= "17:00"  type="time"  name="hora_final"  required >
+                    <input class="form-control"  type="time"  name="hora_final" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"  required >
                         <div class="invalid-feedback">
-                        Llene este campo.
+                        Ingrese una hora correcta 
                         </div>
                     </div>
                   </div>
-                  <?php
-                        date_default_timezone_set("America/Guatemala");
-                        $Fechaactual=  date('Y-m-d'); 
-                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 3 month"));
-                        ?>
+                  <?php  
+                        date_default_timezone_set("America/Guatemala");/* Establece una zona horaria para la fecha actual  */
+                        $Fechaactual=  date("$valor"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                        $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
+                  ?>
                   <div class="col-md-3 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                      <input class="form-control" min= "<?= $Fechaactual?>"   max= "<?=  $fechamaxima?>"  type="date"  name="fecha_inicio" required>
-                       <div class="invalid-feedback">
+                    <input class="form-control" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima?>"  type="date" 
+                       name="fecha_inicio" required>
+                        <div class="invalid-feedback">
                          Llene este campo.
                         </div>
                     </div>
                   </div>
+                  <?php  
+                        date_default_timezone_set("America/Guatemala");
+                        $Fechaactual1=  date("$valor"); 
+                        $fechamaxima1= date("$valor",strtotime($Fechaactual1."+ 6 month"));
+                  ?>
 
                   <div class="col-md-3 mb-3"> <!--FECHA FINAL-->
                     <label  class="control-label">Fecha final:</label> 
                     <div class="form-group">
-                      <input class="form-control" type="date"  name="fecha_final" required>
-                       <div class="invalid-feedback">
+                    <input class="form-control" type="date" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima1?>" 
+                      name="fecha_final" required>
+                        <div class="invalid-feedback">
                          Llene este campo.
                         </div>
                     </div>
