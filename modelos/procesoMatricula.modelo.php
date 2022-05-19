@@ -167,15 +167,34 @@ if(isset($_POST['MatriEliminar'])){
 
 
 <?php
+//CODIGO PARA MODIFICAR LA OBSERVACION y EL ESTADO DE UNA MATRICULA ACADEMICA
 if(isset($_POST['MODIFICAR_CALIFICACION'])){
     $codigo_matricula = $_POST['codigo_matricula_alumno'];
     $codigo_estado = $_POST['codigo_estado'];
+    $observacion_academica = $_POST['observacion_academica'];
+
+    date_default_timezone_set("America/Guatemala");//codigo que asigna la zona horaria de CentroAmerica
+    $Fechaactual= date('Y-m-d');
 
 
-    $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
-                              SET OBSERVACION = '$codigo_estado' 
-                              WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
-    $Respuesta=$conn->query($consulta_matricula);
+    if($codigo_estado == 13){ //si se finaliza la matricula se modifica la fecha que finaliza la matricula 
+      $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
+                                SET OBSERVACION = '$codigo_estado',
+                                    OBSERVACION_MATRICULA = '$observacion_academica',
+                                    FECHA_FINALMATRICULA = '$Fechaactual'
+                                WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
+    
+      $Respuesta=$conn->query($consulta_matricula);
+       }else{//si no solo se modifica la observacion y el estado de la matricula
+        $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
+        SET OBSERVACION = '$codigo_estado',
+            OBSERVACION_MATRICULA = '$observacion_academica'
+        WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
+        
+         $Respuesta=$conn->query($consulta_matricula);
+       }
+
+
 
     if($Respuesta>0){
       echo "<script>
@@ -187,11 +206,44 @@ if(isset($_POST['MODIFICAR_CALIFICACION'])){
       window.location = 'crudAlumnosMatricula';
       </script>";
 
-    }
+    } 
+    //CODIGO PARA MODIFICAR LA OBSERVACION y EL ESTADO DE UNA MATRICULA ESPIRITUAL
+}else if(isset($_POST['MODIFICAR_OBSERVACION_CATEQUESIS'])){
+  $codigo_matricula = $_POST['codigo_matricula_alumno'];
+  $codigo_estado = $_POST['codigo_estado'];
+  $observacion_catequesis = $_POST['observacion_catequesis'];
 
+  date_default_timezone_set("America/Guatemala");//codigo que asigna la zona horaria de CentroAmerica
+  $Fechaactual= date('Y-m-d'); 
 
+   if($codigo_estado == 13){ //si se finaliza la matricula se modifica la fecha que finaliza la matricula 
+  $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
+                            SET OBSERVACION = '$codigo_estado',
+                                OBSERVACION_MATRICULA = '$observacion_catequesis',
+                                FECHA_FINALMATRICULA = '$Fechaactual'
+                            WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
+
+  $Respuesta=$conn->query($consulta_matricula);
+   }else{//si no solo se modifica la observacion y el estado de la matricula
+    $consulta_matricula = "UPDATE TBL_MATRICULA_ACADEMICA
+    SET OBSERVACION = '$codigo_estado',
+        OBSERVACION_MATRICULA = '$observacion_catequesis'
+    WHERE CODIGO_MATRICULA = '$codigo_matricula'; ";
+    
+     $Respuesta=$conn->query($consulta_matricula);
+   }
+
+  if($Respuesta>0){
+    echo "<script>
+    window.location = 'crudAlumnosCatequesis';
+    </script>";
+
+  }else{
+    echo "<script>
+    window.location = 'crudAlumnosCatequesis';
+    </script>";
+
+  }
 
 }
-
-
 ?>

@@ -373,7 +373,7 @@ if(isset($_POST['eliminar_carga'])){
 
 
 <?php
-
+//Codigo que captura una de las tutorias que esta impartiendo un tutor academico, y lo envia a lista de alumnos matriculados en esa tutoria
 if(isset($_POST['codigo_carga_matricula'])){
     session_start();
     $_SESSION['carga'] = $_POST['codigo_carga_matricula'];
@@ -384,9 +384,18 @@ if(isset($_POST['codigo_carga_matricula'])){
     window.location = 'crudAlumnosMatricula';
     </script>";
     exit;
+    
+    /*Codigo que captura una de las tutorias que esta impartiendo un tutor espiritual, y lo envia a lista de alumnos matriculados en esa tutoria*/
+}else if(isset($_POST['codigo_carga_matricula_espiritual'])){
+    session_start();
+    $_SESSION['carga_espiritual'] = $_POST['codigo_carga_matricula_espiritual'];
+    $_SESSION['catequesis'] = $_POST['nombre_catequesis'];
 
 
-
+    echo "<script>
+    window.location = 'crudAlumnosCatequesis';
+    </script>";
+    exit;
 }
 
 ?>

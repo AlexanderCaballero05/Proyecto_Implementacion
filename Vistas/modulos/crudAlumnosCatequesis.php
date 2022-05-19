@@ -15,16 +15,16 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTA DE AlUMNOS <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "TUTORIA DE ".$_SESSION['tutoria'] ?></p> </h4>
+              <h4> LISTA DE JOVENES <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "CATEQUESIS DE ".$_SESSION['catequesis'] ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
-         <ul class="nav nav-tabs card-header-tabs">
+        <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="crudTutoriasTutor">Lista de tutorias</a>
+            <a class=" nav-link" style="color:#000000;" href="crudTutorEspiritual">Lista de catequesis</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="crudAlumnosMatricula">Lista de alumnos</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Lista de Jovenes</a>
             </li>
           </ul>
         </div>
@@ -41,11 +41,13 @@
                     $cod_usuario=$sentencia1->fetchColumn();
                     ?>
                      <?php
-                          $codigo_carga  = $_SESSION['carga'];
+                          $codigo_carga_espiritual  = $_SESSION['carga_espiritual'];
+                          $nombre_catquesis = $_SESSION['catequesis'];
                       ?>
-      <form method="POST" action="Reportes_Prosecar/reporteAlumnosMatricula.php" target="_blank">
-         <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor_informe_clases">
-         <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_informe">
+      <form method="POST" action="Reportes_Prosecar/reporteAlumnosCatequesis.php" target="_blank">
+         <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor_espiritual">
+         <input type="text"  hidden value="<?php echo $codigo_carga_espiritual; ?>" name="codigo_carga_espritual">
+
         <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
         </form>
 
@@ -64,12 +66,12 @@
                       <tr>
                         <th class="text-center">Numero</th>
                         <th class="text-center">Alumno</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Catequesis</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Año</th>
                         <th class="text-center">periodo</th>
-                        <th class="text-center">Estado matricula</th>
+                        <th class="text-center">Estado Matricula</th>
                         <th class="text-center">Accion</th>
                       </tr>
                     </thead>
@@ -78,11 +80,11 @@
                     
 
                       <?php
-                          $codigo_carga  = $_SESSION['carga'];
+                          $codigo_carga  = $_SESSION['carga_espiritual'];
                       ?>
                     <?php
-                      $query = "SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION,
-                       c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA, mat.OBSERVACION_MATRICULA, mat.OBSERVACION
+                      $query = "SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,
+                      s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA, 	mat.OBSERVACION_MATRICULA, mat.OBSERVACION
                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
                       WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
                       AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
@@ -109,15 +111,12 @@
                           $var6 = $row['ESTADO_MATRICULA'];
                           $codigo_estado_matricula = $row['OBSERVACION'];
                           $codigo_matricula = $row['CODIGO_MATRICULA'];
-                          $observacion_matricula = $row['OBSERVACION_MATRICULA'];
-
-                          
-                          
+                          $observacion_matricula = $row['OBSERVACION_MATRICULA'];             
                       ?>
+                       
                       <tr>
-
                       <?php
-                                 if($codigo_estado_matricula == 13){//si el codigo de estado de la matricula es igual a 13 que es ya finalizado el texto de los datos de la tabla cambian a rojo y tachado
+                            if($codigo_estado_matricula == 13){// si el codigo de estado de la matricula es igual a 13 que es ya finalizado el texto de los datos de la tabla cambian a rojo y tachado
                         ?>
                         <td class="text-center" style="color:#FA0079;text-decoration: line-through;"><?php echo $contador; ?></td>
                         <td class="text-center" style="color:#FA0079;text-decoration: line-through;"><?php echo $var1; ?></td>
@@ -129,8 +128,9 @@
                         <td class="text-center" style="color:#FA0079;text-decoration: line-through"><?php echo $var6; ?></td>
 
                         <?php
-                             }else{ //si no e; texto de los datos de la tabla no cambian
+                            }else{ //si no e; texto de los datos de la tabla no cambian
                         ?>
+                           
                         <td class="text-center"><?php echo $contador; ?></td>
                         <td class="text-center"><?php echo $var1; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>                      
@@ -156,7 +156,7 @@
                                     if($row > 0){
                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                     $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                    $evaluar_permiso->execute(array($usuariomo, '24'));
+                                    $evaluar_permiso->execute(array($usuariomo, '53'));
                                     $row1=$evaluar_permiso->fetchColumn();
                                       $permiso_registrar =$row1;             
                                     }
@@ -165,18 +165,18 @@
                                     if($permiso_registrar == 'SI'){
                                     ?>
 
-                                  <?php
-                                  if($codigo_estado_matricula == 13){ //si el codigo de estado de la matricula es igual a 13 que es ya finalizado el color del boton a rojo y tachado
+                                <?php
+                                   if($codigo_estado_matricula == 13){ //si el codigo de estado de la matricula es igual a 13 que es ya finalizado el color del boton a rojo y tachado
                                   ?>
                                  
-                                  <a href="#CALIFICAR<?php echo $codigo_matricula; ?>" data-toggle="modal">
+                                  <a href="#CALIFICAR_CATEQUESIS<?php echo $codigo_matricula; ?>" data-toggle="modal">
                                    <button type='button' id="btnGuardar"  style="color:white;text-decoration: line-through"class="form-control btn btn-danger"><span>Observacion</span></button>
                                   </a>
 
                                   <?php
-                                    }else{//sino el boton permanece en verde
+                                    }else{ //sino el boton permanene en verde
                                   ?>
-                                    <a href="#CALIFICAR<?php echo $codigo_matricula; ?>" data-toggle="modal">
+                                  <a href="#CALIFICAR_CATEQUESIS<?php echo $codigo_matricula; ?>" data-toggle="modal">
                                    <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observacion</span></button>
                                   </a>
 
@@ -184,7 +184,7 @@
                                   <?php
                                     }
                                   ?>
-                                  
+
                                   <?php
                                     }
                                   ?>
@@ -194,7 +194,7 @@
                         </td>
                        
                         
-                        <div id="CALIFICAR<?php echo $codigo_matricula ?>" class="modal fade" role="dialog">
+                        <div id="CALIFICAR_CATEQUESIS<?php echo $codigo_matricula ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST"  class="needs-validation" novalidate>
@@ -209,13 +209,13 @@
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre Alumno:</label>
+                                          <label for="txtcodigo_persona">Nombre:</label>
                                           <input type="text"  readonly value ="<?php echo $var1; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Tutoria:</label>
+                                          <label for="txtcodigo_persona">Catequesis:</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var2; ?>" >
                                         </div>
                                       </div>
@@ -251,7 +251,8 @@
                                         and es.CODIGO_ESTADO <> 8
                                         and es.CODIGO_ESTADO <> 12
                                         and es.CODIGO_ESTADO <> 11
-                                        and es.CODIGO_ESTADO <> 10;
+                                        and es.CODIGO_ESTADO <> 10
+                                        ;
                                         ";
                                         $result1= $conn->query($query);
                                         ?>
@@ -280,17 +281,16 @@
                                       <div class="col-sm-8">
                                           <div class="form-group">
                                               <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
-                                                <textarea type="textarea" name="observacion_academica" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
+                                                <textarea type="textarea" name="observacion_catequesis" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
 
                                           </div>
                                       </div>
                                   </div>
-
                                   
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="MODIFICAR_CALIFICACION"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observacion</button>
+                                  <button type="submit" name="MODIFICAR_OBSERVACION_CATEQUESIS"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observacion</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>

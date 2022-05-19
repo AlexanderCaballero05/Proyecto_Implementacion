@@ -14,16 +14,16 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>LISTA DE TUTORIAS  <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ESPIRITUAL ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
+              <h4>LISTA DE CATEQUESIS  <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ESPIRITUAL ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="crudTutoriasTutor">Lista de tutorias</a>
+            <a class=" nav-link active" style="color:#000000;" href="crudTutorEspiritual">Lista de catequesis</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Lista de alumnos</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Lista de Jovenes</a>
             </li>
           </ul>
         </div>
@@ -60,12 +60,12 @@
                     <thead>
                       <tr>
                         <th class="text-center">Numero</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Catequesis</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Periodo</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">Notas alumnos</th>
+                        <th class="text-center">Obsevacion Jovenes</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -128,9 +128,9 @@
                                             
                                         
                                   <form method="POST">
-                                    <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
-                                    <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
-                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista alumnos</span></button>
+                                    <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula_espiritual">
+                                    <input type="text"  hidden value="<?php echo $var1; ?>" name="nombre_catequesis">
+                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista Jovenes</span></button>
                                   </form>
                                   <?php
                                            }
