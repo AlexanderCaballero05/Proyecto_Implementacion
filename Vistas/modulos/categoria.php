@@ -2,12 +2,10 @@
 
   include_once "conexionpdo.php";
   include_once "conexion3.php";
-  
-  /*$codigoObjeto=13;
+  $codigoObjeto=13;
   $accion='Ingreso a la tabla de registro de personas';
   $descripcion= 'Usuario se autentifico';
-  bitacora($codigoObjeto, $accion,$descripcion); */
-
+  bitacora($codigoObjeto, $accion,$descripcion); 
 ?>
 <head>
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
@@ -30,21 +28,19 @@
     }
     .bh{
      background-color: #11DECC;
-      
     }
   </style>
 </head>
 <body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
     <div class="content-header">
-      
     </div>
     <!-- Main content -->
     <section class="content">
     <div class="container-fluid">
       <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>AGREGAR PERSONAS</h4>
+            <h4>AGREGAR PERSONAS</h4>
           </h1>     
       </section>
      <div class="card"> 
@@ -66,7 +62,7 @@
         <div class="row"><!-- COLUMNA PRINCIPAL -->
           <div class="col-md-12"> <!-- COLUMNA DE REGISTRO DE PERSONAS -->
             <div class="card card-primary ">
-               <form method="POST" class="needs-validation" novalidate id="form">
+               <form method="POST" class="needs-validation" novalidate id="form" enctype="multipart/form-data">
                   <div class="card-body">
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                       <h2 class="card-title"> Datos Generales persona</h2>
@@ -140,7 +136,7 @@
                       $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
                       $resultadod=$conn->query($query);                
                       ?>
-                         <label for="cbx_persona" class="control-label">Tipo Persona:</label>
+                         <label class="control-label">Tipo Persona:</label>
                          <div class="form-group">
                             <select class="form-control"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
                              <option selected enable  value="">--Seleccionar tipo Persona--</option>
@@ -166,7 +162,7 @@
                         $query = "SELECT CODIGO_SEXO, SEXO FROM TBL_SEXO;";
                         $resultado=$conn->query($query);
                        ?>
-                         <label for="cbx_persona" class="control-label">Sexo:</label>
+                         <label class="control-label">Sexo:</label>
                          <div class="form-group">
                             <select class="form-control"   style="width: 100%;" name="sexo" id="TIPOPERSONA" required="">
                               <option selected disabled value="">--Seleccionar Sexo--</option>
@@ -191,7 +187,7 @@
 
                     <div class="row">
                       <div class="col-md-4"><!--telefono-->
-                      <label for="" class="control-label">Telefono:</label> 
+                      <label class="control-label">Telefono:</label> 
                         <div class="input-group">
                           <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" minlength="8" maxlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);"  required="">
                           <div class="invalid-feedback">
@@ -258,8 +254,6 @@
                       </div>
                     </div><!--fin row -->
                     </br>
-                   
-
                     <div class="card-header" id="form_usuario">
                        <h2 class="card-title"> <strong>Registrar Usuario</strong></h2>
                     </div><br>
@@ -269,7 +263,6 @@
                         <div class="form-group">
                             <input class="form-control" maxlength="15" minlength="4" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
                             onblur="quitarespacios(this);" placeholder="Nombre Usuario" >
-                           
                         </div>
                       </div>
                     <div  class="col-sm-4 mb-2" id="cuarta_fila">
@@ -287,7 +280,7 @@
                         $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 3;";
                         $resultadod=$conn->query($query);                
                         ?>
-                         <label for="cbx_persona" class="control-label">Tipo Especialidad Psicologia:</label>
+                         <label class="control-label">Tipo Especialidad Psicologia:</label>
                          <div class="form-group">
                             <select class="form-control select2" style="width: 100%;" name="psicologo" >
                              <option selected disabled value="" >--Seleccionar tipo--</option>
@@ -304,17 +297,16 @@
                               ?>
                             </select>
                             <div class="invalid-feedback">
-                                  campo obligatorio.
+                              campo obligatorio.
                           </div>
                          </div>
                       </div>
-
-                      <div  style ="display:none;" class="col-md-4" id="especialidad_medico"><!--especialidad medico-->
+                      <div style ="display:none;" class="col-md-4" id="especialidad_medico"><!--especialidad medico-->
                         <?php 
                         $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 2;";
                         $resultadod=$conn->query($query);                
                         ?>
-                         <label for="cbx_persona" class="control-label">Tipo Especialidad Medico:</label>
+                         <label class="control-label">Tipo Especialidad Medico:</label>
                          <div class="form-group">
                             <select class="form-control select2"   style="width: 100%;" name="medico" >
                              <option selected disabled value="" >--Seleccionar tipo--</option>
@@ -337,7 +329,7 @@
                         $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 4;";
                         $resultadod=$conn->query($query);                
                         ?>
-                         <label for="cbx_persona" class="control-label">Catequistas:</label>
+                         <label class="control-label">Catequistas:</label>
                          <div class="form-group">
                             <select class="form-control select2"   style="width: 100%;" name="catequista">
                              <option selected enable value="" >--Seleccionar Catequesis--</option>
@@ -355,27 +347,33 @@
                             </select>
                          </div>
                       </div>
+                      <div style ="display:none;" class="col-md-4" id="imagen"><!--Codigo para subir la foto :3 -->
+                       <div class="form-group">
+                        <label >Subir foto de perfil</label>
+                        <input type="file" class="form-control" name="foto_perfil">
+                       </div>
+                      </div>
                     </div><!--Fin de otra fila :v -->
 
                     <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '25'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-                          <?php 
-                      if($permiso_registrar == 'SI'){
-                     ?> 
+                      include "conexionpdo.php";
+                      $usuario=$_SESSION['vario'];
+                      //Evaluo si existe el tipo de Rol
+                      $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                      $evaluar_usuario->execute(array($usuario));
+                      $row=$evaluar_usuario->fetchColumn();
+                      if($row > 0){
+                        $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                        //llamar al procedimiento almacenado
+                        $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                        $evaluar_permiso->execute(array($usuariomo, '25'));
+                        $row1=$evaluar_permiso->fetchColumn();
+                        $permiso_registrar =$row1;             
+                      }
+                    ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                      <?php 
+                       if($permiso_registrar == 'SI'){
+                      ?> 
                                       
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                     <?php 
@@ -513,16 +511,16 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
 
 <script type="text/javascript">
-  //FUNCIONES PARA MOSTRAR LOS CAMPOS DE USUARIOS (Se puede optimizar,pero hata implementacion)
+  //FUNCIONES PARA MOSTRAR LOS CAMPOS DE USUARIOS (Se puede optimizar,pero hasta en evaluacion creo :v)
  $( function() {
     $("#tipo_persona").change( function() {//tutor administrador y enfermero
         if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9"  ) {
           document.getElementById('titulo').style.display = "none";
            document.getElementById('sacramentos').style.display = "none";
-
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
+          document.getElementById('imagen').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -534,6 +532,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('cuarta_fila').style.display = "none";
            document.getElementById('titulo').style.display = "block";
            document.getElementById('sacramentos').style.display = "block";
+           document.getElementById('imagen').style.display = "block";
            document.getElementById('form_usuario').style.display = "block";
            document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -542,6 +541,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('imagen').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('form_usuario').style.display = "none";
           document.getElementById('primera_fila').style.display = "none";
@@ -553,6 +553,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
+          document.getElementById('imagen').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -561,6 +562,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('sacramentos').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
+          document.getElementById('imagen').style.display = "block";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
@@ -571,6 +573,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
+          document.getElementById('imagen').style.display = "block";
           document.getElementById('catequistas').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
@@ -595,6 +598,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
               }, false)
           })
   })()
-  //Toda la pantalla elaborada por Diana Rut ,lo que este medio desastre,yo no lo hice : )
+  //Toda la pantalla elaborada por Diana Rut ,algunas cosas agregadas por terceros : )
 </script>
 

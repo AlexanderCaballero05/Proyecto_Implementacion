@@ -312,7 +312,7 @@ include_once "conexion3.php";
                                       </div>
 
                                       <div style="display:none;" id="Mostrar_reseteo1<?php echo $var2?>" class="col-sm-6 mb-2">
-                                        <label for="" class="control-label">Confirmar Contraseña</label> 
+                                        <label  class="control-label">Confirmar Contraseña</label> 
                                         <div class="input-group">
                                           <input type="password" class="form-control" id="confirmar_clave<?php echo $var2?>" minlength="?>" maxlength="" name="confirmar_clave"  >
                                           <div class="input-group-prepend">
