@@ -514,9 +514,16 @@
                           <li class="nav-item">
                             <a href="crudTutorEspiritual" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias esprituales</p>
+                              <p>Proceso tutorias espirituales</p>
                             </a>
-                          </li>         
+                          </li>      
+                          
+                          <li class="nav-item">
+                            <a href="procesoCitasEspirituales" class="nav-link">
+                              <i class="far fa-edit nav-icon"></i>
+                              <p>Proceso eventos espirituales</p>
+                            </a>
+                          </li>      
                         </ul>
                       </li>
 
