@@ -272,7 +272,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         name="edit_fecha_cita"  id="edit_fecha_cita">
                                                                     </div>
                                                                     <div class="invalid-feedback">
-                                                                    fecha invalida.
+                                                                    Campo obligatorio, completelo con una fecha valida.
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-6">
@@ -284,7 +284,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                             name="edit_hora" id="edit_hora1">
                                                                         </div>
                                                                         <div class="invalid-feedback">
-                                                                            Horario valido de 9:00 a.m. a 17:00 p.m.
+                                                                        Campo obligatorio, completelo con una hora valida.
                                                                         </div>
                                                                         
                                                                 </div>
@@ -317,7 +317,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                                             }?>
                                                                             </select>
                                                                                     <div class="invalid-feedback">
-                                                                                    Seleccione una opción.
+                                                                                    Campo obligatorio, seleccione una opción.
                                                                                     </div>
                                                                         </div>
                                                                     </div>

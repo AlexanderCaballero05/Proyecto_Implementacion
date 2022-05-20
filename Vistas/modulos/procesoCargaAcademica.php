@@ -65,14 +65,14 @@
           </div><!--FIN DEL CARD HEADER -->
           <div class="card-body"><!--Cuerpo del card body principal -->
             </br>
-            <form  class=" needs-validation" novalidate id="FORMREGISTRAR" method="POST">
+            <form  class=" was-validated"  id="FORMREGISTRAR" method="POST">
               <div class="row">
                 <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
                     <div class="form-group">
                     <input class="form-control"  type="time" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"    name="hora"  required >
                         <div class="invalid-feedback">
-                          Ingrese una hora correcta
+                        Complete este campo con una hora valida.
                         </div>
                     </div>
                   </div>
@@ -81,7 +81,7 @@
                     <div class="form-group">
                     <input class="form-control"  type="time"  name="hora_final" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"  required >
                         <div class="invalid-feedback">
-                        Ingrese una hora correcta 
+                        Complete este campo con una hora valida.
                         </div>
                     </div>
                   </div>
@@ -96,7 +96,7 @@
                     <input class="form-control" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima?>"  type="date" 
                        name="fecha_inicio" required>
                         <div class="invalid-feedback">
-                         Llene este campo.
+                        Complete este campo con una fecha valida.
                         </div>
                     </div>
                   </div>
@@ -112,7 +112,7 @@
                     <input class="form-control" type="date" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima1?>" 
                       name="fecha_final" required>
                         <div class="invalid-feedback">
-                         Llene este campo.
+                        Complete este campo con una fecha valida.
                         </div>
                     </div>
                   </div>
@@ -148,7 +148,7 @@
                         ?>
                      </select>
                        <div class="invalid-feedback">
-                         Llene este campo.
+                         Complete este campo.
                         </div>
                     </div>
                   </div><!--fin de columna para selecionar el area-->
@@ -162,7 +162,7 @@
                     ?>
                     <label for="identidad" class="control-label">Nombre Tutoria:</label> 
                     <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas">
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" required>
                         <option selected disabled value="" >--Seleccionar Tutoria--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -177,7 +177,7 @@
                         ?>
                       </select> 
                       <div class="invalid-feedback">
-                          Llene este campo.
+                      Complete este campo.
                         </div>
                     </div>
                   </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
@@ -191,7 +191,7 @@
                     ?>
                     <label for="identidad" class="control-label">Nombre Tutoria:</label> 
                     <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales">
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" required>
                         <option selected disabled value="" >--Seleccionar Tutoria--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -206,7 +206,7 @@
                         ?>
                       </select> 
                       <div class="invalid-feedback">
-                          Llene este campo.
+                      Complete este campo.
                         </div>
                     </div>
                   </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
@@ -219,7 +219,7 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico">
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico" required>
                       <option selected disabled value="">--Seleccionar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
@@ -234,7 +234,7 @@
                       ?>
                     </select> 
                      <div class="invalid-feedback">
-                         Llene este campo.
+                     Complete este campo.
                      </div>
                   </div>
                 </div><!--CIERRE DE tutores academico-->
@@ -248,7 +248,7 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor">
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" required>
                       <option selected disabled value="">--Seleccionar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
@@ -263,7 +263,7 @@
                       ?>
                     </select> 
                      <div class="invalid-feedback">
-                         Llene este campo.
+                     Complete este campo.
                      </div>
                   </div>
                 </div><!--CIERRE DE tutores academico-->
@@ -295,7 +295,7 @@
                       ?>
                     </select>
                      <div class="invalid-feedback">
-                        Llene este campo.
+                     Complete este campo.
                       </div> 
                   </div>
                 </div><!--cierre de la modalidad  -->
@@ -321,7 +321,7 @@
                         ?>
                       </select>
                       <div class="invalid-feedback">
-                        Llene este campo.
+                      Complete este campo.
                       </div>
                     </div>
                   </div>
@@ -337,7 +337,7 @@
                               <span class="input-group-text">Meses</span>
                             </div>
                              <div class="invalid-feedback">
-                                 Llene este campo.
+                             Complete este campo.
                               </div>
                           </div>
                   </div><!--CIERRE DEL PERIODO -->
@@ -406,7 +406,7 @@
  <script>
     (function () { 
         'use strict'
-        var forms = document.querySelectorAll('.needs-validation')
+        var forms = document.querySelectorAll('.was-validated')
         // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
           .forEach(function (form) {

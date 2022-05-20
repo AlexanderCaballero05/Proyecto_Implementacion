@@ -481,7 +481,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                            <form method="POST" class="needs-validation" >
+                                                            <form method="POST" class="was-validated" >
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita  
                                                                     </h4>
@@ -503,7 +503,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1" required ="">
                                                                         </div>
                                                                         <div class="invalid-feedback">
-                                                                           campo obligatorio
+                                                                        Campo obligatorio, completelo con una fecha valida.
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
@@ -512,7 +512,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             <input type="time"  value="<?php echo $var3; ?>" required min= "<?= ($valor1)?>"   max= "<?= ($valor2)?>" class="form-control"  name="edit_hora1" id="edit_hora1">
                                                                         </div>
                                                                         <div class="invalid-feedback">
-                                                                            campo obligatorio
+                                                                        Campo obligatorio, completelo con una hora valida.
                                                                         </div>
                                                                     </div>
                                                                 </div> 
@@ -551,7 +551,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 }?>
                                                                             </select>
                                                                             <div class="invalid-feedback">
-                                                                              Seleccione una opción.
+                                                                              Campo obligatorio seleccione una opción
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -571,7 +571,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST" class="needs-validation">
+                                                                <form method="POST" class="was-validated">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Ver Cita  </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>

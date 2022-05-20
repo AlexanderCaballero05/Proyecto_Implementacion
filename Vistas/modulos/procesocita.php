@@ -113,7 +113,7 @@ $result3= $conn->query($query);
           </ul>
           </div>
           <div class="card-body">  
-            <form method="POST" class="needs-validation" novalidate id="form">
+            <form method="POST" class="was-validated" >
                 <div class="row pl-2 mb-3 mt-4">
                  <?php
                   $query= "SELECT concat_ws (' ' ,tp.PRIMER_NOMBRE, tp.PRIMER_APELLIDO ) 
@@ -143,10 +143,7 @@ $result3= $conn->query($query);
                         ?>
                     </select>
                       <div class="invalid-feedback">
-                      Llene este campo.
-                      </div>
-                      <div class="valid-feedback">
-                        ¡Se ve bien!
+                      Complete este campo.
                       </div>
                   </div>
                 </div> 
@@ -173,10 +170,7 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                              Llene este campo.
-                            </div>
-                            <div class="valid-feedback">
-                              ¡Se ve bien!
+                            Complete este campo.
                             </div>
                             
                     </div>
@@ -188,7 +182,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Medica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_medico" >
+                            <select class="form-control select2" name="es_medico" required >
                             <option value= "">--Selecione Especialidad--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -202,7 +196,7 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
@@ -214,7 +208,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Psicologica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_psico"  >
+                            <select class="form-control select2" name="es_psico" required  >
                             <option value= "">--Selecione Especialidad Psicologica--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -227,7 +221,7 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
@@ -238,7 +232,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Tipos de Catequesis</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_espiritual"  >
+                            <select class="form-control select2" name="es_espiritual" required >
                             <option value= "">--Selecione Catequesis--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -251,7 +245,7 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
@@ -260,7 +254,7 @@ $result3= $conn->query($query);
                     <div  id="mostrar_ecita" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados citas</label>
-                            <select class="form-control select2" >
+                            <select class="form-control select2" required >
                             <option value= "">--Seleccione Encargado--</option>
                             </select>
                            
@@ -269,7 +263,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
-                            <select class="form-control select2" name="encargado_medico"  >
+                            <select class="form-control select2" name="encargado_medico" required  >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result1->num_rows > 0){
@@ -282,14 +276,14 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
                     <div style ="display:none;" id="encargado_psico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
-                            <select class="form-control select2" name="encargado_psicologo" >
+                            <select class="form-control select2" name="encargado_psicologo"required  >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result2->num_rows > 0){
@@ -302,14 +296,14 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
                     <div style ="display:none;" id="encargado_catequesis" class="col-sm-5 mb-3"><!-- area espiritual-->
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
-                            <select class="form-control select2" name="encargado_catequesis" >
+                            <select class="form-control select2" name="encargado_catequesis" required  >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result3->num_rows > 0){
@@ -322,7 +316,7 @@ $result3= $conn->query($query);
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                             Llene este campo.
+                            Complete este campo.
                             </div>
                         </div>
                     </div>
@@ -330,9 +324,9 @@ $result3= $conn->query($query);
                       <div class="form-group">
                         <label for="txtcodigo_persona"> Hora </label>
                         <input type="time"  min= "<?= ($valor1)?>" step="1800"   max= "<?= ($valor2)?>" 
-                         class="form-control" name="agregar_hora" id="agregar_hora">
-                        <div class="invalid-feedback" required>
-                             Horario valido de 9:00 a.m. a 17:00 p.m.
+                         class="form-control" name="agregar_hora" id="agregar_hora" required>
+                        <div class="invalid-feedback">
+                        Complete este campo con una hora valida.
                         </div>
                      </div>
                     
@@ -352,7 +346,7 @@ $result3= $conn->query($query);
                             class="form-control" 
                             name="agregar_fecha_cita" id="agregar_fecha_cita" required>
                             <div class="invalid-feedback">
-                              fecha invalida.
+                            Complete este campo con una fecha valida.
                             </div>
                         </div>
                       </div>
@@ -496,7 +490,7 @@ if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 <script>
   (function () {
     'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
+    var forms = document.querySelectorAll('.was-validated')
     Array.prototype.slice.call(forms)
 
       .forEach(function (form) {

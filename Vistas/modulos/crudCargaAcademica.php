@@ -294,7 +294,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST">
+                              <form  method="POST" >
                                 <div class="modal-header" style="background-color: #0CCDE3">
                                   <h4 class="card-title">Editar Carga Academica</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -529,6 +529,24 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         
       })
   } );
+</script>
+
+<script>
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.was-validated')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
 </script>
 
 
