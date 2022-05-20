@@ -21,6 +21,14 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
+
+</head>
+
+
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -277,13 +285,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time"  min="09:00:00"  step="1800" max= "17:00:00" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <div class="invalid-feedback">
+                                         Horario valido de 9:00 a.m. a 5:00 p.m.
+                                        </div>
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time" max= "18:00:00"   step="1800"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <div class="invalid-feedback">
+                                          Horario valido de 9:00 a.m. a 5:00 p.m.
+                                       </div>
                                       </div>
                                     </div>
                                     <?php
@@ -491,6 +505,24 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         
       })
   } );
+</script>
+
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>
 
 
