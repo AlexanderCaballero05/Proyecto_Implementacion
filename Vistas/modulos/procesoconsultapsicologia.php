@@ -75,7 +75,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                   AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                                   AND es.CODIGO_PERSONA = '$cod_usuario'
                                                                   AND i.CODIGO_ESTADO = '11' 
-                                                                  and  i.AREA_CITA = '3'
+                                                                  and i.AREA_CITA = '3'
                                                                   AND i.FECHA_CITA = CURDATE();
                            ";
                           $resul=$conn->query($query); 

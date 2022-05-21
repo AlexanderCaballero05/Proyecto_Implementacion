@@ -623,8 +623,11 @@ include_once "conexion3.php";
                                                             <button type='button' style="color:white;" class=" form-control btn btn-warning"><span><i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                         </a>
                                                          <a>
-                                                        <form method="post"  action="Reportes_Prosecar/reportePersonaIndividual.php" target="_blank"> 
-                                                        <input type="hidden" name="persona_enviar" value="<?php echo $var1 ?>">
+                                                        <form method="post"  
+                                                        action="Reportes_Prosecar/reportePersonaIndividual.php" 
+                                                        target="_blank"> 
+                                                        <input type="hidden" name="persona_enviar"
+                                                         value="<?php echo $var1 ?>">
                                                         <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                                         </form>
                                                         </a>

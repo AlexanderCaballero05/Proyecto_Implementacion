@@ -18,8 +18,8 @@ if (isset($_POST['cod_edit_cita2'])){
            $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
         
          $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
-         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = 5 ");
-         $sentencia_paciente->execute(array($personas,$hora,$fecha));
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
           $row=$sentencia_paciente->fetchColumn();
           if($row >0){
             echo "<script>
@@ -29,8 +29,8 @@ if (isset($_POST['cod_edit_cita2'])){
                 exit;
           }else {
             $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
-          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = 5  ");
-          $sentencia_especialista->execute(array($especialistas,$hora,$fecha));
+          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
            $row=$sentencia_especialista->fetchColumn();
            if($row >0){
              echo "<script>
@@ -43,7 +43,7 @@ if (isset($_POST['cod_edit_cita2'])){
             $consulta=$conn->query($sql);
             if ($consulta > 0){
              echo "<script>
-                window.location = 'crudicitasgenerales';
+                window.location = 'crudcitasgenerales';
                  </script>";
                $codigoObjeto=32;
                $accion='Actualizacion';

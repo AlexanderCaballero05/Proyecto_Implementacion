@@ -147,12 +147,12 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 
   //con lo de ditar no toque,porque ya les daba y no tengo el procediemiento :v ,ya eso ustedes lo terminan 
  ///BOTON DE EDITAR 
- if (isset($_POST['cod_edit_cita2'])){
-  if(isset($_POST['edit_cita1'])){
-    $fecha= $_POST['edit_fecha_cita1'];
-    $hora =$_POST['edit_hora1'];
-    $estado =$_POST['estado_edit1'];
-    $cod =$_POST['cod_edit_cita2'];
+ if (isset($_POST['cod_edit_cita'])){
+  if(isset($_POST['edit_cita'])){
+    $fecha= $_POST['edit_fecha_cita'];
+    $hora =$_POST['edit_hora'];
+    $estado =$_POST['estado_edit'];
+    $cod =$_POST['cod_edit_cita'];
      try {
       $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
         from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
@@ -161,10 +161,9 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
         foreach ( $ESPECIALISTAS AS $RESULTADOS){
            $personas = $RESULTADOS['CODIGO_PERSONA'];
            $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
-        
          $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
-         $sentencia_paciente->execute(array($personas,$hora,$fecha,$cod));
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
           $row=$sentencia_paciente->fetchColumn();
           if($row >0){
             echo "<script>
@@ -175,7 +174,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
           }else {
             $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
           from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
-          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$cod));
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
            $row=$sentencia_especialista->fetchColumn();
            if($row >0){
              echo "<script>

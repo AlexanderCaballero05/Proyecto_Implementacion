@@ -390,6 +390,23 @@
       $connueva = ($_POST['clave_nueva']);
       $confconn = ($_POST['confirmar_clave']);
       $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
+      date_default_timezone_set("America/Guatemala");
+      $Fechaactual=  date("Y-m-d" );
+      if($ESTADO == "3"){
+        $actualizaresatado = "UPDATE TBL_CARGA_ACADEMICA
+                                  SET FECHA_FINAL = '$Fechaactual' 
+                                  WHERE CODIGO_PERSONA = '$CODUSUARIO';";
+        $Respuesta=$conn->query($actualizaresatado);
+        if($Respuesta>0){
+          echo "<script>
+          window.location = 'ediusuarios';
+          </script>";
+        }else{
+          echo "<script>
+          window.location = 'ediusuarios';
+          </script>";
+        }
+      }
           try{
             // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
             $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
@@ -443,7 +460,9 @@
   }//if padre
 }
 
-  
+
+
+
   //FUNCION PARA ELIMINAR EL USUARIO,FUNCIONA BIEN,NO TOCAR,no funciona del todo bien :v asi que si pueden tocar
   if(isset($_POST['usuario_eliminar'])){
     if(isset($_POST['ELIMINAR'])){
