@@ -347,12 +347,7 @@
                             </select>
                          </div>
                       </div>
-                      <div style ="display:none;" class="col-md-4" id="imagen"><!--Codigo para subir la foto :3 -->
-                       <div class="form-group">
-                        <label >Subir foto de perfil</label>
-                        <input type="file" class="form-control" name="foto_perfil">
-                       </div>
-                      </div>
+                      
                     </div><!--Fin de otra fila :v -->
 
                     <?php
@@ -520,7 +515,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
-          document.getElementById('imagen').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -532,7 +526,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('cuarta_fila').style.display = "none";
            document.getElementById('titulo').style.display = "block";
            document.getElementById('sacramentos').style.display = "block";
-           document.getElementById('imagen').style.display = "block";
            document.getElementById('form_usuario').style.display = "block";
            document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -541,7 +534,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
-          document.getElementById('imagen').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('form_usuario').style.display = "none";
           document.getElementById('primera_fila').style.display = "none";
@@ -553,7 +545,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
-          document.getElementById('imagen').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
           document.getElementById('cuarta_fila').style.display = "block";
@@ -562,7 +553,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('sacramentos').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
-          document.getElementById('imagen').style.display = "block";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
@@ -573,7 +563,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
            document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
-          document.getElementById('imagen').style.display = "block";
           document.getElementById('catequistas').style.display = "block";
           document.getElementById('form_usuario').style.display = "block";
           document.getElementById('primera_fila').style.display = "block";
