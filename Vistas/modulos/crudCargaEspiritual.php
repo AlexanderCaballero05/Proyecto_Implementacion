@@ -268,7 +268,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST">
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="card-title">Editar Carga Academica</h4>
+                                  <h4 class="card-title">Editar Carga Espiritual</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -277,13 +277,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time" max= "18:00:00"   step="1800" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <div class="invalid-feedback">
+                                          Horario valido de 9:00 a.m. a 5:00 p.m.
+                                       </div>
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time" max= "18:00:00"   step="1800" value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <div class="invalid-feedback">
+                                          Horario valido de 9:00 a.m. a 5:00 p.m.
+                                       </div>
                                       </div>
                                     </div>
                                     <?php
@@ -312,7 +318,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       ?>
                                       <label  class="control-label">Tutoria:</label> 
                                       <div class="form-group">
-                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  required>
+                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled">
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 
                                           <?php 
                                           if ($resultadod->num_rows > 0) {

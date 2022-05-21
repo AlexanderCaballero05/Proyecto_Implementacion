@@ -326,7 +326,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       ?>
                                       <label  class="control-label">Tutoria:</label> 
                                       <div class="form-group">
-                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  required>
+                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled" >
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 
                                           <?php 
                                           if ($resultadod->num_rows > 0) {
