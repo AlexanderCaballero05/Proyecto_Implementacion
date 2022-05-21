@@ -27,9 +27,9 @@
              $estado = "1";  
              $contrasena = crypt($_POST['contrasena'],'$2a$07$usesomesillystringforsalt$');
              $fechaActual = date('Y-m-d');  
-             $especialidad_medico = ($_POST['medico']);   
-             $especialidad_psicologo = ($_POST['psicologo']); 
-             $especialidad_catequista =   ($_POST['catequista']); 
+               
+             
+             
              
             try{ 
                 $consulta = $db->prepare("SELECT DNI FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
@@ -48,7 +48,7 @@
                   if($row>0){
                     echo "<script>
                     alert('La direccion de correo electronico $correo ya se encuentra registrada');
-                    window.location = 'agregarusuarios';
+                    window.location = 'crudpersonas';
                     </script>";
                     exit;
                   }else{ //else de verificar el telefono 
@@ -59,7 +59,7 @@
                     if($row >0){
                       echo "<script>
                       alert('El Número de telefono $telefono ya se encuentra registrado');
-                      window.location = 'agregarusuarios';
+                      window.location = 'crudpersonas';
                       </script>";
                       exit;
                     }else{
@@ -86,11 +86,10 @@
                               exit;
                              }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar 
                               try{
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
                                 $rol= "1";
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$foto');" ;
+                                '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
                                   echo "<script> 
@@ -126,10 +125,9 @@
                                 exit;
                               }else{
                                 $rol= "2";
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$foto');" ;
+                                '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
@@ -162,10 +160,9 @@
                                 exit;
                               }else{
                                 $rol= "7"; //roll de enfermero
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
                                 $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$foto');" ;
+                                '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
@@ -187,7 +184,6 @@
 
                           }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes(porque se les pego la gana hacerlos estudiantes :v)
                            try{
-                              $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
                               $queryregistrarp = "INSERT INTO TBL_PERSONA( PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO,DNI, FECHA_NACIMIENTO,LUGAR_NACIMIENTO,
                               FECHA_INSCRIPCION,CODIGO_TIPO_PERSONA,CREADO_POR_USUARIO,SEXO,DIRECCION)
                               VALUES('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento',
@@ -202,7 +198,7 @@
                               $resultado2=$conn->query($querycorreo);
                               //insertar el usuario para el estudiante
                               $rol ="8";// rol del estudiante
-                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA,CREADO_POR,IMAGEN)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena','$usuario','$foto');";
+                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA,CREADO_POR,IMAGEN)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena','$usuario');";
                               $resultado3 = $conn->query($query_user);
 
                               if (is_array($_POST['sacramento'])) {//codigo para insertar los sacramentos ,es diferente porque es con checbox
@@ -245,10 +241,10 @@
                                 </script>";
                                 exit;
                               }else{
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
+                                $especialidad_medico = ($_POST['medico']); 
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_medico','$foto');" ;
+                                '$estado','$rol','$contrasena','$especialidad_medico');" ;
                                 $consul =$conn->query($insert_medico);
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
@@ -282,10 +278,10 @@
                             }else{
                               try{
                                 $rol= "4";//rol del psicologo
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
+                                $especialidad_psicologo = ($_POST['psicologo']); 
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_psicologo','$foto');" ;
+                                '$estado','$rol','$contrasena','$especialidad_psicologo');" ;
                                 $consul =$conn->query($insert_medico);
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
@@ -303,6 +299,7 @@
                               }
                             }
                           }else if($tipo_persona == "8"){//Para insertar un catequiste :)
+
                             $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
@@ -314,11 +311,11 @@
                               exit;
                             }else{
                               try{
+                                $especialidad_catequista =   ($_POST['catequista']); 
                                 $rol ="6";//rol de catequista
-                                $foto = addslashes(file_get_contents($_FILES['foto_perfil']['tmp_name']));
                                 $insert_medico = " CALL Sp_insertar_usuario_especialidad('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
                                 '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena','$especialidad_catequista','$foto');" ;
+                                '$estado','$rol','$contrasena','$especialidad_catequista');" ;
                                 $consul =$conn->query($insert_medico);
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
@@ -400,9 +397,7 @@
       date_default_timezone_set("America/Guatemala");
       $Fechaactual=  date("Y-m-d" );
       if($ESTADO == "3"){
-        $actualizaresatado = "UPDATE TBL_CARGA_ACADEMICA
-                                  SET FECHA_FINAL = '$Fechaactual' 
-                                  WHERE CODIGO_PERSONA = '$CODUSUARIO';";
+        $actualizaresatado = "UPDATE TBL_CARGA_ACADEMICA SET FECHA_FINAL = '$Fechaactual' WHERE CODIGO_PERSONA = '$CODUSUARIO';";
         $Respuesta=$conn->query($actualizaresatado);
         if($Respuesta>0){
           echo "<script>
@@ -434,10 +429,10 @@
                     }else{
                       if(preg_match($expre,$connueva)){ //evalua la expresion regular,que define una contraseña segura :3
                         $pass= crypt($connueva,'$2a$07$usesomesillystringforsalt$');
-                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass';" ; //Al cumplir con los requerimientos ,se llama al procedimiento alamcenado y se actualiza la contraseña
+                        $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass');" ; //Al cumplir con los requerimientos ,se llama al procedimiento alamcenado y se actualiza la contraseña
                         $consulta=$conn->query($sql);
                         if (($consulta)>0) {
-                          echo "alert('Cambio exitosamente ');<script>window.location = 'ediusuarios';</script>";
+                          echo "<script> alert('Cambio exitosamente');window.location = 'ediusuarios';</script>";
                         }
                       }else{
                         echo "<script>

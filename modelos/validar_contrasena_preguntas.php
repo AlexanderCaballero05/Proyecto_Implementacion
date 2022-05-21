@@ -39,7 +39,7 @@
                                 }
                                 else{ //si la contraseña es diferente de la que tiene en el sistema
                                     try{
-                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contraseña  WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASENA = '$pass';";
+                                        $buscarclave = "SELECT * FROM tbl_ms_hist_contrasena WHERE  CODIGO_USUARIO = '$usuari'  AND CONTRASENA = '$pass';";
                                         $busqueda=$conn->query($buscarclave);
                                         $fila=$busqueda->num_rows;
                                         if($fila>0){
@@ -82,19 +82,16 @@
                                         echo $e->getMessage();  
                                         return false;
                                     }
-                                  
-
                                     $_SESSION['vario'] =$usuario;
                                     //llamada de la fuction bitacora -->
-                                 $codigoObjeto=1;
-                                 $accion='Cambio de contraseña';
-                                 $descripcion= 'Cambio la contraseña por metodo preguntas';
-                                 bitacora($codigoObjeto, $accion,$descripcion);
-
+                                    $codigoObjeto=1;
+                                    $accion='Cambio de contraseña';
+                                    $descripcion= 'Cambio la contraseña por metodo preguntas';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
                                 }//final del else
                             }catch (PDOException $e){
-                            echo $e->getMessage();  
-                            return false;
+                              echo $e->getMessage();  
+                              return false;
                             }
                         }else{
                             echo "<script> alert('La contraseña no cumple con los requisitos')
