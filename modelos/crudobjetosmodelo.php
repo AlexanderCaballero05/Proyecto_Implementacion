@@ -70,9 +70,11 @@
         $edinombre_objeto = ($_POST['editnombre']);
         $edi_descripcion = ($_POST['editdescripcion']);
         $fecha_modificacion= date('Y-m-d');
+
         $user = $_SESSION['vario'];
+
         try {
-         $sentencia = $db->prepare("SELECT * FROM tbl_objeto where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");
+         $sentencia = $db->prepare("SELECT * FROM tbl_objetos where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");
          $sentencia->execute(array($edinombre_objeto,$codigo_objeto));
          $row=$sentencia->fetchColumn();
          if($row>0){
@@ -83,7 +85,8 @@
           exit;
          } else {
           try {
-            $sql = " UPDATE tbl_objetos SET NOMBRE = '$edinombre_objeto' ,DESCRIPCION = '$edi_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
+            $sql = " UPDATE tbl_objetos SET NOMBRE = '$edinombre_objeto' 
+                                          ,DESCRIPCION = '$edi_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = 'ADMIN'
             WHERE CODIGO_OBJETO = '$codigo_objeto' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

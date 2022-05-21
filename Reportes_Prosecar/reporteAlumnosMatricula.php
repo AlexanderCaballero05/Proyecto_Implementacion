@@ -119,12 +119,14 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Rol usuario', 1, 0, 'C', 0);
-			$this->Cell(75, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Insertar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Eliminar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Actualizar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Mostrar', 1, 1, 'C', 0);
+			$this->Cell(50, 8, 'Alumno', 1, 0, 'C', 0);
+			$this->Cell(35, 8, 'Tutoria', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Grado', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Periodo', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Anio', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Matricula', 1, 0, 'C', 0);
+			$this->Cell(55, 8, 'Observacion', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -199,7 +201,8 @@ class PDF extends FPDF {
 //------------------OBTENES LOS DATOS DE LA BASE DE DATOS-------------------------
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION, c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA
+	$strquery ="SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION,
+	 c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA, mat.OBSERVACION_MATRICULA
     FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
     WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
     AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
@@ -230,17 +233,18 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(10);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Alumno', 1, 0, 'C', 1);
-$pdf->Cell(75, 12, 'Nombre Tutoria', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, 'Tutoria', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Grado', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Periodo', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Anio', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Observacion', 1, 1, 'C', 1);
+$pdf->Cell(25, 12, 'Matricula', 1, 0, 'C', 1);
+$pdf->Cell(55, 12, 'Observacion', 1, 1, 'C', 1);
 
 
 
@@ -253,11 +257,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15, 50, 75, 25,25,25,25,30)); //???
+$pdf->SetWidths(array(15, 50, 35, 25,25,25,25,25,55)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['ALUMNO'], ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TUTORIA']))),ucwords(strtolower(utf8_decode($data[$i]['SECCION']))), ucwords(strtolower(utf8_decode($data[$i]['HORA']))),ucwords(strtolower(utf8_decode($data[$i]['PERIODO']))),ucwords(strtolower(utf8_decode($data[$i]['ANIO']))),ucwords(strtolower(utf8_decode($data[$i]['ESTADO_MATRICULA']))) ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['ALUMNO'], ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TUTORIA']))),ucwords(strtolower(utf8_decode($data[$i]['SECCION']))), ucwords(strtolower(utf8_decode($data[$i]['HORA']))),ucwords(strtolower(utf8_decode($data[$i]['PERIODO']))),ucwords(strtolower(utf8_decode($data[$i]['ANIO']))),ucwords(strtolower(utf8_decode($data[$i]['ESTADO_MATRICULA']))),ucwords(strtolower(utf8_decode($data[$i]['OBSERVACION_MATRICULA']))) ),10); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

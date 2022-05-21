@@ -280,7 +280,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                 value=""
                                                 class="form-control" maxlength="40"
                                                 minlength="15"
-                                                onKeyDown="sinespacio(this);"
                                                 placeholder="Agregue  la especialidad"
                                                 onkeyup="mayus(this);"
                                                 autocomplete="off" type="text"

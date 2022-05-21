@@ -1,5 +1,8 @@
 <?php
-
+session_start();
+$persona = $_SESSION['persona'];
+?>
+<?php
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
 
@@ -17,7 +20,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(115);
-		$this->Cell(100, 8, utf8_decode('Reporte general de  personas'));
+		$this->Cell(100, 8, utf8_decode('Reporte por tipo de persona'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -34,26 +37,11 @@ class PDF extends FPDF {
 	$this->SetY(-18);
 	$this->SetX(28);
 	$this->Cell(100,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	
 	$this->SetX(6);
 	$this->Line(6,200,290,200);
-	
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
-
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------
@@ -119,15 +107,12 @@ class PDF extends FPDF {
 			$this->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);
 			$this->Cell(45, 11, 'Correo', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
-		
 		}
-
 		if ($setX == 100) {
 			$this->SetX(100);
 		} else {
 			$this->SetX($setX);
 		}
-
 	}
 
 	function NbLines($w, $txt) {
@@ -198,15 +183,11 @@ class PDF extends FPDF {
 	WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
 	AND tl.CODIGO_PERSONA = p.CODIGO_PERSONA
 	AND c.CODIGO_PERSONA = p.CODIGO_PERSONA 
-    AND p.CODIGO_PERSONA  > 1;";
+    AND p.CODIGO_PERSONA  > 1
+    AND t.CODIGO_TIPO_PERSONA = '$persona';";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
-
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 

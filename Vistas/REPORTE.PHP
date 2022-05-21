@@ -51,7 +51,7 @@ if (isset($_POST['expediente'])) {
     padding: 2px 9px;
   }
   body {
-    margin-top: 4cm;
+    margin-top: 4.5cm;
     margin-left: 1cm;
     margin-right: 1cm;
     margin-bottom: 2cm;
@@ -70,9 +70,14 @@ if (isset($_POST['expediente'])) {
    header {
     position: fixed;
     top: 0.5cm;
-    left: 1cm;
+    left: 1.5cm;
     right: 0cm;
-    height: 4cm;
+    height: 4.5cm;
+  }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
   }
   .c{
     width: 706px;
@@ -81,7 +86,7 @@ if (isset($_POST['expediente'])) {
     margin: 8px;
     border: 1px solid #404141;
   }
-  .c2{
+  .c2{ /* Son estilos para los div que hacen como si fueran un textarea,si no sabe pues practique css :v */
     width: 706px;
     margin:2px;
     min-height: 200px;
@@ -92,14 +97,14 @@ if (isset($_POST['expediente'])) {
    </style>
     <style>
    .pagenum:before {
-     
-        content: counter(page);
+      content: counter(page);/*Es para que salga la enumeracion de la pagina si */
     }
    </style>
     <title>Historial medico paciente</title>
   </head>
   <body>
     <header>
+    <img src="LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
       <p  style="text-align: center; font-size: 19px;">Historial medico del paciente</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
@@ -132,9 +137,9 @@ if (isset($_POST['expediente'])) {
       ?>      
       <legend>  Datos Personales Paciente</legend><br>
       <label  ><b>Nombre completo: </b><?php  echo ucwords(strtolower($nombre)); ?></label><br>
-      <label style="padding-right: 12px;" ><b>DNI:  </b><?php echo $dni; ?></label> 
+      <label style="padding-right: 24px;" ><b>DNI:  </b><?php echo $dni; ?></label> 
       <label><b>Edad: </b><?php echo $edad . " años"; ?> </label><br>
-      <label style="padding-right: 22px;"><b>Celular: </b> <?php echo $telefono;?></label>
+      <label style="padding-right: 20px;"><b>Celular: </b> <?php echo $telefono;?></label>
        <label><b> Sexo:</b> <?php echo  ucwords(strtolower($sexo)); ?></label>
       <br>
     </fieldset>
@@ -197,10 +202,14 @@ if (isset($_POST['expediente'])) {
         $consulti = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA, con.SINTOMAS, 
         con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO, pre.PESO, pre.MASA_CORPORAL, pre.ESTATURA, 
         pre.TEMPERATURA, pre.PULSO, pre.FRECUENCIA_CARDIACA, pre.FRECUENCIA_RESPIRATORIA, pre.DESNUTRICION, 
-        GROUP_CONCAT(med.NOMBRE_MEDICAMENTO) AS NOMBRE_MEDICAMENTO, GROUP_CONCAT(exa.EXAMEN_MEDICO) as NOMBRE_EXAMEN
+        GROUP_CONCAT(med.NOMBRE_MEDICAMENTO) AS NOMBRE_MEDICAMENTO, GROUP_CONCAT(exa.EXAMEN_MEDICO) as NOMBRE_EXAMEN,
+        CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO,
+        i.HORARIO AS HORA
           FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_preclinica pre,
-         tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med
+         tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med ,tbl_persona_especialidad pes, tbl_persona pee
                 WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                AND pes.CODIGO_PERSONA_ESPECIALIDAD = i.CODIGO_ESPECIALISTA
+                AND pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
                 AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                 AND i.CODIGO_CITA = pre.CODIGO_CITA
                 AND con.CODIGO_CITA = i.CODIGO_CITA
@@ -209,9 +218,9 @@ if (isset($_POST['expediente'])) {
                 AND recp.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
                 AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
                 AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO
-                      AND  i.AREA_CITA = '2'
-                        AND pe.CODIGO_PERSONA= '$persona'
-                        GROUP BY con.CODIGO_CONSULTA;";
+                AND  i.AREA_CITA = '2'
+                AND pe.CODIGO_PERSONA= '$persona'
+                GROUP BY con.CODIGO_CONSULTA;";
         $resul=$conn->query($consulti);
       ?>
       <?php
@@ -223,7 +232,8 @@ if (isset($_POST['expediente'])) {
           $evolucion = $row['EVOLUCION'];
           $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
           $fecha = $row['FECHA_CREACION'];
-
+          $MEDICO = $row['MEDICO'];
+          $HORA = $row['HORA'];
           $peso = $row['PESO'];
           $estatura = $row['ESTATURA'];
           $masa = $row['MASA_CORPORAL'];
@@ -237,6 +247,14 @@ if (isset($_POST['expediente'])) {
       ?>
       <div id="caja3">
        <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Consulta medica fecha: <?php echo $fecha;?></label></div>
+       <br>
+       <fieldset>
+         <legend>Datos generales de la consulta</legend><br>
+         <label  ><b>Nombre del medico: </b><?php  echo ucwords(strtolower($MEDICO)); ?></label><br>
+         <label style="padding-right: 22px;"><b>Hora</b><?php echo $HORA; ?></label>
+         <label><b>Fecha: </b><?php echo $fecha; ?></label>
+       </fieldset>
+       
       <p>Datos de preclínica </p><hr><br>
       <table style="border-collapse: collapse;  border: 0.4px solid #FFFF;">
         <thead >

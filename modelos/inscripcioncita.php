@@ -330,4 +330,39 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
  }
 //fin de inscripcion cita por parte de un usuario psicologo
 ?>
-<!-- modificado por Gissela y Any :( -->
+
+<?php
+//Codigo para la inscripcion cita por parte de un usuario catequista
+ if(isset ($_POST['codigo_paciente_espiritual'])){
+    if(isset ($_POST['REGISTRAR_CITA_PACIENTE_ESPIRITUAL'])){
+      $codigo_persona = $_POST['codigo_paciente_espiritual'];
+      $codigo_catequista = $_POST['codigo_catequista'];
+      $fecha_cita = $_POST['fecha_cita'];
+      $hora_cita = $_POST['hora_cita'];
+      $area_cita = "4";
+      $estado = "5";
+      $fechaactual = date('Y-m-d'); 
+      $user = "Admin";
+
+      $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_catequista', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
+      $consulta=$conn->query($insertar);
+      if($consulta >0){ 
+          echo "<script>
+           window.location = 'crudPacientesEspirituales';
+          </script>";
+          $codigoObjeto=32;
+          $accion='Registro';
+          $descripcion='Se vizualiza citas registradas';
+          bitacora($codigoObjeto,$accion,$descripcion);
+           exit;
+      }else{
+        echo "<script> 
+        window.location = 'crudPacientesEspirituales';
+        </script>";
+        exit;
+      }
+
+    }
+ }
+//fin de inscripcion cita por parte de un usuario catequista
+?>

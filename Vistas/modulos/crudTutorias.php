@@ -155,7 +155,11 @@
 
                                       <div class="col-sm-12">
                                         <?php //--INICIO DEL ESTADO
-                                        $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                        $query = "SELECT  CODIGO_AREA,NOMBRE 
+                                        FROM tbl_area
+                                        where CODIGO_AREA BETWEEN 1 and 4
+                                        and CODIGO_AREA <> 2
+                                        and  CODIGO_AREA <> 3";
                                         $resultadod=$conn->query($query);                
                                        ?>
                                        <label  class="control-label">Area</label>  
@@ -236,7 +240,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre</label>
-                                    <input id="bloquear" required type="text"  value ="" class="form-control"  maxlength="20" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
+                                    <input id="bloquear" required type="text"  value ="" class="form-control"  maxlength="100" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
                                    </div>
@@ -244,7 +248,11 @@
                             </div>
                             <div class="col-sm-12">
                               <?php //--INICIO DEL ESTADO
-                                $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area where CODIGO_AREA <> 2 and  CODIGO_AREA <> 3;";
+                                $query = "SELECT  CODIGO_AREA,NOMBRE 
+                                FROM tbl_area
+                                where CODIGO_AREA BETWEEN 1 and 4
+                                and CODIGO_AREA <> 2
+                                and  CODIGO_AREA <> 3;";
                                 $resultadod=$conn->query($query);                
                                ?>
                               <label  class="control-label">Area</label>  

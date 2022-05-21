@@ -27,7 +27,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
     </div>
     <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-          <h4> LISTA CARGA ACADEMICA <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> LISTA CARGA ESPIRITUAL <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
       <section class="content">
@@ -35,10 +35,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Ver carga academica</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
+            <a class="nav-link active" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
@@ -76,7 +76,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-            </br></br>
+    
                   <?php
                     }
                     ?>
@@ -93,7 +93,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Filtrar por Fecha</button>  
                 </div>
                   -->
-                
+                </br></br>
                 <?php 
                     if(isset($_POST['excel'])){
                       $desde = date("Y-m-d", strtotime($_POST['bdesde']));
@@ -165,10 +165,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                           AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
                                           AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
                                           AND c.CODIGO_SECCION = s.CODIGO_SECCION
-                                          AND t.CODIGO_AREA  = 1; ";
+                                          AND t.CODIGO_AREA  = 4; ";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
-                        $contador = 0;
+                        $contador=0;
                         while($row = $result->fetch_assoc()) {
                         $contador=$contador+1;
                         $var1 = $row['CODIGO_CARGA'];
@@ -452,7 +452,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
   <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteCargaAcademica.php','_blank');
+      window.open('Reportes_Prosecar/reporteCargaEspiritual.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
