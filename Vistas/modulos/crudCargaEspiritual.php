@@ -21,6 +21,26 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
+
+<!-- Trae los parametros de la hora inicial y final -->
+<?php
+  $hora ="HORA_INICIO_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horainicial2 = $row;
+  }
+?>
+<?php
+  $hora1 ="HORA_FINAL_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora1));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horafinal2= $row;
+  }
+?>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -268,7 +288,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST">
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="card-title">Editar Carga Academica</h4>
+                                  <h4 class="card-title">Editar Carga Espiritual</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -277,13 +297,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time" min= "<?= ($horainicial2)?>" step="1800"   max= "<?= ($horafinal2)?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <div class="invalid-feedback">
+                                        Horario no valido, sobrepasa la hora limite establecida
+                                       </div>
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time" mmin= "<?= ($horainicial2)?>" step="1800"   max= "<?= ($horafinal2)?>" value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <div class="invalid-feedback">
+                                        Horario no valido, sobrepasa la hora limite establecida
+                                       </div>
                                       </div>
                                     </div>
                                     <?php
@@ -312,7 +338,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       ?>
                                       <label  class="control-label">Tutoria:</label> 
                                       <div class="form-group">
-                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  required>
+                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled">
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 
                                           <?php 
                                           if ($resultadod->num_rows > 0) {

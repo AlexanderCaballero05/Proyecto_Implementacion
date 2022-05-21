@@ -22,33 +22,34 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  
 ?>
 
+
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
+
+</head>
+
+<!-- Trae los parametros de la hora inicial y final -->
 <?php
-  $Fechaactual ="FECHAINICIAL"; ///Se llama a los parametros de la base de datos 
+  $hora ="HORA_INICIO_CARGAACADEMICA";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
-  $sentencia->execute(array($Fechaactual));
+  $sentencia->execute(array($hora));
   $row=$sentencia->fetchColumn();
   if($row>0){
-    $valor = $row;
+    $horainicial = $row;
   }
 ?>
 <?php
-  $horainicial="HORA_INICIO_CARGAACADEMICA";
+  $hora1 ="HORA_FINAL_CARGAACADEMICA";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
-  $sentencia->execute(array( $horainicial));
+  $sentencia->execute(array($hora1));
   $row=$sentencia->fetchColumn();
   if($row>0){
-    $horainicio = $row;
+    $horafinal= $row;
   }
 ?>
-<?php
-  $horafinal="HORA_FINAL_CARGAACADEMICA";
-  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
-  $sentencia->execute(array($horafinal));
-  $row=$sentencia->fetchColumn();
-  if($row>0){
-    $horafinalcarga = $row;
-  }
-?>
+
+
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -305,15 +306,23 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  value ="<?php echo $var6;?>" class="form-control" name="hora1"
-                                         min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>">
+
+                                        <input  type="time"  min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <div class="invalid-feedback">
+                                         Horario no valido, sobrepasa la hora limite establecida
+                                        </div>
+
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" 
-                                        min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"  >
+
+                                        <input  type="time"min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <div class="invalid-feedback">
+                                        Horario no valido, sobrepasa la hora limite establecida
+                                       </div>
+
                                       </div>
                                     </div>
                                     <?php  
@@ -350,7 +359,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       ?>
                                       <label  class="control-label">Tutoria:</label> 
                                       <div class="form-group">
-                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  required>
+                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled" >
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 
                                           <?php 
                                           if ($resultadod->num_rows > 0) {
@@ -532,21 +541,24 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 </script>
 
 <script>
-    (function () { 
-        'use strict'
-        var forms = document.querySelectorAll('.was-validated')
-        // Loop over them and prevent submission
-        Array.prototype.slice.call(forms)
-          .forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-              if (!form.checkValidity()) {
-                event.preventDefault()
-                event.stopPropagation()
-              }
-              form.classList.add('was-validated')
-            }, false)
-          })
-    })()
+
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+
 </script>
 
 
