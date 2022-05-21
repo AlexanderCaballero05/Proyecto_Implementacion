@@ -139,7 +139,7 @@
           <input type="password"  name="contraAnte" id="PASSACTUAL" class="form-control" placeholder="Ingrese su actual contraseña"
             required minlength="5" maxlength="30" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
           <div class="input-group-append">
-            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button" onKeyDown="sinespacio(this);" onclick="Passactual()"><span class="icon2 fa fa-eye-slash"></button>
+            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Passactual()"><span class="icon2 fa fa-eye-slash"></button>
           </div>
           <div class="invalid-feedback">
               Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.
@@ -149,7 +149,7 @@
           <input  type="password" id="PASSNUEVA" name="clave_nueva" class="form-control" placeholder="Ingrese una nueva contraseña"
             autocomplete = "off"    required  minlength="5" maxlength="30"  title="Configure con los valores solicitados" onkeyup="sinespacio(this); ">
           <div class="input-group-append">
-            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button" onKeyDown="sinespacio(this);" onclick="Passnueva()"><span class="icon3 fa fa-eye-slash"></button>
+            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Passnueva()"><span class="icon3 fa fa-eye-slash"></button>
           </div>
           <div class="invalid-feedback">
               Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.
@@ -159,7 +159,7 @@
           <input type="password" id="CONFPASS" name="confirmar_clave" class="form-control" placeholder="Confirme la contraseña"
             autocomplete = "off"  required minlength="5"  maxlength="30"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
           <div class="input-group-append">
-            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button" onKeyDown="sinespacio(this);" onclick="Confpass()"><span class="icon4 fa fa-eye-slash"></button>
+            <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Confpass()"><span class="icon4 fa fa-eye-slash"></button>
           </div>
           <div class="invalid-feedback">
             Ambas contraseñas deben ser iguales.
