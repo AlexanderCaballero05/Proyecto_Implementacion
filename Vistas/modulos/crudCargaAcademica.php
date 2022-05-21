@@ -28,6 +28,25 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 </head>
 
+<!-- Trae los parametros de la hora inicial y final -->
+<?php
+  $hora ="HORA_INICIO_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horainicial = $row;
+  }
+?>
+<?php
+  $hora1 ="HORA_FINAL_CARGAACADEMICA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($hora1));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $horafinal= $row;
+  }
+?>
 
 <div class="content-wrapper">
   <div class="content-header">
@@ -285,18 +304,18 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time"  min="09:00:00"  step="1800" max= "17:00:00" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time"  min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
                                         <div class="invalid-feedback">
-                                         Horario valido de 9:00 a.m. a 5:00 p.m.
+                                         Horario no valido, sobrepasa la hora limite establecida
                                         </div>
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time" max= "18:00:00"   step="1800"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time"min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
                                         <div class="invalid-feedback">
-                                          Horario valido de 9:00 a.m. a 5:00 p.m.
+                                        Horario no valido, sobrepasa la hora limite establecida
                                        </div>
                                       </div>
                                     </div>
