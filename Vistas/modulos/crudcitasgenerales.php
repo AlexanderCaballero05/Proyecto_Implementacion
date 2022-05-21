@@ -578,8 +578,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </div>
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
-                                                                    <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"name="cod_enviar_cita1" id="cod_enviar_cita1" >
-                                                                    <input type="text" value="<?php echo $var6; ?>" hidden class="form-contro" name="estado_cita1" id="estado_cita1" >
+                                                                    <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
+                                                                    name="cod_enviar_cita1" id="cod_enviar_cita1" >
+                                                                    <input type="text" value="<?php echo $var6; ?>" hidden class="form-contro" 
+                                                                    name="estado_cita1" id="estado_cita1" >
                                                                     <h2 class="text-center">Informacion de cita</h2>
                                                                     <br>
                                                                     <div class="row"> 

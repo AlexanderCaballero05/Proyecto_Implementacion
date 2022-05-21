@@ -90,8 +90,6 @@ AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 4
 ";
 $result3= $conn->query($query);
 ?>
-
-
 <body>
     <section class="content">
     <div class="container-fluid">
@@ -124,7 +122,8 @@ $result3= $conn->query($query);
                   $resultado = $conn->query($query);
                   ?>
                   <a href="categoria">
-                  <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-2"></i></span>  Agregar persona </button>
+                  <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  
+                  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-2"></i></span>  Agregar persona </button>
                  </a>
                  <div class="col-sm-9">
                    <!-- <label for="txtcodigo_cita">Beneficiario</label>-->
@@ -171,10 +170,8 @@ $result3= $conn->query($query);
                             </select>
                             <div class="invalid-feedback">
                             Complete este campo.
-                            </div>
-                            
+                            </div>  
                     </div>
-                    
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
                         <?php
                         $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA =2 ";
@@ -336,7 +333,6 @@ $result3= $conn->query($query);
                         $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
                         $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                    ?>
-
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
 
@@ -352,7 +348,6 @@ $result3= $conn->query($query);
                       </div>
                  </div> <!-- fin de algo--> 
               </br></br></br>
-
               <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -424,9 +419,6 @@ window_mouseout( document, 'mouseout', event => {
 event = event ? event : window.event;
 
 var from   = event.relatedTarget || event.toElement;
-
-
-
 if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 
     // Haz lo que quieras aquí
@@ -438,10 +430,7 @@ if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 } ); */
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-
-
 </body>
-
 
  <script>
     $( function() {
