@@ -2,8 +2,10 @@
 session_start();
 include_once "conexion.php";
 include_once "conexion3.php";
+
 include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
+
 $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
@@ -497,6 +499,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <div class="row"> <!-------- INICIO PRIMERA ROW editar -----------> 
                                                                     <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_cita2" id="cod_edit_cita2" >
                                                                     <div class="col-sm-6">
+
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                             <input type="date" value="<?php echo $var2; ?>"  min= "<?= date ($valor)?>" max="<?= date($fechamaxima)?>" 
@@ -505,6 +508,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="invalid-feedback">
                                                                         Campo obligatorio, completelo con una fecha valida.
                                                                         </div>
+
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">

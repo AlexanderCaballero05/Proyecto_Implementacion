@@ -22,29 +22,26 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 
     <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CONSULTA PSICOLOGICA PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> CONSULTA ESPIRITUAL PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Citas en espera</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link"  style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link active" style="color:#000000;" href="#">consulta Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de personas</a>
             </li>
           </ul>
         </div>
@@ -52,7 +49,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <body oncopy="return false" onpaste="return false" >
         <form method="POST" class="needs-validation" novalidate id="form">
             
-            <h5>Datos del Paciente</h5>
+            <h5>Datos de la persona</h5>
             <hr>
                       
             <div class="row mb-8">
@@ -75,7 +72,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                   AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
                                                                   AND es.CODIGO_PERSONA = '$cod_usuario'
                                                                   AND i.CODIGO_ESTADO = '11' 
-                                                                  and i.AREA_CITA = '3'
+                                                                  and  i.AREA_CITA = '4'
                                                                   AND i.FECHA_CITA = CURDATE();
                            ";
                           $resul=$conn->query($query); 
@@ -86,8 +83,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             $codigo_paciente = $row['CODIGO_PERSONA'];
                           
                           ?>
-                      <input type="text" name="codigocita3" value="<?php echo $var3?>" hidden>
-                       <label for="">Nombre del paciente:</label> 
+                      <input type="text" name="codigo_cita_espiritual" value="<?php echo $var3?>" hidden>
+                       <label for="">Nombre de la persona:</label> 
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
@@ -99,54 +96,51 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     }
                     ?>
                     <br></br>
-                    <h5>Expediente Psicologico</h5>
+                    <h5>Expediente Espiritual</h5>
                     <hr>
             <!--INICIO COMBOBOX -->
              <div class="form-group">
              <?php
-              $query = "SELECT exp.CODIGO_EXPEDIENTE, exp.ANTECEDENTES_FAMILIARES, exp.ANTECEDENTES_PERSONALES, exp.ANTECEDENTES_CLINICOS, GROUP_CONCAT(sin.TIPO) as NEUROTICOS
-              FROM tbl_expediente_psicologico_unico exp, tbl_persona per, tbl_personas_sintomas psin, tbl_sintomas_neuroticos sin            			       
-              WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
-              AND exp.CODIGO_EXPEDIENTE = psin.CODIGO_EXPEDIENTE
-              AND psin.CODIGO_SINTOMA_NEUROTICO = sin.CODIGO_SINTOMA_NEUROTICO
-              AND exp.CODIGO_PERSONA = '$codigo_paciente';" ;
+              $query = "SELECT exp.CODIGO_EXPEDIENTE, exp.NOMBRE_IGLESIA, exp.GRUPO_IGLESIA, exp.TIEMPO_ASISTIR_IGLESIA, exp.MOTIVACION_IGLESIA
+              FROM tbl_expediente_espiritual exp
+              WHERE CODIGO_PERSONA = '$codigo_paciente';" ;
               $resul2=$conn->query($query); 
                
               while($row2 = $resul2->fetch_assoc()){
-                $var6 = $row2['ANTECEDENTES_FAMILIARES'];
-                $var7 = $row2['ANTECEDENTES_PERSONALES'];
-                $var9 = $row2['ANTECEDENTES_CLINICOS'];
-                $var8 = $row2['NEUROTICOS'];
+                $var6 = $row2['NOMBRE_IGLESIA'];
+                $var7 = $row2['GRUPO_IGLESIA'];
+                $var9 = $row2['TIEMPO_ASISTIR_IGLESIA'];
+                $var8 = $row2['MOTIVACION_IGLESIA'];
                 $var5 = $row2['CODIGO_EXPEDIENTE'];
               ?>
                    <div class= "row">                      
                         <div class="col-md-6">
                                 <input type="text" name="codigoexpediente" value="<?php echo $var5?>" Hidden> <!--CODGIO DEL EXPEDIENTE PARA Q SALGA TODA INFO  --> 
-                                <label for="" class="control-label">Sintomas Neuroticos</label> 
+                                <label for="" class="control-label">Nombre iglesia</label> 
                                 <div class="form-group">
                                 <textarea required class="form-control"  type="textarea" required value=""disabled ="disabled" 
-                                name="sintomasneuraticos" id="sintomasneuraticos"><?php echo $var8?></textarea>
+                                name="sintomasneuraticos" id="sintomasneuraticos"><?php echo $var6?></textarea>
                                 </div>
                         </div><!--fin del Sintomas Neuroticos-->
                         <div  class="col-md-6">
-                                <label for="" class="control-label">Antecedentes Familiares</label> 
+                                <label for="" class="control-label">Grupo de iglesia</label> 
                                     <div class="form-group">
                                 <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled"
-                                 name="Familiares" id="Familiares"><?php echo $var6?></textarea>
+                                 name="Familiares" id="Familiares"><?php echo $var7?></textarea>
                                     </div>
                         </div><!--fin del la Antecedentes Familiares -->   
                     </div> <!--fin del row primer de expediente  -->
                     <div class="row">
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Antecedentes Personales</label> 
+                            <label for="" class="control-label">Tiempo de asistir a la iglesia</label> 
                                 <div class="form-group">
-                            <textarea required class="form-control"  type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var7?></textarea>
+                            <textarea required class="form-control"  type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var9?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->    
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Antecedentes Clinicos</label> 
+                            <label for="" class="control-label">Motivacion en la iglesia</label> 
                                 <div class="form-group">
-                            <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var9?></textarea>
+                            <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var8?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->       
                     </div><!--fin del row segundo de expediente -->
@@ -159,39 +153,19 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <hr>
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Sintomas:</label> 
+                        <label for="identidad" class="control-label">Motivo de consulta:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" onkeyup="mayus(this);" name="sintomas3" id="sintomas3"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" minlength="5"  name="Motivo_consulta" id="Motivo_consulta" autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <label for="identidad" class="control-label">Diagnóstico Ingreso:</label> 
-                        <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" onkeyup="mayus(this);" name="Ingreso3" id="Ingreso3"  autocomplete = "off" required ></textarea>
-                          <div class="invalid-feedback">
-                              Llene este campo.
-                          </div>
-                        </div>
-                      </div>
-                    </div><!--Fin de una fila -->
-                             
-                    <div class="row">
-                      <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Diagnóstico Egreso:</label> 
-                        <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" onkeyup="mayus(this);" name="Egreso3" id="Egreso3" autocomplete = "off" required></textarea>
-                          <div class="invalid-feedback">
-                              Llene este campo.
-                          </div>
-                        </div>
-                      </div>
+                      </div>               
+                
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Observaciónes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="600" minlength="5" onkeyup="mayus(this);" name="observaciones3" id="observaciones3"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" minlength="3" name="observaciones_espiritual" id="observaciones_espiritual"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -200,7 +174,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
+                    <button type="submit"  name="Consulta_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->

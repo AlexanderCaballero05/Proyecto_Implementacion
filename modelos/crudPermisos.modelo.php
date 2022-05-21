@@ -1,7 +1,6 @@
 <?php
   include_once "modelos/conexion.php";
   include_once "modelos/Conexionpdo.php";
-  
 ?>
 
 <?php 
