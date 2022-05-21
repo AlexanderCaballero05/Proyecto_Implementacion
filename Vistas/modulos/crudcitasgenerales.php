@@ -2,7 +2,7 @@
 session_start();
 include_once "conexion.php";
 include_once "conexion3.php";
-$codigoObjeto = 32;///CAMBIAR 
+$codigoObjeto = 48;
 $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
@@ -453,6 +453,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <div class="row"> <!-------- INICIO PRIMERA ROW editar -----------> 
                                                                     <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_cita2" id="cod_edit_cita2" >
                                                                     <div class="col-sm-6">
+
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                             <input type="date"autocomplete = "off" value="<?php echo $var2; ?>" min="<?= date("Y-m-d")?>" max="<?= date("2022-04-30")?>" 
@@ -461,6 +462,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="invalid-feedback">
                                                                            campo obligatorio
                                                                         </div>
+
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">

@@ -112,7 +112,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar objeto
                     </button>
                    
-                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"
+                         style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> 
+                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                        <?php 
                       }
                      ?>

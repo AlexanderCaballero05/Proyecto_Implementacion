@@ -161,10 +161,9 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
         foreach ( $ESPECIALISTAS AS $RESULTADOS){
            $personas = $RESULTADOS['CODIGO_PERSONA'];
            $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
-        
          $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
-         $sentencia_paciente->execute(array($personas,$hora,$fecha,$cod));
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
           $row=$sentencia_paciente->fetchColumn();
           if($row >0){
             echo "<script>
@@ -175,7 +174,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
           }else {
             $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
           from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
-          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$cod));
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
            $row=$sentencia_especialista->fetchColumn();
            if($row >0){
              echo "<script>
