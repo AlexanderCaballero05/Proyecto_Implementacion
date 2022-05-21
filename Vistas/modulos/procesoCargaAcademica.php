@@ -307,7 +307,7 @@
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
                     <select style="width: 100%"   class="form-control select2" name="seccion" required>
-                        <option selected disabled value="" >--Seleccionar Seccion--</option>
+                        <option selected disabled value="" >--Seleccionar grado--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                             while($row = $resultadod->fetch_assoc()) { 

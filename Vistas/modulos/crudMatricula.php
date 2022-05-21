@@ -95,7 +95,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <th>Acción</th>
                           <th class="text-center">Codigo Matricula</th>
                           <th class="text-center">Asignatura </th>
-                          <th class="text-center">Seccion</th>
+                          <th class="text-center">Grado</th>
                           <th class="text-center">Hora</th>
                           <th class="text-center">Modalidad</th>
                           <th class="text-center">Nombre del Tutor</th>

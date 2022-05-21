@@ -23,7 +23,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO DE SECCIONES</h4>
+            <h4>MANTENIMIENTO DE GRADO</h4>
         </h1>     
     </section>
       <div class="row">
@@ -148,7 +148,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form  method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Sección</h4>
+                                    <h4 class="text-center">Editar Grado</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -188,7 +188,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="seccion_eliminar" >
-                                    <h4 class="text-center">¿Esta seguro de eliminar la sección<?php echo $var2?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar el grado<?php echo $var2?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -220,7 +220,7 @@
            <div class="modal-content"><!-- Modal content-->
                 <form method="POST"  class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Sección</h4>
+                        <h4 class="text-center">Agregar Grado</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->

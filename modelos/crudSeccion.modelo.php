@@ -17,7 +17,7 @@
                   $row=$consulta_seccion->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de la sección $nombre_seccion ya se encuentra registrado');
+                    alert('El nombre del grado $nombre_seccion ya se encuentra registrado');
                     window.location = 'crudSeccion';
                     </script>";
                   exit;
@@ -33,7 +33,7 @@
                         include_once 'function_bitacora.php';
                         $codigoObjeto=33;
                         $accion='Registro';
-                        $descripcion= 'Se agrego un nueva seccion ';
+                        $descripcion= 'Se agrego un nuevo grado ';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
@@ -74,7 +74,7 @@
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe una sección con este mismo nombre: $editar_nombre');
+          alert('Ya existe un grado con este mismo nombre: $editar_nombre');
           window.location = 'crudSeccion';
           </script>";
           exit;
@@ -90,12 +90,12 @@
               include_once 'function_bitacora.php';
               $codigoObjeto=2;
               $accion='Modificacion';
-              $descripcion= 'Se edito una sección ';
+              $descripcion= 'Se edito un grado ';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar la seccion!');
+              alert('¡Error al  intentar modificar el grado!');
               window.location = 'crudSeccion';
               </script>";
             }
@@ -122,7 +122,7 @@ if(isset($_POST['seccion_eliminar'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar la seccion,esta relacionado con carga!');
+        alert('¡No se puede eliminar el grado,esta relacionado con carga!');
         window.location = 'crudSeccion';
         </script>";
         exit;
@@ -137,7 +137,7 @@ if(isset($_POST['seccion_eliminar'])){
             include_once 'function_bitacora.php';
             $codigoObjeto=2;
             $accion='Eliminación';
-            $descripcion= 'Se elimino una Sección ';
+            $descripcion= 'Se elimino un grado ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

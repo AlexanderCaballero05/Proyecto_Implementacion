@@ -205,7 +205,7 @@
                   </div>
                 </div><!--cierre de modalidad  -->
                 <div class="col-md-4"><!--seccion-->
-                    <label for="identidad" class="control-label">Sección:</label> 
+                    <label for="identidad" class="control-label">Grado:</label> 
                     <div class="form-group">
                       <select class="form-control select2" id="" name="seccion1" >
                       <option value="<?php echo $var6; ?>"><?php echo $var6; ?></option>
@@ -380,7 +380,7 @@
                   </div>
                 </div><!--cierre de la modalidad  -->
                 <div class="col-md-4"><!--CORREO ELECTRONICO-->
-                    <label for="identidad" class="control-label">Sección:</label> 
+                    <label for="identidad" class="control-label">Grado:</label> 
                     <div class="form-group">
                       <select class="form-control select2" id="" name="seccion" required >
                        <option  selected disabled value="">--Seleccione</option>

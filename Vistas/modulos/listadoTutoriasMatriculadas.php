@@ -74,7 +74,7 @@ session_start();
                             $resulta=$conn->query($query1);                
                             ?>
                         <select style="width: 100%" class="form-control select2"  name ="seccion" >
-                            <option selected enable value="" >--Seleccionar Grado/seccion--</option>
+                            <option selected enable value="" >--Seleccionar Grado--</option>
                                 <?php 
                                 if ($resulta->num_rows > 0) {
                                     while($row = $resulta->fetch_assoc()) { 
@@ -120,7 +120,7 @@ session_start();
                           <th class="text-center">Nombre tutor</th>
                           <th class="text-center">Nombre del estudiante</th> 
                           <th class="text-center">Modalidad</th>
-                          <th class="text-center">Sección</th>
+                          <th class="text-center">Grado</th>
                           <th class="text-center">Hora</th> 
                         </tr>
                    </thead>
@@ -203,7 +203,7 @@ session_start();
                           <th class="text-center">Nombre tutor</th>
                           <th class="text-center">Nombre del estudiante</th> 
                           <th class="text-center">Modalidad</th>
-                          <th class="text-center">Sección</th>
+                          <th class="text-center">Grado</th>
                           <th class="text-center">Hora</th> 
                         </tr>
                    </thead>

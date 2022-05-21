@@ -139,7 +139,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
              $fila = $query1->fetchColumn();
              if($fila > 0){
                  echo "<script> 
-                 alert('Ya se encuentra registrada la asignatura y sección');
+                 alert('Ya se encuentra registrada la asignatura y el grado');
                  window.location = 'procesoCargaAcademica';
                  </script>";
                  exit;

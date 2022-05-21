@@ -177,7 +177,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Modalidad</th>
                         <th class="text-center">Tutoria</th>
                         <th class="text-center">Tutor</th>
-                        <th class="text-center">Sección</th>
+                        <th class="text-center">Grado</th>
                         <th class="text-center">Hora inicio</th>
                         <th class="text-center">Hora final</th>
                         <th class="text-center">Fecha inicio</th>
@@ -380,7 +380,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       $query = "SELECT * FROM tbl_seccion";
                                       $resultadod=$conn->query($query);                
                                       ?>
-                                      <label for="identidad" class="control-label">Sección:</label> 
+                                      <label for="identidad" class="control-label">Grado:</label> 
                                       <div class="form-group">
                                       <select style="width: 100%"   class="form-control select2" required name="seccion1" >
                                       <option value="<?php echo $var13; ?>" ><?php echo $var5; ?></option> 
