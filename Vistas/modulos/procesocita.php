@@ -179,7 +179,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Medica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_medico" required >
+                            <select class="form-control select2" name="es_medico"  >
                             <option value= "">--Selecione Especialidad--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -205,7 +205,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Especialidad Cita Psicologica</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_psico" required  >
+                            <select class="form-control select2" name="es_psico"   >
                             <option value= "">--Selecione Especialidad Psicologica--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -229,7 +229,7 @@ $result3= $conn->query($query);
                         ?> 
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Tipos de Catequesis</label><!-- cita medica-->
-                            <select class="form-control select2" name="es_espiritual" required >
+                            <select class="form-control select2" name="es_espiritual"  >
                             <option value= "">--Selecione Catequesis--</option>
                                 <?php
                                 if ($resultado->num_rows > 0){
@@ -251,7 +251,7 @@ $result3= $conn->query($query);
                     <div  id="mostrar_ecita" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados citas</label>
-                            <select class="form-control select2" required >
+                            <select class="form-control select2"  >
                             <option value= "">--Seleccione Encargado--</option>
                             </select>
                            
@@ -260,7 +260,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_medico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de cita Medica</label>
-                            <select class="form-control select2" name="encargado_medico" required  >
+                            <select class="form-control select2" name="encargado_medico"   >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result1->num_rows > 0){
@@ -280,7 +280,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_psico" class="col-sm-5 mb-3">
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de citas Psicologica</label>
-                            <select class="form-control select2" name="encargado_psicologo"required  >
+                            <select class="form-control select2" name="encargado_psicologo"  >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result2->num_rows > 0){
@@ -300,7 +300,7 @@ $result3= $conn->query($query);
                     <div style ="display:none;" id="encargado_catequesis" class="col-sm-5 mb-3"><!-- area espiritual-->
                         <div class="form-group">
                             <label for="txtcodigo_especialista">Encargados de Catequesis</label>
-                            <select class="form-control select2" name="encargado_catequesis" required  >
+                            <select class="form-control select2" name="encargado_catequesis"  >
                             <option value= "">--Seleccione Encargado--</option>
                                 <?php
                                 if ($result3->num_rows > 0){
