@@ -162,7 +162,7 @@
                     ?>
                     <label for="identidad" class="control-label">Nombre Tutoria:</label> 
                     <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" required>
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" >
                         <option selected disabled value="" >--Seleccionar Tutoria--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -191,7 +191,7 @@
                     ?>
                     <label for="identidad" class="control-label">Nombre Tutoria:</label> 
                     <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" required>
+                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" >
                         <option selected disabled value="" >--Seleccionar Tutoria--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
@@ -219,7 +219,7 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico" required>
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico" >
                       <option selected disabled value="">--Seleccionar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
@@ -248,7 +248,7 @@
                   ?>
                   <div class="form-group">
                     <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" required>
+                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" >
                       <option selected disabled value="">--Seleccionar Tutor--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
