@@ -267,7 +267,7 @@ if(isset($_POST['IDCARGA'])){
               }else{
                     try{
                         $corre = "UPDATE `tbl_carga_academica` SET 
-                        CODIGO_TUTORIA = '$tutoria_modi',  
+                        
                         HORA = '$hora_modi' , 
                         FECHA_INICIO = '$fecha_inicio_modi',
                         FECHA_FINAL = '$fecha_final_modi' , 
