@@ -506,7 +506,7 @@
                    <!-- Menu de AREA DE TUTOR academico-->
                      <li class="nav-item">
                      <a href="#" class="nav-link bg-gradient-navy">
-                          <i class=" nav-icon fas fa-briefcase"></i>
+                          <i class="nav-icon fas fa-briefcase "></i>
                           <p>
                             Area Academica
                             <i class="fas fa-angle-left right"></i>
