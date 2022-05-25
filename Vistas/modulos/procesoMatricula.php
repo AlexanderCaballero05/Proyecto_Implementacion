@@ -180,7 +180,7 @@
                         <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                <a href="#MODAL_MATRICULA<?php echo $var1; ?>" data-toggle="modal">
+                                <a href="#MODAL_MATRICULA<?php echo $var6; ?>" data-toggle="modal">
                                 <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
                               </a>
                               </div>
@@ -193,7 +193,7 @@
                           <td class="text-center"><?php echo $var6; ?></td> 
                           <td class="text-center"><?php echo $var7; ?></td> 
 
-                          <div id="MODAL_MATRICULA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="MODAL_MATRICULA<?php echo $var6 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMESTUDIANTE" method="POST">

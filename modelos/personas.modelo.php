@@ -198,7 +198,7 @@
                               $resultado2=$conn->query($querycorreo);
                               //insertar el usuario para el estudiante
                               $rol ="8";// rol del estudiante
-                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA,CREADO_POR,IMAGEN)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena','$usuario');";
+                              $query_user = "INSERT INTO TBL_USUARIO(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO,CODIGO_TIPO_ROL,CONTRASENA,CREADO_POR)VALUES ('$codigo','$nombre_usuario','$estado','$rol','$contrasena','$usuario');";
                               $resultado3 = $conn->query($query_user);
 
                               if (is_array($_POST['sacramento'])) {//codigo para insertar los sacramentos ,es diferente porque es con checbox
