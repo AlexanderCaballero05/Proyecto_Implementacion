@@ -227,7 +227,7 @@ class PDF extends FPDF {
     left join tbl_area ta                             on ta.CODIGO_AREA  = tt.CODIGO_AREA 
     left join tbl_modalidad tm                        on tm.CODIGO_MODALIDA = tca.CODIGO_MODALIDAD 
     left join tbl_seccion ts                          on ts.CODIGO_SECCION  = tca.CODIGO_SECCION 
-    where tp.CODIGO_PERSONA  = '$cod_usuario'  and  tma.ESTADO_MATRICULA=9;";
+    where tp.CODIGO_PERSONA  = '$cod_usuario'  and  tma.OBSERVACION=9;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
