@@ -403,11 +403,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-8"> 
                                       <?php //
                                       $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                                      FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
+                                      FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
                                       $resultadod=$conn->query($query);                
                                       ?>
                                       <div class="form-group">
-                                        <label  class="control-label">Encargado:</label>
+                                        <label  class="control-label">Catequista/ Asesor Espiritual:</label>
                                         <select class="form-control select2"  style="width: 100%;"  name="tutor1" required>
                                           <option value="<?php echo $var11;?>"> <?php echo $var4; ?></option><!--Se muestra el nombre completo y se trae al value el codigo de la persona de la tabla carga -->
                                           <?php 
