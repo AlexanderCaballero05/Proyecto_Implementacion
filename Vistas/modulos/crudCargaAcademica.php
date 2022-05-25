@@ -23,10 +23,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 ?>
 
 
-<head>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-</head>
+
 
 <!-- Trae los parametros de la hora inicial y final -->
 <?php

@@ -247,9 +247,9 @@
                   $resultadod=$conn->query($query);                
                   ?>
                   <div class="form-group">
-                    <label  class="control-label">Encargado-Tutor:</label>
+                    <label  class="control-label">Catequista/ Asesor Espiritual:</label>
                     <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" >
-                      <option selected disabled value="">--Seleccionar Tutor--</option>
+                      <option selected disabled value="">--Seleccionar Catequista o Asesor Espiritual--</option>
                       <?php 
                         if ($resultadod->num_rows > 0) {
                           while($row = $resultadod->fetch_assoc()) { 
