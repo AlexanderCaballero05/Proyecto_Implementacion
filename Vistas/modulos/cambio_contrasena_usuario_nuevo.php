@@ -10,6 +10,15 @@
     $valor = $row;
   }
 ?>
+<?php
+  $parametro1 ="NUM_MIN_CARACTER";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($parametro1));
+  $row1 = $sentencia1->fetchColumn();
+  if($row1>0){
+    $valor1 = $row1;
+  }
+?>
 
 <!doctype html>
 <html lang="en">
@@ -25,11 +34,8 @@
      /*Estilos aplicados para usar en las validaciones de js,donde los
      inputs cambien de colores  */
      body{
-           background-color:#E8E8E1;
+       background-color:#e9ecef; 
        }
-    .fa-eye:hover{
-        color:steelblue;
-    }
     .formulario__input-error {
       font-size: 13px;
       margin-bottom: 0;
@@ -49,15 +55,15 @@
 <body>
     <div class="row align-items-center justify-content-center mt-5">
           <div class="col-md-5 rounded" style="width: 20rem;" >
-            <H3 class="fw-bold text-center py-4">Cambiar Contraseña</H3>
           <div  class="card">           
               <div class="card-body">
+                <h4 class="fw-bold text-center ">Cambiar Contraseña</h4><hr style="color:green;" size="4px";>
                 <form  action="../../modelos/validar_contrasena_usuario_nuevo.php" method="POST" class="formulario" id="formulario">
                   <div class="row">
                     <label class="control-label mb-2">Contrase&ntilde;a anterior:</label>
                     <div class="input-group mb-3" >
                       <input type="password" id="contra_anterior" name="contraAnte" class="form-control" 
-                       required minlength="5" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                       required minlength="<?php echo $valor1;?>" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                        <div class="input-group-prepend">
                           <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar()"><span class="icon fa fa-eye-slash"></button>
                         </div>
@@ -66,7 +72,7 @@
                     <label class="control-label mb-2">Contrase&ntilde;a:</label>
                     <div class="input-group mb-3" id="grupo__clave_nueva">
                         <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
-                          required  minlength="5" maxlength="<?php echo "$valor"?>"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                          required  minlength="<?php echo $valor1;?>" maxlength="<?php echo "$valor"?>"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                           <div class="input-group-prepend">
                             <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar1()"><span class="icon1 fa fa-eye-slash"></button>
                           </div>
@@ -75,7 +81,7 @@
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a:</label>
                     <div class="input-group mb-3 " id="grupo__confirmar_clave">
                         <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
-                         required minlength="5"  maxlength="<?php echo "$valor"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                         required minlength="<?php echo $valor1;?>"  maxlength="<?php echo "$valor"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                          <div class="input-group-append">
                            <button id="show_password" class="form-control btn-outline-secondary btn-block" type="button"  onclick="mostrar2()"><span class="icon2 fa fa-eye-slash"></button>
                          </div>

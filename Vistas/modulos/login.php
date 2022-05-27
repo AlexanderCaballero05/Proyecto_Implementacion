@@ -1,3 +1,34 @@
+<?php
+ include "conexionpdo.php";
+  // Parametro de minimo nombre usuario
+  $min_usuario = "MIN_USUARIO";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($min_usuario));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
+  ?>
+  <?php
+  //Parametro de maximo nombre usuario
+  $max_usuario = "MAX_USUARIO";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($max_usuario));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $valor2 = $row1;
+  }
+?>
+<?php
+  //Parametro de maximo contraseña
+  $max_clave = "NUM_MAX_CARACTER";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($max_clave));
+  $row2=$sentencia2->fetchColumn();
+  if($row2>0){
+    $valor3 = $row2;
+  }
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,14 +63,14 @@
                 <form method="POST" class="needs-validation" novalidate>
                   <div class="input-group mb-4"><!--Para ingresar el nombre de usuario -->
                       <span class="input-group-text" ><i class="fas fa-user"></i></span>
-                      <input type="text" name="ingUsuario" id="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" minlength="3" maxlength="20" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
+                      <input type="text" name="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" autocomplete = "off" minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                       <div class="invalid-tooltip">
                          Llene este campo
                       </div>
                   </div>
                   <div class="input-group mb-3"><!--Para ingresar la contraseña -->
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" name="ingPassword" id="contra" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" aria-label="Username" aria-describedby="basic-addon1"   minlength="8" maxlength="30" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
+                    <input type="password" name="ingPassword" id="contra" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
                     <span class="input-group-text" onclick="mostrar1()"><i class=" icon1 fa fa-eye-slash"></i></span>
                       <div class="invalid-tooltip">
                         Llene este campo

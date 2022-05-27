@@ -1,3 +1,4 @@
+
 <?php
  session_start();
 include "function_bitacora.php";
@@ -61,182 +62,99 @@ use PHPMailer\PHPMailer\Exception;
 //validacion de Recuperacion de contrasena por medio de correo
 if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
     if(isset($_REQUEST['correo'])) { //este if es verdad si se presiono el boton correo <entonces.. entro al bloque de codigo
-
         $usuario = ($_POST["usuario"]);// entonces capturo el dato del usuario enviado mediante el metodo POST
 
         $_SESSION['vario']  = $_POST["usuario"]; // se crea una variable de sesion con el nombre del isuario
-
-        $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'"; 
+        $consultar_usuario=" SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario' AND CODIGO_ESTADO ='2'  "; 
         $existe=$conn->query($consultar_usuario);
         $filas=$existe->num_rows;
       
-
         if($filas==0){
-            
-            echo '<script>
-            alert("Datos incorrectos");
-            window.location="../Vistas/modulos/metodos_recuperar_clave.php";
-                  </script>';
+          echo '<script> alert("Datos incorrectos");
+          window.location="../Vistas/modulos/metodos_recuperar_clave.php";</script>';
         } else{ //construir el query para traer el dato del correo al cual se enviara la clave de recuperacion
-               $consultar_correo = "SELECT c.CORREO_PERSONA  
-               FROM tbl_persona p, tbl_correo_electronico c, tbl_usuario u
-               where p.CODIGO_PERSONA = c.CODIGO_PERSONA
-               AND p.CODIGO_PERSONA = u.CODIGO_PERSONA
-               AND u.NOMBRE_USUARIO = '$usuario'";    
+           $consultar_correo = "SELECT c.CORREO_PERSONA  
+           FROM tbl_persona p, tbl_correo_electronico c, tbl_usuario u
+           where p.CODIGO_PERSONA = c.CODIGO_PERSONA
+           AND p.CODIGO_PERSONA = u.CODIGO_PERSONA
+           AND u.NOMBRE_USUARIO = '$usuario'";    
+           $revision_correo =$conn->query($consultar_correo);
+            //se hace la consulta a la base de datos
+            if($revision_correo->num_rows>0){
+              while($fila=$revision_correo->fetch_assoc()){
+               $correo= $fila['CORREO_PERSONA'];
 
-                $revision_correo =$conn->query($consultar_correo);
-                 //se hace la consulta a la base de datos
-             if($revision_correo->num_rows>0){
-                 
-                 while($fila=$revision_correo->fetch_assoc()){
-                  $correo= $fila['CORREO_PERSONA'];
-
-                            echo '<script>
-                            alert("Verifique su Correo se ha enviado la clave");
-                         window.location="../login";
-                               </script>';
-
-                              
-                               $_SESSION['vario'] =$usuario;
+               echo '<script>  alert("Verifique su Correo se ha enviado la clave"); window.location="../login";</script>';
+               $_SESSION['vario'] =$usuario;
                                //llamada de la fuction bitacora -->
-                            $codigoObjeto=1;
-                            $accion='Correo de recuperacion';
-                            $descripcion= 'Solicitud recuperacion de contraseña ';
-                            bitacora($codigoObjeto, $accion,$descripcion);
+               $codigoObjeto=1;
+               $accion='Correo de recuperacion';
+               $descripcion= 'Solicitud recuperacion de contraseña ';
+               bitacora($codigoObjeto, $accion,$descripcion);
                
-                            require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
-                            require "PHPMailer/PHPMailer.php";
-                            require "PHPMailer/SMTP.php";
+               require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
+               require "PHPMailer/PHPMailer.php";
+               require "PHPMailer/SMTP.php";
+                function contraseña_random($length=8){ // FUNCION para generar la contraseña aleatoria
+                  $charset=" /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/";
+                  $contraseña="";
+                  for ($i=0;$i < $length;$i++) {
+                    $rand= rand() % strlen($charset);
+                    $contraseña.= substr($charset,$rand,1);
+                  }
+                  return $contraseña;
+                }
+                $contra= (contraseña_random()) ; //se captura la contrasena generada
+                 //Se construye el update para cambiar la contrasena anterior por generada Y el estado pasa a pendiente
+                $query_cambio="UPDATE tbl_usuario SET CONTRASENA='$contra',CODIGO_ESTADO = 5 WHERE NOMBRE_USUARIO= '$usuario'";
+                $contraseña_cambiada=$conn->query($query_cambio); // se hace elquery a la base de datos
+                $oMail= new PHPMailer(true);
+                // $parametros_mail="SELECT "
 
+                $oMail->isSMTP();
+                $oMail->Host=($valor);
+                $oMail->Port=($valor1);
+                $oMail->SMTPSecure="tls";
+                $oMail->SMTPAuth=true;
 
-                            function contraseña_random($length=8) // FUNCION para generar la contraseña aleatoria
-                                {
-                                $charset=" /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/";
-                                $contraseña="";
-                         
-                                for ($i=0;$i < $length;$i++)
-                                {
-                                 $rand= rand() % strlen($charset);
-                                 $contraseña.= substr($charset,$rand,1);
-                         
-                                }
-                                return $contraseña;
-                         
-                                 }
-                                 
-                                $contra= (contraseña_random()) ; //se captura la contrasena generada
-
-                            //Se construye el update para cambiar la contrasena anterior por generada Y el estado pasa a pendiente
-                           $query_cambio="UPDATE tbl_usuario
-                                          SET CONTRASENA='$contra',
-                                          CODIGO_ESTADO = 5
-                                          WHERE NOMBRE_USUARIO= '$usuario'";
-
-                            
-
-                            $contraseña_cambiada=$conn->query($query_cambio); // se hace elquery a la base de datos
-
-                            $oMail= new PHPMailer(true);
-
-
-                           // $parametros_mail="SELECT "
-
-                            $oMail->isSMTP();
-                            $oMail->Host=($valor);
-                            $oMail->Port=($valor1);
-                            $oMail->SMTPSecure="tls";
-                            $oMail->SMTPAuth=true;
-
-                            $oMail->Username="$valor2";//  
-                            $oMail->Password="$valor3";
-                            $oMail->setFrom("$valor2"); // direccion de correo de destino hacia los correos de usuarios
-                            $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
-                            $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
-                            <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>
-                            <p>Al ingresar al sistema por razones de seguridad automaticamente se le pedirá cambiar su contraseña de recuperación</p>
-                            <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envio.</p>
-                            
-                            <a href='http://localhost/Rama_Proyecto_Implementacion/index.php'>
-                            <button class='btn btn-primary btn-flat'> Cambiar contraseña</button>
-                            </a>
-                            
-                            <p><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>
-                                  
-                           ";
-
-                           $oMail->Subject=utf8_decode("RECUPERACION DE CONTRASEÑA");
-                            $oMail->msgHTML(utf8_decode($mensaje));
-                            if(!$oMail->send())
-                            echo $oMail->ErrorInfo;
-                 }
-
-            }
-                            else {
-                                echo '<script>
-                                    alert("Verifique su Correo esta malo");
-                                window.location="../vistas/modulos/tipo_recuperacion.php";
-                                        </script>';
-                            }
-
-
+                $oMail->Username="$valor2";//  
+                $oMail->Password="$valor3";
+                $oMail->setFrom("$valor2"); // direccion de correo de destino hacia los correos de usuarios
+                $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
+                $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
+                  <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>
+                  <p>Al ingresar al sistema por razones de seguridad automaticamente se le pedirá cambiar su contraseña de recuperación</p>
+                  <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envio.</p>
+                  <a href='http://localhost/Rama_Proyecto_Implementacion/index.php'>
+                    <button class='btn btn-primary btn-flat'> Cambiar contraseña</button>
+                  </a><p><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>";
+                $oMail->Subject=utf8_decode("RECUPERACION DE CONTRASEÑA");
+                $oMail->msgHTML(utf8_decode($mensaje));
+                if(!$oMail->send())
+                   echo $oMail->ErrorInfo;
+                }
+              }
+               else {
+                echo '<script> alert("Verifique su Correo esta malo"); window.location="../vistas/modulos/tipo_recuperacion.php"; </script>';
+              }
         }
 
+      //validacion de Recuperacion de contrasena por medio de pregunta
+    }else if(isset($_POST['recu'])) { // este if es verdad si se presiono el boton preguntas <entonces.. entro al bloque de codigo
+      $usuario = ($_POST["usuario"]);
+      session_start();
+      $_SESSION['vario'] = $_POST["usuario"]; // se crea una variable de sesion con el nombre del isuario
+      $consultar_usuario="SELECT * FROM tbl_usuario WHERE NOMBRE_USUARIO ='$usuario' AND CODIGO_ESTADO = '2';";
+      $existe=$conn->query($consultar_usuario);
+      $filas=$existe->num_rows;
 
-
-
-
-
-
-
-    } 
-     //validacion de Recuperacion de contrasena por medio de preguntas
-    else if(isset($_POST['recu'])) { // este if es verdad si se presiono el boton preguntas <entonces.. entro al bloque de codigo
-
-
-        $usuario = ($_POST["usuario"]);
-
-        session_start();
-        $_SESSION['vario'] = $_POST["usuario"]; // se crea una variable de sesion con el nombre del isuario
-
-        $consultar_usuario="SELECT *FROM tbl_usuario WHERE NOMBRE_USUARIO='$usuario'";
-        $existe=$conn->query($consultar_usuario);
-        $filas=$existe->num_rows;
-
-        if($filas>0){
-            header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
-          
-                  }else{
-                      
-                    echo '<script>
-                    alert("Datos incorrectos");
-                    window.location="../Vistas/modulos/metodos_recuperar_clave.php";
-                          </script>';
-        }
-
-
-    }
-
+      if($filas>0){
+        header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
+      }else{
+        echo '<script> alert("Datos incorrectos");window.location="../Vistas/modulos/metodos_recuperar_clave.php"; </script>';
+      }
+    }//Fin del else if
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
+   
 ?>
