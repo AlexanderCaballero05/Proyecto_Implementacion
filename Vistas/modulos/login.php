@@ -65,7 +65,7 @@
                       <span class="input-group-text" ><i class="fas fa-user"></i></span>
                       <input type="text" name="ingUsuario" class="form-control" placeholder="Ingresa tu nombre de usuario" autocomplete = "off"  onkeypress="return soloLetras(event);" autocomplete = "off" minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onkeyup="mayus(this);" required onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                       <div class="invalid-tooltip">
-                         Llene este campo
+                        Debe teber minimo <?php echo $valor1; ?> caracteres.
                       </div>
                   </div>
                   <div class="input-group mb-3"><!--Para ingresar la contraseña -->

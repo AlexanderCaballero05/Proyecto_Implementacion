@@ -58,9 +58,10 @@ include_once "../../modelos/conexion3.php";
             <div  class="card">
               <div class="card-body"> <!--action que  manda al archivo donde estan las validaciones,acuerdensen de poner el method="POST"! -->
                  <h4 class="fw-bold text-center ">Cambiar Contraseña</h4><hr style="color:green;" size="4px";>
-                <form  method="POST" action="../../modelos/validar_contrasena_preguntas.php" class="formulario" id="formulario"  >
-                   <div class="form-group mb-3">
-                        <label class="control-label mb-2">Usuario</label> <!--Muestra el usuario que se ingreso desde la pantalla para cambio de contraseña -->
+                <form  method="POST" action="../../modelos/validar_contrasena_preguntas.php" class="formulario" id="formulario">
+                  <div class="row">
+                     <label class="control-label mb-2">Usuario</label> <!--Muestra el usuario que se ingreso desde la pantalla para cambio de contraseña -->
+                     <div class="input-group mb-3">
                         <input onkeyup="mayus(this);" autocomplete = "off" value="<?php echo ($_SESSION['vario']);?>"  id="usuarioc" type="text" name="usuarioc" class="form-control" readonly required >
                     </div>
                     <label class="control-label mb-2">Contrase&ntilde;a</label>
@@ -72,19 +73,21 @@ include_once "../../modelos/conexion3.php";
                           </div>
                         <p class="formulario__input-error">Su contraseña debe  tener letras mayusculas, minisculas, caracteres especiales y un numero.</p>
                     </div>
+                    
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a</label>
                     <div class="input-group mb-3 " id="grupo__confirmar_clave">
                         <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
-                         required minlength="<?php echo $valor1;?>  maxlength="<?php echo "$valor"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                         required minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                          <div class="input-group-append">
                            <button id="show_password" class="form-control btn-outline-secondary btn-block" type="button"  onclick="mostrar2()"><span class="icon2 fa fa-eye-slash"></button>
                          </div>
-                        <p class="formulario__input-error" >Ambas contraseñas deben ser iguales.</p>
                     </div>
-                    <br>
+                    <br><br>
                     <div class="d-grid">
                       <button type="submit" name="cambiar_clave" id="cambiar_clave" class="btn btn btn-success btn-block">Cambiar Contrase&ntilde;a</button>
                     </div>
+                
+                  </div>
                 </form>
               </div>
            </div>
