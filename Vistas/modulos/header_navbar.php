@@ -5,121 +5,60 @@
  ?>
 
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-
-    <!-- Left navbar links -->
+    <!-- item de desplegar el menu o no-->
     <ul class="navbar-nav">
-
         <li class="nav-item">
-
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-
         </li>
-           
     </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-        
-        <!-- Navbar Search -->
-        <li class="nav-item">
-
-            <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                <i class="fas fa-search"></i>
-            </a>
-
-            <div class="navbar-search-block">
-
-                <form class="form-inline">
-
-                    <div class="input-group input-group-sm">
-                        
-                        <input class="form-control form-control-navbar" type="search" placeholder="Busca lo que necesitas..." aria-label="Busqueda">
-                        
-                        <div class="input-group-append">
-
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-
-                            <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                                <i class="fas fa-times"></i>
-                            </button>
-                            
-                        </div>
-
-                    </div>
-
-                </form>
-
-            </div>
-        </li>
 
         <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
+      <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
-      <!-- Messages Dropdown Menu -->
-      <li class="dropdown no-arrow nav-item">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php 
-                                 $nomUser= $_SESSION['vario'];
-                                 $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
-                                 $result = $conn->query($query);
-                                 if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
-                                        $var12 = $row['imagen'];
-                                    }
-                                 }
-                                ?>
-                                <img style="width:24px; heigth:29px;"  class="user-img" src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
-                               <!-- <img class="img-profile rounded-circle" width="44 px" src="vistas/assets/dist/img/user8-128x128.jpg"> -->
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div  class="dropdown-menu dropdown-menu-right  bg-gradient-blue"
-                                aria-labelledby="userDropdown">
-                              <div  class="dropdown-item">
-                                  <div class="dropdown-author" style="color:white"><?php echo $_SESSION['vario']; ?>
-
-                                  </div>
-                              </div>
-                             
-                                                            
-                                <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item menu-action" onclick="location.href='perfilUsuario'" >
-
-                                <i class="fas fa-user"></i>
-                                    <span class="menu-action-text pr-2" style="color:white">Perfil</span>
-                                    </a>
-
-                                    <div class="dropdown-divider"></div>
-
-                                <a class="dropdown-item menu-action" onclick="location.href='crudPreguntasUsuarios'" >
-
-                                <i class="fas fa-user"></i>
-                                    <span class="menu-action-text pr-2" style="color:white">Preguntas de seguridad</span>
-                                    </a>
-                                    
-
-                                <div class="dropdown-divider"></div>
-                                
-                                <a class="dropdown-item menu-action" onclick="location.href='salir'" >
-
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    <span class="menu-action-text pr-2" style="color:white">Cerrar sesion</span>
-                                </a>
-
-                               
-                            </div>
-   </li>
+    
+       <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false"><!--Para la foto de perfil -->
+            <?php 
+                $nomUser= $_SESSION['vario'];
+                $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $var12 = $row['imagen'];
+                }
+                }
+            ?>
+            <img style="max-width:25px;"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
+            </a>
+        
+           <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right bg-gradient-blue" style="left: inherit; right: 0px;">
+                <div  class="dropdown-item">
+                <div class="dropdown-author" style="color:#3F4041;"><?php echo $_SESSION['vario']; ?>
+                </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item menu-action" onclick="location.href='perfilUsuario'" >
+                <i class="fas fa-user"></i>
+                <span class="menu-action-text pr-2" style="color:#3F4041;">Perfil</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item menu-action" onclick="location.href='crudPreguntasUsuarios'" >
+                <i class="fas fa-user"></i>
+                <span class="menu-action-text pr-2" style="color:#3F4041;">Preguntas de seguridad</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item menu-action" onclick="location.href='salir'" >
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                <span class="menu-action-text pr-2" style="color:#3F4041;">Cerrar sesion</span>
+                </a>
+           </div>
+        </li>
     </ul>
-  </nav>
-
 </nav>
 <!-- /.navbar -->
-              <!--INICIO DEL MODAL DE EDITAR -->
+
         

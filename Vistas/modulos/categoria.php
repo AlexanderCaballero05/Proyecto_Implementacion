@@ -1,11 +1,75 @@
-<?php
+<!-----------------------------------------------------------------------
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Juan .......... ( correo@yahoo.com)
+David...........( Correo@yahoo.com)
 
-  include_once "conexionpdo.php";
+Catedratico:
+Lic. Karla Melisa Garcia Pineda 
+---------------------------------------------------------------------
+Programa:         Pantalla de registro de personas/usuarios
+Fecha:             01-jan-2016
+Programador:       Javier
+descripcion:       Registra las diferentes personas y usuarios invlucradas al sistema
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               27/05/2022            Se agregaron parametos que faltaban
+----------------------------------------------------------------------->
+<?php
+ include "conexionpdo.php";
+?>
+<?php
   include_once "conexion3.php";
   $codigoObjeto=13;
   $accion='Ingreso a la tabla de registro de personas';
   $descripcion= 'Usuario se autentifico';
   bitacora($codigoObjeto, $accion,$descripcion); 
+?>
+<?php
+  // Parametro de minimo nombre usuario
+  $min_usuario = "MIN_USUARIO";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($min_usuario));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
+  ?>
+  <?php
+  //Parametro de maximo nombre usuario
+  $max_usuario = "MAX_USUARIO";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($max_usuario));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $valor2 = $row1;
+  }
+?>
+<?php
+ //Parametro de maximo de contraseña
+  $parametro ="NUM_MAX_CARACTER";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($parametro));
+  $row3=$sentencia->fetchColumn();
+  if($row3>0){
+    $valor3 = $row3;
+  }
+?>
+<?php
+ //Parametro minimo de contraseña
+  $parametro1 ="NUM_MIN_CARACTER";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($parametro1));
+  $row4 = $sentencia1->fetchColumn();
+  if($row4>0){
+    $valor4 = $row4;
+  }
 ?>
 <head>
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
@@ -38,10 +102,8 @@
     <!-- Main content -->
     <section class="content">
     <div class="container-fluid">
-      <section class="content-header text-xl-center mb-3 btn-light">
-          <h1>
+      <section class="content-header text-xl-center mb-3 ">
             <h4>AGREGAR PERSONAS</h4>
-          </h1>     
       </section>
      <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -138,7 +200,7 @@
                       ?>
                          <label class="control-label">Tipo Persona:</label>
                          <div class="form-group">
-                            <select class="form-control"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
+                            <select class="form-control select2"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
                              <option selected enable  value="">--Seleccionar tipo Persona--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -261,17 +323,23 @@
                       <div class="col-md-4" id="primera_fila"><!--INICIO NOMBRE USUARIO-->
                         <label  class="control-label">Nombre Usuario</label>
                         <div class="form-group">
-                            <input class="form-control" maxlength="15" minlength="4" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
-                            onblur="quitarespacios(this);" placeholder="Nombre Usuario" >
+                            <input class="form-control"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
+                            onblur="quitarespacios(this);" placeholder="Nombre Usuario">
+                        </div>
+                        <div class="invalid-feedback">
+                           Debe teber minimo <?php echo $valor1; ?> caracteres.
                         </div>
                       </div>
                     <div  class="col-sm-4 mb-2" id="cuarta_fila">
                       <label  class="control-label">Contraseña</label>
                       <div class="input-group mb-3">
-                        <input class="form-control"  minlength="8" maxlength="15" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
+                        <input class="form-control" minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
                         <div class="input-group-append">
                           <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                         </div>
+                        <div class="invalid-feedback">
+                           Debe teber minimo <?php echo $valor4; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
+                        </div> 
                       </div>  
                     </div>                                   
                       
@@ -368,8 +436,7 @@
                     ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                       <?php 
                        if($permiso_registrar == 'SI'){
-                      ?> 
-                                      
+                      ?>           
                     <button type="submit"  id="GUARDARPERSONA" name="GUARDAR" class="btn btn-success btn-lg mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                     <?php 
                       }

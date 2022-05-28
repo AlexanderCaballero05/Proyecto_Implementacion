@@ -87,6 +87,7 @@
                      <br>
                      <div class="mt-2"><a style=" text-decoration:none" 
                      href="vistas/modulos/auto_registro.php">Autoregistro</a></div>
+
                    </div>
                    <?php
                    //alguna funcion para el controlador

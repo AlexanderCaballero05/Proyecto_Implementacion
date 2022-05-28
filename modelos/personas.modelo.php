@@ -38,6 +38,7 @@
                 if ($row>0){
                   echo "<script>
                   alert('El numero de identidad $identidad ya se encuentra registrado');
+                  window.location = 'categoria';
                   </script>";
                   exit;
                 }else{// else para la sentencia de que si el correo ya existe
@@ -48,7 +49,7 @@
                   if($row>0){
                     echo "<script>
                     alert('La direccion de correo electronico $correo ya se encuentra registrada');
-                    window.location = 'crudpersonas';
+                    window.location = 'categoria';
                     </script>";
                     exit;
                   }else{ //else de verificar el telefono 
@@ -59,7 +60,7 @@
                     if($row >0){
                       echo "<script>
                       alert('El Número de telefono $telefono ya se encuentra registrado');
-                      window.location = 'crudpersonas';
+                      window.location = 'categoria';
                       </script>";
                       exit;
                     }else{
@@ -81,7 +82,7 @@
                             if($row>0){// si hay registros con el mismo nombre 
                               echo "<script>
                               alert('El Nombre de usuario $nombre_usuario ya se encuentra registrado');
-                              window.location = 'crudpersonas';
+                              window.location = 'categoria';
                               </script>";
                               exit;
                              }else{//si el usuario no existe en tbl_usuario,entonces se puede registrar 
@@ -103,7 +104,7 @@
                                   }else{
                                     echo "<script> 
                                     alert('Ocurrio algun error,comunicarse con el administrador!');
-                                    location.href = 'crudpersonas';
+                                    location.href = 'categoria';
                                     </script>";
                                     exit;
                                   }

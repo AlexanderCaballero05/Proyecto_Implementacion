@@ -1,6 +1,25 @@
 <?php
+ include "conexionpdo.php";
 include_once "conexion.php";
 include_once "conexion3.php";
+?>
+<?php
+  $parametro ="NUM_MAX_CARACTER";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($parametro));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+<?php
+  $parametro1 ="NUM_MIN_CARACTER";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($parametro1));
+  $row1 = $sentencia1->fetchColumn();
+  if($row1>0){
+    $valor1 = $row1;
+  }
 ?>
     <!--llamada de la fuction bitacora -->
   <?php 
@@ -22,10 +41,8 @@ include_once "conexion3.php";
   </div>
   
   <section class="content">
-     <section class="content-header text-xl-center mb-3 btn-light">
-          <h1>
-              <h4>MANTENIMIENTO USUARIOS</h4>
-          </h1>     
+     <section class="content-header text-xl-center mb-3">
+              <h4>MANTENIMIENTO USUARIOS</h4>    
       </section>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -246,18 +263,7 @@ include_once "conexion3.php";
                                         <div class="col-sm-6">
                                           <label for="cbx_persona" class="control-label">Rol</label>  
                                           <div class="form-group">
-                                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
-                                              <option value="<?php echo $var14?>"><?php echo $var8;?></option>
-                                              <?php 
-                                                if ($resultadod->num_rows > 0) {
-                                                  while($row = $resultadod->fetch_assoc()) { 
-                                                  $codigo_estado = $row['CODIGO_TIPO_ROL'];
-                                                  $estado = $row['NOMBRE'];
-                                                ?>
-                                                <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
-                                                <?php } 
-                                                }?>
-                                            </select> 
+                                            <input class="form-control"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" readonly value="<?php echo $var8;?>" >
                                           </div>  
                                         </div> <!--FIN ROL-->
                                     </div> <!-- FIN ROW --> 
@@ -272,9 +278,12 @@ include_once "conexion3.php";
                                       <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group">
-                                          <input type="password" class="form-control" id="clave_nueva<?php echo $var2?>" minlength="?>" maxlength="" name="clave_nueva">
+                                          <input type="password" class="form-control" id="clave_nueva<?php echo $var2?>" minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"  name="clave_nueva">
                                           <div class="input-group-prepend">
                                             <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar2(<?php echo $var2?>)" type="button"><span class="icon2 fa fa-eye-slash"></button></span>
+                                          </div>
+                                          <div class="invalid-feedback">
+                                            Debe teber minimo <?php echo $valor1; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
                                           </div>
                                         </div>
                                       </div>
@@ -282,9 +291,12 @@ include_once "conexion3.php";
                                       <div style="display:none;" id="Mostrar_reseteo1<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label  class="control-label">Confirmar Contraseña</label> 
                                         <div class="input-group">
-                                          <input type="password" class="form-control" id="confirmar_clave<?php echo $var2?>" minlength="?>" maxlength="" name="confirmar_clave"  >
+                                          <input type="password" class="form-control" id="confirmar_clave<?php echo $var2?>" minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>" name="confirmar_clave"  >
                                           <div class="input-group-prepend">
                                             <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1(<?php echo $var2?>)" type="button"><span class="icon1 fa fa-eye-slash"></button></span>
+                                          </div>
+                                          <div class="invalid-feedback">
+                                            Debe teber minimo <?php echo $valor1; ?> caracteres y debe ser igual a la contraseña.
                                           </div>
                                         </div>
                                       </div>
@@ -364,7 +376,7 @@ include_once "conexion3.php";
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
         "search": "Buscar un  Usuario:",
-        "zeroRecords": "Sin resultados encontrados",
+        "zeroRecords": "El usuario no existe",
         "paginate": {
             "first": "Primero",
             "last": "Ultimo",
