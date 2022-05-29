@@ -57,7 +57,7 @@
           <div  class="card">           
               <div class="card-body">
                 <h4 class="fw-bold text-center ">Cambiar Contraseña</h4><hr style="color:green;" size="4px";>
-                <form  action="../../modelos/validar_contrasena_correo.php" method="POST" class="formulario" id="formulario">
+                <form  action="../../modelos/validar_contrasena_correo.php" method="POST" class="formulario" id="formulario" >
 
                     <label class="control-label mb-2">Contrase&ntilde;a anterior</label>
                     <div class="input-group mb-3" >
@@ -153,6 +153,22 @@
       $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
   }
+</script>
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
 </script>
 
 <script src="../../modelos/validacion_clave.js"></script>

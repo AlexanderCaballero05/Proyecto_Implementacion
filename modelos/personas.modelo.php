@@ -387,7 +387,6 @@
       $USUARIO = ($_POST['NOMUSUARIO']); 
       $PASS = ($_POST['clave_nueva']);
       $CONFIRMA = ($_POST['confirmar_clave']);
-      $ROL = ($_POST['ROLUSUARIO']);
       $ESTADO = ($_POST['ESTADOUSUARIO']);
       $correo_mofi = ($_POST['correo_modi']);
       $nombre_modi = ($_POST['nombre_modi']);
@@ -418,7 +417,7 @@
             $ID_PERSONA_CORREO = $row;
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
-                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$ROL','$userregis');" ;
+                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis');" ;
                 $consulta=$conn->query($sql);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {

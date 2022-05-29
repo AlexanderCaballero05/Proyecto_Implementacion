@@ -59,8 +59,9 @@
                                                      MODIFICADO_POR ='$usuari'
                                                     WHERE NOMBRE_USUARIO = '$usuario' ";
                                                     $resul=$conn->query($update);
-                                                    if($resul >0){
+                                                    if($resul >0){//Si la contraseña se actualizco correctamente
                                                         echo "<script> 
+                                                        alert('Contraseña cambiada exitosamente')
                                                         location.href = '../index.php';
                                                         </script>";
                                                         exit;

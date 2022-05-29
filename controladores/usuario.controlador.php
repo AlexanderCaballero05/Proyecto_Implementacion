@@ -53,8 +53,20 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
                     
                 echo '<script>
-             window.location = "inicioadmin";
-				</script>';
+                Swal.fire({
+                    icon: "success",
+                    type: "success",
+                    title: "!Bienvenido al Sistema!",
+                    showConfirmButton: "true",
+                    confirmButtonText: "Entrar",
+                    closeOnConfirm: "false",
+                    background:"rgb(245, 245, 245)"
+                    }).then((result)=>{
+                        if (result.value){
+                            window.location="inicioadmin"
+                        }
+                        });
+                        </script>';
 
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] == 1){
 
@@ -64,6 +76,7 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
     Swal.fire({
         type: "success",
+        icon: "info",
         title: "!Debe contestar unas preguntas!",
         showConfirmButton: "true",
         confirmButtonText: "Entrar",
@@ -85,10 +98,22 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                         //Cuando se debe restablecer la contrasena porque se hizo la recuperacion por metodo correo
                     }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==5){
                         $_SESSION['vario'] =$_POST["ingUsuario"];
-                        echo "<script>
-                              alert('Contraseña provisional correcta, debe cambiar su contraseña por razones de seguridad');
-                              location.href = 'Vistas/modulos/cambio_contrasena_correo.php';
-                                    </script>";
+                        echo '<script>
+                            Swal.fire({
+                            type: "success",
+                            icon: "info",
+                            text: "Contraseña provisional correcta, debe cambiar su contraseña por razones de seguridad",
+                            showConfirmButton: "true",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: "false",
+                            background:"rgb(245, 245, 245)"
+                            }).then((result)=>{
+                             if (result.value){
+                                location.href = "Vistas/modulos/cambio_contrasena_correo.php";
+                            }
+                            });
+                            </script>';
+                        
 }else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==3){
     //Usuario Inhabilitado, contacte al administrador
     echo '<script>
@@ -238,10 +263,11 @@ $dato=$conn->query($query);
 echo '<script>
 
 Swal.fire({
-    type: "success",
-    title: "!Usuario y contraseña incorrectos!",
+    icon: "error",
+    title: "Error",
+    text: "Datos incorrectos.",
     showConfirmButton: "true",
-    confirmButtonText: "cerrar",
+    confirmButtonText: "Ok",
     closeOnConfirm: "false",
     background:"rgb(245, 245, 245)"
 

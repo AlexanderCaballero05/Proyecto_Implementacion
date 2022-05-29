@@ -6,6 +6,7 @@
          Analisis, Programacion y Evaluacion de Sistemas
                     Segundo Periodo 2022
 Equipo:
+
 Catedratico:
 Lic. Karla Melisa Garcia Pineda 
 ---------------------------------------------------------------------
@@ -53,7 +54,7 @@ Diana Rut Garcia	 	27-may-2021       Cambio apariencia pantalla con validaciones
                     <h4 class=" text-center ">Verificar preguntas de seguridad</h4>
                     </div>
                     <div class="card-body">
-                        <form class="needs-validation" novalidate method="POST" action="../../modelos/metodo_seleccionado_recuperacion.php">
+                        <form class="needs-validation" novalidate method="POST" action="../../modelos/recu_contrasena_preguntas.php">
                            <div  class="col-md-12 mb-3">
                              <div class="form-group"><!--Muesrta el nombre del usuario que esta registrado en el sistema,pra cambiar contraseña -->
                                  <input type="text"   name="user" id="user" class="form-control" value="USUARIO: <?php echo ($_SESSION['vario']);?>" readonly required >
