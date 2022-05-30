@@ -81,6 +81,7 @@ Diana Rut Garcia Amador	 	28-may-2021       Se cambio la pantalla para que se vi
          background-image:url(assets/imagenes/prosecar.PNG);
          background-position: center center;
        }
+       
   </style>
 <body oncopy="return false" onpaste="return false">
 <div class="container-fluid">
@@ -110,8 +111,7 @@ Diana Rut Garcia Amador	 	28-may-2021       Se cambio la pantalla para que se vi
                   </div>
               </div></br>
               <div class="d-grid">
-                <button style="border-radius: 20px;" name = "btningresar" 
-                type="submit" class="btn btn-danger btn-block"><i class=" fas fa-sign-in-alt mx-1"></i> INGRESAR</button>
+                <button style="border-radius: 20px; background-color:#ED027E; " name = "btningresar" type="submit" class="btn btn-danger btn-block"><i class=" fas fa-sign-in-alt mx-1"></i> INGRESAR</button>
               </div>
               <div class=" text-center my-3"> 
                 <p class="semibold-text mb-2"><a style="color:black; text-decoration:none" href="vistas/modulos/metodos_recuperar_clave.php">¿Olvidaste tu contrase&ntilde;a? </a></p>

@@ -1,3 +1,4 @@
+
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -5,26 +6,20 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
+            <h1 class="m-0 px-3">Bienvenido <?php  echo $_SESSION['vario'];?> estudiante</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <!-- Main content -->
+   <!-- Contenido general de pagina -->
     <section class="content">
-    <div class="container-fluid">
-
-    AQUI VA EL INICIO DE PANTALLA xD
-
+      <div class="container-fluid">
+      
+        
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
 

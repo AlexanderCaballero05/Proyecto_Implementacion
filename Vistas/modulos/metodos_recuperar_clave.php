@@ -136,6 +136,22 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
       }
     }
   </script>
-
+  <script type="text/javascript">
+    function sinespacio(e) {
+      var cadena =  e.value;
+      var limpia = "";
+      var parts = cadena.split(" ");
+      var length = parts.length;
+      for (var i = 0; i < length; i++) {
+        nuevacadena = parts[i];
+        subcadena = nuevacadena.trim();
+        if(subcadena != "") {
+          limpia += subcadena + " ";
+        }
+      }
+      limpia = limpia.trim();
+      e.value = limpia;
+    };
+  </script>
 
 </html>
