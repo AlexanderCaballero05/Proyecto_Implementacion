@@ -5,7 +5,7 @@ include_once "conexion3.php";
 ?>
       <!--llamada de la fuction bitacora -->
      <?php 
-      $codigoObjeto=3;
+      $codigoObjeto=43;
       $accion='Ingreso a la pantalla de mantenimiento parámetros';
       $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
       bitacora($codigoObjeto, $accion,$descripcion);
@@ -24,20 +24,23 @@ include_once "conexion3.php";
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> RELACIÓN DEL FAMILIAR CON EL ESTUDIANTE  </h4>
-        </section>
+       <div class="content-header text-xl-center mb-3 "> 
+          <h4> RELACIÓN DEL FAMILIAR CON EL ESTUDIANTE </h4>
+        </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
+          <li class="nav-item">
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+            </li>
+              <li class="nav-item ">
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
+                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
+                <a class="nav-link active" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
               </li>
             </ul>
           </div>

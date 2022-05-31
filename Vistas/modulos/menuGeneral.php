@@ -8,7 +8,7 @@
 
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
-        <img src="vistas/assets/dist/img/logoparroquia.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <img src="vistas/assets/dist/img/logoparroquia.jpg"  class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PROSECAR</span>
     </a>
 
@@ -156,7 +156,7 @@
                     if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>        
-            <!-- Menu de graficas del sistema -->
+            <!-- Menu de gestion del estudinate -->
             <li class="nav-item">
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-graduation-cap"></i>
@@ -172,34 +172,34 @@
                     <p>Proceso de estudiantes</p>
                   </a>
                 </li>
-
                 <li class="nav-item">
                   <a href="crudSacramentos"class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento Sacramentos</p>
                   </a>
                 </li>
-                
-
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento Tipo de contenido</p>
                   </a>
                 </li> 
-                 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
                   <i class="nav-icon fas fa-table"></i>
                     <p>Mantenimiento Tipo socieconomico</p>
                   </a>
                 </li>
-                   
+                <li class="nav-item">
+                  <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
+                  <i class="nav-icon fas fa-table"></i>
+                    <p>Mantenimiento de parentesco</p>
+                  </a>
+                </li>
               </ul>
             </li>
         <?php
-                    }
-              
+          }
         ?>
 
    <?php 
@@ -271,40 +271,8 @@
                             }
                             ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 26.-->
 
-                    <?php 
-                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-                    ?>        
-            <!-- Menu de graficas del sistema -->
-            <li class="nav-item">
-              <a href="" class="nav-link bg-gradient-navy">
-                <i class="nav-icon fas  fa-copy"></i>
-                <p>
-                  Gestion de Familiares
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="procesoRegistrarFamiliares"class="nav-link">
-                    <i class="far fa-edit nav-icon"></i>
-                    <p>Proceso de familiares</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-
-                  <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
-                  <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de parentesco</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-        <?php
-                    }
-              
-        ?>
-        <?php
+                   
+                    <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -345,7 +313,6 @@
                   </a>
                 </li>
                 <li class="nav-item">
-
                   <a href="matriculaestudiantes" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
                     <p>Tutorias</p>

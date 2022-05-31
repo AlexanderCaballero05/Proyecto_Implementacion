@@ -5,8 +5,7 @@
      Analisis, Programacion y Evaluacion de Sistemas
              Segundo periodo 2022
 Equipo:
-Juan .......... ( correo@yahoo.com)
-David...........( Correo@yahoo.com)
+Diana Rut .......... (drgarciaa@unah.hn)
 
 Catedratico:
 Lic. Karla Melisa Garcia Pineda 
@@ -14,12 +13,13 @@ Lic. Karla Melisa Garcia Pineda
 Programa:         Pantalla de registro de personas/usuarios
 Fecha:             01-jan-2016
 Programador:       Javier
-descripcion:       Registra las diferentes personas y usuarios invlucradas al sistema
+descripcion:       Registra las diferentes personas y usuarios involucradas al sistema
 -----------------------------------------------------------------------
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut               27/05/2022            Se agregaron parametos que faltaban
+Diana Rut               31/05/2022            Se agrego mas campos en el area de familiar y se quitaron campos de estudiante
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -77,19 +77,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
  <script src="../../js/funcionesAgregarPersonas.js"></script>
   <style type="text/css">
     /* ESTILOS PARA OCULTAR LOS INPUTS DE FORM DE REGISTRAR USUARIO*/
-    #form_usuario{
-      display:none;
-      background-color: #0CCDE3;
-    }
-    #primera_fila{
-      display:none;
-    }
-    #cuarta_fila{
-      display:none;
-    }
-    #quinta_fila{
-      display:none;
-    }
+
     .bh{
      background-color: #11DECC;
     }
@@ -136,7 +124,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                         <div class="form-group">
                           <input onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
                           <div class="invalid-feedback">
-                              campo obligatorio.
+                              Campo obligatorio.
                           </div>                     
                         </div>
                       </div>
@@ -145,7 +133,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                         <div class="form-group">
                           <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required="">
                           <div class="invalid-feedback">
-                             campo obligatorio.
+                             Campo obligatorio.
                           </div>  
                         </div>
                       </div>
@@ -162,7 +150,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                         <div class="form-group">
                           <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
                           <div class="invalid-feedback">
-                              campo obligatorio.
+                              Campo obligatorio.
                           </div> 
                         </div>
                       </div>
@@ -177,7 +165,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                         <div class="form-group">
                           <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required=""  >
                           <div class="invalid-feedback">
-                            campo obligatorio.
+                            Campo obligatorio.
                           </div> 
                         </div>
                       </div>
@@ -187,9 +175,9 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                       <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
                         <label  class="control-label">Lugar Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" id="lugar" placeholder="lugar nacimiento" name="lugar_nacimiento" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <input class="form-control" type="text" id="lugar"  name="lugar_nacimiento" onkeyup="mayus(this);" autocomplete = "off" required="">
                           <div class="invalid-feedback">
-                             campo obligatorio.
+                             Campo obligatorio.
                           </div> 
                         </div>
                       </div>
@@ -255,18 +243,8 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>
-                          <div class="input-group-prepend">
-                            <button  type="button"  class="btn btn-primary btn-md"><span onclick="MostrarTelefono();"  > <i class="nav-icon fa fa-plus mx-1"></i></span></button>
-                          </div>
                         </div>
                       </div>
-                      <div  style ="display:none;" id="telefono2" class="col-md-4"><!--INICIO FECHA DE BAJA-->
-                        <label  class="control-label">Otro Telefono:</label> 
-                        <div class="form-group">
-                         <input class="form-control" type="text" minlength="8" maxlength="8"  name="otro_telefono"  onKeyDown="sinespacio(this);" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" >
-                        </div>
-                      </div>
-
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
                         <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
@@ -281,69 +259,70 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                       <div class="col-md-12"><!--INICIO DIRECCION--> 
                         <label  class="control-label">Dirección:</label> <!--INICIO DIRECCION-->
                         <div class="form-group">
-                          <textarea class="form-control" type="text" name="direccion"   id="direccion" onkeyup="mayus(this);"  onkeypress="" placeholder="Ingrese Direccion" required="" ></textarea>
+                          <textarea class="form-control" type="text" name="direccion"   id="direccion" onkeyup="mayus(this);"  onkeypress=""  required="" ></textarea>
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>
                         </div>
                       </div>
                     </div><!--Fin de otra row -->
-                    <div  style ="display:none;" id="titulo" class="card-header" id="form_estudiante">
-                       <h2 class="card-title"> <strong>Agregar Sacramentos Estudiante</strong></h2>
-                    </div><br>
-                    <div class="row">
-                      <div style ="display:none;" id="sacramentos" class="col-md-12">
-                          <?php 
-                          $query = "SELECT CODIGO_SACRAMENTO,NOMBRE from tbl_sacramento ";
-                          $resultado=$conn->query($query);                
-                          ?>
-                          <?php 
-                          if ($resultado->num_rows > 0) {
-                          while($row = $resultado->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_SACRAMENTO'];
-                          $nombre= $row['NOMBRE'];
-                          ?>
-                        <div class="icheck-yellow d-inline">
-                        <input class="form-check mx-2" type="checkbox" name="sacramento[]" id="sacramento<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                          <label class="form-check-label mx-2"  for="sacramento<?php echo $codigo;?>">
-                            <?php echo $nombre;?>
-                          </label>
+                    <div style ="display:none;" id="familiares">
+                      <h2 class="card-title"> Datos de familiares</h2><br><hr>
+                      <div class="row"><!--Para agregar campos adicionales al familiar -->
+                        <div class="col-md-3">
+                          <label class="form-label">Estado civil</label>
+                          <div class="form-group">
+                            <input name ="estado_civil" onkeypress="return soloLetras(event);" placeholder="Eje: Soltero" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                          </div>
                         </div>
-                          <?php 
-                            } 
-                            }
-                          ?>
+                        <div class="col-md-3">
+                          <label class="form-label">Nivel educativo</label>
+                          <div class="form-group">
+                            <input name ="nivel_educativo" onkeypress="return soloLetras(event);" placeholder="Eje: Secundaria" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">Ingresos mensuales</label>
+                          <div class="form-group">
+                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeypress="return solonumeros(event);" type="text" minlength="5" maxlength="" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-md-3">
+                          <label class="form-label">Iglesia que asiste</label>
+                          <div class="form-group">
+                            <input name ="iglesia" onkeypress="return soloLetras(event);" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
+                          </div>
+                        </div>
                       </div>
-                    </div><!--fin row -->
+                    </div>
                     </br>
-                    <div class="card-header" id="form_usuario">
-                       <h2 class="card-title"> <strong>Registrar Usuario</strong></h2>
-                    </div><br>
-                    <div  class="row"> 
-                      <div class="col-md-4" id="primera_fila"><!--INICIO NOMBRE USUARIO-->
-                        <label  class="control-label">Nombre Usuario</label>
-                        <div class="form-group">
-                            <input class="form-control"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
-                            onblur="quitarespacios(this);" placeholder="Nombre Usuario">
+                    <div style ="display:none;" id="usuarios"><!--Contiene los datos de usuario como los adicioneles de especialidades y los oculta -->
+                       <h2 class="card-title">Registrar Usuario</h2><br><hr>
+                      <div class="row"> 
+                        <div class="col-md-4" ><!--INICIO NOMBRE USUARIO-->
+                          <label  class="control-label">Nombre Usuario</label>
+                          <div class="form-group">
+                              <input class="form-control"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
+                              onblur="quitarespacios(this);" placeholder="Nombre Usuario">
+                          </div>
+                          <div class="invalid-feedback">
+                            Debe teber minimo <?php echo $valor1; ?> caracteres.
+                          </div>
                         </div>
-                        <div class="invalid-feedback">
-                           Debe teber minimo <?php echo $valor1; ?> caracteres.
+                        <div  class="col-sm-4 mb-2" >
+                         <label  class="control-label">Contraseña</label>
+                         <div class="input-group mb-3">
+                           <input class="form-control" minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
+                             <div class="input-group-append">
+                               <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
+                             </div>
+                            <div class="invalid-feedback">
+                              Debe teber minimo <?php echo $valor4; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
+                             </div> 
+                          </div>  
                         </div>
-                      </div>
-                    <div  class="col-sm-4 mb-2" id="cuarta_fila">
-                      <label  class="control-label">Contraseña</label>
-                      <div class="input-group mb-3">
-                        <input class="form-control" minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
-                        <div class="input-group-append">
-                          <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
-                        </div>
-                        <div class="invalid-feedback">
-                           Debe teber minimo <?php echo $valor4; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
-                        </div> 
-                      </div>  
-                    </div>                                   
-                      
-                      <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->
+                                                   
+                       <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->
                         <?php 
                         $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 3;";
                         $resultadod=$conn->query($query);                
@@ -415,7 +394,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
                             </select>
                          </div>
                       </div>
-                      
+                      </div> 
                     </div><!--Fin de otra fila :v -->
 
                     <?php
@@ -575,66 +554,37 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 <script type="text/javascript">
   //FUNCIONES PARA MOSTRAR LOS CAMPOS DE USUARIOS (Se puede optimizar,pero hasta en evaluacion creo :v)
  $( function() {
-    $("#tipo_persona").change( function() {//tutor administrador y enfermero
-        if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9"  ) {
-          document.getElementById('titulo').style.display = "none";
-           document.getElementById('sacramentos').style.display = "none";
+    $("#tipo_persona").change( function() {//tutor administrador ,enfermero y estudiante
+        if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9" || $(this).val() === "4" ) {
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
-          document.getElementById('form_usuario').style.display = "block";
-          document.getElementById('primera_fila').style.display = "block";
-          document.getElementById('cuarta_fila').style.display = "block";
-        } else if ($(this).val() === "4" ){//estudiante
-          document.getElementById('especialidad_psico').style.display = "none";
-          document.getElementById('especialidad_medico').style.display = "none";
-          document.getElementById('catequistas').style.display = "none";
-          document.getElementById('primera_fila').style.display = "none";
-           document.getElementById('cuarta_fila').style.display = "none";
-           document.getElementById('titulo').style.display = "block";
-           document.getElementById('sacramentos').style.display = "block";
-           document.getElementById('form_usuario').style.display = "block";
-           document.getElementById('primera_fila').style.display = "block";
-          document.getElementById('cuarta_fila').style.display = "block";
+          document.getElementById('familiares').style.display = "none";
+          document.getElementById('usuarios').style.display = "block";
         }else if ($(this).val() === "7"){ //es para un familiar
-          document.getElementById('titulo').style.display = "none";
-           document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
-          document.getElementById('form_usuario').style.display = "none";
-          document.getElementById('primera_fila').style.display = "none";
-          document.getElementById('cuarta_fila').style.display = "none";
-
+          document.getElementById('usuarios').style.display = "none";
+          document.getElementById('familiares').style.display = "block";
         }else if($(this).val() ===  "5" ){//para medico
-          document.getElementById('titulo').style.display = "none";
-           document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
+          document.getElementById('familiares').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
-          document.getElementById('form_usuario').style.display = "block";
-          document.getElementById('primera_fila').style.display = "block";
-          document.getElementById('cuarta_fila').style.display = "block";
-
+          document.getElementById('usuarios').style.display = "block";
         }else if($(this).val() ===  "6" ){// para psicologo
           document.getElementById('especialidad_medico').style.display = "none";
-          document.getElementById('sacramentos').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
+          document.getElementById('familiares').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "block";
-          document.getElementById('form_usuario').style.display = "block";
-          document.getElementById('primera_fila').style.display = "block";
-          document.getElementById('cuarta_fila').style.display = "block";
-          
+          document.getElementById('usuarios').style.display = "block";
         }else if($(this).val() ===  "8"){//para catequista
-          document.getElementById('titulo').style.display = "none";
-           document.getElementById('sacramentos').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
+          document.getElementById('familiares').style.display = "none";
           document.getElementById('catequistas').style.display = "block";
-          document.getElementById('form_usuario').style.display = "block";
-          document.getElementById('primera_fila').style.display = "block";
-          document.getElementById('cuarta_fila').style.display = "block";
-          
+          document.getElementById('usuarios').style.display = "block";
         }
     });
   }); 

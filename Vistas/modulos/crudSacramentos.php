@@ -14,16 +14,13 @@
 <body oncopy="return false" onpaste="return false"> 
 <div class="content-wrapper">
   <div class="content-header">
-    <div class="container-fluid">
-    </div><!-- /.container-fluid -->
+     <!--Puede ir un titulo -->
   </div>
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>MANTENIMIENTO DE SACRAMENTOS</h4>
-        </h1>     
-    </section>
+      <div class="content-header text-xl-center mb-3 ">
+            <h4>MANTENIMIENTO DE SACRAMENTOS</h4>    
+      </div>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -103,7 +100,7 @@
                                  if($permiso_eliminar == 'SI'){
                                ?>                            
                                 <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                <button  type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
                                <?php
@@ -125,8 +122,7 @@
                                }
                               ?>
                               <?php
-                                if($permiso_actualizar == 'SI')
-                                {
+                                if($permiso_actualizar == 'SI') {
                               ?>
                                 <a href="#EDITARSACRAMENTO<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>

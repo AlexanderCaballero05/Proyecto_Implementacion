@@ -11,23 +11,26 @@
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-        <section class="content-header text-xl-center mb-3 btn-light">
+        <div class="content-header text-xl-center mb-3">
               <h4>ESTUDIANTES PROSECAR </h4>
-        </section>
+        </div>
   
   <section class="content">
     <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class=" nav-link active " style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+          <li class="nav-item">
+              <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
-            </li>
+                <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
+              </li>
           </ul>
         </div>
         <div class="card-body">

@@ -71,16 +71,22 @@
                          $sp_basicos = $db->prepare("CALL Sp_insertar_socieconomico_basicos(?,?);");
                          $sp_basicos->execute(array($basicos,$codigo));
                          $conn->commit();
-                          }
+                        }
                        } //fin del insert de servicios
+
+                        if(is_array($_POST['sacramento'])) {//codigo para insertar los sacramentos
+                          foreach ($_POST['sacramento'] as $sacramento){
+                            $sentencia = $db->prepare(" CALL Sp_insertar_sacramentos(?,?);");
+                            $sentencia->execute(array($sacramento,$codigo));
+                            $conn->commit();
+                          }
+                        }//fin del insert de sacramentos estudiantes
                       echo "<script>
                       window.location = 'crudEstudiante';
                       </script>";
                       exit; 
                     
                       
-                        
-                    
                     }catch(PDOException $e){
                     echo $e->getMessage(); 
                     return false;
