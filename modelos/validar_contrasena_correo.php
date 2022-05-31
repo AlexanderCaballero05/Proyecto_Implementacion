@@ -81,8 +81,8 @@ if(isset($_SESSION['vario'] )) {
                                                 echo $e->getMessage();  
                                                 return false;
                                             }
-                                            echo "<script> alert('!cambio de contraseña correcto')
-                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                            echo "<script> alert('Cambio de contraseña correctamente')
+                                            location.href = '../index.php';
                                             </script>";
                                             $_SESSION['vario'] =$nomUser;
                                             //llamada de la fuction bitacora -->

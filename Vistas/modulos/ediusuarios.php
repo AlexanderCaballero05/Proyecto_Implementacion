@@ -110,11 +110,13 @@ include_once "conexion3.php";
                         <?php
                         $query = "SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
                         e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-                        FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
-                        where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
-                        u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA and
-                        u.CODIGO_USUARIO >1
-                        ORDER BY CODIGO_USUARIO ASC;";
+                        FROM tbl_usuario u
+                        left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
+                        left join tbl_estado e on e.CODIGO_ESTADO = u.CODIGO_ESTADO
+                        left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
+                        left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+                        where
+                        u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
