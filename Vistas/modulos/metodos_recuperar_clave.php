@@ -18,7 +18,7 @@ Descripcion:       Pantalla Metodos para restablecer la contraseña
  Historial de Cambio
 -----------------------------------------------------------------------
 Programador            Fecha                Descripcion
-Diana Rut Garcia	 	05-may-2021       Cambio apariencia pantalla -->
+Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
 <?php
  include "conexionpdo.php";
 ?>
@@ -47,9 +47,9 @@ Diana Rut Garcia	 	05-may-2021       Cambio apariencia pantalla -->
  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="./fontawesome-free/css/all.min.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <title>Restablecer la contraseña usuario</title>
   </head>
   <style>
@@ -59,30 +59,35 @@ Diana Rut Garcia	 	05-may-2021       Cambio apariencia pantalla -->
   </style>
   <body class="login-page" _c_t_common="1"  >
       <div class="container-fluid">
-         <div class="row  justify-content-center mt-5">
-            <div class="col-md-5 rounded" style="width: 25rem;">
+         <div class="row justify-content-center mt-5">
+            <div class="col-md-3 " style="width: 20rem;">
                 <div  class="card card-outline card-primary">
                     <div class="card-header bg-white ">
-                       <h3 class="fw-bold text-center py-3 mx-3">Restablecer la contrase&ntilde;a </h3>
+                       <h3 class=" text-center">Restablecer la contrase&ntilde;a </h3>
                     </div>
                     <div class="card-body">
                         <form class="needs-validation" novalidate method="POST" action="../../modelos/metodo_seleccionado_recuperacion.php">
                             <div class="input-group mb-1">
                              <p><strong>¿Olvidaste tu contraseña?</strong></p></br>
-                               <p class="fw-normal mx-1"> Ingresa tu nombre de usuario para restablecerla mediante 2 formas</p>
+                               <p class="fw-normal ">Ingresa tu nombre  usuario para restablecer la contraseña mediante 2 formas.</p>
                             </div>
                             <div class="input-group mb-3">
+                              <div class="input-group-prepend">
                                <span class="input-group-text" ><i class="fas fa-user"></i></span>
-                               <input required type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeyup="mayus(this);"
+                              </div>
+                              <input required type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeyup="mayus(this);"
                                 autocomplete = "off"  onkeypress="return soloLetras(event);"; onkeydown="sinespacio(this);">
                                 <div class="invalid-feedback">
                                    Debe tener minimo <?php echo $valor1; ?> caracteres.
                                 </div>
                             </div>
                             <div class="d-grid gap-2"><!--Botones  -->
-                              <button type="submit" name="correo" class="btn btn-outline-primary" type="button"> Recuperar contrase&ntilde;a por correo </button>
-                              <button type="submit" name="recu"  class="btn btn-outline-primary mb-2" type="button"> Recuperar via preguntas secretas </button>
-                              <button type="reset"  onclick="location.href='../../index.php'" class="btn btn-block btn-danger btn-flat">CANCELAR</button>
+                              <button type="submit" name="correo"  class="btn btn-block btn-outline-primary">
+                                <i class="fa fa-envelope mr-2"></i>Recuperar por Correo Electrónico
+                              </button>
+                              <button type="submit" name="recu" class="btn btn-block btn-outline-success">
+                                <i class="fa fa-question-circle mr-2"></i>Por Preguntas de Seguridad </button><br>
+                              <button type="button"  onclick="location.href='../../index.php'" class="btn btn-block btn-danger btn-flat">CANCELAR</button>
                             </div>
                         </form>
                     </div>
@@ -131,7 +136,7 @@ Diana Rut Garcia	 	05-may-2021       Cambio apariencia pantalla -->
       }
     }
   </script>
-  <script type="text/javascript">//Para quitar los espacios
+  <script type="text/javascript">
     function sinespacio(e) {
       var cadena =  e.value;
       var limpia = "";
@@ -140,12 +145,12 @@ Diana Rut Garcia	 	05-may-2021       Cambio apariencia pantalla -->
       for (var i = 0; i < length; i++) {
         nuevacadena = parts[i];
         subcadena = nuevacadena.trim();
-       if(subcadena != "") {
+        if(subcadena != "") {
           limpia += subcadena + " ";
-          }
         }
-        limpia = limpia.trim();
-        e.value = limpia;
+      }
+      limpia = limpia.trim();
+      e.value = limpia;
     };
   </script>
 

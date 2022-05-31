@@ -63,8 +63,8 @@ if(isset($_SESSION['vario'] )) {
                                                             u.CODIGO_ESTADO = 2
                                                             WHERE u.NOMBRE_USUARIO ='$nomUser'";
                                                             $resul=$conn->query($update);
-                                                            if($resul >0){
-                                                              echo "<script> location.href = '../index.php'; </script>";
+                                                            if($resul >0){//En caso que la contraseña se actualice correctamente.
+                                                              echo "<script> alert('Contraseña cambiada exitosamente') location.href = '../index.php'; </script>";
                                                             }
                                                          }
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
@@ -81,8 +81,8 @@ if(isset($_SESSION['vario'] )) {
                                                 echo $e->getMessage();  
                                                 return false;
                                             }
-                                            echo "<script> alert('!cambio de contraseña correcto')
-                                            location.href = '../Vistas/modulos/cambio_contrasena_correo.php';
+                                            echo "<script> alert('Cambio de contraseña correctamente')
+                                            location.href = '../index.php';
                                             </script>";
                                             $_SESSION['vario'] =$nomUser;
                                             //llamada de la fuction bitacora -->

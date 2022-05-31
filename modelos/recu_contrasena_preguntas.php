@@ -5,9 +5,20 @@
  include_once "conexion3.php";
 ?> 
 <?php
+  //Parametro de maximo nombre usuario
+  $intentos = "NUM_INTENTOS_PREGUNTAS";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($intentos));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $parametro = $row1;
+  }
 
+?>
+<?php
 if(isset($_SESSION['vario'])) {
     $usuario = $_SESSION['vario'];
+    
      try{ 
          $sentencia = $db->prepare("SELECT CODIGO_USUARIO FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
          $sentencia->execute(array($usuario));
@@ -24,17 +35,29 @@ if(isset($_SESSION['vario'])) {
                   echo "<script>
                   window.location='../Vistas/modulos/cambio_contrasena_preguntas.php';
                   </script>";
-                  $_SESSION['vario'] =$usuario;
-                  //llamada de la fuction bitacora -->
-                  $codigoObjeto=1;
-                  $accion='recuperacion contraseña por preguntas';
-                  $descripcion= 'Solicitud recuperacion de contraseña ';
-                  bitacora($codigoObjeto, $accion,$descripcion);
-
                 }else{ //Si no hay registros en la fila ,la respuesta es incorrecta y se bloquea al usuario :/
-                  $updat = "UPDATE tbl_usuario SET CODIGO_ESTADO = 4 WHERE CODIGO_USUARIO = '$user';";
-                  $resultado =$conn->query($updat);
-                  echo "<script> alert('Usuario bloqueado');location.href = '../index.php';</script>";
+                  $sentencia2 = $db->prepare("SELECT p.PAR_VALOR
+                  from tbl_usuario u, tbl_parametros_usuarios p 
+                  WHERE u.CODIGO_USUARIO = p.CODIGO_USUARIO
+                  AND P.CODIGO_PARAMETRO = 19
+                  AND u.NOMBRE_USUARIO = (?);");
+                  $sentencia2->execute(array($usuario));
+                  $valor_usuario=$sentencia2->fetchColumn();// cantidad que tiene el usuario de intentos validos
+
+                  if($valor_usuario < $parametro){ //evalua que la cantidad de intentos validos que tiene el usuario sea menor que el parametro
+                    $query = "UPDATE tbl_parametros_usuarios SET 
+                      PAR_VALOR=(PAR_VALOR+1)
+                      WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario') AND CODIGO_PARAMETRO = 19;";
+                      $dato=$conn->query($query); 
+                      echo "<script> alert('Respuesta incorrecta,intente otra vez')
+                      window.location='../Vistas/modulos/recuperacion_clave_preguntas.php';
+                      </script>";
+                  }else{ // si es mayor significa que supero las veces de intentos validos,osea va bloquear el usuario
+                    echo "<script> alert('Contactar al administrador su usuario ha sido bloqueado');
+                    location.href = '../index.php';</script>";
+                    $updat = "UPDATE tbl_usuario SET CODIGO_ESTADO = 4 WHERE CODIGO_USUARIO = '$user';";
+                    $resultado =$conn->query($updat);
+                  }
                 }
             }
         }else{

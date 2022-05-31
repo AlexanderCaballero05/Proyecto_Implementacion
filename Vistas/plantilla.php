@@ -127,7 +127,7 @@ session_start();
          $_GET["ruta"] == "crudTutorias" ||
          $_GET["ruta"] == "crudTutoriasTutor" ||
          $_GET["ruta"] == "crudTutorEspiritual" ||
-    
+         $_GET["ruta"] == "inicioTutor" ||
          $_GET["ruta"] == "area" ||
          $_GET["ruta"] == "procesoPreClinica" ||
          $_GET["ruta"] == "crudPreClinica" ||

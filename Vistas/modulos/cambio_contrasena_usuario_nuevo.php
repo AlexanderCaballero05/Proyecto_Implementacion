@@ -67,7 +67,7 @@
                        <div class="input-group-prepend">
                           <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar()"><span class="icon fa fa-eye-slash"></button>
                         </div>
-                      <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.</p>
+                        <p class="formulario__input-error">Debe tener minimo <?php echo $valor1;?> caracteres, letras minúsculas,mayúsculas caracteres especiales y un numero.</p>
                     </div>
                     <label class="control-label mb-2">Contrase&ntilde;a:</label>
                     <div class="input-group mb-3" id="grupo__clave_nueva">
@@ -76,7 +76,7 @@
                           <div class="input-group-prepend">
                             <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar1()"><span class="icon1 fa fa-eye-slash"></button>
                           </div>
-                        <p class="formulario__input-error">Su contraseña debe que tener letras mayusculas, minisculas y caracteres especiales y un numero.</p>
+                        <p class="formulario__input-error">Debe tener minimo <?php echo $valor1;?> caracteres, letras minúsculas,mayúsculas caracteres especiales y un numero.</p>
                     </div>
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a:</label>
                     <div class="input-group mb-3 " id="grupo__confirmar_clave">

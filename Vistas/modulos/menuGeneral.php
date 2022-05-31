@@ -29,7 +29,7 @@
                }
               ?>
               <div class="image">
-                <img style="width:35px ; heigth:33px"  class="img-circle elevation-1" alt="Imagen usuario"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
+                <img style="width:35px ; heigth:33px"  class="img-circle elevation-1"   src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
                  <!--  <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image"> -->
               </div>
               

@@ -71,7 +71,7 @@ include_once "../../modelos/conexion3.php";
                           <div class="input-group-prepend">
                             <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar1()"><span class="icon1 fa fa-eye-slash"></button>
                           </div>
-                        <p class="formulario__input-error">Su contraseña debe  tener letras mayusculas, minisculas, caracteres especiales y un numero.</p>
+                        <p class="formulario__input-error">Debe tener minimo <?php echo $valor1;?> caracteres,una minúscula,mayúscula ,número y caracter especial.</p>
                     </div>
                     
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a</label>
