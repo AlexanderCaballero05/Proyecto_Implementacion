@@ -1,3 +1,26 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD CABALLERO
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda 
+---------------------------------------------------------------------
+Programa:          Pantalla que registra datos adicionales al estudiante
+Fecha:             01-jan-2016
+Programador:       Javier
+descripcion:       Registra los datos estudiantiles ,como ser socioeconomicos,escolares etc
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               31/05/2022            Se agrego campo de sacramentos
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -16,13 +39,12 @@
 <body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
   <div class="content-header">
-    <div class="container-fluid">
-    </div><!-- /.container-fluid -->
+     <!--Aqui iba el titulo :v -->
   </div>
   <section class="content">
-              <div class="content-header text-xl-center mb-3 btn-light">
-               <h4>AGREGAR ESTUDIANTE</h4>
-              </div>
+      <div class="content-header text-xl-center mb-3 ">
+         <h4>AGREGAR ESTUDIANTE</h4>
+      </div>
     <div class="container-fluid">
                 <!-- Inicio del PROCESO inscripcion de estudiantes-->
         <div class="card ">
@@ -36,7 +58,10 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link active" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
-            </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
+              </li>
             </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
@@ -46,7 +71,6 @@
             <strong>Datos escolares</strong>
             <hr>
             </br>
-
             <div class="row mb-5 pl-3">
                     <?php //
                     $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
@@ -71,17 +95,15 @@
                         }
                         ?>
                       </select>
-                          
                       <div class="invalid-feedback">
                           Agregue un nombre!
                       </div>
-
                       <div class="valid-feedback">
                         ¡Se ve bien!
                    </div>
                 </div>
-            </div> 
-                  <div class="row">
+            </div>
+                    <div class="row">
                       <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Grado Actual</label> 
                           <div class="form-group">
@@ -91,7 +113,6 @@
                               </div>
                           </div>
                       </div>
-
                       <div class="col-md-3">
                         <label  class="control-label pl-4">¿Repitente de curso?</label>
                         <br>
@@ -102,12 +123,8 @@
                         <div class="form-check form-check-inline">
                           <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio2" value="NO" required="">
                           <label class="form-check-label" for="inlineRadio2">NO</label>
-                          
                         </div>
-                             
-                       
                       </div>
-
                         <div class="col-md-3"> <!--INICIO INDICE ACADEMICO-->
                           <label for="identidad" class="control-label">Indice academico</label> 
                           <div class="form-group">
@@ -116,9 +133,7 @@
                                   campo obligatorio.
                               </div>
                           </div>
-                          
                         </div>
-
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Materias con bajo rendimiento</label> 
                           <div class="form-group">
@@ -127,13 +142,11 @@
                                   campo obligatorio.
                               </div>
                           </div>
-                          
                         </div>
-                  </div>
+                    </div>
 
 
                   <div class="row">
-
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
@@ -164,14 +177,43 @@
                           </div>
                         </div>
                   </div><!--Cierre del row general -->
+                  <br>
+                   <!--Sacramentos -->
+                    <div>
+                       <h2 class="card-title"><strong> Sacramentos Estudiante</strong></h2><br><hr>
+                    <div class="row">
+                      <div  id="sacramentos" class="col-md-12">
+                          <?php 
+                          $query = "SELECT CODIGO_SACRAMENTO,NOMBRE from tbl_sacramento ";
+                          $resultado=$conn->query($query);                
+                          ?>
+                          <?php 
+                          if ($resultado->num_rows > 0) {
+                          while($row = $resultado->fetch_assoc()) { 
+                          $codigo = $row['CODIGO_SACRAMENTO'];
+                          $nombre= $row['NOMBRE'];
+                          ?>
+                        <div class="icheck-yellow d-inline">
+                        <input class="form-check mx-2" type="checkbox" name="sacramento[]" id="sacramento<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                          <label class="form-check-label mx-2"  for="sacramento<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                          </label>
+                        </div>
+                          <?php 
+                            } 
+                            }
+                          ?>
+                      </div>
+                    </div><!--fin row -->
+                    </div>
                       </br>
-                      <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
+                    <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
                         <h2 class="card-title"> <strong>Datos socioeconomicos</strong></h2>
                     </div></br>
 
-                <div class="row pl-3">
+                <div class="row md-3 ">
                      <!-- inicio del checkbox de dispositivos-->  
-                <div class="col-sm-3">
+                 <div class="col-sm-3">
                   <div class="card">
                      <div class="card-header" style="background-color:#DFD4FE;">
                              <strong>¿Con que dispositivos cuenta?</strong>
@@ -378,24 +420,7 @@ else if ( obj.attachEvent ) {
 }
 }
 
-window_mouseout( document, 'mouseout', event => {
 
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    localStorage.setItem( 'leftWindow', true );
-}
-} );
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 

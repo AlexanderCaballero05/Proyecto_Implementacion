@@ -1,3 +1,28 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR Diana Rut
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos del usuario
+Fecha:             01-jan-2016
+Programador:       Javier
+descripcion:       Mantenimiento de usuario,edita elimina 
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               28/05/2022            Se modifico la parte de rol para que no se edite
+----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
 include_once "conexion.php";
@@ -42,7 +67,7 @@ include_once "conexion3.php";
   
   <section class="content">
      <section class="content-header text-xl-center mb-3">
-              <h4>MANTENIMIENTO USUARIOS</h4>    
+          <h4>MANTENIMIENTO USUARIOS</h4>    
       </section>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">

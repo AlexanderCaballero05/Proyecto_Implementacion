@@ -1,3 +1,28 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD GARCIA u otr persona
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos socioeconomicos de los estudiantes
+Fecha:             01-jan-2016
+Programador:       Javier
+descripcion:       Pantalla de mantenimiento edita datos socieconomicos
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               31/05/2022            Se agrego un tab al menu y un cierre de div
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -8,16 +33,12 @@
 
 <div class="content-wrapper">
   <div class="content-header">
-    <div class="container-fluid">
-    </div><!-- /.container-fluid -->
   </div>
-  <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>ESTUDIANTES PROSECAR</h4>
+  <div class="content-header text-xl-center mb-3 ">
+      <h4>ESTUDIANTES PROSECAR</h4>
   </div>
   <section class="content">
-    
     <div class="container-fluid">
-      
       <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
@@ -28,8 +49,11 @@
                 <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
-            </li>
+                <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
+              </li>
           </ul>
         </div>
         <div class="card-body">
@@ -72,11 +96,9 @@
           <!-- card de la tabla-->
           <div class="card "> 
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
-                  
                 <div class="table-responsive">
                   <table id="tabla_estudiantes" class="table table-bordered table-striped">
                       <thead>
@@ -86,7 +108,6 @@
                           <th class="text-center">Nombre estudiante</th>
                           <th class="text-center">Contenido socio-economico</th>
                           <th class="text-center">Nombre tipo contenido</th>
-                          
                         </tr>
                       </thead>
                       <tbody>
@@ -98,8 +119,6 @@
                         AND t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO
                         AND e.CODIGO_PERSONA = p.CODIGO_PERSONA
                         ORDER BY codigo_tabla asc;";
-
-
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -114,69 +133,51 @@
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-
-                              <?php
+                            <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario  WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
                                 $evaluar_permiso_actualizar->execute(array($usuariomo, '16'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
-                               
                             }
                             ?> 
-
-
 
                             <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
                                 $evaluar_permiso_eliminar->execute(array($usuariomo, '16'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
                             ?> 
-
-
-                                <?php
-                                  if($permiso_eliminar == 'SI')
-                                   {
-                                ?>
-                                
+                            <?php
+                              if($permiso_eliminar == 'SI') {
+                            ?>
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-
                                <?php
                                   }
                                 ?>
-
                                 <?php 
-                                if ($permiso_actualizar == 'SI')
-                                {
+                                if ($permiso_actualizar == 'SI'){
                                 ?>
-                               
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
                                 <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
@@ -199,7 +200,6 @@
                               WHERE S.CODIGO_TIPOSOCIO = 1;";
                               $result1= $conn->query($query1);
                            ?>
-
                             <?php 
                               include_once "conexion3.php";
                               $query2= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
@@ -209,7 +209,6 @@
                            ?>
 
                             <?php
-                            
                               include_once "conexion3.php";
                               $query3= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
                               FROM tbl_contenido_socioeconomico s
@@ -218,7 +217,6 @@
                            ?>
                               
                             <?php
-                            
                             include_once "conexion3.php";
                             $query4= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO
                             FROM tbl_contenido_socioeconomico s
@@ -247,20 +245,13 @@
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editar_estudiante" id="editar_estudiante" disabled>
                                         </div>
                                       </div>
-
-
-
                                       <?php
-                                      if ($var4 == 'DISPOSITIVO ELECTRONICO')
-                                      { 
-
+                                      if ($var4 == 'DISPOSITIVO ELECTRONICO'){ 
                                       ?>
-
                                       <div class="col-sm-12">
                                           <label for="DISPOSITIVOS" class="control-label">¿Con que dispositivos cuenta?</label> 
                                             <select  style="width: 100%;"  class="form-control select2"  name="EDITDISPOSITIVOS" type="text" aria-placeholder="Buscar" required="" >
                                               <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
-                                            
                                                 <?php 
                                                 session_start();
                                                 $_SESSION['codigo'] = $var5;
@@ -274,13 +265,10 @@
                                                   } 
                                                   }
                                                   ?>
-                                                  
                                                 </select>
-                                      </div>
-
+                                       </div>
                                       <?php
-                                      }elseif($var4 == 'SERVICIOS DE INTERNET')
-                                      {
+                                      }elseif($var4 == 'SERVICIOS DE INTERNET'){
                                     ?>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
@@ -289,27 +277,23 @@
                                           <label for="txtcodigo_persona">¿Qué servicios de internet utiliza?</label>
                                            <select  style="width: 100%;"  class="form-control select2" name="EDITSERVICIOS"  id="EDITSERVICIOS" type="text" aria-placeholder="Buscar" required="" >
                                             <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
-
-                                                      <?php 
-                                                        if ($result2->num_rows > 0) {
-                                                        while($row2 = $result2->fetch_assoc()) { 
-                                                        $codigo = $row2['CODIGO_CONTENIDO_SOCIOECONOMICO'];
-                                                        $nombre = $row2['NOMBRE_TIPO'];
-                                                        ?>
-                                                    <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                      <?php 
-                                                      } 
-                                                      }
-                                                      ?>
+                                             <?php 
+                                               if($result2->num_rows > 0) {
+                                                  while($row2 = $result2->fetch_assoc()) { 
+                                                  $codigo = $row2['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                                  $nombre = $row2['NOMBRE_TIPO'];
+                                              ?>
+                                            <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                            <?php 
+                                              } 
+                                              }
+                                            ?>
                                            </select>
                                         </div>
                                       </div>
-
                                       <?php
-                                      }elseif($var4 == 'PROVEEDOR DE INGRESO')
-                                      {
+                                      }elseif($var4 == 'PROVEEDOR DE INGRESO'){
                                     ?>
-
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                          <label for="EDITPROVEEDOR" class="control-label">¿Quién provee el ingreso familiar?</label> 
@@ -340,27 +324,25 @@
                                          <label for="BASICOS" class="control-label">¿Con qué servicios básicos cuenta en su casa?</label> 
                                           <select  stye="width: 100%;"  class="form-control select2" name="EDITBASICOS" id="EDITBASICOS" type="text" aria-placeholder="Buscar" required >
                                           <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
-                                                  <?php 
-                                                    if ($result4->num_rows > 0) {
-                                                    while($row4 = $result4->fetch_assoc()) { 
-                                                    $codigo = $row4['CODIGO_CONTENIDO_SOCIOECONOMICO'];
-                                                    $nombre = $row4['NOMBRE_TIPO'];
-                                                    ?>
-                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                  <?php 
-                                                  } 
-                                                  }
-                                                  ?>
+                                           <?php 
+                                            if($result4->num_rows > 0) {
+                                              while($row4 = $result4->fetch_assoc()) { 
+                                              $codigo = $row4['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                              $nombre = $row4['NOMBRE_TIPO'];
+                                           ?>
+                                           <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                            <?php 
+                                             } 
+                                             }
+                                            ?>
                                           </select>
                                         </div>
                                       </div>
-
                                       <?php
                                       }
                                       
                                     ?>
                                       
-
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY --> 
 
@@ -411,6 +393,7 @@
     </div>
     </div><!--fin del card del menu -->
   </section>
+</div>
 
 
 
@@ -430,17 +413,16 @@
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTUDIANTE -->
   <div id="AGREGAR_ESTUDIANTE" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
-                    <?php
-                    include_once "conexion3.php";
-                    $query= "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
-                    $result= $conn->query($query);
-                    ?>
-
-                    <?php
-                    include_once "conexion3.php";
-                    $query1= "SELECT s.CODIGO_TIPOSOCIO,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s";
-                    $result1= $conn->query($query1);
-                    ?>
+        <?php
+         include_once "conexion3.php";
+         $query= "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
+         $result= $conn->query($query);
+        ?>
+        <?php
+         include_once "conexion3.php";
+         $query1= "SELECT s.CODIGO_TIPOSOCIO,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s";
+         $result1= $conn->query($query1);
+        ?>
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
@@ -450,49 +432,35 @@
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                         <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre Estudiante</label>
-                                   
-                                    <select class="form-control" name="codigo_persona" id="codigo_estudiante">
-
-                                     <option value="">Seleccionar estudiante</option>
+                            <div class="form-group">
+                              <label for="txtcodigo_persona">Nombre Estudiante</label>
+                                <select class="form-control" name="codigo_persona" id="codigo_estudiante">
+                                  <option value="">Seleccionar estudiante</option>
                                      <?php
                                       if ($result->num_rows > 0){
                                         while($row = $result->fetch_assoc()){
-
-                                        
-
-                                       
                                       ?>
                                      <option value="<?php echo $row['CODIGO_PERSONA'];?>"><?php echo $row['PRIMER_NOMBRE'];?></option>
                                      <?php
                                       }
                                     }
-
                                       ?>
                                    </select>
                                 </div>
                                     <!-- INICIO DEL COMBOBOX CONTENIDO SOCIOECONOMICO --> 
                                 <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Contenido Socioeconomico</label>
-                                   
-                                    <select class="form-control" name="contenido_socio" id="contenido_socio">
-
+                                  <label for="txtcodigo_persona">Contenido Socioeconomico</label>
+                                  <select class="form-control" name="contenido_socio" id="contenido_socio">
                                      <option value="">Contenido</option>
                                      <?php
                                       if ($result1->num_rows > 0){
                                         while($row1 = $result1->fetch_assoc()){
-
-                                        
-
-                                       
                                       ?>
                                      <option value="<?php echo $row1['CODIGO_TIPOSOCIO'];?>"><?php echo $row1['NOMBRE_TIPO'];?></option>
                                      <?php
                                       }
                                     }
-
                                       ?>
                                    </select>
                                 </div>

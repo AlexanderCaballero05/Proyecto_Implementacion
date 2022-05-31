@@ -27,10 +27,8 @@ include_once "conexion3.php";
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
-       
-    
-    <h4>MANTENIMIENTO PERSONAS</h4>
+    <div class="content-header text-xl-center mb-3 ">
+      <h4>MANTENIMIENTO PERSONAS</h4>
     </div>
     <section class="content">
      <div class="card"> 
@@ -546,10 +544,10 @@ include_once "conexion3.php";
                         $tipo = $_POST['BUSCAR'];
                         
                         $query = "SELECT p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
-                        FROM TBL_PERSONA p, tbl_telefono tl, tbl_tipo_persona t, tbl_correo_electronico c
-                        WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
-                        AND tl.CODIGO_PERSONA = p.CODIGO_PERSONA
-                        AND c.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+                        FROM TBL_PERSONA p
+                        left join tbl_telefono tl     on tl.CODIGO_PERSONA = p.CODIGO_PERSONA
+                        left join tbl_tipo_persona t  on t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
+                        left join tbl_correo_electronico c  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
