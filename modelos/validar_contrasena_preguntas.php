@@ -61,7 +61,7 @@
                                                     $resul=$conn->query($update);
                                                     if($resul >0){//Si la contraseña se actualizco correctamente
                                                         echo "<script> 
-                                                        alert('Contraseña cambiada exitosamente')
+                                                        alert('Contraseña fue actualizada exitosamente')
                                                         location.href = '../index.php';
                                                         </script>";
                                                         exit;

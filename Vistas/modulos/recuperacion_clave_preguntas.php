@@ -18,19 +18,36 @@ Descripcion:       Pantalla de recuperacion por preguntas de seguridad
  Historial de Cambio
 -----------------------------------------------------------------------
 Programador            Fecha                Descripcion
-Diana Rut Garcia	 	27-may-2021       Cambio apariencia pantalla con validaciones de parametos -->
+Diana Rut Garcia	 	27-may-2021       Cambio apariencia pantalla con validaciones de parametos 
+ANY HERNANDEZ       01-JUN-2022       PARAMETROS DE MAXIMO Y MINIMO DE LA RESPUESTA -->
+
 <?php
  session_start();
  include "conexionpdo.php";
  include_once 'conexion2.php';
+ include_once 'conexion3.php';
 ?>
+
 <?php
-  $_SESSION['vario'] ;
-  $db = new Conexion();
-  $con = $db->conectar();
-  $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;");
-  $comando->execute();
-  $resultado = $comando->fetchall(PDO::FETCH_ASSOC);
+  //Parametro de maximo nombre usuario
+  $max = "MAX_RESPUESTA_PREGUNTAS";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($max));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $valor2 = $row1;
+  }
+?>
+
+<?php
+  //Parametro de maximo nombre usuario
+  $min = "MIN_RESPUESTA_PREGUNTAS";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($min));
+  $row=$sentencia1->fetchColumn();
+  if($row>0){
+    $valor1 = $row;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -62,16 +79,21 @@ Diana Rut Garcia	 	27-may-2021       Cambio apariencia pantalla con validaciones
                            </div>
                            <div class="col-md-12 mb-3"> 
                              <div class="form-group">
-                               <select class="form-control" aria-label="Default select example" name="pregunta_usuario" id="pregunta_usuario" required>
-                                   <option selected enable value="">Selecione una pregunta</option>
+                             <select class="form-control"  aria-label="Default select example"  name="pregunta_usuario" id="pregunta_usuario" required>
+                                <?php
+                                  $query = "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas";
+                                  $resultado=$conn->query($query);
+                                ?>
+                                   <option selected enable value="">--Selecione--</option>
                                     <?php //Muestra los datos de la tabla de preguntas en el select
-                                    foreach($resultado as $pregunta){
-                                    $valuep =$pregunta['CODIGO_PREGUNTAS'];
-                                    $pre =  $pregunta['PREGUNTA'];
+                                    if($resultado->num_rows > 0) {
+                                      while($pregunta = $resultado->fetch_assoc()) { 
+                                        $valuep =$pregunta['CODIGO_PREGUNTAS'];
+                                        $pre =  $pregunta['PREGUNTA'];
                                     ?>
                                     <option value="<?php echo $valuep?>"><?php echo $pre;?></option>
                                     <?php
-                                        }
+                                        } }
                                     ?>
                                 </select>
                                 <div class="invalid-feedback">
@@ -81,8 +103,8 @@ Diana Rut Garcia	 	27-may-2021       Cambio apariencia pantalla con validaciones
                             </div>
                             <div class="col-md-12 mb-3" >
                                <div class="form-group">
-                                 <input type="text" maxlength="50" minlength="4" name="respuesta" id="respuesta" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
-                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required>
+                                 <input type="text" maxlength="<?php echo $valor2;?>"  minlength="<?php echo $valor1;?>" name="respuesta" id="respuesta" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
+                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}">
                                   <div class="invalid-feedback">
                                     Debe contestar este campo.
                                   </div> 
