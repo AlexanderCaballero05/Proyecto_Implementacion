@@ -84,7 +84,7 @@ Diana Rut Garcia	 	29-may-2021       Cambio apariencia pantalla con validaciones
                                  <input type="text" maxlength="50" minlength="4" name="respuesta1" id="respuesta1" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
                                   placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required>
                                   <div class="invalid-feedback">
-                                    Debe contestar este campo.
+                                    Debe completar este campo con minimo 3 carateres.
                                   </div> 
                                </div>
                             </div>
