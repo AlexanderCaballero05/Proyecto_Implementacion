@@ -53,6 +53,7 @@ Diana Rut Garcia Amador	 	28-may-2021       Se cambio la pantalla para que se vi
   }
 ?>
 <?php
+//Parametro de minimo contraseña
   $min_clave ="NUM_MIN_CARACTER";
   $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia3->execute(array($min_clave));
