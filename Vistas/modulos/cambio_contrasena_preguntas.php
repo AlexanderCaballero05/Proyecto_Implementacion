@@ -67,7 +67,7 @@ include_once "../../modelos/conexion3.php";
                     <label class="control-label mb-2">Contrase&ntilde;a</label>
                     <div class="input-group mb-3" id="grupo__clave_nueva">
                         <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
-                          required  minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                          required  minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"  title="Configure con los valores solicitados" onkeyup="noespacio(this, event)" onkeyup="sinespacio(this);">
                           <div class="input-group-prepend">
                             <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar1()"><span class="icon1 fa fa-eye-slash"></button>
                           </div>
@@ -77,7 +77,7 @@ include_once "../../modelos/conexion3.php";
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a</label>
                     <div class="input-group mb-3 " id="grupo__confirmar_clave">
                         <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
-                         required minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                         required minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"   title="Configure con los valores solicitados" onkeyup="noespacio(this, event)" onkeyup="sinespacio(this);">
                          <div class="input-group-append">
                            <button id="show_password" class="form-control btn-outline-secondary btn-block" type="button"  onclick="mostrar2()"><span class="icon2 fa fa-eye-slash"></button>
                          </div>
@@ -142,6 +142,15 @@ include_once "../../modelos/conexion3.php";
         e.value = limpia;
       };
     </script>
+  <script language="javascript">
+    function noespacio(campo, event) {
+      CadenaaReemplazar = " ";
+      CadenaReemplazo = "";
+      CadenaTexto = campo.value;
+      CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+      campo.value = CadenaTextoNueva;
+    }
+ </script>
     <script src="../../modelos/validacion_clave.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>

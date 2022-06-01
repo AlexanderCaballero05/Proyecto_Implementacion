@@ -63,7 +63,7 @@
                     <label class="control-label mb-2">Contrase&ntilde;a anterior:</label>
                     <div class="input-group mb-3" >
                       <input type="password" id="contra_anterior" name="contraAnte" class="form-control" 
-                       required minlength="<?php echo $valor1;?>" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+                       required minlength="<?php echo $valor1;?>" maxlength="<?php echo "$valor"?>" title="Configure con los valores solicitados" onkeyup="noespacio(this, event)" onkeyup="sinespacio(this);">
                        <div class="input-group-prepend">
                           <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar()"><span class="icon fa fa-eye-slash"></button>
                         </div>
@@ -71,7 +71,7 @@
                     </div>
                     <label class="control-label mb-2">Contrase&ntilde;a:</label>
                     <div class="input-group mb-3" id="grupo__clave_nueva">
-                        <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" 
+                        <input  type="password" id="clave_nueva" name="clave_nueva" class="form-control" onkeyup="noespacio(this, event)"
                           required  minlength="<?php echo $valor1;?>" maxlength="<?php echo "$valor"?>"  title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                           <div class="input-group-prepend">
                             <button id="show_password" class="form-control btn-outline-secondary  btn-block" type="button" onKeyDown="sinespacio(this);" onclick="mostrar1()"><span class="icon1 fa fa-eye-slash"></button>
@@ -80,7 +80,7 @@
                     </div>
                     <label class="control-label mb-2">Confirmar contrase&ntilde;a:</label>
                     <div class="input-group mb-3 " id="grupo__confirmar_clave">
-                        <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control"
+                        <input  type="password" id="confirmar_clave" name="confirmar_clave" class="form-control" onkeyup="noespacio(this, event)"
                          required minlength="<?php echo $valor1;?>"  maxlength="<?php echo "$valor"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
                          <div class="input-group-append">
                            <button id="show_password" class="form-control btn-outline-secondary btn-block" type="button"  onclick="mostrar2()"><span class="icon2 fa fa-eye-slash"></button>
@@ -105,8 +105,8 @@ function mayus(e) {
 }
 </script>
 <script type="text/javascript">
-//funciones para ver la contraseña por cada input
-function mostrar2(){ 
+ //funciones para ver la contraseña por cada input
+ function mostrar2(){ 
  var cla1 = document.getElementById("confirmar_clave");
     if(cla1.type == "password"){
       cla1.type = "text";
@@ -115,7 +115,7 @@ function mostrar2(){
       cla1.type = "password";
       $('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
     }
-}
+  }
 </script>
 <script type="text/javascript">
   function mostrar(){
@@ -142,7 +142,7 @@ function mostrar2(){
   }
 </script>
 <script type="text/javascript">
-function sinespacio(e) { //funcion sin espacion la clave
+ function sinespacio(e) { //funcion sin espacion la clave
   var cadena =  e.value;
   var limpia = "";
   var parts = cadena.split(" ");
@@ -156,7 +156,16 @@ function sinespacio(e) { //funcion sin espacion la clave
   }
   limpia = limpia.trim();
   e.value = limpia;
-};
+ };
+</script>
+<script language="javascript">
+  function noespacio(campo, event) {
+    CadenaaReemplazar = " ";
+    CadenaReemplazo = "";
+    CadenaTexto = campo.value;
+    CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+    campo.value = CadenaTextoNueva;
+  }
 </script>
 
 <script src="../../modelos/validacion_clave.js"></script>

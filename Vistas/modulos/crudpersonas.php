@@ -27,7 +27,7 @@ include_once "conexion3.php";
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 ">
+    <div class="content-header text-xl-center mb-3">
       <h4>MANTENIMIENTO PERSONAS</h4>
     </div>
     <section class="content">

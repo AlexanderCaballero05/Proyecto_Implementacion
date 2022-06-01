@@ -50,17 +50,19 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <link rel="stylesheet" href="./fontawesome-free/css/all.min.css">
 
-    <title>Restablecer la contraseña usuario</title>
+    <title>Restablecer contraseña</title>
+    <link rel="shortcut icon" href="../assets/dist/img/logoparroquia.jpg" type="image/x-icon">
+
   </head>
   <style>
       body{
         background-color:#e9ecef; 
       }
   </style>
-  <body class="login-page" _c_t_common="1"  >
+  <body class="login-page" _c_t_common="1" >
       <div class="container-fluid">
          <div class="row justify-content-center mt-5">
-            <div class="col-md-3 " style="width: 20rem;">
+            <div class="col-md-3 d-lg-block col-md-5  col-sm-8  col-xl-3 " >
                 <div  class="card card-outline card-primary">
                     <div class="card-header bg-white ">
                        <h3 class=" text-center">Restablecer la contrase&ntilde;a </h3>
@@ -75,7 +77,7 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
                               <div class="input-group-prepend">
                                <span class="input-group-text" ><i class="fas fa-user"></i></span>
                               </div>
-                              <input required type="text" name="usuario" class="form-control"  placeholder="Ingresa el usuario" aria-label="Username"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeyup="mayus(this);"
+                              <input required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}"  onkeyup="noespacio(this, event);mayus(this)"  required type="text" name="usuario" class="form-control"  placeholder="Nombre de usuario"   minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"
                                 autocomplete = "off"  onkeypress="return soloLetras(event);"; onkeydown="sinespacio(this);">
                                 <div class="invalid-feedback">
                                    Debe tener minimo <?php echo $valor1; ?> caracteres.
@@ -99,6 +101,7 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
   <!--Elaborado por Diana Rut -->
 
   <!--Funciones js -->
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script>
       function mayus(e) {//Funcion mayuscula
@@ -152,6 +155,16 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
       limpia = limpia.trim();
       e.value = limpia;
     };
+  </script>
+  <!-- Codigo para evitar los espacios cuando se coloca el cursor en medio de la constraseña-->
+  <script language="javascript">
+    function noespacio(campo, event) {
+      CadenaaReemplazar = " ";
+      CadenaReemplazo = "";
+      CadenaTexto = campo.value;
+      CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+      campo.value = CadenaTextoNueva;
+    }
   </script>
 
 </html>

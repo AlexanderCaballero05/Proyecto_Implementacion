@@ -122,16 +122,16 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"> <!--INICIO DNI-->
                         <label  class="control-label">Número de Identidad:</label> 
                         <div class="form-group">
-                          <input onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
+                          <input required pattern="[0-9]{13,13}" onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
                           <div class="invalid-feedback">
-                              Campo obligatorio.
+                              Campo obligatorio,requerido 13 caracteres.
                           </div>                     
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label  class="control-label">Primer Nombre:</label> 
                         <div class="form-group">
-                          <input  id="pri_nombre" class="form-control" type="text" maxlength="13" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required="">
+                          <input  id="pri_nombre" class="form-control" required pattern="[A-Z]{3,20}" type="text" maxlength="20" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required>
                           <div class="invalid-feedback">
                              Campo obligatorio.
                           </div>  
@@ -140,7 +140,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO er NOMBRE-->
                         <label  class="control-label">Segundo Nombre:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="3" name="segundo_nombre" id="seg_nombre" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
+                          <input class="form-control" type="text"   maxlength="20" minlength="3" name="segundo_nombre" id="seg_nombre" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
                         </div>
                       </div>
                     </div><!--Fin de una fila -->
@@ -148,7 +148,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO 1er APELLIDO-->
                         <label  class="control-label">Pimer Apellido:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <input class="form-control" type="text" required pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
                           <div class="invalid-feedback">
                               Campo obligatorio.
                           </div> 
@@ -157,7 +157,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO 2er APELLIDO-->
                         <label  class="control-label">Segundo Apellido:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" maxlength="13" minlength="4" name="segundo_apellido" id="seg_apellido" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
+                          <input class="form-control" type="text"  pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="segundo_apellido" id="seg_apellido" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
                         </div>
                       </div>
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
@@ -175,7 +175,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
                         <label  class="control-label">Lugar Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" id="lugar"  name="lugar_nacimiento" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4" required pattern="[A-Z]{4,30}"  name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
                           <div class="invalid-feedback">
                              Campo obligatorio.
                           </div> 
@@ -239,9 +239,9 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--telefono-->
                       <label class="control-label">Telefono:</label> 
                         <div class="input-group">
-                          <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" minlength="8" maxlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);"  required="">
+                          <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" required pattern="[1-9]{8,8}" title="Tamaño minimo de 8" maxlength="8" minlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);" >
                           <div class="invalid-feedback">
-                              campo obligatorio.
+                              campo obligatorio valor minimo 8 caracteres .
                           </div>
                         </div>
                       </div>
@@ -259,7 +259,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-12"><!--INICIO DIRECCION--> 
                         <label  class="control-label">Dirección:</label> <!--INICIO DIRECCION-->
                         <div class="form-group">
-                          <textarea class="form-control" type="text" name="direccion"   id="direccion" onkeyup="mayus(this);"  onkeypress=""  required="" ></textarea>
+                          <textarea  maxlength="500" minlength="4" required pattern="[A-Z,0-9]{4,500}" class="form-control" type="text" name="direccion"   id="direccion" onkeyup="mayus(this);"  ></textarea>
                           <div class="invalid-feedback">
                               campo obligatorio.
                           </div>

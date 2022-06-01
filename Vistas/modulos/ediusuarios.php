@@ -22,6 +22,7 @@ Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut               28/05/2022            Se modifico la parte de rol para que no se edite
+Diana Rut               1/06/2022            Se agrego una validacion de input
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
