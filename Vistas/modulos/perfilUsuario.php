@@ -1,7 +1,27 @@
 <?php
   include_once "conexion.php";
   include_once "conexion3.php";
+  include "conexionpdo.php";
  ?>
+ <?php
+  //Parametro de maximo contraseña
+  $max_clave = "NUM_MAX_CARACTER";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($max_clave));
+  $row2=$sentencia2->fetchColumn();
+  if($row2>0){
+    $valor3 = $row2;
+  }
+?>
+<?php
+  $min_clave ="NUM_MIN_CARACTER";
+  $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia3->execute(array($min_clave));
+  $row3 = $sentencia3->fetchColumn();
+  if($row1>0){
+    $valor4 = $row3;
+  }
+?>
  <!-- Content Wrapper. Contains page content -->
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -136,28 +156,28 @@
           <input type="text"  readonly="" value="Nombre de usuario: <?php echo $_SESSION['vario'];?>"  class="form-control" placeholder="Usuario">
         </div>
         <div class="input-group mb-3 ">
-          <input type="password"  name="contraAnte" id="PASSACTUAL" class="form-control" placeholder="Ingrese su actual contraseña"
-            required minlength="5" maxlength="30" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+          <input type="password"  name="contraAnte" onkeyup="noespacio(this, event)" id="PASSACTUAL" class="form-control" placeholder="Ingrese su actual contraseña"
+          minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
           <div class="input-group-append">
             <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Passactual()"><span class="icon2 fa fa-eye-slash"></button>
           </div>
           <div class="invalid-feedback">
-              Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.
+              Su contraseña debe contener letras mayusculas, minisculas, caracteres especiales y un numero.
           </div>
         </div>
         <div class="input-group mb-3">
-          <input  type="password" id="PASSNUEVA" name="clave_nueva" class="form-control" placeholder="Ingrese una nueva contraseña"
-            autocomplete = "off"    required  minlength="5" maxlength="30"  title="Configure con los valores solicitados" onkeyup="sinespacio(this); ">
+          <input  type="password" id="PASSNUEVA" onkeyup="noespacio(this, event)" name="clave_nueva" class="form-control" placeholder="Ingrese una nueva contraseña"
+            autocomplete = "off"    required minlength="<?php echo $valor4;?>" maxlength="<?php echo "$valor3"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this); ">
           <div class="input-group-append">
             <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Passnueva()"><span class="icon3 fa fa-eye-slash"></button>
           </div>
           <div class="invalid-feedback">
-              Su contraseña debe que tener letras mayusculas, minisculas caracteres especiales y un numero.
+              Su contraseña debe contener letras mayusculas, minisculas, caracteres especiales y un numero.
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" id="CONFPASS" name="confirmar_clave" class="form-control" placeholder="Confirme la contraseña"
-            autocomplete = "off"  required minlength="5"  maxlength="30"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
+          <input type="password" id="CONFPASS" onkeyup="noespacio(this, event)" name="confirmar_clave" class="form-control" placeholder="Confirme la contraseña"
+            autocomplete = "off"  required minlength="<?php echo $valor4;?>" maxlength="<?php echo "$valor3"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this);">
           <div class="input-group-append">
             <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Confpass()"><span class="icon4 fa fa-eye-slash"></button>
           </div>
@@ -277,5 +297,15 @@
             }, false)
         })
   })()
+</script>
+<!-- Codigo para evitar los espacios cuando se coloca el cursor en medio de la constraseña-->
+<script language="javascript">
+  function noespacio(campo, event) {
+    CadenaaReemplazar = " ";
+    CadenaReemplazo = "";
+    CadenaTexto = campo.value;
+    CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+    campo.value = CadenaTextoNueva;
+  }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
