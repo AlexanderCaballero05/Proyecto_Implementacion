@@ -59,11 +59,11 @@ if(isset($_POST['btnregistrar'])){
   //CODIGO PERSONA: para poder relacionar las otras tablas de correo y usuario con el código de persona
   $codigo = mysqli_insert_id($conn);
 
-  $querytelefono = "INSERT INTO TBL_TELEFONO (CODIGO_TELEFONO, CODIGO_PERSONA) VALUES('$telefono','$codigo')";
+  $querytelefono = "INSERT INTO TBL_TELEFONO (NUMERO_TELEFONO, CODIGO_PERSONA) VALUES('$telefono','$codigo')";
   $resultado=$conn->query( $querytelefono);
 
 
-  $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO( CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
+  $querycorreo = "INSERT INTO TBL_CORREO_ELECTRONICO(CORREO_PERSONA, CODIGO_PERSONA) VALUES ('$correo','$codigo')";
   $resultado=$conn->query( $querycorreo);
 
 
@@ -73,7 +73,7 @@ if(isset($_POST['btnregistrar'])){
   
 
   $conn->commit();
-  echo "<script>
+  echo "<script> alert('Registro creado');
   window.location = '../index';
    </script>";
 
