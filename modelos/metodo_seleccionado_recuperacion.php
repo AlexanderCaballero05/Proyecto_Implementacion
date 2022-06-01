@@ -1,4 +1,3 @@
-
 <?php
  session_start();
 include "function_bitacora.php";
@@ -10,7 +9,7 @@ include_once "conexion3.php";
   $row=$sentencia->fetchColumn();
   
   if($row>0){
-    $valor = $row;
+    $servidor_correo = $row;
   }
 ?>
 
@@ -23,7 +22,7 @@ include_once "conexion3.php";
   $row1=$sentencia1->fetchColumn();
   
   if($row1>0){
-    $valor1 = $row1;
+    $puerto_servidor = $row1;
   }
 ?>
 
@@ -36,9 +35,11 @@ include_once "conexion3.php";
   $row2=$sentencia2->fetchColumn();
   
   if($row2>0){
-    $valor2 = $row2;
+    $usuario_correo = $row2;
   }
 ?>
+
+
 
 
 <?php
@@ -50,7 +51,7 @@ include_once "conexion3.php";
   $row3=$sentencia3->fetchColumn();
   
   if($row3>0){
-    $valor3 = $row3;
+    $contrasena_usuario = $row3;
   }
 ?>
 
@@ -84,7 +85,7 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
               while($fila=$revision_correo->fetch_assoc()){
                $correo= $fila['CORREO_PERSONA'];
 
-               echo '<script>  alert("Verifique su Correo se ha enviado la clave"); window.location="../login";</script>';
+               echo '<script>  alert("Verifique su correo electrónico se ha enviado una contraseña de restableción"); window.location="../login";</script>';
                $_SESSION['vario'] =$usuario;
                                //llamada de la fuction bitacora -->
                $codigoObjeto=1;
@@ -96,7 +97,8 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                require "PHPMailer/PHPMailer.php";
                require "PHPMailer/SMTP.php";
                 function contraseña_random($length=8){ // FUNCION para generar la contraseña aleatoria
-                  $charset=" /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/";
+                  $charset="^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$";
+                  
                   $contraseña="";
                   for ($i=0;$i < $length;$i++) {
                     $rand= rand() % strlen($charset);
@@ -105,37 +107,38 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                   return $contraseña;
                 }
                 $contra= (contraseña_random()) ; //se captura la contrasena generada
+                $pass= crypt($contra,'$2a$07$usesomesillystringforsalt$');
                  //Se construye el update para cambiar la contrasena anterior por generada Y el estado pasa a pendiente
-                $query_cambio="UPDATE tbl_usuario SET CONTRASENA='$contra',CODIGO_ESTADO = 5 WHERE NOMBRE_USUARIO= '$usuario'";
+                $query_cambio="UPDATE tbl_usuario SET CONTRASENA='$pass',CODIGO_ESTADO = 5 WHERE NOMBRE_USUARIO= '$usuario'";
                 $contraseña_cambiada=$conn->query($query_cambio); // se hace elquery a la base de datos
                 $oMail= new PHPMailer(true);
                 // $parametros_mail="SELECT "
 
                 $oMail->isSMTP();
-                $oMail->Host=($valor);
-                $oMail->Port=($valor1);
+                $oMail->Host=($servidor_correo);
+                $oMail->Port=($puerto_servidor);
                 $oMail->SMTPSecure="tls";
                 $oMail->SMTPAuth=true;
 
-                $oMail->Username="$valor2";//  
-                $oMail->Password="$valor3";
-                $oMail->setFrom("$valor2"); // direccion de correo de destino hacia los correos de usuarios
+                $oMail->Username=($usuario_correo); 
+                $oMail->Password=($contrasena_usuario);
+                $oMail->setFrom($usuario_correo); // direccion de correo de destino hacia los correos de usuarios
                 $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
-                $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña:</p>
-                  <p><h3>La nueva contraseña para ingresar al sistema es: ".utf8_decode($contra)."</h3></p>
-                  <p>Al ingresar al sistema por razones de seguridad automaticamente se le pedirá cambiar su contraseña de recuperación</p>
-                  <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envio.</p>
-                  <a href='http://localhost/Rama_Proyecto_Implementacion/index.php'>
-                    <button class='btn btn-primary btn-flat'> Cambiar contraseña</button>
+                $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña del sistema del Proyecto Prosecar.</p>
+                  <p><h3>La nueva contraseña de acceso al sistema es: " .utf8_decode($contra)."</h3></p>
+                  <p>Al ingresar al sistema por razones de seguridad automáticamente se le pedirá cambiar su contraseña de recuperación por una contraseña nueva.</p>
+                  <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envío.</p>
+                  <a href='http://localhost/Proyecto_Implementacion1/login'>
+                    <button class='form-control' class='btn btn-primary btn-flat'> Ir al Cambio de contraseña</button>
                   </a><p><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>";
-                $oMail->Subject=utf8_decode("RECUPERACION DE CONTRASEÑA");
+                $oMail->Subject=utf8_decode("PROSECAR Recuperación de contraseña");
                 $oMail->msgHTML(utf8_decode($mensaje));
                 if(!$oMail->send())
                    echo $oMail->ErrorInfo;
                 }
               }
                else {
-                echo '<script> alert("Verifique su Correo esta malo"); window.location="../vistas/modulos/tipo_recuperacion.php"; </script>';
+                echo '<script> alert("Verifique su Correo es incorrecto"); window.location="../vistas/modulos/tipo_recuperacion.php"; </script>';
               }
         }
 
