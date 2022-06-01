@@ -2,6 +2,7 @@
  include_once "conexion3.php";
  include_once "conexion.php";
 ?>
+
 <!--validacion para cambio de contraseña-->
 <?php
   if(isset($_POST['cambioContrasena'])) {
@@ -21,7 +22,7 @@
                         $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
                         if($contraNueva<>$contraConfirm){
                           echo "<script>
-                          alert('Las contraseña no son iguales'); location.href = 'perfilUsuario'; </script>";
+                          alert('Las contraseñas no son iguales'); location.href = 'perfilUsuario'; </script>";
                         }else{
                           if(preg_match($expre,$contraNueva)){
                             $pass=crypt($contraNueva,'$2a$07$usesomesillystringforsalt$');
@@ -29,7 +30,7 @@
                                 $datos=$conn->query($sentencia);
                                 $row=$datos->num_rows;
                                 if($row>0){ //si la contraseña es la misma que tiene en el sistema
-                                    echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
+                                    echo "<script> alert('¡Utilice una contraseña que no haya usado anteriormente!')
                                     location.href = 'perfilUsuario';
                                     </script>";
                                 }else{
@@ -37,7 +38,7 @@
                                     $busqueda=$conn->query($buscarclave);
                                     $fila=$busqueda->num_rows;
                                     if($fila>0){
-                                      echo "<script> alert('!Utilice una contraseña que no haya usado anteriormente')
+                                      echo "<script> alert('¡Utilice una contraseña que no haya usado anteriormente!')
                                       location.href = 'perfilUsuario';</script>";
                                     }else{
                                       $insert = "INSERT INTO tbl_ms_hist_contrasena (CODIGO_USUARIO,CONTRASENA,CREADO_POR_USUARIO)
@@ -49,7 +50,7 @@
                                         $resul=$conn->query($update);
                                         if($resul >0){
                                            echo "<script> 
-                                           alert('!Se ha actulizado la contraseña¡');  location.href = 'perfilUsuario'; </script>";
+                                           alert('¡Se ha actualizado la contraseña!');  location.href = 'perfilUsuario'; </script>";
                                         }
                                       }else{
                                         echo "<script> 
@@ -118,7 +119,7 @@ if(isset($_POST['ACTUALIZAR'])){
       echo "<script> window.location = 'perfilUsuario'; </script>";
     }else{
       echo "<script>
-      alert('!Actualizacion fallida!'); window.location = 'perfilUsuario'; </script>";
+      alert('¡Actualizacion fallida!'); window.location = 'perfilUsuario'; </script>";
     }
 }
 ?>
@@ -133,7 +134,7 @@ if(isset($_POST['ACTUALIZAR_FOTO'])){
     if($resul){//si todo fue bien al actualizar :)
       echo "<script>window.location = 'perfilUsuario';</script>";
     }else{//en caso que algo esta mal :c
-      echo "<script> alert('Ocurrio un problema al tratar de actualizar la foto de perfil');window.location = 'perfilUsuario';</script>";
+      echo "<script> alert('Ocurrió un problema al tratar de actualizar la foto de perfil');window.location = 'perfilUsuario';</script>";
     }
 }
 ?>
