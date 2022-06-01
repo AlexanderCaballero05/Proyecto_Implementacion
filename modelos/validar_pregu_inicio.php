@@ -1,3 +1,41 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+Luz Maria Montoya Medina (luz.montoya@unah.hn)
+Diana Rut Garcia Amador (drgarciaa@unah.hn)
+Any Melissa Hernandez (anyhernandez@unah.hn)
+Gissela Yamileth Diaz (gdiaza@unah.hn)
+Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla modelo de Validar preguntas de inicio
+Fecha:            01-jan-2016
+Programador:       
+descripcion:      Pantalla que contrala las preguntas que contestará el usuario por primera vez
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Gissela Diaz        		02-06-2022                 cambio en agregar que no acepte respuestas duplicadas y mensaje de error
+                                                   al no guardar una pregunta
+
+
+----------------------------------------------------------------------->
 <?php
   session_start();
   include "function_bitacora.php";
@@ -49,13 +87,24 @@
                      alert('No puede contestar la misma pregunta dos veces' );
                      location.href ='../vistas/modulos/preguntas_inicio.php';
                      </script> ";
+                    }else{
+                      $consultar_res= "SELECT * FROM tbl_preguntas_usuarios r, tbl_usuario u
+                      WHERE  r.CODIGO_USUARIO = u.CODIGO_USUARIO
+                      AND r.RESPUESTA = '$respuesta'
+                      AND u.NOMBRE_USUARIO = '$usuario'";              
+                      $existe2=$conn->query($consultar_res);
+                      $row=$existe2->num_rows;
 
-                 }else{
-
+                      if($row==1){ //aqui si es igual a 1 entonces encontro un registro 
+                        echo "<script>
+                          alert('No puede contestar con la misma respuesta dos veces' );
+                          location.href ='../vistas/modulos/preguntas_inicio.php';
+                          </script> ";
+                      }else{
                   $Insertar_pregunta = "INSERT INTO tbl_preguntas_usuarios(CODIGO_PREGUNTAS,CODIGO_USUARIO, RESPUESTA)
                   VALUES ('$pregunta', '$cod_usuario' ,'$respuesta')";
                   $Resultado1=$conn->query($Insertar_pregunta);
-
+              if ($Resultado1 > 0){
                      $query = "UPDATE tbl_parametros_usuarios SET 
                       PAR_VALOR=(PAR_VALOR+1)
                       WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario') AND CODIGO_PARAMETRO = 2;";
@@ -66,17 +115,10 @@
                           alert('Gracias por contestar todas las preguntas' );
                           location.href ='../Vistas/modulos/cambio_contrasena_usuario_nuevo.php';
                           </script> "; 
-                          
-                              
-                          
                           $query = "UPDATE tbl_usuario SET 
                           CODIGO_ESTADO=2
                           WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario');";
                             $dato=$conn->query($query); 
-
-
-
-                           
                             //llamada de la fuction bitacora -->
                          $codigoObjeto=1;
                          $accion='Ingreso de preguntas para recuperacion';
@@ -85,19 +127,23 @@
 
                         }
                         //si el parametro no es igual se envia a contestar la siguiente pregunta              
-                      echo "<script>
+                        echo "<script>
                       alert('Pregunta contestada' );
                       location.href ='../vistas/modulos/preguntas_inicio.php';
                       </script> ";
-
-                 } 
-                 
-               
-                 
-                                              
-                 }else {
- 
-                }            
+                    }
+                      else {
+                        echo "<script>
+                      alert('Error' );
+                      location.href ='../vistas/modulos/preguntas_inicio.php';
+                      </script> ";
+                      }
+                      
+                      }
+                    
+                 }     
+                                                    
+                }
   
     
 ?> 

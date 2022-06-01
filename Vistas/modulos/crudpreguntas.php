@@ -1,3 +1,40 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+Luz Maria Montoya Medina (luz.montoya@unah.hn)
+Diana Rut Garcia Amador (drgarciaa@unah.hn)
+Any Melissa Hernandez (anyhernandez@unah.hn)
+Gissela Yamileth Diaz (gdiaza@unah.hn)
+Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento preguntas
+Fecha:             01-jan-2016
+Programador:       Gissela Diaz 
+descripcion:       Pantalla que contrala las preguntas que contestará el usuario al ingresar por primera vez al sistema
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Gissela Diaz        		02-06-2022                 cambio en el campo de que la pregunta no sea editable
+Gissela Diaz        		02-06-2022                 cambio en la validacion de agregar (Funcion Mayúscula)
+
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -121,36 +158,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   }
                                 ?>
                                </a>
-                                <a href="#EDITARPREGUNTA<?php echo $var1; ?>" data-toggle="modal">
-                                <?php
-                                  include "conexionpdo.php";
-                                  $usuario=$_SESSION['vario'];
-                                  //Evaluo si existe el tipo de Rol
-                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                                  FROM tbl_usuario 
-                                                                  WHERE NOMBRE_USUARIO = (?);");
-                                  $evaluar_usuario->execute(array($usuario));
-                                  $row=$evaluar_usuario->fetchColumn();
-                                  if($row > 0){
-                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                   //llamar al procedimiento almacenado
-                                  $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '4'));
-                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
-                                  $permiso_actualizar =$row1; 
-                                    
-                                  }
-                                ?>
-                                <?php
-                                    if ($permiso_actualizar == 'SI'){
-
-                                ?>
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                <?php
-                                  }
-                                 ?> 
-                              </a>
+                                
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -160,38 +168,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           
 
-                        <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
-                          <div id="EDITARPREGUNTA<?php echo $var1 ?>" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-md">
-                              <div class="modal-content"><!-- Modal content-->
-                                <form  method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar preguntas</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
-                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_pregunta" id="id_pregunta">
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Preguntas</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeypress="return soloLetrascaracteres(event);"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  
-                                          name="editar_pregunta" id="edipre" required="">
-                                          <div class="invalid-feedback">
-                                       campo obligatorio.
-                                   </div>
-                                        </div>
-                          </div>
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
-                                  </div><!--FINAL DEL CARD BODY -->                       
-                                  <div class="modal-footer ">
-                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="editar" name="editar" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                                </div>
-                              </form>
-                            </div>
-                          </div><!-- FIN DEL MODAL EDITAR -->  
                             
                           <!--INCICIO DEL MODAL ELIMINAR   -->
                           <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
@@ -244,9 +220,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control" onkeypress="return soloLetrascaracteres(event);" maxlength="60" minlength="5"   autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
-                                    <div class="invalid-feedback">
-                                       campo obligatorio.
+                                    <input  type="text"   class="form-control" minlength = "3" onkeypress="return soloLetrascaracteres(event);" maxlength="60" 
+                                      onkeyup="mayus(this);" autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
+                                      <div class="invalid-feedback">
+                                       campo obligatorio minimo 3 caracteres.
                                    </div>
                                 </div>
                             </div>
