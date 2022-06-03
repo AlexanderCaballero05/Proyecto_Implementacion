@@ -175,7 +175,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
                         <label  class="control-label">Lugar Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4" required pattern="[A-Z]{4,30}"  name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
+                          <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4"   name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
                           <div class="invalid-feedback">
                              Campo obligatorio.
                           </div> 

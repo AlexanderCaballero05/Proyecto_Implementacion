@@ -72,7 +72,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group" >
-                  <img class="profile-user-img img-circle"  style=" width: 135px; height: 160px;"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>" alt="User profile picture">
+                  <img class="profile-user-img img-circle"  style=" width: 135px; height: 160px;"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>" >
                 </div>
               </div>
               <div class="col-sm-12">
