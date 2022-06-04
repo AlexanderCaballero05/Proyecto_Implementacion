@@ -261,14 +261,11 @@ include_once "conexion3.php";
                                                 role="dialog">
                                                 <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
+                                                   <div class="modal-header" style="background-color: #0CCDE3">
+                                                     <h4 class="text-center">Editar información persona </h4><button type="button" class="close"data-dismiss="modal">&times;</button>
+                                                    </div>
                                                         <!-- Modal content-->
                                                         <form method="POST" class="needs-validation" novalidate >
-                                                            <div class="modal-header" style="background-color: #0CCDE3">
-                                                                <h4 class="text-center">Editar informacion persona
-                                                                </h4>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal">&times;</button>
-                                                            </div>
                                                             <div class="modal-body">
                                                                 <!--CUERPO DEL MODAL -->
                                                                 <div class="row">
@@ -547,7 +544,7 @@ include_once "conexion3.php";
                         FROM TBL_PERSONA p
                         left join tbl_telefono tl     on tl.CODIGO_PERSONA = p.CODIGO_PERSONA
                         left join tbl_tipo_persona t  on t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
-                        left join tbl_correo_electronico c  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA;";
+                        left join tbl_correo_electronico c  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA WHERE p.CODIGO_PERSONA >1;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -653,14 +650,13 @@ include_once "conexion3.php";
                                                 role="dialog">
                                                 <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
+                                                   <div class="modal-header" style="background-color: #0CCDE3">
+                                                     <h4 class="text-center">Editar información persona</h4>
+                                                     <button type="button" class="close"data-dismiss="modal">&times;</button>
+                                                   </div>
                                                         <!-- Modal content-->
                                                         <form method="POST" class="needs-validation" novalidate >
-                                                            <div class="modal-header" style="background-color: #0CCDE3">
-                                                                <h4 class="text-center">Editar informacion persona
-                                                                </h4>
-                                                                <button type="button" class="close"
-                                                                    data-dismiss="modal">&times;</button>
-                                                            </div>
+                                                            
                                                             <div class="modal-body">
                                                                 <!--CUERPO DEL MODAL -->
                                                                 <div class="row">

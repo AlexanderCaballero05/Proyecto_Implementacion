@@ -130,34 +130,39 @@ include_once "conexion3.php";
                           <th class="text-center">Correo Electronico</th>
                           <th class="text-center">Estado</th>
                           <th class="text-center">Rol</th>
+                          <th class="text-center">Fecha creación</th>
+                          <th class="text-center">Fecha modificación</th>
                         </tr>
                       </thead>
                       <tbody class="text-center">
                         <?php
-                        $query = "SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-                        e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-                        FROM tbl_usuario u
-                        left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
-                        left join tbl_estado e on e.CODIGO_ESTADO = u.CODIGO_ESTADO
-                        left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
-                        left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
-                        where
-                        u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
-                        $result = $conn->query($query);
-                        if ($result->num_rows > 0) {
-                          while($row = $result->fetch_assoc()) {
-                            $var2 = $row['CODIGO_PERSONA'];
-                            $var3 = $row['PRIMER_NOMBRE'];
-                            $var4 = $row['PRIMER_APELLIDO'];
-                            $var6 = $row['NOMBRE_USUARIO'];
-                            $var15 = $row['correo_persona'];
-                            $var7 = $row['ESTADO'];
-                            $var8 = $row['ROLL'];
-                            $var13 = $row['CODIGO_ESTADO']; 
-                            $var14 = $row['CODIGO_TIPO_ROL']; 
-                            $var16 = $row['CODIGO_USUARIO'];
+                          $query = "SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+                          e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR,
+                          u.FECHA_CREACION,u.FECHA_MODIFICACION
+                          FROM tbl_usuario u
+                          left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
+                          left join tbl_estado e on e.CODIGO_ESTADO = u.CODIGO_ESTADO
+                          left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
+                          left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+                          where
+                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
+                          $result = $conn->query($query);
+                          if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                              $var2 = $row['CODIGO_PERSONA'];
+                              $var3 = $row['PRIMER_NOMBRE'];
+                              $var4 = $row['PRIMER_APELLIDO'];
+                              $var6 = $row['NOMBRE_USUARIO'];
+                              $var15 = $row['correo_persona'];
+                              $var7 = $row['ESTADO'];
+                              $var8 = $row['ROLL'];
+                              $var13 = $row['CODIGO_ESTADO']; 
+                              $var14 = $row['CODIGO_TIPO_ROL']; 
+                              $var16 = $row['CODIGO_USUARIO'];
+                              $var17 = $row['FECHA_CREACION'];
+                              $var18 = $row['FECHA_MODIFICACION'];
                         ?>
-                            <?php
+                          <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -172,8 +177,8 @@ include_once "conexion3.php";
                               $row1=$evaluar_permiso_actualizar->fetchColumn();
                               $permiso_actualizar =$row1; 
                             }
-                            ?> 
-                            <?php
+                          ?> 
+                          <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -187,34 +192,31 @@ include_once "conexion3.php";
                               $row1=$evaluar_permiso_eliminar->fetchColumn();
                               $permiso_eliminar =$row1; 
                             }
-                            ?> 
+                          ?> 
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                              <?php
-                                 if($permiso_eliminar == 'SI')
-                                 {
+                              <?php 
+                                if($permiso_eliminar == 'SI'){ //PERMISO DE ELIMINAR
                               ?>                     
                                <a href="#ELIMINAR<?php echo $var2;?>" data-toggle="modal">
-                                <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                               </button>
+                                  <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
                                </a>
                                <?php
                                   }
                                  ?>
                                 <?php 
-                                  if ($permiso_actualizar == 'SI'){
-                                      
+                                  if ($permiso_actualizar == 'SI'){//PERMISO DE ACTUALIZAR
                                  ?>
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                 <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
-                                <a>
-                                <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
-                                <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
-                                <button type='submit'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
-                                </form>
+                                <a><!--Manda el codigo de usuario a la parte del reporte -->
+                                  <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
+                                    <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
+                                    <button type='submit'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                  </form>
                                 </a>
                                 <?php
                                   }
@@ -228,15 +230,17 @@ include_once "conexion3.php";
                           <td><?php echo $var15; ?></td>
                           <td><?php echo $var7; ?></td>
                           <td><?php echo $var8; ?></td>
+                          <td><?php echo $var17; ?></td>
+                          <td><?php echo $var18; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center"> Usuarios</h4>
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center"> Editar Usuarios</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
@@ -284,14 +288,25 @@ include_once "conexion3.php";
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
-                                      <?php
-                                        $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' ;";
-                                        $resultadod=$conn->query($query);                
-                                        ?> 
+                                        <?php
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
+                                           $resultadod=$conn->query($query);                
+                                         ?> 
                                         <div class="col-sm-6">
                                           <label for="cbx_persona" class="control-label">Rol</label>  
                                           <div class="form-group">
-                                            <input class="form-control"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" readonly value="<?php echo $var8;?>" >
+                                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
+                                              <option value="<?php echo $var14?>"><?php echo $var8;?></option>
+                                              <?php 
+                                                if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo_estado = $row['CODIGO_TIPO_ROL'];
+                                                  $estado = $row['NOMBRE'];
+                                                ?>
+                                                <option value="<?php echo $codigo_estado?>"><?php echo $estado;?></option>
+                                                <?php } 
+                                                }?>
+                                            </select> 
                                           </div>  
                                         </div> <!--FIN ROL-->
                                     </div> <!-- FIN ROW --> 
