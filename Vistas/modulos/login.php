@@ -85,7 +85,9 @@ Diana Rut Garcia Amador	 	01-jun-2022       Se agrego una validacion de no permi
        }
        
   </style>
+
 <body oncopy="" onpaste="">
+
 <div class="container-fluid">
   <div class="row justify-content-center ">
    <div class="card mb-3 rounded shadow " style="max-width: 740px;">
@@ -106,9 +108,11 @@ Diana Rut Garcia Amador	 	01-jun-2022       Se agrego una validacion de no permi
               </div>
               <div class="input-group mb-3"><!--Para ingresar la contraseña -->
                 <span class="input-group-text"><i class="fas fa-lock"></i></span>
+
                 <input type="password" name="ingPassword" id="contra" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
 
               <!--  <input type="password" required pattern="[A-Z,1-9,a-z,@$!%*?&]{<?php echo $valor4;?>,<?php echo $valor3;?>}" name="ingPassword" id="contra" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" onkeyup="noespacio(this, event)" minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>"   onblur="quitarespacios(this);"onkeyup="sinespacio(this);"> -->
+
                   <span class="input-group-text" onclick="mostrar1()"><i class=" icon1 fa fa-eye-slash"></i></span>
                   <div class="invalid-tooltip">
                       Llene este campo con los valores requeridos.
