@@ -284,7 +284,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         <div class="col-md-3">
                           <label class="form-label">Ingresos mensuales</label>
                           <div class="form-group">
-                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeypress="return solonumeros(event);" type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeypress="return solonumeros(event);" type="text" minlength="3" maxlength="5" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-3">

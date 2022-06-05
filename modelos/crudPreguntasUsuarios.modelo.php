@@ -1,10 +1,42 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+    Programa:          Valida el ingreso y la eliminacion de las preguntas de seguridad por parte del usuario
+    Fecha:             04-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       Valida el ingreso y la eliminacion de las preguntas de seguridad por parte del usuario desde
+                        la pantalla de preguntas de seguridad con el usuario ya en la sesion iniciada
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+    Programador               Fecha                      Descripcion
+    Arnold Caballero     		01-06-2022                 cambio de nombre de variables para la recuperacion por correo
+    Arnold Caballero     		03-06-2022                 cambio del cuerpo y el diseño del mensaje enviado al correo electronico.
+
+----------------------------------------------------------------------->
 <?php
-
-//session_start();
-
-
-//session_start();
-
 
  include_once "conexion3.php";
  include_once "conexion.php";
@@ -106,8 +138,26 @@ if(isset($_POST['codigo_pregunta_usuario'])){
    if(isset($_POST['ELIMINAR_PREGUNTA'])){ 
    $codigo_pregunta_usuario = ($_POST['codigo_pregunta_usuario']);
    //$codigo_pregunta = ($_POST['codigo_pregunta']);
-  $codigo_usuario = ($_POST['codigo_usuario']);
+   $codigo_usuario = ($_POST['codigo_usuario']);
 
+   $sentencia2 = $db->prepare("SELECT p.PAR_VALOR
+   from tbl_usuario u, tbl_parametros_usuarios p 
+   WHERE u.CODIGO_USUARIO = p.CODIGO_USUARIO
+   AND P.CODIGO_PARAMETRO = 2
+   AND u.CODIGO_USUARIO = (?);");
+   $sentencia2->execute(array($codigo_usuario));
+   $valor_usuario1=$sentencia2->fetchColumn();
+
+
+         if($valor_usuario1 == 1){
+            echo "<script>
+            alert('!Error! Debe tener al menos una(1) pregunta contestada' );
+            location.href ='crudPreguntasUsuarios';
+            </script> ";
+            exit;
+         }
+
+       
          $eliminar_pregunta = "DELETE FROM tbl_preguntas_usuarios 
          WHERE CODIGO_PREGUNTA_USUARIO = '$codigo_pregunta_usuario'; ";
          $consulta_eliminar=$conn->query($eliminar_pregunta);
@@ -118,7 +168,7 @@ if(isset($_POST['codigo_pregunta_usuario'])){
          AND CODIGO_PARAMETRO = 2;";
          $dato=$conn->query($query); 
 
-
+      
 
    }
 

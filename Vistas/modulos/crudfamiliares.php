@@ -32,15 +32,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
       </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
-            <ul class="nav nav-tabs card-header-tabs">
+          <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="crudfamiliares"> Ver Familiares </a>
+                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="procesoRegistrarFamiliares"> Agregar Familiar </a>
+                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Agregar Parentesco Estudiante-Familiar</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link "  style="color:#000000;" href="crudFamiliaresEstudiantes"> Agregar relación Familiar-Estudiante </a>
+                <a class="nav-link active" style="color:#000000;" href="crudfamiliares">Ver Datos de Familiares</a>
               </li>
             </ul>
             
@@ -81,7 +81,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                      ?>
                
               
-                <a href="procesoRegistrarFamiliares">
+                <a href="categoria">
 
                 <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Familiar</button>
                 </a>

@@ -1,3 +1,41 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+    Programa:          Valida el metodo seleccionado de recuperacion de contraseña por correo
+    Fecha:             04-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       Valida el metodo seleccionado de recuperacion de contraseña por correo y si es por preguntas lo envia a la pantalla de ingresar la pregunta
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+    Programador               Fecha                      Descripcion
+    Arnold Caballero     		01-06-2022                 cambio de nombre de variables para la recuperacion por correo
+    Arnold Caballero     		03-06-2022                 cambio del cuerpo y el diseño del mensaje enviado al correo electronico.
+
+----------------------------------------------------------------------->
+
 <?php
  session_start();
 include "function_bitacora.php";
@@ -124,13 +162,40 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                 $oMail->Password=($contrasena_usuario);
                 $oMail->setFrom($usuario_correo); // direccion de correo de destino hacia los correos de usuarios
                 $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
-                $mensaje="<h2>Hola, $usuario</h2> Usted ha realizado una solicitud de recuperación de contraseña del sistema del Proyecto Prosecar.</p>
-                  <p><h3>La nueva contraseña de acceso al sistema es: " .utf8_decode($contra)."</h3></p>
-                  <p>Al ingresar al sistema por razones de seguridad automáticamente se le pedirá cambiar su contraseña de recuperación por una contraseña nueva.</p>
-                  <p>Esta contraseña solo tiene validez por 24 horas desde su fecha de envío.</p>
-                  <a href='http://localhost/Proyecto_Implementacion1/login'>
-                    <button class='form-control' class='btn btn-primary btn-flat'> Ir al Cambio de contraseña</button>
-                  </a><p><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>";
+                $mensaje="
+                
+                <!--Copia desde aquí-->
+                <table style='max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;'>
+                  <tr>
+                    <td style='background-color: #ecf0f1; text-align: left; padding: 0'>
+                      
+                  
+                      
+                    </td>
+                  </tr>
+                
+                  
+                  <tr>
+                    <td style='background-color: #ecf0f1'>
+                      <div style='color: #000105; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif'>
+                        <h2 style='color: #e67e22; margin: 0 0 7px'>Hola, $usuario</h2>
+                        <p style='margin: 2px; font-size: 15px'><h3>
+                        Usted ha realizado una solicitud de recuperación de contraseña del sistema del Proyecto Prosecar.<h3></p>
+                        <p style='margin: 2px; font-size: 15px'><h3>La nueva contraseña de acceso al sistema es la siguiente:</h3></p>
+                        <p style='margin: 2px; font-size: 15px'><h2> " .utf8_decode($contra)."</h2></p>
+                        <p style='margin: 2px; font-size: 15px'><h3>Al ingresar al sistema por razones de seguridad automáticamente se le pedirá cambiar su contraseña de recuperación por una contraseña nueva.</h3></p>
+                        <p style='margin: 2px; font-size: 15px'><h3>Esta contraseña solo tiene validez por 24 horas desde su fecha de envío.<h3></p>
+                        
+                        
+                        
+                        <div style='width: 100%; text-align: center'>
+                          <a style='text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db' href='http://localhost/Proyecto_Implementacion2/login'>Ir a la página</a>	
+                        </div>
+                        <p style='color: #000105; font-size: 12px; text-align: center;margin: 30px 0 0'><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>";
                 $oMail->Subject=utf8_decode("PROSECAR Recuperación de contraseña");
                 $oMail->msgHTML(utf8_decode($mensaje));
                 if(!$oMail->send())

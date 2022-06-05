@@ -25,22 +25,19 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
        <div class="content-header text-xl-center mb-3 "> 
-          <h4> RELACIÓN DEL FAMILIAR CON EL ESTUDIANTE </h4>
+          <h4> PARENTESCO DE ESTUDIANTES CON FAMILIARES </h4>
         </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
-            </li>
-              <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
-              </li>
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
+                <a class="nav-link active" style="color:#000000;" href="crudFamiliaresEstudiantes">Agregar Parentesco Estudiante-Familiar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color:#000000;" href="crudfamiliares">Ver Datos de Familiares</a>
               </li>
             </ul>
           </div>
@@ -208,9 +205,9 @@ include_once "conexion3.php";
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
-                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var2.",ES"; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center"><?php echo "DE,".$var4; ?></td>
                         
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARFAMILIAREST<?php echo $var1 ?>" class="modal fade" role="dialog">
