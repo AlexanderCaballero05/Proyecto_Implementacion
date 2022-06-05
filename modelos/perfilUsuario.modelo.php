@@ -51,15 +51,24 @@
                                         if($resul >0){
                                            echo "<script> 
                                            alert('¡Se ha actualizado la contraseña!');  location.href = 'perfilUsuario'; </script>";
+                                           $codigoObjeto=1;
+                                           $accion='salio al modulo de administrador';
+                                           $descripcion= 'Usuario se saliÃ³ del sistema';
+                                           bitacora($codigoObjeto, $accion,$descripcion);
+                                           
+                                           session_destroy();
+                                           echo '<script> 
+                                           window.location = "login";
+                                           </script>'; 
                                         }
                                       }else{
                                         echo "<script> 
-                                        alert('!Error al ingresar los datos¡');
+                                        alert('¡Error al ingresar los datos!');
                                         location.href = 'perfilUsuario'; </script>";
                                         exit;
                                       }                         
                                     }
-                                    echo "<script> alert('!cambio de contraseña correcto')
+                                    echo "<script> alert('¡Cambio de contraseña correcto!')
                                     location.href = 'perfilUsuario'; </script>";
                                 }
                               }else{
@@ -70,7 +79,7 @@
                 }//fin del if de ver si esta lleno el boton de cambiar contraseña
             }else{
               echo "<script>
-              alert('Error nombre de usuario y contraseña incorrectos');
+              alert('El nombre de usuario y contraseña es incorrecto');
               location.href = 'perfilUsuario';</script>";
             }
     }
