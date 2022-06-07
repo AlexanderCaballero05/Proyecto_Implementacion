@@ -16,13 +16,13 @@
                $fechaActual = date('Y-m-d');  
                $usuario=$_SESSION['vario']; 
               try{ 
-                  $consulta_pregunta = $db->prepare("SELECT pregunta FROM tbl_preguntas WHERE pregunta = (?);");
+                  $consulta_pregunta = $db->prepare("SELECT * FROM tbl_preguntas WHERE pregunta = (?);");
                   $consulta_pregunta->execute(array($pregunta));
                   $row=$consulta_pregunta->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('La $pregunta ya se encuentra registrado');
-                    window.location = 'preguntas';
+                    alert('La pregunta $pregunta ya se encuentra registrada');
+                    window.location = 'crudpreguntas';
                     </script>";
                   exit;
                   }else{

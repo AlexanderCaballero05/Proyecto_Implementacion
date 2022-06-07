@@ -38,11 +38,33 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ include "conexionpdo.php";
  $codigoObjeto=4;
  $accion='Ingreso a mantenimiento preguntas';
  $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
+<?php
+  //Parametro de maximo contraseña
+  $maxpregunta = "NUM_MAX_CARACTER";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($maxpregunta));
+  $row2=$sentencia2->fetchColumn();
+  if($row2>0){
+    $valores3 = $row2;
+  }
+?>
+<?php
+//Parametro de minimo contraseña
+  $minpregunta ="NUM_MIN_CARACTER";
+  $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia3->execute(array($minpregunta));
+  $row3 = $sentencia3->fetchColumn();
+  if($row1>0){
+    $valores4 = $row3;
+  }
+  ?>
+
 <head>
 
 </head>
@@ -220,10 +242,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Preguntas</label>
-                                    <input  type="text"   class="form-control" minlength = "3" onkeypress="return soloLetrascaracteres(event);" maxlength="60" 
-                                      onkeyup="mayus(this);" autocomplete = "off" type="text"  name="pregunta" id="pregu" required="" >
+                                    <input  type="text"   class="form-control" minlength= "<?php echo $valores4;?>" maxlength="<?php echo $valores3;?>"  onkeypress="return soloLetrascaracteres(event);" 
+                                      onkeyup="mayus(this);" autocomplete = "off" type="text"  name="pregunta" id="pregu" required pattern="[A-Z,¿ ?]{<?php echo $valores4;?>,<?php echo $valores3;?>}">
                                       <div class="invalid-feedback">
-                                       campo obligatorio minimo 3 caracteres.
+                                       campo obligatorio.
                                    </div>
                                 </div>
                             </div>
