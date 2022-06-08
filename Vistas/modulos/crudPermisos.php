@@ -33,6 +33,7 @@
     Programador               Fecha                      Descripcion
     Arnold Caballero     		01-06-2022                 cambio de nombre de variables para la recuperacion por correo
     Arnold Caballero     		03-06-2022                 cambio del cuerpo y el diseño del mensaje enviado al correo electronico.
+    Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
 
 ----------------------------------------------------------------------->
 
@@ -53,9 +54,9 @@
   </div>
   
   <section class="content">
-  <section class="content-header text-xl-center mb-3 btn-light">
+  <section class="content-header text-xl-center mb-3 ">
         <h1>
-            <h4>PERMISOS DE USUARIOS</h4>
+            <h3>Permisos de Usuarios</h3>
         </h1>     
     </section>
     <div class="container-fluid">
@@ -243,25 +244,20 @@
                           <div id="EditarPermiso<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                 <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar permisos</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
-
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                       <select class="hidden" name="PERMISOU" required>
-                                          <option value="<?php echo $var1 ?>"></option>
-                                       </select>
-                                            <!--Inicio combobox tipo de rol -->
+                                      <input hidden name="PERMISOU" value="<?php echo $var1 ?>"></input>
+                                      <!--Inicio combobox tipo de rol -->
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Rol Usuario</label>
-                                            <select class="form-control" name="EDITIPO" required>
-                                              <option value="<?php echo $var2?>"><?php echo $var4 ?></option>
-                                            </select>
+                                             <input hidden name="EDITIPO" value="<?php echo $var2?>"> 
+                                              <input class="form-control" readonly  required value="<?php echo $var4 ?>" >
                                         </div>
                                       </div>
                                             <!--Inicio combobox objeto -->
@@ -269,8 +265,8 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Objeto</label>
-                                          <select class="form-control" name="EDIOBJETO" required>
-                                            <option value="<?php echo $var3?>"><?php echo $var5 ?></option>
+                                          <input  hidden value="<?php echo $var3?>"  name="EDIOBJETO" >
+                                            <input required class="form-control"  readonly value="<?php echo $var5 ?>">
                                           </select>
                                         </div>
                                       </div>
