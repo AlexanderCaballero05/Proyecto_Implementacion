@@ -216,7 +216,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             
                          <!--INCICIO DEL MODAL ELIMINAR   -->
                          <div id="ELIMINAR<?php echo $var1 ?>"  
-                                                    name="eliminar_medicamento" id="eliminar_medicamento"class="modal fade" role="dialog">
+                                                    name="eliminar_apariencia" id="eliminar_apariencia"class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -225,14 +225,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         </div>
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_aparienciafisica" id="eliminar_aparienciafisica">
                                                             <h4 class="text-center">¿Esta seguro de eliminar la apariencia <?php echo $var2;?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
                                                             <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                             <button type="submit"  
-                                                            name="eliminar_medica" id="eliminar_medica"  class="btn btn-primary">Si,eliminar</button>      
+                                                            name="eliminar_apariencia" id="eliminar_apariencia"  class="btn btn-primary">Si,eliminar</button>      
                                                             </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                                     </form>
                                                     </div><!--fin del modal contener -->

@@ -118,34 +118,51 @@ if(isset($_POST['apariencia'])){
   }//cierre del if principal
 
 
- 
- if (isset($_POST['eliminar_medica']) && isset($_POST['eliminar_medicamento'])){
-  $codigo =($_POST['eliminar_medicamento']);
-      try {
-          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_apariencia_fisica WHERE CODIGO_APARIENCIA  = '$codigo' ");
-          if(mysqli_affected_rows($link)>0){
-            echo "<script>
-          alert('Apariencia eliminada!');
-          window.location = 'crudAparienciaFisica';
-          </script>";
-          include_once 'function_bitacora.php';
-          $codigoObjeto=25; //cmabiar 
-          $accion='Eliminación';
-          $descripcion= 'Se elimino una apriencia ';
-          bitacora($codigoObjeto, $accion,$descripcion);
-          exit;
-      }else{
-          echo "<script>
-          alert('¡Error al eliminar la apariencia tiene relacion con otras tablas !');
-          window.location = 'crudAparienciaFisica';
-          </script>";
-          exit;
-        } 
-        }catch(PDOException $e){
-              echo $e->getMessage(); 
-              return false;
-                      } 
- 
-} // fin if 
+ //// eliminar medicamento  /////
+ if(isset($_POST['eliminar_aparienciafisica'])){
+   if(isset($_POST['eliminar_apariencia'])){
+     $codigo = ($_POST['eliminar_aparienciafisica']);//asigna a una variable el id de la pregunta a  eliminar
+     try{
+         $relacion_tablas =  $db->prepare("SELECT pa.CODIGO_PERSONAS_APARIENCIA, pa.CODIGO_APARIENCIA from  tbl_apariencia_fisica af ,tbl_personas_apariencia pa
+         where af.CODIGO_APARIENCIA  = pa.CODIGO_APARIENCIA and af.CODIGO_APARIENCIA = (?);");
+       $relacion_tablas->execute(array($codigo));
+       $row = $relacion_tablas->fetchColumn();
+       if($row >0){
+         echo "<script>
+         alert('¡No se puede eliminar esta, relacionado con otras tablas!');
+         window.location = 'crudAparienciaFisica';
+         </script>";
+         exit;
+       }else{
+         try{
+           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+           mysqli_query($link, "DELETE FROM tbl_apariencia_fisica WHERE  CODIGO_APARIENCIA = '$codigo'");
+           if(mysqli_affected_rows($link)>0){
+             echo "<script>
+             window.location = 'crudAparienciaFisica';
+             </script>";
+             include_once 'function_bitacora.php';
+             $codigoObjeto=19;
+             $accion='Modificacion';
+             $descripcion= 'Se elimino una apariencia ';
+             bitacora($codigoObjeto, $accion,$descripcion);
+             exit;
+           }else{
+             echo "<script>
+             alert('¡Error al eliminar la apariencia!');
+             window.location = 'crudAparienciaFisica';
+             </script>";
+             exit;
+           }
+         }catch(PDOException $e){
+         echo $e->getMessage(); 
+         return false;
+        }
+       }
+     }catch(PDOException $e){
+      echo $e->getMessage(); 
+      return false;
+     }
+   }
+ }//Cerre del if padre
 ?>

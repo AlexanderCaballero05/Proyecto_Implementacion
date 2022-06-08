@@ -8,7 +8,6 @@
   //// agregar medicamento /////
   if (isset($_POST['agregar_medicame']) && isset($_POST['agregar_medicamento'])){
     $medicamento = $_POST['agregar_medicamento'];
-    $codigo = $_POST['agregar_cod_medi'];
     $descripcion = $_POST['agregar_med_desc'];
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
@@ -26,8 +25,8 @@
           exit;  
         } else {
             try {
-              $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-              VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
+              $query_medicamento = "INSERT INTO tbl_medicamento (NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
+              VALUES ('$medicamento','$descripcion','$usuario','$fechaActual');";
                $resul=$conn->query($query_medicamento);
                if ($resul >0){
                    echo "<script> 
@@ -76,7 +75,7 @@
        
       
         try {
-            $sql = "UPDATE tbl_medicamento tm set tm.CODIGO_MEDICAMENTO  = '$edi_cod' ,tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
+            $sql = "UPDATE tbl_medicamento tm set tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
             tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
@@ -108,33 +107,50 @@
    }///fin if 
 
   //// eliminar medicamento  /////
-  if (isset($_POST['eliminar_medica']) && isset($_POST['eliminar_medicamento'])){
-    $codigo =($_POST['eliminar_medicamento']);
-        try {
+  if(isset($_POST['eliminar_medicamentos'])){
+    if(isset($_POST['eliminar_medica'])){
+      $codigo = ($_POST['eliminar_medicamentos']);//asigna a una variable el id de la pregunta a  eliminar
+      try{
+          $relacion_tablas =  $db->prepare("SELECT rm.CODIGO_RECETA_MEDICA, rm.CODIGO_MEDICAMENTO from  tbl_receta_medica rm, tbl_medicamento m
+          where m.CODIGO_MEDICAMENTO  = rm.CODIGO_MEDICAMENTO and m.CODIGO_MEDICAMENTO = (?);");
+        $relacion_tablas->execute(array($codigo));
+        $row = $relacion_tablas->fetchColumn();
+        if($row >0){
+          echo "<script>
+          alert('¡No se puede eliminar esta, relacionado con otras tablas!');
+          window.location = 'crudmedicamento';
+          </script>";
+          exit;
+        }else{
+          try{
             $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-            mysqli_query($link, "DELETE FROM tbl_medicamento WHERE CODIGO_MEDICAMENTO  = '$codigo' ");
+            mysqli_query($link, "DELETE FROM tbl_medicamento WHERE  CODIGO_MEDICAMENTO = '$codigo' ");
             if(mysqli_affected_rows($link)>0){
               echo "<script>
-            alert('Medicamento eliminada!');
-            window.location = 'crudmedicamento';
-            </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=25; //cmabiar 
-            $accion='Eliminación';
-            $descripcion= 'Se elimino un medicamento  ';
-            bitacora($codigoObjeto, $accion,$descripcion);
-            exit;
-        }else{
-            echo "<script>
-            alert('¡Error al eliminar el medicamento tiene relacion con otras tablas !');
-            window.location = 'crudmedicamento';
-            </script>";
-            exit;
-          } 
+              window.location = 'crudmedicamento';
+              </script>";
+              include_once 'function_bitacora.php';
+              $codigoObjeto=19;
+              $accion='Modificacion';
+              $descripcion= 'Se elimino una modalidad ';
+              bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
+            }else{
+              echo "<script>
+              alert('¡Error al eliminar el medicamento!');
+              window.location = 'crudmedicamento';
+              </script>";
+              exit;
+            }
           }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        } 
-   
-  } // fin if 
+          echo $e->getMessage(); 
+          return false;
+         }
+        }
+      }catch(PDOException $e){
+       echo $e->getMessage(); 
+       return false;
+      }
+    }
+  }//Cerre del if padre
 ?>

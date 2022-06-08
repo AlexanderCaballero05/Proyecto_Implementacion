@@ -103,7 +103,7 @@ Gissela Diaz        06-062022         Agregar los parametros de Minimo y maximo-
                             <div class="col-md-12 mb-3" >
                                <div class="form-group">
                                  <input type="text" minlength="<?php echo $valor; ?>" maxlength="<?php echo $valor1; ?>"name="respuesta1" id="respuesta1" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
-                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required pattern="[A-Z,1-9]{<?php echo $valor;?>,<?php echo $valor1;?>}">
+                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required pattern="[A-Z, 1-9]{<?php echo $valor;?>,<?php echo $valor1;?>}">
                                   <div class="invalid-feedback">
                                     Debe completar este campo.
                                   </div> 
