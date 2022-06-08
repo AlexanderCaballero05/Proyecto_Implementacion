@@ -28,7 +28,7 @@
              $fechaActual = date('Y-m-d');  
                
             try{ 
-                $consulta = $db->prepare("SELECT DNI FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
+                $consulta = $db->prepare("SELECT COUNT(*)  FROM tbl_persona WHERE DNI = (?);");//consulta pra verificar si el DNI existe
                 $consulta->execute(array($identidad));
                 $row=$consulta->fetchColumn();
                 if ($row>0){
@@ -72,7 +72,7 @@
                       try{ //Se evalua el tipo de persona,dependiendo de que tipo es se llenan en sus correspondientes tablas
                         
                          if($tipo_persona == "1" ){// Para registrar tipo de persona administrador
-                            $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                            $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
                             if($row>0){// si hay registros con el mismo nombre 
@@ -111,7 +111,7 @@
                             }//fin del else de insertar administrador
                           }else if($tipo_persona == "2"){ //Para registrar tutores uwu
                             try{
-                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
                               $row=$sentencia->fetchColumn();
                               if($row>0){// si hay registros con el mismo nombre 
@@ -146,7 +146,7 @@
 
                           }else if($tipo_persona == "9" ){//para enfermeras y enfermeros si existen :v
                             try{
-                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
                               $row=$sentencia->fetchColumn();
                               if($row>0){// si hay registros con el mismo nombre 
@@ -181,7 +181,7 @@
 
                           }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes(porque se les pego la gana hacerlos estudiantes :v)
                            try{
-                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
                               $row=$sentencia->fetchColumn();
                               if($row>0){
@@ -214,7 +214,7 @@
                           }elseif( ($tipo_persona == "5") ){ //CODIGO PARA INSERTAR UN MEDICO CON SU ESPECIALIDAD
                             $rol = "5";//rol de medico
                             try{
-                              $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                              $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
                               $row=$sentencia->fetchColumn();
                               if($row>0){// si hay registros con el mismo nombre 
@@ -249,7 +249,7 @@
                             }//Fin de registrar medico
                             //CODIGO PARA INSERTAR UN PSICOLOGO CON SU ESPECIALIDAD
                           }elseif ($tipo_persona == "6"){
-                            $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                            $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
                             if($row>0){// si hay registros con el mismo nombre 
@@ -282,7 +282,7 @@
                               }
                             }
                           }else if($tipo_persona == "8"){//Para insertar un catequista :)
-                            $sentencia = $db->prepare("SELECT nombre_usuario FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
+                            $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                             $sentencia->execute(array($nombre_usuario));
                             $row=$sentencia->fetchColumn();
                             if($row>0){// si hay registros con el mismo nombre 
@@ -362,7 +362,7 @@
         } //fin del try catch principal
     }
     //fin del if de comprobar que el DNI no esta vacio
-//Ordenado y comentado para su comprension persona que revise este codigo 
+//Ordenado y comentado para su comprension persona que revise este codigo Y SI TOCA DEJOLO COMO ESTA,SI
 
 
 //************EDITAR USUARIO************ */
@@ -374,6 +374,7 @@
       $PASS = ($_POST['clave_nueva']);
       $CONFIRMA = ($_POST['confirmar_clave']);
       $ESTADO = ($_POST['ESTADOUSUARIO']);
+      $ROLL = ($_POST['ROLUSUARIO']);
       $correo_mofi = ($_POST['correo_modi']);
       $nombre_modi = ($_POST['nombre_modi']);
       $apellido_modi = ($_POST['apellido_modi']);
@@ -403,7 +404,7 @@
             $ID_PERSONA_CORREO = $row;
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
-                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis');" ;
+                $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis','$ROLL');" ;
                 $consulta=$conn->query($sql);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {

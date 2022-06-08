@@ -1,4 +1,33 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+           Segundo Periodo 2022
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
 
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          codigo que realiza el mantemiento de roles del lado del backend
+    Fecha:             04-Abril-2022
+    Programador:       Diana Rut Garic
+    descripcion:       Realiza las tres gestiones del mantenimiento del rol ,del lado del backend
+-----------------------------------------------------------------------
+ Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut Garica     		05-06-2022               Cambio en la consultas
+----------------------------------------------------------------------->
  <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -13,12 +42,12 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];   
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_roles WHERE NOMBRE = (?);");
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_roles WHERE NOMBRE = ?");
                   $consulta_rol->execute(array($nombre_rol));
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre del rol $nombre_rol ya se encuentra registrado');
+                    alert('El rol $nombre_rol ya se encuentra registrado');
                     window.location = 'crudRoles';
                     </script>";
                   exit;
@@ -28,6 +57,7 @@
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
+                        alert('Rol registrado correctamente');
                         window.location = 'crudRoles';
                         </script>";
                         exit;
@@ -38,7 +68,7 @@
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        alert('Error auxilio');
                         window.location = 'crudRoles';
                         </script>";
                         exit;
@@ -58,9 +88,9 @@
         echo $e->getMessage(); 
         return false;
        }
-    }//FIN DEL IF DE REGISTAR UN ROL
+    }
 
-  //PARTE PARA EDITAR UN ROLL
+//*******************CODIGO PARA EDITAR UN ROLL******************
   if(isset($_POST['id_rol'])){
     if(isset($_POST['editar_rol'])){
       $codigo_rol = ($_POST['id_rol']);
@@ -68,10 +98,9 @@
       $editar_descripcion = ($_POST['editar_descripcion']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
-
       try{
-       // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_roles where NOMBRE = (?) and CODIGO_TIPO_ROL <> (?) ;");
+       // consulta para saber si el rol ya existe y otra cosa :v
+       $sentencia = $db->prepare("SELECT * FROM tbl_roles where NOMBRE = ? and CODIGO_TIPO_ROL <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_rol));
        $row=$sentencia->fetchColumn();
         if($row>0){
@@ -111,20 +140,20 @@
         return false;
        }
     }
-  }//cierre del if principal
+  }
 
-//PARTE PARA ELIMINAR UN ROL
+//**********CODIGO PARA ELIMINAR UN ROL****************
 if(isset($_POST['rol_eliminar'])){
   if(isset($_POST['ELIMINAR_ROL'])){
     $code = ($_POST['rol_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
+      $relacion_tablas =  $db->prepare("SELECT COUNT(*) from  tbl_usuario  u ,tbl_roles r
       where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar este rol,esta relacionado con otras tablas!');
+        alert('¡No se puede eliminar este rol,tien relación con otras tablas!');
         window.location = 'crudRoles';
         </script>";
         exit;
@@ -159,8 +188,5 @@ if(isset($_POST['rol_eliminar'])){
      return false;
     }
   }
-}//Cirre del if padre
-
-
-//*****Elaborado por Diana Rut,no quiten creditos :v *******
+}
 ?>
