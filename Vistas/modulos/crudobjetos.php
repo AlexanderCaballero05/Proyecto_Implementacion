@@ -9,7 +9,6 @@ $descripcion = 'Ver los registros de los objetos';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
-
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -36,7 +35,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre</label>
-                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text"
+                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="nombre" id="nombre" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
@@ -47,7 +46,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripcion</label>
-                                <input type="text" class="form-control" onkeyup="mayus(this);"  type="text" 
+                                <input type="text" class="form-control" onkeyup="mayus(this);"  type="text"  autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="descripcion" id="descripcion" autocomplete = "off" maxlength="100" required="">
                                  <div class="invalid-feedback">
                                   campo obligatorio.
@@ -126,6 +125,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         </div>
 
                         <!-- form start -->
+                        <form method ="POST" CLASS ="needs-validation">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tabla_objetos" class="table table-bordered table-striped">
@@ -241,16 +241,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="editnombre" autocomplete = "off" id="editnombre">
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                    name="editnombre" autocomplete = "off" id="editnombre" required="">
+                                                                                    <div class="invalid-feedback">
+                                                                                    Complete este campo.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?> "onkeyup="mayus(this);"  class="form-control" maxlength="100" minlength="5"  
-                                                                                     name="editdescripcion"autocomplete = "off" id="editdescripcion">
+                                                                                    <input type="text" value="<?php echo $var4; ?> "onkeyup="mayus(this);"  class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+
+                                                                                     name="editdescripcion"autocomplete = "off" id="editdescripcion" required="">
+                                                                                     <div class="invalid-feedback">
+                                                                                    Complete este campo.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -338,7 +345,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.was-validated')
+    Array.prototype.slice.call(forms)
 
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
 
 <script type="text/javascript">
@@ -488,9 +511,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
       })
   } );
 
-
-   /////copiar y pegar y eso 
-  var nombre=document.getElementById("nombre"); //el nombre del id del campo y cambiar la variable 
+/////copiar y pegar y eso 
+var nombre=document.getElementById("nombre"); //el nombre del id del campo y cambiar la variable 
   nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)
