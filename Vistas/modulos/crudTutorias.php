@@ -33,7 +33,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
  include "conexionpdo.php";
  
  $codigoObjeto=22;
- $accion='INGRESO AL MANTENIMIENTO TUTORIAS';
+ $accion='INGRESO AL MANTENIMIENTO TUTORÍAS';
  $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>

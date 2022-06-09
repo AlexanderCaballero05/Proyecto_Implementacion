@@ -122,7 +122,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                     location.href = 'crudpersonas';
                                     </script>";
                                     $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN ADMINISTRADOR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -160,7 +160,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   location.href = 'crudpersonas';
                                   </script>";
                                    $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN TUTOR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -205,7 +205,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   location.href = 'crudpersonas';
                                   </script>";
                                    $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN ENFERMERO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -235,7 +235,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   location.href = 'crudpersonas';
                                   </script>";
                                     $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN ESTUDIANTE';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -276,7 +276,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   location.href = 'crudpersonas';
                                   </script>";
                                     $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN MEDICO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -316,7 +316,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   echo "<script> 
                                   location.href = 'crudpersonas';</script>";
                                    $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN PSICOLOGO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -353,7 +353,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                   location.href = 'crudpersonas';
                                   </script>";
                                    $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UN CATEQUISTA';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -384,7 +384,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                 location.href = 'crudpersonas';
                                 </script>";
                                    $codigoObjeto=13;
-                                    $accion='REGISTRO';
+                                    $accion='INSERCIÓN';
                                     $descripcion= 'SE REGISTRO UNA PERSONA';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
@@ -466,6 +466,12 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> window.location = 'ediusuarios'; </script>";
+                    $codigoObjeto=14;
+                    $accion='MODIFICACIÓN';
+                    $descripcion= 'SE MODIFICO UN USUARIO';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    exit;
+
                   }else{ //Si las contraseñas son diferentes ,no permitira que se registre
                     if($connueva<>$confconn){
                       echo "<script>
@@ -478,7 +484,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                         if (($consulta)>0) {
                           echo "<script> alert('Cambio exitosamente');window.location = 'ediusuarios';</script>";
                           $codigoObjeto=14;
-                          $accion='MODIFICACION';
+                          $accion='MODIFICACIÓN';
                           $descripcion= 'SE MODIFICO UNA CONTRASEÑA';
                           bitacora($codigoObjeto, $accion,$descripcion);
                           exit;

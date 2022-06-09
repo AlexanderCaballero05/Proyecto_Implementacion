@@ -32,7 +32,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
  include_once "conexion.php";
  include_once "conexion3.php";
  $codigoObjeto=21;
- $accion='INGRESO AL MANTENIMIENTO AREAS';
+ $accion='INGRESO AL MANTENIMIENTO ÁREAS';
  $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>

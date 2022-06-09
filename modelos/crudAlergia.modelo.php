@@ -32,8 +32,8 @@
                         exit;
                         include_once 'function_bitacora.php';
                         $codigoObjeto=39;
-                        $accion='REGISTRO';
-                        $descripcion= 'SE AGREGO UNA NUEVA ALERGIA';
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA ALERGIA';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
@@ -92,7 +92,7 @@
               </script>';
               include_once 'function_bitacora.php';
               $codigoObjeto=39;
-              $accion='MODIFICACION';
+              $accion='MODIFICACIÓN';
               $descripcion= 'SE MODIFICO UNA ALERGIA';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
@@ -139,7 +139,7 @@ if(isset($_POST['alergia_eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=39;
-            $accion='ElIMINACION';
+            $accion='ELIMINACIÓN';
             $descripcion= 'SE ELIMINO UNA ALERGIA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;

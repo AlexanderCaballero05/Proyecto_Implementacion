@@ -31,8 +31,8 @@
                         </script>";
                         include_once 'function_bitacora.php';
                         $codigoObjeto=46;
-                        $accion='REGISTRO';
-                        $descripcion= 'SE AGREGO UNA NUEVA SECCION';
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA SECCIÓN';
                          bitacora($codigoObjeto, $accion,$descripcion);
                          exit;
                       }else{
@@ -89,8 +89,8 @@
               </script>';
               include_once 'function_bitacora.php';
               $codigoObjeto=46;
-              $accion='MODIFICACION';
-              $descripcion= 'SE MODIFICO UNA SECCION';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA SECCIÓN';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -116,13 +116,13 @@ if(isset($_POST['seccion_eliminar'])){
   if(isset($_POST['ELIMINAR_SECCION'])){
     $code = ($_POST['seccion_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
-      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
+      $relacion_tablas =  $db->prepare("SELECT  t.CODIGO_SECCION  ,t.NOMBRE from tbl_seccion t,tbl_carga_academica c
+      where  t.CODIGO_SECCION = c.CODIGO_SECCION and t.CODIGO_SECCION  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar la seccion,esta relacionado con carga!');
+        alert('¡No se puede eliminar la sección,esta relacionado con carga!');
         window.location = 'crudSeccion';
         </script>";
         exit;
@@ -136,8 +136,8 @@ if(isset($_POST['seccion_eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=46;
-            $accion='ElIMINACION';
-            $descripcion= 'SE ELIMINO UNA SECCION';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA SECCIÓN';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
