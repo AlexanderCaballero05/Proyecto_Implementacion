@@ -1,9 +1,9 @@
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
-      $codigoObjeto=14;
-      $accion='Ingreso a la pantalla de mantenimiento usuarios';
-      $descripcion= 'Ver los registros de los usuarios';
+      $codigoObjeto=25;
+      $accion='INGRESO A LA PANTALLA DE MANTENIMIENTO PERSONAS';
+      $descripcion= 'SE AUTENTIFICO';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
 <script>

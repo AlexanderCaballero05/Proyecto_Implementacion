@@ -29,12 +29,12 @@
                         echo "<script> 
                         window.location = 'crudSeccion';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=33;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nueva seccion ';
+                        $codigoObjeto=46;
+                        $accion='REGISTRO';
+                        $descripcion= 'SE AGREGO UNA NUEVA SECCION';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
@@ -88,9 +88,9 @@
               window.location = "crudSeccion";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una sección ';
+              $codigoObjeto=46;
+              $accion='MODIFICACION';
+              $descripcion= 'SE MODIFICO UNA SECCION';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -135,9 +135,9 @@ if(isset($_POST['seccion_eliminar'])){
             window.location = 'crudSeccion';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una Sección ';
+            $codigoObjeto=46;
+            $accion='ElIMINACION';
+            $descripcion= 'SE ELIMINO UNA SECCION';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

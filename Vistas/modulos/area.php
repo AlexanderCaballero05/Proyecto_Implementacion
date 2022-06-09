@@ -1,6 +1,40 @@
+<!-- -----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de Areas
+    Fecha:             09-Junio-2022
+    Programador:        DESCONODIDO
+    descripcion:       Edita,elimina y registra una area
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador           Fecha                      Descripcion
+Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ $codigoObjeto=21;
+ $accion='INGRESO AL MANTENIMIENTO AREAS';
+ $descripcion= 'USUARIO SE AUTENTIFICO';
+ bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
 
@@ -15,58 +49,42 @@
   </div>
   
   <section class="content">
-      <section class="content-header text-xl-center mb-3 btn-light">
-          <h1>
-              <h4>MANTENIMIENTO ÁREAS</h4>
-          </h1>     
-      </section>
+      <div class="content-header text-xl-center mb-3 ">
+          <h4>Mantenimiento Áreas</h4>   
+      </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-
-        
-           
         <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '21'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
+         include "conexionpdo.php";
+         $usuario=$_SESSION['vario'];
+         //Evaluo si existe el tipo de Rol
+         $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+         $evaluar_usuario->execute(array($usuario));
+         $row=$evaluar_usuario->fetchColumn();
+          if($row > 0){
+            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+            //llamar al procedimiento almacenado
+            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+            $evaluar_permiso->execute(array($usuariomo, '21'));
+            $row1=$evaluar_permiso->fetchColumn();
+            $permiso_registrar =$row1;             
+         }
+       ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
                     <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-
+                    if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     ?> 
-                    
-                    <button  data-toggle="modal" href="#AGREGAR_AREA"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar area</button>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                     <button  data-toggle="modal" href="#AGREGAR_AREA"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Área</button>
+                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                     <?php 
-
-                      }
-                        
+                      }  
                     ?> 
-          <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
-                  
                 <div class="table-responsive">
                   <table id="tabla_area" class="table table-bordered table-striped">
                       <thead>
@@ -75,8 +93,6 @@
                         <th class="text-center">ID</th>
                         <th class="text-center">Nombre Área</th>
                         <th class="text-center">Descripción</th>
-                         
-                          
                         </tr>
                       </thead>
                       <tbody>
@@ -90,52 +106,36 @@
                             $var1 = $row['CODIGO_AREA'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
-                  
-                           
                         ?>
                         <tr>
                           <td>
                             <div class="text-center" >
                               <div class="btn-group">
-                                
-
                               <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
                                 $evaluar_permiso_actualizar->execute(array($usuariomo, '21'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
-                                
-                                
-                               
                             }
                             ?> 
-
-
-
                             <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
                             $evaluar_usuario->execute(array($usuario));
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
                                 $evaluar_permiso_eliminar->execute(array($usuariomo, '21'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
@@ -153,8 +153,6 @@
                                <?php
                                 }
                                 ?>
-
-
                                <?php
                                 if ($permiso_actualizar == 'SI'){    
                                 ?> 
@@ -165,8 +163,6 @@
                                 <?php
                                 }
                                 ?>
-
-
                               </div>
                             </div><!-- final del text-center -->
                           </td>
@@ -175,29 +171,28 @@
                           <td class="text-center"><?php echo $var3; ?></td>
                       
                          
-
                         <!--INICIO DEL MODAL DE EDITAR AREA -->
                           <div id="EDITARAREA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Área </h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar área </h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_area" id="id_area">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_nombre" id="editar_nombre">
+                                          <label for="txtcodigo_persona">Nombre Área</label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" required   autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -223,7 +218,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="area_eli" id="area_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el área   <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el área <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -256,18 +251,18 @@
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Area</h4>
+                        <h4 class="text-center">Agregar Área</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
+                                    <label for="txtcodigo_persona">Nombre Área</label>
 
                                     <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre de la area" name="nombre_area" id="nombre_area" required="">
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                     </div>
                                   </div>
                             </div>
@@ -276,7 +271,7 @@
                                     <label for="txtcodigo_persona">Descripción</label>
                                     <textarea  type="text"  class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la area" name="descripcion_area" id="descripcion_area" required="" onkeypress="return soloLetras(event);" ></textarea>
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                     </div>
                                   </div>
                             </div>
@@ -289,12 +284,7 @@
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTADO --> 
-
-  <!-- Button trigger modal -->
-
-
-<!-- Modal -->
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO --> 
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
@@ -312,7 +302,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar area:",
+        "search": "Buscar Área:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

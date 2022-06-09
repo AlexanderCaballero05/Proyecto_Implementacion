@@ -31,12 +31,12 @@
                         echo "<script> 
                         window.location = 'crudTutorias';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
                         $codigoObjeto=22;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego una nueva tutoria ';
+                        $accion='REGISTRO';
+                        $descripcion= 'SE AGREGO UNA NUEVA TUTORIA';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
                         alert('Error auxilio,ok no!');
@@ -93,9 +93,10 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=22;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una tutoria ';
+              $accion='MODIFICACION';
+              $descripcion= 'SE MODIFICO UNA TUTORIA';
               bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar la tutoria!');
@@ -139,8 +140,8 @@ if(isset($_POST['tutoria_eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=22;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una Tutoria ';
+            $accion='ELIMINACION';
+            $descripcion= 'SE ELIMINO UNA TUTORIA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
