@@ -8,6 +8,7 @@
   //// agregar medicamento /////
   if (isset($_POST['agregar_medicame']) && isset($_POST['agregar_medicamento'])){
     $medicamento = $_POST['agregar_medicamento'];
+    $codigo = $_POST['agregar_cod_medi'];
     $descripcion = $_POST['agregar_med_desc'];
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
@@ -25,8 +26,8 @@
           exit;  
         } else {
             try {
-              $query_medicamento = "INSERT INTO tbl_medicamento (NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-              VALUES ('$medicamento','$descripcion','$usuario','$fechaActual');";
+              $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
+              VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
                $resul=$conn->query($query_medicamento);
                if ($resul >0){
                    echo "<script> 
@@ -34,9 +35,9 @@
                    </script>";
                    exit;
                    include_once 'function_bitacora.php';
-                          $codigoObjeto=25;/// CAMBIAR 
-                         $accion='Registro';
-                         $descripcion= 'Se agrego un nuevo medicamento';
+                          $codigoObjeto=35;/// CAMBIAR 
+                         $accion='REGISTRO DE MEDICAMENTO';
+                         $descripcion= 'SE AGREGO UN NUEVO MEDICAMENTO';
                           bitacora($codigoObjeto, $accion,$descripcion);
                  } else {
                    echo "<script> 
@@ -62,7 +63,6 @@
   ///// editar medicamento ////
    if (isset( $_POST['cod_edit_med']) && isset($_POST['guardar_med'])){
     $codigo = $_POST['cod_edit_med'];
-    $edi_cod = $_POST['edit_cod_medi'];
     $medicamento = $_POST['edit_nom_medi'];
     $descripcion = $_POST['edit_desc_medi'];
     $fechaActual = date('Y-m-d');
@@ -80,13 +80,12 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Medicamento modificado exitosamente!');
               window.location = 'crudmedicamento';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=25; // cambiar 
-              $accion='Modificacion';
-              $descripcion= 'Se edito un medicamento';
+              $codigoObjeto=35; // cambiar 
+              $accion='MODIFICACION';
+              $descripcion= 'SE EDITO UN MEDICAMENTO';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -106,8 +105,8 @@
                     } 
    }///fin if 
 
-  //// eliminar medicamento  /////
-  if(isset($_POST['eliminar_medicamentos'])){
+   //// eliminar medicamento  /////
+   if(isset($_POST['eliminar_medicamentos'])){
     if(isset($_POST['eliminar_medica'])){
       $codigo = ($_POST['eliminar_medicamentos']);//asigna a una variable el id de la pregunta a  eliminar
       try{
@@ -130,9 +129,9 @@
               window.location = 'crudmedicamento';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=19;
-              $accion='Modificacion';
-              $descripcion= 'Se elimino una modalidad ';
+              $codigoObjeto=35;
+              $accion='ELIMINACION';
+              $descripcion= 'SE ELIMINO UN MEDICAMENTO ';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{

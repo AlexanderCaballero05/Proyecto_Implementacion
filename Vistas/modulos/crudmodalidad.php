@@ -31,8 +31,8 @@ Programador               Fecha                      Descripcion
  include_once "conexion.php";
  include_once "conexion3.php";
  $codigoObjeto=19;
- $accion='Ingreso a mantenimiento preguntas';
- $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
+ $accion='INGRESO A MANTENIMIENTO MODALIDAD';
+ $descripcion='MANTENIMIENTO A LOS REGISTROS DE MODALIDAD';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
@@ -47,7 +47,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO MODALIDAD </h4>
+              <h4>Mantenimiento Modalidad </h4>
         </section>
   
   

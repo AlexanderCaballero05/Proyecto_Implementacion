@@ -26,7 +26,8 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
-Gissela Diaz              08/06/2022                 Cambios en el boton de eliminar
+Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
+                                                    y descripción
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -34,8 +35,8 @@ include_once "conexion3.php";
 
 
 $codigoObjeto = 35;
-$accion = 'Ingreso a la pantalla de mantenimiento de especialidad  ';
-$descripcion = 'Ver los registros de especialidad';
+$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO DE MEDICAMENTO  ';
+$descripcion = 'DAR MANTENIMIENTO A LOS MEDICAMENTOS REGISTRADOS';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
@@ -56,7 +57,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <!--CUERPO DEL MODAL -->
                     <div class="row">
                         <!-- INICIO PRIMERA ROW -->
-                    
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                              <label for="txtcodigo_persona">
+                              Codigo del Medicamento</label>
+                              <input type="text"  class="form-control" maxlength="10" onkeyup="mayus(this);" autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
+                              name="agregar_cod_medi" id="agregar_codd_medi">
+                          </div>
+                      </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
@@ -65,7 +73,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                  name="agregar_medicamento" id="agregar_medicamento">
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                    </div> <!-- FIN DE EL PRIMER ROW -->
+                    <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripción</label>
@@ -73,7 +82,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                  name="agregar_med_desc" id="agregar_med_desc">
                             </div>
                         </div>
-                    </div> <!-- FIN DE EL PRIMER ROW -->
                 </div>
                 <!--FINAL DEL CARD BODY -->
                 <div class="modal-footer ">
@@ -99,7 +107,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
   <section class="content">
   <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO MEDICAMENTOS</h4>
+            <h4>Mantenimiento Medicamentos</h4>
         </h1>     
     </section>
     <div class="container-fluid">
@@ -154,7 +162,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             <th>ID</th>
                                             <th>Nombre del Medicamento</th>
                                             <th>Descripción</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -257,7 +264,15 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             <!-- INICIO PRIMERA ROW -->
                                                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" 
                                                                                  name="cod_edit_med" id="cod_edit_med" >
-                                                        
+                                                                                 
+                                                                            <div class="col-sm-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="txtcodigo_persona">
+                                                                                    Codigo del Medicamento</label>
+                                                                                    <input type="text" value="<?php echo $var1; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
+                                                                                    name="edit_cod_medi" id="edit_codd_medi" disabled="">
+                                                                                </div>
+                                                                            </div>
                                                                             <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
@@ -266,7 +281,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     name="edit_nom_medi" id="edit_nom_medi">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-sm-6">
+                                                                        </div> <!-- FIN DE EL PRIMER ROW -->
+                                                                          <div class="col-sm-6">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion del Medicamento</label>
@@ -274,7 +290,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                      name="edit_desc_medi" id="edit_desc_medi">
                                                                                 </div>
                                                                             </div>
-                                                                        </div> <!-- FIN DE EL PRIMER ROW -->
                                                                     </div>
                                                                     <!--FINAL DEL CARD BODY -->
                                                                     <div class="modal-footer ">
@@ -289,7 +304,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                     <!-- inicio modal eliminar  -->   
                                                     <div id="ELIMINAR<?php echo $var1 ?>"  
-                                                    name="elimin" id=" elim_medicamento"class="modal fade" role="dialog">
+                                                    name="eliminar_medicamento" id="eliminar_medicamento"class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -298,7 +313,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         </div>
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamentos" id="eliminar_medicamentos">
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamentos" id="eliminar_medicamento">
                                                             <h4 class="text-center">¿Esta seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">

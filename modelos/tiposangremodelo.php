@@ -32,9 +32,9 @@
                         window.location = 'crudtiposangre';
                         </script>";
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=33;
-                        $accion='Inserción';
-                        $descripcion='Se agrego un nuevo tipo de sangre';
+                        $codigoObjeto=37;
+                        $accion='AGREGAR';
+                        $descripcion='SE AGREGO UN NUEVO TIPO DE SANGRE';
                        bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
@@ -96,9 +96,9 @@
               window.location = 'crudtiposangre';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=33;
-              $accion='Editar'; 
-              $descripcion= 'Se edito un  tiposangre';
+              $codigoObjeto=37;
+              $accion='MODIFICACION'; 
+              $descripcion= 'SE MODIFICO UN TIPO DE SANGRE';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
@@ -142,9 +142,9 @@ if(isset($_POST['eliminar_tiposangre'])){
             window.location = 'crudtiposangre';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=33;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un tipo de sangre';
+            $codigoObjeto=37;
+            $accion='ELIMINACION';
+            $descripcion= 'SE ELIMINO UN TIPO DE SANGRE';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
