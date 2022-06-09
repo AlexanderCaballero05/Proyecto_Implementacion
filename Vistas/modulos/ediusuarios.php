@@ -5,8 +5,7 @@ ELABORADO POR Diana Rut
 	Departamento de Informatica administrativa
      Analisis, Programacion y Evaluacion de Sistemas
              Segundo periodo 2022
-Equipo:
-Arnold Caballero.......... (no me acuerdo)
+
 
 Catedratico:
 Lic. Karla Melisa Garcia Pineda  --Evaluacion
@@ -15,7 +14,7 @@ Clauidia Nuñez -- Analisis y diseño
 ---------------------------------------------------------------------
 Programa:          Pantalla que muestra los datos del usuario
 Fecha:             01-jan-2016
-Programador:       Javier
+Programador:       Diana Rut Garcia
 descripcion:       Mantenimiento de usuario,edita elimina 
 -----------------------------------------------------------------------
 Historial de Cambio

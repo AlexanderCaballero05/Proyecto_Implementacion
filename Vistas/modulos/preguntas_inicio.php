@@ -18,11 +18,32 @@ Descripcion:       Pantalla de recuperacion por preguntas de seguridad
  Historial de Cambio
 -----------------------------------------------------------------------
 Programador            Fecha                Descripcion
-Diana Rut Garcia	 	29-may-2021       Cambio apariencia pantalla con validaciones de parametos -->
+Diana Rut Garcia	 	29-may-2021       Cambio apariencia pantalla con validaciones de parametos 
+Gissela Diaz        06-062022         Agregar los parametros de Minimo y maximo-->
+
 <?php
  session_start();
  include "conexionpdo.php";
  include_once 'conexion2.php';
+?>
+<?php
+  $Min = "MIN_RESPUESTA_PREGUNTAS";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Min));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+
+<?php
+  $Max = "MAX_RESPUESTA_PREGUNTAS";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Max));
+  $row1=$sentencia->fetchColumn();
+  if($row1>0){
+    $valor1 = $row1;
+  }
 ?>
 <?php
   $_SESSION['vario'] ;
@@ -81,10 +102,10 @@ Diana Rut Garcia	 	29-may-2021       Cambio apariencia pantalla con validaciones
                             </div>
                             <div class="col-md-12 mb-3" >
                                <div class="form-group">
-                                 <input type="text" maxlength="50" minlength="4" name="respuesta1" id="respuesta1" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
-                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required>
+                                 <input type="text" minlength="<?php echo $valor; ?>" maxlength="<?php echo $valor1; ?>"name="respuesta1" id="respuesta1" class="form-control" id="" onkeyup="mayus(this);" autocomplete = "off"
+                                  placeholder="Respuesta de seguridad" onkeypress="return soloLetras(event);" required pattern="[A-Z,1-9]{<?php echo $valor;?>,<?php echo $valor1;?>}">
                                   <div class="invalid-feedback">
-                                    Debe completar este campo con minimo 3 carateres.
+                                    Debe completar este campo.
                                   </div> 
                                </div>
                             </div>
@@ -125,7 +146,7 @@ Diana Rut Garcia	 	29-may-2021       Cambio apariencia pantalla con validaciones
       function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
-       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz123456789";
        especiales = ["8-37-39-46"];
        tecla_especial = false
        for(var i in especiales){

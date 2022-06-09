@@ -103,7 +103,7 @@ Diana Rut Garcia Amador	 	01-jun-2022       Se agrego una validacion de no permi
                 <span class="input-group-text" ><i class="fas fa-user"></i></span>
                 <input type="text" required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}" name="ingUsuario" class="form-control " placeholder="Ingresa tu nombre de usuario" autocomplete = "off" onkeyup="noespacio(this, event);mayus(this)" onkeypress="return soloLetras(event);" autocomplete = "off"   minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onblur="quitarespacios(this);" onkeydown="sinespacio(this);">
                   <div class="invalid-tooltip">
-                    Debe teber minimo <?php echo $valor1; ?> caracteres.
+                    Debe tener minimo <?php echo $valor1; ?> caracteres.
                   </div>
               </div>
               <div class="input-group mb-3"><!--Para ingresar la contraseña -->

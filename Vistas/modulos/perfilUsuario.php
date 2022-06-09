@@ -167,7 +167,7 @@
         </div>
         <div class="input-group mb-3">
           <input  type="password" id="PASSNUEVA" onkeyup="noespacio(this, event)" name="clave_nueva" class="form-control" placeholder="Ingrese una nueva contraseña"
-            autocomplete = "off" required pattern="[A-Z,1-9,a-z,@$!%*?&ñÑ¡!+-/?¿-]{<?php echo $valor4;?>,<?php echo $valor3;?>}" minlength="<?php echo $valor4;?>" maxlength="<?php echo "$valor3"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this); ">
+            autocomplete = "off" required pattern="[A-Z,1-9,a-z,@$!%*?&ñÑ¡_!+-/?¿-]{<?php echo $valor4;?>,<?php echo $valor3;?>}" minlength="<?php echo $valor4;?>" maxlength="<?php echo "$valor3"?>"   title="Configure con los valores solicitados" onkeyup="sinespacio(this); ">
           <div class="input-group-append">
             <button id="show_password" class="form-control btn btn-info btn-sm btn-block" type="button"  onclick="Passnueva()"><span class="icon3 fa fa-eye-slash"></button>
           </div>

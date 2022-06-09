@@ -19,11 +19,9 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>REGISTRAR ROLES</h4>
-        </h1>     
-    </section>
+      <div class="content-header text-xl-center mb-3">
+         <h3>Registrar roles</h3>   
+      </div>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -45,7 +43,7 @@
           if($permiso_registrar == 'SI'){
           ?>
           
-          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar  Rol</button>
+          <button  data-toggle="modal"  href="#AGREGAR_ROL" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar rol</button>
           <?php
            }
           ?>
@@ -143,27 +141,33 @@
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR ROL -->
-                          <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog">
+                          <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog" class="needs-validation" novalidate>
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Roles</h4>
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar rol</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_rol" id="id_rol">
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="40" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input   type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control" required pattern="[A-Z]{5,40}"  maxlength="40" minlength="5" title="Campo obligatorio,minimo 5 caracteres."   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <div class="invalid-feedback">
+                                           Campo obligatorio minimo 5 caracteres.
+                                        </div>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <textarea  type="text" class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255" autocomplete = "off" type="text"   name="editar_descripcion"  onkeypress="return soloLetras(event);" id="editar_descripcion"><?php echo $var3; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -188,7 +192,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el rol <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el rol <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -218,28 +222,28 @@
     <div id="AGREGAR_ROL" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form  method="POST"  class="needs-validation" novalidate>
+                <form  method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Rol</h4>
+                        <h4 class="text-center">Agregar rol</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
-                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" required="">
+                                    <label>Nombre</label>
+                                    <input  type="text" class="form-control" required pattern="[A-Z]{5,40}"  minlength="5" maxlength="40" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" >
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio minimo 5 caracteres.
                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" required=""></textarea>
+                                    <label>Descripción</label>
+                                    <textarea  type="text"   class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
                                     <div class="invalid-feedback">
-                                      campo obligatorio.
+                                      Campo obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -283,7 +287,7 @@
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
         "search": "Buscar Rol:",
-        "zeroRecords": "Sin resultados encontrados",
+        "zeroRecords": "El rol no existe.",
         "paginate": {
             "first": "Primero",
             "last": "Ultimo",

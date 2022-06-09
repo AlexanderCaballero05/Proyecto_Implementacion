@@ -12,7 +12,7 @@ Lic. Karla Melisa Garcia Pineda
 ---------------------------------------------------------------------
 Programa:         Pantalla de registro de personas/usuarios
 Fecha:             01-jan-2016
-Programador:       Javier
+Programador:       Diana Rut Garcia
 descripcion:       Registra las diferentes personas y usuarios involucradas al sistema
 -----------------------------------------------------------------------
 Historial de Cambio
@@ -20,6 +20,7 @@ Historial de Cambio
 Programador               Fecha                      Descripcion
 Diana Rut               27/05/2022            Se agregaron parametos que faltaban
 Diana Rut               31/05/2022            Se agrego mas campos en el area de familiar y se quitaron campos de estudiante
+Diana Rut               07/05/2022            Se validaron los campos de contraseña y nombre de usuario que sean los tamaños requeridos
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -122,7 +123,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"> <!--INICIO DNI-->
                         <label  class="control-label">Número de Identidad:</label> 
                         <div class="form-group">
-                          <input required pattern="[0-9]{13,13}" onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
+                          <input required pattern="[0-9]{13,13}" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
                           <div class="invalid-feedback">
                               Campo obligatorio,requerido 13 caracteres.
                           </div>                     
@@ -131,7 +132,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO 1er NOMBRE-->
                         <label  class="control-label">Primer Nombre:</label> 
                         <div class="form-group">
-                          <input  id="pri_nombre" class="form-control" required pattern="[A-Z]{3,20}" type="text" maxlength="20" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);" onkeyup="mayus(this);" required>
+                          <input  id="pri_nombre" class="form-control" onkeyup="noespacio(this, event);mayus(this)" required pattern="[A-Z]{3,20}" type="text" maxlength="20" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);">
                           <div class="invalid-feedback">
                              Campo obligatorio.
                           </div>  
@@ -163,7 +164,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label  class="control-label">Fecha Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required=""  >
+                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required  >
                           <div class="invalid-feedback">
                             Campo obligatorio.
                           </div> 
@@ -239,18 +240,18 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                       <div class="col-md-4"><!--telefono-->
                       <label class="control-label">Telefono:</label> 
                         <div class="input-group">
-                          <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" required pattern="[1-9]{8,8}" title="Tamaño minimo de 8" maxlength="8" minlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);" >
+                          <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" required pattern="[0-9]{8,8}" title="Tamaño minimo de 8" maxlength="8" minlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);" >
                           <div class="invalid-feedback">
-                              campo obligatorio valor minimo 8 caracteres .
+                              Campo obligatorio valor minimo 8 caracteres .
                           </div>
                         </div>
                       </div>
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
                         <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="email" maxlength="50"  id="correo" name="correo" autocomplete = "off"  onKeyDown="sinespacio(this);"  required=""  >
+                          <input class="form-control" type="email" onkeyup="noespacio(this, event);" maxlength="50"  id="correo" name="correo" autocomplete = "off"  onKeyDown="sinespacio(this);"  required  >
                           <div class="invalid-feedback">
-                              campo obligatorio.
+                              Campo obligatorio.
                           </div>
                         </div>
                       </div>
@@ -261,7 +262,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         <div class="form-group">
                           <textarea  maxlength="500" minlength="4" required pattern="[A-Z,0-9]{4,500}" class="form-control" type="text" name="direccion"   id="direccion" onkeyup="mayus(this);"  ></textarea>
                           <div class="invalid-feedback">
-                              campo obligatorio.
+                              Campo obligatorio.
                           </div>
                         </div>
                       </div>
@@ -302,7 +303,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         <div class="col-md-4" ><!--INICIO NOMBRE USUARIO-->
                           <label  class="control-label">Nombre Usuario</label>
                           <div class="form-group">
-                              <input class="form-control"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text" 
+                              <input class="form-control" required pattern="[A-Z]{3,20}"  minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>" onKeyDown="sinespacio(this);" type="text" name="nombre_usuario" id="nombre_usuario" onkeypress="return soloLetras(event);" onkeyup="noespacio(this, event);mayus(this)" autocomplete = "off" type="text" 
                               onblur="quitarespacios(this);" placeholder="Nombre Usuario">
                           </div>
                           <div class="invalid-feedback">
@@ -312,14 +313,12 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         <div  class="col-sm-4 mb-2" >
                          <label  class="control-label">Contraseña</label>
                          <div class="input-group mb-3">
-                           <input class="form-control" minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" type="password" id="contrasena" name="contrasena" >
+                           <input class="form-control"  required pattern="[A-Z,1-9,a-z,@$!%*?&]{<?php echo $valor4;?>,<?php echo $valor3;?>}"; minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);" type="password" id="contrasena" name="contrasena" >
                              <div class="input-group-append">
                                <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                              </div>
-                            <div class="invalid-feedback">
-                              Debe teber minimo <?php echo $valor4; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
-                             </div> 
-                          </div>  
+                          </div> 
+                           <FONT SIZE=2>*Debe teber minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
                         </div>
                                                    
                        <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->
@@ -329,7 +328,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         ?>
                          <label class="control-label">Tipo Especialidad Psicologia:</label>
                          <div class="form-group">
-                            <select class="form-control select2" style="width: 100%;" name="psicologo" >
+                            <select class="form-control select2" required id="psico" style="width: 100%;" name="psicologo" >
                              <option selected disabled value="" >--Seleccionar tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -355,7 +354,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         ?>
                          <label class="control-label">Tipo Especialidad Medico:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="medico" >
+                            <select class="form-control select2" required id="medico"  style="width: 100%;" name="medico" >
                              <option selected disabled value="" >--Seleccionar tipo--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -369,6 +368,9 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                Elija una opción.
+                            </div>
                          </div>
                       </div>
                       <div  style ="display:none;" class="col-md-4" id="catequistas"><!--catequistas-->
@@ -378,7 +380,7 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                         ?>
                          <label class="control-label">Catequistas:</label>
                          <div class="form-group">
-                            <select class="form-control select2"   style="width: 100%;" name="catequista">
+                            <select  required id="cate" class="form-control select2"   style="width: 100%;" name="catequista">
                              <option selected enable value="" >--Seleccionar Catequesis--</option>
                               <?php 
                                 if ($resultadod->num_rows > 0) {
@@ -392,6 +394,9 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
                               }
                               ?>
                             </select>
+                            <div class="invalid-feedback">
+                                Elija una opción.
+                            </div>
                          </div>
                       </div>
                       </div> 
@@ -521,16 +526,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
   }        
   }
 </script>
- <script>
-   function MostrarTelefono(){
-    let x = document.getElementById('telefono2');
-    if(x.style.display === "none" ){
-      x.style.display = "block";
-    }else{
-      x.style.display = "none";
-    }
-   }
- </script>
+
 
  <script type="text/javascript">//para validar que solo ingrese un numero al inicio 8,93
     function telfono(evt,input){
@@ -549,6 +545,15 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
         return (preg.test(__val__) === true);
     }
 </script>
+<script language="javascript">
+  function noespacio(campo, event) {
+    CadenaaReemplazar = " ";
+    CadenaReemplazo = "";
+    CadenaTexto = campo.value;
+    CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+    campo.value = CadenaTextoNueva;
+  }
+</script>
 
 
 <script type="text/javascript">
@@ -561,30 +566,54 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
           document.getElementById('usuarios').style.display = "block";
+          document.getElementById('medico').required = false;
+          document.getElementById('cate').required = false;
+          document.getElementById('psico').required = false;
+          document.getElementById('contrasena').required = true; 
+          document.getElementById('nombre_usuario').required = true; 
         }else if ($(this).val() === "7"){ //es para un familiar
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('usuarios').style.display = "none";
           document.getElementById('familiares').style.display = "block";
+          document.getElementById('medico').required = false;
+          document.getElementById('cate').required = false;
+          document.getElementById('psico').required = false;
+          document.getElementById('contrasena').required = false; 
+          document.getElementById('nombre_usuario').required = false; 
         }else if($(this).val() ===  "5" ){//para medico
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
+          document.getElementById('cate').required = false;
+          document.getElementById('psico').required = false;
+          document.getElementById('medico').required = true;
+          document.getElementById('contrasena').required = true; 
+          document.getElementById('nombre_usuario').required = true;
         }else if($(this).val() ===  "6" ){// para psicologo
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
+          document.getElementById('medico').required = false;
+          document.getElementById('cate').required = false;
+          document.getElementById('contrasena').required = true; 
+          document.getElementById('nombre_usuario').required = true;
         }else if($(this).val() ===  "8"){//para catequista
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('familiares').style.display = "none";
           document.getElementById('catequistas').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
+          document.getElementById('psico').required = false;
+          document.getElementById('medico').required = false;
+          document.getElementById('cate').required = true;
+          document.getElementById('contrasena').required = true; 
+          document.getElementById('nombre_usuario').required = true;
         }
     });
   }); 
