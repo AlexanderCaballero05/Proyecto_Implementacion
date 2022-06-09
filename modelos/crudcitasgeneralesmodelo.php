@@ -45,9 +45,9 @@ if (isset($_POST['cod_edit_cita2'])){
              echo "<script>
                 window.location = 'crudcitasgenerales';
                  </script>";
-               $codigoObjeto=32;
-               $accion='Actualizacion';
-               $descripcion='Se vizualiza citas registradas';
+               $codigoObjeto=48;
+               $accion='AGREGAR';
+               $descripcion='SE AGREGO UNA NUEVA CITA';
                bitacora($codigoObjeto,$accion,$descripcion);
                
                }

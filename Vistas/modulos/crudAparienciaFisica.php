@@ -1,9 +1,40 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento modalidad
+Fecha:             01-jan-2016
+Programador:       
+descripcion:       Pantalla que contrala la modalidad de las tutorias 
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
+                                                    y descripción
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=19;
- $accion='Ingreso a mantenimiento examenes';
- $descripcion='mantenimiento examenes medicos';
+ $codigoObjeto=40;
+ $accion='INGRESO A MANTENIMIENTO APARIENCIA FISICA';
+ $descripcion='DAR MANTENIMIENTO A LOS REGISTROS DE APARIENCIA FISICA';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 
@@ -11,8 +42,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
 </head>
 <body oncopy="return false" onpaste="return false">
+
 <div class="content-wrapper">
   <div class="content-header">
+  <div class="text-center">
+      </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
@@ -21,7 +55,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO APARIENCIA FISICA</h4>
+            <h4>Mantenimiento Apariencia Física</h4>
         </h1>     
      </section>
       <div class="row">
@@ -77,8 +111,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead class="text-center">
                         <tr>
                         <th>Acción</th>
-                         <th>ID</th>
-                         <th>Tipo</th>         
+                         <th>Código</th>
+                         <th>Tipo de Apariencia</th>         
                         </tr>
                       </thead>
                       <tbody>
@@ -165,13 +199,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
-                                                    <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
                                                     
-                                                    
-
-    
-
-                        
                                         <!--INICIO DEL MODAL DE EDITA EXAMEN -->
                           
                         <!--INICIO DEL MODAL DE EDITAR -->
@@ -216,7 +245,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             
                          <!--INCICIO DEL MODAL ELIMINAR   -->
                          <div id="ELIMINAR<?php echo $var1 ?>"  
-                                                    name="eliminar_medicamento" id="eliminar_medicamento"class="modal fade" role="dialog">
+                                                    name="eliminar_apariencia" id="eliminar_apariencia"class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -225,14 +254,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         </div>
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_aparienciafisica" id="eliminar_aparienciafisica">
                                                             <h4 class="text-center">¿Esta seguro de eliminar la apariencia <?php echo $var2;?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
                                                             <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                             <button type="submit"  
-                                                            name="eliminar_medica" id="eliminar_medica"  class="btn btn-primary">Si,eliminar</button>      
+                                                            name="eliminar_apariencia" id="eliminar_apariencia"  class="btn btn-primary">Si,eliminar</button>      
                                                             </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                                     </form>
                                                     </div><!--fin del modal contener -->

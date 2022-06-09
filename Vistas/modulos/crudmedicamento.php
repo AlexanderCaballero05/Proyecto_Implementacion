@@ -1,11 +1,42 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento modalidad
+Fecha:             01-jan-2016
+Programador:       
+descripcion:       Pantalla que contrala la modalidad de las tutorias 
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
+                                                    y descripción
+----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
 
 
 $codigoObjeto = 35;
-$accion = 'Ingreso a la pantalla de mantenimiento de especialidad  ';
-$descripcion = 'Ver los registros de especialidad';
+$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO DE MEDICAMENTO  ';
+$descripcion = 'DAR MANTENIMIENTO A LOS MEDICAMENTOS REGISTRADOS';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
@@ -76,7 +107,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
   <section class="content">
   <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO MEDICAMENTOS</h4>
+            <h4>Mantenimiento Medicamentos</h4>
         </h1>     
     </section>
     <div class="container-fluid">
@@ -131,7 +162,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             <th>ID</th>
                                             <th>Nombre del Medicamento</th>
                                             <th>Descripción</th>
-                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -283,7 +313,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         </div>
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamentos" id="eliminar_medicamento">
                                                             <h4 class="text-center">¿Esta seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">

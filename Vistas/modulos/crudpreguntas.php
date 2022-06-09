@@ -40,8 +40,8 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
  include_once "conexion3.php";
  include "conexionpdo.php";
  $codigoObjeto=4;
- $accion='Ingreso a mantenimiento preguntas';
- $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
+ $accion='INGRESO A MANTENIMIENTO PREGUNTA';
+ $descripcion='MANTENIMIENTO AL REGISTRO DE PREGUNTAS';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <?php
@@ -77,7 +77,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO PREGUNTAS </h4>
+              <h4>Mantenimiento Preguntas </h4>
         </section>
   
   <section class="content">

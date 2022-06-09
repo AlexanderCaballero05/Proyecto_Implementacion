@@ -27,9 +27,9 @@ Programador               Fecha                      Descripcion
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto = 34;
- $accion='Ingreso crud tipo de sangre';
- $descripcion='Se visualiza los tipos de sangre';
+ $codigoObjeto = 37;
+ $accion='INGRESO A MANTENIMIENTO TIPO SANGRE';
+ $descripcion='MANTENIMIENTO AL REGISTRO DE TIPO DE SANGRE';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
@@ -44,7 +44,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO TIPO SANGRE </h4>
+              <h4>Mantenimiento Tipo de Sangre </h4>
         </section>
   
   <section class="content">

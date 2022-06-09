@@ -1,6 +1,39 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento modalidad
+Fecha:             01-jan-2016
+Programador:       Gissela Diaz 
+descripcion:       Pantalla que contrala la modalidad de las tutorias 
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+ $codigoObjeto= 62;
+ $accion='INGRESO A MANTENIMIENTO EXPEDIENTE PSICOLOGICO UNICO';
+ $descripcion='MANTENIMIENTO A LOS REGISTROS DE EXPEDIENTE';
+bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
 
@@ -14,7 +47,7 @@
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
     <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>EXPEDIENTE PSICOLOGICO UNICO </h4>
+              <h4> Mantenimiento Expediente Psicológico Único </h4>
         </section>
   </div>
   
@@ -84,7 +117,7 @@
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '1'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '62'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -108,7 +141,7 @@
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '1'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '62'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }

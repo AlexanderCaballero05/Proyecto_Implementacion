@@ -35,9 +35,9 @@
                    </script>";
                    exit;
                    include_once 'function_bitacora.php';
-                          $codigoObjeto=25;/// CAMBIAR 
-                         $accion='Registro';
-                         $descripcion= 'Se agrego un nuevo medicamento';
+                          $codigoObjeto=35;/// CAMBIAR 
+                         $accion='REGISTRO DE MEDICAMENTO';
+                         $descripcion= 'SE AGREGO UN NUEVO MEDICAMENTO';
                           bitacora($codigoObjeto, $accion,$descripcion);
                  } else {
                    echo "<script> 
@@ -63,7 +63,6 @@
   ///// editar medicamento ////
    if (isset( $_POST['cod_edit_med']) && isset($_POST['guardar_med'])){
     $codigo = $_POST['cod_edit_med'];
-    $edi_cod = $_POST['edit_cod_medi'];
     $medicamento = $_POST['edit_nom_medi'];
     $descripcion = $_POST['edit_desc_medi'];
     $fechaActual = date('Y-m-d');
@@ -76,18 +75,17 @@
        
       
         try {
-            $sql = "UPDATE tbl_medicamento tm set tm.CODIGO_MEDICAMENTO  = '$edi_cod' ,tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
+            $sql = "UPDATE tbl_medicamento tm set tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
             tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
-              alert('¡Medicamento modificado exitosamente!');
               window.location = 'crudmedicamento';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=25; // cambiar 
-              $accion='Modificacion';
-              $descripcion= 'Se edito un medicamento';
+              $codigoObjeto=35; // cambiar 
+              $accion='MODIFICACION';
+              $descripcion= 'SE EDITO UN MEDICAMENTO';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -107,34 +105,51 @@
                     } 
    }///fin if 
 
-  //// eliminar medicamento  /////
-  if (isset($_POST['eliminar_medica']) && isset($_POST['eliminar_medicamento'])){
-    $codigo =($_POST['eliminar_medicamento']);
-        try {
+   //// eliminar medicamento  /////
+   if(isset($_POST['eliminar_medicamentos'])){
+    if(isset($_POST['eliminar_medica'])){
+      $codigo = ($_POST['eliminar_medicamentos']);//asigna a una variable el id de la pregunta a  eliminar
+      try{
+          $relacion_tablas =  $db->prepare("SELECT rm.CODIGO_RECETA_MEDICA, rm.CODIGO_MEDICAMENTO from  tbl_receta_medica rm, tbl_medicamento m
+          where m.CODIGO_MEDICAMENTO  = rm.CODIGO_MEDICAMENTO and m.CODIGO_MEDICAMENTO = (?);");
+        $relacion_tablas->execute(array($codigo));
+        $row = $relacion_tablas->fetchColumn();
+        if($row >0){
+          echo "<script>
+          alert('¡No se puede eliminar esta, relacionado con otras tablas!');
+          window.location = 'crudmedicamento';
+          </script>";
+          exit;
+        }else{
+          try{
             $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-            mysqli_query($link, "DELETE FROM tbl_medicamento WHERE CODIGO_MEDICAMENTO  = '$codigo' ");
+            mysqli_query($link, "DELETE FROM tbl_medicamento WHERE  CODIGO_MEDICAMENTO = '$codigo' ");
             if(mysqli_affected_rows($link)>0){
               echo "<script>
-            alert('Medicamento eliminada!');
-            window.location = 'crudmedicamento';
-            </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=25; //cmabiar 
-            $accion='Eliminación';
-            $descripcion= 'Se elimino un medicamento  ';
-            bitacora($codigoObjeto, $accion,$descripcion);
-            exit;
-        }else{
-            echo "<script>
-            alert('¡Error al eliminar el medicamento tiene relacion con otras tablas !');
-            window.location = 'crudmedicamento';
-            </script>";
-            exit;
-          } 
+              window.location = 'crudmedicamento';
+              </script>";
+              include_once 'function_bitacora.php';
+              $codigoObjeto=35;
+              $accion='ELIMINACION';
+              $descripcion= 'SE ELIMINO UN MEDICAMENTO ';
+              bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
+            }else{
+              echo "<script>
+              alert('¡Error al eliminar el medicamento!');
+              window.location = 'crudmedicamento';
+              </script>";
+              exit;
+            }
           }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        } 
-   
-  } // fin if 
+          echo $e->getMessage(); 
+          return false;
+         }
+        }
+      }catch(PDOException $e){
+       echo $e->getMessage(); 
+       return false;
+      }
+    }
+  }//Cerre del if padre
 ?>

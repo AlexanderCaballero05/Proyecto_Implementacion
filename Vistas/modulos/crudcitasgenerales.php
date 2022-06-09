@@ -1,13 +1,41 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento modalidad
+Fecha:             01-jan-2016
+Programador:       Gissela Diaz Y ANY HERNANDEZ
+descripcion:       Pantalla que contrala la modalidad de las tutorias 
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+----------------------------------------------------------------------->
 <?php
 session_start();
 include_once "conexion.php";
 include_once "conexion3.php";
 
 include "conexionpdo.php";
-$codigoObjeto = 32;///CAMBIAR 
-
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
+$codigoObjeto = 48;///CAMBIAR 
+$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO DE CITAS GENERALES ';
+$descripcion = 'MANTENIMIENTO REGISTRO DE CITAS GENERALES';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <?php
@@ -47,7 +75,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>CITAS GENERALES PROSECAR </h4>
+              <h4>Citas Generales Prosecar </h4>
     </div>
     <section class="content">
        <div class="card"> 
