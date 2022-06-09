@@ -1,7 +1,7 @@
+<div class="col-12">
+<div class="content-wrapper">
 
-?><div class="content-wrapper">
-
-<section class="content-header">
+<section class="content-header text-center">
   <h1>
 	Respaldo y Restauración de Base de Datos
 
@@ -9,9 +9,7 @@
 
   <ol class="breadcrumb">
 
-  <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 	
-	<li class="active">Respaldo y Restauración de Base de Datos</li>
 
   </ol>
 
@@ -36,7 +34,7 @@
 	en bases de datos. Y para minimizar el riego de pérdida de datos,
 	usted necesita asegurarse de que respalda sus bases de datos regularmente
 	tomando en consideración los cambios aplicados a sus datos.</p>
-	<br>
+	
 	  <!-- <a href="./vistas/modulos/Backup.php">Realizar copia de seguridad</a> -->
 	  <form action="./vistas/modulos/Backup.php" method="POST"> 
                     <?php
@@ -70,14 +68,15 @@
                 }
             
                 ?> 
-    </form> 
+                
+    </form>
     <br> 
 	<div class="box-header bg-black text-center">
 
     	<h2 class="box-title">Restauración</h1>
     </div>
-	<br>
 	<form action="./vistas/modulos/Restore.php" method="POST">
+    <br>
 
 		<p>Cuando se está recuperando de una falla de base de datos,
 		un administrador necesita restaurar un conjunto 
@@ -85,12 +84,10 @@
 		Con esto en mente, el objetivo es tener un punto de recuperación ante
 		desastres, creando un plan de copias de seguridad, así como un plan 
 		apropiado de restauración de bases de datos.</p>
-	<br>
 	
 
 	<label>Selecciona un Punto de Restauración:</label>
 	
-	<br>
 	
 		<select name="restorePoint" required>
 			<option value="">Selecciona un Punto de Restauración</option>
@@ -158,4 +155,5 @@
 </div>
 </div>
 </section>
+</div>
 </div>

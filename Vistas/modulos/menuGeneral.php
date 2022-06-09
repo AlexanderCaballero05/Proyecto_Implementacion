@@ -4,7 +4,7 @@
  ?>
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral position-fixed">
 
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
@@ -13,7 +13,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar position-fixed">
 
         <!-- parte de la foto de perfil y nombre de usuario :3-->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -61,7 +61,7 @@
             <a href="index" class="nav-link active">
                <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Menu general
+                Menú General
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -95,7 +95,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  Gestion Usuarios
+                  Gestión Usuarios
                   <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right"></span>
                 </p>
@@ -104,14 +104,14 @@
                 <li class="nav-item">
                   <a href="crudpersonas" class="nav-link" >
                    <i class="far fa-user nav-icon"></i>
-                    <p>Proceso Personas/Usuarios</p>
+                    <p>Proceso Personas/ Usuarios</p>
                   </a>
                 </li>
 
                 <li class="nav-item">
                   <a href="crudparametrosusuario" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                      <p>Mantenimiento de Parametros usuarios</p>
+                      <p>Mantenimiento de Parámetros Usuarios</p>
                   </a>
               </li>
               <li class="nav-item">
@@ -161,7 +161,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-graduation-cap"></i>
                 <p>
-                  Gestion de Estudiantes
+                  Gestión de Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -169,7 +169,7 @@
                 <li class="nav-item">
                   <a href="crudEstudiante"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Proceso de estudiantes</p>
+                    <p>Proceso de Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -181,19 +181,19 @@
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Tipo de contenido</p>
+                    <p>Mantenimiento Tipo de Contenido</p>
                   </a>
                 </li> 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Tipo socieconomico</p>
+                    <p>Mantenimiento Tipo Socieconómico</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de parentesco</p>
+                    <p>Mantenimiento de Parentesco</p>
                   </a>
                 </li>
               </ul>
@@ -232,7 +232,7 @@
                           <a href="" class="nav-link bg-gradient-navy">
                             <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
-                              Gestion de Citas 
+                              Gestión de Citas 
                               <i class="right fas fa-angle-left"></i>
                             </p>
                           </a>
@@ -301,7 +301,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas  fa-copy"></i>
                 <p>
-                  Gestion de Estudiantes
+                  Gestión de Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -315,7 +315,7 @@
                 <li class="nav-item">
                   <a href="matriculaestudiantes" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Tutorias</p>
+                    <p>Tutorías</p>
                   </a>
                 </li>
               </ul>
@@ -354,7 +354,7 @@
             <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-edit"></i>
               <p>
-                Carga Academica
+                Carga Académica
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -364,13 +364,13 @@
             <li class="nav-item">
                 <a href="crudCargaAcademica" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                  <p>Proceso carga academica</p>
+                  <p>Proceso Carga Académica</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento tutorias</p>
+                  <p>Mantenimiento Tutorías</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -382,7 +382,7 @@
               <li class="nav-item">
                 <a href="crudmodalidad" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento modalidad</p>
+                  <p>Mantenimiento Modalidad</p>
                 </a>
               </li>
               
@@ -429,14 +429,14 @@
             <i class=" nav-icon fas fa-school"></i>
             <p>
               Matricula
-              <i class="fas fa-angle-left "></i>
+              <i class="fas fa-angle-left right "></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
               <li class="nav-item">
               <a href="crudMatricula" class="nav-link">
                  <i class="far fa-edit nav-icon"></i>
-                  <p>Proceso de matricula</p>
+                  <p>Proceso de Matricula</p>
                 </a>
               </li>
             </ul>
@@ -475,7 +475,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class="nav-icon fas fa-briefcase "></i>
                           <p>
-                            Area Academica
+                            Área Académica
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -484,7 +484,7 @@
                           <li class="nav-item">
                             <a href="crudTutoriasTutor" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias academicas</p>
+                              <p>Proceso Tutorías Académicas</p>
                             </a>
                           </li>         
                         </ul>
@@ -525,7 +525,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class=" nav-icon fas fa-briefcase"></i>
                           <p>
-                            Area Espiritual
+                            Área Espiritual
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -534,14 +534,14 @@
                           <li class="nav-item">
                             <a href="crudTutorEspiritual" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias espirituales</p>
+                              <p>Proceso Tutorías Espirituales</p>
                             </a>
                           </li>      
                           
                           <li class="nav-item">
                             <a href="procesoCitasEspirituales" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso eventos espirituales</p>
+                              <p>Proceso Eventos Espirituales</p>
                             </a>
                           </li>      
                         </ul>
@@ -589,7 +589,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
             <p>
-              Area Medica
+              Área Medica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -597,7 +597,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclinica</p>
+                <p>Proceso de Preclínica</p>
              </a>
            </li>
           </ul>
@@ -638,7 +638,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
             <p>
-              Area Medica
+              Área Medica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -670,7 +670,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclinica</p>
+                <p>Proceso de PreclÍnica</p>
              </a>
            </li>
 
@@ -681,13 +681,13 @@
            <li class="nav-item">
              <a href="ProcesoCitasMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso consultas</p>
+                <p>Proceso Consultas</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="crudPacientesMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Lista de pacientes Medicos</p>
+                <p>Lista de Pacientes Médicos</p>
              </a>
            </li>
             
@@ -698,21 +698,21 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-briefcase-medical"></i>
             <p>
-              Mantenimiento medico
-              <i class="nav-icon "></i>
+              Mantenimiento Medico
+              <i class="fas fa-angle-left right "></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento alergias</p>
+                <p>Mantenimiento Alergias</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudtiposangre" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento tipo sangre</p>
+                <p>Mantenimiento Tipo Sangre</p>
               </a>
             </li>
             <li class="nav-item">
@@ -726,13 +726,13 @@
             <li class="nav-item">
               <a href="crudExamenesMedicos" class="nav-link">
                <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Examenes</p>
+                <p>Mantenimiento Exámenes</p>
               </a>
             </li>
               <li>
               <a href="crudTranstornos" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento transtornos</p>
+                <p>Mantenimiento Trastornos</p>
               </a>
             </li>
 
@@ -740,7 +740,7 @@
             <li class="nav-item">
               <a href="crudAparienciaFisica" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento apariencias fisicas</p>
+                <p>Mantenimiento Apariencias Físicas</p>
               </a>
             </li>
           </ul>
@@ -784,7 +784,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase"></i>
             <p>
-              Area Psicologica
+              Área Psicológica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -793,21 +793,21 @@
             <li class="nav-item">
               <a href="ProcesoCitasPsicologicas" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de consultas</p>
+                <p>Proceso de Consultas</p>
               </a>
             </li>
                     
             <li class="nav-item">
               <a href="crudExpedientePsicoUnico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Lista de pacientes </p>
+                <p>Lista de Pacientes </p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="crudsintomasneuroticos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento sintomas</p>
+                <p>Mantenimiento Síntomas</p>
               </a>
             </li> 
           </ul>
@@ -880,7 +880,7 @@
               <li class="nav-item">
                 <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                 <i class="nav-icon fas fa-table"></i>
-                   <p>Mantenimiento de Parametros</p>
+                   <p>Mantenimiento de Parámetros</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -895,7 +895,7 @@
               <li class="nav-item">
               <a href="area" class="nav-link" > 
               <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Areas</p>
+                  <p>Mantenimiento de Áreas</p>
               </a>
               </li>
             </ul>
@@ -932,7 +932,7 @@
                       <a href="Formbitacora" class="nav-link bg-gradient-navy">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
-                          Bitacora del sistema
+                          Bitácora del Sistema
                           <i class="fas fa-angle-left right"></i>
                         </p>
                       </a>

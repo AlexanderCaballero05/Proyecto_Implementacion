@@ -20,7 +20,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3">
-         <h3>Registrar roles</h3>   
+         <h3>Registrar Roles</h3>   
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -62,7 +62,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Descripción</th>
                         </tr>
