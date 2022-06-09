@@ -19,7 +19,7 @@
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de la tutoria  $nombre_tutoria ya se encuentra registrado');
+                    alert('El nombre de la tutoría  $nombre_tutoria ya se encuentra registrada');
                     window.location = 'crudTutorias';
                     </script>";
                   exit;
@@ -31,12 +31,12 @@
                         echo "<script> 
                         window.location = 'crudTutorias';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
                         $codigoObjeto=22;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego una nueva tutoria ';
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA TUTORÍA';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
                         alert('Error auxilio,ok no!');
@@ -93,12 +93,13 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=22;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una tutoria ';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA TUTORÍA';
               bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar la tutoria!');
+              alert('¡Error al  intentar modificar la tutoría!');
               window.location = 'crudTutorias';
               </script>";
             }
@@ -139,8 +140,8 @@ if(isset($_POST['tutoria_eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=22;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una Tutoria ';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA TUTORÍA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

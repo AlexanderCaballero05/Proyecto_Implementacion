@@ -1,11 +1,33 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR Diana Rut
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla de mantenimiento de sacramentos
+Fecha:             01-jan-2016
+Programador:       Diana Rut Garcia
+descripcion:       Mantenimiento de sacramentos,agrega edita elimina
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               09/06/2022            Se modifico los mensajes de bitacora,con correciones pequeñas de escritura
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=2;
- $accion='Ingreso a la tabla de sacramentos';
- $descripcion= 'Usuario se autentifico ';
+ $codigoObjeto=45;
+ $accion='INGRESO AL MANTENIMIENTO SACRAMENTOS';
+ $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
@@ -19,7 +41,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3 ">
-            <h4>MANTENIMIENTO DE SACRAMENTOS</h4>    
+            <h4>Mantenimiento Sacramentos</h4>    
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -60,8 +82,8 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo</th>
-                          <th class="text-center">Nombre</th>
+                          <th class="text-center">Nombre Sacramento</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
@@ -140,24 +162,24 @@
                           <div id="EDITARSACRAMENTO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Sacramentos</h4>
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar Sacramento</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                 </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_sacramento" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeyup="mayus(this);"  maxlength="40" minlength="10"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <label for="txtcodigo_persona">Nombre Sacramento</label>
+                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeyup="mayus(this);"  maxlength="40" minlength="10"   required autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="200"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="200"     autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -182,7 +204,7 @@
                                 <form  method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="sacramento_eliminar" >
-                                    <h4 class="text-center">¿Esta seguro de eliminar el sacramento<?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el sacramento<?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -221,10 +243,10 @@
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
+                                    <label for="txtcodigo_persona">Nombre Sacramento</label>
                                     <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="10"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al sacramento" name="nombre_sacramento"required="">
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -233,7 +255,7 @@
                                     <label for="txtcodigo_persona">Descripción</label>
                                     <textarea  type="text"   class="form-control"  maxlength="200"    autocomplete = "off" type="text"  placeholder="Ingrese una descripción del sacramento" name="descripcion_sacramento" id="descripcion_sacramento" required=""></textarea>
                                     <div class="invalid-feedback">
-                                      campo obligatorio.
+                                      Campo obligatorio.
                                    </div>
                                 </div>
                             </div>

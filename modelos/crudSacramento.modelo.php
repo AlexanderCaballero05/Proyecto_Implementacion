@@ -1,4 +1,25 @@
-
+<!-- ---------------------------------------------------------------------
+ELABORADO POR Diana Rut
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Codigo de mantenimiento de sacramentos
+Fecha:             01-jan-2016
+Programador:       Diana Rut Garcia
+descripcion:       Codigo del manteniento de sacramentos,edita ,elimina y agrega
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Diana Rut               09/06/2022            Se modifico los mensajes de bitacora
+----------------------------------------------------------------------->
  <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -29,12 +50,12 @@
                         echo "<script> 
                         window.location = 'crudSacramentos';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=2;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nuevo sacramento ';
+                        $codigoObjeto=45;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UN SACRAMENTO';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
@@ -85,9 +106,9 @@
               window.location = "crudSacramentos";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un sacramento ';
+              $codigoObjeto=45;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UN SACRAMENTO';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -133,9 +154,9 @@ if(isset($_POST['sacramento_eliminar'])){
             window.location = 'crudSacramentos';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino un sacramento ';
+            $codigoObjeto=45;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UN SACRAMENTO';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

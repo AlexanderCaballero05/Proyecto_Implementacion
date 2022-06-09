@@ -20,7 +20,7 @@
                   $row=$consulta_estado->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El area $nombre_area ya se encuentra registrado');
+                    alert('El área $nombre_area ya se encuentra registrada');
                     window.location = 'area';
                     </script>";
                   exit;
@@ -32,6 +32,11 @@
                         echo "<script> 
                         window.location = 'area';
                         </script>";
+                        include_once 'function_bitacora.php';
+                        $codigoObjeto=21;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE AGREGO UNA ÁREA';
+                        bitacora($codigoObjeto, $accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
@@ -76,7 +81,7 @@
        $fechaActual = date('Y-m-d'); 
         if($row>0){
           echo "<script>
-          alert('Ya existe una area con este mismo nombre: $editar_nombre');
+          alert('Ya existe una área con este mismo nombre: $editar_nombre');
           window.location = 'area';
           </script>";
           exit;
@@ -96,9 +101,9 @@
               window.location = 'area';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito la area ';
+              $codigoObjeto=21;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA ÁREA';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
@@ -130,9 +135,9 @@ if(isset($_POST['area_eli'])){
         window.location = 'area';
         </script>";
          //<!--llamada de la fuction bitacora -->
-         $codigoObjeto=9;
-         $accion='Eliminar Area';
-         $descripcion= 'Se eliminó el area';
+         $codigoObjeto=21;
+         $accion='ELIMINACIÓN';
+         $descripcion= 'SE ELIMINO UNA ÁREA';
          bitacora($codigoObjeto, $accion,$descripcion);
         exit;
       }else{
@@ -140,11 +145,7 @@ if(isset($_POST['area_eli'])){
         alert('¡Error al eliminar la area!');
         window.location = 'area';
         </script>";
-         //<!--llamada de la fuction bitacora -->
-         $codigoObjeto=9;
-         $accion='No eliminar area';
-         $descripcion= 'Intento de invalido de eliminar area';
-         bitacora($codigoObjeto, $accion,$descripcion); 
+         //<!--llamada de la fuction bitacora --> 
         exit;
       }
     }catch(PDOException $e){

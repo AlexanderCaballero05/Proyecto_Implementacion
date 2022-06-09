@@ -1,3 +1,32 @@
+<!-- -----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Pantalla de codigo que registra elimina y editar usuarios
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia
+    descripcion:       Edita,elimina y registra un usuario
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador           Fecha                      Descripcion
+Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
+----------------------------------------------------------------------->
 <?php
  session_start();
   include_once 'conexion3.php';
@@ -92,9 +121,9 @@
                                   echo "<script> 
                                     location.href = 'crudpersonas';
                                     </script>";
-                                    $codigoObjeto=1;
-                                    $accion='Registro';
-                                    $descripcion= 'Se registro un Usuario ';
+                                    $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN ADMINISTRADOR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                   }else{
@@ -130,7 +159,11 @@
                                   echo "<script> 
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  exit;
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN TUTOR';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar al tutor');
@@ -168,10 +201,14 @@
                                   exit;
                                 }else{
                                   echo "<script> 
-                                  alert('No se puede registrar al tutor');
+                                  alert('No se puede registrar el enfermero');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  exit;
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN ENFERMERO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }
                               }
                             }catch(PDOException $e){
@@ -197,7 +234,11 @@
                                   echo "<script> 
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  exit;
+                                    $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN ESTUDIANTE';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el estudiante');
@@ -234,7 +275,11 @@
                                   echo "<script> 
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  exit;
+                                    $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN MEDICO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el medico');
@@ -270,7 +315,11 @@
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
                                   location.href = 'crudpersonas';</script>";
-                                  exit;
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN PSICOLOGO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el medico');location.href = 'categoria'</script>";
@@ -303,7 +352,11 @@
                                   echo "<script> 
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  exit;
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UN CATEQUISTA';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el medico');location.href = 'categoria';</script>";
@@ -330,7 +383,11 @@
                                 echo "<script> 
                                 location.href = 'crudpersonas';
                                 </script>";
-                                exit;
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO UNA PERSONA';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                               }else{
                                 echo "<script> 
                                 alert('No se pudo registrar la persona,comunicarse con el admin');
@@ -409,6 +466,12 @@
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> window.location = 'ediusuarios'; </script>";
+                    $codigoObjeto=14;
+                    $accion='MODIFICACIÓN';
+                    $descripcion= 'SE MODIFICO UN USUARIO';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    exit;
+
                   }else{ //Si las contraseñas son diferentes ,no permitira que se registre
                     if($connueva<>$confconn){
                       echo "<script>
@@ -420,6 +483,11 @@
                         $consulta=$conn->query($sql);
                         if (($consulta)>0) {
                           echo "<script> alert('Cambio exitosamente');window.location = 'ediusuarios';</script>";
+                          $codigoObjeto=14;
+                          $accion='MODIFICACIÓN';
+                          $descripcion= 'SE MODIFICO UNA CONTRASEÑA';
+                          bitacora($codigoObjeto, $accion,$descripcion);
+                          exit;
                         }
                       }else{
                         echo "<script>

@@ -31,9 +31,9 @@
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=2;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego una nueva alergia ';
+                        $codigoObjeto=39;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA ALERGIA';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
@@ -91,9 +91,9 @@
               window.location = "crudAlergias";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una alergia ';
+              $codigoObjeto=39;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA ALERGIA';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -138,9 +138,9 @@ if(isset($_POST['alergia_eliminar'])){
             window.location = 'crudAlergias';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una alergia';
+            $codigoObjeto=39;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA ALERGIA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
