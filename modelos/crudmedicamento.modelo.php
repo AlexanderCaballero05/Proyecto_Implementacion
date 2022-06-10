@@ -33,12 +33,12 @@
                    echo "<script> 
                    window.location = 'crudmedicamento';
                    </script>";
-                   exit;
                    include_once 'function_bitacora.php';
-                          $codigoObjeto=35;/// CAMBIAR 
-                         $accion='REGISTRO DE MEDICAMENTO';
-                         $descripcion= 'SE AGREGO UN NUEVO MEDICAMENTO';
-                          bitacora($codigoObjeto, $accion,$descripcion);
+                    $codigoObjeto=35; // cambiar 
+                    $accion='INSERCIÓN';
+                    $descripcion= 'SEREGISTRÓ UN MEDICAMENTO';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    exit;
                  } else {
                    echo "<script> 
                          alert('Error!');
@@ -84,8 +84,8 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=35; // cambiar 
-              $accion='MODIFICACION';
-              $descripcion= 'SE EDITO UN MEDICAMENTO';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICÓ UN MEDICAMENTO';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -130,8 +130,8 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=35;
-              $accion='ELIMINACION';
-              $descripcion= 'SE ELIMINO UN MEDICAMENTO ';
+              $accion='ELIMINACIÓN';
+              $descripcion= 'SE ELIMINÓ UN MEDICAMENTO ';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{

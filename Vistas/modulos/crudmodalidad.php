@@ -224,7 +224,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"   onkeypress="return soloLetras(event);" 
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
                                            autocomplete = "off" type="text"   name="editar_descripcion1" id="edidemoda" required="">
                                           <div class="invalid-feedback">
                                   campo obligatorio.
@@ -304,7 +304,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                    <textarea  type="text"   class="form-control"  maxlength="100"  onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
                                      placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id= "modali" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
