@@ -4,8 +4,8 @@ include_once "conexion3.php";
 
 
 $codigoObjeto = 17;
-$accion = 'Ingreso a la pantalla de mantenimiento de tipo socioeconomico ';
-$descripcion = 'Ver los registros de los tipo socioeconomico';
+$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO TIPO SOCIOECONÓMICO';
+$descripcion = 'SE AUTENTIFICO';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
@@ -16,36 +16,37 @@ bitacora($codigoObjeto, $accion, $descripcion);
 </head>
 <!--INICIO DEL MODAL DE Agregar -->
 
-<div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<div class="modal fade" id="ADDOBJETO"  role="dialog" >
+    <div class="modal-dialog modal-md">
     <body oncopy="return false" onpaste="return false" >
         <div class="modal-content">
-            <!-- Modal content-->
-            <form method="POST">
-
-                <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">
-                     Agregar tipo socioeconomico</h4>
-
-                </div>
+          <div class="modal-header" style="background-color: #0CCDE3">
+             <h4 class="text-center">Agregar Tipo Socioeconómico</h4>
+             <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <form method="POST" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <!--CUERPO DEL MODAL -->
                     <div class="row">
                         <!-- INICIO PRIMERA ROW -->
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Tipo Socio Economico</label>
-                                <input type="text" class="form-control"  autocomplete = "off"maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                <label>Nombre tipo Socioeconómico</label>
+                                <input type="text" required class="form-control"  autocomplete = "off"maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text"  onkeypress="return soloLetras(event);"
                                  name="guardar_tipo" id="guardar_tipo">
+                                <div class="invalid-feedback">
+                                    Campo obligatorio.
+                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Descripción</label>
-                                <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="guardar_descripcion"autocomplete = "off" id="guardar_descripcion">
+                                <label>Descripción</label>
+                                <textarea type="text" required class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                 name="guardar_descripcion"autocomplete = "off" id="guardar_descripcion"></textarea>
+                                <div class="invalid-feedback">
+                                    Campo obligatorio.
+                               </div>
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -69,10 +70,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO TIPO SOCIOECONOMICO</h4>
+    <div class="content-header text-xl-center mb-3">
+      <h4>Mantenimiento Tipo Socioeconómico </h4>
     </div>
-
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -126,7 +126,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         <tr>
                                             <th class="text-center">Acción</th>
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">Tipo de Socio Economico</th>
+                                            <th class="text-center"> Nombre Tipo Socioeconómico</th>
                                             <th class="text-center">Descripción</th>
                             
                                         </tr>
@@ -216,35 +216,33 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                     <!--INICIO DEL MODAL DE EDITAR -->
                                                     <div id="editar_tipo<?php echo $var1; ?>" class="modal fade" role="dialog">
-                                                        <div class="modal-dialog modal-lg">
+                                                        <div class="modal-dialog modal-md">
                                                             <div class="modal-content">
-                                                                <!-- Modal content-->
+                                                               <div class="modal-header" style="background-color: #0CCDE3">
+                                                                  <h4 class="text-center">Editar Tipo Socioeconómico</h4>
+                                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
                                                                 <form method="POST">
-                                                                    <div class="modal-header" style="background-color: #0CCDE3">
-                                                                        <h4 class="text-center">Editar Tipo Socio Economico
-                                                                        </h4>
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                    </div>
                                                                     <div class="modal-body">
                                                                         <!--CUERPO DEL MODAL -->
                                                                         <div class="row">
                                                                             <!-- INICIO PRIMERA ROW -->
                                                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
                                                                                  name="cod_edit_tipo" id="cod_edit_tipo" >
-                                                                            <div class="col-sm-6">
+                                                                            <div class="col-sm-12">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
-                                                                                    Tipo Socio Economico</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" autocomplete = "off" class="form-control" maxlength="50" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
+                                                                                     Nombre Tipo Socioeconómico </label>
+                                                                                    <input type="text" value="<?php echo $var3; ?>" required autocomplete = "off" class="form-control" maxlength="50" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                                                     name="edit_tipo_socio" id="edit_tipo_socio">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-sm-6">
+                                                                            <div class="col-sm-12">
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripción</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?>" autocomplete = "off"class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" 
-                                                                                     name="edit_descripcion" id="edit_descripcion">
+                                                                                    <textarea type="text" required autocomplete = "off"class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" 
+                                                                                     name="edit_descripcion" id="edit_descripcion"><?php echo $var4; ?></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -299,35 +297,37 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                     </div><!-- fINAL DEL card PRIMARY -->
                 </div>
-
-
                 <!--FINAL DE COL-M12-->
             </div><!-- FINAL ROW PADRE -->
         </div><!-- FINAL CONTAINER FLUID -->
-    </section><!-- FINAL SECTION -->
+    </section>
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-
-
-
-
-
-
-</div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-</div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-</div><!-- ./wrapper -->
-
+ <script>
+    function Descargar() {
+      window.open('Reportes_Prosecar/reportetiposocioeconomico.php','_blank');
+      window.open(this.href,'_self');
+    }
+ </script>
+  <script>
+    $(document).ready(function() {
+        $('.hb').select2();
+    });
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
+</script>
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
@@ -356,148 +356,4 @@ bitacora($codigoObjeto, $accion, $descripcion);
       })
   } );
 </script>
-
-
-
-
-
-
-
-
-
-
-
-<script type="text/javascript">
-    $(function() {
-        $("#ESTADOUSUARIO").change(function() {
-            if ($(this).val() === "4") {
-                document.getElementById('CONUSUARIO').disable = true;
-
-            } else {
-                document.getElementById('CONUSUARIO').disable = false;
-
-            }
-        });
-    }); //este codigo si me costo 
-</script>
-
-
-
-<script type="text/javascript">
-    //funcion de mostrar el estilo de la datatable
-    $(function() {
-        $("#cbx_persona").change(function() {
-            if ($(this).val() === "2") {
-                document.getElementById("c").style.display = "block";
-            } else {
-                document.getElementById("c").style.display = "none";
-            }
-        });
-    });
-</script>
-
-
-<!-- funciones del sistema -->
-<script>
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = ["8-37-39-46"];
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-            return false;
-        }
-    }
-    //funcion para solu numeros ingresar en el campo
-    function soloNumeros_tel(e) {
-        var teclaPulsada = window.event ? window.event.keyCode : e.which;
-        // capturamos el contenido del input
-        var valor = document.getElementById("tele").value;
-        if (valor.length < 9) {
-            if (teclaPulsada == 9) {
-                return true;
-            }
-            // devolvemos true o false dependiendo de si es numerico o no
-            return /\d/.test(String.fromCharCode(teclaPulsada));
-        } else {
-            return false;
-        }
-    }
-    //funcion para quitar espacios
-    function quitarespacios(e) {
-        var cadena = e.value;
-        cadena = cadena.trim();
-        e.value = cadena;
-    };
-    //funcion para poner mayusculas
-    function mayus(e) {
-        e.value = e.value.toUpperCase();
-    }
-    //funcion sin espacios 
-    function sinespacio(e) {
-        var cadena = e.value;
-        var limpia = "";
-        var parts = cadena.split(" ");
-        var length = parts.length;
-        for (var i = 0; i < length; i++) {
-            nuevacadena = parts[i];
-            subcadena = nuevacadena.trim();
-            if (subcadena != "") {
-                limpia += subcadena + " ";
-            }
-        }
-        limpia = limpia.trim();
-        e.value = limpia;
-    };
-    //otra funcion para quitar espacios :V
-    function quitarespacios(e) {
-        var cadena = e.value;
-        cadena = cadena.trim();
-        e.value = cadena;
-    };
-
-    var guardar_tipo=document.getElementById("guardar_tipo"); //el nombre del id del campo y cambiar la variable 
-    guardar_tipo.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-
-    var guardar_descripcion=document.getElementById("guardar_descripcion"); //el nombre del id del campo y cambiar la variable 
-    guardar_descripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-    var edit_tipo_socio=document.getElementById("edit_tipo_socio"); //el nombre del id del campo y cambiar la variable 
-    edit_tipo_socio.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-
-    var edit_descripcion=document.getElementById("edit_descripcion"); //el nombre del id del campo y cambiar la variable 
-    edit_descripcion.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-  
-    function Descargar() {
-      window.open('Reportes_Prosecar/reportetiposocioeconomico.php','_blank');
-      window.open(this.href,'_self');
-    }
-</script>
-
-<!--♠DianaRut *No me quiten los creditos modificado por any :( --> 
+<!--*No me quiten los creditos modificado por any :( --> 

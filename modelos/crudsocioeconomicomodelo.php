@@ -13,12 +13,12 @@
      $usuario =$_SESSION['vario'];
      
      try {
-        $consulta_objeto = $db->prepare("SELECT tts.TIPO  from tbl_tipo_socioeconomico tts  where tts.TIPO  = (?);");
+        $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_tipo_socioeconomico  where TIPO  = (?);");
         $consulta_objeto->execute(array($tipo));
         $row=$consulta_objeto->fetchColumn();
         if($row>0){
             echo "<script>
-            alert('El nombre del tipo socio economico $tipo ya se encuentra registrado');
+            alert('El nombre del tipo Socioeconómico  $tipo ya se encuentra registrado');
             window.location = 'crudtiposocioeconomico';
             </script>";
           exit;
@@ -31,39 +31,36 @@
                 $resul=$conn->query($query_objeto);
                 if ($resul >0){
                     echo "<script> 
-                    alert('Tipo Socio Economico registrado correctamente');
+                    alert('Tipo Socioeconómico registrado correctamente');
+                    window.location = 'crudtiposocioeconomico';
+                    </script>";
+                    include_once 'function_bitacora.php';
+                    $codigoObjeto=17;
+                    $accion='INSERCIÓN';
+                    $descripcion= 'SE REGISTRO UN TIPO SOCIOECONÓMICO';
+                    bitacora($codigoObjeto, $accion,$descripcion);
+                    exit;
+                  }else{
+                    echo "<script> 
+                    alert('Ocurrio algun error');
                     window.location = 'crudtiposocioeconomico';
                     </script>";
                     exit;
-                    include_once 'function_bitacora.php';
-                           $codigoObjeto=17;
-                          $accion='Registro';
-                          $descripcion= 'Se agrego un nuevo Tipo socio Economico ';
-                           bitacora($codigoObjeto, $accion,$descripcion);
-                  } else {
-                    echo "<script> 
-                          alert('Error !');
-                          window.location = 'crudtiposocioeconomico';
-                          </script>";
-                          exit;
                   }
-
             }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        }
-
-        }// fin else padre  
-
+             echo $e->getMessage(); 
+             return false;
+            }
+        }// fin else  
      }catch(PDOException $e){
-        echo $e->getMessage(); 
-        return false;
-                } 
+      echo $e->getMessage(); 
+      return false;
+      } 
+    }//
+  }
 
-      }// if fin hijoo
+  // ******EDITAR TIPO SOCIOECONOMICO******
 
-  }// if fin padre
-  ////////////editar  socio economico
    if  (isset($_POST['cod_edit_tipo'])){
     if (isset($_POST['edit_tipo'])){
         $code =($_POST['cod_edit_tipo']);
@@ -71,55 +68,50 @@
         $edi_descripcion = ($_POST['edit_descripcion']);
         $fecha_modificacion= date('Y-m-d');
         $user =$_SESSION['vario'];
-
          try {
-            $sentencia = $db->prepare("SELECT * FROM tbl_tipo_socioeconomico where TIPO = (?)
+            $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_socioeconomico where TIPO = (?)
              and CODIGO_TIPOSOCIO <> (?) ;");
             $sentencia->execute(array($editipo,$code));
             $row=$sentencia->fetchColumn();
             if($row>0){
              echo "<script>
-             alert('Ya existe un Tipo Socio Economico con este mismo nombre: $editipo');
+             alert('Ya existe un tipo Socioeconómico con este mismo nombre: $editipo');
              window.location = 'crudtiposocioeconomico';
              </script>";
              exit;
-            } else {
-              try {
+            }else{
+              try{
                 $sql = " UPDATE tbl_tipo_socioeconomico SET TIPO = '$editipo' ,DESCRIPCION = '$edi_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
                 WHERE CODIGO_TIPOSOCIO = '$code' ";
                 $consulta=$conn->query($sql);
                 if ($consulta>0){
                   echo "<script>
-                  alert('¡Tipo Socio Economico modificado exitosamente!');
+                  alert('¡Tipo Socioeconómico modificado exitosamente!');
                   window.location = 'crudtiposocioeconomico';
                   </script>";
                   include_once 'function_bitacora.php';
                   $codigoObjeto=17;
-                  $accion='Modificacion';
-                  $descripcion= 'Se edito un  Tipo socio Economico';
+                  $accion='MODIFICACIÓN';
+                  $descripcion= 'SE MODIFICO UN TIPO SOCIOECONÓMICO ';
                   bitacora($codigoObjeto, $accion,$descripcion);
                   exit;
                 }else{
                     echo "<script>
-                    alert('¡Error al  intentar modificar el Tipo socio Economico !');
+                    alert('¡Error al  intentar modificar el tipo Socioeconómico!');
                     window.location = 'crudtiposocioeconomico';
                     </script>";
                   }
               }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        } 
-
-            }// fin else padre 
-
+              echo $e->getMessage(); 
+              return false;
+             } 
+          }// fin else padre 
          } catch(PDOException $e){
-            echo $e->getMessage(); 
-            return false;
-                    } 
-
-    }// fin hijo if 
-     
-   }// fin padre if 
+          echo $e->getMessage(); 
+          return false;
+        } 
+    }
+   }
    
 
    ///// eliminar socio economico 
@@ -130,12 +122,12 @@
            try {
             $relacion_tablas =  $db->prepare("SELECT tts.TIPO ,tcs.NOMBRE_TIPO 
             from tbl_tipo_socioeconomico tts , tbl_contenido_socioeconomico tcs  
-            where  tts.CODIGO_TIPOSOCIO =tcs.CODIGO_TIPOSOCIO  and tts.CODIGO_TIPOSOCIO = (?);;");
+            where  tts.CODIGO_TIPOSOCIO =tcs.CODIGO_TIPOSOCIO  and tts.CODIGO_TIPOSOCIO = (?);");
             $relacion_tablas->execute(array($code));
             $row = $relacion_tablas->fetchColumn();
             if($row >0){
               echo "<script>
-              alert('¡No se puede eliminar este Tipo socio Economico, esta relacionado con otras tablas!');
+              alert('¡No se puede eliminar este tipo socioeconómico,esta relacionado con otras tablas!');
               window.location = 'crudtiposocioeconomico';
               </script>";
               exit;
@@ -145,13 +137,13 @@
                 mysqli_query($link, "DELETE FROM tbl_tipo_socioeconomico WHERE  CODIGO_TIPOSOCIO = '$code' ");
                 if(mysqli_affected_rows($link)>0){
                   echo "<script>
-                alert('¡Tipo socio Economico eliminado!');
+                alert('¡Tipo socioeconómico eliminado!');
                 window.location = 'crudtiposocioeconomico';
                 </script>";
                 include_once 'function_bitacora.php';
                 $codigoObjeto=17;
-                $accion='Eliminación';
-                $descripcion= 'Se elimino un Tipo socio Economico ';
+                $accion='ELIMINACIÓN';
+                $descripcion= 'SE ELIMINO UN TIPO SOCIOECONÓMICO';
                 bitacora($codigoObjeto, $accion,$descripcion);
                 exit;
             }else{

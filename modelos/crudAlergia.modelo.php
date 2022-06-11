@@ -12,7 +12,7 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];   
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_alergias WHERE NOMBRE = (?);");
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_alergias WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_alergia));
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
@@ -72,7 +72,7 @@
 
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_alergias where NOMBRE = (?) and CODIGO_ALERGIAS <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_alergias where NOMBRE = (?) and CODIGO_ALERGIAS <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_alergia));
        $row=$sentencia->fetchColumn();
         if($row>0){

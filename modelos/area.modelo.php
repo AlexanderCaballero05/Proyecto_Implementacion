@@ -15,7 +15,7 @@
                $descripcion = ($_POST['descripcion_area']);
                $fechaActual = date('Y-m-d'); 
               try{ 
-                  $consulta_estado = $db->prepare("SELECT NOMBRE FROM tbl_area WHERE NOMBRE = (?);");
+                  $consulta_estado = $db->prepare("SELECT COUNT(*) FROM tbl_area WHERE NOMBRE = (?);");
                   $consulta_estado->execute(array($nombre_area));
                   $row=$consulta_estado->fetchColumn();
                   if($row>0){
@@ -75,7 +75,7 @@
       
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_area where NOMBRE = (?) and CODIGO_AREA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_area where NOMBRE = (?) and CODIGO_AREA <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_area));
        $row=$sentencia->fetchColumn();
        $fechaActual = date('Y-m-d'); 

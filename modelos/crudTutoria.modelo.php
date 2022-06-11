@@ -14,7 +14,7 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];    
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_tutoria WHERE NOMBRE = (?);");
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_tutoria WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_tutoria));
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
@@ -29,6 +29,7 @@
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
+                        alert('Tutoría registrada correctamente');
                         window.location = 'crudTutorias';
                         </script>";
                         include_once 'function_bitacora.php';
@@ -73,12 +74,12 @@
       $user =$_SESSION['vario'];  
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_tutoria where NOMBRE = (?) and CODIGO_TUTORIA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tutoria where NOMBRE = (?) and CODIGO_TUTORIA <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_tutoria));
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe una Tutoria con este mismo nombre: $editar_nombre');
+          alert('Ya existe una Tutoría con este mismo nombre: $editar_nombre');
           window.location = 'crudTutorias';
           </script>";
           exit;
@@ -136,6 +137,7 @@ if(isset($_POST['tutoria_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_tutoria WHERE  CODIGO_TUTORIA = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('Se elimino la tutoría correctamente');
             window.location = 'crudTutorias';
             </script>";
             include_once 'function_bitacora.php';
