@@ -12,7 +12,7 @@
                $nombre_seccion = ($_POST['nombre_seccion']);
                $descripcion = ($_POST['descripcion_seccion']); 
               try{ 
-                  $consulta_seccion = $db->prepare("SELECT NOMBRE FROM tbl_seccion WHERE NOMBRE = (?);");
+                  $consulta_seccion = $db->prepare("SELECT COUNT(*) FROM tbl_seccion WHERE NOMBRE = (?);");
                   $consulta_seccion->execute(array($nombre_seccion));
                   $row=$consulta_seccion->fetchColumn();
                   if($row>0){
@@ -69,7 +69,7 @@
       $editar_descripcion = ($_POST['editar_descripcion']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_seccion));
        $row=$sentencia->fetchColumn();
         if($row>0){
