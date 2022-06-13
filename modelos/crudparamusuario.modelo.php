@@ -35,13 +35,13 @@ if(isset($_POST['id_paramusu'])){
           $consulta=$conn->query($sql);
           if ($consulta>0){
             echo "<script>
-            alert('¡Par Valor modificado exitosamente!');
+            alert('¡Contador modificado exitosamente!');
             window.location = 'crudparametrosusuario';
             </script>";
              //<!--llamada de la fuction bitacora -->
              $codigoObjeto=9;
-             $accion='Editar parámetro';
-             $descripcion= 'Se editó el registro de Par valor ya existente';
+             $accion='MODIFICACION';
+             $descripcion= 'SE MODIFICO CONTADOR';
              bitacora($codigoObjeto, $accion,$descripcion);
           //}else{
             echo "<script>
@@ -69,35 +69,65 @@ if(isset($_POST['id_paramusu'])){
 if(isset($_POST['paramusuario_eli'])){
   if(isset($_POST['ELIMINAR_PARAMETROUSUARIO'])){
     $code = ($_POST['paramusuario_eli']);//asigna a una variable el id del estado a eliminar
-    try{
-      $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-      mysqli_query($link, "DELETE FROM tbl_parametros_usuarios WHERE  CODIGO_PARAM_USUARIO = $code");
-      if(mysqli_affected_rows($link)>0){
+    
+    try {
+      $relacion_tablas =  $db->prepare("SELECT tpu.CODIGO_PARAMETRO , tpu.CODIGO_PARAM_USUARIO 
+      from tbl_parametros_usuarios tpu 
+      left join tbl_usuario tu       on tu.CODIGO_USUARIO = tpu.CODIGO_USUARIO 
+      left join tbl_parametros tp    on tp.CODIGO_PARAMETRO = tpu.CODIGO_PARAMETRO 
+      where tpu.CODIGO_PARAM_USUARIO =(?);");
+      $relacion_tablas->execute(array($code));
+      $row = $relacion_tablas->fetchColumn();
+      if($row >0){
         echo "<script>
-        alert('¡Parametro Usuario eliminado!');
+        alert('¡No se puede eliminar este campo,esta relacionado con otras tablas!');
         window.location = 'crudparametrosusuario';
         </script>";
-         //<!--llamada de la fuction bitacora -->
-         $codigoObjeto=9;
-         $accion='Eliminar PAR VALOR';
-         $descripcion= 'Se eliminó un registro de Par Valor';
-         bitacora($codigoObjeto, $accion,$descripcion);
-        exit;
+        
+        //<!--llamada de la fuction bitacora -->
+        $codigoObjeto=9;
+        $accion='INTENTO DE ELIMINACIÓN';
+        $descripcion= 'INTENTO DE ELIMINACIÓN DE CONTADOR';
+        bitacora($codigoObjeto, $accion,$descripcion); 
+
       }else{
-        echo "<script>
-        alert('¡Error al eliminar el parametro usuario!');
-        window.location = 'crudparametrosusuario';
-        </script>";
-         //<!--llamada de la fuction bitacora -->
-         $codigoObjeto=9;
-         $accion='No eliminar parámetro';
-         $descripcion= 'Intento de invalido de eliminar Par Valor';
-         bitacora($codigoObjeto, $accion,$descripcion); 
-        exit;
+        
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_parametros_usuarios WHERE  CODIGO_PARAM_USUARIO = $code");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            alert('¡Contador eliminado!');
+            window.location = 'crudparametrosusuario';
+            </script>";
+             //<!--llamada de la fuction bitacora -->
+             $codigoObjeto=9;
+             $accion='ELIMINACIÓN';
+             $descripcion= 'SE ELIMINO EL CONTADOR';
+             bitacora($codigoObjeto, $accion,$descripcion);
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el contador!');
+            window.location = 'crudparametrosusuario';
+            </script>";
+             //<!--llamada de la fuction bitacora -->
+             $codigoObjeto=9;
+             $accion='NO SE ELIMINO';
+             $descripcion= 'NO  SE ELIMINO EL CONTADOR';
+             bitacora($codigoObjeto, $accion,$descripcion); 
+            exit;
+          }
+        }catch(PDOException $e){
+          echo $e->getMessage(); 
+          return false;
+        }
+
       }
     }catch(PDOException $e){
       echo $e->getMessage(); 
       return false;
-    }
+     }
+    
   }
 }

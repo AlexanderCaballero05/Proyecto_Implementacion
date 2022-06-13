@@ -1,3 +1,38 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de las personas
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de las personas  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
+
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -28,7 +63,7 @@ include_once "conexion3.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3">
-      <h4>MANTENIMIENTO PERSONAS</h4>
+      <h4>Mantenimiento Personas</h4>
     </div>
     <section class="content">
      <div class="card"> 
@@ -78,14 +113,14 @@ include_once "conexion3.php";
                     <?php 
                       }
                      ?> 
-                     <div class="row"><!--Inicio del codigo del filtrado de personas -->
+                     <div class="row"> <!--Inicio del codigo del filtrado de personas -->
                          <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Filtrar por:</label>
                         <div class="col-sm-3">
                         <?php 
                             $query = "SELECT * FROM tbl_tipo_persona WHERE CODIGO_TIPO_PERSONA <> '3' and  CODIGO_TIPO_PERSONA BETWEEN 1 AND 8;";
                             $resul=$conn->query($query);                
                         ?>
-                        <form method="POST" action="crudpersonas">
+                        <form method="POST" action="crudpersonas" class="needs-validation" novalidate>
                             <select class="form-control" name="BUSCAR" required>
                                <option  value="" >Seleccione</option>
                                <?php 
@@ -100,12 +135,15 @@ include_once "conexion3.php";
                                 }
                                 ?>
                             </select>
+                            <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                             </div>  
                         </div>
                         <div class="col-md-1">
                           <button type="submit"  name="generar" class=" form-control btn btn-info b"> Generar</button>
                         </div>
                      </form>
-                     </div>
+                     </div>  <!--final del codigo del filtrado de personas -->
                      <br>
                      <?php
                         if(isset($_POST['BUSCAR'])){ 
@@ -135,19 +173,19 @@ include_once "conexion3.php";
                                     <thead>
                                         <tr>
                                             <th class="text-center">Acción</th>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">Primer nombre</th>
-                                            <th class="text-center">Segundo nombre</th>
+                                            <th class="text-center">Código</th>
+                                            <th class="text-center">Primer Nombre</th>
+                                            <th class="text-center">Segundo Nombre</th>
                                             <th class="text-center">Primer Apellido</th>
                                             <th class="text-center">Segundo Apellido</th>
                                             <th class="text-center">Dni</th>
                                             <th class="text-center">Sexo</th>
-                                            <th class="text-center">Fecha nacimiento</th>
-                                            <th class="text-center">Lugar nacimiento</th>
+                                            <th class="text-center">Fecha Nacimiento</th>
+                                            <th class="text-center">Lugar Nacimiento</th>
                                             <th class="text-center">Dirección</th>
                                             <th class="text-center">Tipo de Persona</th>
-                                            <th class="text-center">Telefono</th>
-                                            <th class="text-center">Correo</th>                                            
+                                            <th class="text-center">Teléfono</th>
+                                            <th class="text-center">Córreo</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -232,7 +270,7 @@ include_once "conexion3.php";
                                                             <button type='button' style="color:white;" class=" form-control btn btn-warning"><span><i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                         </a>
                                                          <a>
-                                                        <form method="post"  action="Reportes_Prosecar/reportePersonaIndividual.php" target="_blank"> 
+                                                        <form method="post"  action="Reportes_Prosecar/reportePersonaIndividual.php" target="_blank" > 
                                                         <input type="hidden" name="persona_enviar" value="<?php echo $var1 ?>">
                                                         <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                                         </form>
@@ -288,7 +326,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="p_nombre" id="p_nombre" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -306,7 +344,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="s_nombre" id="s_nombre" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -324,7 +362,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="p_apellido" id="p_apellido" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -342,7 +380,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="s_apellido" id="s_apellido" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -357,7 +395,7 @@ include_once "conexion3.php";
                                                                                 autocomplete="off" type="text"
                                                                                 name="dni" id="dni" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -371,13 +409,13 @@ include_once "conexion3.php";
                                                                                onkeypress="" 
                                                                                required="" >
                                                                                <div class="invalid-feedback">
-                                                                             campo obligatorio.
+                                                                             Campo Obligatorio.
                                                                               </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Correo</label>
+                                                                            <label for="txtcodigo_persona">Córreo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
@@ -385,28 +423,28 @@ include_once "conexion3.php";
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="correo" id="correo">
+                                                                                name="correo" id="correo"  required="" >
                                                                                 <div class="invalid-feedback">
-                                                                                campo obligatorio.
+                                                                                Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Telefono</label>
+                                                                            <label for="txtcodigo_persona">Teléfono</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var13; ?>"
                                                                              class="form-control" 
                                                                                 onkeyup="mayus(this);" maxlength="10" 
                                                                                 minlength="8"
                                                                                 onkeypress="return telfono(event,this);"
-                                                                                 required onblur="quitarespacios(this);" 
+                                                                                 onblur="quitarespacios(this);" 
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
                                                                                  autocomplete = "off"
                                                                                 name="telefono" id="telefono">
                                                                                 <div class="invalid-feedback">
-                                                                                campo obligatorio.
+                                                                                Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -521,19 +559,19 @@ include_once "conexion3.php";
                                     <thead>
                                         <tr>
                                             <th class="text-center">Acción</th>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">Primer nombre</th>
-                                            <th class="text-center">Segundo nombre</th>
+                                            <th class="text-center">Código</th>
+                                            <th class="text-center">Primer Nombre</th>
+                                            <th class="text-center">Segundo Nombre</th>
                                             <th class="text-center">Primer Apellido</th>
                                             <th class="text-center">Segundo Apellido</th>
                                             <th class="text-center">Dni</th>
                                             <th class="text-center">Sexo</th>
-                                            <th class="text-center">Fecha nacimiento</th>
-                                            <th class="text-center">Lugar nacimiento</th>
+                                            <th class="text-center">Fecha Nacimiento</th>
+                                            <th class="text-center">Lugar Nacimiento</th>
                                             <th class="text-center">Dirección</th>
                                             <th class="text-center">Tipo de Persona</th>
-                                            <th class="text-center">Telefono</th>
-                                            <th class="text-center">Correo</th>                                            
+                                            <th class="text-center">Teléfono</th>
+                                            <th class="text-center">Córreo</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -679,7 +717,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="p_nombre" id="p_nombre" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -697,7 +735,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="s_nombre" id="s_nombre" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -715,7 +753,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="p_apellido" id="p_apellido" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -733,7 +771,7 @@ include_once "conexion3.php";
                                                                                 onkeypress="return soloLetras(event);"
                                                                                 name="s_apellido" id="s_apellido" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -748,7 +786,7 @@ include_once "conexion3.php";
                                                                                 autocomplete="off" type="text"
                                                                                 name="dni" id="dni" required ="">
                                                                                 <div class="invalid-feedback">
-                                                                                 campo obligatorio.
+                                                                                 Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
@@ -762,13 +800,13 @@ include_once "conexion3.php";
                                                                                onkeypress="" 
                                                                                required="" >
                                                                                <div class="invalid-feedback">
-                                                                             campo obligatorio.
+                                                                             Campo Obligatorio.
                                                                               </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Correo</label>
+                                                                            <label for="txtcodigo_persona">Córreo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
@@ -776,28 +814,30 @@ include_once "conexion3.php";
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="correo" id="correo">
+                                                                                name="correo" id="correo"  
+                                                                               required="" >
                                                                                 <div class="invalid-feedback">
-                                                                                campo obligatorio.
+                                                                                Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Telefono</label>
+                                                                            <label for="txtcodigo_persona">Teléfono</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var13; ?>"
                                                                              class="form-control" 
                                                                                 onkeyup="mayus(this);" maxlength="10" 
                                                                                 minlength="8"
                                                                                 onkeypress="return telfono(event,this);"
-                                                                                 required onblur="quitarespacios(this);" 
+                                                                                 onblur="quitarespacios(this);" 
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
                                                                                  autocomplete = "off"
-                                                                                name="telefono" id="telefono">
+                                                                                name="telefono" id="telefono"  
+                                                                                 required=""  >
                                                                                 <div class="invalid-feedback">
-                                                                                campo obligatorio.
+                                                                                Campo Obligatorio.
                                                                                 </div>
                                                                         </div>
                                                                     </div>

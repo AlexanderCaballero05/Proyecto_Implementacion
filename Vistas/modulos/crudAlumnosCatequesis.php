@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de los alumnos de catequisis
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de los alumnos de catequisis ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -15,13 +47,13 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTA DE JOVENES <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "CATEQUESIS DE ".$_SESSION['catequesis'] ?></p> </h4>
+              <h4> Lista de Jovenes <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "CATEQUESIS DE ".$_SESSION['catequesis'] ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="crudTutorEspiritual">Lista de catequesis</a>
+            <a class=" nav-link" style="color:#000000;" href="crudTutorEspiritual">Lista de Catequesis</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Lista de Jovenes</a>
@@ -64,15 +96,15 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Numero</th>
+                        <th class="text-center">Número</th>
                         <th class="text-center">Alumno</th>
                         <th class="text-center">Catequesis</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">periodo</th>
-                        <th class="text-center">Estado Matricula</th>
-                        <th class="text-center">Accion</th>
+                        <th class="text-center">Período</th>
+                        <th class="text-center">Estado Matrícula</th>
+                        <th class="text-center">Acción</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -199,7 +231,7 @@
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="text-center">Agregar observacion </h4>
+                                  <h4 class="text-center">Agregar Observación </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -226,7 +258,7 @@
 
                                         </div>
                                          <div class="invalid-feedback">
-                                            Llene este campo.
+                                           Campo Obligatorio.
                                          </div>
                                       </div>
                                   </div><!--fin row -->
@@ -239,25 +271,20 @@
                                      </div>
                                      <div class="col-sm-3">
                                        <div class="form-group">
-                                           <label for="fecha" class="form-label">Periodo</label>
+                                           <label for="fecha" class="form-label">Período</label>
                                            <input type="text"  readonly value ="<?php echo $var5; ?>" class="form-control">
                                        </div>
                                      </div>
                                       <div class="col-sm-6 mb-3">
                                        <?php
                                         $query= "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                        FROM tbl_estado es
-                                        WHERE  es.CODIGO_ESTADO between 7 and 13 
-                                        and es.CODIGO_ESTADO <> 8
-                                        and es.CODIGO_ESTADO <> 12
-                                        and es.CODIGO_ESTADO <> 11
-                                        and es.CODIGO_ESTADO <> 10
+                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
                                         ;
                                         ";
                                         $result1= $conn->query($query);
                                         ?>
                                          <div class="form-group">
-                                            <label for="txtcodigo_especialista">Estado de matricula</label>
+                                            <label for="txtcodigo_especialista">Estado de matrícula</label>
                                             <select class="form-control select2" name="codigo_estado" required>
                                                 <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
                                                  <?php
@@ -271,7 +298,7 @@
                                                     ?>
                                             </select>
                                             <div class="invalid-feedback">
-                                                Llene este campo.
+                                            Campo Obligatorio.
                                             </div>
                                         </div>
                                        </div>
@@ -290,7 +317,7 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="MODIFICAR_OBSERVACION_CATEQUESIS"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observacion</button>
+                                  <button type="submit" name="MODIFICAR_OBSERVACION_CATEQUESIS"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observación</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>

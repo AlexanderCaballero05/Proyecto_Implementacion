@@ -1,3 +1,36 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de consultas 
+    Fecha:           
+    Programador:      
+    descripcion:        Permite llevar un mantenimiento de consultas 
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
+----------------------------------------------------------------------->
+
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -79,13 +112,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   <table id="tabla_expediente" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                        <th>Acción</th>
-                       
-                            <th>ID</th>
-                            <th>Paciente</th>
-                            <th>Diagnostico Ingreso</th>
-                            <th>Diagnostico Egreso</th>
-                            <th>Fecha</th>
+                        <th class="text-center">Acción</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Paciente</th>
+                        <th class="text-center">Diagnóstico Ingreso</th>
+                        <th class="text-center">Diagnóstico Egreso</th>
+                        <th class="text-center">Fecha</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -181,7 +213,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                  <!-- Modal content-->
                                  <form method="POST">
                                      <div class="modal-header" style="background-color: #0CCDE3">
-                                         <h4 class="text-center">Editar informacion del Expediente Medico
+                                         <h4 class="text-center">Editar información del Expediente Médico
                                          </h4>
                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
                                      </div>
@@ -194,7 +226,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                              <div class="col-sm-6">
                                                  <div class="form-group">
                                                      <label for="txtcodigo_persona">
-                                                     Diacnostico ingreso</label>
+                                                     Diagnóstico Ingreso</label>
                                                      <input type="text" value="<?php echo $var5; ?>" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                      name="edit_tipo_expe" id="edit_tipo_expe">
                                                  </div>
@@ -202,7 +234,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                              <div class="col-sm-6">
                                                  <div class="form-group">
                                                      <label for="txtcodigo_persona">
-                                                         Diacnostico_egreso</label>
+                                                     Diagnóstico Egreso</label>
                                                      <input type="text" value="<?php echo $var6; ?>" class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                                       name="edit_descripcion_expe" id="edit_descripcion_expe">
                                                  </div>
@@ -219,7 +251,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                  </form>
                              </div>
                          </div>
-                      /div><!-- FIN DEL MODAL EDITAR --> 
+                        </div><!-- FIN DEL MODAL EDITAR --> 
                             
               <!-- inicio modal eliminar  -->   
               <div id="ELIMINAR<?php echo $var1 ?>"  

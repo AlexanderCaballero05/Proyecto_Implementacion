@@ -16,17 +16,20 @@ Lic. Karla Melisa Garcia Pineda (Evaluación)
 
 ---------------------------------------------------------------------
 
-Programa:         Pantalla de Ingreso a mantenimiento modalidad
-Fecha:             01-jan-2016
-Programador:       Gissela Diaz Y ANY HERNANDEZ
-descripcion:       Pantalla que contrala la modalidad de las tutorias 
+Programa:         Pantalla de Ingreso a mantenimiento de citas generales
+Fecha:             
+Programador:       GISELLA DIAS Y ANY HERNANDEZ
+descripcion:       Pantalla que contrala las citas generales permitiendolo editarlas
 
 -----------------------------------------------------------------------
                       Historial de Cambio
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
+ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
 ----------------------------------------------------------------------->
+
+
 <?php
 session_start();
 include_once "conexion.php";
@@ -187,7 +190,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                     <tbody>
                                     <?php 
                                     $area = $_POST['BUSCAR'];
-                                    
+
                                     $query1 ="SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
                                     MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
                                     FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe                                   WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
@@ -301,23 +304,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </div> 
                                                                 <?php
                                                                         include "conexion1.php";
-                                                                        $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                                                        FROM tbl_estado es
-                                                                        WHERE  es.CODIGO_ESTADO <> 1 
-                                                                        and es.CODIGO_ESTADO <> 2 
-                                                                        and es.CODIGO_ESTADO <> 3 
-                                                                        and es.CODIGO_ESTADO <> 4
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 8
-                                                                        and es.CODIGO_ESTADO <> 15
-                                                                        and es.CODIGO_ESTADO <> 14
-                                                                        and es.CODIGO_ESTADO <> 13
-                                                                        and es.CODIGO_ESTADO <> 12
-                                                                        and es.CODIGO_ESTADO <> 11
-                                                                        and es.CODIGO_ESTADO <> 10
-                                                                        and es.CODIGO_ESTADO <> 9
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 16;";
+                                                                        $queryr = " SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
+                                                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 5 or  es.CODIGO_ESTADO = 7
+                                                                        ;";
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
                                                                 <div class="row">
@@ -363,7 +352,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <div class="modal-body"> 
                                                                     <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"name="cod_enviar_cita1" id="cod_enviar_cita1" >
                                                                     <input type="text" value="<?php echo $var6; ?>" hidden class="form-contro" name="estado_cita1" id="estado_cita1" >
-                                                                    <h2 class="text-center">Informacion de cita</h2>
+                                                                    <h2 class="text-center">Información de cita</h2>
                                                                     <br>
                                                                     <div class="row"> 
                                                                         <div class="col-sm-6">
@@ -551,22 +540,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 <?php
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                                                        FROM tbl_estado es
-                                                                        WHERE  es.CODIGO_ESTADO <> 1 
-                                                                        and es.CODIGO_ESTADO <> 2 
-                                                                        and es.CODIGO_ESTADO <> 3 
-                                                                        and es.CODIGO_ESTADO <> 4
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 8
-                                                                        and es.CODIGO_ESTADO <> 15
-                                                                        and es.CODIGO_ESTADO <> 14
-                                                                        and es.CODIGO_ESTADO <> 13
-                                                                        and es.CODIGO_ESTADO <> 12
-                                                                        and es.CODIGO_ESTADO <> 11
-                                                                        and es.CODIGO_ESTADO <> 10
-                                                                        and es.CODIGO_ESTADO <> 9
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 16;";
+                                                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 5 or  es.CODIGO_ESTADO = 7 
+                                                                        ;";
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
                                                                 <div class="row">
@@ -614,7 +589,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     name="cod_enviar_cita1" id="cod_enviar_cita1" >
                                                                     <input type="text" value="<?php echo $var6; ?>" hidden class="form-contro" 
                                                                     name="estado_cita1" id="estado_cita1" >
-                                                                    <h2 class="text-center">Informacion de cita</h2>
+                                                                    <h2 class="text-center">Información de cita</h2>
                                                                     <br>
                                                                     <div class="row"> 
                                                                         <div class="col-sm-6">

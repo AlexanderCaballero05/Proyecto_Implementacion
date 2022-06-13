@@ -1,3 +1,37 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de los parametros de los usuarios
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de los parametros de los usuarios es su relación  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -20,7 +54,7 @@ include_once "conexion3.php";
 <div class="content-wrapper">
   <div class="content-header">
     <div class="text-center">
-      <h2>Parametro usuarios</h2>
+      <h2>Parametro Usuarios</h2>
     </div>
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
@@ -42,7 +76,6 @@ include_once "conexion3.php";
                             $row=$evaluar_usuario->fetchColumn();
                             if($row > 0){
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
                                 $evaluar_permiso->execute(array($usuariomo, '9'));
@@ -55,8 +88,9 @@ include_once "conexion3.php";
                     if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     {
                     ?>     
-
+        <a href="categoria"> 
         <button  data-toggle="modal"  href="#agregar_param" type='button' id="btnNuevo"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Parámetro</button>
+        </a>  
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                   <?php
                     }
@@ -66,16 +100,16 @@ include_once "conexion3.php";
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="example1" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">EDITAR</th>
-                          <th class="text-center">NOMBRE USUARIO</th>
-                          <th class="text-center">PARAMETRO</th>
-                          <th class="text-center">PAR VALOR</th>
+                          <th class="text-center">Editar</th>
+                          <th class="text-center">Nombre Usuario</th>
+                          <th class="text-center">Nombre Parámetro</th>
+                          <th class="text-center">Contador</th>
                          
                         </tr>
                       </thead>
@@ -184,7 +218,7 @@ include_once "conexion3.php";
                           <div id="EDITARROL<?php echo $var6 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parametro Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -197,10 +231,14 @@ include_once "conexion3.php";
                                       <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="id_paramusu" id="id_paramusu">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txt_parvalor">Par Valor</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="editar_parvalor" id="editar_parvalor">
-                                        
-
+                                          <label for="txt_parvalor">Contador</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" 
+                                          class="form-control"  maxlength="2" minlength="1"   
+                                           autocomplete = "off" type="text" onkeypress="return solonumero(event)" 
+                                           name="editar_parvalor" id="editar_parvalor" required =""  >
+                                           <div class="invalid-feedback">
+                                          Campo Obligatorio.
+                                          </div>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">

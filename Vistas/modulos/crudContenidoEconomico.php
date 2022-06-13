@@ -1,3 +1,29 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD GARCIA u otr persona
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos socioeconomicos de los estudiantes
+Fecha:            
+Programador:       
+descripcion:       Pantalla de mantenimiento edita datos socieconomicos
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -17,7 +43,7 @@
   <section class="content">
      <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>MANTENIMIENTO DE CONTENIDO SOCIOECONÓMICO</h4>
+              <h4>Mantenimiento de Contenido Socioeconómico</h4>
           </h1>     
       </section>
     <div class="container-fluid">
@@ -67,7 +93,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Tipo del Contenido socioeconómico</th>
                           <th class="text-center">Nombre del Contenido socioeconómico</th>
                           
@@ -170,7 +196,7 @@
                           <div id="EDITARCONTENIDO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Contenido </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -183,6 +209,9 @@
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre del Contenido Socioeconomico</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" autocomplete = "off" type="text"   name="editar_nombre" id="editar_nombre" required="">
+                                          <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -246,7 +275,7 @@
                     $result= $conn->query($query);
                     ?>
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Contenido</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

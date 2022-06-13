@@ -1,3 +1,36 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de los roles
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de los roles  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -20,7 +53,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3">
-         <h3>Registrar roles</h3>   
+         <h3>Registrar Roles</h3>   
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -54,7 +87,7 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -62,7 +95,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Descripción</th>
                         </tr>
@@ -148,7 +181,7 @@
                                     <h4 class="text-center">Editar rol</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_rol" id="id_rol">

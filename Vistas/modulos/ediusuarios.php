@@ -23,6 +23,7 @@ Programador               Fecha                      Descripcion
 Diana Rut               28/05/2022            Se modifico la parte de rol para que no se edite
 Diana Rut               1/06/2022            Se agrego una validacion de input
 Diana Rut               09/06/2022           Se modifico los datos de la bitacora
+ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -117,7 +118,7 @@ include_once "conexion3.php";
           <div class="card ">
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_usuarios" class="table table-bordered table-striped">
@@ -240,7 +241,7 @@ include_once "conexion3.php";
                                     <h4 class="text-center"> Editar Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
@@ -361,7 +362,7 @@ include_once "conexion3.php";
                                   <h5 class="modal-title" id="exampleModalLabel"></h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEeliminar" method="POST">
+                                <form id="FORMEeliminar" method="POST" >
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
                                     <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var6; ?>?</h4>

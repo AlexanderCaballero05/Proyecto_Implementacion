@@ -63,7 +63,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
-<div class="content-wrapper">
+<div class="content-wrapper ">
 
  <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
@@ -183,7 +183,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
         
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
            <div class="card-body pr-1">
-            <div class="table-responsive">
+            <div class="table-responsive ">
               <table id="bitacora_del_sistema" class="table table-bordered table-striped table-hover" style="width:100%">
                 <br><center>
                   

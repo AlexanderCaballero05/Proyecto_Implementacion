@@ -17,7 +17,7 @@ Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
 
 Programa:         Pantalla de Ingreso a mantenimiento modalidad
-Fecha:             01-jan-2016
+Fecha:             
 Programador:       
 descripcion:       Pantalla que contrala la modalidad de las tutorias 
 
@@ -210,7 +210,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                  <!-- Modal content-->
                                  <form method="POST">
                                      <div class="modal-header" style="background-color: #0CCDE3">
-                                         <h4 class="text-center">Editar Apariencia Fisica
+                                         <h4 class="text-center">Editar Apariencia Física
                                          </h4>
                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
                                      </div>
@@ -223,7 +223,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                              <div class="col-sm-12">
                                                  <div class="form-group">
                                                      <label for="txtcodigo_persona">
-                                                     Apariencia Fisica</label>
+                                                     Apariencia Física</label>
                                                      <input required type="text"  value="<?php echo $var2; ?>" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                      name="editar_apariencia" id="editar_apariencia">
                                                  </div>
@@ -297,14 +297,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITARMODA" method="POST">
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar una apariencia fisica</h4>
+                        <h4 class="text-center">Agregar una apariencia física</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtmodalidad">Nombre Apariencia Fisica</label>
+                                    <label for="txtmodalidad">Nombre Apariencia Física</label>
                                     <input  type="text"  class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" required="">
                                     <div class="invalid-feedback">
                                   campo obligatorio.
