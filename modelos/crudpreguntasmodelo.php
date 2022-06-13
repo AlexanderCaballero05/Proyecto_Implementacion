@@ -35,8 +35,8 @@
                         </script>";
                         include_once 'function_bitacora.php';
                         $codigoObjeto=4;
-                        $accion='Se agrego una nueva pregunta';
-                        $descripcion='Preguntas realizadas al usuario para cambio de contraseña';
+                        $accion='INSERCIÓN';
+                        $descripcion='SE REGISTRÓ UNA PREGUNTA';
                        bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
@@ -99,8 +99,8 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=4;
-              $accion='Editar Pregunta'; 
-              $descripcion= 'Se edito una pregunta ';
+              $accion='MODIFICACIÓN'; 
+              $descripcion= 'SE MODIFICÓ UNA PREGUNTA ';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
@@ -145,8 +145,8 @@ if(isset($_POST['pregunta_eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=4;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino una pregunta ';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ UNA PREGUNTA ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

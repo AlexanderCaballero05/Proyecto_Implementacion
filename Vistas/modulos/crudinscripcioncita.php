@@ -3,8 +3,8 @@ include_once "conexion.php";
 include_once "conexion3.php";
 include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
+$accion = 'INGRESO AL MATENIMIENTO CITAS HOY ';
+$descripcion = 'MANTENIMIENTO A LAS CITAS DEL DIA DE HOY';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <?php 
@@ -59,7 +59,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>CITAS GENERALES PROSECAR </h4>
+              <h4>Citas Hoy Prosecar </h4>
     </div>
     <section class="content">
        <div class="card"> 

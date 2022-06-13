@@ -36,8 +36,8 @@
                         exit;
                         include_once 'function_bitacora.php';
                         $codigoObjeto=19;
-                        $accion='AGREGAR';
-                        $descripcion= 'SE AGREGO UNA MODALIDAD';
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRÓ UNA MODALIDAD';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
@@ -97,8 +97,8 @@
               </script>';
               include_once 'function_bitacora.php';
               $codigoObjeto=19;
-              $accion='MODIFICACION';
-              $descripcion= 'SE EDITO UNA MODALIDAD';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICÓ UNA MODALIDAD';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -144,8 +144,8 @@ if(isset($_POST['eliminar'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=19;
-            $accion='ELIMINACION';
-            $descripcion= 'SE ELIMINO UNA MODALIDAD ';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ UNA MODALIDAD ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
