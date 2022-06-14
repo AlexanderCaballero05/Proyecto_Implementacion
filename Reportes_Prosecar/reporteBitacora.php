@@ -1,5 +1,7 @@
 <?php
 session_start();
+$usuario= $_SESSION['vario'];
+
 $desde= $_SESSION['bdesde'];
 $hasta= $_SESSION['bhasta'];
 
@@ -18,6 +20,7 @@ class PDF extends FPDF {
 
 	function Header() {
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
+		date_default_timezone_set("America/Guatemala");
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
 		$this->SetX(86);
@@ -30,6 +33,7 @@ class PDF extends FPDF {
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
 		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		
 		
 		$this->Ln(10);
 	}

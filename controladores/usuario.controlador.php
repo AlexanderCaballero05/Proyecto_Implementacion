@@ -42,14 +42,12 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
                 $_SESSION['vario'] =$u;
                 $_SESSION['userrr'] =$respuesta["CODIGO_TIPO_ROL"];
 
-
+                $codigoObjeto = 54;
+                $accion = 'AUTENTICACIÓN CORRECTA';
+                $descripcion = 'USUARIO INICIO SESIÓN CORRECTAMENTE';
+                bitacora($codigoObjeto, $accion, $descripcion);
 
                     //llamado a la funcion
-                    $codigoObjeto=1;
-                    $accion='Ingreso al modulo de administrador';
-                    $descripcion= 'Usuario se autentifico';
-                    bitacora($codigoObjeto, $accion,$descripcion);
-
 
                     
                 echo '<script>
@@ -138,10 +136,12 @@ if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASE
 
             $_SESSION['vario'] =$_POST["ingUsuario"];
             //llamada de la fuction bitacora -->
-         $codigoObjeto=1;
-         $accion='Intento de login fallido';
-         $descripcion= 'El usuario inhabilitado intento ingresar al sistema';
-         bitacora($codigoObjeto, $accion,$descripcion);
+
+            $codigoObjeto = 54;
+            $accion = 'AUTENTICACIÓN FALLIDA';
+            $descripcion = 'EL USUARIO INTENTO INICIAR SESIÓN CON LA CUENTA INACTIVA';
+            bitacora($codigoObjeto, $accion,$descripcion);
+        
 } 
 else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==4){
     echo '<script>
@@ -166,11 +166,14 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
 
         $_SESSION['vario'] =$_POST["ingUsuario"];
             //llamada de la fuction bitacora -->
-         $codigoObjeto=1;
-         $accion='Intento de login fallido';
-         $descripcion= 'El usuario bloqueado intento ingresar al sistema';
-         bitacora($codigoObjeto, $accion,$descripcion);
+            $_SESSION['vario'] = $valor;
+            //llamada de la fuction bitacora -->
+            $codigoObjeto = 54;
+            $accion = 'AUTENTICACIÓN FALLIDA';
+            $descripcion = 'EL USUARIO INTENTO INICIAR SESIÓN CON LA CUENTA BLOQUEADA';
+            bitacora($codigoObjeto, $accion,$descripcion);
 
+            
 
 } else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CONTRASENA"] == $contra && $respuesta["CODIGO_ESTADO"] ==6){
          echo '<script>
@@ -195,9 +198,11 @@ else if ($respuesta["NOMBRE_USUARIO"] == $_POST["ingUsuario"] && $respuesta["CON
 
                 $_SESSION['vario'] =$_POST["ingUsuario"];
                     //llamada de la fuction bitacora -->
-                 $codigoObjeto=1;
-                 $accion='Intento de login fallido';
-                 $descripcion= 'El usuario se registro por medio de autoregistro';
+                 
+
+                 $codigoObjeto = 54;
+                 $accion = 'AUTENTICACIÓN FALLIDA';
+                 $descripcion = 'EL USUARIO INTENTO INICIAR SESIÓN CON LA CUENTA INACTIVA';
                  bitacora($codigoObjeto, $accion,$descripcion);
 
 } else if(($respuesta["Par_valor"]==$respu["VALOR"])and ($respuesta["CONTRASENA"] <> $_POST["ingPassword"])  ){
@@ -239,9 +244,9 @@ $servername = "localhost";
 
                                 $_SESSION['vario'] = $valor;
                                 //llamada de la fuction bitacora -->
-                                $codigoObjeto=1;
-                                $accion='Usuario bloqueado';
-                                $descripcion= 'Se ingreso el numero de intentos validos';
+                                $codigoObjeto = 54;
+                                $accion = 'AUTENTICACIÓN FALLIDA';
+                                $descripcion = 'EL USUARIO FUE BLOQUEADO POR INTENTOS DE INICIO DE SESIÓN FALLIDOS';
                                 bitacora($codigoObjeto, $accion,$descripcion);
 
 } elseif(($respuesta["NOMBRE_USUARIO"])!='ADMIN') {	
@@ -283,10 +288,10 @@ Swal.fire({
 
         $_SESSION['vario'] =$va;
         //llamada de la fuction bitacora -->
-     $codigoObjeto=1;
-     $accion='Intento de login fallido';
-     $descripcion= 'Ingreso de Credenciales incorrectas';
-     bitacora($codigoObjeto, $accion,$descripcion);
+        $codigoObjeto = 54;
+        $accion = 'AUTENTICACIÓN FALLIDA';
+        $descripcion = 'INTENTÓ DE INICIO DE SESIÓN FALLIDO';
+        bitacora($codigoObjeto, $accion, $descripcion);
 
 			
                     

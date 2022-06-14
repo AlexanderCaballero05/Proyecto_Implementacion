@@ -1,3 +1,40 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+    Programa:          Valida cambio de contraseña por correo
+    Fecha:             04-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       Valida el metodo seleccionado de recuperacion de contraseña por correo y si es por preguntas lo envia a la pantalla de ingresar la pregunta
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+    Programador               Fecha                      Descripcion
+    Arnold Caballero     		01-06-2022                 cambio de nombre de variables para la recuperacion por correo
+
+----------------------------------------------------------------------->
+
 <?php
  session_start();
  include "function_bitacora.php";
@@ -64,7 +101,13 @@ if(isset($_SESSION['vario'] )) {
                                                             WHERE u.NOMBRE_USUARIO ='$nomUser'";
                                                             $resul=$conn->query($update);
                                                             if($resul >0){//En caso que la contraseña se actualice correctamente.
-                                                              echo "<script> alert('Contraseña cambiada exitosamente') location.href = '../index.php'; </script>";
+                                                              echo "<script> alert('¡Cambio de contraseña correcto!') location.href = '../index.php'; </script>";
+                                                              $_SESSION['vario'] =$nomUser;
+                                                              $codigoObjeto=54;
+
+                                                              $accion='MODIFICACIÓN DE CONTRASEÑA';
+                                                              $descripcion= 'EL USUARIO MODIFICÓ LA CONTRASEÑA POR EL METODO DE CORREO';
+                                                              bitacora($codigoObjeto, $accion,$descripcion);
                                                             }
                                                          }
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
@@ -81,15 +124,10 @@ if(isset($_SESSION['vario'] )) {
                                                 echo $e->getMessage();  
                                                 return false;
                                             }
-                                            echo "<script> alert('Cambio de contraseña correctamente')
+                                            echo "<script> 
                                             location.href = '../index.php';
                                             </script>";
-                                            $_SESSION['vario'] =$nomUser;
-                                            //llamada de la fuction bitacora -->
-                                         $codigoObjeto=1;
-                                         $accion='Cambio de contraseña';
-                                         $descripcion= 'Cambio la contraseña por metodo correo';
-                                         bitacora($codigoObjeto, $accion,$descripcion);
+                                            
                                         }//final del else
                                     }catch (PDOException $e){
                                     echo $e->getMessage();  

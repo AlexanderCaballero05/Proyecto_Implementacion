@@ -126,9 +126,9 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                echo '<script>  alert("Verifique su correo electrónico se ha enviado una contraseña de restableción"); window.location="../login";</script>';
                $_SESSION['vario'] =$usuario;
                                //llamada de la fuction bitacora -->
-               $codigoObjeto=1;
-               $accion='Correo de recuperacion';
-               $descripcion= 'Solicitud recuperacion de contraseña ';
+               $codigoObjeto=54;
+               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
+               $descripcion= 'EL USUARIO SOLICITO RECUPERAR LA CONTRASEÑA POR CORREO';
                bitacora($codigoObjeto, $accion,$descripcion);
                
                require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
@@ -218,7 +218,15 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
 
       if($filas>0){
         header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
+        $codigoObjeto=54;
+               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
+               $descripcion= 'EL USUARIO SOLICITÓ RECUPERAR LA CONTRASEÑA POR PREGUNTAS DE SEGURIDAD';
+               bitacora($codigoObjeto, $accion,$descripcion);
       }else{
+        $codigoObjeto=54;
+               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
+               $descripcion= 'EL USUARIO SOLICITÓ RECUPERAR LA CONTRASEÑA POR PREGUNTAS DE SEGURIDAD FUE FALLIDO';
+               bitacora($codigoObjeto, $accion,$descripcion);
         echo '<script> alert("Datos incorrectos");window.location="../Vistas/modulos/metodos_recuperar_clave.php"; </script>';
       }
     }//Fin del else if

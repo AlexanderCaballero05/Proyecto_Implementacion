@@ -41,6 +41,11 @@
 
 <?php 
  include_once "conexion1.php";
+ include_once "conexion3.php";
+ $codigoObjeto = 5;
+$accion = 'INGRESO AL MANTENIMIENTO DE PERMISOS';
+$descripcion = 'VIZUALIZAR LOS REGISTROS DE LOS PERMISOS';
+bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <head>
 
