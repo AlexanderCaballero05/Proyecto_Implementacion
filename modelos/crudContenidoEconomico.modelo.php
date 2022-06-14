@@ -13,7 +13,7 @@
                $contenido_nombre = ($_POST['contenido_nombre']); 
                   
               try{ 
-                  $consulta_contenido = $db->prepare("SELECT CODIGO_TIPOSOCIO FROM tbl_contenido_socioeconomico WHERE CODIGO_TIPOSOCIO = (?);");
+                  $consulta_contenido = $db->prepare("SELECT COUNT(*) FROM tbl_contenido_socioeconomico WHERE CODIGO_TIPOSOCIO = (?);");
                   $consulta_contenido->execute(array($contenido_nombre));
                   $row=$consulta_contenido->fetchColumn();
                   if($row>0){
@@ -28,14 +28,16 @@
                       $query_contenido = " INSERT INTO `tbl_contenido_socioeconomico`(`CODIGO_TIPOSOCIO`,`NOMBRE_TIPO`) VALUES ('$codigo_contenido','$contenido_nombre'); ";
                       $resul=$conn->query($query_contenido);
                       if($resul >0){
-                        echo "<script> 
-                        
-                        window.location = 'crudContenidoEconomico';
-                        </script>";
+                        echo "<script> window.location = 'crudContenidoEconomico'; </script>";
+                        include_once 'function_bitacora.php';
+                        $codigoObjeto=18;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UN CONTENIDO DE TIPO SOCIOECONÓMICO';
+                        bitacora($codigoObjeto, $accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        alert('Ocurrio algun error');
                         window.location = 'crudContenidoEconomico';
                         </script>";
                         exit;
@@ -69,8 +71,9 @@
      
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_Contenido_Socioeconomico where NOMBRE_TIPO = (?);");
-       $sentencia->execute(array($editar_nombre));
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_Contenido_Socioeconomico where NOMBRE_TIPO = (?)
+       and CODIGO_CONTENIDO_SOCIOECONOMICO <> (?);");
+       $sentencia->execute(array($editar_nombre,$codigo_contenido));
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
@@ -85,15 +88,13 @@
             $sql = " UPDATE tbl_Contenido_Socioeconomico SET NOMBRE_TIPO = '$editar_nombre' WHERE CODIGO_CONTENIDO_SOCIOECONOMICO = '$codigo_contenido' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo "<script>
-             
-              window.location = 'crudContenidoEconomico';
-              </script>";
+              echo "<script> window.location = 'crudContenidoEconomico'; </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un Contenido ';
+              $codigoObjeto=18;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UN CONTENIDO DE TIPO SOCIOECONÓMICO ';
               bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el nombre del Contenido!');
@@ -117,7 +118,10 @@ if(isset($_POST['contenido_eliminar'])){
   if(isset($_POST['ELIMINAR_CONTENIDO'])){
     $code = ($_POST['contenido_eliminar']);//asigna a una variable el id del contenido a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT c.CODIGO_CONTENIDO_SOCIOECONOMICO, c.CODIGO_TIPOSOCIO , c.NOMBRE_TIPO from tbl_contenido_socioeconomico c ,tbl_tipo_socioeconomico t where t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO =(?);");
+      $relacion_tablas =  $db->prepare("SELECT es.CODIGO_CONTENIDO_SOCIOECONOMICO , es.CODIGO_ESTUDIANTE_SOCIOECONOMICO
+      from tbl_estudiante_socioeconomico es ,tbl_contenido_socioeconomico con 
+      where es.CODIGO_CONTENIDO_SOCIOECONOMICO = con.CODIGO_CONTENIDO_SOCIOECONOMICO 
+       and con.CODIGO_CONTENIDO_SOCIOECONOMICO = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -132,13 +136,12 @@ if(isset($_POST['contenido_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_Contenido_socioeconomico WHERE  CODIGO_TIPOSOCIO  = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-           
             window.location = 'crudContenidoEconomico';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un registro en la tabla contenido';
+            $codigoObjeto=18;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UN CONTENIDO DE TIPO SOCIOECONÓMICO ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

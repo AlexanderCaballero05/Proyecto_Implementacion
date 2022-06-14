@@ -33,8 +33,8 @@
                         </script>";
                         include_once 'function_bitacora.php';
                         $codigoObjeto=37;
-                        $accion='AGREGAR';
-                        $descripcion='SE AGREGO UN NUEVO TIPO DE SANGRE';
+                        $accion='INSERCIÓN';
+                        $descripcion='SE REGISTRÓ UN NUEVO TIPO DE SANGRE';
                        bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
@@ -97,8 +97,8 @@
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=37;
-              $accion='MODIFICACION'; 
-              $descripcion= 'SE MODIFICO UN TIPO DE SANGRE';
+              $accion='MODIFICACIÓN'; 
+              $descripcion= 'SE MODIFICÓ UN TIPO DE SANGRE';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
@@ -143,8 +143,8 @@ if(isset($_POST['eliminar_tiposangre'])){
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=37;
-            $accion='ELIMINACION';
-            $descripcion= 'SE ELIMINO UN TIPO DE SANGRE';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ UN TIPO DE SANGRE';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

@@ -33,7 +33,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                $nombre_sacramento = ($_POST['nombre_sacramento']);
                $descripcion = ($_POST['descripcion_sacramento']);  
               try{ 
-                  $consulta_sacramento = $db->prepare("SELECT NOMBRE FROM tbl_sacramento WHERE NOMBRE = (?);");
+                  $consulta_sacramento = $db->prepare("SELECT COUNT(*) FROM tbl_sacramento WHERE NOMBRE = (?);");
                   $consulta_sacramento->execute(array($nombre_sacramento));
                   $row=$consulta_sacramento->fetchColumn();
                   if($row>0){
@@ -87,7 +87,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
       try{
-       $sentencia = $db->prepare("SELECT * FROM tbl_sacramento where NOMBRE = (?) and CODIGO_SACRAMENTO <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_sacramento where NOMBRE = (?) and CODIGO_SACRAMENTO <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_sacramento));
        $row=$sentencia->fetchColumn();
         if($row>0){

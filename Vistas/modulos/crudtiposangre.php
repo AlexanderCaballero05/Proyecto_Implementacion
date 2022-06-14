@@ -29,7 +29,7 @@ Programador               Fecha                      Descripcion
  include_once "conexion3.php";
  $codigoObjeto = 37;
  $accion='INGRESO A MANTENIMIENTO TIPO SANGRE';
- $descripcion='MANTENIMIENTO AL REGISTRO DE TIPO DE SANGRE';
+ $descripcion='MANTENIMIENTO A LOS REGISTRO DE TIPO DE SANGRE';
 bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>

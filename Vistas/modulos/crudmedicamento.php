@@ -36,7 +36,7 @@ include_once "conexion3.php";
 
 $codigoObjeto = 35;
 $accion = 'INGRESO A LA PANTALLA MANTENIMIENTO DE MEDICAMENTO  ';
-$descripcion = 'DAR MANTENIMIENTO A LOS MEDICAMENTOS REGISTRADOS';
+$descripcion = 'MANTENIMIENTO A LOS MEDICAMENTOS REGISTRADOS';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 

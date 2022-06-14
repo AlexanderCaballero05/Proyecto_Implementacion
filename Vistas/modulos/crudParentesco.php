@@ -14,14 +14,15 @@ Lic Giancarlo Scalichi -- Implementacion de sistemas
 Clauidia Nuñez -- Analisis y diseño
 ---------------------------------------------------------------------
 Programa:          Pantalla que muestra los parentescos
-Fecha:             01-jan-2016
-Programador:       Javier
+Fecha:             01-jan-2022
+Programador:       ?
 descripcion:       Mantenimiento de parenteso agrega uno nuevo edita y elimina
 -----------------------------------------------------------------------
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
-Diana Rut               31/05/2022            Se modifico la pantalal
+Diana Rut               31/05/2022            Se modifico la pantala
+Diana Rut               09/06/2022            Se modifico los mensajes de bitacora y otras cosas visuales como el titulo y modal editar
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -31,8 +32,8 @@ include_once "conexion3.php";
  <!--llamada de la fuction bitacora -->
      <?php 
       $codigoObjeto=44;
-      $accion='Ingreso a la pantalla de mantenimiento parentesco';
-      $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
+      $accion='INGRESO A LA PANTALLA MANTENIMIENTO PARENTESCO';
+      $descripcion= 'SE AUTENTIFICO';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
  <head>
@@ -44,7 +45,7 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3 ">
-            <h4>PARENTESCO FAMILIAR</h4>    
+            <h4>Mantenimiento Parentesco Familiar</h4>    
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -161,29 +162,28 @@ include_once "conexion3.php";
                           <div id="EDITARPARENTESCO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARENTESCO" method="POST" class=" needs-validation">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Parentesco</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                               <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Parentesco</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form  method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->
-                                     
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtnombre_usuario">Código: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var1; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="id_parentes" id="id_parentes" required>
+                                          <label class="form-label">Código Parentesco</label>
+                                          <input  type="text" readonly value="<?php echo $var1;?>" class="form-control" name="codigo_parentesco" >
                                           <div class="invalid-feedback">
-                                           Llene este campo.
+                                            Campo obligatorio.
                                           </div>
                                         </div>
                                       </div> 
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtnombre_usuario">Parentesco: </label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_paren" id="Edit_paren" required>
+                                          <label >Parentesco</label>
+                                          <input  type="text" onkeypress="return soloLetras(event);"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  minlength="3" maxlength="100"     autocomplete = "off" type="text"   name="editar_parentesco"  required>
                                           <div class="invalid-feedback">
-                                           Llene este campo.
+                                            Campo obligatorio.
                                           </div>
                                         </div>
                                       </div> 
@@ -191,7 +191,7 @@ include_once "conexion3.php";
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="Edit_parentesco" name="Edit_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                    <button type="submit"  name="PARENTESCOEDITAR" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
@@ -209,7 +209,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="paren_eliminar" id="paren_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el registro de parentesco de  <?php echo $var2; ?> ?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el parentesco <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -240,7 +240,7 @@ include_once "conexion3.php";
   <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Parentesco</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,9 +250,9 @@ include_once "conexion3.php";
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtparametro">Parentesco</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parentesco" name="parentesco" id="parentesco" required>
+                                    <input  type="text" onkeypress="return soloLetras(event);" class="form-control"  maxlength="20" minlength="3"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parentesco" name="parentesco" id="parentesco" required>
                                     <div class="invalid-feedback">
-                                     Llene este campo.
+                                      Campo obligatorio.
                                     </div>
                                 </div>
                             

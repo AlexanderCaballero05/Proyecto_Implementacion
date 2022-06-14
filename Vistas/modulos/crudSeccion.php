@@ -184,13 +184,13 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_seccion" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre Sección</label>
+                                          <label>Nombre Sección</label>
                                           <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5" required   autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Descripción</label>
+                                          <label>Descripción</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>

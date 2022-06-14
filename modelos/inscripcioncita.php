@@ -72,8 +72,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
-                          $accion='AGREGAR';
-                          $descripcion='SE AGREGO UNA NUEVA CITA';
+                          $accion='INSERCIÓN';
+                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
                           bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
@@ -93,8 +93,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 
                           window.location = 'crudinscripcioncita';
                           </script>";
-                          $accion='AGREGAR';
-                          $descripcion='SE AGREGO UNA NUEVA CITA';
+                          $accion='INSERCIÓN';
+                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
                           bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
@@ -111,8 +111,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
-                          $accion='AGREGAR';
-                          $descripcion='SE AGREGO UNA NUEVA CITA';
+                          $accion='INSERCIÓN';
+                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
                           bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
@@ -189,8 +189,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                 window.location = 'crudinscripcioncita';
                  </script>";
                $codigoObjeto=32;
-               $accion='MODIFICACION';
-               $descripcion='SE MODIFICO UNA CITA';
+               $accion='MODIFICACIÓN';
+               $descripcion='SE MODIFICÓ UNA CITA';
                bitacora($codigoObjeto,$accion,$descripcion);
                
                }
@@ -242,8 +242,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
             window.location = 'crudinscripcioncita';
             </script>";
             $codigoObjeto=32;// cambiar 
-            $accion='ELIMINACION';
-            $descripcion= 'SE ELIMINO UNA CITA ';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ UNA CITA ';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
@@ -282,8 +282,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       if($consulta >0){ 
           echo "<script> window.location = 'crudPacientesMedicos';</script>";
           $codigoObjeto=32;
-          $accion='AGREGAR';
-          $descripcion='SE AGREGO UNA NUEVA CITA';
+          $accion='INSERCIÓN';
+          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
           bitacora($codigoObjeto,$accion,$descripcion);
            exit;
       }else{
@@ -316,8 +316,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       if($consulta >0){ 
           echo "<script> window.location = 'crudPacientesPsicologicos';</script>";
           $codigoObjeto=32;
-          $accion='AGREGAR';
-          $descripcion='SE AGREGO UNA NUEVA CITA';
+          $accion='INSERCIÓN';
+          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
           bitacora($codigoObjeto,$accion,$descripcion);
            exit;
       }else{
@@ -350,8 +350,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
            window.location = 'crudPacientesEspirituales';
           </script>";
           $codigoObjeto=32;
-          $accion='AGREGAR';
-          $descripcion='SE AGREGO UNA NUEVA CITA';
+          $accion='INSERCIÓN';
+          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
           bitacora($codigoObjeto,$accion,$descripcion);
            exit;
       }else{

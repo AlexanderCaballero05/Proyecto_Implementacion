@@ -3,9 +3,9 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto = 48;///cambiar
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
+$codigoObjeto = 64;///cambiar
+$accion = 'INGRESO A PANTALLA DE MANTENIMIENTO CITAS PSICOLÓGICAS ESTUDIANTES ';
+$descripcion = 'MANTENIMIENTO A LAS CITAS PSICOLOGICAS ESTUDIANTES ';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
@@ -19,7 +19,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>CITAS MEDICAS PENDIENTES DE LOS ESTUDIANTES DE PROSECAR </h4>
+              <h4>Citas Psocológicas Pendientes Estudiantes Proseca</h4>
     </div>
     <section class="content">
        <div class="card"> 
