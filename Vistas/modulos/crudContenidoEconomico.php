@@ -1,3 +1,29 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD GARCIA u otr persona
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos socioeconomicos de los estudiantes
+Fecha:            
+Programador:       
+descripcion:       Pantalla de mantenimiento edita datos socieconomicos
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -15,9 +41,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
  
   <body oncopy="return false" onpaste="return false"> 
   <section class="content">
-     <div class="content-header text-xl-center mb-3 ">
-        <h4>Mantenimiento Contenido Socioeconómico</h4>    
-     </div>
+
+     <section class="content-header text-xl-center mb-3 btn-light">
+          <h1>
+              <h4>Mantenimiento de Contenido Socioeconómico</h4>
+          </h1>     
+      </section>
+
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -64,9 +95,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
-                          <th class="text-center">Tipo Socioeconómico</th>
-                          <th class="text-center">Contenido Tipo Socioeconómico</th>
+
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Tipo del Contenido socioeconómico</th>
+                          <th class="text-center">Nombre del Contenido socioeconómico</th>
+
                           
                         </tr>
                       </thead>
@@ -167,8 +200,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <div id="EDITARCONTENIDO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Contenido Socioeconómico</h4>
+
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
+                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar Contenido </h4>
+
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST">
@@ -178,9 +214,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
               
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label class="form-label">Contenido Tipo Socioeconomico</label>
-                                          <textarea required type="text" class="form-control"  maxlength="50" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" autocomplete = "off" type="text"  
-                                           name="editar_nombre" id="editar_nombre"><?php echo $var3; ?></textarea>
+
+                                          <label for="txtcodigo_persona">Nombre del Contenido Socioeconomico</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" autocomplete = "off" type="text"   name="editar_nombre" id="editar_nombre" required="">
+                                          <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
+
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -246,11 +286,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
           $result= $conn->query($query);
         ?>
            <div class="modal-content"><!-- Modal content-->
-               <div class="modal-header" style="background-color: #0CCDE3">
-                  <h4 class="text-center">Agregar Contenido Socioeconómico</h4>
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
+
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Contenido</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">

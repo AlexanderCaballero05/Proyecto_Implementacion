@@ -17,7 +17,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO TIPO PERSONA </h4>
+              <h4>Mantenimiento Tipo Persona </h4>
         </section>
   
   <section class="content">
@@ -182,7 +182,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                        campo obligatorio.
                                           </div>
                                         </div>
-                          </div>
+                                        </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">

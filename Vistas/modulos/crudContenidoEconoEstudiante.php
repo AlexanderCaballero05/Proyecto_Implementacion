@@ -14,14 +14,15 @@ Lic Giancarlo Scalichi -- Implementacion de sistemas
 Clauidia Nuñez -- Analisis y diseño
 ---------------------------------------------------------------------
 Programa:          Pantalla que muestra los datos socioeconomicos de los estudiantes
-Fecha:             01-jan-2016
-Programador:       Javier
+Fecha:            
+Programador:       
 descripcion:       Pantalla de mantenimiento edita datos socieconomicos
 -----------------------------------------------------------------------
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut               31/05/2022            Se agrego un tab al menu y un cierre de div
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -35,7 +36,7 @@ Diana Rut               31/05/2022            Se agrego un tab al menu y un cier
   <div class="content-header">
   </div>
   <div class="content-header text-xl-center mb-3 ">
-      <h4>ESTUDIANTES PROSECAR</h4>
+      <h4>Estudiantes Prosecar</h4>
   </div>
   <section class="content">
     <div class="container-fluid">
@@ -46,7 +47,7 @@ Diana Rut               31/05/2022            Se agrego un tab al menu y un cier
               <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
-                <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+                <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
@@ -104,9 +105,9 @@ Diana Rut               31/05/2022            Se agrego un tab al menu y un cier
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Nombre estudiante</th>
-                          <th class="text-center">Contenido socio-economico</th>
+                          <th class="text-center">Contenido socio-económico</th>
                           <th class="text-center">Nombre tipo contenido</th>
                         </tr>
                       </thead>
@@ -230,7 +231,7 @@ Diana Rut               31/05/2022            Se agrego un tab al menu y un cier
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Contenido socieconomico</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>

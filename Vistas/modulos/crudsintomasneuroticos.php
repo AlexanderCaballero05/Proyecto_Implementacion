@@ -18,7 +18,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO SINTOMAS NEUROTICOS </h4>
+              <h4>Mantenimiento de Sintomas Neuróticos </h4>
         </section>
   
   <section class="content">

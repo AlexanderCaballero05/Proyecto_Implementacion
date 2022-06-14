@@ -1,3 +1,37 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de objetos
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de objetos  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -75,7 +109,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO OBJETOS</h4>
+              <h4>Mantenimiento Objetos</h4>
     </div>
     <section class="content">
         <div class="container-fluid">
@@ -125,16 +159,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         </div>
 
                         <!-- form start -->
-                        <form method ="POST" CLASS ="needs-validation">
+                        <form method ="POST">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tabla_objetos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                         <th class="text-center">Acción</th>
-                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Código</th>
                                         <th class="text-center">Nombre</th>
-                                        <th class="text-center">Descripcion</th>
+                                        <th class="text-center">Descripción</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -224,7 +258,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content-->
-                                                                <form method="POST">
+                                                                <form method="POST" class="needs-validation" novalidate>
                                                                     <div class="modal-header" style="background-color: #0CCDE3">
                                                                         <h4 class="text-center">Editar informacion objetos
                                                                         </h4>

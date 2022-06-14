@@ -22,7 +22,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <section class="content">
    <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO ESPECIALIDADES</h4>
+            <h4>Mantenimiento Especialidad</h4>
         </h1>     
     </section>
     <div class="container-fluid">
@@ -73,7 +73,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead>
                         <tr>
                         <td class="text-center">Acción</th>
-                        <td class="text-center">Area</th>
+                        <td class="text-center">Área</th>
                         <td class="text-center">Especialidad</th>  
                         <td class="text-center">Descripción</th>
                         </tr>
@@ -192,9 +192,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                 onKeyDown="sinespacio(this);"
                                                 onkeyup="mayus(this);"
                                                 autocomplete="off" type="text"
-                                                name="editespecialidad" id="editespecialidad">
+                                                name="editespecialidad" id="editespecialidad"  required="">
                                                 <div class="invalid-feedback">
-                                                campo obligatorio.
+                                                Campo Obligatorio.
                                                 </div>
                                         </div>
                                     </div>
@@ -207,9 +207,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                             onkeyup="mayus(this);"  
                                              autocomplete = "off" type="text"
                                               onkeypress="return soloLetras(event);" 
-                                             name="editar_descripcion" id="editar_descripcion">
+                                             name="editar_descripcion" id="editar_descripcion" required="">
                                           <div class="invalid-feedback">
-                                          campo obligatorio.
+                                          Campo Obligatorio.
                                           </div>
                                         </div>
                                       </div>
@@ -283,9 +283,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                 placeholder="Agregue  la especialidad"
                                                 onkeyup="mayus(this);"
                                                 autocomplete="off" type="text"
-                                                name="agregarespecialidad" id="agregarespecialidad">
+                                                name="agregarespecialidad" id="agregarespecialidad"  required="" >
                                                 <div class="invalid-feedback">
-                                                campo obligatorio.
+                                                Campo Obligatorio.
                                                 </div>
                                         </div>
                                     </div>
@@ -299,7 +299,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       name="agregardescripcion"
                                        id="agregardescripcion" required=""></textarea>
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo Obligatorio.
                                    </div>
                                 </div>
                             </div> 
@@ -314,7 +314,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   
                                       style="width: 100%;" name="codigo_area" id="codigo_area" 
-                                      required>
+                                      required="">
                                       <option > --Seleccione-- </option>
                                       <?php 
                                        if ($resultadod->num_rows > 0) {
@@ -325,8 +325,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <option value="<?php echo $codigo_area?>" ><?php echo $area;?></option>
                                       <?php } 
                                       }?>
-                                    </select> 
+                                    </select>
                                 </div>
+                                <div class="invalid-feedback">
+                                     Campo Obligatorio.
+                                   </div> 
                              </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       

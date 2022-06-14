@@ -1,3 +1,39 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de los trastornos 
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de los trastornos  es su relación  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
+
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -18,7 +54,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
         <h1>
-            <h4>MANTENIMIENTO DE TRASTORNOS</h4>
+            <h4>Mantenimiento de Trastornos</h4>
         </h1>     
     </section>
       <div class="row">
@@ -59,7 +95,7 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST"  class="needs-validation" novalidate ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">

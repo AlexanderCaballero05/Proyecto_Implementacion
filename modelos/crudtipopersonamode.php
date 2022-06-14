@@ -29,16 +29,17 @@
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
+                        alert('¡Se agrego un  nuevo tipo de persona!');
                         window.location = 'crudtipopersona';
                         </script>";
                         $codigoObjeto=12;
-                        $accion='Se ingreso un tipo persona';
-                        $descripcion='Se vizualiza el tipo de persona';
+                        $accion='SE AGREGO';
+                        $descripcion='SE AGREGO UN TIPO DE PERSONA';
                        bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        alert('¡Error auxilio!');
                         window.location = 'crudtipopersona';
                         </script>";
                         exit;
@@ -87,11 +88,12 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
+              alert('¡Se modifico el tipo de persona!');
               window.location = 'crudtipopersona';
               </script>";
               $codigoObjeto=12;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un tipo de persona ';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UN TIPO DE PERSONA ';
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
@@ -122,7 +124,7 @@ if(isset($_POST['persona_eliminar'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar esta, relacionado con otras tablas!');
+        alert('¡No se puede eliminar este campo, esta relacionado con otras tablas!');
         window.location = 'crudtipopersona';
         </script>";
         exit;
@@ -132,6 +134,7 @@ if(isset($_POST['persona_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_tipo_persona WHERE CODIGO_TIPO_PERSONA = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('¡Se elimino un tipo de persona!');
             window.location = 'crudtipopersona';
             </script>";
             $codigoObjeto=12;
