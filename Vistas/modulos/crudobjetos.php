@@ -38,7 +38,7 @@ include_once "conexion3.php";
 
 
 $codigoObjeto = 6;
-$accion = 'Ingreso a la pantalla de mantenimiento objetos ';
+$accion = 'Ingreso a la pantalla de mantenimiento objetos';
 $descripcion = 'Ver los registros de los objetos';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>

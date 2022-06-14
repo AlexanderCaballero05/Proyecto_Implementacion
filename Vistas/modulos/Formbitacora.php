@@ -39,9 +39,9 @@
 
 <?php 
 date_default_timezone_set("America/Guatemala");
-$fecha_actual = date("Y-m-d");
-  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
-  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
+$fecha_actual = date("Y-m-d h:i:s a");
+  $_SESSION["bdesde"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."- 1 month"));
+  $_SESSION["bhasta"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."+ 23 hour + 2 minute + 2 second"));
 
 ?>
 
@@ -55,8 +55,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <?php 
                   $codigoObjeto=7;
-                    $accion='Ingreso a la bitacora universal';
-                    $descripcion= 'Consultar la informacion de la bitacora';
+                    $accion='INGRESO A LA BITACORA UNIVERSAL';
+                    $descripcion= 'CONSULTAR LA INFORMACION DE LA BITACORA UNIVERSAL';
                     bitacora($codigoObjeto, $accion,$descripcion);
                     ?>
 <head>
@@ -96,12 +96,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
+            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
           </div>
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-            <input class="form-control" type="date" max="<?= date("Y-m-d")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
+            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
           </div>
           <div class="col-sm-2 mt-4">
              <button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>

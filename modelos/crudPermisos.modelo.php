@@ -87,6 +87,12 @@ if(isset($_POST['PERUSUARIO'])){
                                  alert('¡El Permiso ha sido asignado correctamente!');
                                 window.location = 'crudPermisos';
                                  </script>";
+                                 include_once 'function_bitacora.php';
+                                 $codigoObjeto=5;
+                                 $accion='INSERCIÓN';
+                                 $descripcion= 'SE REGISTRO UN PERMISO SOBRE UN ROL';
+                                  bitacora($codigoObjeto, $accion,$descripcion);
+                                  exit;
                                  }else{
                                    
                                  echo "<script>
@@ -172,9 +178,16 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
 
                       if ($consulta>0) {
                         echo "<script>
-                       
+                        alert('Permiso actualizado');
                        window.location = 'crudPermisos';
-                        </script>";
+                          </script>";
+
+                        include_once 'function_bitacora.php';
+                                 $codigoObjeto=5;
+                                 $accion='MODIFICACIÓN';
+                                 $descripcion= 'SE MODIFICO UN PERMISO A UN ROL';
+                                  bitacora($codigoObjeto, $accion,$descripcion);
+                                  exit;
                         }else{
                         echo "<script>
                        alert('Error al actualizar el registro');
@@ -237,11 +250,11 @@ if(isset($_POST['eliminarPermiso'])){
             window.location = 'crudPermisos';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un rol ';
-            bitacora($codigoObjeto, $accion,$descripcion);
-            exit;
+                                 $codigoObjeto=5;
+                                 $accion='ELIMINACIÓN';
+                                 $descripcion= 'SE ELIMINO UN PERMISO A UN ROL';
+                                  bitacora($codigoObjeto, $accion,$descripcion);
+                                  exit;
           }else{
             echo "<script>
             alert('¡Error al eliminar el rol!');

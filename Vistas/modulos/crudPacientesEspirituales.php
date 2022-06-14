@@ -12,7 +12,7 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> PACIENTES DEL AREA ESPIRITUAL<i class="nav-icon fas fa-stethoscope"></i> </h4>
+              <h4>PACIENTES DEL AREA ESPIRITUAL<i class="nav-icon fas fa-stethoscope"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">

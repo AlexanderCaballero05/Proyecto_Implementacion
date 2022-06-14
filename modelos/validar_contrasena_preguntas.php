@@ -61,10 +61,12 @@
                                                     $resul=$conn->query($update);
                                                     if($resul >0){//Si la contraseña se actualizco correctamente
                                                         echo "<script> 
-                                                        alert('Contraseña fue actualizada exitosamente')
+                                                        alert('¡Cambio de contraseña correcto!')
                                                         location.href = '../index.php';
                                                         </script>";
                                                         exit;
+
+                                                       
                                                     }
                                                 }
                                                 else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )
@@ -83,12 +85,7 @@
                                         echo $e->getMessage();  
                                         return false;
                                     }
-                                    $_SESSION['vario'] =$usuario;
-                                    //llamada de la fuction bitacora -->
-                                    $codigoObjeto=1;
-                                    $accion='Cambio de contraseña';
-                                    $descripcion= 'Cambio la contraseña por metodo preguntas';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                                        
                                 }//final del else
                             }catch (PDOException $e){
                               echo $e->getMessage();  
