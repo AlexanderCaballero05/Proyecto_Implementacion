@@ -22,7 +22,7 @@
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de parametros
     Fecha:             
-    Programador:      
+    Programador:       Luz María Montoya Medina
     descripcion:       Permite llevar un mantenimiento de parametro  ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio

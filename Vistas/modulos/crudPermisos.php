@@ -34,6 +34,7 @@
 
     Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
+    Luz Montoya             16-06-2022                 Cambio en el encabezado de la tabla, el orden de la columna de permisos
 
 
 ----------------------------------------------------------------------->
@@ -118,10 +119,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <th class="text-center">ID</th> <!--encabezados de la tabla -->
                           <th class="text-center">Rol Usuario</th>
                           <th class="text-center">Permiso Objeto</th>
+                          <th class="text-center">Permiso Mostrar</th>
                           <th class="text-center">Permiso Insertar</th>
                           <th class="text-center">Permiso Eliminar</th>
-                          <th class="text-center">Permiso Actualizar</th>
-                          <th class="text-center">Permiso Mostrar</th>
+                          <th class="text-center">Permiso Editar</th>
+                         
                                                    
 
                         </tr>
@@ -137,10 +139,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             $var3 = $row['CODIGO_OBJETO'];
                             $var4 = $row['ROL'];
                             $var5 = $row['NOMBRE'];
+                            $var9 = $row['MOSTRAR'];
                             $var6 = $row['INSERTAR'];
                             $var7 = $row['ELIMINAR'];
                             $var8 = $row['ACTUALIZAR'];
-                            $var9 = $row['MOSTRAR'];
+                            
                            
                         ?>
                             <?php
