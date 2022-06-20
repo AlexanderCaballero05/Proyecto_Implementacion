@@ -90,6 +90,7 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
+              alert('La tutoría se modifico correctamente'); 
               window.location = 'crudTutorias';
               </script>";
               include_once 'function_bitacora.php';

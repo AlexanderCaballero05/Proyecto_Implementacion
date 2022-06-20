@@ -18,36 +18,38 @@ include_once 'conexionpdo.php';
   </div>
   <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE EXPEDIENTE PSICOLOGICO  <i class="nav-icon fas fa-stethoscope"></i></h4>
-        </section>
+        <div class="content-header text-xl-center mb-3"> 
+          <h4>Registrar Expediente Psicológico <i class="nav-icon fas fa-stethoscope"></i></h4>
+       </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Psicológica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Plan Terapéutico</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                    <strong>Datos generales de expediente</strong>
-                    <hr>
+                 <div  class="pt-2 pb-2 px-2">
+                      <h5>Datos Generales Expediente</h5>
+                  </div>
+                    <hr color="blue">
                     <div class= "row"> 
                         <div  class="col-sm-8">
                         <?php
@@ -85,7 +87,7 @@ include_once 'conexionpdo.php';
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                     <label for="" class="control-label">Paciente</label> 
+                                     <label for="" class="control-label">Nombre del Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre2;?>">
                             <input  hidden name="codigo_paciente_expediente_psicologico" value="<?php echo $codigo2;?>">
@@ -100,28 +102,24 @@ include_once 'conexionpdo.php';
                        
 
                         <div class="col-sm-4">
-                         <label for="antecedentes_familiares" class="control-label">Antecedentes Psicologicos familiares</label> 
+                         <label for="antecedentes_familiares" class="control-label">Antecedentes Psicológicos Familiares</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" name="antecedentes_familiares" id="antecedentes_familiares" autocomplete = "off" required></textarea>
+                            <textarea class="form-control" type="text" name="antecedentes_familiares" onkeyup="mayus(this);" id="antecedentes_familiares" autocomplete = "off" required></textarea>
                             <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo obligatorio.
                               </div>
                             </div>
                         </div><!--fin del peso -->
 
-                        
-
-
                     </div> <!--fin del row -->
-                    </br>
+
                     <hr>
-                    <br>
                     <div class="row">
                      
                     <div class="col-sm-4">
-                         <label for="antecedentes_personales" class="control-label">Antecedentes Psicologicos personales</label> 
+                         <label for="antecedentes_personales" class="control-label">Antecedentes Psicológicos Personales</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" name="antecedentes_personales" id="antecedentes_personales" autocomplete = "off" required></textarea>
+                            <textarea class="form-control" type="text" name="antecedentes_personales" id="antecedentes_personales" onkeyup="mayus(this);" autocomplete = "off" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -129,11 +127,11 @@ include_once 'conexionpdo.php';
                         </div><!--fin del peso -->
                       <!-- End: checkbox -->
                       <div class="col-sm-4">
-                         <label for="antecedentes_clinicos" class="control-label">Antecedentes clinicos</label> 
+                         <label for="antecedentes_clinicos" class="control-label">Antecedentes Clínicos</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" name="antecedentes_clinicos" id="antecedentes_clinicos" autocomplete= "off" required></textarea>
-                            <div class="invalid-feedback">
-                                  campo obligatorio.
+                            <textarea class="form-control" type="text" name="antecedentes_clinicos" id="antecedentes_clinicos" onkeyup="mayus(this);" autocomplete= "off" required></textarea>
+                             <div class="invalid-feedback">
+                                  Campo obligatorio.
                               </div>
                             </div>
                         </div><!--fin del peso -->
@@ -141,7 +139,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-4">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>Sintomas neuroticos</strong>
+                              <strong>Síntomas Neuróticos</strong>
                             </div>
                         <div class="card-body">
                         
@@ -156,25 +154,25 @@ include_once 'conexionpdo.php';
                                 $nombre1= $row1['TIPO'];
                                 ?>
                             <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="neuroticos[]" id="neuroticos<?php echo $codigo1;?>" value="<?php echo $codigo1;?>">
+                                <input class="form-check-input" type="checkbox" name="neuroticos[]" id="neuroticos<?php echo $codigo1;?>" value="<?php echo $codigo1;?>">
                                 <label class="form-check-label" for="neuroticos<?php echo $codigo1;?>">
                                     <?php echo $nombre1;?>
                                 </label>
                                 </br>
-                                
                                 </div>
                                 <?php 
                                 } 
                                 }
                                 ?>
+                                
                       </div><!--fin otros antecedentes--> 
                       </div>
                       </div>
                      
                     </div><!--div del row -->  
 
-                 </br></br>
-                <button type="submit"  id="" name="expediente_medico" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar </button>
+                 
+                <button type="submit"  id="" name="expediente_medico" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Expediente </button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->
@@ -213,24 +211,7 @@ else if ( obj.attachEvent ) {
 }
 }
 
-window_mouseout( document, 'mouseout', event => {
 
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
-}
-} );
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>

@@ -26,6 +26,7 @@
 -----------------------------------------------------------------------
     Programador           Fecha                      Descripcion
 Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
+Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de registro correctamente
 ----------------------------------------------------------------------->
 <?php
  session_start();
@@ -119,6 +120,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
                                   echo "<script> 
+                                   alert('Usuario registrado correctamente');
                                     location.href = 'crudpersonas';
                                     </script>";
                                     $codigoObjeto=13;
@@ -157,6 +159,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                    $codigoObjeto=13;
@@ -196,6 +199,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                   exit;
@@ -232,6 +236,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
                                   echo "<script> 
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                     $codigoObjeto=13;
@@ -273,6 +278,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                     $codigoObjeto=13;
@@ -313,7 +319,8 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                 $consul =$conn->query($insert_medico);
   
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
-                                  echo "<script> 
+                                  echo "<script>
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';</script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
@@ -350,6 +357,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                                 $consul =$conn->query($insert_medico);
                                 if($resultado = mysqli_fetch_assoc($consul)>0 ){
                                   echo "<script> 
+                                  alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
                                    $codigoObjeto=13;
@@ -381,6 +389,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                               $consulti =$conn->query($insert_persona);
                               if($resultado = mysqli_fetch_assoc($consulti)>0 ){
                                 echo "<script> 
+                                alert('persona registrada correctamente');
                                 location.href = 'crudpersonas';
                                 </script>";
                                    $codigoObjeto=13;
@@ -465,7 +474,8 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
                 $consulta=$conn->query($sql);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
-                    echo "<script> window.location = 'ediusuarios'; </script>";
+                    echo "<script> alert('Usuario modificado exitosamente');
+                    window.location = 'ediusuarios'; </script>";
                     $codigoObjeto=14;
                     $accion='MODIFICACIÓN';
                     $descripcion= 'SE MODIFICO UN USUARIO';

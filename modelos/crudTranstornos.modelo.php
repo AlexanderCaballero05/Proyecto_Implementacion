@@ -31,7 +31,7 @@ if(isset($_POST['agregar_tipo'])){
                  $resul=$conn->query($query_estado);
                  if($resul >0){
                    echo "<script> 
-               
+                   alert('Se registro correctamente'); 
                    window.location = 'crudTranstornos';
                    </script>";
                    exit;
@@ -64,8 +64,6 @@ if(isset($_POST['agregar_tipo'])){
     if(isset($_POST['editar_nopatologia'])){
       $codigo_nopatologia = ($_POST['EDITARNOPATOLOGIA']);
       $editar_tipo = ($_POST['editar_tipo']);
-
-    
        // 
           try{
             $sql = "UPDATE tbl_transtornos_corporales SET TIPO = '$editar_tipo'
@@ -73,7 +71,7 @@ if(isset($_POST['agregar_tipo'])){
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-             
+              alert("Transtorno modificado correctamente"); 
               window.location = "crudTranstornos";
               </script>';
               include_once 'function_bitacora.php';
@@ -104,7 +102,7 @@ if(isset($_POST['transtorno_eliminar'])){
       mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
       if(mysqli_affected_rows($link)>0){
         echo "<script>
-        
+        alert('Se elimino correctamente'); 
         window.location = 'crudTranstornos';
         </script>";
         include_once 'function_bitacora.php';

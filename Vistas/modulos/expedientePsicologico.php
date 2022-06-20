@@ -20,29 +20,29 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <section class="content-header text-xl-center mb-3 btn-light"> 
-                <h4> EXPEDIENTE PSICOLOGICO PACIENTE <i class="nav-icon fas fa-stethoscope"></i></h4>
+            <section class="content-header text-xl-center mb-3 "> 
+                <h4> Informe de Consulta Psicológica<i class="nav-icon fas fa-stethoscope"></i></h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
                 <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Psicológica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Plan Terapéutico</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
                 </div><!--FIN DEL CARD HEADER -->
@@ -54,13 +54,10 @@
                 <!--Form del archivo expediente -->
                 <form method="POST" id="form">
 
-               
-               <hr>
-
-                <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <h5>Datos de paciente</h5>
+                <div  class="pt-2 pb-2 px-2">
+                      <h5>Datos del paciente</h5>
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
                      <?php
@@ -74,7 +71,7 @@
                                         $cod_usuario=$sentencia1->fetchColumn();
                                     ?>   
                          <?php 
-                           $query = "SELECT i.CODIGO_CITA as CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE,  pe.DNI, pe.FECHA_NACIMIENTO
+                           $query = "SELECT i.CODIGO_CITA as CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE,  pe.DNI, pe.FECHA_NACIMIENTO
                            FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
                                                                    WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
                                                                    AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
@@ -94,7 +91,7 @@
                                     $dni = $row['DNI'];
                                     $fecha = $row['FECHA_NACIMIENTO'];
                               ?>              
-                          <label for="" class="control-label">Paciente</label> 
+                          <label for="" class="control-label">Nombre del Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre_pa;?>">
                             <input  hidden name="EXPEDIENTE_CITA_PSICOLOGICO" value="<?php echo $codigo_cita;?>">
@@ -118,11 +115,11 @@
                     }
                  ?>
                   </div><!--fin row -->
-                  <HR>
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                 <hr>
+                  <div >
                       <h5>Expediente Paciente</h3>
                   </div>
-                  <hr>
+                  <hr color="blue">
 
                   <div class="row">
                       <?php
@@ -144,7 +141,7 @@
                          
                         ?>  
                          <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Sintomas neuroticos</label>
+                         <label  class="form-label">Síntomas Neuróticos</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $alergias;?></textarea>
                           </div>
@@ -169,7 +166,7 @@
                      </div>
 
                      <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Antecedentes clinicos</label>
+                         <label  class="form-label">Antecedentes Clínicos</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $enfermedades;?></textarea>
                           </div>
@@ -184,10 +181,10 @@
                   </div>
 
                   <hr>
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                  <div >
                      <h5>Datos de consulta</h5> 
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
 
                   <div class="row">
                       <?php
@@ -214,13 +211,13 @@
                          
                         ?> 
                       <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Sintomas</label>
+                         <label  class="form-label">Síntomas</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $sintomas;?></textarea>
                           </div>
                       </div>
                       <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Diagnostico Ingreso</label>
+                         <label  class="form-label">Diagnóstico Ingreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_ingreso ; ?></textarea>
                           </div>
@@ -230,7 +227,7 @@
 
                   <div class="row">
                   <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Diagnostico de egreso</label>
+                         <label  class="form-label">Diagnóstico Egreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_egreso; ?></textarea>
                           </div>
@@ -250,28 +247,24 @@
 
                   </div>
                  
+              <div class="modal-footer justify-content-start">
+              <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
+                  Crear Plan Terapéutico
+                </button>
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
 
-                  <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
-                  Crear Plan terapeutico
-               </button>
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
-
-                </form>
-                <!--fin form del archivo expediente-->
-
-                 <!--form para el reporte de la consulta-->
-                 <a> 
-                  <form action="Reportes_Prosecar/reporteConsultaPsicologica.php" method="POST"> 
+                </form><!--fin form del archivo expediente-->
+                <!--form para el reporte de la consulta-->
+                <form action="Reportes_Prosecar/reporteConsultaPsicologica.php" method="POST"> 
                   <div class="row"> 
                     <input hidden name="codigo_cita_reporte" value="<?php echo $codigo_cita;?>">  
                     <input type="text" name="id_persona"  hidden value="<?php echo $persona ?>">
                     <input type="hidden" name="id_usuario" value="<?php echo $cod_usuario ?>">
                   </div>
-                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079" class="btn btn-danger btn"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                   </form>
-
-                </a>
-                <!--fin form para el reporte de la consulta-->
+                   <!--fin form para el reporte de la consulta-->
+              </div>
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 

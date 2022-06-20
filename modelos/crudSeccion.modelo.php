@@ -27,6 +27,7 @@
                       $resul=$conn->query($query_seccion);
                       if($resul >0){
                         echo "<script> 
+                        alert('La sección se registro correctamente'); 
                         window.location = 'crudSeccion';
                         </script>";
                         include_once 'function_bitacora.php';
@@ -37,7 +38,7 @@
                          exit;
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        alert('Ocurrio algun error');
                         window.location = 'crudSeccion';
                         </script>";
                         exit;
@@ -84,7 +85,8 @@
             WHERE CODIGO_SECCION = '$codigo_seccion' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo '<script>              
+              echo '<script>  
+              alert("Sección modificada correctamente");             
               window.location = "crudSeccion";
               </script>';
               include_once 'function_bitacora.php';
@@ -132,6 +134,7 @@ if(isset($_POST['seccion_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_seccion WHERE  CODIGO_SECCION = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('Se elimino correctamente'); 
             window.location = 'crudSeccion';
             </script>";
             include_once 'function_bitacora.php';

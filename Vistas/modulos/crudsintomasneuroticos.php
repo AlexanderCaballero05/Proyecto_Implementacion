@@ -17,9 +17,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>Mantenimiento de Sintomas Neuróticos </h4>
-        </section>
+    <div class="content-header text-xl-center mb-3 ">
+        <h4>Mantenimiento de Síntomas Neuróticos </h4>
+    </div>
   
   <section class="content">
     <div class="container-fluid">
@@ -48,7 +48,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-            <button  data-toggle="modal"  href="#AGREGARSINTOMAS" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar síntomas neuróticos</button>
+            <button  data-toggle="modal"  href="#AGREGARSINTOMAS" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Síntoma Neurótico</button>
             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
                           <?php
                               }
@@ -65,12 +65,12 @@ bitacora($codigoObjeto,$accion,$descripcion);
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_preguntas" class="table table-bordered table-striped">
+                  <table id="tabla_sintomas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
-                          <th class="text-center">Tipo</th>
+                          <th class="text-center">Nombre Síntoma</th>
                      
                           
                       
@@ -164,19 +164,19 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITARSINTOMA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form  method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar síntomas neuróticos</h4>
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar Síntoma Neurótico</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form  method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="sintoneu" id="sintomasneu">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_sintomas">Tipo</label>
+                                          <label for="txtcodigo_sintomas">Nombre Síntoma</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);"  class="form-control" onkeypress="return soloLetras(event);"  maxlength="100"    autocomplete = "off" type="text"  
-                                          name="editarsintoneu" id="edisinneu" required="">
+                                          name="editarsintoneu" id="edisinneu" required>
                                           <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -204,7 +204,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminarsintoneu" id="eliminarsin">
-                                    <h4 class="text-center">¿Esta seguro de eliminar este síntoma neurótico? <?php echo $var2; ?></h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar este síntoma neurótico? <?php echo $var2; ?></h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -236,15 +236,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar tipo de síntomas neuróticos</h4>
+                        <h4 class="text-center">Agregar Síntomas Neuróticos</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_sintoma">Tipo</label>
-                                    <input  type="text"   class="form-control" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" maxlength="100"    autocomplete = "off" type="text"  name="agregarsintomasneu" id="agregarsintomasneuro" required="" >
+                                    <label for="txtcodigo_sintoma">Nombre Síntoma</label>
+                                    <input  type="text"   class="form-control" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" maxlength="100"    autocomplete = "off" type="text"  name="agregarsintomasneu" id="agregarsintomasneuro" required>
                                     <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -273,7 +273,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
  <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
-      $('#tabla_preguntas').DataTable({
+      $('#tabla_sintomas').DataTable({
         language: {
         "decimal": "",
         "emptyTable": "No hay información",
@@ -285,7 +285,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar:",
+        "search": "Buscar Síntoma:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

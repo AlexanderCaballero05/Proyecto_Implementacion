@@ -83,21 +83,31 @@ if (isset($_POST['id_persona_plan'])) {
     margin: 8px;
     border: 1px solid #404141;
   }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
+  .pagenum:before {
+        content: counter(page);
+    }
   
     </style>
     <title>Reporte paciente psicologia</title>
   </head>
   <body>
     <header>
+    <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 20px;">Consulta psicologica del paciente</p>
+      <p  style="text-align: center; font-size: 20px;">Consulta Psicológica del Paciente</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
    
 
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+      <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -126,7 +136,7 @@ if (isset($_POST['id_persona_plan'])) {
     </fieldset>
     <br>
     <fieldset>
-      <legend>Expediente Psicologico</legend>
+      <legend>Expediente Psicológico</legend>
     <br>
     <table>
     <?php
@@ -150,17 +160,17 @@ if (isset($_POST['id_persona_plan'])) {
          <tr>
            <th>Antecedentes Familiares</th>
            <th>Antecedentes Personales</th>
-           <th>Antecedentes Clinicos</th>
-           <th>Sintomas Neuroticos</th>
+           <th>Antecedentes Clínicos</th>
+           <th>Síntomas Neuróticos</th>
           
          </tr>
       </thead>
       <tbody>
          <tr>
-         <td ><?php echo ucwords(strtolower($var1)); ?></td>
-         <td ><?php echo ucwords(strtolower($var2)); ?></td>
-         <td ><?php echo ucwords(strtolower($var3)); ?></td>
-         <td ><?php echo ucwords(strtolower($var4)); ?></td>
+         <td ><?php echo (strtolower($var1)); ?></td>
+         <td ><?php echo (strtolower($var2)); ?></td>
+         <td ><?php echo (strtolower($var3)); ?></td>
+         <td ><?php echo (strtolower($var4)); ?></td>
          
          </tr>
          <?php
@@ -205,23 +215,23 @@ if (isset($_POST['id_persona_plan'])) {
           $resultados = $row['RESULTADOS'];
          
       ?>
-      <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Cita psicologica paciente <?php echo $fecha;?></label></div>
-      <p>Datos cita psicologica</p><hr><br>
+      <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Cita Psicológica Paciente <?php echo $fecha;?></label></div>
+      <p>Datos Cita Psicológica</p><hr><br>
       <div>
-      <div class="c" ><label><b>Sintomas: </b></label> <?php  echo utf8_decode(strtolower($sintomas)) ?> </div>
-      <div class="c" > <label><b>Diagnostico Ingreso: </b></label> <?php  echo utf8_decode(strtolower($diagnostico_ingreso))  ?></div>
+      <div class="c" ><label><b>Síntomas: </b></label> <?php  echo utf8_decode(strtolower($sintomas)) ?> </div>
+      <div class="c" > <label><b>Diagnóstico Ingreso: </b></label> <?php  echo utf8_decode(strtolower($diagnostico_ingreso))  ?></div>
       <div class="c" > <label><b>Evolución: </b></label> <?php echo  utf8_decode(strtolower($observaciones)) ?></div>
-      <div class="c" > <label><b>Diagnostico Egreso: </b></label> <?php echo utf8_decode(strtolower($diagnostico_egreso))?></div>
+      <div class="c" > <label><b>Diagnóstico Egreso: </b></label> <?php echo utf8_decode(strtolower($diagnostico_egreso))?></div>
 
       </div>
       
 
       <div id="caja3">
-        <p>Datos Plan terapeutico</p><hr><br>
+        <p>Datos Plan Terapéutico</p><hr><br>
         
         <div class="c" > <label><b>Actividades: </b></label> <?php echo utf8_decode(strtolower($actividades))?> </div>
         <div class="c" ><label><b>Resultados: </b></label> <?php echo utf8_decode(strtolower($resultados))?></div>
-        <div class="c" ><label><b>Tecnicas: </b></label><?php echo utf8_decode(strtolower($tecnicas))?></div>
+        <div class="c" ><label><b>Técnicas: </b></label><?php echo utf8_decode(strtolower($tecnicas))?></div>
         <div class="c" ><label><b>Tareas: </b></label><?php echo utf8_decode(strtolower($tareas))?></div>
        </div>
 
@@ -265,6 +275,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("ReporteConsulta_Psicologica.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>
