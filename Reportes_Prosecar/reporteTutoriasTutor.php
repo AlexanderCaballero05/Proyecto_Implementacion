@@ -25,7 +25,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de lista de tutorias'));
+		$this->Cell(180, 8, utf8_decode('Reporte de lista de tutorías'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -117,12 +117,12 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Rol usuario', 1, 0, 'C', 0);
-			$this->Cell(75, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Insertar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Eliminar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Actualizar', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Mostrar', 1, 1, 'C', 0);
+			$this->Cell(50, 8, 'Tutor', 1, 0, 'C', 0);
+			$this->Cell(75, 8, utf8_decode('Nombre Tutoría'), 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Grado', 1, 0, 'C', 0);
+			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
+			$this->Cell(25, 8, utf8_decode('Período'), 1, 0, 'C', 0);
+			$this->Cell(25, 8, utf8_decode('Año'), 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -228,11 +228,11 @@ $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Tutor', 1, 0, 'C', 1);
-$pdf->Cell(75, 12, 'Nombre Tutoria', 1, 0, 'C', 1);
+$pdf->Cell(75, 12, utf8_decode('Nombre Tutoría'), 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Grado', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Periodo', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Anio', 1, 1, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Período'), 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Año'), 1, 1, 'C', 1);
 
 
 

@@ -21,20 +21,20 @@
 
     <section class="content">
        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> MATRICULAR ALUMNOS<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+              <h4> Matricular Alumnos <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
     <div class="container-fluid">
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matricula</a>
+                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar matricula academica</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar Matrícula Académica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar matricula espiritual</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar Matrícula Espiritual</a>
               </li>
             </ul>
           </div>
@@ -77,7 +77,7 @@
                     <div class="col-sm-4">
                     <div class="form-group">
                       <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="BUSCA_ESTUDIANTE"  required>
-                        <option selected enable value="">Seleccione alumno</option> <!--Lo mismo que el de arriba :v -->
+                        <option selected enable value="">Seleccione Alumno</option> <!--Lo mismo que el de arriba :v -->
                         <?php 
                           if ($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) { 
@@ -135,7 +135,7 @@
 
           <div class="card ">
             <div class="card-header text-center" style="background-color: #3FCDFD"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">CARGA ACADEMICA PARA MATRICULAR </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Carga académica para matrícular</strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -144,13 +144,13 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th> 
-                          <th class="text-center">ASIGNATURA</th>
-                          <th class="text-center">NOMBRE DEL TUTOR</th>
-                          <th class="text-center">MODALIDAD</th>
-                          <th class="text-center">SECCION</th>
-                          <th class="text-center">HORA</th> 
-                          <th class="text-center">FECHA INICIO</th>                     
+                          <th class="text-center">Acción</th> 
+                          <th class="text-center">Asignatura</th>
+                          <th class="text-center">Nombre del Tutor</th>
+                          <th class="text-center">Modalidad</th>
+                          <th class="text-center">Sección</th>
+                          <th class="text-center">Hora</th> 
+                          <th class="text-center">Fecha Inicio</th>                     
                                             
                         </tr>
                       </thead>
@@ -198,7 +198,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMESTUDIANTE" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Matricular Tutoria</h4>
+                                    <h4 class="text-center">Matricular Tutoría</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -282,7 +282,7 @@
 
           <div class="card">
             <div class="card-header text-center" style="background-color:#3FCDFD " id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">ClASES MATRICULADAS </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Clases Matriculadas </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -291,11 +291,11 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center"> ACCION</th> 
-                          <th class="text-center"> ASIGNATURA</th>
-                          <th class="text-center"> NOMBRE DEL TUTOR</th>
-                          <th class="text-center"> MODALIDAD</th>
-                          <th class="text-center"> Seccion</th>
+                          <th class="text-center"> Acción</th> 
+                          <th class="text-center"> Asignatura</th>
+                          <th class="text-center"> Nombre del Tutor</th>
+                          <th class="text-center"> Modaidad</th>
+                          <th class="text-center"> Sección</th>
                           <th class="text-center"> Hora</th>                     
                                             
                         </tr>

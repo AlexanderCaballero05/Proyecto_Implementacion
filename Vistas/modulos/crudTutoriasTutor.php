@@ -3,7 +3,10 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
- 
+ $codigoObjeto=58;
+ $accion='IINGRESO A LA PANTALLA TUTORIAS TUTOR';
+ $descripcion= 'SE VISUALIZAN LAS TUTORIAS QUE SE LE HAN ASIGNADO A UN TUTOR';
+ bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
 
@@ -14,16 +17,16 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>LISTA DE TUTORIAS <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ACADEMICO ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
+              <h4>Lista de Tutorías  <p style="font-style: italic; color:chocolate"><?php echo "Tutor Académico ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="crudTutoriasTutor">Lista de tutorias</a>
+            <a class=" nav-link active" style="color:#000000;" href="crudTutoriasTutor">Lista de Tutorías</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Lista de alumnos</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Lista de Alumnos</a>
             </li>
           </ul>
         </div>
@@ -116,7 +119,7 @@
                                           if($row > 0){
                                           $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                           $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                          $evaluar_permiso->execute(array($usuariomo, '24'));
+                                          $evaluar_permiso->execute(array($usuariomo, '58'));
                                           $row1=$evaluar_permiso->fetchColumn();
                                             $permiso_registrar =$row1;             
                                           }

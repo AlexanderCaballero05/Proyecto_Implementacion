@@ -98,7 +98,7 @@ class PDF extends FPDF {
             $this->Cell(40, 12, 'Asignatura', 1, 0, 'C', 1);
 			$this->Cell(35, 12, 'Nombre del Tutor', 1, 0, 'C', 1);
             $this->Cell(40, 12, 'Modalidad', 1, 0, 'C', 1);
-            $this->Cell(55, 12, 'Seccion', 1, 0, 'C', 1);
+            $this->Cell(55, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
             $this->Cell(30, 12, 'Hora', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 		}
@@ -216,7 +216,7 @@ $pdf->Cell(12, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Asignatura', 1, 0, 'C', 1);
 $pdf->Cell(80, 12, 'Nombre del Tutor', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Modalidad', 1, 0, 'C', 1);
-$pdf->Cell(35, 12, 'Seccion', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Hora', 1, 1, 'C', 1);
 
 

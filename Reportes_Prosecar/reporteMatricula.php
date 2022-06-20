@@ -15,7 +15,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',12);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Matricula'));
+		$this->Cell(180, 8, utf8_decode('Reporte de Matrícula'));
 		$this->SetX(5);
 		$this->Ln(5);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
@@ -109,7 +109,7 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(50, 8, 'N', 1, 0, 'C', 0);
 			$this->Cell(60, 8, 'Asignatura', 1, 0, 'C', 0);
-			$this->Cell(80, 8, 'Seccion', 1, 0, 'C', 0);
+			$this->Cell(80, 8, utf8_decode('Sección'), 1, 0, 'C', 0);
 			$this->Cell(35, 8, 'Hora', 1, 1, 'C', 0);
 			$this->Cell(35, 8, 'Modalidad', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
@@ -227,7 +227,7 @@ $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Asignatura', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Seccion', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(35, 12, 'Modalidad', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Nombre del Tutor', 1, 0, 'C', 1);

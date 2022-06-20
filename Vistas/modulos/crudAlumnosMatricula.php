@@ -3,7 +3,10 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
- 
+ $codigoObjeto=59;
+ $accion='INGRESO A LA PANTALLA LISTA DE ALUMNOS';
+ $descripcion= 'SE VISUALIZAN LOS ALUMNOS MATRICULADOS A UNA TUTORIA  ';
+ bitacora($codigoObjeto, $accion,$descripcion);
 ?>
                  
 <head>
@@ -14,16 +17,16 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTA DE AlUMNOS <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "TUTORIA DE ".$_SESSION['tutoria'] ?></p> </h4>
+              <h4> Lista de Alumnos <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Tutoría de ".$_SESSION['tutoria'] ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="crudTutoriasTutor">Lista de tutorias</a>
+            <a class=" nav-link" style="color:#000000;" href="crudTutoriasTutor">Lista de Tutorías</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="crudAlumnosMatricula">Lista de alumnos</a>
+            <a class=" nav-link active" style="color:#000000;" href="crudAlumnosMatricula">Lista de Alumnos</a>
             </li>
           </ul>
         </div>
@@ -58,15 +61,15 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Numero</th>
+                        <th class="text-center">Número</th>
                         <th class="text-center">Alumno</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">periodo</th>
-                        <th class="text-center">Estado matricula</th>
-                        <th class="text-center">Accion</th>
+                        <th class="text-center">período</th>
+                        <th class="text-center">Estado matrícula</th>
+                        <th class="text-center">Acción</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -151,7 +154,7 @@
                                     if($row > 0){
                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                     $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                    $evaluar_permiso->execute(array($usuariomo, '23'));
+                                    $evaluar_permiso->execute(array($usuariomo, '59'));
                                     $row1=$evaluar_permiso->fetchColumn();
                                       $permiso_registrar =$row1;             
                                     }
@@ -165,7 +168,7 @@
                                   ?>
                                  
                                   <a href="#CALIFICAR<?php echo $codigo_matricula; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;text-decoration: line-through"class="form-control btn btn-danger"><span>Observacion</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;text-decoration: line-through"class="form-control btn btn-danger"><span>Observación</span></button>
                                   </a>
 
                                   <?php
@@ -192,9 +195,9 @@
                         <div id="CALIFICAR<?php echo $codigo_matricula ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
+                              <form  method="POST"  class="needs-validation" >
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="text-center">Agregar observacion </h4>
+                                  <h4 class="text-center">Agregar Observación </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -210,7 +213,7 @@
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Tutoria:</label>
+                                          <label for="txtcodigo_persona">Tutoría:</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var2; ?>" >
                                         </div>
                                       </div>
@@ -234,7 +237,7 @@
                                      </div>
                                      <div class="col-sm-3">
                                        <div class="form-group">
-                                           <label for="fecha" class="form-label">Periodo</label>
+                                           <label for="fecha" class="form-label">Período</label>
                                            <input type="text"  readonly value ="<?php echo $var5; ?>" class="form-control">
                                        </div>
                                      </div>
@@ -251,7 +254,7 @@
                                         $result1= $conn->query($query);
                                         ?>
                                          <div class="form-group">
-                                            <label for="txtcodigo_especialista">Estado de matricula</label>
+                                            <label for="txtcodigo_especialista">Estado de Matrícula</label>
                                             <select class="form-control select2" name="codigo_estado" required>
                                                 <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
                                                  <?php
@@ -275,9 +278,11 @@
                                       <div class="col-sm-8">
                                           <div class="form-group">
                                               <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
-                                                <textarea type="textarea" name="observacion_academica" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
-
+                                                <textarea type="textarea" name="observacion_academica" class="form-control"  onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" required><?php echo $observacion_matricula;?></textarea> 
                                           </div>
+                                          <div class="invalid-feedback">
+                                                Llene este campo.
+                                            </div>
                                       </div>
                                   </div>
 
@@ -285,7 +290,7 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="MODIFICAR_CALIFICACION"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observacion</button>
+                                  <button type="submit" name="MODIFICAR_CALIFICACION"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar Observación</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>
@@ -329,7 +334,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Paciente:",
+        "search": "Buscar Alumno:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",
@@ -359,4 +364,26 @@
         })
     })()
 </script>
-
+<script>
+  function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz 123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+   
+    
+ </script>
