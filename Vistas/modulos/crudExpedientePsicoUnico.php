@@ -4,33 +4,30 @@ Universidad Nacional Autonoma de Honduras (UNAH)
 		Facultad de Ciencias Economicas
 Departamento de Informatica administrativa
 Analisis, Programacion y Evaluacion de Sistemas
-           Primer Periodo 2016
-
+          Segundo Periodo 2022
 Equipo:
-
-
 Catedratico:
 Lic. Claudia Nuñez (Analisis)
 Lic. Giancarlo Martini Scalici Aguilar (Implementación)
 Lic. Karla Melisa Garcia Pineda (Evaluación)
 
----------------------------------------------------------------------
+---------------------------------------------------------------
 
 Programa:         Pantalla de Ingreso a mantenimiento modalidad
 Fecha:             01-jan-2016
-Programador:       Gissela Diaz 
-descripcion:       Pantalla que contrala la modalidad de las tutorias 
-
+Programador:       ?
+descripcion:       Pantalla que contrala los expedientes unicos 
 -----------------------------------------------------------------------
                       Historial de Cambio
 -----------------------------------------------------------------------
 
-Programador               Fecha                      Descripcion
+Programador                   Fecha               Descripción
+Diana Rut Garcia            20/06/2022          Modificaciones en el modal
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto= 62;
+ $codigoObjeto= 34;
  $accion='INGRESO A MANTENIMIENTO EXPEDIENTE PSICOLOGICO UNICO';
  $descripcion='MANTENIMIENTO A LOS REGISTROS DE EXPEDIENTE';
 bitacora($codigoObjeto,$accion,$descripcion);
@@ -46,9 +43,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
       
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
-    <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> Mantenimiento Expediente Psicológico Único </h4>
-        </section>
+    <div class="content-header text-xl-center mb-3 ">
+        <h4>Expedientes Psicológicos </h4>
+    </div>
   </div>
   
   
@@ -56,9 +53,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
-        <a href="ProcesoCitasPsicologicas" >
-        <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Expediente</button>
-        </a>
+        
         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
           
     
@@ -71,15 +66,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
               <div class="card-body">
                   
                 <div class="table-responsive">
-                  <table id="tabla_expedienteunica" class="table table-bordered table-striped">
+                  <table id="tabla_expedienteunico" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Id Expediente</th>
+                          <th class="text-center">ID</th>
                           <th class="text-center">Nombre del Paciente</th>
                           <th class="text-center">Antecedentes Familiares</th>
                           <th class="text-center">Antecedentes Personales</th>
-                          <th class="text-center">Antecedentes Clinicos</th>
+                          <th class="text-center">Antecedentes Clínicos</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -117,7 +112,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '62'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '31'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -141,7 +136,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '62'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '31'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
@@ -191,16 +186,15 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITAREXPEDIENTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Expediente</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
-
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="number" value ="<?php echo $var1; ?>" hidden class="form-control" name="codigo_expediente" id="codigo_expediente">
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre del Paciente</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" readonly="" placeholder="" name="editar_nombre" id="editar_nombre">
@@ -210,7 +204,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                          <label for="BASICOS" class="control-label">Antecedentes Psicológicos Familiares</label> 
-                                         <textarea  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="600"     autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" name="editar_familiar" id="editar_familiar" required="" ></textarea>
+                                         <textarea  type="text"  class="form-control"  maxlength="600"     autocomplete = "off" type="text" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="editar_familiar" id="editar_familiar" required ><?php echo $var4; ?></textarea>
                                          <div class="invalid-feedback">
                                          campo obligatorio.
                                         </div>
@@ -220,7 +214,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                          <label for="BASICOS" class="control-label">Antecedentes Psicológicos Personales</label> 
-                                         <textarea  type="text"  value ="<?php echo $var5; ?>" class="form-control"  maxlength="600"     autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" name="editar_personal" id="editar_personal" required="" ></textarea>
+                                         <textarea  type="text"  class="form-control"  maxlength="600"  autocomplete = "off" type="text" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="editar_personal" id="editar_personal" required><?php echo $var5;?></textarea>
                                          <div class="invalid-feedback">
                                          campo obligatorio.
                                         </div>
@@ -230,7 +224,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                          <label for="BASICOS" class="control-label">Antecedentes Psicológicos Clinicos</label> 
-                                         <textarea  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="600"     autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_clinico" id="editar_clinico" required="" ></textarea>
+                                         <textarea  type="text"  class="form-control"  maxlength="600"  onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_clinico" id="editar_clinico" required><?php echo $var6;?></textarea>
                                          <div class="invalid-feedback">
                                          campo obligatorio.
                                         </div>
@@ -296,16 +290,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
  }
  </script>
 
-<script type="text/javascript"> function solonumero(e) {
-        tecla = (document.all) ? e.keyCode : e.which;
-        if (tecla==8) return true;
-        else if (tecla==0||tecla==9)  return true;
-       // patron =/[0-9\s]/;// -> solo letras
-        patron =/[0-9\s]/;// -> solo numeros
-        te = String.fromCharCode(tecla);
-        return patron.test(te);
-    }
-	</script>
+
 
 <script>
     function Descargar() {
@@ -316,270 +301,28 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_expedienteunica').DataTable({
-      language:espanol
-    });
-} );
- 
- //Funcion para habilitar el de la tabla
- $( function() {
-    $("#persona").change( function() {
-        if ($(this).val() > 0 ) {
-          document.getElementById('especialidad').style.display = "block";
-          document.getElementById('tabla_expedienteunica').style.display = "block";
-          
-        } else{
-          document.getElementById('especialidad').style.display = "none";
-          document.getElementById('tabla_expedienteunica').style.display = "none";
-           
+   $(document).ready( function () {
+      $('#tabla_expedienteunico').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Expediente:",
+        "zeroRecords": "No existe el expediente",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
         }
-    });
-  });
-
-
-//todo lo que tenga que ver con el datatable se verá en español
-let = espanol = {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "infoThousands": ",",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-        "first": "Primero",
-        "last": "Último",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    },
-    "aria": {
-        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-        "copy": "Copiar",
-        "colvis": "Visibilidad",
-        "collection": "Colección",
-        "colvisRestore": "Restaurar visibilidad",
-        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-        "copySuccess": {
-            "1": "Copiada 1 fila al portapapeles",
-            "_": "Copiadas %ds fila al portapapeles"
-        },
-        "copyTitle": "Copiar al portapapeles",
-        "csv": "CSV",
-        "excel": "Excel",
-        "pageLength": {
-            "-1": "Mostrar todas las filas",
-            "_": "Mostrar %d filas"
-        },
-        "pdf": "PDF",
-        "print": "Imprimir",
-        "renameState": "Cambiar nombre",
-        "updateState": "Actualizar",
-        "createState": "Crear Estado",
-        "removeAllStates": "Remover Estados",
-        "removeState": "Remover",
-        "savedStates": "Estados Guardados",
-        "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-        "cancel": "Cancelar",
-        "fill": "Rellene todas las celdas con <i>%d<\/i>",
-        "fillHorizontal": "Rellenar celdas horizontalmente",
-        "fillVertical": "Rellenar celdas verticalmentemente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-            "date": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "notBetween": "No entre",
-                "notEmpty": "No Vacio",
-                "not": "Diferente de"
-            },
-            "number": {
-                "between": "Entre",
-                "empty": "Vacio",
-                "equals": "Igual a",
-                "gt": "Mayor a",
-                "gte": "Mayor o igual a",
-                "lt": "Menor que",
-                "lte": "Menor o igual que",
-                "notBetween": "No entre",
-                "notEmpty": "No vacío",
-                "not": "Diferente de"
-            },
-            "string": {
-                "contains": "Contiene",
-                "empty": "Vacío",
-                "endsWith": "Termina en",
-                "equals": "Igual a",
-                "notEmpty": "No Vacio",
-                "startsWith": "Empieza con",
-                "not": "Diferente de",
-                "notContains": "No Contiene",
-                "notStarts": "No empieza con",
-                "notEnds": "No termina con"
-            },
-            "array": {
-                "not": "Diferente de",
-                "equals": "Igual",
-                "empty": "Vacío",
-                "contains": "Contiene",
-                "notEmpty": "No Vacío",
-                "without": "Sin"
-            }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-        "clearMessage": "Borrar todo",
-        "collapse": {
-            "0": "Paneles de búsqueda",
-            "_": "Paneles de búsqueda (%d)"
-        },
-        "count": "{total}",
-        "countFiltered": "{shown} ({total})",
-        "emptyPanes": "Sin paneles de búsqueda",
-        "loadMessage": "Cargando paneles de búsqueda",
-        "title": "Filtros Activos - %d",
-        "showMessage": "Mostrar Todo",
-        "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },
-        "rows": {
-            "1": "1 fila seleccionada",
-            "_": "%d filas seleccionadas"
-        }
-    },
-    "thousands": ".",
-    "datetime": {
-        "previous": "Anterior",
-        "next": "Proximo",
-        "hours": "Horas",
-        "minutes": "Minutos",
-        "seconds": "Segundos",
-        "unknown": "-",
-        "amPm": [
-            "AM",
-            "PM"
-        ],
-        "months": {
-            "0": "Enero",
-            "1": "Febrero",
-            "10": "Noviembre",
-            "11": "Diciembre",
-            "2": "Marzo",
-            "3": "Abril",
-            "4": "Mayo",
-            "5": "Junio",
-            "6": "Julio",
-            "7": "Agosto",
-            "8": "Septiembre",
-            "9": "Octubre"
-        },
-        "weekdays": [
-            "Dom",
-            "Lun",
-            "Mar",
-            "Mie",
-            "Jue",
-            "Vie",
-            "Sab"
-        ]
-    },
-    "editor": {
-        "close": "Cerrar",
-        "create": {
-            "button": "Nuevo",
-            "title": "Crear Nuevo Registro",
-            "submit": "Crear"
-        },
-        "edit": {
-            "button": "Editar",
-            "title": "Editar Registro",
-            "submit": "Actualizar"
-        },
-        "remove": {
-            "button": "Eliminar",
-            "title": "Eliminar Registro",
-            "submit": "Eliminar",
-            "confirm": {
-                "_": "¿Está seguro que desea eliminar %d filas?",
-                "1": "¿Está seguro que desea eliminar 1 fila?"
-            }
-        },
-        "error": {
-            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-        },
-        "multi": {
-            "title": "Múltiples Valores",
-            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
-            "restore": "Deshacer Cambios",
-            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-        }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-        "creationModal": {
-            "button": "Crear",
-            "name": "Nombre:",
-            "order": "Clasificación",
-            "paging": "Paginación",
-            "search": "Busqueda",
-            "select": "Seleccionar",
-            "columns": {
-                "search": "Búsqueda de Columna",
-                "visible": "Visibilidad de Columna"
-            },
-            "title": "Crear Nuevo Estado",
-            "toggleLabel": "Incluir:"
-        },
-        "emptyError": "El nombre no puede estar vacio",
-        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
-        "removeError": "Error al eliminar el registro",
-        "removeJoiner": "y",
-        "removeSubmit": "Eliminar",
-        "renameButton": "Cambiar Nombre",
-        "renameLabel": "Nuevo nombre para %s",
-        "duplicateError": "Ya existe un Estado con este nombre.",
-        "emptyStates": "No hay Estados guardados",
-        "removeTitle": "Remover Estado",
-        "renameTitle": "Cambiar Nombre Estado"
-    }
-};
-
+      },
+      })
+  } );
 </script>

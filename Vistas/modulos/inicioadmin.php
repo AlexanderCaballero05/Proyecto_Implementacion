@@ -364,7 +364,7 @@ include "conexionpdo.php";
         <!--COLLAPSE3-->
       
 
-</html>
+</section></div>
       
  
 

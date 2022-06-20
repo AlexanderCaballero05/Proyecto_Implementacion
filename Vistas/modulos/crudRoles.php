@@ -53,7 +53,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3">
-         <h3>Registrar Roles</h3>   
+         <h3>Mantenimiento Roles</h3>   
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -265,16 +265,16 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Nombre</label>
-                                    <input  type="text" class="form-control" required pattern="[A-Z]{5,40}"  minlength="5" maxlength="40" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" >
+                                    <input  type="text" class="form-control" required pattern="[A-Z]{5,40}"  minlength="5" maxlength="40" onkeyup="mayus(this);" autocomplete = "off"  onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al rol" name="nombre_rol" id="nombre_rol" >
                                     <div class="invalid-feedback">
-                                     Campo obligatorio minimo 5 caracteres.
+                                     Campo obligatorio mínimo 5 caracteres.
                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
-                                    <textarea  type="text"   class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
+                                    <textarea  type="text"   class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off"  onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
                                    </div>

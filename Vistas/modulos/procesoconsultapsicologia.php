@@ -8,10 +8,10 @@ $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
-
+<!DOCTYPE html>
+<html>
 <head>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
+    
 </head>
 
 <body oncopy="return false" onpaste="return false">
@@ -21,39 +21,39 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
 
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CONSULTA PSICOLOGICA PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
-        </section>
+       <div class="content-header text-xl-center mb-3"> 
+          <h4>Consulta Psicológica<i class="nav-icon fas fa-stethoscope"></i></h4>
+      </div>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link"  style="color:#000000;" href="#">Registrar expediente</a>
+            <a class="nav-link"  style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Consulta Psicológica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Plan Terapéutico</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
         </div>
         <div class="card-body">
-        <body oncopy="return false" onpaste="return false" >
-        <form method="POST" class="needs-validation" novalidate id="form">
+
+        <form method="POST" class="needs-validation" novalidate >
             
             <h5>Datos del Paciente</h5>
-            <hr>
+            <hr COLOR="blue">
                       
             <div class="row mb-8">
                                     <?php
@@ -87,11 +87,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           
                           ?>
                       <input type="text" name="codigocita3" value="<?php echo $var3?>" hidden>
-                       <label for="">Nombre del paciente:</label> 
+                       <label for="">Nombre del paciente</label> 
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
-                         <label for="">DNI:</label>
+                         <label for="">DNI</label>
                          <input type="text" name="dni" class="form-control"  aria-label="dni"  value="<?php echo $var2 ?>" disabled ="disabled">
                     </div>
                     </div>
@@ -99,8 +99,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     }
                     ?>
                     <br></br>
-                    <h5>Expediente Psicologico</h5>
-                    <hr>
+                    <h5>Expediente Psicológico</h5>
+                    <hr COLOR="blue">
             <!--INICIO COMBOBOX -->
              <div class="form-group">
              <?php
@@ -122,31 +122,31 @@ bitacora($codigoObjeto, $accion, $descripcion);
                    <div class= "row">                      
                         <div class="col-md-6">
                                 <input type="text" name="codigoexpediente" value="<?php echo $var5?>" Hidden> <!--CODGIO DEL EXPEDIENTE PARA Q SALGA TODA INFO  --> 
-                                <label for="" class="control-label">Sintomas Neuroticos</label> 
+                                <label >Síntomas Neuróticos</label> 
                                 <div class="form-group">
-                                <textarea required class="form-control"  type="textarea" required value=""disabled ="disabled" 
+                                <textarea required class="form-control"  type="textarea" required disabled ="disabled" 
                                 name="sintomasneuraticos" id="sintomasneuraticos"><?php echo $var8?></textarea>
                                 </div>
                         </div><!--fin del Sintomas Neuroticos-->
                         <div  class="col-md-6">
-                                <label for="" class="control-label">Antecedentes Familiares</label> 
+                                <label >Antecedentes Familiares</label> 
                                     <div class="form-group">
-                                <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled"
+                                <textarea required class="form-control"  type="textarea" required  disabled ="disabled"
                                  name="Familiares" id="Familiares"><?php echo $var6?></textarea>
                                     </div>
                         </div><!--fin del la Antecedentes Familiares -->   
                     </div> <!--fin del row primer de expediente  -->
                     <div class="row">
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Antecedentes Personales</label> 
+                            <label >Antecedentes Personales</label> 
                                 <div class="form-group">
                             <textarea required class="form-control"  type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var7?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->    
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Antecedentes Clinicos</label> 
+                            <label >Antecedentes Clínicos</label> 
                                 <div class="form-group">
-                            <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var9?></textarea>
+                            <textarea required class="form-control"  type="textarea" required disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var9?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->       
                     </div><!--fin del row segundo de expediente -->
@@ -156,21 +156,21 @@ bitacora($codigoObjeto, $accion, $descripcion);
              </div><!--fin del div de row DE EXPEDIENTE-->
                     
                     <h5>Datos de consulta</h5>
-                    <hr>
+                    <hr COLOR="blue">
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Sintomas:</label> 
+                        <label>Síntomas</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="100" minlength="5" onkeyup="mayus(this);" name="sintomas3" id="sintomas3"   autocomplete = "off" required></textarea>
+                          <textarea type="text" class="form-control" minlength="5" maxlength="100"  required pattern="[A-Z]{5,100}"  autocomplete = "off" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="sintomas3"  ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="identidad" class="control-label">Diagnóstico Ingreso:</label> 
+                        <label >Diagnóstico Ingreso</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" onkeyup="mayus(this);" name="Ingreso3" id="Ingreso3"  autocomplete = "off" required ></textarea>
+                          <textarea class="form-control" type="text"  required pattern="[A-Z]{5,200}" minlength="5"  maxlength="200"   onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="Ingreso3"  autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -180,18 +180,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
                              
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Diagnóstico Egreso:</label> 
+                        <label >Diagnóstico Egreso</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="200" minlength="5" onkeyup="mayus(this);" name="Egreso3" id="Egreso3" autocomplete = "off" required></textarea>
+                          <textarea type="text" class="form-control"  required pattern="[A-Z]{5,200}" minlength="5" maxlength="200"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="Egreso3"  autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="identidad" class="control-label">Observaciónes:</label> 
+                        <label  >Observaciones</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" maxlength="600" minlength="5" onkeyup="mayus(this);" name="observaciones3" id="observaciones3"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" required pattern="[A-Z]{5,600}" minlength="5" maxlength="600"  onkeyup="mayus(this);" name="observaciones3"   autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -213,9 +213,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       </div>
                       </div>
   </section><!-- FINAL SECTION -->
+</body>
+</html>
 
    <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-   <script>
+  <script>
  var isSubmitting = false
 
 $(document).ready(function () {
@@ -271,16 +273,6 @@ if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 
  
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-//funcion para poner mayusculas
-function mayus(e) {
-        e.value = e.value.toUpperCase();
-    }
-
     (function () { 
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
@@ -296,34 +288,4 @@ function mayus(e) {
             }, false)
           })
     })()
-
-
-
-    var observaciones=document.getElementById("observaciones"); //el nombre del id del campo y cambiar la variable 
-    observaciones.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-    var Egreso=document.getElementById("Egreso"); //el nombre del id del campo y cambiar la variable 
-    Egreso.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-    var Ingreso=document.getElementById("Ingreso"); //el nombre del id del campo y cambiar la variable 
-    Ingreso.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
-
-    var sintomas=document.getElementById("sintomas"); //el nombre del id del campo y cambiar la variable 
-    sintomas.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
-    //Si se está repitiendo, ignorar
-    if (keyboardEvent.repeat)
-    keyboardEvent.preventDefault();
-    });
 </script>

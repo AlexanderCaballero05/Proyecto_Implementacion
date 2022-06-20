@@ -14,7 +14,7 @@
         $fechaActual = date('Y-m-d');
         $usuario =$_SESSION['vario'];
         try {
-            $consulta_objeto = $db->prepare("SELECT NOMBRE FROM tbl_objetos WHERE NOMBRE = (?);");
+            $consulta_objeto = $db->prepare("SELECT COUNT(*) FROM tbl_objetos WHERE NOMBRE = (?);");
             $consulta_objeto->execute(array($nombre_objeto));
             $row=$consulta_objeto->fetchColumn();
             if($row>0){
@@ -74,7 +74,7 @@
         $user = $_SESSION['vario'];
 
         try {
-         $sentencia = $db->prepare("SELECT * FROM tbl_objetos where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");
+         $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_objetos where NOMBRE = (?) and CODIGO_OBJETO <> (?) ;");
          $sentencia->execute(array($edinombre_objeto,$codigo_objeto));
          $row=$sentencia->fetchColumn();
          if($row>0){
