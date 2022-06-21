@@ -1,6 +1,36 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD GARCIA u otr persona
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos socioeconomicos de los estudiantes
+Fecha:            
+Programador:       
+descripcion:       Pantalla de mantenimiento edita datos socieconomicos
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
+$codigoObjeto = 18;
+$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO CONTENIDO TIPO SOCIOECONÓMICO';
+$descripcion = 'SE AUTENTIFICO';
+bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <head>
 
@@ -8,18 +38,17 @@
 
 <div class="content-wrapper">
   <div class="content-header">
-  <div class="text-center">
-    <div class="container-fluid">
-    </div><!-- /.container-fluid -->
-  </div>
-  
+ 
   <body oncopy="return false" onpaste="return false"> 
   <section class="content">
+
      <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>MANTENIMIENTO DE CONTENIDO SOCIOECONÓMICO</h4>
+              <h4>Mantenimiento de Contenido Socioeconómico</h4>
           </h1>     
       </section>
+
+
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -59,17 +88,18 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"> </strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
-                  
                 <div class="table-responsive">
                   <table id="tabla_ContenidoEconomico" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
+
+                          <th class="text-center">Código</th>
                           <th class="text-center">Tipo del Contenido socioeconómico</th>
                           <th class="text-center">Nombre del Contenido socioeconómico</th>
+
                           
                         </tr>
                       </thead>
@@ -170,19 +200,27 @@
                           <div id="EDITARCONTENIDO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Contenido </h4>
+
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="number" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_contenido" id="id_contenido">
+                                      <input type="number" required value ="<?php echo $var1; ?>" hidden class="form-control" name="id_contenido" id="id_contenido">
               
                                       <div class="col-sm-12">
                                         <div class="form-group">
+
                                           <label for="txtcodigo_persona">Nombre del Contenido Socioeconomico</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="50" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" autocomplete = "off" type="text"   name="editar_nombre" id="editar_nombre" required="">
+                                          <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
+
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -209,8 +247,8 @@
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="contenido_eliminar" id="contenido_eliminar">
-                                    <h4 class="text-center">¿Esta seguro que desea eliminar el contenido <?php echo $var3; ?>?</h4>
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="contenido_eliminar" >
+                                    <h4 class="text-center">¿Está seguro que desea eliminar el contenido <?php echo $var3; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -235,53 +273,55 @@
       </div><!-- FINAL ROW PADRE -->
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
+  </div>
+</div>
 
 
    <!--INICIO DEL MODAL DE AGREGAR UN NUEVO CONTENIDO SOCIOECONOMICO -->
    <div id="AGREGAR_CONTENIDO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
        <?php
-                    include_once "conexion3.php";
-                    $query= "SELECT t.CODIGO_TIPOSOCIO,t.TIPO FROM tbl_tipo_socioeconomico t;";
-                    $result= $conn->query($query);
-                    ?>
+          include_once "conexion3.php";
+          $query= "SELECT t.CODIGO_TIPOSOCIO,t.TIPO FROM tbl_tipo_socioeconomico t;";
+          $result= $conn->query($query);
+        ?>
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Contenido</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
+
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Tipo de Contenido socioeconómico</label>
-                                    <select class="form-control" name="codigo_contenido" id="codigo_contenido">
+                                    <label for="txtcodigo_persona">Tipo Socioeconómico</label>
+                                    <select class="form-control" name="codigo_contenido" id="codigo_contenido" required="">
 
-                                     <option value="">Seleccionar nombre de campo...</option>
+                                     <option value="">--Seleccione un tipo--</option>
                                      <?php
                                       if ($result->num_rows > 0){
                                         while($row = $result->fetch_assoc()){
-
-                                        
-
-                                       
                                       ?>
                                      <option value="<?php echo $row['CODIGO_TIPOSOCIO'];?>"><?php echo $row['TIPO'];?></option>
                                      <?php
                                       }
-                                    }
-
+                                     }
                                       ?>
                                    </select>
+                                   <div class="invalid-feedback">
+                                      Campo obligatorio.
+                                   </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre del Contenido socioeconómico  </label>
-                                    <textarea  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="contenido_nombre" id="contenido_nombre" required=""></textarea>
+                                    <label for="txtcodigo_persona">Contenido tipo socioeconómico</label>
+                                    <textarea required type="text"  class="form-control"  maxlength="150"  onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="contenido_nombre" id="contenido_nombre"></textarea>
                                     <div class="invalid-feedback">
-                                      campo obligatorio.
+                                      Campo obligatorio.
                                   </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -295,31 +335,11 @@
       </div>
    </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTADO -->
 
-  <!-- Button trigger modal -->
+ 
 
 
-<!-- Modal -->
 
 
-<!-- funciones del sistema -->
-<script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- </script>
 
 <script>
     function Descargar() {
@@ -328,272 +348,53 @@
     }
   </script>
 
+
+
+  <script>
+    $(document).ready(function() {
+        $('.hb').select2();
+    });
+    (function () { 
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+          .forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+              form.classList.add('was-validated')
+            }, false)
+          })
+    })()
+</script>
+
 <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_ContenidoEconomico').DataTable({
-      language:espanol
-    });
-} );
-
- //Funcion para habilitar el de la tabla
- $( function() {
-    $("#persona").change( function() {
-        if ($(this).val() > 0 ) {
-          document.getElementById('especialidad').style.display = "block";
-          document.getElementById('tabla_ContenidoEconomico').style.display = "block";
-          
-        } else{
-          document.getElementById('especialidad').style.display = "none";
-          document.getElementById('tabla_ContenidoEconomico').style.display = "none";
-           
+  $(document).ready( function () {
+      $('#tabla_ContenidoEconomico').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Contenido Socioeconómico:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
         }
-    });
-  });
-
-
-//todo lo que tenga que ver con el datatable se verá en español
-let = espanol = {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "infoThousands": ",",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-        "first": "Primero",
-        "last": "Último",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    },
-    "aria": {
-        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-        "copy": "Copiar",
-        "colvis": "Visibilidad",
-        "collection": "Colección",
-        "colvisRestore": "Restaurar visibilidad",
-        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-        "copySuccess": {
-            "1": "Copiada 1 fila al portapapeles",
-            "_": "Copiadas %ds fila al portapapeles"
-        },
-        "copyTitle": "Copiar al portapapeles",
-        "csv": "CSV",
-        "excel": "Excel",
-        "pageLength": {
-            "-1": "Mostrar todas las filas",
-            "_": "Mostrar %d filas"
-        },
-        "pdf": "PDF",
-        "print": "Imprimir",
-        "renameState": "Cambiar nombre",
-        "updateState": "Actualizar",
-        "createState": "Crear Estado",
-        "removeAllStates": "Remover Estados",
-        "removeState": "Remover",
-        "savedStates": "Estados Guardados",
-        "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-        "cancel": "Cancelar",
-        "fill": "Rellene todas las celdas con <i>%d<\/i>",
-        "fillHorizontal": "Rellenar celdas horizontalmente",
-        "fillVertical": "Rellenar celdas verticalmentemente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-            "date": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "notBetween": "No entre",
-                "notEmpty": "No Vacio",
-                "not": "Diferente de"
-            },
-            "number": {
-                "between": "Entre",
-                "empty": "Vacio",
-                "equals": "Igual a",
-                "gt": "Mayor a",
-                "gte": "Mayor o igual a",
-                "lt": "Menor que",
-                "lte": "Menor o igual que",
-                "notBetween": "No entre",
-                "notEmpty": "No vacío",
-                "not": "Diferente de"
-            },
-            "string": {
-                "contains": "Contiene",
-                "empty": "Vacío",
-                "endsWith": "Termina en",
-                "equals": "Igual a",
-                "notEmpty": "No Vacio",
-                "startsWith": "Empieza con",
-                "not": "Diferente de",
-                "notContains": "No Contiene",
-                "notStarts": "No empieza con",
-                "notEnds": "No termina con"
-            },
-            "array": {
-                "not": "Diferente de",
-                "equals": "Igual",
-                "empty": "Vacío",
-                "contains": "Contiene",
-                "notEmpty": "No Vacío",
-                "without": "Sin"
-            }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-        "clearMessage": "Borrar todo",
-        "collapse": {
-            "0": "Paneles de búsqueda",
-            "_": "Paneles de búsqueda (%d)"
-        },
-        "count": "{total}",
-        "countFiltered": "{shown} ({total})",
-        "emptyPanes": "Sin paneles de búsqueda",
-        "loadMessage": "Cargando paneles de búsqueda",
-        "title": "Filtros Activos - %d",
-        "showMessage": "Mostrar Todo",
-        "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },
-        "rows": {
-            "1": "1 fila seleccionada",
-            "_": "%d filas seleccionadas"
-        }
-    },
-    "thousands": ".",
-    "datetime": {
-        "previous": "Anterior",
-        "next": "Proximo",
-        "hours": "Horas",
-        "minutes": "Minutos",
-        "seconds": "Segundos",
-        "unknown": "-",
-        "amPm": [
-            "AM",
-            "PM"
-        ],
-        "months": {
-            "0": "Enero",
-            "1": "Febrero",
-            "10": "Noviembre",
-            "11": "Diciembre",
-            "2": "Marzo",
-            "3": "Abril",
-            "4": "Mayo",
-            "5": "Junio",
-            "6": "Julio",
-            "7": "Agosto",
-            "8": "Septiembre",
-            "9": "Octubre"
-        },
-        "weekdays": [
-            "Dom",
-            "Lun",
-            "Mar",
-            "Mie",
-            "Jue",
-            "Vie",
-            "Sab"
-        ]
-    },
-    "editor": {
-        "close": "Cerrar",
-        "create": {
-            "button": "Nuevo",
-            "title": "Crear Nuevo Registro",
-            "submit": "Crear"
-        },
-        "edit": {
-            "button": "Editar",
-            "title": "Editar Registro",
-            "submit": "Actualizar"
-        },
-        "remove": {
-            "button": "Eliminar",
-            "title": "Eliminar Registro",
-            "submit": "Eliminar",
-            "confirm": {
-                "_": "¿Está seguro que desea eliminar %d filas?",
-                "1": "¿Está seguro que desea eliminar 1 fila?"
-            }
-        },
-        "error": {
-            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-        },
-        "multi": {
-            "title": "Múltiples Valores",
-            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
-            "restore": "Deshacer Cambios",
-            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-        }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-        "creationModal": {
-            "button": "Crear",
-            "name": "Nombre:",
-            "order": "Clasificación",
-            "paging": "Paginación",
-            "search": "Busqueda",
-            "select": "Seleccionar",
-            "columns": {
-                "search": "Búsqueda de Columna",
-                "visible": "Visibilidad de Columna"
-            },
-            "title": "Crear Nuevo Estado",
-            "toggleLabel": "Incluir:"
-        },
-        "emptyError": "El nombre no puede estar vacio",
-        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
-        "removeError": "Error al eliminar el registro",
-        "removeJoiner": "y",
-        "removeSubmit": "Eliminar",
-        "renameButton": "Cambiar Nombre",
-        "renameLabel": "Nuevo nombre para %s",
-        "duplicateError": "Ya existe un Estado con este nombre.",
-        "emptyStates": "No hay Estados guardados",
-        "removeTitle": "Remover Estado",
-        "renameTitle": "Cambiar Nombre Estado"
-    }
-};
-
+      },
+        
+      })
+  } );
 </script>

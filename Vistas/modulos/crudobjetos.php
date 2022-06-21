@@ -1,14 +1,47 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de objetos
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de objetos  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
 
 
 $codigoObjeto = 6;
-$accion = 'Ingreso a la pantalla de mantenimiento objetos ';
+$accion = 'Ingreso a la pantalla de mantenimiento objetos';
 $descripcion = 'Ver los registros de los objetos';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
-
 
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -17,57 +50,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 <!--INICIO DEL MODAL DE Agregar -->
 <body oncopy="return false" onpaste="return false" >
-<div class="modal fade" id="ADDOBJETO" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <!-- Modal content-->
-            <form method="POST" class="needs-validation" novalidate>
 
-                <div class="modal-header" style="background-color: #0CCDE3">
-                    <h4 class="text-center">Agregar
-                        objetos</h4>
-
-                </div>
-                <div class="modal-body">
-                    <!--CUERPO DEL MODAL -->
-                    <div class="row">
-                        <!-- INICIO PRIMERA ROW -->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Nombre</label>
-                                <input type="text" class="form-control" maxlength="40" minlength="10"  onkeyup="mayus(this);" autocomplete="off" type="text"
-                                 name="nombre" id="nombre" required="">
-                                 <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="txtcodigo_persona">
-                                    Descripcion</label>
-                                <input type="text" class="form-control" onkeyup="mayus(this);"  type="text" 
-                                 name="descripcion" id="descripcion" autocomplete = "off" maxlength="100" required="">
-                                 <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
-                            </div>
-                        </div>
-                    </div> <!-- FIN DE EL PRIMER ROW -->
-
-
-                </div>
-                <!--FINAL DEL CARD BODY -->
-                <div class="modal-footer ">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                    <button type="submit" name="ADD_OBJETO" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                </div>
-                <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-            </form>
-        </div>
-    </div>
-</div><!-- FIN DEL MODAL AGREGAR -->
 
 <body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
@@ -75,8 +58,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>MANTENIMIENTO OBJETOS</h4>
+    <div class="content-header text-xl-center mb-3 ">
+        <h4>Mantenimiento Objetos</h4>
     </div>
     <section class="content">
         <div class="container-fluid">
@@ -109,7 +92,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      ?>
                      
                     <button type="button" class="btn btn-primary mb-3" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar objeto
+                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Objeto
                     </button>
                    
                        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"
@@ -126,15 +109,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         </div>
 
                         <!-- form start -->
+                        <form method ="POST">
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="tabla_objetos" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
                                         <th class="text-center">Acción</th>
-                                        <th class="text-center">ID</th>
+                                        <th class="text-center">Código</th>
                                         <th class="text-center">Nombre</th>
-                                        <th class="text-center">Descripcion</th>
+                                        <th class="text-center">Descripción</th>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -221,15 +205,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
     
                                                     <!--INICIO DEL MODAL DE EDITAR -->
                                                     <div id="EDITAROBJETO<?php echo $var1; ?>" class="modal fade" role="dialog">
-                                                        <div class="modal-dialog modal-lg">
+                                                        <div class="modal-dialog modal-md">
                                                             <div class="modal-content">
                                                                 <!-- Modal content-->
+                                                                <div class="modal-header" style="background-color: #0CCDE3">
+                                                                    <h4 class="text-center">Editar información objeto </h4>
+                                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
                                                                 <form method="POST">
-                                                                    <div class="modal-header" style="background-color: #0CCDE3">
-                                                                        <h4 class="text-center">Editar informacion objetos
-                                                                        </h4>
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                    </div>
                                                                     <div class="modal-body">
                                                                         <!--CUERPO DEL MODAL -->
                                                                         <div class="row">
@@ -237,20 +220,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
                                                                                  name="cod_objetoedit" id="cod_objetoedit">
                                                                                  
-                                                                            <div class="col-sm-6">
+                                                                            <div class="col-sm-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="txtcodigo_persona">
-                                                                                        Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="editnombre" autocomplete = "off" id="editnombre">
+                                                                                    <label>Nombre</label>
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                    name="editnombre" autocomplete = "off" id="editnombre" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                    Complete este campo.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-sm-6">
+                                                                            <div class="col-sm-12">
                                                                                 <div class="form-group">
-                                                                                    <label for="txtcodigo_persona">
-                                                                                        Descripcion</label>
-                                                                                    <input type="text" value="<?php echo $var4; ?> "onkeyup="mayus(this);"  class="form-control" maxlength="100" minlength="5"  
-                                                                                     name="editdescripcion"autocomplete = "off" id="editdescripcion">
+                                                                                    <label>Descripción</label>
+                                                                                    <textarea type="text"  onkeyup="mayus(this);"  class="form-control" required pattern="[A-Z]{5,100}" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="editdescripcion" autocomplete = "off" id="editdescripcion" ><?php echo $var4;?></textarea>
+                                                                                     <div class="invalid-feedback">
+                                                                                      Complete este campo.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -278,7 +264,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="cod_objeto_eliminar" id="cod_objeto_eliminar">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este objeto <?php echo $var3; ?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar este objeto <?php echo $var3; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
@@ -310,27 +296,52 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- FINAL CONTAINER FLUID -->
     </section><!-- FINAL SECTION -->
 
-    <!-- Button trigger modal -->
-
-
-    <!-- Modal -->
-
-
-
-
-
-
 </div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-</div><!-- /.content-wrapper -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control Sidebar -->
-</aside>
-</div><!-- ./wrapper -->
+
+<div  id="ADDOBJETO" class="modal fade"   role="dialog" >
+    <div class="modal-dialog modal-md">
+        <div class="modal-content"><!-- Modal content-->
+            <div class="modal-header" style="background-color: #0CCDE3">
+                <h4 class="text-center">Agregar Objetos</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+           <form method="POST" class="needs-validation" novalidate>
+                <div class="modal-body">
+                    <!--CUERPO DEL MODAL -->
+                    <div class="row">
+                        <!-- INICIO PRIMERA ROW -->
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" required minlength="10" maxlength="40"   onkeyup="mayus(this);" autocomplete="off"  onkeypress="return soloLetras(event);"
+                                 name="nombre" id="nombre" >
+                                <div class="invalid-feedback">
+                                  Campo obligatorio.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label >Descripción</label>
+                                <textarea type="text" class="form-control" required pattern="[A-Z,]{5,100}" minlength="5" maxlength="100" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"      name="descripcion"  ></textarea>
+                                 <div class="invalid-feedback">
+                                   Campo obligatorio.
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div> <!-- FIN DE EL PRIMER ROW -->
+                </div>
+                <!--FINAL DEL CARD BODY -->
+                <div class="modal-footer ">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                    <button type="submit" name="ADD_OBJETO" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                </div>
+                <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+            </form>
+        </div>
+    </div>
+</div><!-- FIN DEL MODAL AGREGAR -->
 
 
 
@@ -338,7 +349,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
 
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.was-validated')
+    Array.prototype.slice.call(forms)
 
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
 
 <script type="text/javascript">
@@ -371,80 +398,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
 </script>
 
 
-<!-- funciones del sistema -->
-<script>
-    function soloLetras(e) {
-        key = e.keyCode || e.which;
-        tecla = String.fromCharCode(key).toLowerCase();
-        letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-        especiales = ["8-37-39-46"];
-        tecla_especial = false
-        for (var i in especiales) {
-            if (key == especiales[i]) {
-                tecla_especial = true;
-                break;
-            }
-        }
-        if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-            return false;
-        }
-    }
-    //funcion para solu numeros ingresar en el campo
-    function soloNumeros_tel(e) {
-        var teclaPulsada = window.event ? window.event.keyCode : e.which;
-        // capturamos el contenido del input
-        var valor = document.getElementById("tele").value;
-        if (valor.length < 9) {
-            if (teclaPulsada == 9) {
-                return true;
-            }
-            // devolvemos true o false dependiendo de si es numerico o no
-            return /\d/.test(String.fromCharCode(teclaPulsada));
-        } else {
-            return false;
-        }
-    }
-    //funcion para quitar espacios
-    function quitarespacios(e) {
-        var cadena = e.value;
-        cadena = cadena.trim();
-        e.value = cadena;
-    };
-    //funcion para poner mayusculas
-    function mayus(e) {
-        e.value = e.value.toUpperCase();
-    }
-    //funcion sin espacios 
-    function sinespacio(e) {
-        var cadena = e.value;
-        var limpia = "";
-        var parts = cadena.split(" ");
-        var length = parts.length;
-        for (var i = 0; i < length; i++) {
-            nuevacadena = parts[i];
-            subcadena = nuevacadena.trim();
-            if (subcadena != "") {
-                limpia += subcadena + " ";
-            }
-        }
-        limpia = limpia.trim();
-        e.value = limpia;
-    };
-    //otra funcion para quitar espacios :V
-    function quitarespacios(e) {
-        var cadena = e.value;
-        cadena = cadena.trim();
-        e.value = cadena;
-    };
-</script>
+
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -453,7 +413,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
           event.preventDefault()
           event.stopPropagation()
         }
-
         form.classList.add('was-validated')
       }, false)
     })
@@ -488,9 +447,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
       })
   } );
 
-
-   /////copiar y pegar y eso 
-  var nombre=document.getElementById("nombre"); //el nombre del id del campo y cambiar la variable 
+/////copiar y pegar y eso 
+var nombre=document.getElementById("nombre"); //el nombre del id del campo y cambiar la variable 
   nombre.addEventListener('keydown', function(keyboardEvent) {///cambiar la variable 
     //Si se está repitiendo, ignorar
     if (keyboardEvent.repeat)

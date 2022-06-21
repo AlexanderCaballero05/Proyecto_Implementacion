@@ -22,6 +22,8 @@ Historial de Cambio
 Programador               Fecha                      Descripcion
 Diana Rut               28/05/2022            Se modifico la parte de rol para que no se edite
 Diana Rut               1/06/2022            Se agrego una validacion de input
+Diana Rut               09/06/2022           Se modifico los datos de la bitacora
+ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -49,8 +51,8 @@ include_once "conexion3.php";
     <!--llamada de la fuction bitacora -->
   <?php 
   $codigoObjeto=14;
-  $accion='Ingreso a la pantalla de mantenimiento usuarios';
-  $descripcion= 'Ver los registros de los usuarios';
+  $accion='INGRESO A LA PANTALLA MANTENIMIENTO USUARIOS';
+  $descripcion= 'SE AUTENTIFICO';
   bitacora($codigoObjeto, $accion,$descripcion);
   ?>
 <head>
@@ -66,9 +68,9 @@ include_once "conexion3.php";
   </div>
   
   <section class="content">
-     <section class="content-header text-xl-center mb-3">
-          <h4>MANTENIMIENTO USUARIOS</h4>    
-      </section>
+     <div class="content-header text-xl-center mb-3">
+          <h4>Mantenimiento Usuarios</h4>    
+    </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
@@ -116,7 +118,7 @@ include_once "conexion3.php";
           <div class="card ">
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_usuarios" class="table table-bordered table-striped">
@@ -236,10 +238,10 @@ include_once "conexion3.php";
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center"> Editar Usuarios</h4>
+                                    <h4 class="text-center"> Editar Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
@@ -252,19 +254,19 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Primer nombre</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>"   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" id="nombre_modi">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" required   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" id="nombre_modi">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Primer Apellido</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi" id="apellido_modi">
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" required  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi" id="apellido_modi">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Correo</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
+                                          <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -278,7 +280,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-6">
                                         <label for="cbx_persona" class="control-label">Estado</label>  
                                         <div class="form-group">
-                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
+                                          <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
                                             <option value="<?php echo $var13?>"><?php echo $var7;?></option>
                                             <option value="2">ACTIVO</option>
                                             <option value="3">INACTIVO</option>
@@ -294,7 +296,7 @@ include_once "conexion3.php";
                                         <div class="col-sm-6">
                                           <label for="cbx_persona" class="control-label">Rol</label>  
                                           <div class="form-group">
-                                            <select class="form-control select2 select2-primary"   style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
+                                            <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ROLUSUARIO" id="ROLUSUARIO" required="">
                                               <option value="<?php echo $var14?>"><?php echo $var8;?></option>
                                               <?php 
                                                 if ($resultadod->num_rows > 0) {
@@ -360,7 +362,7 @@ include_once "conexion3.php";
                                   <h5 class="modal-title" id="exampleModalLabel"></h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEeliminar" method="POST">
+                                <form id="FORMEeliminar" method="POST" >
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
                                     <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var6; ?>?</h4>

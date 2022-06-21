@@ -12,7 +12,7 @@
                $nombre_seccion = ($_POST['nombre_seccion']);
                $descripcion = ($_POST['descripcion_seccion']); 
               try{ 
-                  $consulta_seccion = $db->prepare("SELECT NOMBRE FROM tbl_seccion WHERE NOMBRE = (?);");
+                  $consulta_seccion = $db->prepare("SELECT COUNT(*) FROM tbl_seccion WHERE NOMBRE = (?);");
                   $consulta_seccion->execute(array($nombre_seccion));
                   $row=$consulta_seccion->fetchColumn();
                   if($row>0){
@@ -27,17 +27,18 @@
                       $resul=$conn->query($query_seccion);
                       if($resul >0){
                         echo "<script> 
+                        alert('La sección se registro correctamente'); 
                         window.location = 'crudSeccion';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=33;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nueva seccion ';
+                        $codigoObjeto=46;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA SECCIÓN';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
-                        alert('Error auxilio!');
+                        alert('Ocurrio algun error');
                         window.location = 'crudSeccion';
                         </script>";
                         exit;
@@ -69,7 +70,7 @@
       $editar_descripcion = ($_POST['editar_descripcion']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_seccion));
        $row=$sentencia->fetchColumn();
         if($row>0){
@@ -84,13 +85,14 @@
             WHERE CODIGO_SECCION = '$codigo_seccion' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo '<script>              
+              echo '<script>  
+              alert("Sección modificada correctamente");             
               window.location = "crudSeccion";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una sección ';
+              $codigoObjeto=46;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA SECCIÓN';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -116,13 +118,13 @@ if(isset($_POST['seccion_eliminar'])){
   if(isset($_POST['ELIMINAR_SECCION'])){
     $code = ($_POST['seccion_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
-      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);");
+      $relacion_tablas =  $db->prepare("SELECT  t.CODIGO_SECCION  ,t.NOMBRE from tbl_seccion t,tbl_carga_academica c
+      where  t.CODIGO_SECCION = c.CODIGO_SECCION and t.CODIGO_SECCION  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar la seccion,esta relacionado con carga!');
+        alert('¡No se puede eliminar la sección,esta relacionado con carga!');
         window.location = 'crudSeccion';
         </script>";
         exit;
@@ -132,12 +134,13 @@ if(isset($_POST['seccion_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_seccion WHERE  CODIGO_SECCION = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('Se elimino correctamente'); 
             window.location = 'crudSeccion';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una Sección ';
+            $codigoObjeto=46;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA SECCIÓN';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

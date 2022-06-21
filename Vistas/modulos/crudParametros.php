@@ -1,3 +1,37 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de parametros
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de parametro  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -25,7 +59,7 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> PARÁMETROS  <i class=" nav-icon fas fa-shield-alt"></i></h4>
+          <h4> Mantenimiento de Parámetros  </h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -34,7 +68,7 @@ include_once "conexion3.php";
                 <a class="nav-link active"  style="color:#000000;" href="crudParametros">Parámetros</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="parametrosusuario">Parámetros usuario</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudparametrosusuario">Parámetros usuario</a>
               </li>
             </ul>
           </div>
@@ -95,7 +129,7 @@ include_once "conexion3.php";
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Parametro</th>
                           <th class="text-center">Valor</th>
                         </tr>
@@ -203,7 +237,7 @@ include_once "conexion3.php";
                           <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
+                                <form id="FORMEDITPARAMETROS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parámetros</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -281,7 +315,7 @@ include_once "conexion3.php";
   <div id="agregar_param" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Parámetro</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

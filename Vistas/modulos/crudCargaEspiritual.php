@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+     Programa:          Mantenimiento de carga espiritual  
+    Fecha:           
+    Programador:      
+    descripcion:        Permite llevar un mantenimiento de la carga espiritual ,editar,eliminar nuevo     
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia 
+----------------------------------------------------------------------->
+
 <?php 
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
@@ -47,7 +79,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
     </div>
     <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-          <h4> LISTA CARGA ESPIRITUAL <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Lista de Carga Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
       <section class="content">
@@ -164,16 +196,16 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <thead >
                       <tr>
                         <th class="text-center">Acción</th>
-                        <th class="text-center">Numero</th>
+                        <th class="text-center">Número</th>
                         <th class="text-center">Modalidad</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Tutoría</th>
                         <th class="text-center">Tutor</th>
                         <th class="text-center">Sección</th>
                         <th class="text-center">Hora inicio</th>
                         <th class="text-center">Hora final</th>
                         <th class="text-center">Fecha inicio</th>
                         <th class="text-center">Fecha final</th>
-                        <th class="text-center">Periodo</th>
+                        <th class="text-center">Período</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -336,7 +368,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       $query = "SELECT * FROM tbl_tutoria";
                                       $resultadod=$conn->query($query);                
                                       ?>
-                                      <label  class="control-label">Tutoria:</label> 
+                                      <label  class="control-label">Tutoría:</label> 
                                       <div class="form-group">
                                         <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled">
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 

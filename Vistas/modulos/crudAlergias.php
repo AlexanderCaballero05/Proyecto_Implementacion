@@ -1,11 +1,42 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de alergias
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia 
+    descripcion:       Permite llevar un mantenimiento de las alergias del area media ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+DIANA RUT GARCIA    		09-06-2022                 Cambio en el titulo y en el modal de editar
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=28;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
+ $codigoObjeto=39;
+ $accion='INGRESO AL MANTENIMIENTO DE ALERGIAS';
+ $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
@@ -20,11 +51,9 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>MANTENIMIENTO ALERGIAS</h4>
-        </h1>     
-    </section>
+    <div class="content-header text-xl-center mb-3 ">
+        <h4>Mantenimiento Alergias</h4>    
+    </div>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -46,7 +75,6 @@
           if($permiso_registrar == 'SI'){
           ?>
            
-          
           <button  data-toggle="modal"  href="#AGREGAR_ALERGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Alergia</button>
           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>   
           <!-- Inicios del card -->
@@ -103,7 +131,6 @@
                                <?php
                                  if($permiso_eliminar == 'SI'){
                                ?>                            
-                                
                               <!--Fin del boton de eliminar -->
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
                                 <button id="ELIMINAR" name="ELIMINAR" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
@@ -148,25 +175,25 @@
                         
                           <div id="EDITAR_ALERGIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
-                              <div class="modal-content"><!-- Modal content-->
+                              <div class="modal-content"><!-- Modal contenido-->
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Alergia</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Alergia</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_alergia" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Alergia</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" >
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" required onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" >
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción Alergia</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -231,9 +258,9 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Alergia</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="6"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" required="">
+                                    <input  type="text" onkeyup="mayus(this);" class="form-control"  maxlength="20" minlength="6"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" required="">
                                      <div class="invalid-feedback">
-                                       campo obligatorio.
+                                       Campo obligatorio.
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +269,7 @@
                                     <label for="txtcodigo_persona">Descripción Alergia</label>
                                     <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia"  required=""></textarea>
                                     <div class="invalid-feedback">
-                                       campo obligatorio.
+                                       Campo obligatorio.
                                    </div>
                                 </div>
                             </div>

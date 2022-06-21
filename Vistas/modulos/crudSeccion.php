@@ -1,11 +1,41 @@
+<!-- -----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de secciones
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia
+    descripcion:       Edita,elimina y registra una seccion
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador           Fecha                      Descripcion
+Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=22;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
+ $codigoObjeto=46;
+ $accion='INGRESO AL MANTENIMIENTO SECCIONES';
+ $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
@@ -21,11 +51,9 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>MANTENIMIENTO DE SECCIONES</h4>
-        </h1>     
-    </section>
+      <div class="content-header text-xl-center mb-3 ">
+        <h4>Mantenimiento Secciones</h4>   
+      </div>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -64,8 +92,8 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo</th>
-                          <th class="text-center">Nombre</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Nombre Sección</th>
                           <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
@@ -146,24 +174,24 @@
                           <div id="EDITARSECCION<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
+                               <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Sección</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 <form  method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Sección</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_seccion" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5"    autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
+                                          <label>Nombre Sección</label>
+                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5" required   autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <label>Descripción</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -188,7 +216,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="seccion_eliminar" >
-                                    <h4 class="text-center">¿Esta seguro de eliminar la sección<?php echo $var2?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la sección <?php echo $var2?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -227,19 +255,19 @@
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
+                                    <label for="txtcodigo_persona">Nombre Sección</label>
                                     <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la sección" name="nombre_seccion"  required="">
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la secció"  name="descripcion_seccion" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la sección"  name="descripcion_seccion" required=""></textarea>
                                     <div class="invalid-feedback">
-                                      campo obligatorio.
+                                      Campo obligatorio.
                                    </div>
                                 </div>
                             </div>

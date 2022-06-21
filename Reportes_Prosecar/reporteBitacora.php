@@ -1,5 +1,7 @@
 <?php
 session_start();
+$usuario= $_SESSION['vario'];
+
 $desde= $_SESSION['bdesde'];
 $hasta= $_SESSION['bhasta'];
 
@@ -18,6 +20,7 @@ class PDF extends FPDF {
 
 	function Header() {
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
+		date_default_timezone_set("America/Guatemala");
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
 		$this->SetX(86);
@@ -30,6 +33,7 @@ class PDF extends FPDF {
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
 		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		
 		
 		$this->Ln(10);
 	}
@@ -115,7 +119,7 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(10, 8, 'Número', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Fecha', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Usuario', 1, 0, 'C', 0);
 			$this->Cell(40, 8, 'Objeto', 1, 0, 'C', 0);
@@ -201,7 +205,8 @@ class PDF extends FPDF {
     FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
     WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
     AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-    AND bi.FECHA BETWEEN '$desde' AND '$hasta'; ";
+    AND bi.FECHA BETWEEN '$desde' AND '$hasta'
+	ORDER BY bi.CODIGO_BITACORA DESC; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -224,12 +229,12 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 $pdf->SetX(32);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(20, 12, 'Número', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(50, 12, 'Acción', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Descripción', 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -239,11 +244,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 30, 40,50,50)); //???
+$pdf->SetWidths(array(20, 30, 30, 40,50,50)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($data[$i]['CODIGO_BITACORA'], ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_USUARIO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_OBJETO']))), utf8_decode($data[$i]['ACCION']), $data[$i]['DESCRIPCION']   ),32 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_USUARIO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_OBJETO']))), utf8_decode($data[$i]['ACCION']), $data[$i]['DESCRIPCION']   ),32 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -1,3 +1,29 @@
+<!-- ---------------------------------------------------------------------
+ELABORADO POR ARNOLD GARCIA u otr persona
+	Universidad Nacional Autonoma de Honduras (UNAH)
+	  	Facultad de Ciencias Economicas
+	Departamento de Informatica administrativa
+     Analisis, Programacion y Evaluacion de Sistemas
+             Segundo periodo 2022
+Equipo:
+Arnold Caballero.......... (no me acuerdo)
+
+Catedratico:
+Lic. Karla Melisa Garcia Pineda  --Evaluacion
+Lic Giancarlo Scalichi -- Implementacion de sistemas
+Clauidia Nuñez -- Analisis y diseño
+---------------------------------------------------------------------
+Programa:          Pantalla que muestra los datos  de los estudiantes
+Fecha:            
+Programador:       
+descripcion:       Pantalla de mantenimiento edita datos de estudiantes
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -12,7 +38,7 @@
     </div><!-- /.container-fluid -->
   </div>
         <div class="content-header text-xl-center mb-3">
-              <h4>ESTUDIANTES PROSECAR </h4>
+              <h4>Estudiantes Prosecar </h4>
         </div>
   
   <section class="content">
@@ -23,7 +49,7 @@
               <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
@@ -87,7 +113,7 @@
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">ID</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Grado actual</th>
@@ -220,7 +246,7 @@
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Estudiante</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -231,13 +257,20 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" autocomplete ="off">
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
+                                          autocomplete ="off" required =" ">
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pasatiempos</label>
-                                          <input  type="text"  value ="<?php echo $var7 ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="ediTPASATIEMPOS" id="editar_pasatiempos" autocomplete ="off">
+                                          <input  type="text"  value ="<?php echo $var7 ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="ediTPASATIEMPOS" id="editar_pasatiempos" autocomplete ="off" required =" ">
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -246,14 +279,20 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <input  type="text"  value ="<?php echo $var8; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editDISTRACTORES" id="editar_distractores">
+                                          <input  type="text"  value ="<?php echo $var8; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editDISTRACTORES" id="editar_distractores"required =" ">
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Metas</label>
-                                          <input  type="text"  value ="<?php echo $var9; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editMETAS" id="editar_metas">
-                                        </div>
+                                          <input  type="text"  value ="<?php echo $var9; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editMETAS" id="editar_metas" required =" ">
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
+                                             </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY --> 

@@ -21,7 +21,7 @@
 
 ---------------------------------------------------------------------
 
-    Programa:          Pantalla de registro de permisos de objetos
+    Programa:          Pantalla de registro de permisos a los objetos o pantallas del sistema
     Fecha:             04-Marzo-2022
     Programador:       Arnold Caballero 
     descripcion:       Valida agregar a los roles de usuario permisos sobre objetos o modulos del sistema
@@ -31,15 +31,21 @@
 -----------------------------------------------------------------------
 
     Programador               Fecha                      Descripcion
-    Arnold Caballero     		01-06-2022                 cambio de nombre de variables para la recuperacion por correo
-    Arnold Caballero     		03-06-2022                 cambio del cuerpo y el diseño del mensaje enviado al correo electronico.
+
+    Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
+
 
 ----------------------------------------------------------------------->
 
 
 <?php 
  include_once "conexion1.php";
+ include_once "conexion3.php";
+ $codigoObjeto = 5;
+$accion = 'INGRESO AL MANTENIMIENTO DE PERMISOS';
+$descripcion = 'VIZUALIZAR LOS REGISTROS DE LOS PERMISOS';
+bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <head>
 

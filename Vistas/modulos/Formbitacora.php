@@ -1,8 +1,47 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+    Programa:          Pantalla, interfaz de la bitacora del sistema del proyecto PROSECAR
+    Fecha:             12-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       Aqui se visualizan los registros de las acciones que un usuario realizo en el sistema
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+    Programador               Fecha                      Descripcion
+    Arnold Caballero     		07-06-2022                 cambio en las etiquetas de la tabla de la bitacora y el orden descendente de los registros
+.
+
+----------------------------------------------------------------------->
+
+
 <?php 
 date_default_timezone_set("America/Guatemala");
-$fecha_actual = date("Y-m-d");
-  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
-  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
+$fecha_actual = date("Y-m-d h:i:s a");
+  $_SESSION["bdesde"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."- 1 month"));
+  $_SESSION["bhasta"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."+ 23 hour + 2 minute + 2 second"));
 
 ?>
 
@@ -16,15 +55,15 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <?php 
                   $codigoObjeto=7;
-                    $accion='Ingreso a la bitacora universal';
-                    $descripcion= 'Consultar la informacion de la bitacora';
+                    $accion='INGRESO A LA BITACORA UNIVERSAL';
+                    $descripcion= 'CONSULTAR LA INFORMACION DE LA BITACORA UNIVERSAL';
                     bitacora($codigoObjeto, $accion,$descripcion);
                     ?>
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
-<div class="content-wrapper">
+<div class="content-wrapper ">
 
  <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
@@ -57,12 +96,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
+            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
           </div>
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-            <input class="form-control" type="date" max="<?= date("Y-m-d")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
+            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
           </div>
           <div class="col-sm-2 mt-4">
              <button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>
@@ -144,20 +183,20 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
         
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
            <div class="card-body pr-1">
-            <div class="table-responsive">
-              <table id="ventas" class="table table-bordered table-striped table-hover" style="width:100%">
+            <div class="table-responsive ">
+              <table id="bitacora_del_sistema" class="table table-bordered table-striped table-hover" style="width:100%">
                 <br><center>
                   
             
                <thead class="bg-info">
                 <tr>
                 <th></th>
-                <th>Id_bitacora</th>
-			        	<th width="20%" class="center">Fecha</th>
-				        <th>Usuario</th>
-				        <th>Objeto</th>
-				        <th>Accion</th>
-                <th>Descripción</th>
+                <th>Número</th>
+			        	<th width="20%" class="text-center">Fecha</th>
+				        <th class="text-center">Usuario</th>
+				        <th class="text-center">Objeto</th>
+				        <th class="text-center">Acción</th>
+                <th class="text-center">Descripción</th>
                
                 
                  
@@ -178,13 +217,16 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                     FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
                     WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
                     AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-                    AND bi.FECHA BETWEEN '$desde1' AND '$hasta1';";
+                    AND bi.FECHA BETWEEN '$desde1' AND '$hasta1'
+                    ORDER BY bi.CODIGO_BITACORA DESC;";
                            //llamando los datos de la base y almacenadolos en variables 
                            
                     $resulta = $conn->query($queryi);
                     if ($resulta->num_rows > 0) {
+                      $contador = 0;
                         // output data of each row
                         while($row = $resulta->fetch_assoc()) {
+                          $contador = $contador + 1;
                           $var1 = $row['CODIGO_BITACORA'];
                           $var2 = $row['FECHA'];
                           $var3 = $row['NOMBRE_USUARIO'];
@@ -199,7 +241,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                      <td style="visibility:hidden;">
                         
                     </td>
-                 <td class="text-center"><?php echo $var1 ?></td>
+                 <td class="text-center"><?php echo $contador ?></td>
                  <td class="text-center"><?php echo $var2 ?></td>
                  <td class="text-center"><?php echo $var3 ?></td>
 				         <td class="text-center"><?php echo $var4 ?></td>
@@ -243,6 +285,34 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
   </script>
        
 
+       <script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#bitacora_del_sistema').DataTable({
 
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 <!-- ordenar tabla de modo descendente -->
 

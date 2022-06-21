@@ -1,3 +1,34 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de alumnos matrículadas
+    Fecha:            
+    Programador:       
+    descripcion:       Permite llevar un mantenimiento de los alummnos ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia 
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -17,7 +48,9 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
+
               <h4> Lista de Alumnos <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Tutoría de ".$_SESSION['tutoria'] ?></p> </h4>
+
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -61,13 +94,17 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
+
                         <th class="text-center">Código</th>
+
                         <th class="text-center">Alumno</th>
                         <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">período</th>
+
+                        <th class="text-center">Período</th>
+
                         <th class="text-center">Estado matrícula</th>
                         <th class="text-center">Acción</th>
                       </tr>
@@ -197,7 +234,9 @@
                             <div class="modal-content"><!-- Modal content-->
                               <form  method="POST"  class="needs-validation" >
                                 <div class="modal-header" style="background-color: #0CCDE3">
+
                                   <h4 class="text-center">Agregar Observación </h4>
+
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -224,7 +263,7 @@
 
                                         </div>
                                          <div class="invalid-feedback">
-                                            Llene este campo.
+                                          Campo Obligatorio.
                                          </div>
                                       </div>
                                   </div><!--fin row -->
@@ -244,17 +283,15 @@
                                       <div class="col-sm-6 mb-3">
                                        <?php
                                         $query= "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                        FROM tbl_estado es
-                                        WHERE  es.CODIGO_ESTADO between 7 and 13 
-                                        and es.CODIGO_ESTADO <> 8
-                                        and es.CODIGO_ESTADO <> 12
-                                        and es.CODIGO_ESTADO <> 11
-                                        and es.CODIGO_ESTADO <> 10;
+                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
+                                        ;
                                         ";
                                         $result1= $conn->query($query);
                                         ?>
                                          <div class="form-group">
+
                                             <label for="txtcodigo_especialista">Estado de Matrícula</label>
+
                                             <select class="form-control select2" name="codigo_estado" required>
                                                 <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
                                                  <?php
@@ -268,7 +305,7 @@
                                                     ?>
                                             </select>
                                             <div class="invalid-feedback">
-                                                Llene este campo.
+                                            Campo Obligatorio.
                                             </div>
                                         </div>
                                        </div>
@@ -290,7 +327,9 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+
                                   <button type="submit" name="MODIFICAR_CALIFICACION"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar Observación</button>
+
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>

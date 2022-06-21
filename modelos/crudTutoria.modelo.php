@@ -14,12 +14,12 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];    
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_tutoria WHERE NOMBRE = (?);");
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_tutoria WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_tutoria));
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('El nombre de la tutoria  $nombre_tutoria ya se encuentra registrado');
+                    alert('El nombre de la tutoría  $nombre_tutoria ya se encuentra registrada');
                     window.location = 'crudTutorias';
                     </script>";
                   exit;
@@ -29,14 +29,15 @@
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
+                        alert('Tutoría registrada correctamente');
                         window.location = 'crudTutorias';
                         </script>";
-                        exit;
                         include_once 'function_bitacora.php';
                         $codigoObjeto=22;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego una nueva tutoria ';
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA TUTORÍA';
                          bitacora($codigoObjeto, $accion,$descripcion);
+                         exit;
                       }else{
                         echo "<script> 
                         alert('Error auxilio,ok no!');
@@ -73,12 +74,12 @@
       $user =$_SESSION['vario'];  
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_tutoria where NOMBRE = (?) and CODIGO_TUTORIA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tutoria where NOMBRE = (?) and CODIGO_TUTORIA <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_tutoria));
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe una Tutoria con este mismo nombre: $editar_nombre');
+          alert('Ya existe una Tutoría con este mismo nombre: $editar_nombre');
           window.location = 'crudTutorias';
           </script>";
           exit;
@@ -89,16 +90,18 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
+              alert('La tutoría se modifico correctamente'); 
               window.location = 'crudTutorias';
               </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=22;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una tutoria ';
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA TUTORÍA';
               bitacora($codigoObjeto, $accion,$descripcion);
+              exit;
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar la tutoria!');
+              alert('¡Error al  intentar modificar la tutoría!');
               window.location = 'crudTutorias';
               </script>";
             }
@@ -135,12 +138,13 @@ if(isset($_POST['tutoria_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_tutoria WHERE  CODIGO_TUTORIA = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('Se elimino la tutoría correctamente');
             window.location = 'crudTutorias';
             </script>";
             include_once 'function_bitacora.php';
             $codigoObjeto=22;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una Tutoria ';
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA TUTORÍA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

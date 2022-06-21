@@ -1,3 +1,37 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de estados
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de estados  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
+
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -8,14 +42,16 @@
 <body oncopy="return false" onpaste="return false"> 
 <div class="content-wrapper">
   <div class="content-header">
-  <div class="text-center">
-      <h2>MANTENIMIENTO DE ESTADOS</h2>
+
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
     <div class="container-fluid">
+    <div class="content-header text-xl-center mb-3">
+         <h3>Mantenimiento Estados</h3>   
+      </div>
       <div class="row">
         <div class="col-md-12">
            
@@ -56,7 +92,7 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -64,7 +100,7 @@
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
-                          <th class="text-center">Id</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">Nombre del Estado</th>
                           <th class="text-center">Descripción</th>
                           
@@ -170,7 +206,7 @@
                           <div id="EDITARESTADO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Estado</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -219,7 +255,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estado_eliminar" id="estado_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estado <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el estado <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -249,7 +285,7 @@
  <div id="AGREGAR_ESTADO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Nuevo Estado</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>

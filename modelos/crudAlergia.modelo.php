@@ -12,7 +12,7 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];   
               try{ 
-                  $consulta_rol = $db->prepare("SELECT NOMBRE FROM tbl_alergias WHERE NOMBRE = (?);");
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_alergias WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_alergia));
                   $row=$consulta_rol->fetchColumn();
                   if($row>0){
@@ -31,9 +31,9 @@
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=2;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego una nueva alergia ';
+                        $codigoObjeto=39;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRO UNA ALERGIA';
                          bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
@@ -72,7 +72,7 @@
 
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_alergias where NOMBRE = (?) and CODIGO_ALERGIAS <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_alergias where NOMBRE = (?) and CODIGO_ALERGIAS <> (?) ;");
        $sentencia->execute(array($editar_nombre,$codigo_alergia));
        $row=$sentencia->fetchColumn();
         if($row>0){
@@ -91,9 +91,9 @@
               window.location = "crudAlergias";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito una alergia ';
+              $codigoObjeto=39;
+              $accion='MODIFICACIÓN';
+              $descripcion= 'SE MODIFICO UNA ALERGIA';
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
@@ -138,9 +138,9 @@ if(isset($_POST['alergia_eliminar'])){
             window.location = 'crudAlergias';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino una alergia';
+            $codigoObjeto=39;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINO UNA ALERGIA';
             bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{

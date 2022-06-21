@@ -11,29 +11,29 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> PACIENTES DEL AREA PSICOLOGICA<i class="nav-icon fas fa-stethoscope"></i> </h4>
-        </section>
+        <div class="content-header text-xl-center mb-3 ">
+              <h4>Lista de Pacientes <i class="nav-icon fas fa-stethoscope"></i> </h4>
+        </div>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-         <a class=" nav-link" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en espera</a>
+         <a class=" nav-link" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Psicológica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link" style="color:#000000;" href="#">Plan Terapéutico</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudPacientesPsicologicos">Lista de pacientes</a>
+            <a class="nav-link active" style="color:#000000;" href="crudPacientesPsicologicos">Lista de Pacientes</a>
             </li>
           </ul>
         </div>
@@ -53,8 +53,8 @@
                       <tr>
                         <th class="text-center">Acción</th>
                         <th class="text-center">Fecha creación</th>
-                        <th class="text-center">Codigo expediente</th>
-                        <th class="text-center">Nombre del paciente</th>
+                        <th class="text-center">Código expediente</th>
+                        <th class="text-center">Nombre Paciente</th>
                         <th class="text-center">DNI</th>
                         <th class="text-center">Estado</th>
                       </tr>
@@ -69,12 +69,13 @@
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
-                          $var1 = $row['FECHA_CREACION'];
+                          $var1 = $row['CODIGO_PERSONA'];
+                          $var6 = $row['FECHA_CREACION'];
                           $var2 = $row['CODIGO_EXPEDIENTE'];
                           $var3 = $row['PACIENTE'];
                           $var4 = $row['DNI'];
                           $var5 = $row['ESTADO'];
-                          $var6 = $row['CODIGO_PERSONA'];
+                          
                           
                       ?>
                       <tr>
@@ -108,14 +109,14 @@
 
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
-                                     <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var6?>">
+                                     <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var1?>">
                                      <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>
-                        <td class="text-center"><?php echo $var1; ?></td>
+                        <td class="text-center"><?php echo $var6; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>
                         <td class="text-center"><?php echo $var3; ?></td>
                         <td class="text-center"><?php echo $var4; ?></td>
@@ -125,11 +126,11 @@
                         <div id="AGREGAR_CITA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
-                                <div class="modal-header" style="background-color: #0CCDE3">
+                              <div class="modal-header" style="background-color: #0CCDE3">
                                   <h4 class="text-center">Programar cita </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                              <form  method="POST"  >
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_paciente_psicologo">
@@ -137,19 +138,19 @@
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre del paciente:</label>
+                                          <label for="txtcodigo_persona">Nombre del paciente</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">DNI:</label>
+                                          <label for="txtcodigo_persona">DNI</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var4; ?>" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Hora cita:</label>
+                                          <label for="txtcodigo_persona">Hora cita</label>
                                           <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800" class="form-control" name="hora_cita">
                                         </div>
                                          <div class="invalid-feedback">
@@ -199,7 +200,7 @@
                                          <!-- fin de codigo para validar la fecha actual de la region de centroamerica -->
                                          
                                           <div class="form-group">
-                                              <label for="txtcodigo_persona">Fecha cita:</label>
+                                              <label for="txtcodigo_persona">Fecha cita</label>
                                                     <input type="date" min= "<?= $Fechaactual?>" 
                                                       max="<?= date("$fechamaxima")?>"
                                                       class="form-control" 

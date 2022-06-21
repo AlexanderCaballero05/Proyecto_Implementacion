@@ -26,43 +26,43 @@ include "conexionpdo.php";
       <div class="container-fluid">
       </div> <!-- container-fluid -->
    </div> <!-- content-header-->
-        <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CONSULTA PSICOLOGICA PROSECAR<i class="nav-icon fas fa-stethoscope"></i></h4>
-        </section>
+        <div class="content-header text-xl-center mb-3 "> 
+          <h4> Plan Terapéutico <i class="nav-icon fas fa-stethoscope"></i></h4>
+      </div>
     <section class="content">
       <div class="card">
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Consultas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Consultas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Psicologicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Psicológica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Planes terapeuticos</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Plan Terapéutico</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
         </div><!--CARD HEADER-->
         <div class="card-body">
         <form method="POST"  class=" needs-validation" novalidate id="form">
-            <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-               <strong class="form-check-label pt-2 pb-2 px-2" >Datos paciente</strong>
+            <div  class="pt-2 pb-2 px-2">
+              <h5>Datos del paciente</h5>
             </div>
-            <hr> 
+            <hr  color="blue"/> 
                <div class= "row">
                  <div class="col-md-6">
                          <?php 
-                          $query = "SELECT con.CODIGO_EXPEDIENTE_PSICO CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
+                          $query = "SELECT con.CODIGO_EXPEDIENTE_PSICO CODIGO_CONSULTA, con.CODIGO_CITA,pe.DNI, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as PACIENTE
                           FROM tbl_expediente_psicologico_consulta con, tbl_inscripcion_cita i, tbl_persona pe    ,tbl_persona_especialidad es, tbl_estado esta
                           WHERE con.CODIGO_CITA = i.CODIGO_CITA
                           AND i.CODIGO_PERSONA = pe.CODIGO_PERSONA
@@ -76,14 +76,21 @@ include "conexionpdo.php";
                           $codigocon = $row['CODIGO_CONSULTA'];
                           $codigocita = $row['CODIGO_CITA'];
                           $nombrecon = $row['PACIENTE'];
+                          $DNI = $row['DNI'];
                           ?>
-                      <label for="" class="control-label">Paciente</label> 
+                      <label class="control-label">Nombre del Paciente</label> 
                         <div class="form-group">
                           <input  readonly class="form-control" value="<?php echo $nombrecon;?>">
                         </div>
                     </div> <!--COL MD 6-->
+                     <div class="col-md-3">
+                       <label class="control-label">DNI</label> 
+                       <div class="form-group">
+                       <input  readonly class="form-control" value="<?php echo $DNI;?>">
+                       </div>
+                     </div>
                     <div class="col-md-3">
-                      <label for="" class="control-label">Codigo consulta</label> 
+                      <label for="" class="control-label">Código consulta</label> 
                         <div class="form-group">
                           <input readonly class="form-control" name="codigo_consulta"value="<?php echo $codigocon;?>">
                           <input  hidden name="codigo_cita" value="<?php echo $codigocita;?>">
@@ -95,20 +102,22 @@ include "conexionpdo.php";
                         ?>
                </div> <!--ROW-->
                <hr>
+               
             <div class="row">
+            <div class="col-md-12" ><H5>Datos del Plan Terapéutico </h5> <hr  color="blue"/></div>
                       <div class="col-md-6">
                          <label for="" class="control-label">Actividades</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" maxlength="600"  name="Actividades" id="Actividades"  autocomplete = "off" required ></textarea>
+                            <textarea class="form-control" type="text" maxlength="600"  name="Actividades" id="Actividades"  autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
                             <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo obligatorio.
                               </div>
                             </div>
                         </div><!--fin de ACTIVIDADES -->
                         <div class="col-md-6">
-                         <label for="" class="control-label">Tecnicas</label> 
+                         <label for="" class="control-label">Técnicas</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" maxlength="300"  name="tecnicas" id="Actividades"  autocomplete = "off" required ></textarea>
+                            <textarea class="form-control" type="text" maxlength="300"  name="tecnicas" id="Actividades"  autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.                         
                               </div>
@@ -119,7 +128,7 @@ include "conexionpdo.php";
                 <div class="col-md-6">
                   <label for="" class="control-label">Materiales</label> 
                     <div class="form-group">
-                    <textarea class="form-control" type="text" maxlength="600"  name="Materiales" id="Materiales"  autocomplete = "off" required ></textarea>
+                    <textarea class="form-control" type="text" maxlength="600"  name="Materiales" id="Materiales"  autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
                     <div class="invalid-feedback">
                           campo obligatorio.
                       </div>
@@ -128,30 +137,32 @@ include "conexionpdo.php";
                 <div class="col-md-6">
                     <label for="" class="control-label">Tareas</label> 
                     <div class="form-group">
-                    <textarea class="form-control" type="text" maxlength="600"  name="Tareas" id="Tareas"  autocomplete = "off" required ></textarea>
+                    <textarea class="form-control" type="text" maxlength="600"  name="Tareas" id="Tareas"  autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
                     <div class="invalid-feedback">
                           campo obligatorio. 
                       </div>
                     </div> 
                 </div> <!--fin de TAREAS -->                 
-              </div> <!--ROW  3 -->
+              </div> 
              <div class="row">
-             <div class="col-md-6">
-              <label for="" class="control-label">Resultados</label> 
-                <div class="form-group">
-                <textarea class="form-control" type="text" maxlength="600"  name="Resultados" id="Resultados"  autocomplete = "off" required ></textarea>
-                <div class="invalid-feedback">
-                      campo obligatorio.
-                </div>  
-                </div>
-            </div> <!--COL MD 6-->
-            <div class="col-md-6">
-             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>      
-             <button type="submit"  id="" name="GUARDAR_PLAN" class="btn btn-info btn mb-3"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar plan</button>
-             <button style="color:#ffff;" type="submit"   name="cancelar_plan" class="btn btn-danger  mb-3"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cancelar</button>
-            </div> <!--COL MD 6-->
-            </div>  <!--ROW  4 -->
-            <?php 
+                <div class="col-md-12">
+                  <label for="" class="control-label">Resultados</label> 
+                    <div class="form-group">
+                      <textarea class="form-control" type="text" maxlength="600"  name="Resultados" id="Resultados"  autocomplete = "off" required onkeyup="mayus(this);"></textarea>
+                      <div class="invalid-feedback">
+                          campo obligatorio.
+                      </div>  
+                    </div>
+                </div> <!--COL MD 12-->
+              </div>
+            
+            
+         
+          <div class="modal-footer justify-content-start">
+          <button  type="submit"  id="" name="GUARDAR_PLAN" class="btn btn-info btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Plan Terapéutico</button>
+        </form>
+        <form method="POST">
+        <?php //Codigo que sirve para traer el codigo de cita y asi actualizar el registro en caso de cancelar
               $query = "SELECT con.CODIGO_EXPEDIENTE_PSICO CODIGO_CONSULTA, con.CODIGO_CITA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO) as PACIENTE
               FROM tbl_expediente_psicologico_consulta con, tbl_inscripcion_cita i, tbl_persona pe    ,tbl_persona_especialidad es, tbl_estado esta
               WHERE con.CODIGO_CITA = i.CODIGO_CITA
@@ -172,7 +183,10 @@ include "conexionpdo.php";
               }
               }
               ?>
+          <button  type="submit"  name="cancelar_plan" class="btn btn-danger "><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cancelar</button>
         </form>
+        </div>
+    
         </div>  <!--CARD BODY-->
       </div> <!--CARD-->
     </section>

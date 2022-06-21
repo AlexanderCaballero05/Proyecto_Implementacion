@@ -1,11 +1,41 @@
+<!-- -----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de tutorias
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia
+    descripcion:       Edita,elimina y registra una tutoria
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador           Fecha                      Descripcion
+Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
  
  $codigoObjeto=22;
- $accion='Ingreso a la tabla de Tutorias';
- $descripcion= 'Usuario se autentifico ';
+ $accion='INGRESO AL MANTENIMIENTO TUTORÍAS';
+ $descripcion= 'USUARIO SE AUTENTIFICO';
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
@@ -18,11 +48,9 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-     <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>MANTENIENTO DE  TUTORIAS</h4>
-        </h1>     
-     </section>
+     <div class="content-header text-xl-center mb-3 ">
+        <h4>Mantenimiento Tutorías</h4>     
+      </div>
       <div class="row">
         <div class="col-md-12">
         <?php
@@ -42,7 +70,7 @@
            <?php
            if($permiso_registrar == 'SI' ){
            ?> 
-            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoria</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoría</button>
            <?php
             }
            ?>
@@ -52,16 +80,16 @@
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST" ><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
                   <table id="tabla_tutoria" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo</th>
-                          <th class="text-center">Nombre</th>
-                          <th class="text-center">Area</th>
+                          <th class="text-center">Código</th>
+                          <th class="text-center">Nombre Tutoría</th>
+                          <th class="text-center">Área</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -138,18 +166,25 @@
                           <div id="EDITARTUTORIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" >
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Tutoria</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Tutoría</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_tutoria" id="id_tutoria">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre</label>
-                                          <input  id="bloquear1" required type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"   autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <label for="txtcodigo_persona">Nombre Tutoría</label>
+                                          <input  id="bloquear1"  type="text"  
+                                          value ="<?php echo $var2; ?>" class="form-control"  
+                                          maxlength="20" minlength="5" onkeyup="mayus(this);" 
+                                            autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                              name="editar_nombre" id="editar_nombre" required =" ">
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
                                         </div>
                                       </div>
 
@@ -162,10 +197,10 @@
                                         and  CODIGO_AREA <> 3";
                                         $resultadod=$conn->query($query);                
                                        ?>
-                                       <label  class="control-label">Area</label>  
+                                       <label  class="control-label">Área</label>  
                                        <div class="form-group">
                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_area" id="editar_area" required>
-                                         <option value="<?php echo $var6?>"><?php echo $var3;?></option>
+                                         <option  value="<?php echo $var6?>"><?php echo $var3;?></option>
                                           <?php 
                                           if ($resultadod->num_rows > 0) {
                                           while($row = $resultadod->fetch_assoc()) { 
@@ -197,10 +232,10 @@
                                   <h5 class="modal-title" id="exampleModalLabel"></h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEeliminar" method="POST">
+                                <form id="FORMEeliminar" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="tutoria_eliminar" id="tutoria_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la tutoria <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la tutoría <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -232,17 +267,17 @@
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Tutoria</h4>
+                        <h4 class="text-center">Agregar Tutoría</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre</label>
+                                    <label for="txtcodigo_persona">Nombre Tutoría</label>
                                     <input id="bloquear" required type="text"  value ="" class="form-control"  maxlength="100" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -255,7 +290,7 @@
                                 and  CODIGO_AREA <> 3;";
                                 $resultadod=$conn->query($query);                
                                ?>
-                              <label  class="control-label">Area</label>  
+                              <label  class="control-label">Área</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   style="width: 100%;" name="codigo_area" id="codigo_area" required>
                                       <option selected enable value=""> --Seleccionar Area-- </option>
@@ -269,7 +304,7 @@
                                       <?php } 
                                       }?>
                                       <div class="invalid-feedback">
-                                         campo obligatorio.
+                                         Campo obligatorio.
                                      </div>
                                     </select> 
                                 </div>
@@ -313,7 +348,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar Tutoria:",
+        "search": "Buscar Tutoría:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

@@ -28,8 +28,8 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
 <?php
   include_once "conexion3.php";
   $codigoObjeto=13;
-  $accion='Ingreso a la tabla de registro de personas';
-  $descripcion= 'Usuario se autentifico';
+  $accion='INGRESO A LA PANTALLA REGISTRO DE PERSONAS';
+  $descripcion= 'USUARIO SE AUTENTIFICO';
   bitacora($codigoObjeto, $accion,$descripcion); 
 ?>
 <?php
@@ -91,9 +91,9 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
     <!-- Main content -->
     <section class="content">
     <div class="container-fluid">
-      <section class="content-header text-xl-center mb-3 ">
-            <h4>AGREGAR PERSONAS</h4>
-      </section>
+      <div class="content-header text-xl-center mb-3 ">
+          <h4>Agregar Personas/Usuarios</h4>
+      </div>
      <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
