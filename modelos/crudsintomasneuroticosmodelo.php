@@ -14,7 +14,7 @@
           if(isset($_POST['agregarsintoneuro'])){
                $tiposintoma = ($_POST['agregarsintomasneu']);
               try{ 
-                  $consulta_sintomas = $db->prepare("SELECT tipo FROM tbl_sintomas_neuroticos WHERE tipo = (?);");
+                  $consulta_sintomas = $db->prepare("SELECT COUNT(*) FROM tbl_sintomas_neuroticos WHERE tipo = (?);");
                   $consulta_sintomas->execute(array($tiposintoma));
                   $row=$consulta_sintomas->fetchColumn();
                   if($row>0){
@@ -29,6 +29,7 @@
                       $resul=$conn->query($query_sintoma);
                       if($resul >0){
                         echo "<script> 
+                        alert('Se registro correctamente'); 
                         window.location = 'crudsintomasneuroticos';
                         </script>";
                         include_once 'function_bitacora.php';
@@ -70,12 +71,12 @@
       $editar_sintomas = ($_POST['editarsintoneu']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_sintomas_neuroticos where TIPO = (?) and CODIGO_SINTOMA_NEUROTICO <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_sintomas_neuroticos where TIPO = (?) and CODIGO_SINTOMA_NEUROTICO <> (?) ;");
        $sentencia->execute(array($editar_sintomas,$codigo_sintoma));
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe un sintoma con este mismo nombre: $editar_sintomas');
+          alert('Ya existe un síntoma con este mismo nombre: $editar_sintomas');
           window.location = 'crudsintomasneuroticos';
           </script>";
           exit;
@@ -89,6 +90,7 @@
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
+              alert('El síntoma se modifico correctamente'); 
               window.location = 'crudsintomasneuroticos';
               </script>";
               include_once 'function_bitacora.php';
@@ -98,7 +100,7 @@
               bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
-              alert('¡Error al  intentar modificar el sintoma!');
+              alert('¡Error al  intentar modificar el síntoma!');
               window.location = 'crudsintomasneuroticos';
               </script>";
             }
@@ -125,7 +127,7 @@ if(isset($_POST['eliminarsintoneu'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar esta, relacionado con otras tablas!');
+        alert('¡No se puede eliminar, esta relacionado con otras tablas!');
         window.location = 'crudsintomasneuroticos';
         </script>";
         exit;
@@ -135,6 +137,7 @@ if(isset($_POST['eliminarsintoneu'])){
           mysqli_query($link, "DELETE FROM tbl_sintomas_neuroticos WHERE  CODIGO_SINTOMA_NEUROTICO = '$codigo' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
+            alert('Se elimino correctamente'); 
             window.location = 'crudsintomasneuroticos';
             </script>";
             include_once 'function_bitacora.php';

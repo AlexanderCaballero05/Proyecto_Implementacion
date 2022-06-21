@@ -16,7 +16,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',14);
 		$this->SetX(108);
-		$this->Cell(130, 12, utf8_decode('Reporte Expediente Unico pacientes'));
+		$this->Cell(130, 12, utf8_decode('Reporte Expedientes Pacientes'));
 		$this->SetX(5);
 		$this->Ln(5);
 		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');

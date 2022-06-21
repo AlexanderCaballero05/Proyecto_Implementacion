@@ -13,26 +13,26 @@ session_start();
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> LISTADO DE TUTORIAS-SECCIONES<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+              <h4> Listado de Tutorías y Secciones <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matricula</a>
+                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" aria-current="true" href="procesoMatricula">Matricula</a>
+                <a class="nav-link " style="color:#000000;" aria-current="true" href="procesoMatricula">Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Lista de clases</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Lista de Clases</a>
               </li>
             </ul>
         </div>
         <div class="card-body">
             <br>
             <div class="row">
-                <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Buscar por:</label>
+                <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Buscar Por:</label>
                 <div class="col-sm-3">
                   <select class="form-control" id="buscar">
                    <option selected disabled value="">--Seleccione--</option>

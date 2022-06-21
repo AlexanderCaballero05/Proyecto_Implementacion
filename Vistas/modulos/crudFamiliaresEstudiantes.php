@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de parametros
+    Fecha:             
+    Programador:       Luz María Montoya Medina
+    descripcion:       Permite llevar un mantenimiento del parentesco que tienen los familiares registrados
+                       con los estudiantes ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+ 
+----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -6,8 +38,8 @@ include_once "conexion3.php";
       <!--llamada de la fuction bitacora -->
      <?php 
       $codigoObjeto=43;
-      $accion='Ingreso a la pantalla de mantenimiento parámetros';
-      $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
+      $accion='Ingreso a la pantalla de mantenimiento familiares estudiantes';
+      $descripcion= 'Aqui se visualiza los registros existentes de la tabla de familiares-estudiantes';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
       

@@ -1,19 +1,27 @@
-<!--Elaborado por Luz Maria Montoya
+<!-- 
 -----------------------------------------------------------------------
-	           Universidad Nacional Autonoma de Honduras (UNAH)
-		           Facultad de Ciencias Economicas
-	        Departamento de Informatica administrativa
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
          Analisis, Programacion y Evaluacion de Sistemas
-                    Segundo Periodo 2022
-Equipo:
-Luz Maria Montoya
+                   Segundo Periodo 2022
 
-Catedratico:
-Lic. Karla Melisa Garcia Pineda 
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
 Programa:          Autoregistro de usuarios
 Fecha:             10-dic-2021
-Programador:       Erika Zuniga
+Programador:       Luz María Montoya Medina
 Descripcion:       Pantalla que registra usuarios desde afuera del administrador
 -----------------------------------------------------------------------
  Historial de Cambio

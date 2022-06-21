@@ -27,7 +27,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Alumnos de la tutoria'));
+		$this->Cell(180, 8, utf8_decode('Reporte de Alumnos de la tutoría'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -118,15 +118,15 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 12);
 			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(15, 8, utf8_decode('N'), 1, 0, 'C', 0);
 			$this->Cell(50, 8, 'Alumno', 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Tutoria', 1, 0, 'C', 0);
+			$this->Cell(35, 8, utf8_decode('Tutoría'), 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Grado', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Periodo', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Anio', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Matricula', 1, 0, 'C', 0);
-			$this->Cell(55, 8, 'Observacion', 1, 1, 'C', 0);
+			$this->Cell(25, 8, utf8_decode('Período'), 1, 0, 'C', 0);
+			$this->Cell(25, 8, utf8_decode('Año'), 1, 0, 'C', 0);
+			$this->Cell(25, 8, utf8_decode('Matrícula'), 1, 0, 'C', 0);
+			$this->Cell(55, 8, utf8_decode('Observación'), 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -238,13 +238,13 @@ $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Alumno', 1, 0, 'C', 1);
-$pdf->Cell(35, 12, 'Tutoria', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Tutoría'), 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Grado', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Periodo', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Anio', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Matricula', 1, 0, 'C', 1);
-$pdf->Cell(55, 12, 'Observacion', 1, 1, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Período'), 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Año'), 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Matrícula'), 1, 0, 'C', 1);
+$pdf->Cell(55, 12, utf8_decode('Observación'), 1, 1, 'C', 1);
 
 
 

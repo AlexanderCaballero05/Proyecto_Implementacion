@@ -115,9 +115,10 @@ Diana Rut Garica     		05-06-2022               Cambio en la consultas
             WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo '<script>              
-              window.location = "crudRoles";
-              </script>';
+              echo "<script>   
+              alert('El rol se modifico correctamente');           
+              window.location = 'crudRoles';
+              </script>";
               include_once 'function_bitacora.php';
               $codigoObjeto=2;
               $accion='Modificacion';

@@ -75,6 +75,11 @@ if (isset($_POST['id_persona'])) {
     right: 0cm;
     height: 4cm;
   }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
   .c{
     width: 706px;
     margin:2px;
@@ -82,21 +87,26 @@ if (isset($_POST['id_persona'])) {
     margin: 8px;
     border: 1px solid #404141;
   }
+  .pagenum:before {
+        content: counter(page);
+    }
   
     </style>
-    <title>Reporte paciente uwu</title>
+    <title>Reporte Consulta Paciente</title>
   </head>
   <body>
     <header>
+      <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 20px;">Consulta psicologica hoy del paciente</p>
+      <p  style="text-align: center; font-size: 22px;">Informe Consulta Psicológica Paciente </p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
    
 
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+   <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b> 
+      <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -125,7 +135,7 @@ if (isset($_POST['id_persona'])) {
     </fieldset>
     <br>
     <fieldset>
-      <legend>Expediente Psicologico</legend>
+      <legend>Expediente Psicológico</legend>
     <br>
     <table>
     <?php
@@ -149,17 +159,17 @@ if (isset($_POST['id_persona'])) {
          <tr>
            <th>Antecedentes Familiares</th>
            <th>Antecedentes Personales</th>
-           <th>Antecedentes Clinicos</th>
-           <th>Sintomas Neuroticos</th>
+           <th>Antecedentes Clínicos</th>
+           <th>Síntomas Neuróticos</th>
           
          </tr>
       </thead>
       <tbody>
          <tr>
-         <td ><?php echo ucwords(strtolower($var1)); ?></td>
-         <td ><?php echo ucwords(strtolower($var2)); ?></td>
-         <td ><?php echo ucwords(strtolower($var3)); ?></td>
-         <td ><?php echo ucwords(strtolower($var4)); ?></td>
+         <td ><?php echo (strtolower($var1)); ?></td>
+         <td ><?php echo (strtolower($var2)); ?></td>
+         <td ><?php echo (strtolower($var3)); ?></td>
+         <td ><?php echo (strtolower($var4)); ?></td>
          
          </tr>
          <?php
@@ -199,14 +209,14 @@ if (isset($_POST['id_persona'])) {
          
       ?>
       
-      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas psicologicas paciente  <?php echo $fecha; ?> </legend><br><hr>
+      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas Psicológicas Paciente  <?php echo $fecha; ?> </legend><br><hr>
       <div>
-      <div class="c"  ><label><b>Sintomas: </b></label> 
+      <div class="c"  ><label><b>Síntomas: </b></label> 
         <?php  echo ucwords(strtolower($sintomas)) ?> 
       </div>
-      <div class="c"  > <label><b>Diagnostico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
-      <div class="c"  > <label><b>Evolución</b></label> <?php echo  ucwords(strtolower($observaciones)) ?></div>
-      <div class="c"  > <label><b>Diagnostico Egreso</b></label> <?php echo ucwords(strtolower($diagnostico_egreso))?></div>
+      <div class="c"  > <label><b>Diagnóstico Ingreso:</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
+      <div class="c"  > <label><b>Evolución:</b></label> <?php echo  ucwords(strtolower($observaciones)) ?></div>
+      <div class="c"  > <label><b>Diagnóstico Egreso</b></label> <?php echo ucwords(strtolower($diagnostico_egreso))?></div>
 
       </div>
       
@@ -250,6 +260,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("InformeConsulta_Psicologica.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>

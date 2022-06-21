@@ -19,6 +19,7 @@ Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut               09/06/2022            Se modifico los mensajes de bitacora,con correciones pequeñas de escritura
+Luz Montoya             18/06/2022            Arreglo de errores de ortografía
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -82,7 +83,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                       <thead>
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Nombre Sacramento</th>
+                          <th class="text-center">Nombre del Sacramento</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Descripción</th>
                         </tr>

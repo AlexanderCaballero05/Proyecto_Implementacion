@@ -42,14 +42,16 @@
 <body oncopy="return false" onpaste="return false"> 
 <div class="content-wrapper">
   <div class="content-header">
-  <div class="text-center">
-      <h2>Mantenimiento de Estados</h2>
+
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
     <div class="container-fluid">
+    <div class="content-header text-xl-center mb-3">
+         <h3>Mantenimiento Estados</h3>   
+      </div>
       <div class="row">
         <div class="col-md-12">
            
@@ -253,7 +255,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estado_eliminar" id="estado_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estado <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el estado <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

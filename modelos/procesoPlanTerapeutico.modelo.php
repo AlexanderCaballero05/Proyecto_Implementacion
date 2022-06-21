@@ -56,20 +56,20 @@
 <?php
 //codigo que valida si se decide cancelar registrar el plan
 if(isset($_POST['cancelar_plan'])){
+    if(isset($_POST['codigo_cita'])){
     $codigo_cita = ($_POST['codigo_cita']);
 
     $cambiar_estado = "UPDATE tbl_inscripcion_cita
     SET CODIGO_ESTADO = '12'
-    WHERE CODIGO_CITA = ' $codigo_cita'";
+    WHERE CODIGO_CITA = '$codigo_cita'";
 
-        $consulta_estado =$conn->query($cambiar_estado);
-
+    $consulta_estado=$conn->query($cambiar_estado);
         echo "<script>
         window.location = 'expedientePsicologico'
         </script>";
 
-
-
+    }
+    
 }
 
 

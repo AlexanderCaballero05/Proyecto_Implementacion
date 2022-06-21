@@ -23,7 +23,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
     background-color: #FBFBFB;
   }
   table ,th,td{
-    width: 100%;
+    width: 94%;
     border-collapse: collapse;
     border: 0.5px solid #AFB5B8;
     background-color:#FFFF;
@@ -128,18 +128,18 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
       }
     }
       ?>      
-      <legend>  Datos Personales Paciente</legend><br>
+      <legend>Datos Personales Paciente</legend><br>
       <label  ><b>Nombre completo:</b> </label><?php  echo ucwords(strtolower($nombre)); ?> <br>
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
     </fieldset>
     <br>
     <fieldset>
-      <legend>Expediente Psicologico</legend>
+      <legend>Expediente Psicológico</legend>
     <br>
     <table>
     <?php
-       $consulta = "SELECT exp.CODIGO_EXPEDIENTE, concat(per.PRIMER_NOMBRE,' ',per.PRIMER_APELLIDO) as nombr, exp.ANTECEDENTES_FAMILIARES, 
+       $consulta = "SELECT exp.CODIGO_EXPEDIENTE, CONCAT_WS(' ',per.PRIMER_NOMBRE,per.SEGUNDO_NOMBRE,per.PRIMER_APELLIDO,per.SEGUNDO_APELLIDO) as nombr, exp.ANTECEDENTES_FAMILIARES, 
        exp.ANTECEDENTES_PERSONALES, exp.ANTECEDENTES_CLINICOS, GROUP_CONCAT(sin.TIPO) as TIPO
        FROM tbl_expediente_psicologico_unico exp, tbl_persona per, tbl_personas_sintomas psin, tbl_sintomas_neuroticos sin            			       
        WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
@@ -159,12 +159,12 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
          <tr>
            <th>Antecedentes Familiares</th>
            <th>Antecedentes Personales</th>
-           <th>Antecedentes Clinicos</th>
-           <th>Sintomas Neuroticos</th>
+           <th>Antecedentes Clínicos</th>
+           <th>Síntomas Neuróticos</th>
           
          </tr>
       </thead>
-      <tbody>
+      <tbody >
          <tr>
          <td ><?php echo ucwords(strtolower($var1)); ?></td>
          <td ><?php echo ucwords(strtolower($var2)); ?></td>
@@ -225,14 +225,14 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
     <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
     <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Cita psicologica paciente <?php echo $fecha;?></label></div><br>
       <fieldset>
-        <legend>Datos generales de la consulta</legend><br>
-         <label  ><b>Nombre del psicologo: </b> <?php echo ucwords(strtolower($medico)); ?></label><br>
+        <legend>Datos Generales de la Consulta</legend><br>
+         <label  ><b>Nombre del Psicológo: </b> <?php echo ucwords(strtolower($medico)); ?></label><br>
          <label style="padding-right: 22px;"><b>Hora</b><?php echo $hora; ?></label>
          <label><b>Fecha: </b><?php echo $fecha; ?></label>
       </fieldset>
 
-      <p>Datos consulta psicologica</p><hr><br>
-      <div class="c1"  ><label><b>Sintomas</b></label> 
+      <p>Datos Consulta Psicológica</p><hr><br>
+      <div class="c1"  ><label><b>Síntomas</b></label> 
         <?php  echo ucwords(strtolower($sintomas)) ?>
       </div>
       <div class="c1"  > <label><b>Diagnóstico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
@@ -275,13 +275,13 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
 <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
 <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB;"><label style="font-size: 18px;">Cita psicologica paciente <?php echo $fecha;?></label></div><br>
        <fieldset>
-        <legend>Datos generales de la consulta</legend><br>
-         <label  ><b>Nombre del psicologo: </b> <?php echo ucwords(strtolower($medico)); ?></label><br>
+        <legend>Datos Generales de la Consulta</legend><br>
+         <label  ><b>Nombre del Psicólogo: </b> <?php echo ucwords(strtolower($medico)); ?></label><br>
          <label style="padding-right: 22px;"><b>Hora</b><?php echo $hora; ?></label>
          <label><b>Fecha: </b><?php echo $fecha; ?></label>
       </fieldset>
-      <p>Datos consulta psicologica</p><hr><br>
-      <div class="c1" ><label><b>Sintomas</b></label> 
+      <p>Datos Consulta Psicológica</p><hr><br>
+      <div class="c1" ><label><b>Síntomas</b></label> 
         <?php  echo ucwords(strtolower($sintomas)) ?> 
       </div>
       <div class="c1" > <label><b>Diagnóstico Ingreso</b></label> <?php  echo ucwords(strtolower($diagnostico_ingreso))  ?></div>
@@ -293,7 +293,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
 
 
       <div class="caja3"> 
-      <p>Datos plan terapéutico </p><hr><br>
+      <p>Datos Plan Terapéutico </p><hr><br>
         <div class="c1" ><label><b>Actividades a realizar: </b></label>
             <?php  echo ucwords(strtolower($actividades)); ?>
         </div>

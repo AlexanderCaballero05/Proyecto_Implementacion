@@ -22,7 +22,7 @@
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de los parametros de los usuarios
     Fecha:             
-    Programador:      
+    Programador:       Cesar Fernando Rovelo
     descripcion:       Permite llevar un mantenimiento de los parametros de los usuarios es su relación  ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio

@@ -1,10 +1,42 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Menú general
+    Fecha:             
+    Programador:       
+    descripcion:       Menú general que aparece en todo el sistema
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+    Luz Montoya         		18-06-2022                 cambio del orden en las opciones de seguridad 
+----------------------------------------------------------------------->
+
 <?php
   include_once "conexion.php";
   include_once "conexion3.php";
  ?>
 
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 menu_lateral position-fixed">
 
     <!-- Brand Logo -->
     <a href="index.php" class="brand-link">
@@ -13,7 +45,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar position-fixed">
 
         <!-- parte de la foto de perfil y nombre de usuario :3-->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -784,7 +816,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase"></i>
             <p>
-              Area Psicologica
+              Área Psicológica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -793,21 +825,21 @@
             <li class="nav-item">
               <a href="ProcesoCitasPsicologicas" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de consultas</p>
+                <p>Proceso de Consultas</p>
               </a>
             </li>
                     
             <li class="nav-item">
               <a href="crudExpedientePsicoUnico" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Lista de pacientes </p>
+                <p>Expedientes Psicológicos</p>
               </a>
             </li>
 
             <li class="nav-item">
               <a href="crudsintomasneuroticos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento sintomas</p>
+                <p>Mantenimiento Síntomas</p>
               </a>
             </li> 
           </ul>
@@ -853,19 +885,40 @@
             <ul class="nav nav-treeview">
             <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
+
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Roles</p>
                 </a>
               </li>
               <li class="nav-item">
+
+              <li class="nav-item">
+                <a href="crudPermisos" class="nav-link">
+
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Roles</p>
+                </a>
+              </li>
+
                 <a href="crudPermisos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Permisos</p>
                 </a>
               </li>
-             
-              <li class="nav-item">
 
+                <a href="crudobjetos" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Objetos</p>
+                </a>
+              </li>
+              </li>
+
+              <li class="nav-item">
+              <a href="area" class="nav-link" > 
+              <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Areas</p>
+              </a>
+              </li>
                 <a href="crudpreguntas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Preguntas</p>
@@ -883,21 +936,6 @@
                 <i class="nav-icon fas fa-table"></i>
                    <p>Mantenimiento de Parametros</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="crudobjetos" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Objetos</p>
-                </a>
-              </li>
-            
-
-              </li>
-              <li class="nav-item">
-              <a href="area" class="nav-link" > 
-              <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Areas</p>
-              </a>
               </li>
             </ul>
           </li>
@@ -934,7 +972,7 @@
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                           Bitacora del sistema
-                          <i class="fas fa-angle-left right"></i>
+                          <!-- <i class="fas fa-angle-left right"></i> -->
                         </p>
                       </a>
                     </li>
@@ -995,7 +1033,7 @@
 
 
 
-         </li>  
+         </li> <br><br> 
          </ul><!--final del item menu principal-->
 
       </nav>
