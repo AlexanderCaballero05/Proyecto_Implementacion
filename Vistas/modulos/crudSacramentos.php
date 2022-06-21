@@ -166,20 +166,27 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                                     <h4 class="text-center">Editar Sacramento</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                  </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_sacramento" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Sacramento</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeyup="mayus(this);"  maxlength="40" minlength="10"   required autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" maxlength="20" minlength="5" class="form-control" onkeyup="mayus(this);"  autocomplete="off"  onkeypress="return soloLetras(event);"  name="editar_nombre" id="editar_nombre" required="">
+                                           <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                           </div>
                                         </div>
+                                        
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="200"     autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="50" minlength="10"  onkeyup="mayus(this);"    autocomplete="off" onkeypress="return soloLetras(event);" name="editar_descripcion" id="editar_descripcion" required="">
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -234,7 +241,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
     <div id="AGREGAR_SACRAMENTO" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form  method="POST"  class="needs-validation" novalidate>
+                <form  method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Sacramento</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -244,7 +251,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Sacramento</label>
-                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="10"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al sacramento" name="nombre_sacramento"required="">
+                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="20" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al sacramento" name="nombre_sacramento"required="">
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                    </div>
@@ -253,7 +260,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="200"    autocomplete = "off" type="text"  placeholder="Ingrese una descripción del sacramento" name="descripcion_sacramento" id="descripcion_sacramento" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="50" minlength="5"   autocomplete = "off" type="text" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del sacramento" name="descripcion_sacramento" id="descripcion_sacramento" required=""></textarea>
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
                                    </div>

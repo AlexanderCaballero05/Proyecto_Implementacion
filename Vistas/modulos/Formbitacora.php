@@ -39,9 +39,9 @@
 
 <?php 
 date_default_timezone_set("America/Guatemala");
-$fecha_actual = date("Y-m-d h:i:s a");
-  $_SESSION["bdesde"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."- 1 month"));
-  $_SESSION["bhasta"] = date("Y-m-d h:i:s a",strtotime($fecha_actual."+ 23 hour + 2 minute + 2 second"));
+$fecha_actual = date("Y-m-d");
+  $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
+  $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
 
 ?>
 
@@ -53,17 +53,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 }
 ?>
 
-<?php 
-                  $codigoObjeto=7;
-                    $accion='INGRESO A LA BITACORA UNIVERSAL';
-                    $descripcion= 'CONSULTAR LA INFORMACION DE LA BITACORA UNIVERSAL';
-                    bitacora($codigoObjeto, $accion,$descripcion);
-                    ?>
+
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
-<div class="content-wrapper ">
+<div class="content-wrapper">
 
  <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
@@ -96,12 +91,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
+            <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
           </div>
 
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-            <input class="form-control" type="datetime-local" max="<?= date("Y-m-d h:i:s a")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
+            <input class="form-control" type="date" max="<?= date("Y-m-d")?>" id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
           </div>
           <div class="col-sm-2 mt-4">
              <button type="submit"  name="guardarCambiosb" class="btn btn-primary"><span class="glyphicon glyphicon-log-out"></span> Filtrar por Fecha</button>
@@ -183,7 +178,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
         
            <!--  Este codigo muestra el  datagrip  que contiene todos los datos que se le mostraran al Gerente -->
            <div class="card-body pr-1">
-            <div class="table-responsive ">
+            <div class="table-responsive">
               <table id="bitacora_del_sistema" class="table table-bordered table-striped table-hover" style="width:100%">
                 <br><center>
                   

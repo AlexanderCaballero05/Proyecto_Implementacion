@@ -59,12 +59,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
             <form  method="POST" action="./vistas/modulos/Backup.php" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   <div class="">
-                  <p>Las copias de seguridad proveen una importante 
-                    solución para proteger datos críticos que están almacenados
-                    en bases de datos. Y para minimizar el riego de pérdida de datos,
-                    usted necesita asegurarse de que respalda sus bases de datos regularmente
-                    tomando en consideración los cambios aplicados a sus datos.</p>
-                    <br>
+                  
 
                   </div>
                   <div class="row">

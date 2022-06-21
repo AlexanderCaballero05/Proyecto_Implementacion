@@ -18,7 +18,7 @@ $telefono = $_POST['telefono'];
 $correo = $_POST['ingcorreo'];
 //DATOS PARA LA TABLA DE USUARIOS
 $usuario = $_POST['ingusuario'];
-$contrasena = $_POST['ingcontrasena'];
+$contrasena = $_POST['confirmar_clave'];
 $pass=crypt($contrasena,'$2a$07$usesomesillystringforsalt$');
 $fecha_vencimiento = date("Y-m-d",strtotime($fechaActual."+ 60 days"));
 

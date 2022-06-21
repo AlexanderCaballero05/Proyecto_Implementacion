@@ -44,7 +44,7 @@ include 'conexion.php';
 $usuario =$_SESSION['vario'];
 
 date_default_timezone_set("America/Guatemala");
-$fechaActual = date('Y-m-d h:i:s a');
+$fechaActual = date('Y-m-d');
 
 $consulta="SELECT CODIGO_USUARIO
              FROM tbl_usuario
