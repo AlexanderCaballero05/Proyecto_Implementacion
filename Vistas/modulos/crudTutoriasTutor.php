@@ -62,11 +62,11 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Numero</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
-                        <th class="text-center">Periodo</th>
+                        <th class="text-center">Período</th>
                         <th class="text-center">Año</th>
                         <th class="text-center">Notas alumnos</th>
                       </tr>
@@ -133,7 +133,7 @@
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula">
                                     <input type="text"  hidden value="<?php echo $var1; ?>" name="name_matricula">
-                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista alumnos</span></button>
+                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista Alumnos</span></button>
                                   </form>
                                   <?php
                                            }
@@ -182,7 +182,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar tutoria:",
+        "search": "Buscar tutoría:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

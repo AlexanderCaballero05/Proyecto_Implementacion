@@ -1,24 +1,12 @@
 <?php
-if(isset($_POST['codigo_tutor_informe_clases'])){
-$codigo_tutor = $_POST['codigo_tutor_informe_clases'];
-$codigo_carga = $_POST['codigo_carga_informe'];
-
-
-}
-
-?>
-
-<?php
-
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
-
+date_default_timezone_set("America/Guatemala");
 class PDF extends FPDF {
 
 // Cabecera de página
 
 	function Header() {
-		date_default_timezone_set("America/Guatemala");
 		//$this->Image('img/triangulosrecortados.png',0,0,50);
 		$this->Image('../Vistas/modulos/REPORTES/img/LOGO.jpg',242,10,25);
 		$this->SetY(20);
@@ -26,12 +14,12 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Alumnos de la tutoría'));
+		$this->SetX(110);
+		$this->Cell(160, 8, utf8_decode('Reporte Clases Espirituales Matriculadas'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
-		$this->Cell(64, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -51,19 +39,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
-
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------
@@ -116,20 +91,16 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(15, 8, utf8_decode('N'), 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Alumno', 1, 0, 'C', 0);
-			$this->Cell(35, 8, utf8_decode('Tutoría'), 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Grado', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Período'), 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Año'), 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Matrícula'), 1, 0, 'C', 0);
-			$this->Cell(55, 8, utf8_decode('Observación'), 1, 1, 'C', 0);
+			$this->SetFont('Helvetica', 'B', 15);
+	        $this->SetFillColor(72, 208, 234);
+            $this->SetFont('Helvetica', 'B', 12);
+            $this->Cell(12, 12, 'N', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Catequesis', 1, 0, 'C', 1);
+			$this->Cell(35, 12, 'Nombre del Catequista', 1, 0, 'C', 1);
+            $this->Cell(40, 12, 'Modalidad', 1, 0, 'C', 1);
+            $this->Cell(55, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
+            $this->Cell(30, 12, 'Hora', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
-			
-		
 		}
 
 		if ($setX == 100) {
@@ -198,30 +169,33 @@ class PDF extends FPDF {
 // -----------------------------------TERMINA---------------------------------
 }
 
+// -----------------------------DATOS PERSONALES DEL ESTUDIANTE--------------------------------- -->
+
+
+
+
+
 //------------------OBTENES LOS DATOS DE LA BASE DE DATOS-------------------------
+
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION,
-	 c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA, mat.OBSERVACION_MATRICULA
-    FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
+  if (isset($_POST['imprimirmatriculaindividual'])) {
+	$codigo_estudiante=($_POST['imprimirmatriculaindividual']);
+}
+	$strquery ="SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO)
+    as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL,                             c.CREADO_POR_USUARIO
+    FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
     WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
     AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
     AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
     AND c.CODIGO_SECCION = s.CODIGO_SECCION
-    AND c.CODIGO_CARGA = mat.CODIGO_CARGA
-    AND mat.CODIGO_ESTUDIANTE = est.CODIGO_ESTUDIANTE
-    AND mat.OBSERVACION = esta.CODIGO_ESTADO
-    AND est.CODIGO_PERSONA = per.CODIGO_PERSONA
-    AND mat.CODIGO_CARGA =  '$codigo_carga'
-    AND c.CODIGO_PERSONA = '$codigo_tutor';";
+    AND t.CODIGO_AREA = 4; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
+
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -231,20 +205,20 @@ $pdf->AliasNbPages();
 $pdf->AddPage('L'); //añade l apagina / en blanco
 $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
+$pdf->SetFillColor(72, 208, 234);
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(10);
+$pdf->SetX(30);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Alumno', 1, 0, 'C', 1);
-$pdf->Cell(35, 12, utf8_decode('Tutoría'), 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Grado', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Período'), 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Año'), 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Matrícula'), 1, 0, 'C', 1);
-$pdf->Cell(55, 12, utf8_decode('Observación'), 1, 1, 'C', 1);
+$pdf->Cell(12, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Catequesis', 1, 0, 'C', 1);
+$pdf->Cell(80, 12, 'Nombre del Catequista', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Modalidad', 1, 0, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Hora', 1, 1, 'C', 1);
+
+
 
 
 
@@ -257,11 +231,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15, 50, 35, 25,25,25,25,25,55)); //???
+$pdf->SetWidths(array(12, 40, 80, 40,35,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['ALUMNO'], ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TUTORIA']))),ucwords(strtolower(utf8_decode($data[$i]['SECCION']))), ucwords(strtolower(utf8_decode($data[$i]['HORA']))),ucwords(strtolower(utf8_decode($data[$i]['PERIODO']))),ucwords(strtolower(utf8_decode($data[$i]['ANIO']))),ucwords(strtolower(utf8_decode($data[$i]['ESTADO_MATRICULA']))),ucwords(strtolower(utf8_decode($data[$i]['OBSERVACION_MATRICULA']))) ),10); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['TUTORIA']))),ucwords((utf8_decode($data[$i]['NOMBRE_COMPLETO']))), ucwords((utf8_decode($data[$i]['MODALIDAD']))), ucwords((utf8_decode($data[$i]['SECCION']))), $data[$i]['HORA'] ),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

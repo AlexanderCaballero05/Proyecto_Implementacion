@@ -61,7 +61,7 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Número</th>
+                        <th class="text-center">Código</th>
                         <th class="text-center">Alumno</th>
                         <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
@@ -175,7 +175,7 @@
                                     }else{//sino el boton permanece en verde
                                   ?>
                                     <a href="#CALIFICAR<?php echo $codigo_matricula; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observacion</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observación</span></button>
                                   </a>
 
 

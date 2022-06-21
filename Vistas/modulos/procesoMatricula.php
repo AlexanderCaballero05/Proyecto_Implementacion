@@ -202,31 +202,31 @@
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                  <strong>información de la clase</strong>
+                                  <strong>Información de la clase</strong>
                                     </hr> 
                                     <div class="row"><!-- INICIO PRIMERA ROW --> 
                                       <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="ID_CARGA" id="ID_CARGA"><!--este es el importante -->
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">TUTOR</label>
+                                          <label for="txtcodigo_persona">Tutor</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">SECCION</label>
+                                          <label for="txtcodigo_persona">Sección</label>
                                           <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">HORA</label>
+                                          <label for="txtcodigo_persona">Hora</label>
                                           <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">TUTORIA</label>
+                                          <label for="txtcodigo_persona">Tutoría</label>
                                           <input hidden type="text" name="tutoria" value ="<?php echo $var8; ?>" >
                                           <input  type="text"  value ="<?php echo $var1; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
@@ -234,14 +234,14 @@
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">FECHA INICIO</label>
+                                          <label for="txtcodigo_persona">Fecha Inicio</label>
                                           <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">FECHA FINAL</label>
+                                          <label for="txtcodigo_persona">Fecha Final</label>
                                           <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
                                         </div>
@@ -355,11 +355,11 @@
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
                                     <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la clase?<?php echo $var1; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la clase? <?php echo $var1; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_MATRICULA"   class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_MATRICULA"   class="btn btn-primary">Si, eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
