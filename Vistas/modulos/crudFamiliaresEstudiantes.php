@@ -66,7 +66,7 @@ include_once "conexion3.php";
                 <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="crudFamiliaresEstudiantes">Agregar Parentesco Estudiante-Familiar</a>
+                <a class="nav-link active" style="color:#000000;" href="crudFamiliaresEstudiantes">Agregar Relación Familiar-estudiante</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" href="crudfamiliares">Ver Datos de Familiares</a>
@@ -138,7 +138,7 @@ include_once "conexion3.php";
                         $query = "SELECT  fe.CODIGO_FAMILIAR_ESTUDIANTE,
                         (select concat_ws (' ',tp2.PRIMER_NOMBRE, ' ',tp2.SEGUNDO_NOMBRE,' ',tp2.PRIMER_APELLIDO,' ',tp2.SEGUNDO_APELLIDO) from tbl_persona tp2
                          where fa.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as FAMILIAR, pa.NOMBRE as PARENTESCO,
-                         CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE
+                         CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE ,fe.CODIGO_ESTUDIANTE, fe.CODIGO_FAMILIAR, fe.CODIGO_PARENTESCO
                         FROM tbl_estudiante es, tbl_parentesco pa, tbl_familiares_estudiante fe, tbl_persona p, tbl_familiar fa
                         WHERE es.CODIGO_PERSONA = p.CODIGO_PERSONA
                        AND pa.CODIGO_PARENTESCO = fe.CODIGO_PARENTESCO
@@ -151,7 +151,9 @@ include_once "conexion3.php";
                             $var2 = $row['FAMILIAR'];
                             $var3 = $row['PARENTESCO'];
                             $var4 = $row['ESTUDIANTE'];
-                            
+                            $var5 = $row['CODIGO_ESTUDIANTE'];
+                            $var6 = $row['CODIGO_FAMILIAR'];
+                            $var7 = $row['CODIGO_PARENTESCO'];
                            
 
                             ?>
@@ -245,50 +247,123 @@ include_once "conexion3.php";
                           <div id="EDITARFAMILIAREST<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITPARAMETROS" method="POST" class=" needs-validation">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Parentesco</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
-                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
+                              <form id="FORMEDITRAPERSONAS" method="POST" class=" needs-validation">
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                    <h4 class="text-center">Editar Parentesco</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                      <div class="row mb-2"><!-- INICIO PRIMERA ROW -->
+                           <input type="text" hidden value="<?php echo $var1 ?>"name="codigo_tabla">
+                                             <?php //
+                                            $query = "SELECT	fam.CODIGO_FAMILIAR,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                                            FROM tbl_persona per, tbl_familiar fam
+                                            WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
+                                            AND per.CODIGO_TIPO_PERSONA = 7;";
+                                            $resultadod=$conn->query($query);                
+                                            ?>
+                        <!-- ***********BUSCAR AL FAMILIAR*********** -->
+                                   
+                              
                                       <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_parametro">Familiar: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var2; ?>" class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el parámetro" name="Edit_nomparam" id="Edit_nomparam">
-                                        </div>
-                                      </div>
-                                     
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtnombre_usuario">Estudiante: </label>
-                                          <input  type="text" disabled = "disabled" value ="<?php echo $var4; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
-                                          <div class="invalid-feedback">
-                                           Llene este campo.
-                                          </div>
-                                        </div>
-                                      </div> 
+                                      <label for="">Familiar: </label>
+                                          <div class="col-sm-12 mt-2 mb-4">
+                                            <select  style="width: 100%;"  class="form-control select2" name="editFamiliarParentesco" required="" >
+                                            <option value="<?php echo $var6?>"> <?php echo $var2; ?></option>
+                                                <?php 
+                                                  if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo = $row['CODIGO_FAMILIAR'];
+                                                  $nombre = $row['NOMBRE'];
+                                                  
+                                                  ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                <?php 
+                                                } 
+                                                }
+                                                ?>
+                                              </select>
+                                                  
+                                              <div class="invalid-feedback">
+                                                  Agregue un nombre!
+                                              </div>
 
-
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtnombre_usuario">Parentesco: </label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  minlength="1" maxlength="100"     autocomplete = "off" type="text"   name="Edit_valor" id="Edit_valor" required>
-                                          <div class="invalid-feedback">
-                                           Llene este campo.
-                                          </div>
-                                        </div>
-                                      </div> 
-                                      
-                                      </div> <!-- FIN DE EL PRIMER ROW --> 
-                                  </div><!--FINAL DEL CARD BODY -->                       
-                                  <div class="modal-footer ">
-                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit" id="Edit_parametro" name="Edit_parametro" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                              <div class="valid-feedback">
+                                                ¡Se ve bien!
+                                               </div>
                                 </div>
-                              </form>
+                            </div>
+                      </div> 
+
+
+                            <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
+         <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
+                           
+                            <?php //
+                    $query = "SELECT  est.CODIGO_ESTUDIANTE,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                    FROM tbl_persona per, tbl_estudiante est
+                    WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
+                    AND per.CODIGO_TIPO_PERSONA = 4;";
+                    $resultadod=$conn->query($query);                
+                    ?>
+
+                 <label for="">Estudiante:</label>
+                  <div class="col-sm-12">
+                    <select  style="width: 100%;"  class="form-control select2" name="editarEstudianteParentesco" required="" >
+                    <option value="<?php echo $var5?>"><?php echo $var4; ?></option>
+                        <?php 
+                          if ($resultadod->num_rows > 0) {
+                          while($row = $resultadod->fetch_assoc()) { 
+                          $codigo = $row['CODIGO_ESTUDIANTE'];
+                          $nombre = $row['NOMBRE'];
+                          
+                          ?>
+                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                        <?php 
+                        } 
+                        }
+                        ?>
+                      </select>
+                          
+                      <div class="invalid-feedback">
+                          Agregue un nombre!
+                      </div>
+
+                      <div class="valid-feedback">
+                        ¡Se ve bien!
+                   </div>
+                </div>
+
+
+                          
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                          <?php
+                            $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
+                            FROM tbl_parentesco pa";
+                            $parentesco=$conn->query($querypare)
+                          ?>
+                        <div class="row mb-5">
+                          <div class="col-sm-12">
+                            <label>Parentesco</label>
+                            <select class="form-control select2" name="editarparentesco" required="">
+                              <option value="<?php echo $var7?>"><?php echo $var3; ?></option>
+                                       <?php 
+                                        if ($parentesco->num_rows > 0) {
+                                        while($rowt = $parentesco->fetch_assoc()) { ?>
+                                        <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
+                                      <?php } 
+                                              }?>
+                            </select>
+                          </div>
+                        </div>
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" name="editar_familiar_parentesco" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+                                
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
 
@@ -303,12 +378,12 @@ include_once "conexion3.php";
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_familiares" id="eliminar_familiares">
                                     <h4 class="text-center">¿Esta seguro de eliminar el registro de parentesco de  <?php echo $var2; ?> ?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINARPARAM" id="ELIMINARPARAM"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_FAMILIARES" id="ELIMINARPARAM"  class="btn btn-primary">Si,eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->

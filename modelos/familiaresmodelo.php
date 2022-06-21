@@ -117,7 +117,7 @@ if(isset($_POST['eliminarfami'])){
             exit;
           }else{
             echo "<script>
-            alert('¡No puede eliminar esta persona!');
+            alert('¡No puede eliminar este familiar tiene relación con estudiantes!');
             window.location = 'crudfamiliares';
             </script>";
             exit;

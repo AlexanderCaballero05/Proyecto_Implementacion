@@ -1,27 +1,36 @@
-<!-- ---------------------------------------------------------------------
-ELABORADO POR ARNOLD GARCIA u otr persona
-	Universidad Nacional Autonoma de Honduras (UNAH)
-	  	Facultad de Ciencias Economicas
-	Departamento de Informatica administrativa
-     Analisis, Programacion y Evaluacion de Sistemas
-             Segundo periodo 2022
-Equipo:
-Arnold Caballero.......... (no me acuerdo)
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
 
-Catedratico:
-Lic. Karla Melisa Garcia Pineda  --Evaluacion
-Lic Giancarlo Scalichi -- Implementacion de sistemas
-Clauidia Nuñez -- Analisis y diseño
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
 ---------------------------------------------------------------------
-Programa:          Pantalla que muestra los datos  de los estudiantes
-Fecha:            
-Programador:       
-descripcion:       Pantalla de mantenimiento edita datos de estudiantes
+---------------------------------------------------------------------
+Programa:          Pantalla de mantenimiento de los datos escolares del estudiante
+Fecha:             01-04-2022
+Programador:       Arnold Caballero
+descripcion:       Pantalla de mantenimiento de los datos estudiantiles escolares etc
 -----------------------------------------------------------------------
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+Arnol Caballero        		17-06-2022                 Validacion de los maximos y minimos de los inputs 
 ----------------------------------------------------------------------->
 
 <?php
@@ -122,15 +131,17 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                           <th class="text-center">Pasatiempos</th>
                           <th class="text-center">Distractores escolares</th>
                           <th class="text-center">Metas</th>
-                          
+                          <th class="text-center">Sacramentos</th>
+    
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         $query = "SELECT e.CODIGO_ESTUDIANTE, p.PRIMER_NOMBRE , p.PRIMER_APELLIDO, p.CODIGO_PERSONA, e.GRADO_ACTUAL, e.REPITENTE,
-                         e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS
-                        FROM tbl_estudiante e , tbl_persona p
-                        WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA;";
+                        e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS, GROUP_CONCAT(' ',sac.NOMBRE) as SACRAMENTOS
+                       FROM tbl_estudiante e , tbl_persona p, tbl_sacramento_persona sap, tbl_sacramento sac
+                       WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA
+                       AND sap.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -143,6 +154,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                             $var7 = $row['PASATIEMPOS'];
                             $var8 = $row['DISTRACTORES_ESCOLARES'];
                             $var9 = $row['METAS'];
+                            $var10 = $row['SACRAMENTOS'];
                         ?>
                         <tr>
                           <td>
@@ -240,6 +252,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
+                          <td class="text-center"><?php echo $var10; ?></td>
                           
 
                         <!--INICIO DEL MODAL DE EDITAR ESTUDIANTE -->
@@ -257,8 +270,8 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
-                                          autocomplete ="off" required =" ">
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumeros(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
+                                          autocomplete ="off" required ="">
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -267,7 +280,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pasatiempos</label>
-                                          <input  type="text"  value ="<?php echo $var7 ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="ediTPASATIEMPOS" id="editar_pasatiempos" autocomplete ="off" required =" ">
+                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $var7 ?></textarea>
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -279,7 +292,8 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <input  type="text"  value ="<?php echo $var8; ?>" class="form-control"  maxlength="20" minlength="5"    autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editDISTRACTORES" id="editar_distractores"required =" ">
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $var8 ?></textarea>
+
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -288,7 +302,9 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Metas</label>
-                                          <input  type="text"  value ="<?php echo $var9; ?>" class="form-control"  maxlength="50"     autocomplete = "off" type="text"   name="editMETAS" id="editar_metas" required =" ">
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $var9 ?></textarea>
+
+                                           
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -317,7 +333,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estudiante_eliminar" id="estudiante_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estudiante<?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Esta seguro de eliminar al estudiante <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -346,134 +362,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
   </section><!-- FINAL SECTION -->
   </div>
 
-  <!--INICIO DEL MODAL DE AGREGAR UN NUEVO ESTUDIANTE -->
-  <div id="AGREGAR_ESTUDIANTE" class="modal fade" role="dialog">
-       <div class="modal-dialog modal-md">
-                    <?php
-                    include_once "conexion3.php";
-                    $query= "SELECT p.CODIGO_PERSONA,p.PRIMER_NOMBRE FROM tbl_persona p WHERE p.CODIGO_TIPO_PERSONA = 4";
-                    $result= $conn->query($query);
-                    ?>
-                    <!--Traer el contenido socienomico de dispositivos electronicos-->
-                    <?php
-                    include_once "conexion3.php";
-                    $query1= "SELECT s.CODIGO_TIPOSOCIO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s";
-                    $result1= $conn->query($query1);
-                    ?>
-           <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
-                    <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Estudiante</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body"><!--CUERPO DEL MODAL -->
-                        <div class="row"><!-- INICIO PRIMERA ROW -->  
-                        <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre Estudiante</label>
-                                   
-                                    <select class="form-control" name="codigo_persona" id="codigo_estudiante">
-
-                                     <option value="">Seleccionar estudiante</option>
-                                     <?php
-                                      if ($result->num_rows > 0){
-                                        while($row = $result->fetch_assoc()){
-
-                                        
-
-                                       
-                                      ?>
-                                     <option value="<?php echo $row['CODIGO_PERSONA'];?>"><?php echo $row['PRIMER_NOMBRE'];?></option>
-                                     <?php
-                                      }
-                                    }
-
-                                      ?>
-                                   </select>
-                                </div>
-                                    <!-- INICIO DEL COMBOBOX CONTENIDO SOCIOECONOMICO --> 
-                                <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Contenido Socioeconomico</label>
-                                   
-                                    <select class="form-control" name="contenido_socio" id="contenido_socio">
-
-                                     <option value="">Contenido</option>
-                                     <?php
-                                      if ($result1->num_rows > 0){
-                                        while($row1 = $result1->fetch_assoc()){
-
-                                        
-
-                                       
-                                      ?>
-                                     <option value="<?php echo $row1['CODIGO_TIPOSOCIO'];?>"><?php echo $row1['NOMBRE_TIPO'];?></option>
-                                     <?php
-                                      }
-                                    }
-
-                                      ?>
-                                   </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Grado Actual</label>
-                                    <input  type="text"  class="form-control"  maxlength="2" minlength="1"  onKeyDown="sinespacio(this);" onkeypress="return solonumero(event)" autocomplete = "off" type="text"  placeholder="Ingrese un nombre al estudiante" name="nombre_estudiante" id="nombre_estudiante">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Pasatiempos</label>
-                                    <textarea  type="text"  class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción del Estudiante" name="pasatiempos_estudiante" id="pasatiempos_estudiante"></textarea>
-                                </div>
-                            </div>
-                        </div> <!-- FIN DE EL PRIMER ROW --> 
-
-                        <div class="row"><!-- INICIO PRIMERA ROW -->  
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Distractores Escolares</label>
-                                    <input  type="text" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un distractor" name="distractores_estudiante" id="distractores_estudiante">
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Metas</label>
-                                    <textarea  type="text" class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una meta del Estudiante" name="metas_estudiante" id="metas_estudiante"></textarea>
-                                </div>
-                            </div>
-                        </div> <!-- FIN DE EL PRIMER ROW --> 
-
-                    </div><!--FINAL DEL CARD BODY -->                       
-                    <div class="modal-footer ">
-                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="editar_estudiante" name="editar_estudiante" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
-                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                </div>
-            </form>
-      </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO ESTUDIANTE --> 
-   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-   <script>
- var isSubmitting = false
-
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-   </body>
+  
   <!-- Button trigger modal -->
 
 
@@ -516,6 +405,23 @@ $(document).ready(function () {
       window.open(this.href,'_self');
     } 
   </script>
+
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
 
 
   

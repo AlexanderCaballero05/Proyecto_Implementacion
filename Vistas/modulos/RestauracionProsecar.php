@@ -55,23 +55,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
           <!-- jquery validation -->
           <div class="card card-primary">
             <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-            <h4>Restauracion de datos Prosecar</h4>
+            <h4>Restauracion de base de datos Prosecar</h4>
             </div>
             <form  method="POST" action="./vistas/modulos/Restore.php" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   <div class="">
-                  <p>Cuando se está recuperando de una falla de base de datos,
-                      un administrador necesita restaurar un conjunto 
-                      de copias de seguridad en una secuencia correcta y significativa.
-                      Con esto en mente, el objetivo es tener un punto de recuperación ante
-                      desastres, creando un plan de copias de seguridad, así como un plan 
-                      apropiado de restauración de bases de datos.</p>
-                    <br>
+                  
 
                   </div>
 
 	
-	<br>
+	
   <div class="row mb-3">
     <div class="col-sm-12">
       <div class="form-group">
@@ -81,7 +75,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 			<option Selected disabled value="">Selecciona un punto...</option>
 			<?php
 				include_once 'Connet.php';
-				$ruta="C:/xampp/htdocs/Proyecto_Implementacion/vistas/modulos/Backup/" ;
+				$ruta="C:/xampp/htdocs/Proyecto_Implementacion5/vistas/modulos/Backup/" ;
 				if(is_dir($ruta)){
 				    if($aux=opendir($ruta)){
 				        while(($archivo = readdir($aux)) !== false){

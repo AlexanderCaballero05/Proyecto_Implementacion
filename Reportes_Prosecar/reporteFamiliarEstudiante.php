@@ -170,15 +170,15 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT  fe.CODIGO_FAM_EST,
-    (select concat_ws (' ',tp2.PRIMER_NOMBRE, '',tp2.SEGUNDO_NOMBRE,'',tp2.PRIMER_APELLIDO,'',tp2.SEGUNDO_APELLIDO) from tbl_persona tp2
-     where fa.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as FAMILIAR, pa.NOMBRE as PARENTESCO,
-     CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE
-    FROM tbl_estudiante es, tbl_parentesco pa, tbl_familiares_estudiante fe, tbl_persona p, tbl_familiar fa
-    WHERE es.CODIGO_PERSONA = p.CODIGO_PERSONA
+	$strquery ="SELECT  
+	(select concat_ws (' ',tp2.PRIMER_NOMBRE, ' ',tp2.SEGUNDO_NOMBRE,' ',tp2.PRIMER_APELLIDO,' ',tp2.SEGUNDO_APELLIDO) from tbl_persona tp2
+	 where fa.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as FAMILIAR, pa.NOMBRE as PARENTESCO,
+	 CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE 
+	FROM tbl_estudiante es, tbl_parentesco pa, tbl_familiares_estudiante fe, tbl_persona p, tbl_familiar fa
+	WHERE es.CODIGO_PERSONA = p.CODIGO_PERSONA
    AND pa.CODIGO_PARENTESCO = fe.CODIGO_PARENTESCO
    AND fa.CODIGO_FAMILIAR = fe.CODIGO_FAMILIAR
-    AND fe.CODIGO_ESTUDIANTE = es.CODIGO_ESTUDIANTE; ";
+	AND fe.CODIGO_ESTUDIANTE = es.CODIGO_ESTUDIANTE; ";
     
     
 	
@@ -222,7 +222,7 @@ $pdf->SetFont('Arial', '', 12);
 $pdf->SetWidths(array(15,50,40,75)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($data[$i]['CODIGO_FAM_EST'], ucwords(strtolower(utf8_decode($data[$i]['FAMILIAR']))) ,ucwords(strtolower(utf8_decode($data[$i]['PARENTESCO']))), ucwords(strtolower(utf8_decode($data[$i]['ESTUDIANTE'])))   ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FAMILIAR']))) ,ucwords(strtolower(utf8_decode($data[$i]['PARENTESCO']))), ucwords(strtolower(utf8_decode($data[$i]['ESTUDIANTE'])))   ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

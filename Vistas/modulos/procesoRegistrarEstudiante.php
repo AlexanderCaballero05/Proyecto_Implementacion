@@ -1,25 +1,36 @@
-<!-- ---------------------------------------------------------------------
-ELABORADO POR ARNOLD CABALLERO
-	Universidad Nacional Autonoma de Honduras (UNAH)
-	  	Facultad de Ciencias Economicas
-	Departamento de Informatica administrativa
-     Analisis, Programacion y Evaluacion de Sistemas
-             Segundo periodo 2022
-Equipo:
-Arnold Caballero.......... (no me acuerdo)
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
 
-Catedratico:
-Lic. Karla Melisa Garcia Pineda 
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
 ---------------------------------------------------------------------
 Programa:          Pantalla que registra datos adicionales al estudiante
 Fecha:             01-jan-2016
-Programador:       Javier
+Programador:       Arnold Caballero
 descripcion:       Registra los datos estudiantiles ,como ser socioeconomicos,escolares etc
 -----------------------------------------------------------------------
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut               31/05/2022            Se agrego campo de sacramentos
+Arnold Caballero        17/06/2022            Se valido el maximo y minimo de los inputs
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -54,7 +65,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
               <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconomicos</a>
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos socioeconómicos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
@@ -67,7 +78,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
           <div class="card-body"><!--Cuerpo del card body principal -->
           <!-- TITULO ENCABEZADO DATOS PERSONALES -->
             
-         <form method="POST" class="needs-validation" novalidate id="form">
+         <form method="POST" class="needs-validation" novalidate>
             <strong>Datos escolares</strong>
             <hr>
             </br>
@@ -107,14 +118,14 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                       <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Grado Actual</label> 
                           <div class="form-group">
-                             <input class="form-control" type="number" maxlength="2" minlength="1" name="GRADO" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 1" required="" >
+                             <input class="form-control" type="text" maxlength="2" minlength="1" name="GRADO" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 2" required="" >
                               <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
                           </div>
                       </div>
                       <div class="col-md-3">
-                        <label  class="control-label pl-4">¿Repitente de curso?</label>
+                        <label  class="control-label pl-4">¿Repite curso?</label>
                         <br>
                         <div class="form-check form-check-inline pl-4 pr-4">
                           <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio1" value="SI" required="">
@@ -126,9 +137,9 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                         </div>
                       </div>
                         <div class="col-md-3"> <!--INICIO INDICE ACADEMICO-->
-                          <label for="identidad" class="control-label">Indice academico</label> 
+                          <label for="identidad" class="control-label">Índice académico</label> 
                           <div class="form-group">
-                            <input class="form-control" type="number" maxlength="2" minlength="1" name="INDICE" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 90" required="" >
+                            <input class="form-control" type="text" maxlength="3" minlength="2" name="INDICE" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 90" required="" >
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -137,7 +148,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Materias con bajo rendimiento</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="MATERIAS" id="MATERIAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Español" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="100" minlength="2" name="MATERIAS" id="MATERIAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Español" required="" ></textarea>
                                <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -150,7 +161,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -160,7 +171,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="DISTRACTORES" class="control-label">Distractores</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -170,7 +181,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="METAS" class="control-label">Metas</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -180,7 +191,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                   <br>
                    <!--Sacramentos -->
                     <div>
-                       <h2 class="card-title"><strong> Sacramentos Estudiante</strong></h2><br><hr>
+                       <h2 class="card-title"><strong>Sacramentos de Estudiante</strong></h2><br><hr>
                     <div class="row">
                       <div  id="sacramentos" class="col-md-12">
                           <?php 
@@ -198,17 +209,24 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                           <label class="form-check-label mx-2"  for="sacramento<?php echo $codigo;?>">
                             <?php echo $nombre;?>
                           </label>
+                          
+                          
                         </div>
+                       
+                        
                           <?php 
                             } 
                             }
                           ?>
+                           
                       </div>
+                     
+                      
                     </div><!--fin row -->
                     </div>
                       </br>
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
-                        <h2 class="card-title"> <strong>Datos socioeconomicos</strong></h2>
+                        <h2 class="card-title"> <strong>Datos socioeconómicos</strong></h2>
                     </div></br>
 
                 <div class="row md-3 ">
@@ -235,6 +253,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                             <label class="form-check-label" for="dispositivos<?php echo $codigo;?>">
                             <?php echo $nombre;?>
                             </label>
+                            
                             </br>
                            
                           </div>
@@ -268,6 +287,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                             <label class="form-check-label" for="servicios<?php echo $codigo;?>">
                             <?php echo $nombre;?>
                             </label>
+                            
                             </br>
                            
                           </div>
@@ -316,7 +336,7 @@ Diana Rut               31/05/2022            Se agrego campo de sacramentos
                 <div class="col-sm-3"> <!--inicio del checkbox de basicos-->
                   <div class="card">
                      <div class="card-header" style="background-color:#DFD4FE;">
-                             <strong>¿Servicios básicos cuenta en su casa?</strong>
+                             <strong>¿Con qué servicios básicos cuenta en su casa?</strong>
                           </div>
                           <div class="card-body">
                           <?php

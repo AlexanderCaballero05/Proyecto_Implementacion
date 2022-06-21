@@ -273,25 +273,29 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
                         <div class="col-md-3">
                           <label class="form-label">Estado civil</label>
                           <div class="form-group">
-                            <input name ="estado_civil" onkeypress="return soloLetras(event);" placeholder="Eje: Soltero" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="estado_civil" onkeypress="return soloLetras(event);" maxlength="20" minlength="3" onkeyup="mayus(this);" placeholder="Eje: Soltero" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-3">
                           <label class="form-label">Nivel educativo</label>
                           <div class="form-group">
-                            <input name ="nivel_educativo" onkeypress="return soloLetras(event);" placeholder="Eje: Secundaria" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="nivel_educativo" onkeypress="return soloLetras(event);" maxlength="15" minlength="3"onkeyup="mayus(this);" placeholder="Eje: Secundaria" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                            <div class="invalid-feedback">
+                              Campo obligatorio.
                           </div>
+                          </div>
+                          
                         </div>
                         <div class="col-md-3">
                           <label class="form-label">Ingresos mensuales</label>
                           <div class="form-group">
-                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeypress="return solonumeros(event);" type="text" minlength="3" maxlength="5" class="form-control">
+                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeyup="mayus(this);" onkeypress="return solonumeros(event);" type="text" minlength="3" maxlength="5" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-3">
                           <label class="form-label">Iglesia que asiste</label>
                           <div class="form-group">
-                            <input name ="iglesia" onkeypress="return soloLetras(event);" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="iglesia" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" maxlength="50" minlength="5" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
                       </div>

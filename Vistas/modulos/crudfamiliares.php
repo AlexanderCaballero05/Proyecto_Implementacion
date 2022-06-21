@@ -269,7 +269,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Estado Civil</label>
-                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="30" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
+                                <input  type="text"  value ="<?php echo $var3; ?>" class="form-control" maxlength="20" minlength="5" autocomplete = "off" type="text" onkeyup="mayus(this);" 
                                 onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_estado" id="edifa" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
@@ -280,7 +280,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Nivel Educativo</label>
-                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" maxlength="20" minlength="5"autocomplete = "off" type="text"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
+                                <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" minlength="5" maxlength="15"  autocomplete = "off" type="text"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
                                 onKeyDown="sinespacio(this);"   onkeyup="mayus(this);" name="editar_nivele" id="edini" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
@@ -303,9 +303,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="txtcodigo_persona">Iglesia</label>
-                                <input  type="text"  value ="<?php echo $var6; ?>" class="form-control" autocomplete = "off" type="text"    
+                                <input  type="text"  value ="<?php echo $var6; ?>" minlength="2" maxlength="50"class="form-control" autocomplete = "off" type="text"    
                                 autocomplete = "off" type="text" onkeyup="mayus(this);" 
-                                onkeypress="return soloLetras(event);"  onkeyup="mayus(this);"  name="editar_iglesia" id="ediglesia" required="">
+                                onkeypress="return soloLetras(event);"  onkeyup="mayus(this);"   name="editar_iglesia" id="ediglesia" required="">
                                 <div class="invalid-feedback">
                                        campo obligatorio.
                                 </div>
