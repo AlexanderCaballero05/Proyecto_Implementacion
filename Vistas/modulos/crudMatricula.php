@@ -24,16 +24,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <section class="content">
     <div class="container-fluid">
      <div class="content-header text-xl-center mb-3 ">
-          <h4> MATRICULA ACADÉMICA/ESPIRITUAL <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Matrícula Académica y Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
     </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matricula</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" active href="procesoMatricula">Matricula</a>
+                <a class="nav-link" style="color:#000000;" active href="procesoMatricula">Matrícula</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" active href="listadoTutoriasMatriculadas">Lista de clases</a>
@@ -67,7 +67,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                           ?>
                 <a href="procesoMatricula">
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span> Agregar Matricula</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span> Agregar Matrícula</button>
 
                 </a>
               
@@ -91,14 +91,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
                       <thead>
                         <tr>
                         <th>Acción</th>
-                          <th class="text-center">Codigo Matricula</th>
+                          <th class="text-center">Código Matrícula</th>
                           <th class="text-center">Asignatura </th>
-                          <th class="text-center">Seccion</th>
+                          <th class="text-center">Sección</th>
                           <th class="text-center">Hora</th>
                           <th class="text-center">Modalidad</th>
                           <th class="text-center">Nombre del Tutor</th>
                           <th class="text-center">Estudiante</th>
-                          <th class="text-center">Estado de la matricula</th>
+                          <th class="text-center">Estado de la matrícula</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -188,7 +188,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITARMATRICULA" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Matricula Academica </h4>
+                                    <h4 class="text-center">Editar Matr´´icula Académica </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -196,7 +196,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_Matricula" id="id_matricula">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_matricula">Matricula Academica</label>
+                                          <label for="txtcodigo_matricula">Matrícula Académica</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  name="editar_pregunta" id="editar_pregunta">
                                         </div>
                           </div>
@@ -223,11 +223,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="MatriEliminar" id="MatriEliminar">
                                     <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudianteElim">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la matricula academica  <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la matrícula académica  <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINARMATRICULA2" id="ELIMINARMATRICULA2"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINARMATRICULA2" id="ELIMINARMATRICULA2"  class="btn btn-primary">Si, eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->

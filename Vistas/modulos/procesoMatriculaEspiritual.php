@@ -4,8 +4,8 @@
  include "conexionpdo.php";
  
  $codigoObjeto=23;
- $accion='Ingreso Matricula';
- $descripcion= 'Ingreso al proceso/registros de matricula ';
+ $accion='INGRESO A MATRÍCULA';
+ $descripcion= 'AGREGA UNA MATRÍCULA ESPIRITUAL';
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
@@ -21,20 +21,20 @@
 
     <section class="content">
        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> MATRICULAR ALUMNOS<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+              <h4> Matricular Alumno<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
     <div class="container-fluid">
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matricula</a>
+                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar matricula academica</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar Matrícula Académica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar matricula espiritual</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar Matrícula Espiritual</a>
               </li>
             </ul>
           </div>
@@ -77,7 +77,7 @@
                     <div class="col-sm-4">
                     <div class="form-group">
                       <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="BUSCA_ESTUDIANTE"  required>
-                        <option selected enable value="">Seleccione alumno</option> <!--Lo mismo que el de arriba :v -->
+                        <option selected enable value="">Seleccione Alumno</option> <!--Lo mismo que el de arriba :v -->
                         <?php 
                           if ($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) { 
@@ -135,7 +135,7 @@
 
           <div class="card ">
             <div class="card-header text-center" style="background-color: #3FCDFD"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">CARGA ESPIRITUAL PARA MATRICULAR </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Carga espiritual para matricular </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -144,13 +144,13 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center">ACCION</th> 
-                          <th class="text-center">CATEQUESIS</th>
-                          <th class="text-center">NOMBRE DEL CATEQUISTA</th>
-                          <th class="text-center">MODALIDAD</th>
-                          <th class="text-center">SECCION</th>
-                          <th class="text-center">HORA</th> 
-                          <th class="text-center">FECHA INICIO</th>                     
+                          <th class="text-center">Acción</th> 
+                          <th class="text-center">Catequesis</th>
+                          <th class="text-center">Nombre del Catequista</th>
+                          <th class="text-center">Modalidad</th>
+                          <th class="text-center">Sección</th>
+                          <th class="text-center">Hora</th> 
+                          <th class="text-center">Fecha Inicio</th>                     
                                             
                         </tr>
                       </thead>
@@ -181,7 +181,7 @@
                             <div class="text-center" >
                               <div class="btn-group">
                                 <a href="#MODAL<?php echo $var6; ?>" data-toggle="modal">
-                                <button type='button' name="btnmatricular_espritual" id="btnmatricular_espritual"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular catequesis</button>
+                                <button type='button' name="btnmatricular_espritual" id="btnmatricular_espritual"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular Catequesis</button>
                               </a>
                               </div>
                             </div><!-- final del text-center -->
@@ -198,35 +198,35 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMESTUDIANTE" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Matricular catequesis</h4>
+                                    <h4 class="text-center">Matricular Catequesis</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
-                                  <strong>información de la catequesis</strong>
+                                  <strong>Información de la catequesis</strong>
                                     </hr> 
                                     <div class="row"><!-- INICIO PRIMERA ROW --> 
                                       <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="CODIGO_CARGA" id="ID_CARGA"><!--este es el importante -->
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">CATEQUISTA</label>
+                                          <label for="txtcodigo_persona">Catequista</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">SECCION</label>
+                                          <label for="txtcodigo_persona">Sección</label>
                                           <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">HORA</label>
+                                          <label for="txtcodigo_persona">Hora</label>
                                           <input  type="text"  value ="<?php echo $var5; ?>" class="form-control" readonly>
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">CATEQUESIS</label>
+                                          <label for="txtcodigo_persona">Catequesis</label>
                                           <input hidden type="text" name="CATEQUESIS" value ="<?php echo $var8; ?>" >
                                           <input  type="text"  value ="<?php echo $var1; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
@@ -234,14 +234,14 @@
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">FECHA INICIO</label>
+                                          <label for="txtcodigo_persona">Fecha Inicio</label>
                                           <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
                                         </div>
                                       </div>
                                       <div class="col-sm-4">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">FECHA FINAL</label>
+                                          <label for="txtcodigo_persona">Fecha Final</label>
                                           <input  type="text"  value ="<?php echo $var7; ?>" class="form-control"  readonly>
                                           <input hidden type="text"  value ="<?php echo $COD_ES ?>" class="form-control" name="ID_ESTUDIANTE"><!--Y este tambien es muy importante -->
                                         </div>
@@ -272,7 +272,7 @@
           <div class="row"><!-- boton para descargar la "forma 03" -->
            <div class="col-md-12">
             <!-- boton para descargar el reporte -->
-            <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
+            <form method="post"  action="Reportes_Prosecar/reporteMatriculaespiritualindividual.php" target="_blank"> 
             <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_es ?>">
             <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
             </form>
@@ -282,7 +282,7 @@
 
           <div class="card">
             <div class="card-header text-center" style="background-color:#3FCDFD " id="asignaturas"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-               <h1 class=" card-title text-center"><strong style="color:black;">CATEQUESIS MATRICULADAS </strong></h1>
+               <h1 class=" card-title text-center"><strong style="color:black;">Catequesis Matriculadas </strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
               <div class="card-body">
@@ -291,11 +291,11 @@
                   <table id="tabla_asignaturas" class="table table-bordered table-striped">
                       <thead>
                         <tr>
-                          <th class="text-center"> ACCION</th> 
-                          <th class="text-center">CATEQUESIS</th>
-                          <th class="text-center"> NOMBRE DEL CATEQUISTA</th>
-                          <th class="text-center"> MODALIDAD</th>
-                          <th class="text-center"> Seccion</th>
+                          <th class="text-center"> Acción</th> 
+                          <th class="text-center">Catequesis</th>
+                          <th class="text-center"> Nombre del Catequista</th>
+                          <th class="text-center"> Modalidad</th>
+                          <th class="text-center"> Sección</th>
                           <th class="text-center"> Hora</th>                     
                                             
                         </tr>
@@ -354,11 +354,11 @@
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
                                     <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la clase?<?php echo $var1; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la clase? <?php echo $var1; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_MATRICULA"   class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_MATRICULA"   class="btn btn-primary">Si, eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->

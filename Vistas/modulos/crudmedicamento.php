@@ -49,7 +49,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 <div class="modal fade" id="ADDOBJETO" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form method="POST">
+            <form method="POST" class="needs-validation" novalidate>
                 <div class="modal-header" style="background-color: #0CCDE3">
                     <h4 class="text-center">Registrar Medicamentos</h4>
                 </div>
@@ -60,9 +60,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         <div class="col-sm-6">
                           <div class="form-group">
                               <label for="txtcodigo_persona">
-                              Codigo del Medicamento</label>
-                              <input type="text"  class="form-control" maxlength="10" onkeyup="mayus(this);" autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
-                              name="agregar_cod_medi" id="agregar_codd_medi">
+                              Código del Medicamento</label>
+                              <input type="text"  class="form-control" maxlength="10" onkeyup="mayus(this);" autocomplete="off"   onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" ; 
+                              name="agregar_cod_medi" id="agregar_codd_medi" required>
+                              <div class="invalid-feedback">
+                                       campo obligatorio.
+                             </div>
                           </div>
                       </div>
                         <div class="col-sm-6">
@@ -70,7 +73,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <label for="txtcodigo_persona">
                                     Nombre del Medicamento</label>
                                 <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="agregar_medicamento" id="agregar_medicamento">
+                                 name="agregar_medicamento" id="agregar_medicamento" required >
+                                 <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
                             </div>
                         </div>
                     </div> <!-- FIN DE EL PRIMER ROW -->
@@ -78,8 +84,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripción</label>
-                                <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="agregar_med_desc" id="agregar_med_desc">
+                                <textarea type="text" class="form-control" maxlength="100" minlength="5"  autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" ; 
+                                 name="agregar_med_desc" id="agregar_med_desc" required></textarea>
+                                 <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
                             </div>
                         </div>
                 </div>
@@ -252,7 +261,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content-->
-                                                                <form method="POST">
+                                                                <form method="POST" class="needs-validation" novalidate>
                                                                     <div class="modal-header" style="background-color: #0CCDE3">
                                                                         <h4 class="text-center">Editar informacion de Medicamentos
                                                                         </h4>
@@ -271,6 +280,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     Codigo del Medicamento</label>
                                                                                     <input type="text" value="<?php echo $var1; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
                                                                                     name="edit_cod_medi" id="edit_codd_medi" disabled="">
+                                                                                    <div class="invalid-feedback">
+                                                                                        campo obligatorio.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-sm-6">
@@ -278,7 +290,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     <label for="txtcodigo_persona">
                                                                                     Nombre del Medicamento</label>
                                                                                     <input type="text" value="<?php echo $var2; ?>" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="edit_nom_medi" id="edit_nom_medi">
+                                                                                    name="edit_nom_medi" id="edit_nom_medi" required>
+                                                                                    <div class="invalid-feedback">
+                                                                                        campo obligatorio.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div> <!-- FIN DE EL PRIMER ROW -->
@@ -286,8 +301,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripcion del Medicamento</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                                                     name="edit_desc_medi" id="edit_desc_medi">
+                                                                                    <textarea type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="100" minlength="5"   autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" ; 
+                                                                                     name="edit_desc_medi" id="edit_desc_medi" required></textarea>
+                                                                                     <div class="invalid-feedback">
+                                                                                        campo obligatorio.
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                     </div>
@@ -314,13 +332,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamentos" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
                                                             <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                             <button type="submit"  
-                                                            name="eliminar_medica" id="eliminar_medica"  class="btn btn-primary">Si,eliminar</button>      
+                                                            name="eliminar_medica" id="eliminar_medica"  class="btn btn-primary">Si, eliminar</button>      
                                                             </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                                     </form>
                                                     </div><!--fin del modal contener -->
@@ -371,9 +389,53 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
 
 
+<script>
+     function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+  //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+ </script>
+ <script>
+ function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
 
-
-
+ function soloLetrasnumerossinespacio(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ 
+ </script>
 
 
 
@@ -490,3 +552,21 @@ bitacora($codigoObjeto, $accion, $descripcion);
       window.open(this.href,'_self');
     } 
     </script>
+    
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
