@@ -34,6 +34,8 @@
 
     Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
+    Luz Montoya             16-06-2022                 Cambio en el encabezado de la tabla, el orden de la columna de permisos
+    Luz Montoya             18-06-2022                 Cambio de los nombre de permisos a editar y consultar/ y que si la opción de consultar no está seleccionada las otras no se muestren
 
 
 ----------------------------------------------------------------------->
@@ -118,10 +120,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <th class="text-center">ID</th> <!--encabezados de la tabla -->
                           <th class="text-center">Rol Usuario</th>
                           <th class="text-center">Permiso Objeto</th>
+                          <th class="text-center">Permiso Consultar</th>
                           <th class="text-center">Permiso Insertar</th>
                           <th class="text-center">Permiso Eliminar</th>
-                          <th class="text-center">Permiso Actualizar</th>
-                          <th class="text-center">Permiso Mostrar</th>
+                          <th class="text-center">Permiso Editar</th>
+                         
                                                    
 
                         </tr>
@@ -137,10 +140,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             $var3 = $row['CODIGO_OBJETO'];
                             $var4 = $row['ROL'];
                             $var5 = $row['NOMBRE'];
+                            $var9 = $row['MOSTRAR'];
                             $var6 = $row['INSERTAR'];
                             $var7 = $row['ELIMINAR'];
                             $var8 = $row['ACTUALIZAR'];
-                            $var9 = $row['MOSTRAR'];
+                            
                            
                         ?>
                             <?php
@@ -276,7 +280,19 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                           </select>
                                         </div>
                                       </div>
-                                                 
+                                             <!--Inicio combobox Consultar-->
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Consultar</label>
+                                            <select class="form-control" name="ediMostrar" id="editar_descripcion">
+                                                 <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
+                                            </select>
+                                        </div> 
+                                        
+                                    
+                                    
                                             <!--Inicio combobox insertar -->
                                       <div class="col-sm-12">
                                         <div class="form-group">
@@ -300,10 +316,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             </select>
                                         </div>
                                       </div>
-                                        <!--Inicio combobox Actualizar-->
+                                        <!--Inicio combobox Editar-->
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Actualizar</label>
+                                          <label for="txtcodigo_persona">Editar</label>
                                             <select class="form-control" name="ediActualizar" id="editar_descripcion">
                                                  <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
                                                  <option value="SI">SI</option>
@@ -312,16 +328,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         </div>
                                       </div>
 
-                                       <!--Inicio combobox Actualizar-->
-                                       <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Mostrar</label>
-                                            <select class="form-control" name="ediMostrar" id="editar_descripcion">
-                                                 <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
-                                                 <option value="SI">SI</option>
-                                                 <Option value="NO">NO</Option>
-                                            </select>
-                                        </div>
+                                    
+
+                                       
 
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
 
@@ -445,7 +454,22 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 </div>
                             </div> <!--FINAL COMOBOX OBJETO-->
                             
-                        
+                        <!--INICIO COMBOBOX CONSULTAR -->
+                        <div class="col-sm-12">
+                            <label>Consultar</label>
+                                <div class="input-group">
+                                <span class="input-group-append"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                                  <select class="form-control" name="MOSTRAR" required="" id="consultar1">
+                                  <option selected disabled value="">Seleccionar...</option>
+                                    <option value="SI">SI</option>
+                                    <option value="NO">NO</option>
+                                  </select>
+                                </div>
+                            </div><!--FINAL COMOBOX Consultar-->
+
+                        </div> <!-- FIN DE LA PRIMERA ROW -->     
+                          <div style ="display:none;" id="Grupopermisos">
+                          <div class="row"><!-- INICIO SEGUNDA ROW -->                          
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX INSERTAR-->
                                 <div class="form-group">
@@ -472,10 +496,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 </div>
                             </div> <!--FINAL COMOBOX ELIMINAR-->
 
-                            <!--INICIO COMBOBOX ACTUALIZAR -->
+                            <!--INICIO COMBOBOX EDITAR -->
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Modificar:</label>
+                                    <label for="txtcodigo_persona">Editar:</label>
                                     <select class="form-control"name="ACTUALIZAR" required="">
                                     <option selected disabled value="">Seleccionar...</option>
                                         <option value="SI">SI</option>
@@ -483,20 +507,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                     </select>
                                 </div>
                             </div> <!--FINAL COMOBOX MODIFICAR-->
-                             <!--INICIO COMBOBOX MOSTRAR -->
-                             <div class="col-sm-12">
-                            <label>Mostrar</label>
-                                <div class="input-group">
-                                <span class="input-group-append"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-                                  <select class="form-control" name="MOSTRAR" required="">
-                                  <option selected disabled value="">Seleccionar...</option>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                  </select>
-                                </div>
-                            </div><!--FINAL COMOBOX MOSTRAR-->
-                         
-                        </div> <!-- FIN DE LA PRIMERA ROW --> 
+                          </div><!--FINAL SEGUNDA ROW--> 
+                          </div>   <!-- Final del div grupopermisos que oculta los otros pemisos -->
+                          
+                        
                     </div><!--FINAL DEL CARD BODY -->   
                         <div class="modal-footer ">
                             <button type="submit" name="guardarpermisos" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button> 
@@ -572,3 +586,15 @@ bitacora($codigoObjeto, $accion, $descripcion);
     } 
   </script>
 
+
+
+<script type="text/javascript">
+$( function() {
+$("#consultar1").change( function() {
+  if($(this).val() === "SI" ){
+    document.getElementById('Grupopermisos').style.display = "block";
+  }
+});
+}); 
+  
+</script>

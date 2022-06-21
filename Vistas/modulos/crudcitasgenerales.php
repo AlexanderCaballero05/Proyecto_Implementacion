@@ -31,7 +31,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortografia
 
 
 <?php
-session_start();
+//session_start();
 include_once "conexion.php";
 include_once "conexion3.php";
 
@@ -181,7 +181,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             <th class="text-center">Fecha cita</th>
                                             <th class="text-center">Hora</th>
                                             <th class="text-center">Beneficiario</th>
-                                            <th class="text-center">Encargado cita</th>
+                                            <th class="text-center">Encargado de la cita</th>
                                             <th class="text-center">Especialidad</th>
                                             <th class="text-center">Área</th>
                                             <th class="text-center">Estado cita</th>

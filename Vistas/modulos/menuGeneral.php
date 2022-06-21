@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Menú general
+    Fecha:             
+    Programador:       
+    descripcion:       Menú general que aparece en todo el sistema
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+    Luz Montoya         		18-06-2022                 cambio del orden en las opciones de seguridad 
+----------------------------------------------------------------------->
+
 <?php
   include_once "conexion.php";
   include_once "conexion3.php";
@@ -851,13 +883,7 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="crudPermisos" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Permisos</p>
-                </a>
-              </li>
-              <li class="nav-item">
+            <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Roles</p>
@@ -865,6 +891,25 @@
               </li>
               <li class="nav-item">
 
+              <li class="nav-item">
+                <a href="crudPermisos" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Permisos</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="crudobjetos" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Objetos</p>
+                </a>
+              </li>
+              </li>
+              <li class="nav-item">
+              <a href="area" class="nav-link" > 
+              <i class="nav-icon fas fa-table"></i>
+                  <p>Mantenimiento de Areas</p>
+              </a>
+              </li>
                 <a href="crudpreguntas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Preguntas</p>
@@ -882,21 +927,6 @@
                 <i class="nav-icon fas fa-table"></i>
                    <p>Mantenimiento de Parametros</p>
                 </a>
-              </li>
-              <li class="nav-item">
-                <a href="crudobjetos" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Objetos</p>
-                </a>
-              </li>
-            
-
-              </li>
-              <li class="nav-item">
-              <a href="area" class="nav-link" > 
-              <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Areas</p>
-              </a>
               </li>
             </ul>
           </li>
@@ -933,7 +963,7 @@
                         <i class="nav-icon fas fa-table"></i>
                         <p>
                           Bitacora del sistema
-                          <i class="fas fa-angle-left right"></i>
+                          <!-- <i class="fas fa-angle-left right"></i> -->
                         </p>
                       </a>
                     </li>
