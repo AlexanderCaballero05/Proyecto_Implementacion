@@ -885,27 +885,19 @@
             <ul class="nav nav-treeview">
             <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
-
-                <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Roles</p>
-                </a>
-              </li>
-              <li class="nav-item">
-
-              <li class="nav-item">
-                <a href="crudPermisos" class="nav-link">
-
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Roles</p>
                 </a>
               </li>
 
+              <li class="nav-item">
                 <a href="crudPermisos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Permisos</p>
                 </a>
               </li>
-
+              
+              <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Objetos</p>
