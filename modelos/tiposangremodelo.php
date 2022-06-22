@@ -14,7 +14,7 @@
                $fechaActual = date('Y-m-d');  
                $usuario=$_SESSION['vario']; 
               try{ 
-                  $consulta_tipo = $db->prepare("SELECT tipo FROM tbl_tipo_sangre WHERE tipo = (?);");
+                  $consulta_tipo = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_sangre WHERE tipo = (?);");
                   $consulta_tipo->execute(array($tiposangre));
                   $row=$consulta_tipo->fetchColumn();
                   if($row>0){
@@ -72,7 +72,7 @@
       $editar_tipo = ($_POST['editar_tiposangre']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_tipo_sangre where TIPO = (?) and CODIGO_TIPO_SANGRE <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_sangre where TIPO = (?) and CODIGO_TIPO_SANGRE <> (?) ;");
        $sentencia->execute(array($editar_tipo,$codigo_tipo));
        $row=$sentencia->fetchColumn();
         if($row>0){
@@ -129,7 +129,7 @@ if(isset($_POST['eliminar_tiposangre'])){
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
         echo "<script>
-        alert('¡No se puede eliminar esta relacionado con otras tablas!');
+        alert('¡No se puede eliminar está relacionado con otras tablas!');
         window.location = 'crudtiposangre';
         </script>";
         exit;

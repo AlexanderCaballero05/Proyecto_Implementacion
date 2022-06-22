@@ -15,7 +15,7 @@ if(isset($_POST['apariencia'])){
           $fechaActual = date('Y-m-d');
           $usuario =$_SESSION['vario'];    
               try{ 
-                  $consulta_modalidad = $db->prepare("SELECT TIPO FROM tbl_apariencia_fisica WHERE TIPO = (?);");
+                  $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_apariencia_fisica WHERE TIPO = (?);");
                   $consulta_modalidad->execute(array($nombre_apariencia));
                   $row=$consulta_modalidad->fetchColumn();
                   if($row>0){
@@ -74,7 +74,7 @@ if(isset($_POST['apariencia'])){
 
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_apariencia_fisica where TIPO = (?) and CODIGO_APARIENCIA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_apariencia_fisica where TIPO = (?) and CODIGO_APARIENCIA <> (?) ;");
        $sentencia->execute(array($editar_examen,$codigo_examen));
        $row=$sentencia->fetchColumn();
         if($row>0){

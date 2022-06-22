@@ -15,16 +15,16 @@
 
     
     try {
-        $consulta_objeto = $db->prepare("SELECT tm.NOMBRE_MEDICAMENTO  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?);");
-        $consulta_objeto->execute(array($medicamento));
+        $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?) || tm.CODIGO_MEDICAMENTO  =(?); ");
+        $consulta_objeto->execute(array($medicamento,$codigo));
         $row=$consulta_objeto->fetchColumn();
         if($row>0){
             echo "<script>
-            alert('El nombre del medicamento  $medicamento ya se encuentra registrado');
+            alert('El nombre o el código del medicamento  ya se encuentra registrado');
             window.location = 'crudmedicamento';
             </script>";
           exit;  
-        } else {
+        } else{
             try {
               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
@@ -68,7 +68,7 @@
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
       try {
-        $sentencia = $db->prepare(" SELECT * from tbl_medicamento tm  
+        $sentencia = $db->prepare(" SELECT COUNT(*) from tbl_medicamento tm  
         where tm.NOMBRE_MEDICAMENTO  = (?) and tm.DESCRIPCION <> (?);");
        $sentencia->execute(array($medicamento,$codigo));
        $row=$sentencia->fetchColumn();

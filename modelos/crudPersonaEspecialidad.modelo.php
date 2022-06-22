@@ -13,7 +13,7 @@
      $usuario =$_SESSION['vario'];
      
      try {
-        $consulta_objeto = $db->prepare("SELECT ep.NOMBRE  from tbl_especialidad ep  where ep.NOMBRE  = (?);");
+        $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_especialidad ep  where ep.NOMBRE  = (?);");
         $consulta_objeto->execute(array($tipo));
         $row=$consulta_objeto->fetchColumn();
         if($row>0){
@@ -72,7 +72,7 @@
         $fecha_modificacion = date('Y-m-d'); 
         $user=$_SESSION['vario'];
          try {
-            $sentencia = $db->prepare("SELECT * FROM tbl_especialidad where NOMBRE = (?)
+            $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_especialidad where NOMBRE = (?)
              and DESCRIPCION <> (?) ;");
             $sentencia->execute(array($editipo,$code));
             $row=$sentencia->fetchColumn();
