@@ -28,6 +28,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
 DIANA RUT GARCIA    		09-06-2022                 Cambio en el titulo y en el modal de editar
+DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -218,7 +219,7 @@ DIANA RUT GARCIA    		09-06-2022                 Cambio en el titulo y en el mod
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="alergia_eliminar" >
-                                    <h4 class="text-center">¿Esta seguro de eliminar la alergia <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la alergia <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

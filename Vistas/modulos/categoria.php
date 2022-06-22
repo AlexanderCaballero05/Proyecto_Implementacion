@@ -21,6 +21,7 @@ Programador               Fecha                      Descripcion
 Diana Rut               27/05/2022            Se agregaron parametos que faltaban
 Diana Rut               31/05/2022            Se agrego mas campos en el area de familiar y se quitaron campos de estudiante
 Diana Rut               07/05/2022            Se validaron los campos de contraseña y nombre de usuario que sean los tamaños requeridos
+Diana Rut               21/05/2022            Cambios pequeños en el menu
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -98,13 +99,13 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
+            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
+            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
+            <a class="nav-link active" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
           </ul>
         </div>
@@ -115,9 +116,9 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
             <div class="card card-primary ">
                <form method="POST" class="needs-validation" novalidate id="form" enctype="multipart/form-data">
                   <div class="card-body">
-                    <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title"> Datos Generales persona</h2>
-                    </div></br>
+                     <!-- TITULO ENCABEZADO DATOS PERSONALES -->
+                      <h5> Datos Generales Persona</h5>
+                     <hr color="blue"></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
                       <div class="col-md-4"> <!--INICIO DNI-->
@@ -267,19 +268,19 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
                         </div>
                       </div>
                     </div><!--Fin de otra row -->
-                    <div style ="display:none;" id="familiares">
-                      <h2 class="card-title"> Datos de familiares</h2><br><hr>
+                    <div style ="display:none;" id="familiares" >
+                      <h5> Datos Familiares</h5><hr color="blue"><br>
                       <div class="row"><!--Para agregar campos adicionales al familiar -->
                         <div class="col-md-3">
-                          <label class="form-label">Estado civil</label>
+                          <label class="form-label">Estado civil:</label>
                           <div class="form-group">
-                            <input name ="estado_civil" onkeypress="return soloLetras(event);" maxlength="20" minlength="3" onkeyup="mayus(this);" placeholder="Eje: Soltero" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="estado_civil" id="civil"  required onkeypress="return soloLetras(event);" maxlength="20" minlength="3" onkeyup="mayus(this);" placeholder="Eje: Soltero" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-3">
-                          <label class="form-label">Nivel educativo</label>
+                          <label class="form-label">Nivel educativo:</label>
                           <div class="form-group">
-                            <input name ="nivel_educativo" onkeypress="return soloLetras(event);" maxlength="15" minlength="3"onkeyup="mayus(this);" placeholder="Eje: Secundaria" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="nivel_educativo" id="educativo" required onkeypress="return soloLetras(event);" maxlength="15" minlength="3"onkeyup="mayus(this);" placeholder="Eje: Secundaria" autocomplete = "off" type="text" minlength="5" maxlength="" class="form-control">
                             <div class="invalid-feedback">
                               Campo obligatorio.
                           </div>
@@ -287,22 +288,22 @@ Diana Rut               07/05/2022            Se validaron los campos de contras
                           
                         </div>
                         <div class="col-md-3">
-                          <label class="form-label">Ingresos mensuales</label>
+                          <label class="form-label">Ingresos mensuales:</label>
                           <div class="form-group">
-                            <input name ="ingresos" autocomplete = "off" placeholder="Eje:5000" onkeyup="mayus(this);" onkeypress="return solonumeros(event);" type="text" minlength="3" maxlength="5" class="form-control">
+                            <input name ="ingresos" id="ingreso" required autocomplete = "off" placeholder="Eje:5000" onkeyup="mayus(this);" onkeypress="return solonumeros(event);" type="text" minlength="3" maxlength="5" class="form-control">
                           </div>
                         </div>
                         <div class="col-md-3">
-                          <label class="form-label">Iglesia que asiste</label>
+                          <label class="form-label">Iglesia que asiste:</label>
                           <div class="form-group">
-                            <input name ="iglesia" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" maxlength="50" minlength="5" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
+                            <input name ="iglesia" id="iglesia"  required onkeypress="return soloLetras(event);" onkeyup="mayus(this);" maxlength="50" minlength="5" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
                       </div>
                     </div>
                     </br>
                     <div style ="display:none;" id="usuarios"><!--Contiene los datos de usuario como los adicioneles de especialidades y los oculta -->
-                       <h2 class="card-title">Registrar Usuario</h2><br><hr>
+                       <h5>Registrar Usuario</h5><hr color="blue"><br>
                       <div class="row"> 
                         <div class="col-md-4" ><!--INICIO NOMBRE USUARIO-->
                           <label  class="control-label">Nombre Usuario</label>
@@ -571,6 +572,10 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('familiares').style.display = "none";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('medico').required = false;
+          document.getElementById('iglesia').required = false;
+          document.getElementById('ingreso').required = false;
+          document.getElementById('educativo').required = false;
+          document.getElementById('civil').required = false;
           document.getElementById('cate').required = false;
           document.getElementById('psico').required = false;
           document.getElementById('contrasena').required = true; 
@@ -585,7 +590,11 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('cate').required = false;
           document.getElementById('psico').required = false;
           document.getElementById('contrasena').required = false; 
-          document.getElementById('nombre_usuario').required = false; 
+          document.getElementById('nombre_usuario').required = false;
+          document.getElementById('iglesia').required = true;
+          document.getElementById('ingreso').required = true;
+          document.getElementById('educativo').required = true;
+          document.getElementById('civil').required = true;
         }else if($(this).val() ===  "5" ){//para medico
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -593,6 +602,10 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('cate').required = false;
+          document.getElementById('iglesia').required = false;
+          document.getElementById('ingreso').required = false;
+          document.getElementById('educativo').required = false;
+          document.getElementById('civil').required = false;
           document.getElementById('psico').required = false;
           document.getElementById('medico').required = true;
           document.getElementById('contrasena').required = true; 
@@ -605,6 +618,10 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('medico').required = false;
           document.getElementById('cate').required = false;
+          document.getElementById('iglesia').required = false;
+          document.getElementById('ingreso').required = false;
+          document.getElementById('educativo').required = false;
+          document.getElementById('civil').required = false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
         }else if($(this).val() ===  "8"){//para catequista
@@ -615,6 +632,10 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('psico').required = false;
           document.getElementById('medico').required = false;
+          document.getElementById('iglesia').required = false;
+          document.getElementById('ingreso').required = false;
+          document.getElementById('educativo').required = false;
+          document.getElementById('civil').required = false;
           document.getElementById('cate').required = true;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;

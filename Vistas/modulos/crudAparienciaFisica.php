@@ -28,6 +28,7 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 Programador               Fecha                      Descripcion
 Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
                                                     y descripción
+Diana Rut Garcia          21/06/2022                Cambios en el modal con validaciones                                        
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -53,11 +54,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>Mantenimiento Apariencia Física</h4>
-        </h1>     
-     </section>
+    <div class="content-header text-xl-center mb-3 ">
+            <h4>Mantenimiento Apariencia Física</h4>    
+    </div>
       <div class="row">
         <div class="col-md-12">
            
@@ -84,23 +83,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              if ($permiso_registrar == 'SI'){
 
                              ?>
-
-                         
             <button  data-toggle="modal"  href="#AGREGAR" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Apariencia</button>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-                
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
               </br></br>
-                
-                
 
                 </a>
                 <?php
                    }
                  ?>
-          
-          <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+            <div class="card-header text-center" style="background-color: #0CCDE3">
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST"><!-- form start -->
@@ -123,7 +115,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              while ($row = $result->fetch_assoc()) {
                                  $var1 = $row['CODIGO_APARIENCIA'];
                                  $var2 = $row['TIPO'];
-
                         ?>
                         <tr>
                           <td>
@@ -148,20 +139,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                   }
                                   ?>  
                                 
-                               
-                               
                                  <!-- fin del codigo para sustraer el permiso de eliminar-->
-                                                                <?php 
-                                                                if($permiso_eliminar == 'SI'){
-                                                                ?>
-                                                                <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button id="eliminar_medic" name="eliminar_medic" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
-                                                                    </button>
-                                                                </a>
-                                                                <?php 
-                                                                    }
-                                                                    ?>
-                                                                     <!-- Codigo de permiso para Actualizar -->
+                                  <?php 
+                                    if($permiso_eliminar == 'SI'){
+                                  ?>
+                                  <a href="#ELIMINAR<?php echo $var1; ?>" data-toggle="modal">
+                                    <button id="eliminar_medic" name="eliminar_medic" type='button' class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                    </button>
+                                 </a>
+                                 <?php 
+                                   }
+                                 ?>
+                                <!-- Codigo de permiso para Actualizar -->
                                   <?php
                                   include "conexionpdo.php";
                                   $usuario=$_SESSION['vario'];
@@ -179,7 +168,6 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $evaluar_permiso_actualizar->execute(array($usuariomo, '40'));
                                       $row1=$evaluar_permiso_actualizar->fetchColumn();
                                       $permiso_actualizar =$row1; 
-                                    
                                   }
                                   ?>
 
@@ -207,23 +195,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div id="EDITAREXAMEN<?php echo $var1; ?>" class="modal fade" role="dialog">
                          <div class="modal-dialog modal-md">
                              <div class="modal-content">
-                                 <!-- Modal content-->
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Apariencia Física</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                  <form method="POST">
-                                     <div class="modal-header" style="background-color: #0CCDE3">
-                                         <h4 class="text-center">Editar Apariencia Física
-                                         </h4>
-                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                     </div>
-                                     <div class="modal-body">
-                                         <!--CUERPO DEL MODAL -->
+                                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                                          <div class="row">
                                              <!-- INICIO PRIMERA ROW -->
-                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
-                                                  name="id_apariencia" id="id_apariencia" >
+                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="id_apariencia" id="id_apariencia" >
                                              <div class="col-sm-12">
                                                  <div class="form-group">
-                                                     <label for="txtcodigo_persona">
-                                                     Apariencia Física</label>
+                                                     <label>Apariencia Física</label>
                                                      <input required type="text"  value="<?php echo $var2; ?>" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                      name="editar_apariencia" id="editar_apariencia">
                                                  </div>
@@ -235,7 +218,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                      <div class="modal-footer ">
                                          <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
                                          <button type="submit"  name="editaapariencia"  id="editaapariencia" class="btn btn-success"><span>
-                                                 <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                        <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                                      </div>
                                      <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                  </form>
@@ -255,7 +238,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_aparienciafisica" id="eliminar_aparienciafisica">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar la apariencia <?php echo $var2;?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar la Apariencia <?php echo $var2;?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
@@ -295,21 +278,21 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITARMODA" method="POST">
+                <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar una apariencia física</h4>
+                        <h4 class="text-center">Agregar Apariencia Física</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtmodalidad">Nombre Apariencia Física</label>
+                          <div class="col-sm-12">
+                              <div class="form-group">
+                                  <label >Nombre Apariencia Física</label>
                                     <input  type="text"  class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" required="">
-                                    <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
-                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                                <div class="invalid-feedback">
+                                  Campo obligatorio.
+                                </div>
+                          </div> 
                     </div><!--FINAL DEL CARD BODY --> 
                     </div>                      
                     <div class="modal-footer ">
@@ -360,7 +343,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar:",
+        "search": "Buscar Apariencia:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

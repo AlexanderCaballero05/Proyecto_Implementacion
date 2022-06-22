@@ -16,7 +16,7 @@ if(isset($_POST['nombre_examen'])){
           $fechaActual = date('Y-m-d');
           $usuario =$_SESSION['vario'];    
               try{ 
-                  $consulta_modalidad = $db->prepare("SELECT EXAMEN_MEDICO FROM tbl_examenes_medicos WHERE EXAMEN_MEDICO = (?);");
+                  $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_medicos WHERE EXAMEN_MEDICO = (?);");
                   $consulta_modalidad->execute(array($nombre_examen));
                   $row=$consulta_modalidad->fetchColumn();
                   if($row>0){
@@ -76,7 +76,7 @@ if(isset($_POST['nombre_examen'])){
 
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_examenes_medicos where EXAMEN_MEDICO = (?) and CODIGO_EXAMEN_MEDICO <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_medicos where EXAMEN_MEDICO = (?) and CODIGO_EXAMEN_MEDICO <> (?) ;");
        $sentencia->execute(array($editar_examen,$codigo_examen));
        $row=$sentencia->fetchColumn();
         if($row>0){

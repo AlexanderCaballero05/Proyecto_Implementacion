@@ -16,12 +16,12 @@ if(isset($_POST['agregar_tipo'])){
         
              
          try{ 
-             $consulta_estado = $db->prepare("SELECT TIPO FROM tbl_transtornos_corporales WHERE TIPO = (?);");
+             $consulta_estado = $db->prepare("SELECT COUNT(*) FROM tbl_transtornos_corporales WHERE TIPO = (?);");
              $consulta_estado->execute(array($agregar_tipo));
              $row=$consulta_estado->fetchColumn();
              if($row>0){
                echo "<script>
-               alert('El nombre del transtorno $agregar_tipo ya se encuentra registrado');
+               alert('El nombre del trastorno $agregar_tipo ya se encuentra registrado');
                window.location = 'crudTranstornos';
                </script>";
              exit;
@@ -37,7 +37,7 @@ if(isset($_POST['agregar_tipo'])){
                    exit;
                  }else{
                    echo "<script> 
-                   alert('Error auxilio!');
+                   alert('Ocurrio algun error');
                    window.location = 'crudTranstornos';
                    </script>";
                    exit;
@@ -64,14 +64,24 @@ if(isset($_POST['agregar_tipo'])){
     if(isset($_POST['editar_nopatologia'])){
       $codigo_nopatologia = ($_POST['EDITARNOPATOLOGIA']);
       $editar_tipo = ($_POST['editar_tipo']);
-       // 
+       //cODIGO PARA VERIFICAR QUE NO EXISTA EL TRANSTORNO YA
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_transtornos_corporales WHERE TIPO = (?) and CODIGO_TRANSTORNO <> (?) ;");
+       $sentencia->execute(array($editar_tipo,$codigo_nopatologia));
+       $row=$sentencia->fetchColumn();
+        if($row>0){
+          echo "<script>
+          alert('Ya existe un trastorno con este nombre: $editar_tipo');
+          window.location = 'crudTranstornos';
+          </script>";
+          exit;
+        }else{
           try{
             $sql = "UPDATE tbl_transtornos_corporales SET TIPO = '$editar_tipo'
                   WHERE CODIGO_TRANSTORNO = '$codigo_nopatologia'; ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-              alert("Transtorno modificado correctamente"); 
+              alert("Trastorno modificado correctamente"); 
               window.location = "crudTranstornos";
               </script>';
               include_once 'function_bitacora.php';
@@ -90,6 +100,9 @@ if(isset($_POST['agregar_tipo'])){
           echo $e->getMessage(); 
           return false;
           }//fin del try catch
+
+        }
+          
       }
   }//cierre del if principal
 
@@ -97,31 +110,46 @@ if(isset($_POST['agregar_tipo'])){
 if(isset($_POST['transtorno_eliminar'])){
   if(isset($_POST['ELIMINAR_TRANSTORNO'])){
     $code = $_POST['transtorno_eliminar'];//asigna a una variable el id del estado a eliminar
-    try{
-      $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-      mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
-      if(mysqli_affected_rows($link)>0){
+
+     $relacion_tablas =  $db->prepare("SELECT  pt.CODIGO_TRANSTORNO, pt.CODIGO_PERSONAS_TRANSTORNOS 
+     from  tbl_personas_transtornos pt, tbl_transtornos_corporales tc
+           where pt.CODIGO_TRANSTORNO = tc.CODIGO_TRANSTORNO and  pt.CODIGO_TRANSTORNO= (?);");
+      $relacion_tablas->execute(array($code));
+      $row = $relacion_tablas->fetchColumn();
+      if($row >0){
         echo "<script>
-        alert('Se elimino correctamente'); 
+        alert('¡No se puede eliminar, está relacionado con otras tablas!');
         window.location = 'crudTranstornos';
         </script>";
-        include_once 'function_bitacora.php';
-        $codigoObjeto=1;
-        $accion='Modificacion';
-        $descripcion= 'Se elimino un transtorno ';
-        bitacora($codigoObjeto, $accion,$descripcion);
         exit;
       }else{
-        echo "<script>
-        alert('¡Error al eliminar el transtorno!');
-        window.location = 'crudTranstornos';
-        </script>";
-        exit;
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            alert('Se elimino correctamente'); 
+            window.location = 'crudTranstornos';
+            </script>";
+            include_once 'function_bitacora.php';
+            $codigoObjeto=1;
+            $accion='Modificacion';
+            $descripcion= 'Se elimino un transtorno ';
+            bitacora($codigoObjeto, $accion,$descripcion);
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el trastorno!');
+            window.location = 'crudTranstornos';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+
       }
-    }catch(PDOException $e){
-    echo $e->getMessage(); 
-    return false;
-   }
   }
 }
 

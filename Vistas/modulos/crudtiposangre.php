@@ -43,7 +43,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  <section class="content-header text-xl-center mb-3 btn-light">
+  <section class="content-header text-xl-center mb-3 ">
               <h4>Mantenimiento Tipo de Sangre </h4>
         </section>
   
@@ -192,11 +192,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITARTIPOSANGRE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITARTIPOSANGRE" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar tipo de sangre</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                </div>
+                                <form id="FORMEDITARTIPOSANGRE" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_tiposangre" id="id_tiposangre">
@@ -232,7 +232,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_tiposangre" id="eliminar_tiposangre">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de sangre <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el tipo de sangre <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

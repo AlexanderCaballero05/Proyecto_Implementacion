@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  Diana Rut Garcia        		21-06-2022                 Validaciones de no permitir datos vacios y otras cosas
 ----------------------------------------------------------------------->
 
 
@@ -70,13 +71,13 @@ include_once "conexion3.php";
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
+            <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
+            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
+            <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
           </ul>
         </div>
@@ -105,10 +106,10 @@ include_once "conexion3.php";
                       if($permiso_registrar == 'SI'){
                      ?> 
                       <a href="categoria"> 
-                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Persona</button>
                     </a> 
                     
-                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte general</button>
+                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte General</button>
                    
                     <?php 
                       }
@@ -136,7 +137,7 @@ include_once "conexion3.php";
                                 ?>
                             </select>
                             <div class="invalid-feedback">
-                                              Campo Obligatorio.
+                                  Campo Obligatorio.
                              </div>  
                         </div>
                         <div class="col-md-1">
@@ -303,7 +304,7 @@ include_once "conexion3.php";
                                                      <h4 class="text-center">Editar información persona </h4><button type="button" class="close"data-dismiss="modal">&times;</button>
                                                     </div>
                                                         <!-- Modal content-->
-                                                        <form method="POST" class="needs-validation" novalidate >
+                                                        <form method="POST" >
                                                             <div class="modal-body">
                                                                 <!--CUERPO DEL MODAL -->
                                                                 <div class="row">
@@ -314,8 +315,7 @@ include_once "conexion3.php";
                                                                         id="cod_personaguardar">
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Primer
-                                                                                nombre</label>
+                                                                            <label >Primer Nombre</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var3; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -324,7 +324,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_nombre" id="p_nombre" required ="">
+                                                                                name="p_nombre" id="p_nombre" required >
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -332,8 +332,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Segundo
-                                                                                nombre</label>
+                                                                            <label >Segundo Nombre</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var4; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -342,7 +341,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_nombre" id="s_nombre" required ="">
+                                                                                name="s_nombre" id="s_nombre" required>
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -350,8 +349,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Primer
-                                                                                apellido</label>
+                                                                            <label >Primer Apellido</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var5; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -360,7 +358,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_apellido" id="p_apellido" required ="">
+                                                                                name="p_apellido" id="p_apellido" required>
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -368,8 +366,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Segundo
-                                                                                apellido</label>
+                                                                            <label >Segundo Apellido</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var6; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -378,7 +375,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_apellido" id="s_apellido" required ="">
+                                                                                name="s_apellido" id="s_apellido" >
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -386,14 +383,14 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Dni</label>
+                                                                            <label >DNI</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var7; ?>"
                                                                                 class="form-control" maxlength="15" 
                                                                                 onkeypress="return solonumero(event)" 
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="dni" id="dni" required ="">
+                                                                                name="dni" id="dni" required >
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -401,13 +398,12 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Dirección</label>
+                                                                            <label >Dirección</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var18; ?>"
                                                                              class="form-control" maxlength="500"  minlength="20"  name="direccion" id="direccion"
                                                                               onkeyup="mayus(this);" autocomplete = "off"
-                                                                               onkeypress="" 
-                                                                               required="" >
+                                                                                required>
                                                                                <div class="invalid-feedback">
                                                                              Campo Obligatorio.
                                                                               </div>
@@ -415,7 +411,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Córreo</label>
+                                                                            <label >Córreo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
@@ -423,7 +419,7 @@ include_once "conexion3.php";
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="correo" id="correo"  required="" >
+                                                                                name="correo" id="correo"  required >
                                                                                 <div class="invalid-feedback">
                                                                                 Campo Obligatorio.
                                                                                 </div>
@@ -431,7 +427,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Teléfono</label>
+                                                                            <label>Teléfono</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var13; ?>"
                                                                              class="form-control" 
@@ -439,13 +435,12 @@ include_once "conexion3.php";
                                                                                 minlength="8"
                                                                                 onkeypress="return telfono(event,this);"
                                                                                  onblur="quitarespacios(this);" 
-                                                                                 onkeydown="sinespacio(this);" 
-                                                                                 required=""
+                                                                                 onkeydown="sinespacio(this);" required
                                                                                  autocomplete = "off"
                                                                                 name="telefono" id="telefono">
-                                                                                <div class="invalid-feedback">
-                                                                                Campo Obligatorio.
-                                                                                </div>
+                                                                            <div class="invalid-feedback">
+                                                                                 Campo Obligatorio.
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div> <!-- FIN DE EL PRIMER ROW -->
@@ -502,8 +497,7 @@ include_once "conexion3.php";
                                                                 <input type="text" value="<?php echo $var1; ?>" hidden
                                                                     class="form-control" name="cod_personaeliminar"
                                                                     id="cod_personaeliminar">
-                                                                <h4 class="text-center">¿Esta seguro de eliminar la 
-                                                                    persona <?php echo $var3; ?>?
+                                                                <h4 class="text-center">¿Está seguro de eliminar la persona <?php echo $var3; ?>?
                                                                 </h4>
                                                             </div>
                                                             <!--fin el card body -->
@@ -564,12 +558,12 @@ include_once "conexion3.php";
                                             <th class="text-center">Segundo Nombre</th>
                                             <th class="text-center">Primer Apellido</th>
                                             <th class="text-center">Segundo Apellido</th>
-                                            <th class="text-center">Dni</th>
+                                            <th class="text-center">DNI</th>
                                             <th class="text-center">Sexo</th>
                                             <th class="text-center">Fecha Nacimiento</th>
                                             <th class="text-center">Lugar Nacimiento</th>
                                             <th class="text-center">Dirección</th>
-                                            <th class="text-center">Tipo de Persona</th>
+                                            <th class="text-center">Tipo Persona</th>
                                             <th class="text-center">Teléfono</th>
                                             <th class="text-center">Córreo</th>                                            
                                         </tr>
@@ -689,11 +683,11 @@ include_once "conexion3.php";
                                                 <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                    <div class="modal-header" style="background-color: #0CCDE3">
-                                                     <h4 class="text-center">Editar información persona</h4>
+                                                     <h4 class="text-center">Editar información Persona</h4>
                                                      <button type="button" class="close"data-dismiss="modal">&times;</button>
                                                    </div>
                                                         <!-- Modal content-->
-                                                        <form method="POST" class="needs-validation" novalidate >
+                                                        <form method="POST"  >
                                                             
                                                             <div class="modal-body">
                                                                 <!--CUERPO DEL MODAL -->
@@ -705,8 +699,7 @@ include_once "conexion3.php";
                                                                         id="cod_personaguardar">
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Primer
-                                                                                nombre</label>
+                                                                            <label >Primer Nombre</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var3; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -715,7 +708,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_nombre" id="p_nombre" required ="">
+                                                                                name="p_nombre" id="p_nombre" required>
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -723,8 +716,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Segundo
-                                                                                nombre</label>
+                                                                            <label >Segundo Nombre</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var4; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -733,7 +725,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_nombre" id="s_nombre" required ="">
+                                                                                name="s_nombre" id="s_nombre" required>
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -741,8 +733,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Primer
-                                                                                apellido</label>
+                                                                            <label >Primer Apellido</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var5; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -751,7 +742,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="p_apellido" id="p_apellido" required ="">
+                                                                                name="p_apellido" id="p_apellido" required>
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -759,8 +750,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Segundo
-                                                                                apellido</label>
+                                                                            <label>Segundo Apellido</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var6; ?>"
                                                                                 class="form-control" maxlength="20"
@@ -769,7 +759,7 @@ include_once "conexion3.php";
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 onkeypress="return soloLetras(event);"
-                                                                                name="s_apellido" id="s_apellido" required ="">
+                                                                                name="s_apellido" id="s_apellido" >
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -777,14 +767,14 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Dni</label>
+                                                                            <label>DNI</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var7; ?>"
                                                                                 class="form-control" maxlength="15" 
                                                                                 onkeypress="return solonumero(event)" 
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="dni" id="dni" required ="">
+                                                                                name="dni" id="dni" required >
                                                                                 <div class="invalid-feedback">
                                                                                  Campo Obligatorio.
                                                                                 </div>
@@ -792,13 +782,11 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Dirección</label>
+                                                                            <label >Dirección</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var18; ?>"
                                                                              class="form-control" maxlength="500"  minlength="20"  name="direccion" id="direccion"
-                                                                              onkeyup="mayus(this);" autocomplete = "off"
-                                                                               onkeypress="" 
-                                                                               required="" >
+                                                                              onkeyup="mayus(this);" autocomplete = "off" required>
                                                                                <div class="invalid-feedback">
                                                                              Campo Obligatorio.
                                                                               </div>
@@ -806,7 +794,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Córreo</label>
+                                                                            <label>Córreo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
@@ -814,8 +802,7 @@ include_once "conexion3.php";
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 onkeyup="mayus(this);"
                                                                                 autocomplete="off" type="text"
-                                                                                name="correo" id="correo"  
-                                                                               required="" >
+                                                                                name="correo" id="correo" required>
                                                                                 <div class="invalid-feedback">
                                                                                 Campo Obligatorio.
                                                                                 </div>
@@ -823,7 +810,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label for="txtcodigo_persona">Teléfono</label>
+                                                                            <label >Teléfono</label>
                                                                             <input type="text"
                                                                              value="<?php echo $var13; ?>"
                                                                              class="form-control" 
@@ -834,11 +821,10 @@ include_once "conexion3.php";
                                                                                  onkeydown="sinespacio(this);" 
                                                                                  required=""
                                                                                  autocomplete = "off"
-                                                                                name="telefono" id="telefono"  
-                                                                                 required=""  >
-                                                                                <div class="invalid-feedback">
+                                                                                name="telefono" id="telefono" required>
+                                                                             <div class="invalid-feedback">
                                                                                 Campo Obligatorio.
-                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div> <!-- FIN DE EL PRIMER ROW -->
@@ -895,8 +881,7 @@ include_once "conexion3.php";
                                                                 <input type="text" value="<?php echo $var1; ?>" hidden
                                                                     class="form-control" name="cod_personaeliminar"
                                                                     id="cod_personaeliminar">
-                                                                <h4 class="text-center">¿Esta seguro de eliminar la 
-                                                                    persona <?php echo $var3; ?>?
+                                                                <h4 class="text-center">¿Está seguro de eliminar la persona <?php echo $var3; ?>?
                                                                 </h4>
                                                             </div>
                                                             <!--fin el card body -->

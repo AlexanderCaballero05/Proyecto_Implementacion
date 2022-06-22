@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  Diana Rut Garcia        	21-06-2022                 Arreglos en los modales con funcionalidades
 ----------------------------------------------------------------------->
 
 
@@ -52,7 +53,7 @@
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
+    <section class="content-header text-xl-center mb-3 ">
         <h1>
             <h4>Mantenimiento de Trastornos</h4>
         </h1>     
@@ -103,9 +104,8 @@
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
-                                            <th class="text-center">Id</th>
-                                            <th class="text-center">Tipo de Transtorno</th>
-                          
+                        <th class="text-center">Id</th>
+                        <th class="text-center">Tipo de Trastorno</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -117,8 +117,6 @@
                              while ($row = $result->fetch_assoc()) {
                                  $var1 = $row['CODIGO_TRANSTORNO'];
                                  $var2 = $row['TIPO'];
-                                 
-                         
                         ?>
                         <tr>
                           <td>
@@ -201,24 +199,22 @@
                           <div id="EDITARNOPATOLOGIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Trastorno</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="EDITARNOPATOLOGIA" id="EDITARNOPATOLOGIA">
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Tipo</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_tipo" id="editar_tipo" required="">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="50"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_tipo" id="editar_tipo" required="">
                                         </div>
                                       </div>
                                       </div>
-                                      
                                   </div><!--FINAL DEL CARD BODY --> 
-
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
                                     <button type="submit" id="editar_nopatologia" name="editar_nopatologia" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
@@ -228,7 +224,6 @@
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->   
                             
-                                                   <!--INICIO DEL MODAL ELIMINAR   -->
                            <!--INCICIO DEL MODAL ELIMINAR   -->
                            <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -240,7 +235,7 @@
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="transtorno_eliminar" id="transtorno_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar trastorno <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar trastorno <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -270,19 +265,19 @@
   <div id="AGREGAR_NOPATOLOGIA" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITRAPERSONAS" method="POST">
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">AgregarTrastorno</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
+                      <h4 class="text-center">Agregar Trastorno</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Tipo</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="agregar_tipo" id="agregar_tipo" required="">
+                                    <input  type="text"  class="form-control"  maxlength="50" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="agregar_tipo"  required>
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                    </div>
 
                                 </div>
@@ -301,299 +296,60 @@
 </div>
 
 <!-- funciones del sistema -->
-<script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- </script>
+
 
 <script>
     function Descargar() {
       window.open('Reportes_Prosecar/reporteTranstornos.php','_blank');
       window.open(this.href,'_self');
     }
-  </script>
-
-<script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-$(document).ready( function () {
-    $('#tabla_Transtornos').DataTable({
-      language:espanol
-    });
-} );
-
- //Funcion para habilitar el de la tabla
- $( function() {
-    $("#persona").change( function() {
-        if ($(this).val() > 0 ) {
-          document.getElementById('especialidad').style.display = "block";
-          document.getElementById('tabla_Transtornos').style.display = "block";
-          
-        } else{
-          document.getElementById('especialidad').style.display = "none";
-          document.getElementById('tabla_Transtornos').style.display = "none";
-           
-        }
-    });
-  });
-
-
-//todo lo que tenga que ver con el datatable se verá en español
-let = espanol = {
-    "processing": "Procesando...",
-    "lengthMenu": "Mostrar _MENU_ registros",
-    "zeroRecords": "No se encontraron resultados",
-    "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-    "search": "Buscar:",
-    "infoThousands": ",",
-    "loadingRecords": "Cargando...",
-    "paginate": {
-        "first": "Primero",
-        "last": "Último",
-        "next": "Siguiente",
-        "previous": "Anterior"
-    },
-    "aria": {
-        "sortAscending": ": Activar para ordenar la columna de manera ascendente",
-        "sortDescending": ": Activar para ordenar la columna de manera descendente"
-    },
-    "buttons": {
-        "copy": "Copiar",
-        "colvis": "Visibilidad",
-        "collection": "Colección",
-        "colvisRestore": "Restaurar visibilidad",
-        "copyKeys": "Presione ctrl o u2318 + C para copiar los datos de la tabla al portapapeles del sistema. <br \/> <br \/> Para cancelar, haga clic en este mensaje o presione escape.",
-        "copySuccess": {
-            "1": "Copiada 1 fila al portapapeles",
-            "_": "Copiadas %ds fila al portapapeles"
-        },
-        "copyTitle": "Copiar al portapapeles",
-        "csv": "CSV",
-        "excel": "Excel",
-        "pageLength": {
-            "-1": "Mostrar todas las filas",
-            "_": "Mostrar %d filas"
-        },
-        "pdf": "PDF",
-        "print": "Imprimir",
-        "renameState": "Cambiar nombre",
-        "updateState": "Actualizar",
-        "createState": "Crear Estado",
-        "removeAllStates": "Remover Estados",
-        "removeState": "Remover",
-        "savedStates": "Estados Guardados",
-        "stateRestore": "Estado %d"
-    },
-    "autoFill": {
-        "cancel": "Cancelar",
-        "fill": "Rellene todas las celdas con <i>%d<\/i>",
-        "fillHorizontal": "Rellenar celdas horizontalmente",
-        "fillVertical": "Rellenar celdas verticalmentemente"
-    },
-    "decimal": ",",
-    "searchBuilder": {
-        "add": "Añadir condición",
-        "button": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "clearAll": "Borrar todo",
-        "condition": "Condición",
-        "conditions": {
-            "date": {
-                "after": "Despues",
-                "before": "Antes",
-                "between": "Entre",
-                "empty": "Vacío",
-                "equals": "Igual a",
-                "notBetween": "No entre",
-                "notEmpty": "No Vacio",
-                "not": "Diferente de"
-            },
-            "number": {
-                "between": "Entre",
-                "empty": "Vacio",
-                "equals": "Igual a",
-                "gt": "Mayor a",
-                "gte": "Mayor o igual a",
-                "lt": "Menor que",
-                "lte": "Menor o igual que",
-                "notBetween": "No entre",
-                "notEmpty": "No vacío",
-                "not": "Diferente de"
-            },
-            "string": {
-                "contains": "Contiene",
-                "empty": "Vacío",
-                "endsWith": "Termina en",
-                "equals": "Igual a",
-                "notEmpty": "No Vacio",
-                "startsWith": "Empieza con",
-                "not": "Diferente de",
-                "notContains": "No Contiene",
-                "notStarts": "No empieza con",
-                "notEnds": "No termina con"
-            },
-            "array": {
-                "not": "Diferente de",
-                "equals": "Igual",
-                "empty": "Vacío",
-                "contains": "Contiene",
-                "notEmpty": "No Vacío",
-                "without": "Sin"
-            }
-        },
-        "data": "Data",
-        "deleteTitle": "Eliminar regla de filtrado",
-        "leftTitle": "Criterios anulados",
-        "logicAnd": "Y",
-        "logicOr": "O",
-        "rightTitle": "Criterios de sangría",
-        "title": {
-            "0": "Constructor de búsqueda",
-            "_": "Constructor de búsqueda (%d)"
-        },
-        "value": "Valor"
-    },
-    "searchPanes": {
-        "clearMessage": "Borrar todo",
-        "collapse": {
-            "0": "Paneles de búsqueda",
-            "_": "Paneles de búsqueda (%d)"
-        },
-        "count": "{total}",
-        "countFiltered": "{shown} ({total})",
-        "emptyPanes": "Sin paneles de búsqueda",
-        "loadMessage": "Cargando paneles de búsqueda",
-        "title": "Filtros Activos - %d",
-        "showMessage": "Mostrar Todo",
-        "collapseMessage": "Colapsar Todo"
-    },
-    "select": {
-        "cells": {
-            "1": "1 celda seleccionada",
-            "_": "%d celdas seleccionadas"
-        },
-        "columns": {
-            "1": "1 columna seleccionada",
-            "_": "%d columnas seleccionadas"
-        },
-        "rows": {
-            "1": "1 fila seleccionada",
-            "_": "%d filas seleccionadas"
-        }
-    },
-    "thousands": ".",
-    "datetime": {
-        "previous": "Anterior",
-        "next": "Proximo",
-        "hours": "Horas",
-        "minutes": "Minutos",
-        "seconds": "Segundos",
-        "unknown": "-",
-        "amPm": [
-            "AM",
-            "PM"
-        ],
-        "months": {
-            "0": "Enero",
-            "1": "Febrero",
-            "10": "Noviembre",
-            "11": "Diciembre",
-            "2": "Marzo",
-            "3": "Abril",
-            "4": "Mayo",
-            "5": "Junio",
-            "6": "Julio",
-            "7": "Agosto",
-            "8": "Septiembre",
-            "9": "Octubre"
-        },
-        "weekdays": [
-            "Dom",
-            "Lun",
-            "Mar",
-            "Mie",
-            "Jue",
-            "Vie",
-            "Sab"
-        ]
-    },
-    "editor": {
-        "close": "Cerrar",
-        "create": {
-            "button": "Nuevo",
-            "title": "Crear Nuevo Registro",
-            "submit": "Crear"
-        },
-        "edit": {
-            "button": "Editar",
-            "title": "Editar Registro",
-            "submit": "Actualizar"
-        },
-        "remove": {
-            "button": "Eliminar",
-            "title": "Eliminar Registro",
-            "submit": "Eliminar",
-            "confirm": {
-                "_": "¿Está seguro que desea eliminar %d filas?",
-                "1": "¿Está seguro que desea eliminar 1 fila?"
-            }
-        },
-        "error": {
-            "system": "Ha ocurrido un error en el sistema (<a target=\"\\\" rel=\"\\ nofollow\" href=\"\\\">Más información&lt;\\\/a&gt;).<\/a>"
-        },
-        "multi": {
-            "title": "Múltiples Valores",
-            "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
-            "restore": "Deshacer Cambios",
-            "noMulti": "Este registro puede ser editado individualmente, pero no como parte de un grupo."
-        }
-    },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
-    "stateRestore": {
-        "creationModal": {
-            "button": "Crear",
-            "name": "Nombre:",
-            "order": "Clasificación",
-            "paging": "Paginación",
-            "search": "Busqueda",
-            "select": "Seleccionar",
-            "columns": {
-                "search": "Búsqueda de Columna",
-                "visible": "Visibilidad de Columna"
-            },
-            "title": "Crear Nuevo Estado",
-            "toggleLabel": "Incluir:"
-        },
-        "emptyError": "El nombre no puede estar vacio",
-        "removeConfirm": "¿Seguro que quiere eliminar este %s?",
-        "removeError": "Error al eliminar el registro",
-        "removeJoiner": "y",
-        "removeSubmit": "Eliminar",
-        "renameButton": "Cambiar Nombre",
-        "renameLabel": "Nuevo nombre para %s",
-        "duplicateError": "Ya existe un Estado con este nombre.",
-        "emptyStates": "No hay Estados guardados",
-        "removeTitle": "Remover Estado",
-        "renameTitle": "Cambiar Nombre Estado"
-    }
-};
-
-
 </script>
+
+<script>
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+</script>
+<script type="text/javascript"> 
+  $(document).ready( function () {
+      $('#tabla_Transtornos').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Transtorno:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
+
+
+ 
+

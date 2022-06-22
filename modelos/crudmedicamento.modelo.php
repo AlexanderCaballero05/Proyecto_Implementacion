@@ -15,16 +15,16 @@
 
     
     try {
-        $consulta_objeto = $db->prepare("SELECT tm.NOMBRE_MEDICAMENTO  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?);");
-        $consulta_objeto->execute(array($medicamento));
+        $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?) || tm.CODIGO_MEDICAMENTO  =(?); ");
+        $consulta_objeto->execute(array($medicamento,$codigo));
         $row=$consulta_objeto->fetchColumn();
         if($row>0){
             echo "<script>
-            alert('El nombre del medicamento  $medicamento ya se encuentra registrado');
+            alert('El nombre o el código del medicamento  ya se encuentra registrado');
             window.location = 'crudmedicamento';
             </script>";
           exit;  
-        } else {
+        } else{
             try {
               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
@@ -68,13 +68,18 @@
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
       try {
-        $sentencia = $db->prepare(" SELECT * from tbl_medicamento tm  
-        where tm.NOMBRE_MEDICAMENTO  = (?) and tm.DESCRIPCION <> (?);");
+        $sentencia = $db->prepare(" SELECT COUNT(*) from tbl_medicamento tm  
+        where tm.NOMBRE_MEDICAMENTO  = (?) and  tm.CODIGO_MEDICAMENTO <> (?);");
        $sentencia->execute(array($medicamento,$codigo));
        $row=$sentencia->fetchColumn();
-       
-      
-        try {
+       if($row>0){
+        echo "<script>
+        alert('Ya existe un medicamento con este mismo nombre: $medicamento');
+         window.location = 'crudmedicamento';
+        </script>";
+        exit;
+        }else{
+          try{
             $sql = "UPDATE tbl_medicamento tm set tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
             tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
             $consulta=$conn->query($sql);
@@ -89,21 +94,22 @@
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
-                echo "<script>
-                alert('¡Error al  intentar modificar el medicamento!');
-                window.location = 'crudmedicamento';
-                </script>";
-              }
-        }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        }
-       // fin else 
-      }catch(PDOException $e){
+              echo "<script>
+              alert('¡Error al  intentar modificar el medicamento!');
+              window.location = 'crudmedicamento';
+              </script>";
+            }
+          }catch(PDOException $e){
             echo $e->getMessage(); 
             return false;
-                    } 
-   }///fin if 
+          }
+
+        }// fin else 
+      }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+      } 
+   }//FIN DEL CODIGO PARA EDITAR
 
    //// eliminar medicamento  /////
    if(isset($_POST['eliminar_medicamentos'])){

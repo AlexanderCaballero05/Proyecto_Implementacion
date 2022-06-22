@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+ Diana Rut Garcia         	21-06-2022                 areglo del modal editar
 ----------------------------------------------------------------------->
 
 
@@ -206,11 +207,11 @@
                           <div id="EDITARESTADO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Estado</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_estado" id="id_estado">

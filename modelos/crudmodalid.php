@@ -16,7 +16,7 @@
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];   
               try{ 
-                  $consulta_modalidad = $db->prepare("SELECT TIPO FROM tbl_MODALIDAD WHERE TIPO = (?);");
+                  $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_MODALIDAD WHERE TIPO = (?);");
                   $consulta_modalidad->execute(array($tipo_modalidad));
                   $row=$consulta_modalidad->fetchColumn();
                   if($row>0){
@@ -76,7 +76,7 @@
 
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_modalidad where TIPO = (?) and CODIGO_MODALIDA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_modalidad where TIPO = (?) and CODIGO_MODALIDA <> (?) ;");
        $sentencia->execute(array($editar_modalidad,$codigo_modalidad));
        $row=$sentencia->fetchColumn();
         if($row>0){

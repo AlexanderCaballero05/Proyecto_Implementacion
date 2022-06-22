@@ -11,7 +11,7 @@
      $descripcion = $_POST['agregardescripcion'];
      $area = $_POST['codigo_area'];
       try {
-        $consulta = $db->prepare("SELECT te.NOMBRE as especialidad from tbl_especialidad te
+        $consulta = $db->prepare("SELECT COUNT(*) as especialidad from tbl_especialidad te
         where te.NOMBRE  = ?;");
         $consulta->execute(array($especialidad));
         $row=$consulta->fetchColumn();
@@ -60,7 +60,7 @@
   $descripcion = $_POST['editar_descripcion'];
   $cod = $_POST['id_especialidad'];
   try {
-    $sentencia = $db->prepare("SELECT * FROM tbl_especialidad where NOMBRE = (?) and CODIGO_ESPECIALIDAD <> (?) ;");
+    $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_especialidad where NOMBRE = (?) and CODIGO_ESPECIALIDAD <> (?) ;");
     $sentencia->execute(array($especialidad,$cod));
     $row=$sentencia->fetchColumn();
      if($row>0){

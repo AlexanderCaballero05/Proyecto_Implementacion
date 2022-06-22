@@ -32,8 +32,7 @@
 
     Programador               Fecha                      Descripcion
     Arnold Caballero     		07-06-2022                 cambio en las etiquetas de la tabla de la bitacora y el orden descendente de los registros
-.
-
+.   Diana Rut Garcia        21/06/2022                  Solo un cambio en el titulo
 ----------------------------------------------------------------------->
 
 
@@ -60,35 +59,17 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 <!-- Esta primera section  muestra el titulo central y en la parte superior derecha especifica y direcciona que esta en la bitacora -->
 <div class="content-wrapper">
 
- <section class="content-header text-xl-center mb-3 btn-light">
-      <h1>
-           Bitácora Universal
-
-      </h1>
-
-      <ol class="breadcrumb">
-
-      <!--  <li><i class="fa fa-dashboard"></i>Inicio</li>
-        
-        <li class="active">Bitácora Universal</li>-->
-
-      </ol>
-
-    </section>
+ <div class="content-header text-xl-center mb-3 ">
+    <h1> Bitácora Universal</h1>
+ </div>
 
 
   <section class="content">
-
     <div class="container-fluid">
-
       <div class="box-header with-border">
-
      <!-- <button type="submit"  name="excel" class="btn btn-success"><span class="glyphicon glyphicon-export"></span> Exportar Excel</button>-->
-
         <form action="Formbitacora" method="POST"  role="form" >
       <div class="row pl-3">
-       
-
           <div class="col-sm-3">
             <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
             <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
@@ -103,10 +84,6 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
            </div>
        </div>
         <br>
-        
-
-
-
 <?php 
 
 if(isset($_POST['excel'])){
@@ -192,9 +169,6 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
 				        <th class="text-center">Objeto</th>
 				        <th class="text-center">Acción</th>
                 <th class="text-center">Descripción</th>
-               
-                
-                 
                 </tr>
               </thead>
               <tbody>
@@ -204,10 +178,10 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                 <!-- es la conexion de la base para que muestre los datos en el datagrip-->
                 <?php 
 
- //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
+             //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
                   $desde1= $_SESSION['bdesde'];
                   $hasta1= $_SESSION['bhasta'];
- //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
+             //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
                     $queryi = "SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
                     FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
                     WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
@@ -228,48 +202,27 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                           $var4 = $row['NOMBRE_OBJETO'];
                           $var5 = $row['ACCION'];
                           $var6 = $row['DESCRIPCION'];
-                          
-                           
-
                     ?>
                 <tr>
-                     <td style="visibility:hidden;">
-                        
-                    </td>
+                     <td style="visibility:hidden;"></td>
                  <td class="text-center"><?php echo $contador ?></td>
                  <td class="text-center"><?php echo $var2 ?></td>
                  <td class="text-center"><?php echo $var3 ?></td>
 				         <td class="text-center"><?php echo $var4 ?></td>
 				         <td class="text-center"><?php echo $var5 ?></td>
                  <td class="text-center"><?php echo $var6 ?></td>
-				
                     </div>
                     <?php
                       }
-  }
-                        
+  }               
                    ?>
                   </tr>
                 </tbody>
-
               </table>
-   
             </div>
           </div>
-         <br>
-               <br>
-               <br>
-               <br>
-                <br>
-
         </div>
-
-
-        <script>
-          $(document).ready(function() {
-          $('#ventas').DataTable();
-          } );
-        </script>
+  </section>
 
 
  <script>
@@ -280,11 +233,9 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
   </script>
        
 
-       <script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
+<script type="text/javascript">//funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
       $('#bitacora_del_sistema').DataTable({
-
         language: {
         "decimal": "",
         "emptyTable": "No hay información",

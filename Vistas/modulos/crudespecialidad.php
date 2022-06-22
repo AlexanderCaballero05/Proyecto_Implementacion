@@ -20,11 +20,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
   </div>
   
   <section class="content">
-   <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>Mantenimiento Especialidad</h4>
-        </h1>     
-    </section>
+     <div class="content-header text-xl-center mb-3 ">
+            <h4>Mantenimiento Especialidad</h4>   
+     </div>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -174,11 +172,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITARESPECIALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST">
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                               <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Especialidad</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_especialidad" id="id_especialidad">
@@ -201,15 +199,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripcion</label>
-                                          <input required type="text"  value ="<?php echo $var4; ?>"
-                                           class="form-control"  maxlength="35"
-                                            minlength="5" onkeyup="mayus(this);" 
-                                            onkeyup="mayus(this);"  
-                                             autocomplete = "off" type="text"
-                                              onkeypress="return soloLetras(event);" 
-                                             name="editar_descripcion" id="editar_descripcion" required="">
+                                          <textarea required type="text" class="form-control"  maxlength="35"
+                                            minlength="5" onkeyup="mayus(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"
+                                              onkeypress="return soloLetras(event);" name="editar_descripcion" id="editar_descripcion" required><?php echo $var4;?></textarea>
                                           <div class="invalid-feedback">
-                                          Campo Obligatorio.
+                                            Campo Obligatorio.
                                           </div>
                                         </div>
                                       </div>
@@ -236,7 +230,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar" id="eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de especialidad <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el tipo de especialidad <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

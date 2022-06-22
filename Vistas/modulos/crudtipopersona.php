@@ -16,9 +16,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>Mantenimiento Tipo Persona </h4>
-        </section>
+  <div class="content-header text-xl-center mb-3 ">
+       <h4>Mantenimiento Tipo Persona </h4>
+</div>
   
   <section class="content">
     <div class="container-fluid">
@@ -49,7 +49,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                             ?>
 
-            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar tipo persona</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TIPOPER" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tipo Persona</button>
             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>              
                             <?php
                               }
@@ -165,21 +165,21 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div id="EDITARPERSONA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Tipo de Persona</h4>
+                               <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar Tipo Persona</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_editar" id="id_editar">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Tipo de Persona</label>
+                                          <label for="txtcodigo_persona">Nombre Tipo Persona</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onKeyDown="sinespacio(this);"  maxlength="20" minlength="5" onkeyup="mayus(this);" 
                                            onkeypress="return soloLetras(event);"  autocomplete = "off" type="text"  name="editar_persona" id="ediper" required="">
                                           <div class="invalid-feedback">
-                                       campo obligatorio.
+                                          Campo obligatorio.
                                           </div>
                                         </div>
                                         </div>
@@ -205,7 +205,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="persona_eliminar" id="persona_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de persona <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el tipo de persona <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -237,18 +237,18 @@ bitacora($codigoObjeto,$accion,$descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">AGREGAR TIPO DE PERSONA</h4>
+                        <h4 class="text-center">Agregar Tipo Persona</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_pregunta">Nombre Tipo de personas</label>
+                                    <label for="txtcodigo_pregunta">Nombre Tipo Persona</label>
                                     <input  type="text"    class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"   autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese el tipo persona" 
                                     name="TIPO_PERSONA" id="TIPER" required ="">
                                     <div class="invalid-feedback">
-                                     campo obligatorio.
+                                     Campo obligatorio.
                                     </div>
                                   </div>
                             </div>
