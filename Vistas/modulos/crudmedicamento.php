@@ -62,7 +62,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <div class="form-group">
                               <label for="txtcodigo_persona">
                               Código del Medicamento</label>
-                              <input type="text"  class="form-control" required pattern="[A-Z]{2,10}"  maxlength="10" minlength="2" onkeyup="mayus(this);" autocomplete="off"   onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" ; 
+                              <input type="text"  class="form-control" required pattern="[A-Z,0-9]{2,10}"  maxlength="10" minlength="2" onkeyup="mayus(this);" autocomplete="off"   onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" ; 
                               name="agregar_cod_medi" id="agregar_codd_medi" required>
                               <div class="invalid-feedback">
                                        campo obligatorio.
