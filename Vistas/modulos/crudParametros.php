@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  Diana Rut Garcia        	21-06-2022                 Cambios en diseño y modal
 ----------------------------------------------------------------------->
 
 
@@ -58,9 +59,9 @@ include_once "conexion3.php";
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> Mantenimiento de Parámetros  </h4>
-        </section>
+    <div class="content-header text-xl-center mb-3 "> 
+          <h4> Mantenimiento Parámetros</h4>
+    </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
@@ -74,7 +75,7 @@ include_once "conexion3.php";
           </div>
           <div class="card-body">
           </br> 
-<body oncopy="return false" onpaste="return false">
+      <body oncopy="return false" onpaste="return false">
   
 
   <section class="content">
@@ -119,8 +120,8 @@ include_once "conexion3.php";
 
 
           <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+          <div class="card">
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
             </div>
             <form  method="POST" ><!-- form start -->
               <div class="card-body">
@@ -190,8 +191,6 @@ include_once "conexion3.php";
                                 $permiso_eliminar =$row1; 
                             }
                             ?> 
-                            
-                       
                         <tr>
                           <td>
                             <div class="text-center" >
@@ -206,13 +205,9 @@ include_once "conexion3.php";
                                 <button id="ELIMINARPARAM" name="ELIMINARPARAM" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-
-
                                <?php
                                 }
                                ?>
-
-
                                <?php 
                                 if ($permiso_actualizar == 'SI')
                                 {
@@ -236,12 +231,12 @@ include_once "conexion3.php";
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPARAMETRO<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
-                              <div class="modal-content"><!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h4 class="text-center">Editar Parámetro</h4>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
                                 <form id="FORMEDITPARAMETROS" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Parámetros</h4>
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
@@ -285,7 +280,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="param_eliminar" id="param_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el Parámetro <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el Parámetro <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

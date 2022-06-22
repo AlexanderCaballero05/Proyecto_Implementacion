@@ -26,19 +26,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
                        
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-          <h1>
-              <h4>RESTAURACION</h4>
-          </h1>     
-      </section>
+     <div class="content-header text-xl-center mb-3 ">
+        <h4>Restauración</h4>   
+      </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="RespaldoProsecar">Respaldo</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="RespaldoProsecar">Respaldo Datos</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active"  style="color:#000000;" href="RestauracionProsecar">Restauracion</a>
+                <a class="nav-link active"  style="color:#000000;" href="RestauracionProsecar">Restauración</a>
               </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->
@@ -54,8 +52,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
             <div class="col-md-12">
           <!-- jquery validation -->
           <div class="card card-primary">
-            <div class="card-header text-center" style=""><!-- TITULO ENCABEZADO DATOS PERSONALES -->
-            <h4>Restauracion de base de datos Prosecar</h4>
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+            <h4>Restauración de base de datos Prosecar</h4>
             </div>
             <form  method="POST" action="./vistas/modulos/Restore.php" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">

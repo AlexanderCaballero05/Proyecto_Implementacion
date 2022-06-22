@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  Diana Rut Garcia          21-06-2022                 Cambios en el diseño  
 ----------------------------------------------------------------------->
 
 
@@ -53,15 +54,28 @@ include_once "conexion3.php";
 <body oncopy="return false" onpaste="return false" >
 <div class="content-wrapper">
   <div class="content-header">
-    <div class="text-center">
-      <h2>Parametro Usuarios</h2>
-    </div>
+
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
   
   <section class="content">
     <div class="container-fluid">
+    <div class="content-header text-xl-center mb-3 "> 
+          <h4> Mantenimiento Parámetros Usuario</h4>
+    </div>
+    <div class="card">
+          <div class="card-header" style="background-color:#B3F2FF;">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a class="nav-link"  style="color:#000000;" href="crudParametros">Parámetros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="crudparametrosusuario">Parámetros usuario</a>
+              </li>
+            </ul>
+          </div>
+          <div class="card-body">
       <div class="row">
         <div class="col-md-12">
 
@@ -95,9 +109,9 @@ include_once "conexion3.php";
                   <?php
                     }
                     ?>
-          <!-- jquery validation -->
-          <div class="card card-primary">
-            <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
+
+          <div class="card ">
+            <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
             <form  method="POST" class="needs-validation" novalidate><!-- form start -->
@@ -218,11 +232,11 @@ include_once "conexion3.php";
                           <div id="EDITARROL<?php echo $var6 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Parametro Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  </div>
+                                </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                     <input  type="text"  value ="<?php echo $var4; ?>" hidden class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="codigo_usuario" id="editar_parvalor">
@@ -231,13 +245,11 @@ include_once "conexion3.php";
                                       <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="id_paramusu" id="id_paramusu">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txt_parvalor">Contador</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" 
-                                          class="form-control"  maxlength="2" minlength="1"   
-                                           autocomplete = "off" type="text" onkeypress="return solonumero(event)" 
-                                           name="editar_parvalor" id="editar_parvalor" required =""  >
+                                          <label >Contador</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1"   
+                                           autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="editar_parvalor"  required >
                                            <div class="invalid-feedback">
-                                          Campo Obligatorio.
+                                              Campo Obligatorio.
                                           </div>
                                         </div>
                                       </div>
@@ -290,6 +302,8 @@ include_once "conexion3.php";
           </div><!-- fINAL DEL card PRIMARY -->
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
+      </div>
+    </div>
     </div><!-- FINAL CONTAINER FLUID --> 
   </section><!-- FINAL SECTION -->
                       </body>

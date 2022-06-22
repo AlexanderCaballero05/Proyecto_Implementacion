@@ -20,11 +20,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
   
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
-        <h1>
-            <h4>REGISTRAR EXAMENES MEDICOS</h4>
-        </h1>     
-    </section>
+    <div class="content-header text-xl-center mb-3">
+            <h4>Mantenimiento Exámenes Médicos</h4>  
+     </div>
       <div class="row">
         <div class="col-md-12">
           <?php
@@ -62,8 +60,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <tr>
                         <th>Acción</th>
                         <th>ID</th>
-                        <th>Examen Medico</th>
-                        <th>Descripcion</th>        
+                        <th>Exámen Médico</th>
+                        <th>Descripción</th>        
                         </tr>
                       </thead>
                       <tbody>
@@ -146,35 +144,29 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                     
                         <!--INICIO DEL MODAL DE EDITAR -->
                         <div id="EDITAREXAMEN<?php echo $var1; ?>" class="modal fade" role="dialog">
-                         <div class="modal-dialog modal-lg">
+                         <div class="modal-dialog modal-md">
                              <div class="modal-content">
                                  <!-- Modal content-->
-                                 <form method="POST">
-                                     <div class="modal-header" style="background-color: #0CCDE3">
-                                         <h4 class="text-center">Editar Examen
-                                         </h4>
+                                 <div class="modal-header" style="background-color: #0CCDE3">
+                                         <h4 class="text-center">Editar Exámen Médico</h4>
                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                     </div>
-                                     <div class="modal-body">
-                                         <!--CUERPO DEL MODAL -->
+                                  </div>
+                                 <form method="POST">
+                                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                                          <div class="row">
-                                             <!-- INICIO PRIMERA ROW -->
-                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control"
-                                                  name="id_examen" id="id_examen" >
-                                             <div class="col-sm-6">
+                                             <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="id_examen" id="id_examen" >
+                                             <div class="col-sm-12">
                                                  <div class="form-group">
-                                                     <label for="txtcodigo_persona">
-                                                     Examen Medico</label>
+                                                     <label>Exámen Médico</label>
                                                      <input required type="text"  value="<?php echo $var2; ?>" class="form-control" maxlength="30" minlength="5" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
                                                      name="editar_examen" id="editar_examen">
                                                  </div>
                                              </div>
-                                             <div class="col-sm-6">
+                                             <div class="col-sm-12">
                                                  <div class="form-group">
-                                                     <label for="txtcodigo_persona">
-                                                         Descripcion</label>
-                                                     <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="35" minlength="5"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                      name="editar_descripcionexamen" id="editar_descripcionexamen">
+                                                     <label>Descripción</label>
+                                                     <textarea type="text"  class="form-control" maxlength="35" minlength="5"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                      name="editar_descripcionexamen" id="editar_descripcionexamen"><?php echo $var3; ?></textarea>
                                                  </div>
                                              </div>
                                          </div> <!-- FIN DE EL PRIMER ROW -->
@@ -203,7 +195,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar el examen <?php echo $var2; ?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar el examen <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
@@ -241,7 +233,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   <div id="AGREGAR_EXAMEN" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
-                <form id="FORMEDITARMODA" method="POST">
+                <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
                         <h4 class="text-center">Agregar Examen</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,17 +242,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtmodalidad">Nombre Examen</label>
+                                    <label>Nombre Examen</label>
                                     <input  type="text"  class="form-control"  maxlength="30" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el examen" name="nombre_examen" id="nombre_examen" required="">
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                     Campo obligatorio.
                                    </div>
 
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtmodalidad">Descripción</label>
+                                    <label>Descripción</label>
                                     <textarea  type="text"   class="form-control"  maxlength="500"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del examen" name="descripcion_examen" id="descripcion_examen" required=""></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.

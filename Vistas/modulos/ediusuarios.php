@@ -24,6 +24,7 @@ Diana Rut               28/05/2022            Se modifico la parte de rol para q
 Diana Rut               1/06/2022            Se agrego una validacion de input
 Diana Rut               09/06/2022           Se modifico los datos de la bitacora
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
+Diana Rut Garcia        21-06-2022            Se valido las validaciones de editar
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -75,13 +76,13 @@ include_once "conexion3.php";
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver datos personas</a>
+                <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="ediusuarios">Ver datos usuarios</a>
+                <a class="nav-link active" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="categoria">Agregar personas/usuarios</a>
+                <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
               </li>
           </ul>
         </div>
@@ -241,31 +242,31 @@ include_once "conexion3.php";
                                     <h4 class="text-center"> Editar Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre Usuario</label>
-                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" readonly="" placeholder="Ingrese Nombre" name="NOMUSUARIO" id="NOMUSUARIO">
+                                          <label>Nombre Usuario</label>
+                                          <input  type="text"  value ="<?php echo $var6; ?>" class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" readonly="" placeholder="Ingrese Nombre" name="NOMUSUARIO" required>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Primer nombre</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" required   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" id="nombre_modi">
+                                          <label>Primer Nombre</label>
+                                          <input  type="text"  value ="<?php echo $var3; ?>" required   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi" >
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Primer Apellido</label>
+                                          <label>Primer Apellido</label>
                                           <input  type="text"  value ="<?php echo $var4; ?>" class="form-control" required  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi" id="apellido_modi">
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Correo</label>
+                                          <label>Correo</label>
                                           <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
@@ -327,7 +328,7 @@ include_once "conexion3.php";
                                             <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar2(<?php echo $var2?>)" type="button"><span class="icon2 fa fa-eye-slash"></button></span>
                                           </div>
                                           <div class="invalid-feedback">
-                                            Debe teber minimo <?php echo $valor1; ?> caracteres y tener mayúscula,minúscula y un caracter especial.
+                                            Debe teber minimo <?php echo $valor1; ?> Caracteres y tener mayúscula,minúscula y un caracter especial.
                                           </div>
                                         </div>
                                       </div>
@@ -340,7 +341,7 @@ include_once "conexion3.php";
                                             <button  class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1(<?php echo $var2?>)" type="button"><span class="icon1 fa fa-eye-slash"></button></span>
                                           </div>
                                           <div class="invalid-feedback">
-                                            Debe teber minimo <?php echo $valor1; ?> caracteres y debe ser igual a la contraseña.
+                                            Debe teber minimo <?php echo $valor1; ?> Caracteres y debe ser igual a la contraseña.
                                           </div>
                                         </div>
                                       </div>

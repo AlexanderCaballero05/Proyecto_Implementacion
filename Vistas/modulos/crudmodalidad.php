@@ -46,11 +46,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>Mantenimiento Modalidad </h4>
-        </section>
-  
-  
+  <div class="content-header text-xl-center mb-3">
+    <h4>Mantenimiento Modalidad </h4>
+  </div>
+
   <section class="content">
     <div class="container-fluid">
       <div class="row">
@@ -202,33 +201,33 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <div id="EDITARMODALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
-                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Modalidad</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_editar" id="id_editar">
                                    
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona"> Modalidad</label>
+                                          <label for="txtcodigo_persona">Tipo Modalidad</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
                                            autocomplete = "off" type="text"  name="editar_modalidad" id="edimoda" required="">
                                           <div class="invalid-feedback">
-                                       campo obligatorio.
-                                   </div>
+                                             Campo obligatorio.
+                                          </div>
                                         </div>
-                         </div>
-                          <div class="col-sm-12">
+                                   </div>
+                                      <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
                                            autocomplete = "off" type="text"   name="editar_descripcion1" id="edidemoda" required="">
                                           <div class="invalid-feedback">
-                                  campo obligatorio.
-                                   </div>
+                                           Campo obligatorio.
+                                           </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -253,7 +252,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar" id="eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el tipo de  modalidad <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la Modalidad <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -285,14 +284,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">AGREGAR  MODALIDAD</h4>
+                        <h4 class="text-center">Agregar Modalidad</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtmodalidad">Tipo de modalidad</label>
+                                    <label for="txtmodalidad">Tipo Modalidad</label>
                                     <input  type="text"  class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" 
                                     placeholder="Ingrese modalidad" name="nombremodalidad" id ="moda" required="">
                                     <div class="invalid-feedback">

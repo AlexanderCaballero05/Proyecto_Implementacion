@@ -21,7 +21,7 @@ if(isset($_POST['agregar_tipo'])){
              $row=$consulta_estado->fetchColumn();
              if($row>0){
                echo "<script>
-               alert('El nombre del transtorno $agregar_tipo ya se encuentra registrado');
+               alert('El nombre del trastorno $agregar_tipo ya se encuentra registrado');
                window.location = 'crudTranstornos';
                </script>";
              exit;
@@ -37,7 +37,7 @@ if(isset($_POST['agregar_tipo'])){
                    exit;
                  }else{
                    echo "<script> 
-                   alert('Error auxilio!');
+                   alert('Ocurrio algun error');
                    window.location = 'crudTranstornos';
                    </script>";
                    exit;
@@ -70,8 +70,8 @@ if(isset($_POST['agregar_tipo'])){
        $row=$sentencia->fetchColumn();
         if($row>0){
           echo "<script>
-          alert('Ya existe un transtorno con este nombre: $editar_tipo');
-          window.location = 'crudtiposangre';
+          alert('Ya existe un trastorno con este nombre: $editar_tipo');
+          window.location = 'crudTranstornos';
           </script>";
           exit;
         }else{
@@ -81,7 +81,7 @@ if(isset($_POST['agregar_tipo'])){
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>
-              alert("Transtorno modificado correctamente"); 
+              alert("Trastorno modificado correctamente"); 
               window.location = "crudTranstornos";
               </script>';
               include_once 'function_bitacora.php';
@@ -119,7 +119,7 @@ if(isset($_POST['transtorno_eliminar'])){
       if($row >0){
         echo "<script>
         alert('¡No se puede eliminar, está relacionado con otras tablas!');
-        window.location = 'crudtiposangre';
+        window.location = 'crudTranstornos';
         </script>";
         exit;
       }else{
@@ -139,7 +139,7 @@ if(isset($_POST['transtorno_eliminar'])){
             exit;
           }else{
             echo "<script>
-            alert('¡Error al eliminar el transtorno!');
+            alert('¡Error al eliminar el trastorno!');
             window.location = 'crudTranstornos';
             </script>";
             exit;

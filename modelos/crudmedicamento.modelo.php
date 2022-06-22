@@ -69,12 +69,17 @@
     $usuario =$_SESSION['vario'];
       try {
         $sentencia = $db->prepare(" SELECT COUNT(*) from tbl_medicamento tm  
-        where tm.NOMBRE_MEDICAMENTO  = (?) and tm.DESCRIPCION <> (?);");
+        where tm.NOMBRE_MEDICAMENTO  = (?) and  tm.CODIGO_MEDICAMENTO <> (?);");
        $sentencia->execute(array($medicamento,$codigo));
        $row=$sentencia->fetchColumn();
-       
-      
-        try {
+       if($row>0){
+        echo "<script>
+        alert('Ya existe un medicamento con este mismo nombre: $medicamento');
+         window.location = 'crudmedicamento';
+        </script>";
+        exit;
+        }else{
+          try{
             $sql = "UPDATE tbl_medicamento tm set tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
             tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
             $consulta=$conn->query($sql);
@@ -89,21 +94,22 @@
               bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
-                echo "<script>
-                alert('¡Error al  intentar modificar el medicamento!');
-                window.location = 'crudmedicamento';
-                </script>";
-              }
-        }catch(PDOException $e){
-                echo $e->getMessage(); 
-                return false;
-                        }
-       // fin else 
-      }catch(PDOException $e){
+              echo "<script>
+              alert('¡Error al  intentar modificar el medicamento!');
+              window.location = 'crudmedicamento';
+              </script>";
+            }
+          }catch(PDOException $e){
             echo $e->getMessage(); 
             return false;
-                    } 
-   }///fin if 
+          }
+
+        }// fin else 
+      }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+      } 
+   }//FIN DEL CODIGO PARA EDITAR
 
    //// eliminar medicamento  /////
    if(isset($_POST['eliminar_medicamentos'])){
