@@ -189,7 +189,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                 minlength="15"
                                                 onKeyDown="sinespacio(this);"
                                                 onkeyup="mayus(this);"
-                                                autocomplete="off" type="text"
+                                                autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                                 name="editespecialidad" id="editespecialidad"  required="">
                                                 <div class="invalid-feedback">
                                                 Campo Obligatorio.
@@ -200,7 +200,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripcion</label>
                                           <textarea required type="text" class="form-control"  maxlength="35"
-                                            minlength="5" onkeyup="mayus(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"
+                                            minlength="5" onkeyup="mayus(this);"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                               onkeypress="return soloLetras(event);" name="editar_descripcion" id="editar_descripcion" required><?php echo $var4;?></textarea>
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
@@ -276,7 +276,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                 minlength="15"
                                                 placeholder="Agregue  la especialidad"
                                                 onkeyup="mayus(this);"
-                                                autocomplete="off" type="text"
+                                                autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                                 name="agregarespecialidad" id="agregarespecialidad"  required="" >
                                                 <div class="invalid-feedback">
                                                 Campo Obligatorio.
@@ -288,7 +288,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     <label for="txtmodalidad">Descripción</label>
                                     <textarea  type="text"   class="form-control"
                                       maxlength="35"   onkeyup="mayus(this);"  
-                                      autocomplete = "off" type="text"  
+                                      autocomplete = "off" type="text"  onkeypress="return soloLetras(event);"
                                       placeholder="Agregue una descripción de la especialidad" 
                                       name="agregardescripcion"
                                        id="agregardescripcion" required=""></textarea>
