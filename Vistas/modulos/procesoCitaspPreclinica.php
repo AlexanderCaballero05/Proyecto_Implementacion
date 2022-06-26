@@ -18,19 +18,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRAR PRECLINICA <i class="nav-icon fas fa-stethoscope"></i></h4>
-        </section>
+    <div class="content-header text-xl-center mb-3 "> 
+        <h4> Registrar Preclínica<i class="nav-icon fas fa-stethoscope"></i></h4>
+    </div>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">personas preclinica</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Personas Preclínica</a>
             </li>
             <li class="nav-item" disabled="disabled">
-            <a class="nav-link" style="color:#000000;" href="#">Registrar preclinica</a>
+            <a class="nav-link" style="color:#000000;" href="#">Registrar Preclínica</a>
             </li>
            
           </ul>
@@ -44,8 +43,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
-                            <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Citas previas</strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">
@@ -57,9 +54,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             <th class="text-center">ID</th>
                                             <th class="text-center">Fecha cita</th>
                                             <th class="text-center">Hora</th>
-                                            <th class="text-center">Medico</th>
+                                            <th class="text-center">Médico</th>
                                             <th class="text-center">Paciente</th>
-                                            <th class="text-center">Estado cita</th>
+                                            <th class="text-center">Estado Cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -137,12 +134,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Editar Cita  
-                                                                    </h4>
+                                                                    <h4 class="text-center">Editar Cita</h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
+                                                                
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
@@ -150,9 +147,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita" >
-                                                                   
-                                                                
-                                                              
                                                                    <?php
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
@@ -166,7 +160,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
                                                                             <select class="form-control" name="MODUSUARIO" required="">
-                                                                                <option selected disabled value="">Elegir...</option>
+                                                                                <option selected disabled value="">--Seleccione--</option>
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
@@ -201,72 +195,56 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Ver Cita  
-                                                                    </h4>
+                                                                    <h4 class="text-center">Ver Cita</h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  
-                                                                <input type="text" value="<?php echo $var1; ?>" 
-                                                                        hidden class="form-control"
-                                                                        name="codigo_enviar_cita" id="cod_edit_cita" >
+                                                                <input type="text" value="<?php echo $var1; ?>"hidden class="form-control" name="codigo_enviar_cita" id="cod_edit_cita" >
 
                                                                         <input type="text" value="<?php echo $var6; ?>" 
                                                                         hidden class="form-control"
                                                                         name="codigo_persona" id="codigo_persona" >
-
-                                                                        
-
                                                                         <h2 class="text-center">Información de cita</h2>
                                                                         <br>
                                                                     <div class="row"> 
                                             
                                                                         <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
-                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                 <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
+                                                                            </div>
                                                                         </div>
-
-
                                                                         <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
-                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="dropdown-divider"></div>
 
                                                                     <div class="row"> 
                                                                             <div class="col-sm-12">
-                                                                                        <div class="form-group">
-                                                                                        <p><b class="p-1">Paciente:</b> <?php echo $var2; ?></p>
-                                                                                        </div>
+                                                                                <div class="form-group">
+                                                                                    <p><b class="p-1">Paciente:</b> <?php echo $var2; ?></p>
                                                                                 </div>
-
-                                                                        
+                                                                             </div>
                                                                     </div>
-
-
-                                                                  
-
-
                                                                     <div class="row"> 
                                                                             <div class="col-sm-6">
-                                                                                        <div class="form-group">
-                                                                                        <p><b class="p-1">Estado: </b> <?php echo $var5; ?></p>
-
-                                                                                        </div>
+                                                                                <div class="form-group">
+                                                                                    <p><b class="p-1">Estado: </b> <?php echo $var5; ?></p>
                                                                                 </div>
+                                                                            </div>
                                                                     </div>
                                                              
                                                                 </div> 
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a preclinica</button>
+                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar a Preclínica</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

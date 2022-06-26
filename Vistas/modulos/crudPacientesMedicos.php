@@ -11,21 +11,21 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
+        <section class="content-header text-xl-center mb-3 ">
               <h4> PACIENTES DEL AREA MEDICA<i class="nav-icon fas fa-stethoscope"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="ProcesoCitasMedicos">Personas consulta medica</a>
+            <a class=" nav-link " style="color:#000000;" href="ProcesoCitasMedicos">Personas Consulta Medica</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Médica</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
@@ -35,7 +35,7 @@
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudPacientesMedicos">Lista de pacientes</a>
+            <a class="nav-link active" style="color:#000000;" href="crudPacientesMedicos">Lista de Pacientes</a>
             </li>
           </ul>
         </div>

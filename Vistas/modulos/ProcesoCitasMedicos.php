@@ -19,25 +19,25 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
 
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CITAS MEDICAS PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
-        </section>
+    <div class="content-header text-xl-center mb-3 "> 
+          <h4> Citas Medicas <i class="nav-icon fas fa-stethoscope"></i></h4>
+    </div>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Personas consulta medica</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Personas Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Receta Médica</a>
             </li>
             </li>
             <li class="nav-item">
@@ -85,18 +85,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         $sentencia1->execute(array($usuario));
                                         $cod_usuario=$sentencia1->fetchColumn();
                                     ?>
-
                                         <?php
-                                    
                                         $query = "SELECT i.CODIGO_CITA, i.CODIGO_PERSONA, CONCAT_WS (' ',DNI,pe.PRIMER_NOMBRE, ' ',pe.SEGUNDO_NOMBRE,' ',pe.PRIMER_APELLIDO) AS PACIENTE, i.FECHA_CITA, i.HORARIO, est.NOMBRE as nombre_estado
                                         FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est
-                                                                                WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                                                                AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                                                                                AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
-                                                                                AND es.CODIGO_PERSONA = '$cod_usuario'
-                                                                                AND i.CODIGO_ESTADO = '11' 
-                                                                                and  i.AREA_CITA = '2'
-                                                                                AND i.FECHA_CITA = CURDATE();" ;
+                                         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                                        AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
+                                        AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
+                                        AND es.CODIGO_PERSONA = '$cod_usuario'
+                                        AND i.CODIGO_ESTADO = '11' 
+                                        and  i.AREA_CITA = '2'
+                                        AND i.FECHA_CITA = CURDATE();" ;
                                       
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
@@ -107,26 +105,19 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                 $var4 = $row['HORARIO'];
                                                 $var5 = $row['nombre_estado'];
                                                 $var6 = $row['CODIGO_PERSONA'];
-                                               
                                         ?>
                                                 <tr>
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">
-                                                              
-
-                                                                  
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class=" form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
-
-                                                              <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
+                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class=" form-control btn btn-success"><span>
                                                                      Atender</span></button>
-                                                              </a>
-
-
+                                                               </a>
                                                             </div>
                                                         </div><!-- final del text-center -->
                                                     </td>
@@ -141,15 +132,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     
                                                     <div  class="modal fade"  
                                                     id="editar_cita<?php echo $var1 ?>" role="dialog"  >
-                                                        <div class="modal-dialog modal-lg">
+                                                        <div class="modal-dialog modal-md">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Editar Cita  
-                                                                    </h4>
+                                                                    <h4 class="text-center">Editar Cita </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
@@ -157,9 +147,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita" >
-                                                                   
-                                                                
-                                                              
                                                                    <?php
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
@@ -168,22 +155,21 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
 
-
-                                                                    <div class="col-sm-6">
-                                                                        <div class="form-group">
+                                                                    <div class="col-sm-12">
+                                                                        <div >
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
                                                                             <select class="form-control" name="MODUSUARIO" required="">
-                                                                                <option selected disabled value="">Elegir...</option>
-                                                                                            <?php 
-                                                                                        if ($resultador->num_rows > 0) {
-                                                                                            while($rowr = $resultador->fetch_assoc()) { ?>
+                                                                                <option selected disabled value="">--Seleccione--</option>
+                                                                                  <?php 
+                                                                                   if ($resultador->num_rows > 0) {
+                                                                                    while($rowr = $resultador->fetch_assoc()) { ?>
                                                                                 <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
-                                                                                        <?php } 
-                                                                                            }?>
+                                                                                    <?php } 
+                                                                                   }?>
                                                                             </select>
-                                                                                    <div class="invalid-feedback">
-                                                                                        Eliga una opción.
-                                                                                    </div>
+                                                                              <div class="invalid-feedback">
+                                                                                Eliga una opción.
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
@@ -208,12 +194,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center"> 
-                                                                    </h4>
+                                                                    <h4 class="text-center"> </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
+                                                               
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  
@@ -222,53 +208,41 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         name="codigo_cita" >
 
                                                                         <input type="text" value="<?php echo $var6; ?>" 
-                                                                        hidden class="form-control"
-                                                                        name="codigo_persona" >
-
-                                                                        
-
-                                                                        <h2 class="text-center">Informacion de cita</h2>
+                                                                        hidden class="form-control" name="codigo_persona" >
+                                                                        <h2 class="text-center">Información de Cita</h2>
                                                                         <br>
                                                                     <div class="row"> 
-                                            
                                                                         <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
-                                                                                </div>
+                                                                           <div class="form-group">
+                                                                                <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
+                                                                            </div>
                                                                         </div>
-
-
                                                                         <div class="col-sm-6">
-                                                                                <div class="form-group">
-                                                                                    <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
-                                                                                </div>
+                                                                            <div class="form-group">
+                                                                                <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="dropdown-divider"></div>
-
                                                                     <div class="row"> 
-                                                                            <div class="col-sm-12">
-                                                                                        <div class="form-group">
-                                                                                        <p><b class="p-1">Paciente:</b> <?php echo $var2; ?></p>
-                                                                                        </div>
-                                                                                </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                               <p><b class="p-1">Paciente:</b> <?php echo $var2; ?></p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-
-
                                                                     <div class="row"> 
-                                                                            <div class="col-sm-6">
-                                                                                        <div class="form-group">
-                                                                                        <p><b class="p-1">estado: </b> <?php echo $var5; ?></p>
-
-                                                                                        </div>
-                                                                                </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                              <p><b class="p-1">Estado: </b> <?php echo $var5; ?></p>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
-                                                             
                                                                 </div> 
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_consulta"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender consulta</button>
+                                                                <button type="submit" name="enviar_consulta"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender Consulta</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 
@@ -290,7 +264,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                             <input type="text" 
                                                             value ="<?php echo $var1; ?>" hidden class="form-control"
                                                              name="eliminar_nue_cita" id="eliminar_nue_cita">
-                                                            <h4 class="text-center">¿Esta seguro de eliminar este campo? <?php echo $var4; ?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar este campo? <?php echo $var4; ?>?</h4>
                                                         </div> <!--fin el card body eliminar -->
                                                             <div class="modal-footer ">
 

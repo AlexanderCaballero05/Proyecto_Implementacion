@@ -20,21 +20,21 @@ include_once 'conexionpdo.php';
     </div>
     <section class="content">
         <div class="container-fluid">
-            <section class="content-header text-xl-center mb-3 btn-light"> 
-                <h4> EXPEDIENTE MEDICO PACIENTE <i class="nav-icon fas fa-stethoscope"></i></h4>
-            </section>
+            <div class="content-header text-xl-center mb-3 "> 
+                <h4> Expediente Médico<i class="nav-icon fas fa-stethoscope"></i></h4>
+            </div>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
+                <a class=" nav-link" style="color:#000000;" href="#">Personas Consulta Médica</a>
                 </li>
                 <li class="nav-item">
-                <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+                <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
                 </li>
 
                 <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+                <a class="nav-link" style="color:#000000;" href="#">Consulta Médica</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
@@ -44,16 +44,15 @@ include_once 'conexionpdo.php';
                 <a class="nav-link active" style="color:#000000;" href="#">Informe de Consulta</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+                <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
                 </li>
             </ul>
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
                 <form method="POST" id="form" >
-                <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <strong class="form-check-label pt-2 pb-2 px-2" >Datos de paciente</strong>
+                  <div>
+                       <H5>Datos del Paciente</h5><hr color="blue">
                   </div>
-                  <hr> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
                      <?php
@@ -87,7 +86,7 @@ include_once 'conexionpdo.php';
                                 $dni = $row['DNI'];
                                 $fecha = $row['FECHA_NACIMIENTO'];
                            ?>              
-                         <label for="" class="control-label">Paciente</label> 
+                         <label for="" class="control-label">Nombre del Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre_pa;?>">
                             <input  hidden name="EXPEDIENTE_CITA" value="<?php echo $codigo_cita;?>">
@@ -110,10 +109,10 @@ include_once 'conexionpdo.php';
                     }
                   ?>
                   </div><!--fin row -->
-                  <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <strong class="form-check-label pt-2 pb-2 px-2" >Expediente Paciente</strong>
+                  <div>
+                      <h5>Expediente del Paciente</h5>
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
                   <div class="row">
                       <?php //Sentencia que trae los datos que han sido creados del paciente del expediente medico
                        $consulta = "SELECT exp.CODIGO_EXPEDIENTE, concat(per.PRIMER_NOMBRE,' ',per.PRIMER_APELLIDO) as nombre, san.TIPO as TIPO_SANGRE, exp.TRATAMIENTOS, exp.ENFERMEDADES, ale.NOMBRE as ALERGIAS, tra.TIPO as TRASTORNOS, apa.TIPO as APARIENCIA
@@ -146,13 +145,13 @@ include_once 'conexionpdo.php';
                           </div>
                        </div>
                        <div  class="col-sm-5 mb-3">
-                         <label  class="form-label">Tratamientos que toma actualmente</label>
+                         <label  class="form-label">Tratamientos que Toma Actualmente</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $tratamientos ;?></textarea>
                           </div>
                        </div>
                        <div  class="col-sm-5 mb-3">
-                         <label  class="form-label">Enfermedad que padece</label>
+                         <label  class="form-label">Enfermedad que Padece</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $enfermedades;?></textarea>
                           </div>
@@ -172,7 +171,7 @@ include_once 'conexionpdo.php';
                             </div>
                        </div>
                        <div class="col-sm-4 mb-3">
-                            <label  class="form-label">Apariencia fisica</label>
+                            <label  class="form-label">Apariencia Física</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control" ><?php echo $apariencia;?></textarea>
                             </div>
@@ -182,10 +181,10 @@ include_once 'conexionpdo.php';
                        }
                       ?>
                    </div><!--fin row -->
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <strong class="form-check-label pt-2 pb-2 px-2" >informacion de consulta</strong>
+                  <div>
+                      <h5>Información de la Consulta</h5>
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
                   <div class="row">
                     <?php //consulta que trae los datos de la consulta,el codigo etc
                       $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
@@ -211,13 +210,13 @@ include_once 'conexionpdo.php';
                          $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO']
                         ?> 
                       <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Sintomas</label>
+                         <label  class="form-label">Síntomas</label>
                           <div class="form-group">
                              <textarea  type="textarea" readonly class="form-control" ><?php echo $sintomas;?></textarea>
                           </div>
                       </div>
                       <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Diagnostico Ingreso</label>
+                         <label  class="form-label">Diagnóstico Ingreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_ingreso ; ?></textarea>
                           </div>
@@ -229,7 +228,7 @@ include_once 'conexionpdo.php';
                           </div>
                       </div>
                       <div  class="col-sm-3 mb-3">
-                         <label  class="form-label">Diagnostico de egreso</label>
+                         <label  class="form-label">Diagnóstico de Egreso</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $diagnostico_egreso; ?></textarea>
                           </div>
@@ -239,10 +238,10 @@ include_once 'conexionpdo.php';
                        }
                       ?>
                   </div><!-- fin row-->
-                  <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <strong class="form-check-label pt-2 pb-2 px-2" >Informacion de receta</strong>
+                  <div>
+                      <h5>Información de Receta</h5>
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
                   <div class="row">
                     <?php //Consulta que trae los medicamentos y examenes recetados del paciente
                        $consulta = "SELECT rec.CODIGO_CONSULTA, GROUP_CONCAT('/ ',med.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT('/ ',rec.INDICACIONES_RECETA) as indicaciones, GROUP_CONCAT('/ ',exa.EXAMEN_MEDICO) as examenes, GROUP_CONCAT('/ ',exap.INDICACIONES) as indicaciones_examen
@@ -280,13 +279,13 @@ include_once 'conexionpdo.php';
                             $ninguno = 'Ninguno';
                         ?>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Medicamentos recetados</label>
+                            <label class="form-label">Medicamentos Recetados</label>
                             <div class="form-group">
                               <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label  class="form-label">Indicaciones medicamentos</label>
+                            <label  class="form-label">Indicaciones Medicamentos</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
                             </div>
@@ -295,13 +294,13 @@ include_once 'conexionpdo.php';
                           }else{
                         ?>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Medicamentos recetados</label>
+                            <label class="form-label">Medicamentos Recetados</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control"><?php echo $medicamento.': '.$medicamentos;  ?></textarea>
                             </div>
                         </div>
                         <div  class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones medicamentos</label>
+                            <label class="form-label">Indicaciones Medicamentos</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control" ><?php echo $indicaciones;?></textarea>
                            </div>
@@ -316,13 +315,13 @@ include_once 'conexionpdo.php';
                             $ninguno = 'Ninguno';
                         ?>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Examenes recetados</label>
+                            <label class="form-label">Examenes Recetados</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones examnes</label>
+                            <label class="form-label">Indicaciones Examnes</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
                             </div>
@@ -331,13 +330,13 @@ include_once 'conexionpdo.php';
                             }else{ 
                          ?>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Examenes recetados</label>
+                            <label class="form-label">Examenes Eecetados</label>
                             <div class="form-group">
                                 <textarea  readonly class="form-control"><?php echo $examen.': '.$examenes;  ?></textarea>
                             </div>
                         </div>
                         <div class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones examenes</label>
+                            <label class="form-label">Indicaciones Examenes</label>
                             <div class="form-group">
                                  <textarea  readonly class="form-control" ><?php echo $indicaciones_examen;?></textarea>
                             </div>
@@ -350,14 +349,14 @@ include_once 'conexionpdo.php';
                           }
                         ?>
                   </div>
-                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-save mx-1"></i></span>Finalizar</button>
+                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
                   <a >
                     <form method="POST"  action="Vistas/reporte_medico.php" target="_blank"> 
                      <input type="hidden" name="persona" value="<?php echo $persona?>">
                      <input type="hidden" name="codigo_cita" value="<?php echo $codigo_cita?>">
                      <input type="hidden" name="consulta" value="<?php echo $codigo_consulta?>">
-                     <button  onclick="Descargar1()" type="submit" id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte de la consulta</button>
-                     <button  onclick="Descargar2()" type="submit"   style="color:white; background-color:#D200FA"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte de las recetas</button>
+                     <button  onclick="Descargar1()" type="submit" id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte Consulta</button>
+                     <button  onclick="Descargar2()" type="submit"   style="color:white; background-color:#D200FA"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte Recetas</button>
                     </form>
                   </a>
                 </form>
@@ -411,7 +410,7 @@ var from = event.relatedTarget || event.toElement;
 // y así se guarda en localStorage
 // let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
 
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
+if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
     // localStorage.setItem( 'leftWindow', true );

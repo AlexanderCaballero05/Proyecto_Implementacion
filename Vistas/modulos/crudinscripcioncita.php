@@ -58,7 +58,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
+    <div class="content-header text-xl-center mb-3 ">
               <h4>Citas Hoy Prosecar </h4>
     </div>
     <section class="content">
@@ -244,12 +244,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST"  class="needs-validation" >
+                                                                
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Editar Cita  
-                                                                    </h4>
+                                                                    <h4 class="text-center">Editar Cita</h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST"  class="needs-validation" >
                                                                 <?php  
                                                                     date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
                                                                     $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/

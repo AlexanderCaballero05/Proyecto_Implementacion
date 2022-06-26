@@ -18,38 +18,38 @@ include_once 'conexionpdo.php';
   </div>
   <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE EXPEDIENTE MEDICO  <i class="nav-icon fas fa-stethoscope"></i></h4>
+        <section class="content-header text-xl-center mb-3 "> 
+          <h4>Registro Expediente Médico<i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Personas Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Médicas</a>
             </li>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                    <strong>Datos generales de expedientes</strong>
-                    <hr>
+                    <H5>Datos Generales del Expediente</H5>
+                    <hr color="blue">
                     <div class= "row"> 
                         <div  class="col-sm-4">
                                    <?php
@@ -83,7 +83,7 @@ include_once 'conexionpdo.php';
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                 <label for="" class="control-label">Paciente</label> 
+                                 <label for="" class="control-label">Nombre delPaciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre2;?>">
                             <input  hidden name="codigo_paciente_expediente" value="<?php echo $codigo2;?>">
@@ -124,11 +124,9 @@ include_once 'conexionpdo.php';
                         </div><!--fin del tipo sangre -->
 
                         <div class="col-sm-3">
-                         <label for="" class="control-label">Tratamientos que toma actualmente</label> 
+                         <label for="" class="control-label">Tratamientos que Toma Actualmente</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="tratamientos" id="DIRECCION">
-                              
-                            </textarea>
+                            <textarea onkeypress="return soloLetrasnumeros(event)" class="form-control" type="textarea" name="tratamientos"></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -138,22 +136,22 @@ include_once 'conexionpdo.php';
                         <div  class="col-sm-3">
                           <label for="" class="control-label">¿Padece de alguna enfermedad?</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="textarea" name="enfermedades"  autocomplete = "off" onkeypress=""></textarea>
+                            <textarea class="form-control" onkeypress="return soloLetrasnumeros(event)" type="textarea" name="enfermedades"  autocomplete = "off" ></textarea>
                             </div>
                         </div><!--fin del la estatura -->
 
 
                     </div> <!--fin del row -->
                     </br>
-                    <strong>Otros Datos Paciente</strong>
-                    <hr>
+                    <h5>Otros Datos del Paciente</h5>
+                    <hr color="blue">
                     <br>
                     <div class="row">
                      
                   <div class="col-md-3">
                        <div class="card">
                           <div class="card-header" style="background-color:#DFD4FE;">
-                             <strong>ALERGIAS </strong>
+                             <strong>Alergias</strong>
                           </div>
                        <div class="card-body">
                         <?php 
@@ -185,7 +183,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-3">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>Transtornos sistemas corporales</strong>
+                              <strong>Transtornos Sistemas Corporales</strong>
                             </div>
                         <div class="card-body">
                         
@@ -219,7 +217,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-3">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>Apariencia fisica</strong>
+                              <strong>Apariencia Física</strong>
                             </div>
                         <div class="card-body">
                         
@@ -263,13 +261,29 @@ include_once 'conexionpdo.php';
 
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
+function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz,. 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>
+ <script>
  var isSubmitting = false
-
 $(document).ready(function () {
     $('#form').submit(function(){
         isSubmitting = true
     })
-
     $('#form').data('initial-state', $('#form').serialize());
 
     $(window).on('beforeunload', function() {
@@ -278,34 +292,21 @@ $(document).ready(function () {
         }
     });
 })
-
-
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
-
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from         = event.relatedTarget || event.toElement;
-
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
-
 // let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
+if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
     alert( '!Estas a punto de salir!' );
     // localStorage.setItem( 'leftWindow', true );
 }
@@ -317,21 +318,9 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
 
 
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-
-
-
 (function() {
     'use strict'
-
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
-
-    // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
         .forEach(function(form) {
             form.addEventListener('submit', function(event) {
@@ -339,11 +328,9 @@ $(document).ready(function() {
                     event.preventDefault()
                     event.stopPropagation()
                 }
-
                 form.classList.add('was-validated')
             }, false)
         })
 })()
-
 </script>
 
