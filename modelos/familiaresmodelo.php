@@ -76,9 +76,11 @@
                                         WHERE CODIGO_PERSONA = '$codigo_familiares'; ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
-              echo '<script>
-              window.location = "crudfamiliares";
-              </script>';
+              echo "<script>
+              alert('¡Modificación realizada correctamente!');
+              window.location = 'crudfamiliares';
+              </script>";
+
               include_once 'function_bitacora.php';
               $codigoObjeto=2;
               $accion='Modificacion';

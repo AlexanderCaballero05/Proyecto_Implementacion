@@ -911,6 +911,8 @@
                   <p>Mantenimiento de Areas</p>
               </a>
               </li>
+              
+              <li class="nav-item">
                 <a href="crudpreguntas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Mantenimiento de Preguntas</p>

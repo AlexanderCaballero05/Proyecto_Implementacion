@@ -43,6 +43,27 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
  bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
+<?php
+  //Parametro de maximo contraseña
+  $max_clave = "NUM_MAX_CARACTER";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($max_clave));
+  $row2=$sentencia2->fetchColumn();
+  if($row2>0){
+    $valor3 = $row2;
+  }
+?>
+<?php
+//Parametro de minimo contraseña
+  $min_clave ="NUM_MIN_CARACTER";
+  $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia3->execute(array($min_clave));
+  $row3 = $sentencia3->fetchColumn();
+  if($row1>0){
+    $valor4 = $row3;
+  }
+?>
+
 <head>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -118,7 +139,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                       <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Grado Actual</label> 
                           <div class="form-group">
-                             <input class="form-control" type="text" maxlength="2" minlength="1" name="GRADO" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 2" required="" >
+                             <input class="form-control" type="text" name="GRADO" onkeyup="mayus(this);" autocomplete = "off" onblur="quitarespacios(this);" required pattern="[A-Z,1-9]{<?php echo $valor4;?>,<?php echo $valor3;?>}"  maxlength="15" placeholder="Ej: 2" required="" >
                               <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -145,10 +166,11 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                               </div>
                           </div>
                         </div>
+
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Materias con bajo rendimiento</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="100" minlength="2" name="MATERIAS" id="MATERIAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="" placeholder="Ejemplo: Español" required="" ></textarea>
+                          <textarea class="form-control" type="textarea"  name="MATERIAS" id="MATERIAS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Español" required="" ></textarea>
                                <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -161,7 +183,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="PASATIEMPOS" id="PASATIEMPOS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" name="PASATIEMPOS" id="PASATIEMPOS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -171,7 +193,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="DISTRACTORES" class="control-label">Distractores</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="DISTRACTORES" id="DISTRACTORES" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -226,7 +248,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                     </div>
                       </br>
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
-                        <h2 class="card-title"> <strong>Datos socioeconómicos</strong></h2>
+                        <h2 class="card-title"> <strong>Datos Socioeconómicos</strong></h2>
                     </div></br>
 
                 <div class="row md-3 ">
@@ -234,7 +256,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                  <div class="col-sm-3">
                   <div class="card">
                      <div class="card-header" style="background-color:#DFD4FE;">
-                             <strong>¿Con que dispositivos cuenta?</strong>
+                             <strong>¿Con qué dispositivos cuenta?</strong>
                           </div>
                           <div class="card-body">
                           <?php
@@ -509,6 +531,25 @@ else if ( obj.attachEvent ) {
       })
   })()
 </script>
+
+<script>
+function soloLetrascaracteres(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>
 
 
 

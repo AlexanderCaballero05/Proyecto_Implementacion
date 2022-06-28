@@ -125,23 +125,26 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
                           <th class="text-center">Apellido</th>
-                          <th class="text-center">Grado actual</th>
+                          <th class="text-center">Grado Actual</th>
                           <th class="text-center">Repitente</th>
-                          <th class="text-center">Indice académico</th>
+                          <th class="text-center">Indice Académico</th>
                           <th class="text-center">Pasatiempos</th>
-                          <th class="text-center">Distractores escolares</th>
+                          <th class="text-center">Distractores Escolares</th>
                           <th class="text-center">Metas</th>
                           <th class="text-center">Sacramentos</th>
+                          
     
                         </tr>
                       </thead>
                       <tbody>
                         <?php
                         $query = "SELECT e.CODIGO_ESTUDIANTE, p.PRIMER_NOMBRE , p.PRIMER_APELLIDO, p.CODIGO_PERSONA, e.GRADO_ACTUAL, e.REPITENTE,
-                        e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS, GROUP_CONCAT(' ',sac.NOMBRE) as SACRAMENTOS
-                       FROM tbl_estudiante e , tbl_persona p, tbl_sacramento_persona sap, tbl_sacramento sac
-                       WHERE e.CODIGO_PERSONA= p.CODIGO_PERSONA
-                       AND sap.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO;";
+                        e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS,GROUP_CONCAT(sac.NOMBRE) as sacramentos
+                       FROM  tbl_sacramento_estudiante sacp, tbl_sacramento sac, tbl_estudiante e, tbl_persona p
+                       WHERE sacp.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
+                             AND sacp.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
+                             AND e.CODIGO_PERSONA= p.CODIGO_PERSONA
+                           GROUP BY e.CODIGO_ESTUDIANTE;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -154,7 +157,8 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                             $var7 = $row['PASATIEMPOS'];
                             $var8 = $row['DISTRACTORES_ESCOLARES'];
                             $var9 = $row['METAS'];
-                            $var10 = $row['SACRAMENTOS'];
+                            $var10 = $row['sacramentos'];
+                            
                         ?>
                         <tr>
                           <td>
@@ -253,6 +257,8 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
                           <td class="text-center"><?php echo $var10; ?></td>
+
+                         
                           
 
                         <!--INICIO DEL MODAL DE EDITAR ESTUDIANTE -->
@@ -270,7 +276,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumeros(event)"  autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
+                                          <input  type="text"  value ="<?php echo $var4; ?>" class="form-control"  maxlength="15" minlength="1" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
                                           autocomplete ="off" required ="">
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.

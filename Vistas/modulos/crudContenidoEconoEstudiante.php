@@ -106,9 +106,9 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                         <tr>
                           <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
-                          <th class="text-center">Nombre estudiante</th>
-                          <th class="text-center">Contenido socio-económico</th>
-                          <th class="text-center">Nombre tipo contenido</th>
+                          <th class="text-center">Nombre Estudiante</th>
+                          <th class="text-center">Contenido Socio-económico</th>
+                          <th class="text-center">Nombre Tipo contenido</th>
                         </tr>
                       </thead>
                       <tbody>
