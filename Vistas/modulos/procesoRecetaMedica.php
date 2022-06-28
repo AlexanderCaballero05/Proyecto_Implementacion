@@ -30,7 +30,7 @@
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Nombre del examen:</label>
+                                    <label for="txtcodigo_persona">Nombre del Examen</label>
                                     <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre al examen" name="nombre_examen"  required="">
                                     <div class="invalid-feedback">
                                      campo obligatorio.
@@ -39,7 +39,7 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Descripción del examen:</label>
+                                    <label for="txtcodigo_persona">Descripción del Examen</label>
                                     <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción al examen" name="descripcion_examen"  required=""></textarea>
                                     <div class="invalid-feedback">
                                       campo obligatorio.
@@ -62,30 +62,38 @@
            <div class="modal-content"><!-- Modal content-->
                 <form  method="POST"  class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar un medicamento</h4>
+                        <h4 class="text-center">Agregar Medicamento</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW --> 
                              <div class="col-sm-12">
                                   <div class="form-group">
-                                   <label for="txtcodigo_persona"> Codigo del Medicamento</label>
-                                    <input type="text"  class="form-control" maxlength="10" onkeyup="mayus(this);" autocomplete="off" type="text"  onkeypress="return solonumero(event)" ; 
-                                     name="agregar_cod_medi">
-                                 </div>
+                                   <label for="txtcodigo_persona"> Código del Medicamento</label>
+                                    <input type="text" required pattern="[A-Z,0-9]{2,10}"  maxlength="10" minlength="2"  class="form-control" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" name="agregar_cod_medi" required>
+                                    <div class="invalid-feedback">
+                                      Campo obligatorio.
+                                    </div>
+                                  </div>
                               </div>
                             <div class="col-sm-12">
                               <div class="form-group">
                                 <label for="txtcodigo_persona">Nombre del Medicamento</label>
                                 <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="agregar_medicamento" >
+                                 name="agregar_medicamento" required >
+                                 <div class="invalid-feedback">
+                                      Campo obligatorio.
+                                   </div>
                               </div>
                             </div>
                             <div class="col-sm-12">
                                <div class="form-group">
-                                  <label for="txtcodigo_persona">Descripcion</label>
+                                  <label for="txtcodigo_persona">Descripción</label>
                                   <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                   name="agregar_med_desc" >
+                                   name="agregar_med_desc" required >
+                                   <div class="invalid-feedback">
+                                      Campo obligatorio.
+                                    </div>
                                 </div>
                             </div>  
                         </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -109,41 +117,39 @@
   <div class="container-fluid">
    <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE RECETAS PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+        <section class="content-header text-xl-center mb-3 "> 
+          <h4> Recetas Médicas   <i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Personas Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Consultas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Recetas Médicas</a>
             </li>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
           </div>
           <div class="card-body"><!--Cuerpo del card body principal -->
-          <div class="card-header "> <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                      <h2 class="card-title" > <strong>Registro de recetas medicas</strong></h2>
-           </div></br>
+            
 
-         <form method="POST" class="needs-validation" novalidate id="form">
-
+         <form method="POST" class="needs-validation" novalidate >
+         
          <div class="row pl-3 ">
          <?php
           $usuario= $_SESSION['vario'];
@@ -173,6 +179,11 @@
               $nombrecon = $row['PACIENTE'];   
               $fecha_cita = $row['FECHA_CITA'];            
             ?>
+            <div class="col-sm-12 mb-3">
+             <h5> Registro de Recetas Médicas</h5><hr color="blue">
+            </div>
+            
+          
          <div class="col-sm-3 mb-3">
           <label for="" class="form-label">Fecha de receta</label>
           <input class="form-control" type="text" hidden value="<?php echo $fecha_cita?>" name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
@@ -181,7 +192,7 @@
 <!--Inicio del paciente -->
 <div class="col-sm-6  mb-3">
 
-    <label for="" class="control-label">Paciente</label> 
+    <label for="" class="control-label">Nombre del Paciente</label> 
     <div class="form-group">
        <input  readonly class="form-control" value="<?php echo $nombrecon;?>">
        <input type="text" name="codigo_consulta" hidden  value="<?php echo $codigocon?>" > 
@@ -194,11 +205,11 @@
    </div><!--fin del paciente -->
        <div class="col-sm-3 mb-3">
             <div class="form-group">
-              <label for="" class="control-label">Tipo de receta</label>
+              <label for="" class="control-label">Tipo de Receta</label>
               <select class="form-control select2 " required id="recetas" name="recetas" required> 
                 <option selected disabled value="">--Seleccione--</option>
-                <option  value="1">--Receta medica--</option>
-                <option  value="2">--Examen medico--</option>
+                <option  value="1">Receta Médica</option>
+                <option  value="2">Examen Médico</option>
                 
               </select>
               <div class="invalid-feedback">
@@ -214,12 +225,12 @@
                 FROM tbl_medicamento me; ";
                 $resultado2=$conn->query($query1);
                 ?>
-                <div class="row pl-4 mb-3 "  >
-                 <button  data-toggle="modal"  href="#AGREGAR_RECETA" type='button'   style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar medicamento</button>
+                <div class="row pl-4 mb-3 " >
+                 <button  data-toggle="modal"  href="#AGREGAR_RECETA" type='button'   style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Medicamento</button>
                   <div class="col-sm-10">
                    <!-- <label for="identidad" class="control-label">Medicamento</label> -->
-                      <select  style="width: 100%;"  class="form-control select2" name="codigo_medicamento" id="" type="text">
-                      <option selected disabled value="">---Buscar medicamento---</option>
+                      <select id="agregarmedicamento"  style="width: 100%;"  class="form-control select2" name="codigo_medicamento" required type="text">
+                      <option selected disabled value="">--Seleccione--</option>
                           <?php 
                             if ($resultado2->num_rows > 0) {
                             while($row1 = $resultado2->fetch_assoc()) { 
@@ -232,6 +243,9 @@
                           }
                           ?>
                       </select>
+                      <div class="invalid-feedback">
+                         Seleccione un Medicamento.
+                      </div>
                   </div>  
                 </div> <!--fin de Datalist para agregar el medicamento-->
               </div>
@@ -241,11 +255,11 @@
                   $resultado3=$conn->query($query3);
                   ?>
                 <div class="row pl-4 mb-3 "  >
-                 <button  data-toggle="modal"  href="#AGREGAR_EXAMEN" type='button'   style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar examen</button>
+                 <button  data-toggle="modal"  href="#AGREGAR_EXAMEN" type='button'   style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Examen</button>
                   <div class="col-sm-10">
                    <!-- <label for="identidad" class="control-label">Medicamento</label> -->
-                      <select  style="width: 100%;"  class="form-control select2" name="codigo_examen"  type="text">
-                      <option selected disabled value="">---Buscar Examenes---</option>
+                      <select id="agregarexamen" style="width: 100%;"  class="form-control select2" name="codigo_examen" required type="text">
+                      <option selected disabled value="">--Seleccione--</option>
                           <?php 
                             if ($resultado3->num_rows > 0) {
                             while($row1 = $resultado3->fetch_assoc()) { 
@@ -258,6 +272,9 @@
                           }
                           ?>
                       </select>
+                      <div class="invalid-feedback">
+                         Seleccione un examen.
+                      </div>
                   </div>  
                 </div> <!--fin de Datalist para agregar el examen-->
               </div>
@@ -266,49 +283,90 @@
               </div><!-- FIN DEL MODAL AGREGAR -->
                   <div class="row pl-3">
                         <div class="col-md-6"> <!--INICIO INDICE ACADEMICO-->
-                          <label for="identidad" class="control-label">Indicacione de receta</label> 
+                          <label  class="control-label">Indicación de Receta</label> 
                           <div class="form-group">
                             
-                          <textarea class="form-control" type="textarea" name="indicaciones" id="indicaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                          <textarea required class="form-control" type="textarea" name="indicaciones" id="indicaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
                             <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo obligatorio.
                               </div>
                           </div>
                         </div>
                         <div class="col-md-6"> <!--INICIO PASATIEMPOS-->
-                          <label for="MATERIAS" class="control-label">Observaciones</label> 
+                          <label class="control-label">Observaciones</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" name="observaciones" id="observaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
+                          <textarea required class="form-control" type="textarea" name="observaciones" id="observaciones" onkeyup="mayus(this);" autocomplete = "off" onkeypress=""></textarea>
                                <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo obligatorio.
                               </div>
                           </div>
                         </div>
                   </div>
-                      </br></br></br>
-                      <div class="card-footer mb-2 pr-2">
-                           <button type="submit"  id="receta_medica" name="receta_medica" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                      <!--colocar esta seguro que quiere finalizar la consulta-->
-                           <button style="color:#ffff;" type="submit"   name="finalizar_consulta" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
+                      <br>
+                      <div class="modal-footer justify-content-start">
+                           <button type="submit"  id="receta_medica" name="receta_medica" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Receta</button>
+                           <a href="#FINALIZAR<?php echo $codigocita;?>" data-toggle="modal">
+                              <button  type='button'   class="btn btn-warning" data-dismiss="modal"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                            </a>
                       </div>
-          </form>
+                  </form>
+                  
           </div>
         </div>
    </div><!-- CIerre del container fluid--> 
   </section>
 </div><!-- Cierre del div wraper -->
 
+
+
+<!--Modal de confirmar finalización de consulta-->
+    <div id="FINALIZAR<?php echo $codigocita ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <form id="FORMEeliminar" method="POST">
+            <div class="modal-body">
+            <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_finalizar"> 
+              <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
+                <h4 class="text-center">¿Desea finalizar las Recetas?</h4>
+            </div> 
+             <div class="modal-footer ">
+               <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+               <button type="submit" name="finalizar_consulta"  class="btn btn-primary">Si,Finalizar</button>      
+             </div>
+          </form>
+        </div>
+      </div>
+    </div><!--fin del modal -->
+
+<script>
+ function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
  var isSubmitting = false
-
 $(document).ready(function () {
     $('#form').submit(function(){
         isSubmitting = true
     })
-
     $('#form').data('initial-state', $('#form').serialize());
-
     $(window).on('beforeunload', function() {
         if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
             return 'You have unsaved changes which will not be saved.'
@@ -318,34 +376,16 @@ $(document).ready(function () {
 
 
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
-
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
-}
 } );
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
@@ -361,10 +401,15 @@ if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
         if ($(this).val() === "1") {//
           document.getElementById('examenes').style.display = "none";
           document.getElementById('medicamentos').style.display = "block";
+          document.getElementById('agregarmedicamento').required = true;
+          document.getElementById('agregarexamen').required = false;
+          
 
         }else if($(this).val() === "2"){//
           document.getElementById('medicamentos').style.display = "none";
           document.getElementById('examenes').style.display = "block";
+          document.getElementById('agregarmedicamento').required = false;
+          document.getElementById('agregarexamen').required = true;
         }
     });
   }); // 

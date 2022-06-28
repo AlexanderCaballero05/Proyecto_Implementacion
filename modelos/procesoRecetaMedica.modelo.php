@@ -32,7 +32,9 @@ include "conexionpdo.php";
              if($consulta_receta>0){
                 echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
              }else{
-                echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
+                echo "<script> 
+                  alert('Ocurrio un eror');
+                window.location = 'procesoRecetaMedica'; </script>"; exit;
              }
           }//fin del elseif de insertar examenes medicoa
        }  
@@ -40,7 +42,7 @@ include "conexionpdo.php";
 
    //Cuando ya de plano termino de recetar los examenes y recetas :)
    if(isset($_POST['finalizar_consulta'])){
-        $codigo_cita = ($_POST['codigo_cita']);
+        $codigo_cita = ($_POST['codigo_finalizar']);
         $cambiar_estado = "UPDATE tbl_inscripcion_cita
         SET CODIGO_ESTADO = '12'
         WHERE CODIGO_CITA = ' $codigo_cita'";
@@ -61,7 +63,7 @@ include "conexionpdo.php";
     $fechaActual = date('Y-m-d');
     $usuario = $_SESSION['vario'];
 
-    $existe = $db->prepare("SELECT EXAMEN_MEDICO FROM tbl_examenes_medicos WHERE EXAMEN_MEDICO = (?);");
+    $existe = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_medicos WHERE EXAMEN_MEDICO = (?);");
     $existe->execute(array($nombre_examen1));
     $row=$existe->fetchColumn();
     if($row>0){
@@ -72,9 +74,13 @@ include "conexionpdo.php";
         $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario'); ";
         $resul=$conn->query($insertar_examen);
           if($consulta>0){
-            echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
+            echo "<script>
+            alert('Examen Registrado Correctamente');
+            window.location = 'procesoRecetaMedica'; </script>"; exit;
           }else{
-           echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
+           echo "<script>
+            alert('Ocurrio algun error');
+            window.location = 'procesoRecetaMedica'; </script>"; exit;
            }
         }catch(PDOException $e){
         echo $e->getMessage(); 
@@ -92,30 +98,26 @@ include "conexionpdo.php";
         $fechaActual = date('Y-m-d');
         $usuario =$_SESSION['vario'];
          //consulta para validar que no se repita el mismo codigo en el medicamento  
-          $consulta = $db->prepare("SELECT CODIGO_MEDICAMENTO  from tbl_medicamento   where CODIGO_MEDICAMENTO  =(?);");
-          $consulta->execute(array($codigo));
+          $consulta = $db->prepare("SELECT COUNT(*)  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?) || tm.CODIGO_MEDICAMENTO  =(?); ");
+          $consulta->execute(array($medicamento,$codigo));
           $row=$consulta->fetchColumn();
           if($row>0){
-            echo "<script> alert('¡El codigo $codigo del medicamento ya exite!');window.location = 'procesoRecetaMedica';</script>";exit;
+            echo "<script> alert('El nombre o el código del medicamento  ya se encuentra registrado');window.location = 'procesoRecetaMedica';</script>";
+            exit;
           }else{
            try{
-               $consulta_objeto = $db->prepare("SELECT tm.NOMBRE_MEDICAMENTO  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?);");
-               $consulta_objeto->execute(array($medicamento));
-               $row=$consulta_objeto->fetchColumn();
-               if($row>0){
-                 echo "<script> alert('El nombre del medicamento  $medicamento ya se encuentra registrado');
-                 window.location = 'procesoRecetaMedica';</script>";
-                 exit; 
-              }else{
-                  $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-                  VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
-                  $resul=$conn->query($query_medicamento);
-                  if($resul >0){
-                  echo "<script> window.location='procesoRecetaMedica'; </script>"; exit; 
-                  }else{
-                  echo "<script> window.location ='procesoRecetaMedica'; </script>"; exit;
-                  }
-               }//fin del else
+               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
+               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
+               $resul=$conn->query($query_medicamento);
+               if($resul >0){
+                  echo "<script>
+                   alert('Medicamento Registrado Correctamente');
+                   window.location='procesoRecetaMedica'; </script>"; exit; 
+               }else{
+                  echo "<script> 
+                  alert('Ocurrio un error');
+                  window.location ='procesoRecetaMedica'; </script>"; exit;
+               }
              }catch(PDOException $e){
               echo $e->getMessage(); 
               return false;

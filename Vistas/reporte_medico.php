@@ -101,7 +101,7 @@ include('conexion2.php');
   <header>
     <img src="LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 20px;">Reporte medico del paciente</p>
+      <p  style="text-align: center; font-size: 20px;">Reporte Médico del Paciente</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
@@ -138,12 +138,12 @@ include('conexion2.php');
       <label  ><b>Nombre completo:</b> </label><?php  echo utf8_decode(ucwords(strtolower($nombre_pa))); ?> <br>
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
-      <label  ><b>Codigo de la cita: </b></label><?php echo $codigo_cita;?><br>
+      <label  ><b>Código de la cita: </b></label><?php echo $codigo_cita;?><br>
     </fieldset>
     <br>
 
     <fieldset>
-      <legend>Expediente clinico</legend>
+      <legend>Expediente Clínico</legend>
      
     <br>
     <table>
@@ -198,7 +198,7 @@ include('conexion2.php');
     <br>
 
     <fieldset style="background-color: #F7F9FA;">
-     <legend>Datos preclinica</legend>
+     <legend>Datos Preclínica</legend>
      <br>
      <table style="border-collapse: collapse;  border: 0.4px solid #FFFF; background-color: #F7F9FA;">
          <?php
@@ -277,10 +277,10 @@ include('conexion2.php');
       ?>
        <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Información de la consulta<?php echo $fecha;?></label></div><br>
        <div>
-          <div class="c" ><label><b>Sintomas: </b></label> <?php  echo (strtolower($sintomas)) ?> </div>
-          <div class="c" > <label><b>Diagnostico Ingreso: </b></label> <?php  echo (strtolower($diagnostico_ingreso))?></div>
+          <div class="c" ><label><b>Síntomas: </b></label> <?php  echo (strtolower($sintomas)) ?> </div>
+          <div class="c" > <label><b>Diagnóstico Ingreso: </b></label> <?php  echo (strtolower($diagnostico_ingreso))?></div>
           <div class="c" > <label><b>Evolución: </b></label><?php echo  (strtolower($evolucion)) ?></div>
-          <div class="c" > <label><b>Diagnostico Egreso: </b></label><?php echo (strtolower($diagnostico_egreso))?></div>
+          <div class="c" > <label><b>Diagnóstico Egreso: </b></label><?php echo (strtolower($diagnostico_egreso))?></div>
        </div>
       <?php 
        } 
@@ -308,14 +308,14 @@ include('conexion2.php');
         $observacion = $row['OBSERVACIONES'];
         ?>
       <div id="caja3">
-            <legend style="background-color: #ffff; color:#000000;">Datos de medicamentos </legend><br><hr>
-            <div class="c" ><label><b>Nombre del medicamento: </b></label>
+            <legend style="background-color: #ffff; color:#000000;">Información de los medicamentos</legend><br><hr>
+            <div class="c" ><label><b>Nombre del Medicamento: </b></label>
               <?php  echo utf8_decode(strtolower($medicamentos)) ?>
             </div>
-            <div class="c" ><label><b>Indicaciones del medicamento: </b></label>
+            <div class="c" ><label><b>Indicaciones del Medicamento: </b></label>
               <?php  echo utf8_decode(strtolower($indicaciones)) ?>
             </div>
-            <div class="c" ><label><b>Observaciones del medicamento: </b></label>
+            <div class="c" ><label><b>Observaciones del Medicamento: </b></label>
               <?php  echo utf8_decode(strtolower($observacion));?>
             </div>
       </div><br>
@@ -345,14 +345,14 @@ include('conexion2.php');
              $indicacion = $row['indicaciones'];
              $observa = $row['OBSERVACIONES'];
              ?>
-           <p>Datos de examenes </p><hr><br>
-            <div class="c2"><label><b>Nombre del examen: </b></label>
+           <p>Información de los Exámenes </p><hr><br>
+            <div class="c2"><label><b>Nombre del Examen: </b></label>
               <?php  echo utf8_decode(strtolower($examen)) ?>
             </div>
-            <div class="c2"><label><b>Indicaciones del examen: </b></label>
+            <div class="c2"><label><b>Indicaciones del Examen: </b></label>
               <?php  echo utf8_decode(strtolower($indicaciones)) ?>
             </div>
-            <div class="c2"><label><b>Observaciones del examen: </b></label>
+            <div class="c2"><label><b>Observaciones del Examen: </b></label>
               <?php  echo utf8_decode(strtolower($observa));?>
             </div>
       </div>
@@ -386,7 +386,7 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("Consulta_Medica.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>
 

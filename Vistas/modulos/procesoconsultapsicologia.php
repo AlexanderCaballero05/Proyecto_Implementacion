@@ -8,11 +8,18 @@ $accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
 $descripcion = 'Ver los registros de los Inscripcion Cita ';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
+<?php
+  //Parametro para el minimo respuesta
+  $min = "NUM_MIN_CARACTER";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($min));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $minimo = $row1;
+  }
+?>
 <!DOCTYPE html>
 <html>
-<head>
-    
-</head>
 
 <body oncopy="return false" onpaste="return false">
 <div class="content-wrapper">
@@ -155,13 +162,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     ?> <!--METER EL CICLO TODO LOS TEXTOS Y DENTRO DEL ROW PRINCIPAL-->
              </div><!--fin del div de row DE EXPEDIENTE-->
                     
-                    <h5>Datos de consulta</h5>
+                    <h5>Datos de Consulta</h5>
                     <hr COLOR="blue">
                     <div class="row">
                       <div class="col-md-6"> 
                         <label>Síntomas</label> 
                         <div class="form-group">
-                          <textarea type="text" class="form-control" minlength="5" maxlength="100"  required pattern="[A-Z]{5,100}"  autocomplete = "off" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="sintomas3"  ></textarea>
+                          <textarea type="textarea"  class="form-control" maxlength="100" minlength="5"  required onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off"  name="sintomas3"></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -170,7 +177,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6">
                         <label >Diagnóstico Ingreso</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text"  required pattern="[A-Z]{5,200}" minlength="5"  maxlength="200"   onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="Ingreso3"  autocomplete = "off" ></textarea>
+                          <textarea class="form-control" type="textarea"   required pattern="[A-Z]{5,200}" minlength="5"  maxlength="200" onkeypress="return soloLetrasnumeros(event)" onkeyup="mayus(this);"   name="Ingreso3"  autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -182,7 +189,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6"> 
                         <label >Diagnóstico Egreso</label> 
                         <div class="form-group">
-                          <textarea type="text" class="form-control"  required pattern="[A-Z]{5,200}" minlength="5" maxlength="200"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" name="Egreso3"  autocomplete = "off" ></textarea>
+                          <textarea type="textarea"  class="form-control"  required  minlength="4" maxlength="250"  onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" name="Egreso3"  autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -191,7 +198,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6">
                         <label  >Observaciones</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" required pattern="[A-Z]{5,600}" minlength="5" maxlength="600"  onkeyup="mayus(this);" name="observaciones3"   autocomplete = "off" ></textarea>
+                          <textarea class="form-control" type="textarea"  required  minlength="4" maxlength="250"  onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" name="observaciones3"   autocomplete = "off" ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -200,7 +207,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
+                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->
@@ -217,49 +224,34 @@ bitacora($codigoObjeto, $accion, $descripcion);
 </html>
 
    <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-  <script>
+<script>
  var isSubmitting = false
-
 $(document).ready(function () {
     $('#form').submit(function(){
         isSubmitting = true
     })
-
     $('#form').data('initial-state', $('#form').serialize());
-
     $(window).on('beforeunload', function() {
         if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
             return 'You have unsaved changes which will not be saved.'
         }
     });
 })
-
-
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
-
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from         = event.relatedTarget || event.toElement;
-
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
-
 let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
 if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
-
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
     localStorage.setItem( 'leftWindow', true );
@@ -268,7 +260,24 @@ if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
-
+<script>
+ function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvw,.xyz 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>
  
 
  

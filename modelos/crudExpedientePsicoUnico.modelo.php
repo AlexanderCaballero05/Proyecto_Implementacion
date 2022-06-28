@@ -19,7 +19,7 @@
                 $consulta=$conn->query($sql);
                 if ($consulta>0){
                   echo "<script>
-                  
+                  alert('Se actualizo correctamente')
                   window.location = 'crudExpedientePsicoUnico';
                   </script>";
                   include_once 'function_bitacora.php';

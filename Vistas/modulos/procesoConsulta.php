@@ -24,7 +24,9 @@ include_once 'conexionpdo.php';
   </div>
   <section class="content">
     <div class="container-fluid">
-
+    <div class="content-header text-xl-center mb-3 "> 
+          <h4> Consulta Médica<i class="nav-icon fas fa-stethoscope"></i></h4>
+    </div>
     <section class="content">
     <div class="container-fluid">
       
@@ -32,24 +34,24 @@ include_once 'conexionpdo.php';
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Personas consulta medica</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Personas Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
 
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Consultas Medicas</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Consulta Médica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Recetas Medicas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Recetas Médicas</a>
             </li>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Pacientes</a>
             </li>
           </ul>
           </div>
@@ -57,7 +59,7 @@ include_once 'conexionpdo.php';
           <form class=" needs-validation" novalidate method="POST" id="form">
             
             <h5>Datos del Paciente</h5>
-            <hr>
+            <hr color="blue">
             
             
             <div class="row mb-8">
@@ -92,12 +94,12 @@ include_once 'conexionpdo.php';
                           
                           ?>
                       
-                      <label for="">Nombre del paciente:</label>
+                      <label for="">Nombre del Paciente</label>
                       <input type="text" name="codigocita2" value="<?php echo $var3?>" hidden>
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
-                         <label for="">DNI:</label>
+                         <label for="">DNI</label>
                          <input type="text" name="dni" class="form-control"  aria-label="dni"  value="<?php echo $var2 ?>" disabled ="disabled">
                     </div>
                     </div>
@@ -107,8 +109,8 @@ include_once 'conexionpdo.php';
            
             
                     </br>
-                    <h5>Preclinica</h5>
-                    <hr>
+                    <h5> Información Preclínica</h5>
+                    <hr color="blue">
                     
             
             <!--INICIO COMBOBOX -->
@@ -139,7 +141,7 @@ include_once 'conexionpdo.php';
                 $var9 = $row['CODIGO_PRECLINICA'];
               ?>
             <div class= "row">                      
-            <div class="col-sm-2 mb-3">
+            <div class="col-sm-3 mb-3">
             <input type="text" name="codigopre" value="<?php echo $var9 ?>" Hidden>
                          <label for="" class="control-label">Peso</label> 
                          <div class="input-group ">
@@ -150,7 +152,7 @@ include_once 'conexionpdo.php';
                           </div>
                         </div><!--fin del peso -->
 
-                        <div  class="col-sm-2 mb-3">
+                        <div  class="col-sm-3 mb-3">
                           <label for="" class="control-label">Estatura</label> 
                           <div class="input-group ">
                             <input type="text"   maxlength="5" autocomplete = "off" required class="form-control" value="<?php echo  $var2 ?>"  name="estatura" disabled ="disabled" required >
@@ -159,8 +161,8 @@ include_once 'conexionpdo.php';
                             </div>
                           </div>
                         </div><!--fin del la estatura -->
-                        <div  class="col-sm-2 mb-3">
-                          <label for="" class="control-label">temperatura</label> 
+                        <div  class="col-sm-3 mb-3">
+                          <label for="" class="control-label">Temperatura</label> 
                           <div class="input-group ">
                             <input type="text"  value="<?php echo $var3 ?>" onkeypress="return TEMPE(event,this);" autocomplete = "off" required class="form-control"  name="temperatura" disabled ="disabled" required>
                             <div class="input-group-append">
@@ -168,7 +170,7 @@ include_once 'conexionpdo.php';
                             </div>
                           </div>
                         </div><!--fin del temperatura -->
-                        <div  class="col-sm-4 mb-3">
+                        <div  class="col-sm-3 mb-3">
                           <div class="form-group">
                             <label for="" class="control-label">Estatus de desnutrición</label>
                             <select class="form-control " required name="desnutricion" required disabled ="disabled"> 
@@ -182,7 +184,7 @@ include_once 'conexionpdo.php';
                     </div> <!--fin del row -->
                     <div class="row">
                      
-                       <div  class="col-sm-2 mb-3">
+                       <div  class="col-sm-3 mb-3">
                           <label for="" class="control-label">Presión Arterial</label> 
                           <div class="input-group ">
                             <input type="text"  maxlength="5"  name="FC"  value="<?php echo $var5 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
@@ -191,7 +193,7 @@ include_once 'conexionpdo.php';
                             </div>
                           </div>
                         </div><!--fin de presion -->
-                        <div class="col-md-2 mb-3"> <!--Nivel de respiracion-->
+                        <div class="col-md-3 mb-3"> <!--Nivel de respiracion-->
                           <label for="validationCustom03"  class="control-label">Nivel Respiración</label> 
                           <div class="input-group ">
                             <input type="text"  onkeypress="return solonumeros(event);" maxlength="2" name="FR" value="<?php echo $var6 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
@@ -200,7 +202,7 @@ include_once 'conexionpdo.php';
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-2 mb-3"> <!--PULSO-->
+                        <div class="col-md-3 mb-3"> <!--PULSO-->
                           <label for="validationCustom03"  class="control-label">Pulso</label> 
                           <div class="input-group ">
                             <input type="text"  onkeypress="return solonumeros(event);" maxlength="3" name="pulso" value="<?php echo $var7 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
@@ -209,8 +211,8 @@ include_once 'conexionpdo.php';
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-4 mb-3"> <!--masica corporal-->
-                          <label for="validationCustom03"  class="control-label">Indice masa corporal</label> 
+                        <div class="col-md-3 mb-3"> <!--masica corporal-->
+                          <label for="validationCustom03"  class="control-label">Índice Masa Corporal</label> 
                           <div class="input-group ">
                             <input type="text"  maxlength="4"  name="masa_corporal" value="<?php echo $var8 ?>"  autocomplete = "off" required class="form-control" disabled ="disabled" required>
                             <div class="input-group-append">
@@ -225,13 +227,13 @@ include_once 'conexionpdo.php';
                     
                     </div><!--fin del div de row-->
                     
-                    <h5>Consulta</h5>
-                    <hr>
+                    <h5>Datos Consulta</h5>
+                    <hr color="blue">
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Sintomas:</label> 
+                        <label for="identidad" class="control-label">Síntomas:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" name="sintomas2" id="sintomas2"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="100" type="text" name="sintomas2" id="sintomas2" onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -240,7 +242,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text"  name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="100" type="text" onkeypress="return soloLetrasnumeros(event)" name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -252,16 +254,16 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Evolución:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text"  name="evolucion" id="evolucion"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="100" onkeypress="return soloLetrasnumeros(event)" type="text"  name="evolucion" id="evolucion"   autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
                         </div>
                       </div>
                       <div class="col-md-6">
-                        <label for="identidad" class="control-label">Diagnóstico de egreso/ Hallazgos importantes:</label> 
+                        <label for="identidad" class="control-label">Diagnóstico de Egreso/ Hallazgos Importantes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text"  name="diagnostico2" id="diagnostico2"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="5" maxlength="100" type="text" onkeypress="return soloLetrasnumeros(event)" name="diagnostico2" id="diagnostico2"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -269,7 +271,7 @@ include_once 'conexionpdo.php';
                       </div>
                     </div><!--Fin de una fila -->
                     <br>
-                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
+                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </form>   
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
@@ -277,20 +279,35 @@ include_once 'conexionpdo.php';
           </div><!-- fINAL DEL card PRIMARY -->
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
-    </div><!-- FINAL CONTAINER FLUID --> 
-                      </div>
-                      </div>
+    </div><!-- FINAL CONTAINER FLUID -->       
   </section><!-- FINAL SECTION -->
   
-   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-   <script>
- var isSubmitting = false
 
+<script>
+ function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvwxyz,. 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>
+<!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+<script>
+ var isSubmitting = false
 $(document).ready(function () {
     $('#form').submit(function(){
         isSubmitting = true
     })
-
     $('#form').data('initial-state', $('#form').serialize());
 
     $(window).on('beforeunload', function() {
@@ -300,32 +317,21 @@ $(document).ready(function () {
     });
 })
 
-
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
-
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from         = event.relatedTarget || event.toElement;
-
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
-
 let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
 if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
-
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
     localStorage.setItem( 'leftWindow', true );
@@ -336,13 +342,6 @@ if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 </body>
 
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-
-
     (function () { 
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')

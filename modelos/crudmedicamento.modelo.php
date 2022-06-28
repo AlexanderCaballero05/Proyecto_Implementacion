@@ -12,8 +12,6 @@
     $descripcion = $_POST['agregar_med_desc'];
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
-
-    
     try {
         $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?) || tm.CODIGO_MEDICAMENTO  =(?); ");
         $consulta_objeto->execute(array($medicamento,$codigo));
@@ -31,6 +29,7 @@
                $resul=$conn->query($query_medicamento);
                if ($resul >0){
                    echo "<script> 
+                   alert('Medicamento Registrado Correctamente');
                    window.location = 'crudmedicamento';
                    </script>";
                    include_once 'function_bitacora.php';
@@ -41,10 +40,10 @@
                     exit;
                  } else {
                    echo "<script> 
-                         alert('Error!');
-                         window.location = 'crudmedicamento';
-                         </script>";
-                         exit;
+                   alert('Ocurrio un error');
+                   window.location = 'crudmedicamento';
+                  </script>";
+                  exit;
                  }
 
             }catch(PDOException $e){

@@ -129,7 +129,7 @@ include_once "conexion3.php";
                           <th class="text-center">Primer Nombre</th>
                           <th class="text-center">Primer Apellido</th>
                           <th class="text-center">Nombre Usuario</th>
-                          <th class="text-center">Correo Electronico</th>
+                          <th class="text-center">Correo Electrónico</th>
                           <th class="text-center">Estado</th>
                           <th class="text-center">Rol</th>
                           <th class="text-center">Fecha creación</th>
