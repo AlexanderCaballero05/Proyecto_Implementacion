@@ -19,7 +19,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 "> 
-        <h4> Registrar Preclínica<i class="nav-icon fas fa-stethoscope"></i></h4>
+        <h4> Personas Preclínica<i class="nav-icon fas fa-stethoscope"></i></h4>
     </div>
     <section class="content">
        <div class="card"> 

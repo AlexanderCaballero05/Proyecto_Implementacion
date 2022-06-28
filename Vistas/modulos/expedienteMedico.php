@@ -21,7 +21,7 @@ include_once 'conexionpdo.php';
     <section class="content">
         <div class="container-fluid">
             <div class="content-header text-xl-center mb-3 "> 
-                <h4> Expediente Médico<i class="nav-icon fas fa-stethoscope"></i></h4>
+                <h4> Informe de Consulta<i class="nav-icon fas fa-stethoscope"></i></h4>
             </div>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">

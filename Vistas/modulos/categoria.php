@@ -22,6 +22,7 @@ Diana Rut               27/05/2022            Se agregaron parametos que faltaba
 Diana Rut               31/05/2022            Se agrego mas campos en el area de familiar y se quitaron campos de estudiante
 Diana Rut               07/05/2022            Se validaron los campos de contraseña y nombre de usuario que sean los tamaños requeridos
 Diana Rut               21/05/2022            Cambios pequeños en el menu
+Diana Rut               27/05/2022            Se agrego con js required en false a la parte de estudiantes
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -165,7 +166,7 @@ Diana Rut               21/05/2022            Cambios pequeños en el menu
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label  class="control-label">Fecha Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2010-01-01" min="1950-01-01" required  >
+                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2012-01-01" min="1950-01-01" required  >
                           <div class="invalid-feedback">
                             Campo obligatorio.
                           </div> 
@@ -565,7 +566,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
   //FUNCIONES PARA MOSTRAR LOS CAMPOS DE USUARIOS (Se puede optimizar,pero hasta en evaluacion creo :v)
  $( function() {
     $("#tipo_persona").change( function() {//tutor administrador ,enfermero y estudiante
-        if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9" || $(this).val() === "4" ) {
+        if ($(this).val() === "1" || $(this).val() === "2"  || $(this).val() === "9" ) {
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -580,6 +581,23 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('psico').required = false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
+          document.getElementById('correo').required = true; 
+        }else if($(this).val() ===  "4" ){//para estudiantes
+          document.getElementById('especialidad_psico').style.display = "none";
+          document.getElementById('especialidad_medico').style.display = "none";
+          document.getElementById('catequistas').style.display = "none";
+          document.getElementById('familiares').style.display = "none";
+          document.getElementById('usuarios').style.display = "block";
+          document.getElementById('medico').required = false;
+          document.getElementById('iglesia').required = false;
+          document.getElementById('ingreso').required = false;
+          document.getElementById('educativo').required = false;
+          document.getElementById('civil').required = false;
+          document.getElementById('cate').required = false;
+          document.getElementById('psico').required = false;
+          document.getElementById('contrasena').required = true; 
+          document.getElementById('nombre_usuario').required = true; 
+          document.getElementById('correo').required = false;
         }else if ($(this).val() === "7"){ //es para un familiar
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
@@ -595,6 +613,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('ingreso').required = true;
           document.getElementById('educativo').required = true;
           document.getElementById('civil').required = true;
+          document.getElementById('correo').required = true; 
         }else if($(this).val() ===  "5" ){//para medico
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -610,6 +629,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('medico').required = true;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
+          document.getElementById('correo').required = true; 
         }else if($(this).val() ===  "6" ){// para psicologo
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -624,6 +644,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('civil').required = false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
+          document.getElementById('correo').required = true; 
         }else if($(this).val() ===  "8"){//para catequista
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
@@ -639,6 +660,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('cate').required = true;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
+          document.getElementById('correo').required = true; 
         }
     });
   }); 

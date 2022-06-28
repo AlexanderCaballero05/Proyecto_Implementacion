@@ -314,14 +314,18 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
       $consulta=$conn->query($insertar);
       if($consulta >0){ 
-          echo "<script> window.location = 'crudPacientesPsicologicos';</script>";
+          echo "<script> 
+          alert('Cita registrada exitosamente');
+          window.location = 'crudPacientesPsicologicos';</script>";
           $codigoObjeto=32;
           $accion='INSERCIÓN';
           $descripcion='SE REGISTRÓ UNA NUEVA CITA';
           bitacora($codigoObjeto,$accion,$descripcion);
            exit;
       }else{
-        echo "<script> window.location = 'crudPacientesPsicologicos';</script>";
+        echo "<script> 
+        alert('Ocurrio algun problema');
+        window.location = 'crudPacientesPsicologicos';</script>";
         exit;
       }
 

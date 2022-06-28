@@ -47,15 +47,11 @@
           </ul>
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
-
-
-               
-                
                 <!--Form del archivo expediente -->
                 <form method="POST" id="form">
 
                 <div  class="pt-2 pb-2 px-2">
-                      <h5>Datos del paciente</h5>
+                      <h5>Datos del Paciente</h5>
                   </div>
                   <hr color="blue"> 
                   <div class="row">
@@ -182,7 +178,7 @@
 
                   <hr>
                   <div >
-                     <h5>Datos de consulta</h5> 
+                     <h5>Datos de Consulta</h5> 
                   </div>
                   <hr color="blue"> 
 

@@ -56,7 +56,7 @@ include "conexionpdo.php";
         <div class="card-body">
         <form method="POST"  class=" needs-validation" novalidate id="form">
             <div  class="pt-2 pb-2 px-2">
-              <h5>Datos del paciente</h5>
+              <h5>Datos del Paciente</h5>
             </div>
             <hr  color="blue"/> 
                <div class= "row">
@@ -90,7 +90,7 @@ include "conexionpdo.php";
                        </div>
                      </div>
                     <div class="col-md-3">
-                      <label for="" class="control-label">Código consulta</label> 
+                      <label for="" class="control-label">Código Consulta</label> 
                         <div class="form-group">
                           <input readonly class="form-control" name="codigo_consulta"value="<?php echo $codigocon;?>">
                           <input  hidden name="codigo_cita" value="<?php echo $codigocita;?>">
@@ -101,14 +101,14 @@ include "conexionpdo.php";
                           }
                         ?>
                </div> <!--ROW-->
-               <hr>
+               <BR>
                
             <div class="row">
             <div class="col-md-12" ><H5>Datos del Plan Terapéutico </h5> <hr  color="blue"/></div>
                       <div class="col-md-6">
                          <label for="" class="control-label">Actividades</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" maxlength="600"  name="Actividades" id="Actividades"  autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
+                            <textarea class="form-control" type="text" minlength="5" maxlength="600"  name="Actividades" id="Actividades" onkeypress="return soloLetrasnumeros(event)" autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
                             <div class="invalid-feedback">
                                   Campo obligatorio.
                               </div>
@@ -117,7 +117,7 @@ include "conexionpdo.php";
                         <div class="col-md-6">
                          <label for="" class="control-label">Técnicas</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" maxlength="300"  name="tecnicas" id="Actividades"  autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
+                            <textarea class="form-control" type="text" minlength="5" maxlength="300"  name="tecnicas" id="Actividades" onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off" onkeyup="mayus(this);" required ></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.                         
                               </div>
@@ -128,7 +128,7 @@ include "conexionpdo.php";
                 <div class="col-md-6">
                   <label for="" class="control-label">Materiales</label> 
                     <div class="form-group">
-                    <textarea class="form-control" type="text" maxlength="600"  name="Materiales" id="Materiales"  autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
+                    <textarea class="form-control" type="text" minlength="5" maxlength="300"  name="Materiales" id="Materiales" onkeypress="return soloLetrasnumeros(event)" autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
                     <div class="invalid-feedback">
                           campo obligatorio.
                       </div>
@@ -137,7 +137,7 @@ include "conexionpdo.php";
                 <div class="col-md-6">
                     <label for="" class="control-label">Tareas</label> 
                     <div class="form-group">
-                    <textarea class="form-control" type="text" maxlength="600"  name="Tareas" id="Tareas"  autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
+                    <textarea class="form-control" type="text" minlength="5" maxlength="300"  name="Tareas" id="Tareas" onkeypress="return soloLetrasnumeros(event)" autocomplete = "off" required onkeyup="mayus(this);" ></textarea>
                     <div class="invalid-feedback">
                           campo obligatorio. 
                       </div>
@@ -148,7 +148,7 @@ include "conexionpdo.php";
                 <div class="col-md-12">
                   <label for="" class="control-label">Resultados</label> 
                     <div class="form-group">
-                      <textarea class="form-control" type="text" maxlength="600"  name="Resultados" id="Resultados"  autocomplete = "off" required onkeyup="mayus(this);"></textarea>
+                      <textarea class="form-control" type="text" minlength="5" maxlength="600"  name="Resultados" id="Resultados"  autocomplete = "off" required onkeyup="mayus(this);"></textarea>
                       <div class="invalid-feedback">
                           campo obligatorio.
                       </div>  
@@ -196,12 +196,10 @@ include "conexionpdo.php";
  
 <script>
  var isSubmitting = false
-
 $(document).ready(function () {
     $('#form').submit(function(){
         isSubmitting = true
     })
-
     $('#form').data('initial-state', $('#form').serialize());
 
     $(window).on('beforeunload', function() {
@@ -210,46 +208,31 @@ $(document).ready(function () {
         }
     });
 })
-
 function window_mouseout( obj, evt, fn ) {
-
 if ( obj.addEventListener ) {
-
     obj.addEventListener( evt, fn, false );
 }
 else if ( obj.attachEvent ) {
-
     obj.attachEvent( 'on' + evt, fn );
 }
 }
-
 window_mouseout( document, 'mouseout', event => {
-
 event = event ? event : window.event;
-
 var from = event.relatedTarget || event.toElement;
-
 // Si quieres que solo salga una vez el mensaje borra lo comentado
 // y así se guarda en localStorage
 
 let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
 if (!leftWindow  && (!from || from.nodeName === 'HTML') ) {
-
     // Haz lo que quieras aquí
     alert( '!Estas a punto de salir!' );
      localStorage.setItem( 'leftWindow', true );
 }
 } );
   
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
     (function () { 
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
-        // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
           .forEach(function (form) {
             form.addEventListener('submit', function (event) {
@@ -267,3 +250,21 @@ $(document).ready(function() {
       window.open(this.href,'_self');
     }
 </script>
+<script>
+ function soloLetrasnumeros(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = "áéíóúabcdefghijklmnñopqrstuvw,.xyz 0123456789";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+ </script>

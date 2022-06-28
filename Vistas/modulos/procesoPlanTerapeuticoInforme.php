@@ -91,7 +91,7 @@
                                     $dni = $row['DNI'];
                                     $fecha = $row['FECHA_NACIMIENTO'];
                               ?>              
-                          <label for="" class="control-label">Paciente</label> 
+                          <label for="" class="control-label">Nombre del Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre_pa;?>">
                             <input  hidden name="EXPEDIENTE_CITA_PSICOLOGICO" value="<?php echo $codigo_cita;?>">
