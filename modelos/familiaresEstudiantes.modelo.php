@@ -39,11 +39,12 @@
 
                       $query_param = "INSERT INTO `tbl_familiares_estudiante` (`CODIGO_ESTUDIANTE`, `CODIGO_FAMILIAR`, `CODIGO_PARENTESCO`) 
                       VALUES ('$EstudianteParentesco', '$familiar_parentesco', '$Parentesco');";
+                      
 
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
-                       
+                        alert('¡Se agrego correctamente!');
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
                         
@@ -104,7 +105,7 @@
                   $resul=$conn->query($query_familiar);
                   if($resul >0){
                     echo "<script> 
-                   
+                    alert('¡Se modificó correctamente!');
                     window.location = 'crudFamiliaresEstudiantes';
                     </script>";
                     
