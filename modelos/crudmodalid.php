@@ -32,6 +32,7 @@
                       if($resul >0){
                         echo "<script> 
                         window.location = 'crudmodalidad';
+                        alert('¡Modalidad agregada correctamente');
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';

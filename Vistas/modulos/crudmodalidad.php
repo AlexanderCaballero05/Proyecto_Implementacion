@@ -26,6 +26,7 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
+ANY HERNANDEZ           26/06/22                     ARREGLOS DE DESCRIPCION 
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -101,7 +102,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Tipo modalidad</th>
-                          <th class="text-center">Descripcion</th>
+                          <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -214,19 +215,19 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Tipo Modalidad</label>
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
-                                           autocomplete = "off" type="text"  name="editar_modalidad" id="edimoda" required="">
+                                           autocomplete = "off" type="text" onblur="quitarespacios(this);" onKeyDown="quitarespacios(this);"  name="editar_modalidad" id="edimoda" required="">
                                           <div class="invalid-feedback">
-                                             Campo obligatorio.
+                                             Campo Obligatorio.
                                           </div>
                                         </div>
                                    </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"  onkeyup="mayus(this);" onkeypress="return soloLetras(event);" 
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100" 
                                            autocomplete = "off" type="text"   name="editar_descripcion1" id="edidemoda" required="">
                                           <div class="invalid-feedback">
-                                           Campo obligatorio.
+                                           Campo Obligatorio.
                                            </div>
                                         </div>
                                       </div>
@@ -292,10 +293,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Tipo Modalidad</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" 
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5" onkeyup="mayus(this);" onblur="quitarespacios(this);"  onKeyDown="quitarespacios(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" 
                                     placeholder="Ingrese modalidad" name="nombremodalidad" id ="moda" required="">
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo Obligatorio.
                                    </div>
 
                                 </div>
@@ -303,10 +304,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                    <textarea  type="text"   class="form-control"  maxlength="100"   autocomplete = "off" type="text" 
                                      placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id= "modali" required=""></textarea>
                                     <div class="invalid-feedback">
-                                  campo obligatorio.
+                                  Campo Obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -401,12 +402,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     return false;
     }
   }
-   //funcion para quitar espacios
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
+  
   //funcion para poner mayusculas
   function mayus(e) {
     e.value = e.value.toUpperCase();
@@ -427,13 +423,20 @@ bitacora($codigoObjeto,$accion,$descripcion);
    limpia = limpia.trim();
    e.value = limpia;
   };
-  //otra funcion para quitar espacios :V
-  function quitarespacios(e) {
+  
+  </script>
+
+ 
+   <script type="text/javascript">
+   //otra funcion para quitar espacios :V
+   function quitarespacios(e) {
     var cadena =  e.value;
     cadena = cadena.trim();
     e.value = cadena;
   };
 </script>
+
+
 <script>
     function Descargar() {
       window.open('Reportes_Prosecar/reportemodalidad.php','_blank');
