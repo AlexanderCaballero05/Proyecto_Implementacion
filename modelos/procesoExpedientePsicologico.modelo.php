@@ -58,7 +58,6 @@ if(isset($_POST['EXPEDIENTE_CITA_PSICOLOGICO'])){
         $consulTITA=$conn->query($update);
         if ($consulTITA >0 ){
             echo "<script> 
-            aler('Se actualizo correctamente');
             window.location = 'crudPacientesPsicologicos';
             </script>";  
             exit;
