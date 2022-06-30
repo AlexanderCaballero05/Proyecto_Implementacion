@@ -26,6 +26,7 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
+Diana Rut Garcia         30/06/2022                  Cambios en el titulo
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -122,7 +123,7 @@ $result3= $conn->query($query);
 <body>
     <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light">
+        <section class="content-header text-xl-center mb-3 ">
               <h4> Registrar Citas Generales
         </section>
         <div class="card">

@@ -180,10 +180,12 @@ class PDF extends FPDF {
 	$strquery ="select ex.CODIGO_EXPEDIENTE, CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as nombre  ,p.DNI ,t.NUMERO_TELEFONO as telefono, 
     es.NOMBRE as ESTADO,
     p.FECHA_NACIMIENTO,s.SEXO ,c.CORREO_PERSONA
-     from tbl_expediente_psicologico_unico ex, tbl_persona p, tbl_telefono t ,tbl_sexo s,tbl_correo_electronico c, tbl_estado es
-     where  ex.CODIGO_PERSONA = p.CODIGO_PERSONA and t.CODIGO_PERSONA = p.CODIGO_PERSONA 
-     AND s.CODIGO_SEXO = p.SEXO AND  c.CODIGO_PERSONA = p.CODIGO_PERSONA
-     AND es.CODIGO_ESTADO = ex.CODIGO_ESTADO;";
+     from tbl_expediente_psicologico_unico ex
+          LEFT JOIN tbl_persona p on ex.CODIGO_PERSONA = p.CODIGO_PERSONA
+     LEFT JOIN tbl_sexo s on s.CODIGO_SEXO = p.SEXO 
+     LEFT JOIN  tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+     LEFT JOIN tbl_estado es on es.CODIGO_ESTADO = ex.CODIGO_ESTADO
+     LEFT JOIN tbl_telefono t on  t.CODIGO_PERSONA = p.CODIGO_PERSONA";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);

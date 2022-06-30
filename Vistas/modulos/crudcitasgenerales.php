@@ -27,6 +27,7 @@ descripcion:       Pantalla que contrala las citas generales permitiendolo edita
 
 Programador               Fecha                      Descripcion
 ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
+Diana Rut Garcia            30/06/2022                 Cambi en el titulo
 ----------------------------------------------------------------------->
 
 
@@ -77,7 +78,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
+    <div class="content-header text-xl-center mb-3 ">
               <h4>Citas Generales Prosecar </h4>
     </div>
     <section class="content">

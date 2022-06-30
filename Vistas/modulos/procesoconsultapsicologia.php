@@ -168,7 +168,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6"> 
                         <label>Síntomas</label> 
                         <div class="form-group">
-                          <textarea type="textarea"  class="form-control" maxlength="100" minlength="5"  required onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off"  name="sintomas3"></textarea>
+                          <textarea type="textarea"  class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" required onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off"  name="sintomas3"></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
