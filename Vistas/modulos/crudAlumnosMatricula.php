@@ -21,7 +21,7 @@
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de alumnos matrículadas
     Fecha:            
-    Programador:       
+    Programador:       Arnold Caballero
     descripcion:       Permite llevar un mantenimiento de los alummnos ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio
@@ -191,7 +191,7 @@
                                     if($row > 0){
                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                     $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                    $evaluar_permiso->execute(array($usuariomo, '59'));
+                                    $evaluar_permiso->execute(array($usuariomo, '24'));
                                     $row1=$evaluar_permiso->fetchColumn();
                                       $permiso_registrar =$row1;             
                                     }

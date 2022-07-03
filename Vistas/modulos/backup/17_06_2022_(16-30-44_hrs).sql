@@ -1,1238 +1,0 @@
-SET FOREIGN_KEY_CHECKS=0;
-
-CREATE DATABASE IF NOT EXISTS db_proyecto_prosecar;
-
-USE db_proyecto_prosecar;
-
-DROP TABLE IF EXISTS tbl_alergias;
-
-CREATE TABLE `tbl_alergias` (
-  `CODIGO_ALERGIAS` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_ALERGIAS`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_alergias VALUES("1","ALERGIA AL AGUA","ALERGIA EXTRA√ëA","EMILIO","2022-04-19","","0000-00-00");
-INSERT INTO tbl_alergias VALUES("2","ALERGIA AL POLVO","REACCION ALERGICA AL POLVO","EMILIO","2022-04-19","","0000-00-00");
-INSERT INTO tbl_alergias VALUES("3","NINGUNA","NO HAY, NO EXISTE","EMILIO","2022-04-19","","0000-00-00");
-
-
-
-DROP TABLE IF EXISTS tbl_apariencia_fisica;
-
-CREATE TABLE `tbl_apariencia_fisica` (
-  `CODIGO_APARIENCIA` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`CODIGO_APARIENCIA`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_apariencia_fisica VALUES("1","EDEMA HINCHAZON");
-INSERT INTO tbl_apariencia_fisica VALUES("2","ICTERICIA");
-INSERT INTO tbl_apariencia_fisica VALUES("3","PALIDEZ");
-
-
-
-DROP TABLE IF EXISTS tbl_area;
-
-CREATE TABLE `tbl_area` (
-  `CODIGO_AREA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_AREA`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_area VALUES("1","ACADEMICA","AREA DE CLASES","ADMIN","2022-03-17","2022-04-07","ADMIN");
-INSERT INTO tbl_area VALUES("2","MEDICA","AREA DE MEDICINA","ADMIN","2022-03-17","2022-04-07","ADMIN");
-INSERT INTO tbl_area VALUES("3","PSICOLOGICA","AREA DE PSICOLOGIA","ADMIN","2022-03-17","2022-04-22","ARNOLDI√ëO");
-INSERT INTO tbl_area VALUES("4","ESPIRITUAL","AREA ESPIRITUAL","ARNOLDI√ëO","2022-04-22","0000-00-00","");
-INSERT INTO tbl_area VALUES("6","ODONTOLOGICA","ODONTOLOGIA GENERAL ","","2022-04-26","","");
-
-
-
-DROP TABLE IF EXISTS tbl_bitacora_sistema;
-
-CREATE TABLE `tbl_bitacora_sistema` (
-  `CODIGO_BITACORA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_USUARIO` int(5) NOT NULL,
-  `CODIGO_OBJETO` int(5) DEFAULT NULL,
-  `FECHA` date DEFAULT NULL,
-  `ACCION` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DESCRIPCION` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_BITACORA`),
-  KEY `FK_COD_USU_BIT` (`CODIGO_USUARIO`),
-  KEY `FK_COD_OBJ_BIT` (`CODIGO_OBJETO`),
-  CONSTRAINT `FK_COD_OBJ_BIT` FOREIGN KEY (`CODIGO_OBJETO`) REFERENCES `tbl_objetos` (`CODIGO_OBJETO`),
-  CONSTRAINT `FK_COD_USU_BIT` FOREIGN KEY (`CODIGO_USUARIO`) REFERENCES `tbl_usuario` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_bitacora_sistema VALUES("1","1","1","2022-06-05","Ingreso al modulo de administrador","Usuario se autentifico");
-INSERT INTO tbl_bitacora_sistema VALUES("2","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("3","1","13","2022-06-05","Ingreso a la tabla de registro de personas","Usuario se autentifico");
-INSERT INTO tbl_bitacora_sistema VALUES("4","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("5","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("6","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("7","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("8","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("9","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("10","1","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("11","1","1","2022-06-05","salio al modulo de administrador","Usuario se salio del sistema");
-INSERT INTO tbl_bitacora_sistema VALUES("12","2","1","2022-06-05","Ingreso al modulo de administrador","Usuario se autentifico");
-INSERT INTO tbl_bitacora_sistema VALUES("13","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("14","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("15","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("16","2","1","2022-06-05","Usuario ingreso a modificar preguntas","Usuario modifico las preguntas");
-INSERT INTO tbl_bitacora_sistema VALUES("17","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("18","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("19","2","1","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("20","2","20","2022-06-05","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
-INSERT INTO tbl_bitacora_sistema VALUES("21","2","20","2022-06-05","Ingreso al proceso de Carga Academica","Usuario se autentifico ");
-INSERT INTO tbl_bitacora_sistema VALUES("22","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("23","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("24","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("25","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("26","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("27","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("28","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("29","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("30","2","14","2022-06-05","Ingreso a la pantalla de mantenimiento usuarios","Ver los registros de los usuarios");
-INSERT INTO tbl_bitacora_sistema VALUES("31","2","13","2022-06-05","Ingreso a la tabla de registro de personas","Usuario se autentifico");
-INSERT INTO tbl_bitacora_sistema VALUES("32","2","1","2022-06-05","salio al modulo de administrador","Usuario se salio del sistema");
-INSERT INTO tbl_bitacora_sistema VALUES("33","2","1","2022-06-05","Intento de login fallido","Ingreso de Credenciales incorrectas");
-INSERT INTO tbl_bitacora_sistema VALUES("34","2","1","2022-06-05","Intento de login fallido","Ingreso de Credenciales incorrectas");
-INSERT INTO tbl_bitacora_sistema VALUES("35","2","1","2022-06-05","Ingreso al modulo de administrador","Usuario se autentifico");
-INSERT INTO tbl_bitacora_sistema VALUES("36","2","1","2022-06-05","Parametros Usuarios","Ver los parametros de los usuarios");
-
-
-
-DROP TABLE IF EXISTS tbl_carga_academica;
-
-CREATE TABLE `tbl_carga_academica` (
-  `CODIGO_CARGA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_TUTORIA` int(5) NOT NULL,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `CODIGO_MODALIDAD` int(5) DEFAULT NULL,
-  `CODIGO_SECCION` int(5) DEFAULT NULL,
-  `HORA` time DEFAULT NULL,
-  `HORA_FINAL` time NOT NULL,
-  `FECHA_INICIO` date DEFAULT NULL,
-  `FECHA_FINAL` date DEFAULT NULL,
-  `ANIO` int(11) NOT NULL,
-  `PERIODO` int(11) NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CARGA`),
-  KEY `PK_COD_PE` (`CODIGO_PERSONA`),
-  KEY `PK_COD_MOD` (`CODIGO_MODALIDAD`),
-  KEY `PK_COD_TUTO` (`CODIGO_TUTORIA`),
-  KEY `FK_CODSEC_CARG` (`CODIGO_SECCION`),
-  CONSTRAINT `FK_CODSEC_CARG` FOREIGN KEY (`CODIGO_SECCION`) REFERENCES `tbl_seccion` (`CODIGO_SECCION`),
-  CONSTRAINT `PK_COD_MOD` FOREIGN KEY (`CODIGO_MODALIDAD`) REFERENCES `tbl_modalidad` (`CODIGO_MODALIDA`),
-  CONSTRAINT `PK_COD_PE` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`),
-  CONSTRAINT `PK_COD_TUTO` FOREIGN KEY (`CODIGO_TUTORIA`) REFERENCES `tbl_tutoria` (`CODIGO_TUTORIA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_consulta_espiritual;
-
-CREATE TABLE `tbl_consulta_espiritual` (
-  `CODIGO_CONSULTA_ESPIRITUAL` int(10) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CITA` int(10) DEFAULT NULL,
-  `MOTIVO_CONSULTA` longtext DEFAULT NULL,
-  `OBSERVACIONES` longtext DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CONSULTA_ESPIRITUAL`),
-  KEY `COD_CITA_ESPI_FK` (`CODIGO_CITA`),
-  CONSTRAINT `COD_CITA_ESPI_FK` FOREIGN KEY (`CODIGO_CITA`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_CITA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
-DROP TABLE IF EXISTS tbl_consulta_medica;
-
-CREATE TABLE `tbl_consulta_medica` (
-  `CODIGO_CONSULTA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PRECLINICA` int(5) NOT NULL,
-  `CODIGO_CITA` int(5) NOT NULL,
-  `SINTOMAS` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `DIAGNOSTICO_INGRESO` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `EVOLUCION` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `DIAGNOSTICO_EGRESO` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CONSULTA`),
-  KEY `FK_COD_PREC` (`CODIGO_PRECLINICA`),
-  KEY `FK_COD_CIT` (`CODIGO_CITA`),
-  CONSTRAINT `FK_COD_CIT` FOREIGN KEY (`CODIGO_CITA`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_CITA`),
-  CONSTRAINT `FK_COD_PREC` FOREIGN KEY (`CODIGO_PRECLINICA`) REFERENCES `tbl_preclinica` (`CODIGO_PRECLINICA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_contenido_socioeconomico;
-
-CREATE TABLE `tbl_contenido_socioeconomico` (
-  `CODIGO_CONTENIDO_SOCIOECONOMICO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_TIPOSOCIO` int(5) NOT NULL,
-  `NOMBRE_TIPO` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CONTENIDO_SOCIOECONOMICO`),
-  KEY `FK_COD_TIPOSOCIO` (`CODIGO_TIPOSOCIO`),
-  CONSTRAINT `FK_COD_TIPOSOCIO` FOREIGN KEY (`CODIGO_TIPOSOCIO`) REFERENCES `tbl_tipo_socioeconomico` (`CODIGO_TIPOSOCIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_contenido_socioeconomico VALUES("1","1","COMPUTADORA");
-INSERT INTO tbl_contenido_socioeconomico VALUES("2","1","CELULAR");
-INSERT INTO tbl_contenido_socioeconomico VALUES("3","1","TABLET");
-INSERT INTO tbl_contenido_socioeconomico VALUES("4","2","INTERNET RESIDENCIAL");
-INSERT INTO tbl_contenido_socioeconomico VALUES("5","2","DATOS MOVILES");
-INSERT INTO tbl_contenido_socioeconomico VALUES("6","2","AMBOS");
-INSERT INTO tbl_contenido_socioeconomico VALUES("7","3","PADRE");
-INSERT INTO tbl_contenido_socioeconomico VALUES("8","3","MADRE");
-INSERT INTO tbl_contenido_socioeconomico VALUES("9","3","AMBOS");
-INSERT INTO tbl_contenido_socioeconomico VALUES("10","3","REMESAS");
-INSERT INTO tbl_contenido_socioeconomico VALUES("11","4","ENERG√çA EL√âCTRICA");
-INSERT INTO tbl_contenido_socioeconomico VALUES("12","4","AGUA POTABLE");
-INSERT INTO tbl_contenido_socioeconomico VALUES("13","4","ALCANTARILLADO");
-INSERT INTO tbl_contenido_socioeconomico VALUES("14","2","NINGUNO");
-
-
-
-DROP TABLE IF EXISTS tbl_correo_electronico;
-
-CREATE TABLE `tbl_correo_electronico` (
-  `CORREO_PERSONA` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  PRIMARY KEY (`CORREO_PERSONA`),
-  KEY `FK_CORREO` (`CODIGO_PERSONA`),
-  CONSTRAINT `FK_CORREO` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_correo_electronico VALUES("proyecto_prosecar@hotmail.com","1");
-INSERT INTO tbl_correo_electronico VALUES("arnold95caballero@gmail.com","2");
-
-
-
-DROP TABLE IF EXISTS tbl_especialidad;
-
-CREATE TABLE `tbl_especialidad` (
-  `CODIGO_ESPECIALIDAD` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `CODIGO_AREA` int(5) DEFAULT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_ESPECIALIDAD`),
-  KEY `TBL_ESP_FK` (`CODIGO_AREA`),
-  CONSTRAINT `TBL_ESP_FK` FOREIGN KEY (`CODIGO_AREA`) REFERENCES `tbl_area` (`CODIGO_AREA`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_especialidad VALUES("1","MEDICINA GENERAL ","2","ATIENDE DE TODO ","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_especialidad VALUES("2","TERAPIA GENERAL","3","ATIENDE DE TODO TIPO DE LOCOS","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_especialidad VALUES("3","CATEQUESIS JUVENIL","4","CHARLAS CON JOVENES","","0000-00-00","","");
-
-
-
-DROP TABLE IF EXISTS tbl_estado;
-
-CREATE TABLE `tbl_estado` (
-  `CODIGO_ESTADO` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_estado VALUES("1","NUEVO","Este usuario esta ACTIVO");
-INSERT INTO tbl_estado VALUES("2","ACTIVO","este usuario esta nuevo");
-INSERT INTO tbl_estado VALUES("3","INACTIVO","este ususario esta inactivo");
-INSERT INTO tbl_estado VALUES("4","BLOQUEADO","Esta usuario esta en estado de bloqueo");
-INSERT INTO tbl_estado VALUES("5","PENDIENTE","Este usuario esta pendiente de cambiar la contrase");
-INSERT INTO tbl_estado VALUES("6","INDEFINIDO","Este usuario esta deshabiltado ");
-INSERT INTO tbl_estado VALUES("7","CANCELADA","ESTE ESTADO HACE REFERENCIA A LA CITAS");
-INSERT INTO tbl_estado VALUES("8","REALIZADO","ESTADO QUE HACE REFERENCIA A LA REALIZACION");
-INSERT INTO tbl_estado VALUES("9","PROCESO","UNA FUNCION EN PROCESO");
-INSERT INTO tbl_estado VALUES("10","PROCESOPRECLINICA","PARA PRECESO DE PRECLICA");
-INSERT INTO tbl_estado VALUES("11","PROCESOCONSULTA","ESTADO QUE INDICA UNA CITA EN EL PROCESO DE CONSUL");
-INSERT INTO tbl_estado VALUES("12","REPORTECONSULTA","CODIGO QUE PERMITE VER EL REPORTE DE CONSULTA");
-INSERT INTO tbl_estado VALUES("13","FINALIZADO","CODIGO QUE DESCRIBE  LA FINALIZACION DE UN PROCESO");
-INSERT INTO tbl_estado VALUES("14","PLAN_TERAPEUTICO","Estado que espicifica que se hace un plan de terap");
-INSERT INTO tbl_estado VALUES("15","PROCESOENCONSULTA","Esta en consulta justo en ese momento");
-INSERT INTO tbl_estado VALUES("16","REPORTEPLANTERAPIA","ESTADO PARA EL AREA PSICOLOGICA");
-INSERT INTO tbl_estado VALUES("17","EXCELENTE","ESTADO QUE SERA USADO EN MATRICULA");
-INSERT INTO tbl_estado VALUES("18","MUY BUENO","ESTADO QUE SERA USADO EN MATRICULA");
-INSERT INTO tbl_estado VALUES("19","BUENO","ESTADO QUE SERA USADO EN MATRICULA");
-
-
-
-DROP TABLE IF EXISTS tbl_estudiante;
-
-CREATE TABLE `tbl_estudiante` (
-  `CODIGO_ESTUDIANTE` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `GRADO_ACTUAL` int(5) DEFAULT NULL,
-  `REPITENTE` varchar(5) COLLATE utf8mb4_bin NOT NULL,
-  `INDICE_ACADEMICO` int(5) DEFAULT NULL,
-  `MATE_BAJO_RENDI` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  `PASATIEMPOS` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DISTRACTORES_ESCOLARES` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `METAS` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_ESTUDIANTE`),
-  KEY `FK_COD_EST` (`CODIGO_PERSONA`),
-  CONSTRAINT `FK_COD_EST` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_estudiante_socioeconomico;
-
-CREATE TABLE `tbl_estudiante_socioeconomico` (
-  `CODIGO_ESTUDIANTE_SOCIOECONOMICO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CONTENIDO_SOCIOECONOMICO` int(5) NOT NULL,
-  `CODIGO_ESTUDIANTE` int(5) NOT NULL,
-  PRIMARY KEY (`CODIGO_ESTUDIANTE_SOCIOECONOMICO`),
-  KEY `FK_CONTSOCIO` (`CODIGO_CONTENIDO_SOCIOECONOMICO`),
-  KEY `FK_COD_CON_ES` (`CODIGO_ESTUDIANTE`),
-  CONSTRAINT `FK_COD_CON_ES` FOREIGN KEY (`CODIGO_ESTUDIANTE`) REFERENCES `tbl_estudiante` (`CODIGO_ESTUDIANTE`),
-  CONSTRAINT `FK_CONTSOCIO` FOREIGN KEY (`CODIGO_CONTENIDO_SOCIOECONOMICO`) REFERENCES `tbl_contenido_socioeconomico` (`CODIGO_CONTENIDO_SOCIOECONOMICO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_examenes_medicos;
-
-CREATE TABLE `tbl_examenes_medicos` (
-  `CODIGO_EXAMEN_MEDICO` int(11) NOT NULL AUTO_INCREMENT,
-  `EXAMEN_MEDICO` varchar(80) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_EXAMEN_MEDICO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_examenes_medicos VALUES("1","HEMOGRAMA","EXAMEN DE SANGRE","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_examenes_medicos VALUES("2","URALISIS","","EMILIO","2022-04-20","0000-00-00","");
-INSERT INTO tbl_examenes_medicos VALUES("3","PRUEBA PCR","","EMILIO","2022-04-20","0000-00-00","");
-
-
-
-DROP TABLE IF EXISTS tbl_expediente_medico;
-
-CREATE TABLE `tbl_expediente_medico` (
-  `CODIGO_EXPEDIENTE` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `CODIGO_ESTADO` int(5) DEFAULT NULL,
-  `CODIGO_TIPO_SANGRE` int(5) DEFAULT NULL,
-  `TRATAMIENTOS` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `ENFERMEDADES` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_EXPEDIENTE`),
-  KEY `COD_EXP_PERSONA` (`CODIGO_PERSONA`),
-  KEY `FK_COD_TIPO_SANGRE` (`CODIGO_TIPO_SANGRE`),
-  KEY `COD_EST_EXPE` (`CODIGO_ESTADO`),
-  CONSTRAINT `COD_EST_EXPE` FOREIGN KEY (`CODIGO_ESTADO`) REFERENCES `tbl_estado` (`CODIGO_ESTADO`),
-  CONSTRAINT `COD_EXP_PERSONA` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`),
-  CONSTRAINT `FK_COD_TIPO_SANGRE` FOREIGN KEY (`CODIGO_TIPO_SANGRE`) REFERENCES `tbl_tipo_sangre` (`CODIGO_TIPO_SANGRE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_expediente_psicologico_consulta;
-
-CREATE TABLE `tbl_expediente_psicologico_consulta` (
-  `CODIGO_EXPEDIENTE_PSICO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CITA` int(5) DEFAULT NULL,
-  `SINTOMAS` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DIAGNOSTICO_INGRESO` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DIAGNOSTICO_EGRESO` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
-  `OBSEVARCIONES` varchar(600) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_EXPEDIENTE_PSICO`),
-  KEY `FK_CODIGO_CITA_CONSULTA` (`CODIGO_CITA`),
-  CONSTRAINT `FK_CODIGO_CITA_CONSULTA` FOREIGN KEY (`CODIGO_CITA`) REFERENCES `tbl_inscripcion_cita` (`CODIGO_CITA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_expediente_psicologico_unico;
-
-CREATE TABLE `tbl_expediente_psicologico_unico` (
-  `CODIGO_EXPEDIENTE` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) DEFAULT NULL,
-  `CODIGO_ESTADO` int(5) DEFAULT NULL,
-  `ANTECEDENTES_FAMILIARES` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `ANTECEDENTES_PERSONALES` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `ANTECEDENTES_CLINICOS` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  PRIMARY KEY (`CODIGO_EXPEDIENTE`),
-  KEY `COD_EXP_PERSONA` (`CODIGO_PERSONA`) USING BTREE,
-  KEY `COD_ESTA_EXPE` (`CODIGO_ESTADO`) USING BTREE,
-  CONSTRAINT `COD_ESTA_EXPEUN` FOREIGN KEY (`CODIGO_ESTADO`) REFERENCES `tbl_estado` (`CODIGO_ESTADO`),
-  CONSTRAINT `COD_EXPSI_PERSONA` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_familiar;
-
-CREATE TABLE `tbl_familiar` (
-  `CODIGO_FAMILIAR` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `ESTADO_CIVIL` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
-  `NIVEL_EDUCATIVO` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
-  `INGRESOS_DE_FAMILIAR` int(6) DEFAULT NULL,
-  `NOMBRE_IGLESIA` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_FAMILIAR`),
-  KEY `FAM_PK` (`CODIGO_PERSONA`),
-  CONSTRAINT `FAM_PK` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_familiares_estudiante;
-
-CREATE TABLE `tbl_familiares_estudiante` (
-  `CODIGO_FAMILIAR_ESTUDIANTE` int(5) NOT NULL AUTO_INCREMENT,
-  `CODIGO_ESTUDIANTE` int(5) DEFAULT NULL,
-  `CODIGO_FAMILIAR` int(5) DEFAULT NULL,
-  `CODIGO_PARENTESCO` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_FAMILIAR_ESTUDIANTE`),
-  KEY `COD_ESTU_PARE` (`CODIGO_ESTUDIANTE`),
-  KEY `COD_FAM_PARE` (`CODIGO_FAMILIAR`),
-  KEY `COD_PARA_PARE` (`CODIGO_PARENTESCO`),
-  CONSTRAINT `COD_ESTU_PARE` FOREIGN KEY (`CODIGO_ESTUDIANTE`) REFERENCES `tbl_estudiante` (`CODIGO_ESTUDIANTE`),
-  CONSTRAINT `COD_FAM_PARE` FOREIGN KEY (`CODIGO_FAMILIAR`) REFERENCES `tbl_familiar` (`CODIGO_FAMILIAR`),
-  CONSTRAINT `COD_PARA_PARE` FOREIGN KEY (`CODIGO_PARENTESCO`) REFERENCES `tbl_parentesco` (`CODIGO_PARENTESCO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
-DROP TABLE IF EXISTS tbl_inscripcion_cita;
-
-CREATE TABLE `tbl_inscripcion_cita` (
-  `CODIGO_CITA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) DEFAULT NULL,
-  `CODIGO_ESPECIALISTA` int(5) DEFAULT NULL,
-  `CODIGO_ESTADO` int(5) NOT NULL,
-  `AREA_CITA` int(5) NOT NULL,
-  `FECHA_CITA` date DEFAULT NULL,
-  `HORARIO` time DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CITA`),
-  KEY `FK_CODIGO_PERSONAS` (`CODIGO_PERSONA`),
-  KEY `FK_CODIGO_ESPECIALISTA` (`CODIGO_ESPECIALISTA`),
-  KEY `COD_ESTA_FK` (`CODIGO_ESTADO`),
-  KEY `COD_AREA_FK` (`AREA_CITA`),
-  CONSTRAINT `COD_AREA_FK` FOREIGN KEY (`AREA_CITA`) REFERENCES `tbl_area` (`CODIGO_AREA`),
-  CONSTRAINT `COD_ESTA_FK` FOREIGN KEY (`CODIGO_ESTADO`) REFERENCES `tbl_estado` (`CODIGO_ESTADO`),
-  CONSTRAINT `FK_CODIGO_ESPECIALISTA` FOREIGN KEY (`CODIGO_ESPECIALISTA`) REFERENCES `tbl_persona_especialidad` (`CODIGO_PERSONA_ESPECIALIDAD`),
-  CONSTRAINT `FK_CODIGO_PERSONAS` FOREIGN KEY (`CODIGO_PERSONA`) REFERENCES `tbl_persona` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_matricula_academica;
-
-CREATE TABLE `tbl_matricula_academica` (
-  `CODIGO_MATRICULA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CARGA` int(5) DEFAULT NULL,
-  `CODIGO_ESTUDIANTE` int(5) DEFAULT NULL,
-  `OBSERVACION` int(5) DEFAULT NULL,
-  `FECHA_MATRICULA` date DEFAULT NULL,
-  `OBSERVACION_MATRICULA` longtext COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_FINALMATRICULA` date DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_MATRICULA`),
-  KEY `FK_COD_ESTU` (`CODIGO_ESTUDIANTE`),
-  KEY `FK_COD_CARGA_MATR` (`CODIGO_CARGA`),
-  KEY `FK_COD_ESTA_MATR` (`OBSERVACION`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_matricula_academica VALUES("1","1","1","13","2022-05-25","  muy bien","2022-05-25","ROBERTO","2022-05-25","","");
-INSERT INTO tbl_matricula_academica VALUES("2","2","1","13","2022-05-25","muy bien  ","2022-05-25","ROBERTO","2022-05-25","","");
-
-
-
-DROP TABLE IF EXISTS tbl_medicamento;
-
-CREATE TABLE `tbl_medicamento` (
-  `CODIGO_MEDICAMENTO` varchar(10) NOT NULL,
-  `NOMBRE_MEDICAMENTO` varchar(50) DEFAULT NULL,
-  `DESCRIPCION` varchar(100) DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_MEDICAMENTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO tbl_medicamento VALUES("A1","TOSAN","PARA LA TOS","EMILIO","2022-04-20","","0000-00-00");
-INSERT INTO tbl_medicamento VALUES("A2","VITAMINA D","VITAMINAS","EMILIO","2022-04-20","","0000-00-00");
-INSERT INTO tbl_medicamento VALUES("A4","VITAMINA C","VITAMINAS","EMILIO","2022-04-20","","0000-00-00");
-
-
-
-DROP TABLE IF EXISTS tbl_modalidad;
-
-CREATE TABLE `tbl_modalidad` (
-  `CODIGO_MODALIDA` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_MODALIDA`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_modalidad VALUES("1","PRESENCIAL","Clases en la parroquia");
-INSERT INTO tbl_modalidad VALUES("2","VIRTUAL","No tiene que ir ");
-
-
-
-DROP TABLE IF EXISTS tbl_ms_hist_contrasena;
-
-CREATE TABLE `tbl_ms_hist_contrasena` (
-  `CODIGO_HIST_CONTRASENA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_USUARIO` int(5) NOT NULL,
-  `CONTRASENA` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_HIST_CONTRASENA`),
-  KEY `FK_COD_USU_HISCON` (`CODIGO_USUARIO`),
-  CONSTRAINT `FK_COD_USU_HISCON` FOREIGN KEY (`CODIGO_USUARIO`) REFERENCES `tbl_usuario` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_objetos;
-
-CREATE TABLE `tbl_objetos` (
-  `CODIGO_OBJETO` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_OBJETO`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_objetos VALUES("1","ESTADO","SISTEMA DE ADMINISTRACION. ","Administrador","2022-02-09","2022-05-03","ADMIN");
-INSERT INTO tbl_objetos VALUES("2","ROLES","OBJETO DONDE SE REGISTRAN PERSONAS   ","Administrador","2022-02-06","2022-05-03","ADMIN");
-INSERT INTO tbl_objetos VALUES("3","PARAMETROS"," OBJETO MANTENIMIENTO PARAMETROS","Administrador","2022-03-04","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("4","PREGUNTAS","OBJETO MANTENIMIENTO PREGUNTAS  ","ADMIN","2022-03-04","2022-05-03","ADMIN");
-INSERT INTO tbl_objetos VALUES("5","PERMISOS","OBJETO MANTENIMIENTO PERMISOS  ","ADMIN","2022-03-04","2022-05-03","ADMIN");
-INSERT INTO tbl_objetos VALUES("6","OBJETOS","OBJETO MANTENIMIENTO OBJETOS","ADMIN","2022-03-04","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("7","BITACORA","OBJETO CONSULTA BITACORA","ADMIN","2022-03-04","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("8","PREGUNTAS_USUARIOS","OBJETO CONSULTA PREGUNTAS USUARIOS.","ADMIN","2022-03-04","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("9","PARAMETROS_USUARIOS","OBJETO MANTENIMIENTO PARAMETROS USUARIOS  ","","0000-00-00","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("10","BACKUP ","OBJETO MANTENIMIENTO BACKUP  ","ADMIN","2022-03-04","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("11","RESTAURACION","Objeto mantenimiento restauracion","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("12","TIPO_PERSONAS","Mantenimiento de la tabla tipo de personas.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("13","REGISTRAR_PERSONAS","Objeto registra una persona.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("14","EDITAR_USARIOS","Objeto mantenimiento usuarios.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("15","EDITAR_PERSONAS","Objeto mantenimiento personas.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("16","ESTUDIANTES","Objeto mantenimiento estudiantes.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("17","TIPO_SOCIOECONOMICO","Objeto mantenimiento tipo socioeconomico.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("18","CONTENIDO_SOCIOECONOMICO","Objeto mantenimiento contenido socioeconomico.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("19","MODALIDAD","Objeto mantenimiento modalidad","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("20","CARGA_ACADEMICA","Objeto mantenimiento carga acad√©mica.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("21","AREA","Objeto mantenimiento de √°rea.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("22","TUTORIA","Objeto mantenimiento de tutoria.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("23","MATRICULA","Objeto mantenimiento matricula.","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("24","CALIFICACIONES","Objeto mantenimiento calificaciones","ADMIN","2022-03-04","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("25","GESTION_PERSONAS","Gestion complete de personas.","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("26","GESTION_ESTUDIANTES","OBJETO DE GESTION DE LOS ESTUDIANTES","ADMIN","2022-03-10","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("27","GESTION_SEGURIDAD","GESTION DE SEGURIDAD","ADMIN","2022-03-10","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("28","GESTION_CARGA_ACADEMICA","OBJETO DE GESTION DE LA CARGA ACADEMICA","ADMIN","2022-03-10","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("29","GESTION_MATRICULA","OBJETO DE GESTION DE LAS MATRICULAS DE LOS ALUMNOS","ADMIN","2022-03-10","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("30","GESTION_AREA_MEDICA","OBJETO DE GESTION DE LAS CITAS MEDICAS","ADMIN","2022-03-10","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("31","GESTION_AREA_PSICOLOGIA","OBJETO DEL AREA PSICOLOGICA","ADMIN","2022-03-18","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("32","GESTION_DE_CITAS","DED","","2022-03-27","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("33","GESTIONFAMILIARES","PERMISOS PARA INSERTAR DATOS SOCIECONOMICOS FAMILIARES","","2022-03-31","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("34","RECETAMEDICA","CRUD Y PROCESO","","2022-04-07","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("35","MEDICAMENTOS","PERMISO MEDICAMENTOS","","2022-04-07","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("36","TRANSTORNOS","PERMISO PARA EL MANTENIMIENTO","","2022-04-07","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("37","TIPOSANGRE","MANTENIMIENTO TIPO SANGRE","","2022-04-08","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("38","GESTION_TUTOR ACADEMICO","AREA DEL TUTOR ACADEMICO  ","","2022-04-21","2022-05-06","ADMIN");
-INSERT INTO tbl_objetos VALUES("39","ALERGIAS","OBJETO MANTENIMIENTO ALEGIAS","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("40","APARIENCIA FISICA","OBJETO MANTENIMIENTO APARIENCIA","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("41","ESPECIALIDADES","OBJETO MANTENIMIENTO ESPECIALIDADES","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("42","EXAMENES MEDICOS","OBJETO MANTENIMIENTO EXAMENES","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("43","FAMILIARES","OBETO MANTENIMIENTO FAMILIARES","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("44","PARENTESCO","OBJETO MANTENIMIENTO PARANTESCO","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("45","SACRAMENTO","OBJETO MANTENIMIENTO SACRAMENTOS","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("46","SECCION ","OBJETO MANTENIMIENTO SECCIONES","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("47","SINTOMAS NEUROTICOS","OBJETO MANTENIMIENTO SINTOMAS NEUROTICOS","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("48","CITAS GENERALES","OBJETO CITAS GENERALES","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("49","GESTION PRECLINICA","OBJETO DE GESTION PRECLINICA","","2022-04-24","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("50","PRECLINICA","OBJETO PARA VER PRECLINICA POR PARTE DE LOS MEDICOS","","2022-04-24","0000-00-00","");
-INSERT INTO tbl_objetos VALUES("51","GESTION DE ESTUDIANTE","VER LO ASIGNADO A EL ESTUDIANTE.","ADMIN","2022-05-03","","");
-INSERT INTO tbl_objetos VALUES("52","GESTION TUTOR ESPIRITUAL","AREA DEL TUTOR ESPIRITUAL","ALBERT","2022-05-06","","");
-INSERT INTO tbl_objetos VALUES("53","CALIFICACIONES ESPIRITUALES","OBJETO QUE PERMITE CALIFICAR LAS TUTORIAS ESPIRITUALES","ADMIN","2022-05-20","","");
-
-
-
-DROP TABLE IF EXISTS tbl_parametros;
-
-CREATE TABLE `tbl_parametros` (
-  `CODIGO_PARAMETRO` int(11) NOT NULL AUTO_INCREMENT,
-  `PARAMETRO` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `VALOR` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PARAMETRO`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_parametros VALUES("1","NUM_INTEN_VALIDOS","3","Administrador","2022-02-07","2022-03-10","ADMIN");
-INSERT INTO tbl_parametros VALUES("2","NUM_MAX_PREGUNTAS","1","Administrador","2022-02-07","2022-04-26","");
-INSERT INTO tbl_parametros VALUES("3","NUM_MAX_CONTRASENAS","8","Administrador","2022-02-07","2022-03-10","ADMIN");
-INSERT INTO tbl_parametros VALUES("4","NUM_MAX_CARACTER","15","Administrador","2022-02-07","2022-04-07","ADMIN");
-INSERT INTO tbl_parametros VALUES("5","ADMIN_SERVIDOR_CORREO","smtp.gmail.com","","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("6","ADMIN_CPASSWORD","Prosecar123*","Administrador","2022-02-23","0000-00-00","");
-INSERT INTO tbl_parametros VALUES("7","ADMIN_CUSUARIO","prosecarinstancia@gmail.com","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_parametros VALUES("8","ADMIN_CPUERTO","587","ADMIN","2022-03-07","0000-00-00","");
-INSERT INTO tbl_parametros VALUES("10","NOMBRE_EMPRESA","PROYECTO SEMILLERO CARMELITANO PROSECAR\n","ADMIN","2022-03-22","0000-00-00","");
-INSERT INTO tbl_parametros VALUES("11","FECHAINICIAL","Y-m-d","ADMIN","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("12","HORA_INICIO_ATENCIONCITA","09:00","ADMIN","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("13","HORA_FINAL_ATENCIONCITA","18:00","ADMIN","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("14","HORA_INICIO_CARGAACADEMICA","09:00","ADMIN","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("15","HORA_FINAL_CARGAACADEMICA","18:00","ADMIN","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("16","NUM_MIN_CARACTER","5","Administrador","2022-05-26","","");
-INSERT INTO tbl_parametros VALUES("17","MAX_USUARIO","15","Administrador","2022-05-26","","");
-INSERT INTO tbl_parametros VALUES("18","MIN_USUARIO","3","Administrador","2022-05-26","","");
-INSERT INTO tbl_parametros VALUES("19","NUM_INTENTOS_PREGUNTAS","2","Administrador","2022-05-31","","");
-INSERT INTO tbl_parametros VALUES("20","MIN_RESPUESTA_PREGUNTAS","4","","0000-00-00","","");
-INSERT INTO tbl_parametros VALUES("21","MAX_RESPUESTA_PREGUNTAS","50","","0000-00-00","","");
-
-
-
-DROP TABLE IF EXISTS tbl_parametros_usuarios;
-
-CREATE TABLE `tbl_parametros_usuarios` (
-  `CODIGO_PARAM_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_USUARIO` int(5) DEFAULT NULL,
-  `CODIGO_PARAMETRO` int(5) DEFAULT NULL,
-  `PAR_VALOR` int(5) DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PARAM_USUARIO`),
-  KEY `FK_CODPAR_USU` (`CODIGO_USUARIO`),
-  KEY `FK_CODPAR_PAR` (`CODIGO_PARAMETRO`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_parametros_usuarios VALUES("1","1","1","0","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("2","2","1","2","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("3","2","2","1","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("4","2","3","0","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("29","2","19","0","","0000-00-00","","");
-
-
-
-DROP TABLE IF EXISTS tbl_parentesco;
-
-CREATE TABLE `tbl_parentesco` (
-  `CODIGO_PARENTESCO` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PARENTESCO`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
-
-INSERT INTO tbl_parentesco VALUES("1","PADRE");
-INSERT INTO tbl_parentesco VALUES("2","MADRE");
-INSERT INTO tbl_parentesco VALUES("3","HERMANA");
-INSERT INTO tbl_parentesco VALUES("4","HERMANO");
-INSERT INTO tbl_parentesco VALUES("5","ABUELA");
-INSERT INTO tbl_parentesco VALUES("6","ABUELO");
-INSERT INTO tbl_parentesco VALUES("7","TIO");
-INSERT INTO tbl_parentesco VALUES("8","TIA");
-
-
-
-DROP TABLE IF EXISTS tbl_permisos;
-
-CREATE TABLE `tbl_permisos` (
-  `CODIGO_PERMISO` int(10) NOT NULL AUTO_INCREMENT,
-  `CODIGO_TIPO_ROL` int(5) DEFAULT NULL,
-  `CODIGO_OBJETO` int(5) DEFAULT NULL,
-  `INSERTAR` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL,
-  `ELIMINAR` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL,
-  `ACTUALIZAR` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL,
-  `MOSTRAR` varchar(5) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERMISO`),
-  KEY `FK_CO_OBJECT` (`CODIGO_OBJETO`),
-  KEY `FK_CO_TROL` (`CODIGO_TIPO_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_permisos VALUES("1","1","1","SI","SI","SI","SI","Administrador","2022-03-02","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("3","2","24","SI","SI","SI","SI","Administrador","2022-03-02","$1","2022-04-24");
-INSERT INTO tbl_permisos VALUES("4","4","1","NO","NO","NO","NO","","0000-00-00","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("5","3","1","SI","SI","SI","SI","ADMIN","2022-03-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("6","1","2","SI","SI","SI","SI","ADMIN","2022-03-04","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("7","1","19","SI","SI","SI","SI","ADMIN","2022-03-04","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("8","1","5","SI","SI","SI","SI","ADMIN","2022-03-05","ADMIN","2022-03-11");
-INSERT INTO tbl_permisos VALUES("9","1","8","SI","NO","SI","SI","ADMIN","2022-03-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("10","1","10","SI","SI","SI","SI","ADMIN","2022-03-05","$1","2022-04-24");
-INSERT INTO tbl_permisos VALUES("11","1","12","SI","SI","SI","SI","ADMIN","2022-03-05","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("12","1","15","SI","SI","SI","SI","ADMIN","2022-03-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("13","1","3","SI","SI","SI","SI","ADMIN","2022-03-07","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("14","1","4","SI","SI","SI","SI","ADMIN","2022-03-07","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("15","2","38","SI","SI","SI","SI","ADMIN","2022-03-08","ARNOLDI√ëO","2022-04-21");
-INSERT INTO tbl_permisos VALUES("17","1","25","SI","SI","SI","SI","","0000-00-00","$1","2022-04-25");
-INSERT INTO tbl_permisos VALUES("18","1","26","SI","SI","SI","SI","ADMIN","2022-03-10","ADMIN","2022-03-10");
-INSERT INTO tbl_permisos VALUES("19","1","27","SI","SI","SI","SI","ADMIN","2022-03-10","ADMIN","2022-03-10");
-INSERT INTO tbl_permisos VALUES("20","2","28","NO","NO","NO","NO","ADMIN","2022-03-10","ARNOLDI√ëO","2022-04-21");
-INSERT INTO tbl_permisos VALUES("21","2","29","NO","NO","NO","NO","ADMIN","2022-03-10","ARNOLDI√ëO","2022-04-21");
-INSERT INTO tbl_permisos VALUES("22","1","9","SI","SI","SI","SI","ADMIN","2022-03-10","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("23","1","7","SI","SI","SI","SI","ADMIN","2022-03-12","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("24","5","30","SI","SI","SI","SI","ADMIN","2022-03-14","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("25","4","31","SI","SI","SI","SI","ADMIN","2022-03-18","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("26","1","32","SI","SI","SI","SI","","2022-03-27","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("27","1","22","SI","SI","SI","SI","","2022-04-03","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("29","5","34","SI","SI","SI","SI","ADMIN","2022-04-07","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("31","5","35","SI","SI","SI","SI","ADMIN","2022-04-07","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("32","1","28","SI","SI","SI","SI","LUISILLO","2022-04-07","ARNOLDI√ëO","2022-04-21");
-INSERT INTO tbl_permisos VALUES("33","1","29","SI","SI","SI","SI","LUISILLO","2022-04-07","$1","2022-04-25");
-INSERT INTO tbl_permisos VALUES("34","5","36","SI","SI","SI","SI","LUISILLO","2022-04-07","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("35","5","37","SI","SI","SI","SI","ADMIN","2022-04-08","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("36","5","32","NO","NO","NO","NO","","2022-04-14","ADMIN","2022-04-14");
-INSERT INTO tbl_permisos VALUES("37","1","33","SI","SI","SI","SI","","2022-04-14","ARNOLDI√ëO","2022-04-20");
-INSERT INTO tbl_permisos VALUES("38","1","21","SI","SI","SI","SI","","2022-04-23","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("39","5","39","SI","SI","SI","SI","","2022-04-23","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("40","5","40","SI","SI","SI","SI","","2022-04-23","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("41","1","20","SI","SI","SI","SI","","2022-04-23","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("42","1","48","SI","SI","SI","SI","","2022-04-23","$1","2022-04-24");
-INSERT INTO tbl_permisos VALUES("43","1","23","SI","SI","SI","SI","","2022-04-24","$1","2022-04-25");
-INSERT INTO tbl_permisos VALUES("44","1","16","SI","SI","SI","SI","","2022-04-24","$1","2022-04-24");
-INSERT INTO tbl_permisos VALUES("45","1","43","SI","SI","SI","SI","","2022-04-24","$1","2022-04-25");
-INSERT INTO tbl_permisos VALUES("46","1","6","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("47","1","45","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("48","1","18","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("49","1","17","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("50","1","46","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("51","1","41","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("52","5","42","SI","SI","SI","SI","","2022-04-24","$1","2022-04-26");
-INSERT INTO tbl_permisos VALUES("53","7","49","SI","SI","SI","SI","","2022-04-24","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("54","5","50","SI","SI","SI","SI","","2022-04-24","$1","2022-04-24");
-INSERT INTO tbl_permisos VALUES("55","1","14","SI","NO","SI","SI","","2022-04-26","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("56","9","27","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("57","9","5","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("58","9","20","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("59","9","28","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("60","9","13","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("61","9","15","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("62","9","25","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("63","9","26","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("64","9","29","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("65","9","23","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("66","9","6","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("67","9","30","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("68","9","32","SI","SI","SI","SI","","2022-05-03","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("69","9","31","SI","SI","SI","SI","","2022-05-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("70","9","33","SI","SI","SI","SI","","2022-05-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("71","9","10","SI","SI","SI","SI","","2022-05-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("72","9","7","SI","SI","SI","SI","","2022-05-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("73","9","38","SI","SI","SI","SI","","2022-05-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("74","9","52","SI","SI","SI","SI","","2022-05-06","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("75","6","52","SI","SI","SI","SI","","2022-05-06","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("76","9","9","SI","SI","SI","SI","","2022-05-21","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("77","9","14","SI","SI","SI","SI","","2022-05-21","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("78","9","46","SI","SI","SI","SI","","2022-05-25","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("79","9","45","SI","SI","SI","SI","","2022-05-25","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("80","6","53","SI","SI","SI","SI","","2022-05-25","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("81","8","16","SI","SI","SI","SI","","2022-05-25","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("82","8","51","SI","SI","SI","SI","","2022-05-25","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("83","1","44","SI","SI","SI","SI","","2022-06-04","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("84","9","12","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("85","9","41","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("86","9","16","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("87","9","43","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("88","9","17","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("89","9","18","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("90","9","44","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("91","9","48","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("92","9","22","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("93","9","19","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("94","9","2","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("95","9","4","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("96","9","1","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("97","9","3","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-INSERT INTO tbl_permisos VALUES("98","9","21","SI","SI","SI","SI","","2022-06-05","","0000-00-00");
-
-
-
-DROP TABLE IF EXISTS tbl_persona;
-
-CREATE TABLE `tbl_persona` (
-  `CODIGO_PERSONA` int(11) NOT NULL AUTO_INCREMENT,
-  `PRIMER_NOMBRE` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-  `SEGUNDO_NOMBRE` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `PRIMER_APELLIDO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `SEGUNDO_APELLIDO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DNI` varchar(15) COLLATE utf8mb4_bin DEFAULT NULL,
-  `SEXO` char(1) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_NACIMIENTO` date DEFAULT NULL,
-  `LUGAR_NACIMIENTO` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DIRECCION` varchar(500) COLLATE utf8mb4_bin NOT NULL,
-  `FECHA_INSCRIPCION` date DEFAULT NULL,
-  `FECHA_BAJA` date DEFAULT NULL,
-  `CODIGO_TIPO_PERSONA` int(5) NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONA`),
-  KEY `FK_COD_TIP_PERSONA` (`CODIGO_TIPO_PERSONA`),
-  KEY `FK_SEX_PERSONA` (`SEXO`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_persona VALUES("1","ADMIN","ADMIN","ADMIN","ADMIN","0801200017878","M","2010-12-01","TEGUCIGALPA","COL TEGUCIGALPA","2022-05-25","","3","","2022-05-25","","");
-INSERT INTO tbl_persona VALUES("2","ROBERTO","PEDRO","GARCIA","FUENTES","080119801487497","M","1995-08-05","TEGUCIGALPA","LA LAGUNA","2022-05-25","","1","ADMIN","0000-00-00","","");
-
-
-
-DROP TABLE IF EXISTS tbl_persona_especialidad;
-
-CREATE TABLE `tbl_persona_especialidad` (
-  `CODIGO_PERSONA_ESPECIALIDAD` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `CODIGO_ESPECIALIDAD` int(5) NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONA_ESPECIALIDAD`),
-  KEY `FK_COD_ESP_PERSONA` (`CODIGO_PERSONA`),
-  KEY `FK_COD_ESPECIALIDAD` (`CODIGO_ESPECIALIDAD`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_personas_alergias;
-
-CREATE TABLE `tbl_personas_alergias` (
-  `CODIGO_PERSONA_ALERGIAS` int(5) NOT NULL AUTO_INCREMENT,
-  `CODIGO_EXPEDIENTE_PERSONA` int(5) DEFAULT NULL,
-  `CODIGO_ALERGIAS` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONA_ALERGIAS`),
-  KEY `cod_expe_fk` (`CODIGO_EXPEDIENTE_PERSONA`),
-  KEY `cod_aler_fk` (`CODIGO_ALERGIAS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_personas_apariencia;
-
-CREATE TABLE `tbl_personas_apariencia` (
-  `CODIGO_PERSONAS_APARIENCIA` int(5) NOT NULL AUTO_INCREMENT,
-  `CODIGO_EXPEDIENTE` int(5) DEFAULT NULL,
-  `CODIGO_APARIENCIA` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONAS_APARIENCIA`),
-  KEY `CODI_PER_APARI` (`CODIGO_APARIENCIA`),
-  KEY `CODI_PER_EXPE_APA` (`CODIGO_EXPEDIENTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_personas_sintomas;
-
-CREATE TABLE `tbl_personas_sintomas` (
-  `CODIGO_PERSONA_SINTOMA` int(5) NOT NULL AUTO_INCREMENT,
-  `CODIGO_EXPEDIENTE` int(5) DEFAULT NULL,
-  `CODIGO_SINTOMA_NEUROTICO` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONA_SINTOMA`),
-  KEY `COD_EXP_PPSICO` (`CODIGO_EXPEDIENTE`),
-  KEY `COD_SINT_PP` (`CODIGO_SINTOMA_NEUROTICO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_personas_transtornos;
-
-CREATE TABLE `tbl_personas_transtornos` (
-  `CODIGO_PERSONAS_TRANSTORNOS` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_EXPEDIENTE` int(5) DEFAULT NULL,
-  `CODIGO_TRANSTORNO` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PERSONAS_TRANSTORNOS`),
-  KEY `CODI_PER_EXPE` (`CODIGO_EXPEDIENTE`),
-  KEY `CODI_PER_TRANST` (`CODIGO_TRANSTORNO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_plan_terapeutico;
-
-CREATE TABLE `tbl_plan_terapeutico` (
-  `CODIGO_PLAN` int(5) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CONSULTA` int(5) DEFAULT NULL,
-  `ACTIVIDAD` varchar(300) COLLATE utf8mb4_bin NOT NULL,
-  `TECNICA` varchar(600) COLLATE utf8mb4_bin NOT NULL,
-  `MATERIALES` varchar(300) COLLATE utf8mb4_bin NOT NULL,
-  `TAREAS` varchar(300) COLLATE utf8mb4_bin NOT NULL,
-  `RESULTADOS` varchar(600) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`CODIGO_PLAN`),
-  KEY `COD_CONSUL_PSICO_FK` (`CODIGO_CONSULTA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_preclinica;
-
-CREATE TABLE `tbl_preclinica` (
-  `CODIGO_PRECLINICA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CITA` int(5) NOT NULL,
-  `PESO` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `MASA_CORPORAL` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
-  `ESTATURA` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `TEMPERATURA` varchar(30) COLLATE utf8mb4_bin NOT NULL,
-  `PULSO` varchar(30) COLLATE utf8mb4_bin NOT NULL,
-  `FRECUENCIA_CARDIACA` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FRECUENCIA_RESPIRATORIA` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
-  `DESNUTRICION` varchar(40) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PRECLINICA`),
-  KEY `FK_CODIGO_CITA_PREC` (`CODIGO_CITA`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_preguntas;
-
-CREATE TABLE `tbl_preguntas` (
-  `CODIGO_PREGUNTAS` int(11) NOT NULL AUTO_INCREMENT,
-  `PREGUNTA` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PREGUNTAS`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_preguntas VALUES("1","¬øCual es tu comida favorita?","Administrador","2022-02-06","ADMIN","2022-04-12");
-INSERT INTO tbl_preguntas VALUES("2","¬øNombre de tu caricatura favorita de la infancia?","Administrador","2022-02-06","","0000-00-00");
-INSERT INTO tbl_preguntas VALUES("3","¬øNombre de tu pelicula favorita de la infancia?","Administrador","0000-00-00","","0000-00-00");
-INSERT INTO tbl_preguntas VALUES("4","¬øPariente que mas admira?","Administrador","2022-02-02","","0000-00-00");
-INSERT INTO tbl_preguntas VALUES("5","¬øNombre de mascota favorito?","Administrador","2022-02-01","","0000-00-00");
-INSERT INTO tbl_preguntas VALUES("6","¬øUn jugador de futbol favorito? "," ","2022-04-26","","");
-
-
-
-DROP TABLE IF EXISTS tbl_preguntas_usuarios;
-
-CREATE TABLE `tbl_preguntas_usuarios` (
-  `CODIGO_PREGUNTA_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PREGUNTAS` int(5) DEFAULT NULL,
-  `CODIGO_USUARIO` int(5) DEFAULT NULL,
-  `RESPUESTA` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_PREGUNTA_USUARIO`),
-  KEY `FK_CODPRE_PREU` (`CODIGO_PREGUNTAS`),
-  KEY `FK_CODU_PREU` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_preguntas_usuarios VALUES("1","1","2","POLLO","","","","");
-
-
-
-DROP TABLE IF EXISTS tbl_receta_medica;
-
-CREATE TABLE `tbl_receta_medica` (
-  `CODIGO_RECETA_MEDICA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_CONSULTA` int(11) DEFAULT NULL,
-  `CODIGO_MEDICAMENTO` varchar(10) DEFAULT NULL,
-  `INDICACIONES_RECETA` varchar(500) DEFAULT NULL,
-  `OBSERVACIONES` varchar(500) DEFAULT NULL,
-  `FECHA_RECETA` date DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) NOT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `MODIFICADO_POR` varchar(20) DEFAULT NULL,
-  `FECHA_MODIFICACION` date NOT NULL,
-  PRIMARY KEY (`CODIGO_RECETA_MEDICA`),
-  KEY `FK_CODIGO_CONSULTA_MEDICA` (`CODIGO_CONSULTA`),
-  KEY `FK_CODIGO_MEDICAMENTO` (`CODIGO_MEDICAMENTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
-
-
-DROP TABLE IF EXISTS tbl_roles;
-
-CREATE TABLE `tbl_roles` (
-  `CODIGO_TIPO_ROL` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR_USUARIO` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_TIPO_ROL`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_roles VALUES("1","ADMINISTRADOR","Todos los permisos","Administrador","2022-02-11","2022-04-07","ADMIN");
-INSERT INTO tbl_roles VALUES("2","TUTOR","Usuario con permisos al modulo de escuela","Administrador","2022-02-11","2022-03-11","ADMIN");
-INSERT INTO tbl_roles VALUES("3","INDEFINIDO","Rol no definido para el usuario","","0000-00-00","2022-03-11","ADMIN");
-INSERT INTO tbl_roles VALUES("4","PSICOLOGO","√Årea de psicolog√≠a","","0000-00-00","2022-04-07","ADMIN");
-INSERT INTO tbl_roles VALUES("5","MEDICO","area medica","","2022-03-09","2022-03-11","ADMIN");
-INSERT INTO tbl_roles VALUES("6","CATEQUISTA","√Årea espiritual","","2022-03-09","2022-05-05","ALBERT");
-INSERT INTO tbl_roles VALUES("7","ENFERMERO","Area Medica","","2022-04-23","0000-00-00","");
-INSERT INTO tbl_roles VALUES("8","ESTUDIANTE","El usuario solo permitir√° ver las citas y tutor√≠as que tiene este.  ","ADMIN","2022-05-03","","");
-INSERT INTO tbl_roles VALUES("9","SUPER USUARIO","Este tipo de rol, solo sera asignado al usuario admin que es el √∫nico que tendr√° cero limitaciones.","ADMIN","2022-05-03","","");
-
-
-
-DROP TABLE IF EXISTS tbl_sacramento;
-
-CREATE TABLE `tbl_sacramento` (
-  `CODIGO_SACRAMENTO` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_SACRAMENTO`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_sacramento VALUES("1","BAUTISMO","PRIMER SACRAMENTO\n");
-INSERT INTO tbl_sacramento VALUES("2","PRIMERA COMUNION","SEGUNDO SACRAMENTO");
-INSERT INTO tbl_sacramento VALUES("3","CONFIRMA","TERCER SACRAMENTO");
-INSERT INTO tbl_sacramento VALUES("4","NINGUNO","No tiene ning√∫n sacramento.");
-
-
-
-DROP TABLE IF EXISTS tbl_sacramento_persona;
-
-CREATE TABLE `tbl_sacramento_persona` (
-  `CODIGO_CORRELATIVO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) DEFAULT NULL,
-  `CODIGO_SACRAMENTO` int(5) DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_CORRELATIVO`),
-  KEY `FK_CP_SACRAMENTO` (`CODIGO_PERSONA`),
-  KEY `FK_CS_SACRAMENTO` (`CODIGO_SACRAMENTO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-
-
-
-DROP TABLE IF EXISTS tbl_seccion;
-
-CREATE TABLE `tbl_seccion` (
-  `CODIGO_SECCION` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(30) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(200) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_SECCION`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_seccion VALUES("1","SECCION A","primer ingreso");
-
-
-
-DROP TABLE IF EXISTS tbl_sexo;
-
-CREATE TABLE `tbl_sexo` (
-  `CODIGO_SEXO` char(1) COLLATE utf8mb4_bin NOT NULL,
-  `SEXO` varchar(15) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`CODIGO_SEXO`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_sexo VALUES("F","FEMENINO");
-INSERT INTO tbl_sexo VALUES("M","MASCULINO");
-
-
-
-DROP TABLE IF EXISTS tbl_sintomas_neuroticos;
-
-CREATE TABLE `tbl_sintomas_neuroticos` (
-  `CODIGO_SINTOMA_NEUROTICO` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_SINTOMA_NEUROTICO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_sintomas_neuroticos VALUES("1","PESADILLAS");
-INSERT INTO tbl_sintomas_neuroticos VALUES("2","CONVULSIONES");
-INSERT INTO tbl_sintomas_neuroticos VALUES("3","NINGUNO");
-
-
-
-DROP TABLE IF EXISTS tbl_telefono;
-
-CREATE TABLE `tbl_telefono` (
-  `NUMERO_TELEFONO` int(8) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) DEFAULT NULL,
-  PRIMARY KEY (`NUMERO_TELEFONO`),
-  KEY `Numero_perso` (`CODIGO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=98743939 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_telefono VALUES("32978788","2");
-
-
-
-DROP TABLE IF EXISTS tbl_tipo_persona;
-
-CREATE TABLE `tbl_tipo_persona` (
-  `CODIGO_TIPO_PERSONA` int(11) NOT NULL AUTO_INCREMENT,
-  `NOMBRE` varchar(30) COLLATE utf8mb4_bin NOT NULL,
-  PRIMARY KEY (`CODIGO_TIPO_PERSONA`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_tipo_persona VALUES("1","ADMINISTRADOR");
-INSERT INTO tbl_tipo_persona VALUES("2","TUTOR");
-INSERT INTO tbl_tipo_persona VALUES("3","NODEFINIDO");
-INSERT INTO tbl_tipo_persona VALUES("4","ESTUDIANTE");
-INSERT INTO tbl_tipo_persona VALUES("5","MEDICO");
-INSERT INTO tbl_tipo_persona VALUES("6","PSICOLOGO");
-INSERT INTO tbl_tipo_persona VALUES("7","FAMILIAR");
-INSERT INTO tbl_tipo_persona VALUES("8","CATEQUISTA");
-INSERT INTO tbl_tipo_persona VALUES("9","ENFERMERO");
-
-
-
-DROP TABLE IF EXISTS tbl_tipo_sangre;
-
-CREATE TABLE `tbl_tipo_sangre` (
-  `CODIGO_TIPO_SANGRE` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(15) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_TIPO_SANGRE`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_tipo_sangre VALUES("1","TIPOA","ADMIN","2022-03-31","0000-00-00","");
-INSERT INTO tbl_tipo_sangre VALUES("2","TIPOB","ADMIN","2022-03-31","0000-00-00","");
-INSERT INTO tbl_tipo_sangre VALUES("3","TIPOC"," LUISMIGUEL","2022-04-07","2022-04-07","LUISMIGUEL");
-
-
-
-DROP TABLE IF EXISTS tbl_tipo_socioeconomico;
-
-CREATE TABLE `tbl_tipo_socioeconomico` (
-  `CODIGO_TIPOSOCIO` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `DESCRIPCION` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_TIPOSOCIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_tipo_socioeconomico VALUES("1","DISPOSITIVO ELECTRONICO","Dispositivos de los ","ADMIN","2022-04-07","0000-00-00","");
-INSERT INTO tbl_tipo_socioeconomico VALUES("2","SERVICIOS DE INTERNET","","","2022-04-07","0000-00-00","");
-INSERT INTO tbl_tipo_socioeconomico VALUES("3","PROVEEDOR DE INGRESO","","","2022-04-07","0000-00-00","");
-INSERT INTO tbl_tipo_socioeconomico VALUES("4","SERVICIOS BASICOS","","","2022-04-07","0000-00-00","");
-
-
-
-DROP TABLE IF EXISTS tbl_transtornos_corporales;
-
-CREATE TABLE `tbl_transtornos_corporales` (
-  `CODIGO_TRANSTORNO` int(11) NOT NULL AUTO_INCREMENT,
-  `TIPO` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_TRANSTORNO`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_transtornos_corporales VALUES("1","SISTEMA RESPIRATORIO");
-INSERT INTO tbl_transtornos_corporales VALUES("2","SISTEMA DIGESTIVO");
-INSERT INTO tbl_transtornos_corporales VALUES("3","NINGUNO");
-
-
-
-DROP TABLE IF EXISTS tbl_tutoria;
-
-CREATE TABLE `tbl_tutoria` (
-  `CODIGO_TUTORIA` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_AREA` int(5) NOT NULL,
-  `NOMBRE` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  PRIMARY KEY (`CODIGO_TUTORIA`),
-  KEY `FK_CODATREA_TUTO` (`CODIGO_AREA`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_tutoria VALUES("1","1","MATEMATICAS","ROBERTO","2022-05-25","","");
-INSERT INTO tbl_tutoria VALUES("2","4","CONFIRMACION","ROBERTO","2022-05-25","","");
-
-
-
-DROP TABLE IF EXISTS tbl_usuario;
-
-CREATE TABLE `tbl_usuario` (
-  `CODIGO_USUARIO` int(11) NOT NULL AUTO_INCREMENT,
-  `CODIGO_PERSONA` int(5) NOT NULL,
-  `NOMBRE_USUARIO` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `CODIGO_ESTADO` int(5) NOT NULL,
-  `CODIGO_TIPO_ROL` int(5) DEFAULT NULL,
-  `CONTRASENA` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `FECHA_VENCIMIENTO` date DEFAULT NULL,
-  `CREADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `FECHA_CREACION` date NOT NULL,
-  `FECHA_MODIFICACION` date DEFAULT NULL,
-  `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
-  `IMAGEN` longblob NOT NULL,
-  PRIMARY KEY (`CODIGO_USUARIO`),
-  KEY `FK_CODPER_USU` (`CODIGO_PERSONA`),
-  KEY `FK_CODROL_USU` (`CODIGO_TIPO_ROL`),
-  KEY `FK_CODES_USU` (`CODIGO_ESTADO`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
-INSERT INTO tbl_usuario VALUES("1","1","ADMIN","2","9","$2a$07$usesomesillystringforeDLU0KLdU3tCNprit2LU2PhciUHQJFsG","2022-07-24","","2022-05-25","","","âPNG\n\n\0\0\0IHDR\0\0\0\0\0\0\0\0\0√¶$»\0\0\0sBIT€·O‡\0\0\0	pHYs\0\0ø\0\0ø~sE\0\0\0tEXtSoftware\0www.inkscape.orgõÓ<\0\0\0PLTEˇˇˇ\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0#∑·\0\0\0ˇtRNS\0	\n !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~ÄÅÇÉÑÖÜáàâäãåçéèêëíìîïñóòôöõúùûü†°¢£§•¶ß®©™´¨≠ÆØ∞±≤≥¥µ∂∑∏π∫ªºΩæø¿¡¬√ƒ≈∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ‡·‚„‰ÂÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ÎŸ5\0\0≠IDATÌ¡	Äœu˛?Á˜;ﬂ∆ò1å˚‹¶åÚ#ø‹ù*ÖJXm-Ì/ÂH[J•ˇ∂t®-m%“Ö÷F˝vâZ∑~ñ≤9Blé\"˜5c3cfæœH9Ê¯ü„ı˛ÃÎÒ\0îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)˘S“ÆÍ‘Û·CÜæ¯ÍõÔåõ4u⁄güMõ:i‹;oæ˙‚–!ÓŸÈ™¥?îß¯k_{œ¿·„>˘b√ÅÜ†‡¿∆/>7|‡=◊÷ˆCôÀW„ ªü;s.#ñªy˛ÿßÓæ≤Ü $1Ó6cc6-ìΩq∆∞;ƒ@âW•Ìc„Wf”Ÿ+«?÷∂\nîP’∫˛iﬁ⁄nœº?u≠%äÔ“>l¶É6–ÁRîeÆ4„ ]pp∆†´ @π)Ê Áó‰–E9Kûø2 ’Ôùzàözou(gÆ˚„Í ≈Æ˛„u(á‘∏ˇÔG(Œëøﬂ_ vUZT@°\n=T F)}‰S¥¸}S†lQ±◊ú< oNØäP+ﬂ„≥4∆âœzîá≤NÀ±Y4L÷ÿñPñHÓ˜çÙMød®h]3Ò8çu|‚5PQH∞ûÜ[? *2-?Ã•‰~ÿ*læŒãÈã;˚†¬ˇ¿&z ¶‚°BUÂπ˝Ùú˝œUÅ\nEÉ˜≥ÈIŸÔ7Ä*I´AzVpF+®‚4˝å˜YS®¢\\>ù•¿ÙÀ°\n”„ KÖ‡«°Œó6πÄ•F¡‰4®≥•~êœR%ˇÉT®3*é c©ì7™\"‘I1˝≤T:ÿ/\nm◊±‘Z◊•›≈”Y™Mø•Y‚+9,Âr^IDiÂªo˜‹ÁC©t≈r™Sñ_Å“\'˛ï<™ü‰ΩèRÊÜÕTgŸ|Jì‰±TÁõåR„é=TÿsJáö”©\n5Ω&ºœ◊7É™}}∏Û®ä1Ø<≠ÀA™bÏÔJCU¢1	®Êõ®B∞©9º»?‰UHNÒ√sÍ,¢\nŸ¢:òﬂ¶SÖ!˝∑í2c®¬4¶<£Ór™∞-Øè∏È\0U‹OíOë¸!0_“4™àMKÇ·n§ä¬∆Ü0⁄]YTQ…∫Êäyç*jØ≈¿P	3©,03F™æí +´√@øß≤»˜aú3®,ìq#”„ïÖNÙÄQû•≤ÿ≥0GÏ*ÀMàÖ!*,§≤¡¬\n0BÂØ©lÒue†∆∑T6˘∂ƒ´˜ïmæ´·“vPŸhGDkºó V{C∞á®lv®ƒ∫.ì vô◊A®ˆ«©pº=D∫5ó π∑B†≤©í}ƒiùEÂò¨÷¶I:ïÉ“õ@îK˜S9jˇ•‰¢ùT€yƒ®µï q[kAà*®\\∞°\nDH^MÂä’…†ÃT.˘¢\\ÁõJÂö©>∏Ìe*Ωóı°rU∏™]ï´Ú⁄¡EçèPπÏHc∏¶Ê*◊Ì®	óî_E%¿™ÚpEÃgT\"|7å¢b\\–ÉfÀﬁ˜ü¶}¡¥+˛≥/õfÎ«]ëM3Ìô?¢œïóTâ√9‚™\\reüÛ˜–LŸW¿a)€hú#ãﬂÌ◊&≈Ji”Ô›≈Ghúm)pî≥ˆïkQ‡⁄W÷“0Û¸p“À4…—‘AòÍ<0„(MÚ2‘ïÊÿıfª2àHôvoÓ¢9∫¬1óe“¡]àB†Î¸ ëyí∏ÅfH—\0Q´ˇ˙aöaC\"·õF#¨ÏKƒﬂ∑åFòÊÉßÇSZ¿BMˇR@<\\ûC˘Ê7Ö≈öÃ¶|9ó√ve◊QºU7√7Æ§xÎ ¬n#)›÷ª}∞ÖØ€J76k§lçÉm‚˙†l¡ˆ∞UÂ=-8*	∂J§h{*√NüP¥Ì7¬v7nßhü¿F})⁄Ñ$8 iEÎ€§£`˚:√!ù˜Q∞ci∞IÏ\n\n6≠\nSe[{<Gπ2z¿Q=2(◊s∞E√\\äµ>K]O±r¬˛•k^8Æ¬<äµ‘Î=B±ﬁ	¿Åw(÷#∞\\›,\nïﬂ.ÈüO°≤Í¬jˇ†PGnÅkn9B°˛ãußP€¡Eç∂Q®Ó∞T ~ ¥º*\\Uu9e⁄ü+M¢L+ì·≤‰ïîi,‘û2≠©◊UZCô⁄√2Ò€(“∫ †Ú:ä¥-VJë÷WÖU◊S§°∞HÌcîhSQc%:V÷òLâæ´1j}Gâ&√≠Éh[]Rw\n∂Ü|À(PÊeÂ≤L\n¥ÃáË›CÅÇù!LÁ ∫QKÿEÅûÖ8œR†]	à÷0\n4›q|”)–0D©^6Â˘6%~Ky≤Î!:QûÙK “%ÈîÁ#D•5Â)Ë\0°:Pû÷à∆ 3b¶<Ö6îg.õKy⁄ rã)Œë:¨Œä≥ªôÚÙÅh}(œÕà‘WgÑõCqæBÑ:Rú#u \\ù#ß#\"‚[EqzCºﬁgïëËJqÊ¿\0s(NWD¿ˇoJìQ®ùAi˛ÌG¯∫Súﬁ0Boä”aÛm†4´|0Ço•Ÿ‡C∏:Rúv0D;ä”·ZDiÊ√Û)Õ\"Ñ©9•	6Ö1ö)MsÑg\n•ôÉL°4Sñz˘ÊD*ízÇ¬‰◊C8FPöQ0 (J3a®êIa2´¿(U2)LfÑn•\n√•4É≤ÿùÊH\"ìxÑ¬ÏåE®Ó°4#aúëîÊÑjÖ	÷áqÍ)ÃÑ®5•ôÕ¢4≠ö?Sö[`†[(Õüí§£fìÚm¢0Gìä(M©?•˘=BÒ5Ö…LÑë3)Ã◊ASJÛı•iäíΩKaÇi0TZê¬ºã%°0K`¨%ÊHJ“ì“<\nc=Jiz¢$K)L∞åU\'Hañ¢ç(ÕW0ÿWî¶ä˜:•É§4Ø£Xæî&K•4;|(Œ’îfå∂ä“\\ç‚å§4O¡hOQöë(Ü7•i\0£5†4ª˝(ZJ≥Ü[Gi⁄†hoSöa0‹0JÛ6ä≥è“‹√›Liˆ≈†(m)M~\"óòOi⁄¢(ÔSö’0ﬁjJÛ>ä8@iF√x£)ÕÅ\0\n◊û‚táÒ∫Súˆ(‹{ß.åWó‚ºá¬mß4;·;)Õv™!≈˘≈ià¬†8˝·˝)Œ\0f>≈ihFqÊ£	9î&7\0‰Röú\\®#≈ŸOÿHq:‚B£)Œ,x¬,ä3⁄BqﬁÇ\'ºEq∂‡iîÁ1x¬cî\'ÁÎOyná\'‹Ny˙„|≥)œ¡˛ãÚÃ∆ybèSú`<<!>Hqé«‚\\≠)œ.xƒ. ”ÁzÇÚ,ÜG,¶<O‡\\”(œxƒ 3Á⁄GyÜ¬#ÜRû}8G}\n‘—ü’«ŸÓ£@Ω‡Ω(–}8€8\nt<‚.\n4g€@ÅnÉG‹FÅ6‡,)î®<¢%J¡/:Q¢fàfî®~1ú5ÄG4†D√Òã/(QmxDmJÙ~ÊÀ¢D…àdJîÂ√©)\0èP§Tú—ÖÂ¬3r)Qú1îe¬32)—PúÒ7JtûqÇ˝gl¢H1àä¥	?)W@ë √#(RA9ú÷Ç2UÜGT¶L-pZo TQá2ı∆ioR¶4xD} Ù&N˚ú25ÅG\\Nô>«i)”ïà÷îÈ N©J°∫¿#:Q®™8©ÖzÒ\0ÖjÖì∫Q®‡œS®n8iÖèC°Ü‡§˜(‘ßàO)‘{8i.ÖZ	è¯öBÕ≈Iõ(‘Nxƒn\nµ	?ÚÂP®ºxBL>Ö Ò®I±.Å\'\\B±j∏öb›OËH±Æ;ä5û0êb˝¿”k<<a<≈z¿8äı/x¬ø(÷8\0≥)V:<!ÉbÕ∞úrUá‘†\\Àl°\\m·7RÆ-\02(◊”Ä¡î+P∞YÄô,Äj,›„˘Q∞jhH…¬x)YC\\K…ÓáÒÓßd◊¢%˚\0∆õH…∫†7%€„}G…zcE´√’†hÉ0ú¢=√ı¶h√1é¢-Ö·>°h„1E÷Ü— •hce{Fªï≤Õ¿ ˆ%åˆeõÉœ)[∞Lˆe˚_R∏˛0ÿS∏/±í¬-Å¡ÜQ∏ïXK·Ç5a,ﬂ˜n-6Q∫G`¨(›&|OÈ˛	cM†tﬂc7•+®C%dQ∫›8DÒ˙¡P=(ﬁ!•xã`®ÖÔ(NPº`cÈWAäwA ˜!åÙÂ\"óÚÂ_%eRæd—\0c`†\'hÄL¶rk¡8ÅÌ4¿AÏ•	F¿8›hÇ›ÿA´”,ß	∂cç0ÜiC#l∆!=	fYB#|ãµ4√`Â6öa5V“{„aˇ74√2,•!ÜA˛áÜXÇ“€caå∏≠4ƒB|JSÙÅ1°)˛ÅI4≈°™0D•}4≈då§1>Ç!˛Bcå¬s4G°#ÕÒ•9v\'√\0…ªhé˛ËAÉåÉ∆” ˇÉN4I[à◊û&π◊“$[ÀA∏ƒ4I+4¢QF@∏˜iî˙®E£¥Çhmiñî£Y˛¡∂—(¡ ìfyÇç¶Y“|C≥úh±Æ“,õL£a÷\'C®rõiòœºF”,@¶…4Õ\0—8c!“ Á\0hûAËñÁ~\0i4O∞+ƒiêAÛ¥W@Ûoa*l§Å.√èv–@{ÍBîòY4Q~¥à&ZõA|i¢C8i<ç4;rå¢ë÷‡§ßi¶∑!∆4”Lú‘ùÜzB†°F„§V4T¡˝°WêÜÄì™–XœAÄ^˘4UúíEcçâÅ€û†πÍ‚îohÆôÒp◊K4WñßLß¡ñ¶¿E˛wi∞Â8Ìuölc=∏&v\nM6ßı£—v7ÅKR“hÉq⁄-4€ë·ä∆[i∂€qZó€.ËöE√]å”‚N–p¡pöÔ˘ w‹èü,£Ò˛^	é™0ù∆[ç3ﬁ§˘~∏j≥ùÊõå3Ó¢ºÄC‚^-†¿uË	À.Ü#≠°\'\\ÉüÌ§\'ÄÌ¸èe”Ú‚Ò≥ˇ•G¨ª6kµÇ±øxú^[	6™:>HØxøhMÔÿﬂ36âÈüAÔËÖ_ƒÂ–C˛s_\0v∏u-Ω§Œ≤îû≤µO,,”m=%Àè≥ºFèŸ˛`X®LﬂÔË1ˇá≥›AœŸ˘HYX$Ò…›ÙúWp∂öÙ†= √ï_8LÍäslßõ⁄9QÒ_ˇÓ1zRúc\n=*}\\[?\"‰ø˛ÌΩÙ®ı8Wz◊ûë≠>ˇıoÔ•wç∆πZP∂‡“¡∫c§∂æ‘2a_ˇˆ^z⁄ØqÆÿ„î+gVﬂÍ¯QÛ=å\\Ó ˜z7	†D1çzå\\rîëÀøì‚TƒyS®åøﬁôàü‘YÀËdˇÎ≠{˙QÑ¿Â=G/=∆ËÏjﬂ5£vS∂ï8ﬂpJt›õcqñƒYåﬁ—oøò9·çßÍ÷ÆyjrÚEÕn∫≥Ô‡·c˛w¡ölFoEMú‰ønÙ\n6ÁÎBqr˛÷9ÁâM—¶∆„ˇıÔÏ£TÌpæäyîeIﬂä(Lˇ|ä|Áàπq¬1Jî[òOA˛3Ù\"Â∂,\nuÏ\\ ÈÅîÁü∏P?Jë˘Nkß…ä¥„øQ®ÀG¶0Cq°ZAä∞æ_\"Jê8â}YE)€}aêí\\ÖB,£˚ÚßµE(∫ePòº°\'ı≈=cøÖB∑Ìˇc]Ñ®ﬁä≤°9JR¶˜∑‚œ(Ã•t◊≤{  t1œ‰Qå‡®xÑ¿wÎÁ·vj]4˚*Ñ©ı\nÒ√MU≥ÛË∫£eQ®?“-¡Oö#|â)¬á…C›72È≤i(\\K∫£`jcDÊéË∫CøEò*>@Wı@·|;ÈÇºâ±ÑsË™‡‰ö_˘g2ËûºJ(¬h:.wL*¢í:É.Z⁄\në©¯Ú1∫Âs•-úz¢÷a#]≤£;\"Wmd›Ò(ä8LG-n	+ƒ>ôI}&Q©;.èn®á\"M¢É6vÜU™O“a¡â5µ˙SÇt‹*Ì◊tÃæ∞PãÈA:iIsX‚Í’t⁄ì(Zπ„t∆±aâ∞ÿe„O–!¡ô◊¡*˛á”Q5QåOËàø’ÇjøëE‰åΩV™<¶Äöè‚‹KÏ∏6©¯Ã⁄Ï–ã’`µÊ_—9˜¢8ïÚh∑Ç7À√>Òo£ç∂>í\0¯zÌßCé\'¢Xi≥’ÕaØ¿Ìe”ÓåÅMíﬂß3¶†x˜“V«û¿~I=–jÀ≠;µˇÅN∏≈+{ê6ö˝+8§÷¿oh°ıO_ª%O§˝ˆPÇWiõ„¬IçáÔ†%∂oGtﬁKªçBIRÉ¥…öÜpòØÈÄôÈåJˆˇ=wµN©¸1m÷%öE[GîÅ¸M|ö¡àdÕ˝√5qpV∑C¥”î¨#Ì∞∑‹„oˆƒßáñÙO∂¿’Á”Fè°d˛m¥ﬁ?™¬mUØÌÛßôõÚXÇ¸-≥G=‹ÓW~∏≈ˇRêv9ñå¶’rÅ±:7kÒÍÔˆ„Yrl[∑tÓò\';]◊uLßM˛åPTŒ°µvµÑD˛§Zó6ø·Üó’N@î‘’¥G3Ñd-µ¨&Tx éßñ#4≠i•Ie°¬÷\'á÷ª!ZEÀ<âfﬂ”já„¢ﬁ¥Jz®»‘XCãΩÅPïKß56¶AE*i!-¨èêç†%ñTÄä\\‹Zi>Bó§ÊñÉäÜÔZË6Ña£˜˜8®(=§U÷˙Ü.å⁄Ñ®®›}Ç˘¬≥ÉQzÀeÅõè”€Àù°¨—>áVx·I…d4AYÂˆåﬁ˛xÑÈF·(Î¸&üQ{·™pòe•ª•¨ä€ˇc§˛ÍÉ≤Tœ £Û¬ó∞èëôe±ï‹Zà¿„å»“rPñ»håA$ Ód÷UÑ≤¡å\\ND‰˜ﬂ˜5°ÏPf)#6ëâ›∆pe_eèj?0BYU°˚ÆûPvizúëÜH≈ldxﬁá≤œoë√±nÀÚ2P6zâëå»˘÷2ÎBŸ…7ì·€SQËÃ–‹eØJª∂~à \nÜÏPvªï·⁄á®¥g®ñ¯†l˜>√‘QZ¬–‰4Ä≤_˘-Àr¢‘Ü°y\n 	◊0¡+µ˘≈ö\0î#Ü3ìΩ¶˘,Y~3(gîYÀê≠º¡íΩ\nÂî¶’”∞B¬vñds<îc∆3D€ ¬∑±$m°úS„(CÛX‰#oîìÜ2$ã`ïÍÈ,N∞)îì Ìd\nö¿2∞8C9´C6¨„˚ÇEÀOÉrñÔkñhg,‘0óEÂ¥6,Q\'XÍ%ª6î„Ê≤√Ze6±ØC9Øãw∏,v=ó[ yæ,V/Xn<ı!î~œ‚,Ñı*ÌgaÆÖrCπC,⁄ÒãaÉﬂ±ˇÜr«À,⁄ ÿb./‘ µÛXîUÿ\"ı8œw4	 %SXÑúF∞…`ûoî[⁄∞è¬.Åï<œPnÒÔc°Ê˙`õ‘ûcî{∆∞0k¿FwØ@πßÛkÿjœvî{‚2x°q∞W‹\n˛‚Pîã˛ l.õ]îŒü˝ Mw|y≠`ª_ÛgwCπ©‹qûg(0Ç?…ØÂ™ô<◊Ç8 vO[ÂÆ!<«÷8¢ﬁaûÚ,îªn‚Ÿé6ÜC:ÒîŒPÓ™»≥«ºŒì.ÇrŸ˛bú˚/íô>(ó}ƒüÕÙ¡Auë_Bπm œXüGuÚ(∑›¿ü§ß¡a‚Ô°‹ñ‰)∑¿iÅ/ØÇr›nû2Œ´S ukx“®Rj.¥™T)ıí˚ÎBïVØìym†J≠¡d?®“´\'«Bïb∑-çÉ*≈R´C)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•îRJ)•î·˛?å≠∏Ë\'∂•Û\0\0\0\0IENDÆB`Ç");
-INSERT INTO tbl_usuario VALUES("2","2","ROBERTO","2","1","$2a$07$usesomesillystringforeTrXNY25jXESxXCy48KS0JeCpVqZqPwe","","ADMIN","2022-05-25","2022-06-05","ADMIN","âPNG\n\n\0\0\0IHDR\0\0‡\0\0\0\0\0~°ÏŸ\0\0\0sRGB\0ÆŒÈ\0\0\0gAMA\0\0±è¸a\0\0\0	pHYs\0\0t\0\0tﬁfx\0\0§›IDATx^Ìù`G”ÜG∂Ãå±ÜÜ”@!Mì4M*∑)3~e¶øﬂWf∆îô)Mlòôôc«Ã,¯˜]ùlIñdŸñtí<O{—ÌI∂•”›æ;≥≥3ö¨ú|#Ya$£ÕgõÚbÜaÜa$A £\0¬k_|M«Ìo√0√4Mfvû]u(Æ^eóaÜaòÊ°1Vï≤û2√0åÅ–ÍÙF™¨5PïŒ$ª.hÜaÜa<ÅFl!¡ä¶Ë0ìÙ≤\03√0åâ	¢p≠ÜòaÜaºMÑa`ÜaÜÒ2⁄`∂ÄÜa∆Î`NòòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaTÄòaÜaT@c¨*5*˚L b4äˇıJ√ç&ˇ(-Üa∆õ∞\0˚9G∂¸JEY€îñ‚õÕ⁄∑àj Ûï÷D\'u¢S.xá\"„€)G\\£º(Ì^˙.ï‰Ó%£°V¸|%wNq©›©¶¢à ãèSy˛A*+8L∫ÍR“Îk(88T˛lxLÖF&PlJWJÌ<äb€Ùê«=I˛·µî}pπ|/ ©˝JÎ6öÇC\"d€Ëk´(Á‡\n* ‹Be˘áHWSNÉé⁄ıß‰ˆÉ≈9I§®Ñˆ´¸ÑkTãÔ÷ ŒØ#¬£SH§ï˚5ï≈‚}T»˝⁄™2±Sei∂ÿNPU…	qT#æüTäJÏH—âù‰˜™u”9“◊VSqˆ*/:FU‚oö—ÜESd\\;˘ŸÒ7[JÓ·’îµkÆ“\"äàMﬂ˜ JÃ§i¯Œˆ≠˙ò\nqØâA-ŒMRá°Ú:∆y≠*œ°íÏ=T!Æ˝Z—∆Õß—òåa—…ôL1‚µmN:ïbS=Õ3˛∞üÇ}…ÁóPŒÅÂ ëÊBÌzO¢ìœ~‘•¶ühÕœw:ÌÙ]G#:ﬂ∂‘æﬂTÍ;ˆ“ÜF)«õáAWCôõ©,ÔÄ</ËãsˆàsU©º¢MP∞“Òw†ò‰.î‹a•v%;Vw`4ËÈÿéŸtdÛ/bÄ¥]Zã~€†<ktÿË¨£‚€KL¢ë—gí”˜¥‡És)Oàé#B#ƒgÃêÉçÇ„õ≈9™Vûià„∏[Á\nëÈ¶qÉæñm¯ûémüE•y˚≈Á?“ËÁ«ﬂKl7Ä∫ç∏A|Óâ Q◊)Éæ9oü)ZÂ çFúÀÅt˙’ﬂãÛØtùÎø°<d˜:j¯>€˜ôL˝Œ~ÑÇµ· Q¶5¬ÏßgÔ§ﬁ8CÏŸˇ˙`IaÙ_í≥[9‚Rzè±‘y‡%î—˜\\ÂhCÊº5F V•Â>íÑ8Ú≤O§ 7aëdXFkπKvÙÕFt‘âm˚SÁ¡óRá˛Á5´≥∆{…ÿÊ˛K%π{îÉÕ¬9˙∫ü≈\0a®rƒö∆ÿXƒb‡°çî^	X§•y˚îgM¿;\0ãØ¨‡ê¬…4j∆\' 3çSUñ+,≈Oi˜≤˜Ñï_¶m:]ÜÃ†AS^¶iú>B{W~§¥“u¯µ4X¸Œ¶ÚœõßSÒâùJÀ}ƒß˜•”Æ¸∫y◊<pñü¢´Å+—Òÿ©∂™ƒJ|„⁄Ù¢¥ÓgQí∞Ù‚⁄Ùî÷_hDúÚ¨…bÀ‹9áV~wÂ]Øm~\'FÌp#7≥[Œ¸Õ%ü_J5ïE ◊Ä\'`˚øØ“¢èœkô¯!û«7—˙?§yÔéß ‚,Â	◊ÄÖ∑eÓ≥¥ÙÀÀàoHxÖE%)-◊Å’µ‡˝âRÿöã•À≥„Äi¸mÛhÃø”◊˛H)ùG(œòÄªz‘eüR˚~”d;,*Q>6>˚aaÌˇı 0⁄æ%E|õ_p`›◊¥q÷cJÀ‰¿gé“qç⁄^k˚V}\"ßOöJUi.iCÂÄ∂9`pkL-˛Ù\"Ò›Ê)Gò÷p+Çê≥)\nÅIÃLNû&¨°Tj◊Î+a¿º$¨™ä¢„ k`9¡RúÚ‡ä;‹ÜM¡“	˜oxL•%¨˙;hŒõgH˜•´,˘Ïb⁄6ˇy•Uè0k&Ë0·Œ\\·π‚|ÿ`≥‹î;ø°¥¨IÎz:Myhã√ ay∆¶tWûqç¶ú[úyA∫ªZä.¿Á>ıä/ÂwZp|£<÷eeÚ—ºAHV˝p3È™À‰Ô1âNÀúk«∂˝©Ï5NŒ·UV∞>c†q∑Œ°vΩ≠]Ÿ\'ˆ˛´ÏπN∞_Loåñò‘ÓMû*1ÍØ˘XÒÛñ1¯n6Ò:cvA˚!∞~ˇù9ù\némPé4$42âj*Ï_t\"ËÄçBx-âNÍ,,•˘ÇÇñ|~eÌûGß]˘µÌ9éÙ∫j*…ﬁE\'ˆ-¶˝k>∑oÖ\n¡Ü≈]QtL9†Älaπÿ“i‡≈t Öo+-˚†”ü˜Œ8*t¡Î%2∂-EƒµïûÄ≤ÇÉ¶éÿ‚oi√(<2ë*J≤H)÷8‹Ñgﬂ±Pº¬π5WòπçÊø7ﬁÅPjÑıî&~_°¥ÿÕ¿BñÊ”·˛œ‹˘èÚLC&?∏ŸÆ´“ës˚&˛ó6ˇÛîè6]œ†¥nc®R|æÍäÒò)>æQ>WQtTzL\"„2ƒ9Jß∞à ‹3_ªËôl˘>Å\0Æ?ö&ÁyõŒ´£.HÙƒ†ÁÆ1ñs≠ï`ø¯}JHÔ\'ÁØ˜¨¸HX”è „ò_ütﬂö∫Aá+òœÒ‡©/Q◊SÆñﬂ1ã∏ÜˆØ˝J\\ÛáïWZÉ¡•e¿¿π¥7ûﬁs<ù~Â◊Jãi-∞Ïá‰XÊT|„“zS€gQB€ìq«+GÎ		è±\n(Å¯&u&¨‚È í‡ñπœ(≠z“DG∂/|Y>béBæuﬁ≥é]¿¢£o æ@@—3ìwdç≤g¸ΩyÔù-≈7&˘$JÌ<Ry¶!@¿⁄åKÎC·Q…t`ÌótbèTÂo√≈<+ÇìtµRúpn¬ÖMuÄ°˛wÊ‘‚ãÔ¡ÑQ\n¢Rªú*>ÔπBp«…A¢íq˛OÏY ΩIÌÌœı62∫øFƒ\"!aŸ·C,6Õ~úv/{óm¯é≤˜-ëKEq&’\nÀµ8G§ƒÎo˘Eä/ƒë“é(¬Ω‰≥KZ æ¿ë¯#ïπ2≠ æ´¬„õïÜâUﬂﬂLY¯û≈ıﬂÊ§”î£¶˜ºwÂ«JÀ5“≈ΩÃè¡Mç8?ò˙p$æ¿V|ÅY|€útÜtìõ)/¿Ôqv.ò@Ñ-`?÷ÊíO/™ªôõåÀA*,2É\0†6\'ùÆ¥HˇF9?¨Ç}>›˙õ¥ÇAõn£©SˇH#ûXé°¬UYrB\n0,œ“‹˝‚ııV†#Œ{Ú Öÿqo„3#¿i˜“wdñ<Ñ≤∫‹µy4>¢ªH´ñ†S,ŒSØ3Ó§~„ë¢dÀæ5ü—˙ﬂÓWZ÷‡3¿⁄}‘M¶ëF*ŒﬁE;Ω.≈≤Fy?˛≤ùáÀ÷©-ˆ,‡0a…õ?õ¥ÏcR≈±$yAXhG¿ı/>üÂÙñ\na©Vï8ó—	©≠∞ Z{`¿≤Ëì(˜–*Âàâê∞Èf/Œﬁ.J¯ûMÁ¢ù‘Eò€ıóÉº\'Èç◊3:˙≤º.Ò3”ﬂgöˆp¨—πÔåìû3∏.û˚¥ÕYBà(GMÑâsp÷M≥(FºW¿˚˙ÎÂ°“u‹∂Á1à˚¢n∞ÖÂw]á]e∫V∫™R“âÎªRj \néHÅ.Õ?@z≥·X˘ìÿÿ$ÀúÒXÄ˝XT≥_QÁF∂$8$úÜN]Æ≠ƒ≤tF≤√µ\0ÛRπáV““/fÿ˝f}{÷Õ≥ï÷\0°Y/VZ÷Ùü$ı<˝v•eÉ^/¨ìË®ËÕÛÑp\'€2ÒÓïr›§-∞˛·~o|Êé˝œßÆ#Æïn»˝kæê—µ∞z!‰«wŒ°-BÃ±v”‰v~+ Jª}ﬂ…JÀ\\∏ø¸˜$ªÉ\n»Ñ;óJ—iΩ¯=[˛yäˆ›÷⁄Ü?Ì—]Ú˜Ÿ‚,\nzËyØSßÅŸ˝πñ≤Íá[È¶ïV=}∆‹Gªó Ö\\#D)DX˝®ﬁcÓïﬁg‡öﬁ:ÔyLÖÛö÷ÌLqŒ±VÖ`#`kÌØwÀ&æc¨˘-÷|≠C{`é˚º\'ˆ€LŸâl~x‘æº˚©7”¿âˇSZˆ¡î—Íünß„€g·RêYÛ†’ÓŸÛƒ`&¶ı¿.h?7™Ìº≠∏∂:8üí;ì£|[Òö† πÓı¨õˇñÇ#Úèm∞≤.ãú,«(±YŒbè†‡`yÈ«üﬁ[æ{‚ECoõﬂ¯2DN~pô˛\n≈ßıëÇ€mƒı‘ıîk‰>@Áõ—˚öxœ\na]n¢17˛!^kv€g”Ï\'∏ôOlsh—è∏¯Cóƒ –€î7Àπ[≥{‚y÷ç6YDÒ˘˝zB|·9≤Â•eÕéEØIÒÖ•}÷M≥i Cõ•Á¿ïÂDà2v˛‚g∂“îá∑äÎd¶ÚåcÚ≈{1ã/8Ià}r˚!B|/ÅB†ÿ¡µÆœ∑f›eyï=«¿Ç%o1)›Âın+æ\0¿ÍäB•≈¥XÄ˝Ã/ŸªëÅ+.^3qmz»\0 G†√8¥±ﬁ“—äë:∞Á*≥7Áea!˙⁄òáµ…5rY[{¨JÎ>Fiı=Î~!|Ô5aØFf°JÈ4úNø˙;ÈB5±F–^‡∂ﬁ2˜iπo∆îı®!¯Y€%>çÉ˜í@=NΩÖ&›øéNπ‡m:„ö(.≠óÚºÎ`ÓPwÒÇ◊ƒ—¿	«;\n´˚‹˚7PRá!uâ¶ÄA<∏Nc◊RÎ`=¨◊›Ω¸=±gÌÕ¿Äﬁ\03g?N˚Vä•qå6L	D¥Û~‡Æwï¥Æ£ï=˚ ÓÇi]∞\0˚)ñÛ¥∂`4Ì®É¥”Pau`ò-DK,Á˘0ÁÖËN{÷7S\\%π£Û`£††Üñ€¡ﬂâç“∫Íz µ4˛ˆ4Óñ9Tíçe69œ\nWgsÁ—`Åç∏‰CyNLÌ4j◊g¢≈z1«ú¢DÁø4∑qèÄ#‡µË4Ëb¥Öœ÷t∞¶Ÿ:0…`Í¿vM2Dôª\0Êçá_¯ét©zÃ˘fÌöß¥L`Z≈\nÂ˚5„3Íu∆D€Ù›bê\n◊ı¡ﬂ6*¬…b ÅÂCˆ^áâ´¥Ô7EŸ≥O®ãkÆô¿ÅÿOAß‡ÃΩÿhÄëŒëå¿^äIÀÆD∏uAb∆@˘ÿ7gT#i/±»ñ¸#Î‰£Ã∂¥˙ôqiÁí∑‰nTb:˘Ï«E€¸ıø\0Çg∂û1ﬂΩg˘Tc·ƒ±˚ñ(-!î—›˚\0ÛÜã?ª»~Ù∑ó@ZNwÇÅ›∆øLÀy,3DÒbáygoÅ\\‰çy{Ã◊§s…óâ%pQà)¢≈ëx•ƒv”1\'ƒ&õ“q¶(˜ÕπÊ|Êå1∞dZ,¿~\n¨≥’jè¶0¿≤ì¶ÇD∞{üyèrƒu∞$«∂ëØX&cõ2Ò¿∫ØdÍAXº„n˛«•y∆∆ÄÂñÿﬁ~êôÀƒ(h·®3FÕ?oúﬁ\"K∏%∏;¢ÀzÃ◊	\"òmA§8ºﬁ‚»Ê_ï=«ò=5+ææZéò\\€·a9¢Ω“˚ cÆ`éDÔ2ÏJ˘ÿ∑·(qÆ°`ÂΩ1≠`?XúE/7∂Ï¡Ö≥}ŒÊSG\\:S¶∂l*Ê™<éÄ∏[r|˚_¶ayIÎX<JW±∞d⁄´—ﬁÓ[Œ(√≤e˛É†.Cw∆µ’•4˜ù±ÙÔÃi¥Ë”)Ô∞Û5ŒÓ§±†≤¶rdÛœ ™0ôÊ>-RàZˆ&ñ©\'Ìa9\01/Ÿ”ÜYã\\™≈aW¿5á¸Õ»ﬁÙ5ˆ◊ì#“›<ı¡¥¯˜S–±;õÁ≈ÛÆ≤g˘˚vÁtÕ§t¶ÏYÉ¢Ì˚8.‹‡åÏ˝À‰#:≥ÂjZñÑj1Ì‰öŒﬁØ∏}Ö‡bâ\nÕùjè”nïèÓâúYè_À™B›F\\ßÏ	ÏÃ	c†Ñ\0≤ÏΩãh¡ìdbî&Ù48∑J*8∂Ià’<⁄≥‚Z˜€}¥Ú˚õÏnH^Q‚¿Z«“®¨Ω»fçŸ\"ÜÁ¿›ÇÔú?¨°v∆)æ”`-yUié≤gb√◊]GÆêﬁÌ,ßAãŒ8¥È\'Ò∑ÙVﬁ≥ËÜE%ª›c¡¯>,¿~\nÑê2—ˆ\\–ˆ\"6!&{V|®¥Ï°ëÂ\nÌÅ\\ŒñÇc/p\nÉdZ*:±CsñÏÜ?¶ıøõW†Û´ãÊV:£˛˛ØÆc2#Î∞ZÄÁ1øìÊvÀÓ¿0õÄe¶.£æ÷j9÷wyÉÈ=€	‘±%Wà«¢ôÁ—∆øo MâEÄΩ†\'TáB%üyÔé£•_\\&ã ](J$⁄€yâMÖ>¨¡º∑ΩÄ#\n¿w‡ç¿+3òõwæ√∂B(ªΩB9bd]kL»-¡‡–Ú⁄DB[pM€^ÛˇzÇ÷˝jö™±:ø ˝”y»eb∑·‡ç	lXÄ˝åñÕßÏQ]fùù¬∆?QZı ±EuyÅ√—7Ú«¶∫V9°QIh”ﬂOäÁ1Z˘ÌıÙÎ”=Ëœ˙À\"?úLÀøæöˆÆú)À,Å∞¡Úm◊€zâ¨s€îà¯<Ë¸„€Ÿfór∂s‘ñ.s¨¿f…†süïÀo,œ#Œù£yzºx~ÆèÏò·@∆$XîxŒUP∆XÊòçeèB6®ì«?F}∆‹/Îï1?âˇ˘G¶9mÃuﬁÆ◊eœÛ‡z»=Ëºv◊·◊I∑.í±4Í57óä¢L1ò¨øÊó}ç∏Êª7∏Ê˜,O^ﬂÊìPŸc‰M ¶5¡Ïß‡∆µt€ZåÊ¥Üf0\n∑ÏD1:ﬂ8˚	Zˆ%,d£2ˇ.ÎQ∏+kYì;û\"Áâ´+Úe…∑›Kﬂï ë≠ø[	gd|{j+:ÍAìüï’ò¨3>ô˛nÔ—w7¶2Ëu¬˙™üÔÜ»ô´‹D≈’Wñq\'HT“TN9ˇM{À?uQ‚∞ÇÃü1ÿV-N3≤_-˙x:Õ~Â˙„˘ìÈØóáP÷Ó˘ ≥ŒqîË)@ùQ]ñK±i=Â:Z>“-ö#|ëé‘€\08[pxã≠Û_ê1é¿†ß˜Ëª‰~|€~uK§QöªWŸsùvΩŒñôÊP`˘Êk˛ÿˆYVk√Â5ﬂÛl1@{N\\0ËÍ=\'fzúvõ∏ﬁZΩœ¯\',¿~ä—`Ìµµöén˚CZºÊmÛﬂO…bø˛Ø}ˇh™ùÔYˆû¸x2\'†∞r©i42≤’+æπV˛æΩ+>¢Ñv˝©M◊˙ú—∂`é@Œ˛%¥}·+tdÀØ6l§åæÁR˜Q7+Ìz‚≥\"\n˘Éáù˜ÜÃvd^Â©éÀYÑπCƒ˘¬Rìq∑œóB‹e»Âu©ÒYqé;ãÏ‰Ò R;`æqX2É˘‚íÁ‚\0Î…..∏¬Q>—¸`@óµkÆ‹«waÚy;¢fùØf\0K5úë“iDùw”~„z~,q•¢ñô5?›A??’Y÷}éJËË4à·F}çÙ2Ì¯˜4fªl™CˇÛ®áùkûi∞\0˚)∞m”\"ZÇy-îa3oH\n+W¶x¥Èú´ rÍÇ∂,gó¡3úF8√j¬Ô÷/Ê∫ÏckâõA‘,J◊a˛nN€\02$º~·{‚ÁŒÉ·≥òﬂ;“Ó[ı1+k7Òﬁ=Å≥˘8|FGü µ\'\\√Cœ{ç&›≥JZc»®ÖsåHb∏‡ì2Qtb\'πÓÿﬁÚ©`mÑÙXÃ}Á,:,ÉwÏª•Ì-kq•|p¥FYoÁ∫rµéAPs÷≈6Û5Á∏ùëŒ“Ú˚≥¨Üdè‹+®8gè“r˛>Ê¬ëßº0s´E≠ÂÜ◊âÙbPÖ¯€kñÒ–iØÿ]ÛŒ¥XÄ˝g)eôR±9`.∂œYˆ+¸XÇRù],ƒÛ]i ì‘òõfQﬂ≥§NÉ.ë.lGu\0≤O!Pf‰%9‚1≠ !ÜYàPYTóèû∆R``Ò9ÀümId|ıÔ§{WaxSV\n™íÛ¨ÎeRè∞®πå…6YB€~R‰a°Æ˙·ñÜ∏Ï%ÔwÊûm|N{ÎbmÁò-ÅÙx+Äh˜≤˜ô%H)ä©ê\"1@√\\ˆë-ø—°ﬂKa∂q\0iOó}1£Œ–X›i¿4t˙+2p¯≈»\\‚}«öÆ˘‘Œ£úÇ`#^`‘åOÆfZ\\…OA>ˇ=æàŒÙÏ;9\\V≤¯”ãÈÑ≈í∏üQºÔiÔäô¬2ÿ\"-iL¥—n§5,ßI˜ÆëØs‹œø=””jÈèÿ¥Gw(-˜1ˇΩ≥≠Çë3Ω‹	èìEÃIöÑ—H•¬äZ˝„≠uôΩ a8ñs˙ﬂ…Ëk~j‡Ê«ö‰ø^q>ˇä¡B∏Ë Ç7X=ˆCB#ÎRF∆∂ï‡˜õÚ_[ÛÁd∆1{ ≤8ÆÁﬂn»üûƒ|Æuó%Ñ5YzyZ∂P»ﬂÀø∫öéÌP÷¢êEk¬ùK‰µæk…;TîµµÓöèœiÖ‡o_¯íÚjk∆‹G3ÚÑ3Å∞ü“RÜEÄ£~‘∆(EÂÃÎ~¶ƒˆÉîcYˆ’Ut|G}âBXÑ(vsSA=⁄sÓ^·x.S\0—¬2ÒHÉπMM{ló”üo∂l	,zT-≤åxn*∞‰ëæÒ¿˙oe4¥+÷óπ”∑	¸ˇz≈Œ:m!ÿÓX,Så∫cû¸Ô◊F ‘è∞‡Î›Æ&`Ω£ñ≠3Oá;@—}$5±•Û‡À§ÀÀ€`Q Èa%\'u&∆|n(ñ÷mt]E-Ãøb˘º‹¡3˝±Ωv=1+øªQ∆-‘!ŒoDt™t17xE&›≥ö]œª†˝m3Ç^‡&DI>tVëqÌÑ¯YäñQ?ÛÜﬂîTåé]ä∂Înaπô≈∑◊Ëªhƒ≈HWÙ–ÈØRﬂ≥pöûÛ¡k~˙è√9NÄ¿0π¨FàoR˚!≤#Eeì•fîVàß±NÉg†%‚‡^FPŸ…„°sÔ_OÉ&?o]ıH|W∂gÔ§£€˛TZˆ1ã-~º;ƒò]∏ˆÊ‹ë?¸∞•8yGÀÖéâs≤Ó˜˚‰˚@‘=Ç˝p=ÂZe5∞A›‰]KîÍI‚¸fÓ¯GÓÜ*üÕ®◊’≈BÿünälØC\\ã_∏Ï‰7¥ÈöMN›8õ¬‹;≤¢9ıx0≠`?≈ﬁ\\Vc†DJ∞¡zFgé˘SÃı¢n0Ê\'œ∫È/Jl7@yµcêx¬àËÑe—·‰ÈrnùQﬂ±ãgLÇbO\nK≈Ë‰0WªOªÚ+——ñ÷âÇh<ñBô…Ëc]îø•`ÄÇlZ„o_H=Nª]ä:x{  À1ßÛ£-¡ºî«≤0Ö%∞$=MñùÂQ@ä¶ræ˚¸“ãƒÎÕ%/uJzHàv›Û6òØ?[ ¥»ƒ÷±Óöø\\:N~∂~0dÁöGÄ]y°zÖ:ﬂÄÿO¡:U‹ÿé,1∏ÇŒn^∏h±ècXèÿˇúˇìÆﬂÈèÌë¬ã¥ín±ñÏXn\'ªÇ2îuªé8∫ıeœÍ4‡Bπá5™∞òèÔ¸ª.Éä≤ªVÏ\">û\0sµ˝\'<nw÷÷Ô:∆s≥IIJÂ+G€‡¯úπLóo$˜ss—’ò2|AÄ·ëivÆw–y–%ı)+ÌúXøŒ3–1≠`?≈º∆ëk‡§ßi C[ïmMõπ}˙ï_Sœ”nsj…6ôßŸÉßæ ó€¿B	∂3˜ÖâŒ\"mªøFŒÕeXJô{LI*∫øV>\"öÿ›†¯æ=\"¿‰¡»U|ß6ô¿,iNÇw–i‡≈¶kN“ÏãNëßêK€^ûª9ºÒeœ5‰˝Á`‡q ˘o…åcv{Û FŸ÷VfZ,¿~\nÚ ;´}ãŒR>äA2?∑X∏gkoz˚ù$ä¯üy√‚=hÖÂZ”`˘‹à®ÌÎ|∏«!ò„»∫ —ÏWGPéR‡°•`ûµ™Ã˛2/–xöƒCÂ£˘;¥$©Éu¿ïΩ˙Õû\0S»bfrÒ⁄ú-sûñb„	≤îAó=˙ç{ò˙åπO¶üÏ8‡π∂YΩÀ–¶Îh:iÿï4‡úˇìÀÑK—yp√˜rz√ÀÏVñƒ˘0í˝œås6Ú“è‰>ó∂ﬁ*à˜·Mı¶ò÷∞übr?ªGPõä≥“ÖŒ¨ÿ§ˆ©œY˜AYÏZ3◊„ÙÁÌπ~!ÃËÙë*qıO∑IWeK¿œoôÛ?•’¨{∂ﬁ√é_£Ã]s≈~À\\±Ê˘p[1É c™¿{I3p~=2ê9„ƒæE2Îö\'Ê°ëË≈»∞Üz‘◊¡Sûß·ΩGg^ˇ+çπ·wwÀ?4˙⁄i»¥Wd∫Gà4\n}8s¿\'ˆ-VZı`m±=‰`–…˜ç5¡ŒyJ~\'ˆºU;óºŸ‰⁄›L‡¿Ïßò‹Å-ãƒm.Œ\\æ:\'*ﬁ5ı9Û^—)ôr€ÇË–ÕˇàŒ Xnb^ndé25[Ä8»Ωº{ŸªVy£õÜQ.ØB∂#{ UkÏÅÙö[Á=KKøòAK?øT¸¨Im∫#0Ó‡˙oïñ5àæ∂ù60ÿúo¨ªv4HpÑÙ*(Uçúë÷ıJhÎº¯≈ﬁU”øü\'óG5«∆wWx|ãÃÖçÔ`¿\'#›ïÅº9ÊD±)]Â£´`*…:úaJui˝›9Úà†(Gcüï≤‚¨©«ú>nLÎÑÿOëÆeµ,`Û£†±B˚`‰eü N‘÷}-~á˝5±¯ôû£Mπ©móã¿≈‡≈∫XGs—Œ@Õ‹ﬂ^Ô–¢È6‚JV‹√ñ¿‚CÆ_3à÷˝Îï°¥q÷„.[É∞é∂/xâ˛|qÄL€i”Ú0kê\'€§Ì¥]ßk⁄öüˇCø¸˜$˙Òâ˙ÒÒö˜ŒX⁄:Á‰Ü5 ∂¡∏ÊF^:S˛Ïa˛NQnﬂ¡ú∑ŒîE@\\ÁiÔ Od%!§ﬂ\\\"1sﬂ#ü€¸œÂw”F˛ÌŒCÆêû–}‰çÚ±)8Àoêd¶ ”:?tµ∆˚n,ÛnÓXT∑îÀL•¥${„øp\"?ñﬂü/t8ãé≤}ø©JÀΩ¸˘‚@i≠⁄cÙuø4ö{,˚˙j:Ó†s∆\\/äÿs±£\\ﬂ¨óáZU{ÇıkÎﬁ√\\-\"Ø3QíÕËD˚Ÿ∂ê“ÎA˜Ø˝Jà“&ßÇy∆5? D∂îÊÌßŸØö¨™ìNπöˆØ˛LÓXÏ—#Q	 G\"Î\\ÈXì]*¨D,G)+8(-_Û¿i(e˝cõÅ¿àK>íU§,…⁄≥êñ|v±“≤¸@Ñ5D.v‰Rv¥‹∆àñªùs◊RÈÍ∞ˆ∂Œ{ûv.r›j√{¿y@â«–à8ô≤	_¬cRƒ`£ÄÚèÆìÁ–^ég,ÕÇG¡^¬¨£ûx˜Jª◊â3Ÿ{∫G}j;`I÷ıöô˜ÓŸ2“€˛≥ÿ°Ök…¬ßPÓ°ïJÀö§CË¨õfÀÎÇi=∞\0˚)\naeIñrƒO	0˛.,&{ÛY‡¥+ø¶∂=«+-«@x|xnë13j∆gî—gí“≤¶Hà”º˜&‘Õ#C(0Ô\n˜\"¨õe_^.ƒ‘“Ç—PåË¨!DfPÆØ¶™ÿapç-—âùi‹ÌÛ(4<N9bbÈÁóI±ƒ˜ùl WÌDƒEt¿(1Xök]˛:ÂëÌ2~!`U©¨ø)\'	Ñ‚Ö˜iYf–$–=\'=C›GY[ö¯ÓÚ≠VZû£ˇÑ\'Ñå9˘Ü◊	íæ8´,Âåˇæ*œ…kB÷v∂π1≈qÓÍ“kŒziê√ÿá”Æ¸F\\Û„îñc0∑ø‡ÉsTDDå∫¸jÁ¬Ω√ÏÇˆSÃÎÄΩMmMôCÒm\nH˛—ÎÙˇ(≠Ü†Íë£xÒÈ}•ÂÉG\0´—≠®0Ña&öÇ®ÃÆRÃ¬m^ú≥ªn√<6æbR∫9¨©kF∫^/õŸ@|AbF˝ ªE‚Ñÿä/@í[Òï(¬a≤PÎI3ãoáìœì…!,¡2*Ãs€÷¯uQùw§a1˛3Æ˛^Ê\07Òv‰ön	˚◊|!˛µ3HÂõÇŸ‰ÄLVNá`äc”Ï˙Ä-w∏àqæ∫é∏NiYÉÎf˘◊Wâk©È©-ˇÖÿOëë∂Õri):Ût\\v“a6∂Ã√íûßﬂa˜w\0Xíjrä°ü}«ø‘„‘[‰r∏Wˇtª,høeÓ”Ú5fî¸Cû‚ˇóI?õ+7§≥(ú?ÒÓ4x ã≤mXB„oùÁ0¯®À∞+ÎÊ>+x#Z\nÊ{èπWiYcŒÊÑåˆÑÍ»ñ_Ë¿⁄Øîñ	D›6eM≠Ω®n∏ê·íGÆi\0Ò∆πHÃ ãU‡˙hÆ õÀÏÍ‚ƒÔ»ıåÁ1•›H°}g`}.¨[ƒ\nh√cî£&Pd\"Ÿã‰Ü©\\´ÊπgKMoÿ£ﬂÿÂﬂ∂Ra‚öoN„ü∞\0˚)ËÑÇ¥ˆÀ˜y¸˝n#Æ7Y†<õ´`>pÏÕÀé÷ÃÎ¢å“T:c¿ƒˇ ¬»açÍ>pÔ’W¬2ùaY\\-É≥m¯Å\ném¨≥ÙPIh«øØ”Œ≈o»∂-(∂>Òﬁ5ﬂ∂ür§!:ı\nì¿°u7ÌzOîπ¢£¨?nÆ»A@1AMZdJsQÔH`¬ƒ¿gúú§w7e|B2úÜù˜∫¸N&›∑é:∫‘· ´1,ìé‡<c>^îÌzË¶ó~Ô—wÀ}ùW3òÀ}ÌO≤Eµ¯,yGM∞\0»`πì•„≥5em8^?“bnŸå…õ•ëô;M9™ô¿áÁÄ˝òïﬂ›$-K–±`NÀSs¿∞˛xæü›ÄD	<˜!\nM$÷’∂/“ˆÖ/+¨q5® _3\"pw,~ùrˆ/Ué6Ãç\"\0ß]ØsÑ’€◊©0ôÅ `˝/,pWÁî≈Iíü›tƒH(—°ﬂ˘^Ã÷ò#ê:q¡ìdì;Ä0√õ\0a\"Ç›Œ∏Êá8,¡Á?æ}∂,à`JÂ®°»∏∂“:éNÍ$€á6˛ ŸªŒ9‹‰ò„›¸∑˝uªß_ı•˜h|ﬁ’à˝ıÚ–∫ÂN∂‡ªòxœjii#™K´lÅ{Ë¥W≈ã]øÊ·nﬁ∑˙s⁄ÁÉ kNü≠m?„∞\0˚9∞:êΩß@å‘ÕÆ+å≤œº˛7a·†§†˚)8∂I˛]Ãìa^yßcí∫H¡oŒº4ﬁ˜⁄_Ó¢l!öà“EuàO˚æìÂ‹gì¬A*/:&£ƒ´Js‰<-ƒA&=Ä	ÅÅ7$,à\n—∑$”ŒGˆ˛%TU\"˛^iUóU¢™ s•eX[].D»z˘˛>¢Ç„Öÿ#iœö‚∆Ïœ?∂¡•Ëf{`˘í•Á¿ﬁÀ‰6I7c¿MªÌórPàµº∂‡‹‚ª∆ÔÑ	s◊®Ãë√\\<÷0À5æä†!ÈÿˆY2π¢.~#•t°X¢÷ﬁóÊÄ%[¯‹r‡˜›˙ªt{c\0\0Àæ€»ÎÂ`Ø9∞˛ô%ﬂYDlππ}?Î®tW¡uæÓ∑{ïkæF∆†‡EFüsÂzwéÜn∞\0®ôÎƒ$µÀ(Â∆◊Ä˜\0∞≥2çjÄdY{P•∞·È÷ÜÀ¥é…Æ}nπºk◊<ÈÚ«Ú™vΩŒ¶vΩ\'±∞0å,¿√0£Ñ≈0√0*¿Ã0√0*¿Ã0√4ç)`NnBNÃ„<Ãx%‡F>à‰∫N‹† ÕjyÛ⁄‚‚íïfÉµ©uÖ∏‰]Ä∞èÕPˇhzRyPˆ&‡¡Ωi~4ﬂ∑¡ £“vÚö∑4+ú´ émDºyâüÂ}lﬁ‰=.üƒ?™¬Ã∏Ûäµ≥€∫‘…çÍopìóL)7Æº°EÁÇîúﬁÍd∆”@TqO‡˛ï+ ßöå⁄‹( Ω>q?ÀD:ÊÉﬁÅòiubãM‹¨fÀ÷]¯§\0;¿rÑçõYv<|[1>ÓU9P˜ÄÙ·~v„˝ÎÛÏ‹À ˝å˜ÔaQ÷u’FSß°òÊc‹∞äÿöG»ûƒüÿñb,;\"æ∑51ﬂø ÊÈ˚◊oÿñ˜2,e≥{€håñô÷°ˆ(-GÛ‹a¥zÃV..nOäï=¸]ÄmÅª˜óõo`ÜqàºÖ–\"wµ∑Ôﬂ@`[‹x/[∞%aTLÒ÷Id|‹¥!·¶Gµ4∂Dﬁ[5¶ôa‹Õ!Bî‘ºYÄ-i·ΩÏXÄÕ‡iÛÅ‚3Å	nV≠)õ£’&ê∏qoaÍ’ôx†À¥_ª[ã\0◊Å{Y|^}mì>w„l	:∏®Uàc<Ñt/+¡æD´`0»≈}ÖòÔ-∆UpÔ™1E‘≠NÄ-¿Ω,›‘òŒu~/7MÄÕ‡G§“ã?Ç?∆¯!À#f-€£µ	p Ω%Áò¯ﬁbÏ‡˜ok`K‰Ω!∂/7OÄ-ë\0ÓÈñ˝∆‡f≈ÖjQP‹giµl:0ƒa∞3‹øBx!8æ∞50VÂ4ÆıΩ‹r6ÉªÆJi0æÖ∏qÂE*n^Å∏‹¥µ‚ﬁb!nΩ`–¨Ö»¯®≈k∞}pNp/+”LÓ`â¯U:¯æ≈®ùÒò$.N_uU9Ç∏!∏y9`´u·Ö∏¯€˝ÀÏ≈\"v≥\0+‡W¢£Ä{öQ≈UÂÀsDç¡Ï¨’–ù≈ò„ïQÕ*.%j	,¿.`ÙP5$t˙8)°ë˛{˘+8ﬂ°B\\p˛˝U|ΩÇ˚«ù^É+‹[≤”·Ô8†¿˝ã5¯jØ√gºÄ∆√Â•àéB+Å;\n#Œ/¨:Ù¥xêX¿cÖÔ÷/”*ŒùÃñ\'Å%$œØü∫TôÊ/æ{XLåÇ‰°Qb@%òiUxoËåé¬ÏZakÿ=»s ÓÊf·«hª`pãNúπ˛ÖÙbà{òÔﬂVâ˜}W≤£`k∏≈‘ùG∂zõG†)∞¿<»EßŒ¯6®*Ü˚◊/Éáw°Œ‰Q]G¡.ófÅñ=	å#‰îÑ∞Üynÿ7¡˜\"ƒóøüVè∫WÄ9ËÄq\\x‘Ã∏B›µ¬û&ü¬<eƒ0ıá`2RsWÏJu\nŒèöô¶¢Öß	ﬁFUd?\'Ó_ÓÁ|£7ó.i12ÑEÃ4D∫¨8PÉi&∞Ç˘˙Qsºû|Îä¿ú∞≠sGaBúi¡∞Àäi!u∂¿º\nå\nØ¡0ÒΩ!ôÃÚ#FÎåÈ<„.‰º∞∏¶`ë1ûGûŸ´«8∆7}\"Êy·VÎ2CG….+∆C¿\"„ÈœoûôF›^Œ∑Bóô9XÉ≈óÒ$r∫áEÿ˝†ﬂÇóÅÔ_¶q|˚*ë.31Zo-\"åy:Œä√xX¡l	ª9xÜ¯Ú<;„~0LSD8–Gîd`‰Ãh^\"\03a5i	sê_ãë;l˘2Æ„\'W.Ó\0vÀöGŒ£XÊ∆\"‹2πb<Ü]1“=`Ó|Ã˘2åöH”4‰4YkeZÇüŸÃÕ#≈ó;=∆G@‘.[¬Æ#›Œ≥¡4ˇS≤@πË1à‡Ç\nåØKòsçªÄ∏o·1`∑3”¸ÛÍë\"ÏÁn[93Ï‹πìzwÔNW]~9ÈızÂ®J¿\nfvNà8GÌÃ¥ˇæAº0˜‚è»uæ,æL=øˇÚ’‘‘– +Ëƒâ QÅq\"	ªπa‹Ñ˚O§%Ïgs®Ï∂bÏ†”Èî=\"£¡†Ï©ÑÜä÷∞ãûq#˛Øâ˙À!o^93~Ç‡b™áEXó3©1n$0L1p	·˝ÒÕÀ¯˛ËeÚ‚<2-∆Õé/A>n^_üÇaπ,ø÷û≤R.dO\0„^h2R‹æö–Ço^∆ﬂA  ÷x$=lÒÃ∏ü¿äBpìØYö∞¯ÊeY=©ï$•ıœAWåg– ~‡P[IdPy-%¿ÄÄ”L6èÍ2e«C``§B9æU+W“oø¸Bµµµ [∑n•˚˜ìF£°≥∆ç£®HÎÎ&£}{∫ˆ˙Î)..N9¢∏Øpµ‡µÚ◊•éj„Õ>FóüíSÄÒëj*∞cj´Å^·ıæÕ&\0∑⁄ÿ—£È·√ ë¶Òøgû°KgÃPZ*R[%:◊˙eSÓ_ÆÎ€<XÄ]\"0Ø.àû⁄Æht,æå∞n§¥ö~vÿ·JKedLCÄÊªY|ò∞µFÍò7íµ}ôf†.hêy¸xÙ;oΩEø¸¸≥ËÛÉËãØø¶ÙÙtÂâII£¥|Ä@vEÀ©#‹ø<Än6lªD`Ò‘≤Ç’∂æPo‹Ÿ∂];Íÿ©ì’´<Kîëë—‡yü_»¡Iú±¯2^ ∞X∫¢Ωºx‚À©&ô÷@ FEÀÅg´cºC‡+n&Ø	¢Ëå¯ÊeZ‡ò∑á≥]1^§uòjﬁJ•\'Á}Ÿu≈¥\"‰\07@÷π√¢Á¿I∆ã¥ÜÏiÀÆ+éödZ#>ù÷Ed°NP”zi=ä·—¿ä\0t≈1å´@º¸=M•JÒLÎ¶ı∞·z(j”´ÛÃ„ÉH+ÿO›∑“{≈±å˜i]™·1Ê—3”⁄‚ÎØÀíu9„Û¥.ñÀí‹Ï*Ü¯r‡√à{BÊg˜[øåä¥>ø©ªÉ±xÙÃ0\n‡˙Ÿ˝¿ﬁ+FEZ·ƒ%\\en∫Èÿ˙ı_å\"}≠)U)RÊ°-7d»Ú~ñ¨™™*eè®¶¶FŸÛCÇ¸HÄeXÄ,°Ú:‚1ﬂ3∏èt‚öEÍ_§†¨≠^J?\'∞sA;£¶\\Èlõãﬁ0.UÊ1<ù∫1d–û÷$(d˝¸”OÙ–˝˜ÀjI Ωm[˙{ŒäˆµÙìÆ¢´6u æW;jf±’#øæ…¶˝‘ŸzØæñ&‡ës`ÉŒ£z‘∞adÔÅéÁÉ˜ﬁ£\'}TäØyÀ Ã§¶Oß‹úÂU~Ü?∏u1®bÒmxàpÌÀ˚@X∂r`’:m6O–zØ¿ñÆ˚„uÉ≠X¶p©È™Ñe.:!Xx-t±Èızz˚Õ7È’ó_¶ÍÍj°∫¯íK§ıˆÌ€G3D;Sà±ﬂ!≈Õ«®<˜Î\\Ôr)ÆuYQS4,∫û†[¿‚£77˙ùØ˚m•àéVÄ¥\nö7◊ÖRÑoº˙*Ω.61Jﬁy˜›ÙÏ/–‹®{˜ÓÚu†Èì\'”¡Ée€ØÂú  pdC§◊G.aÌÍÖ\0£Õxî÷;§{•>¯≈e¸xŒ¡oP{∏)†C◊FàÅY„É2Ó#=D?ˇ¯£lC|üy˛y∫¢ãd:oÍT⁄∂u´rÑËØ9s®GèJÀO¿\0≈;qÃÎB˙Lwa∂x~0ooûˆS`£Ûl\n<zflAÜ»OX≈N∆≥Î^wı’ÙÀO?…∂V´•Oæ¯Ç.∏BŸ6Q˛Ê˚ÔÈå3œTé]8}:-_æ\\i˘	æzü¯€R)OoéÙ‰¯©¯˙9ÏGmÍ\\ê?-≥`º‹—bX6îïï—Âó]FÀñ.ïBM~¸1ç5JåÈ###ÈÕ∑ﬂ¶K.ΩT∂+**Ëˆõo¶?~ˇ]∂˝pS∏ûÜßèL»A£0¬ÂÃAU™¡WbSÉE<]UâÒo–±a˛Ã¬ŒÕÕ•õo∏ÅVØ\\)€I……ÙˆªÔ“ÈgúaW|ÕDEE—ìˇ˝/]6cÜ¥äKKKÈë§_~˛Yä∏_‡kY¶8ÎïiÍ≠ôÒå{i›s¿fŸJ.ÃUa‰©4è‚Os¿—P~I9]}’’¥s«y$!!Å>˝ÚKÍ€∑Ølª 3ˇ˚}ÒŸgr¢˝Ãsœ—˘^H¡¡>m,Ωb0‚+ÑF˘ûUÓM‡ù¡\01ê„9``‡j\'¡¡Wﬁ#\0—Œgéù@\'NdÀ6¨ÿÂ´VQJj™l7ïè?˙àû{Ê•Et˜Ω˜“mw‹°¥|D’˙B7Î7ƒá£≥=˙∏@¥zYÄÄj—I46“⁄Gœﬁƒœ83+KX®óRnnûlwÏ‘â~¯˘gJJJímKäããiÈí%tÙ»i—4à‹¿∫≈≠˙˚oø—}wﬂ-€∞Ñ/ù1É˛˚Ù”≤Ì≥¯Jf¨D™˚∏«¿S‘`J$@]Œ,¿@cK&ÿ˝Ï]¸XÄ7m⁄B◊›xãV0h‡\0z˜Ì7(πMö©≥Pÿµs\'Ω˙ +¥tÒbi-[“&-M&Ê∏Â∂€($§æs¡Ì:˚ØøË¡˚Ôß™Jì◊f⁄yÁ—/Ω‰ªÓh_qC∑∆4∫wè¿kzYÄÄ∆ÊFÿ˝Ï]¸TÄW¨\\E7›rU*‚8¸îaÙÓ;oP¨9Ø32®á“?ˇMˇ‚ä5øŒËŸ´}Û›wß11oÓ\\ô?⁄,ÚgçGØºˆöåÆˆ=D#=L*“–Ë⁄ëΩ-–É≠XÄ\0úÃU9B^`˜≥◊CÜ¯^s›MuÅRÖÂ˚ıüXY∞`È 5tÕ’◊*-¢ÙÙt∫˙⁄ki»–°2-Â7_}EÛÁÕ´´êîëëAˇÃüO··÷Ûó7l†+gÃ®˚“_-ó0˘2•!ri´Ê~[[¥⁄Á‹[∞\0éÊIÿ˝Ï}¸LÄÁŒõOwﬁ}?’÷‘»HÇ≥«è£7_Y&€∞eÃÿsË»—£rˇÆ{Ó°oæôBC≠◊£œc›0¡£è?.ƒ˝:πo…û={h ƒâ“Ö—Ô—≥\'˝¸€oƒZu`Ècç¥ZÑ˘¢g¿É¯KE*w‡«ÃÎÄ-q†¡˜\'|˛Â◊tÎÌwôÊqÖé=ÎLz˚≠◊ÏäÔwﬂˇX\'æ#Gçísº∂‚2⁄∑ßgŒTZDoΩÒFù•k	ÚFˇ9{6ÖÖâNH∞{◊.ö:i ∂œÔëJ§÷vˇ¬Â‹Zƒ◊œae±ƒë\0sÚ∆pΩ˝Œ{ÙøßüSéòË–°Ω–˚bÛÎo»«–êzˆÈßúNuÔ—É¶Nü.˜KJJhÀÊÕrﬂñ¥Ùt´ﬂ≥ˇ~:˚¨≥ËÄxÙƒ˘P+\0J≠ø´ph˙“∫k∆),¿ñ8¥ÄwíÉëjkÙTUQKÂ•’TV\\’`+/©¢ä≤j™Æ¨%ùx-~ÜÒo<ıÙ≥œ”Îoæ#€pˇ6;ø†@Óc-pF€4Sü¶Nõ¶ÏQì™\"àø3y‚D⁄æmõrƒPk €öÊ~t≈¯<lãm‡ÇÕ¸/DtÔñL:¥+óéÃß™r∏zLß–Ÿâ¥Óû5Æ•ƒ61î“.Vlq‘Fl…mc]Í»[><ÒΩÒÊ€i—‚%≤ç3?|óÆΩ˛fŸæÊÍ+Ë—áî˚ñ‡V;Û¨	tÏ¯qÍ—Ω˝ıÁØ¶\'Bƒı%~á=:DcGèñ˚=Ú]„çrﬂ§®9lòtQè’UU¥eÀ˘,„~˘Ö˙˜Ô/€™ÇÆ∆Y†£ßh-Àè‡vñπù[<@XX¡zΩÅˆÌ»£Ÿ_Æß/^˙ó>xrΩˇƒöˇ„⁄∑5ã*Àjdßä~EcúlÊ◊ò6#U	!œ<T@õó¢˘?l¶Ø_[Bo?<õ>˙Ô<˙Íï≈Ù◊óÎh€Í#“zf|D&_{√Õ¥x…RŸ∆‹Î«ΩGßù:J∂õÖ≠D\\ı›wtÊò1≤çàlDJ/ò7O∂U\"Ëm!ƒ\0∫5à/:]jj(k≈b26≤ºçÒXÄm®≠5“ŒM\'ËœØ∑“œ,£Y_m¶=õ3© ªå*ÀMÇÎ)Ù:É‹º¨⁄ª9K˝f˙¯È˘Ùı´KËﬂﬂ∂	´;GæÜQá‚‚∫ÌéªhŸ≤Ú:àçç•ﬁ{ªe‚ê$¡çA3XÜÙ˛G—Jç·Ú≤2˙œÌ∑”o¬VoDµñ\0,Ωﬂ⁄Zı‘˝¥Êôá)w„ZÂ	∆óaV(Ã-£’Ûˆ–«œ.§9?Ó§˝¬Ú≠©vm{PpEDÖRlb$%§DQ\\Àmc©M˚xjìO…È±‚x4≈ƒGPhX”Ê£0_úõYLõó§ﬂfÆ¶Oû] ﬂgAv©Ë∏ï1ß††ên∫Âva˘.ìmU¯¸ìÈ‘Q#dª≈∏9A>\\œœø¯\"]uÕ5rZÎãÔªÁ˙ˆÎØ=:àlo¢◊~@ÅÔS‡N¨]AπõL¬{p÷œÚëÒmZ˝0ßV¸Ωìv¨=*ØcghÇ4L°·ZJÔî@ù{µ°Ùé	ü›$/¨ÿ¬ú2 ¬zhgétEÎjı2ò´)ÓI}”Ëå©}Ö∞áÀN6†°9`‘‚ù4Â<:zÙòl\'&&–ﬂ≥~ß§§DŸ∏ç∫ıÏ\'˜õ<lÛXòœ≤†©s¿X⁄Ñdñº˝÷[Ù∆´Ø÷	Ô˝>(◊´rÕËuﬁj	8∞æ⁄`†u/<N«ó,êá4b\06˘◊EÚ1‡·9`ˇù—¬ü∑–ß¬¢‹æ∆π¯FFá—©Áˆ¢k9ãÆ{|]˚ËXöt≈Í=§Ω¥lÌıc{6eRˆ—\"•eM∞6H\\·Á\'^1òÆ{l]/~Ôuèç•i7úB›¥ïVucÏﬂvÇ>a!˝˙—*]Õ∏üöö=ÊÏ:Òmﬂ>ÉÃùm%æn√CYãnΩÌ6zI∞Yp_yÈ%˙Èá‰æ◊Ò∂EË.ht\\ |oˆ˙UÚkI_ÕÒ#æN´`ÔÜ%‰‹Íñïá•Âiè§ÙwQ∫ÚÅ3ÈÜ\'∆—ê—]•—ÀA2©Äs˛˝m´¯≠JÀ9Ëµ¬≤Ü–wÍëJ/L∑?{]~ÔÚ=tÏë¢º≤!∞òèÏ…£ôOœ£µ˜Ió5„>pΩT)Ÿ¿˝Èªoæ†s^gwÉŒ‘	•=eÍTzÛùwd–¢∏´≈¿B§ zÀÚ\'–Xô∫(⁄∑ãtÂıÊC~ö¥ëHüÀ¯2≠JÄK+i÷ÁÎh…€Â˙\\[ÇÖ’	∑Óy7ß+ÓM}Üu†ƒTa·\n¡≈Ú£çKH7±+Ö6ñhﬂ∞Ä1wå˜0˝Ü·tÕ√g—Ò=(5√:)ø¨C^>{ß¯|kÌ~6¶y@∞Œ˚á^x˛iö˘—{‘&µyµ|]¶ëu¡Õ\"|Œƒâ“=ç\0≠ó_Æ<£ﬁ≈@üˇµ∞Ô€-AHT4•Ù¨¥_¶’0÷Ï~˝˙È∂µÆπv]È≤{Nß…W•›Ö≈i3Hœ;Q\"Ö{◊zì+“]@8?{a!ﬁï£±O\\R§‡ÓtŸ]ß”˘7çêB‹–í8∞=õ~xg‰¯g5!_$99âŒü>ç‚bcï#ûDt™,7x»;nú:Ûøfº%¿NËyÎKèQˆàz^q#á˘X.p∆.≠BÄ`ı„;+®™º°uJW?4Ü.ºuîå^vDzáDääß≈lsÎ|Î¢ﬂ∂RQn9i]ˇ*⁄wKñB|√„)µ]Cã∏§†íæÉçR∂Ñ}\nsî¥Ìn¬™1ÔãîW◊øﬁÔÒñ¯º˚π~∫¢¶ÿoÇÅUß	SÂ>„˚ˆ*˙™•≥v ı¥ˆ1°ßtÌ¬∫lXõ„/H:ùÅˇπ]9⁄2êQk◊Ü„‘Ì‰taÅ\')G]Kü.ΩÛ4∫‰?ß `0K‡*ˇÚ•ETò«ñ∞⁄,]∂úFû6ÜÜè<É2≥≤‰±Ω˚ˆ”†°#Ìoá–†ìOñ€‘sœïØoæÒù2x0Mü<πÆT°_‚5XE+ﬂ”` fYÁW˘¨⁄®h“h[A‰sÄ∞åÎs≈?ªh˝¢ÜÅIQ±at¡-#Ëî±›ö¥.∑É∞<;vOë¢YR‡º¥⁄©ìz—®âΩîVCJã*i—Ø€(:.ú&\\6»•¿.{`~:≠CÕ∏ÁtqvOam¶¶™ñæ{cô\\„Ã®«÷≠€(\'\'á\n\nÎ‚àÂCçmÂÅ5ï2«ÛŒù;©¥§D9ÍáxÕ`∂)≤ûh¿£≤ñËÓj∂Ï§≤o~£‚ó?†¬áûßº§‹´Ó¶‹+Ó§¸[°¢ˇ{ç øˇÉÙˆWj0ﬁ!`◊ØY∞óV¸ΩKi’”∂s\"MªÓπñ∑9 )∆¨œ÷—ËÈ}Â:‡Ê´|Á˙c4ı∫aBÿG97dÀöˇ”*oÛ≈‹<≤ŸüY¸¨0n#GÎÄ≥Nú†ßüyûä—¨Æ™n<@‚aa)¢d!ík òjÿ·t€Ì∑ãóòBÌl∞œÅ9Ó/‘†–˙ú<“ÌŸOµ{˜ì>+õÙŸπd¨Æ&MX(≈DSôæúénXN	!qîñ(û≥ÃáS!¨cÇ”ÑQb‘ÎIJ—WùOgõ÷ö˚%\\êﬂ∑@e{nÁ.}“h 5Cïñg¿≤ ‰ê∆iEâ»jK´‘¨“‚¸\nÍ‘”˝QµÂ%’Ù˝[À®§∞æì;yd\'sûI ¸Ç\0‡fÅú‰!J√9˛\'¿0—ºPî!\0ÿP\\B%o}D5´÷+Gö	˙¢vIBp≠·Ü‚r2ïQ‰y)˙í)˛yæXÄ}áº¨R˙ˆç%2Jı÷Å∆ú≤›»a3»¡¶•∏ƒ∆ÁÑ-A˛ÊÌké–Óçô≤Ï n 0˛^lR$uÎó.oD∆Xg:j$ÛHlM!°M≥^Ò>0å¸’\0Æj,gÇ›/hÌåé‚~\'¿¿ﬂoòu\\ÑøQΩtïº˛æ}k∂âh\"¬(8-AiYc¨’ë>≥Ä_~å¥3î£~∞oPUQCü=øP.Ì±§«¿v2°í]8„˚∑óI?yDG9áÎl©ÜAà,,ÌÌkèR^fâ¯›Ar˘\\‹»	ÀÉÄ≤‚J ;QJáwÁJ∑0Jˆ‘éú⁄ŸÈ˚AƒˆúÔ6 ≤á\'èÏHgNo∫ıäÅ¡óØ,Æã˛F∞ÇŒ¸Ç÷.¿\0e0]XÚKÜÏ…Æß	_§\n‚˚¬õJÀàÛú/]–$W∫¢√ÍEÀPQ%˛	¶‰∑ü6Ω∆ü`V‚üü≠£É;≥ï#&êH„íˇúÊ“¸gæ Eøm££˚Ú(≠C<ù%,f‘Íµ]ª7ósÃpÒˆî!5£Kí¥|wm8Fv‰»b	HﬁBm⁄#ot™¿›è”ûÕYR∞ë]´œ)¨∞˚˜l:.ﬂGMïé˙	Ò=mRÔFé»9VL?Ω∑Çj™MiOü“áùﬁEÓ˚4>$¿UU’¥s◊.ô\\≈FÒﬂ≈ó^!˜\'û3ÅÆæ“â.¥°&Wt# WıM◊_/.ÙÌ◊èû¯øˇSû±2yuÎﬁ]i©ÊÄ=∏ﬁY\\,Íx˚òÔ-∏Ì ).§’ïîAm¬\\õéh\nöHaCî1X◊∂Óh%<˚ÖtÎ¨º¬O`Và÷ÏØ6(-HÌxÕ#cö‰æ≈È@J«5Û˜Jv˙ßòsπ<Á€ç“-‹©Wwaì∞ã3xd_ÆÃ≤—tD|rîLÙëî#ôµ¢b¬Â1ÛR(Dn„o«$D–Ÿó§åìöæ<…$A˙MÄ{Ì∆ˇ;[.aÚi|DÄÕπ†srsï#Å¡ÀØΩF”¶OWZ*P[âQ≥“\0MòC˜5 æ¯û\nø˚Ö∂î»v∞∏i≈zfÍ(∏MÇbx#tGs)Ê˙À(b¸È ≥~Çp„˛-?\0k^Á˝∏Ei’sˆ•õ<w\n∑Û∞≥∫—çOçósØÊ¢òÜ{VÔïå°IWÆ≥™◊/ﬁOø|∞ ©¯Ç¢ºrYlYπ7Æ~Ë,\n÷jË”Á–ëΩ¶ñ.ä1¿UÏÒ∞zë«`∏upáµóÄqLYYÂÊÂ)≠¿aÂä ûZ8ûﬁq~úÑ£f√V*®≠_ÁOàá0îö5ç:1Çú≈}É7	UçPX¡í˛£:5kﬁ‘€◊°B‡ú÷ôFåÔ!µÃ@Ãf}±Œ*ËuÄàøüM˘Ÿ•¥VX¥≈ÎÜ·~æ¯é”dÕ`∏ú·∂F·Ü°Bî±6Ÿl^qà˛˝≈T÷ÔıOåìÛ‘>ãèX¿Xw{ »3§g§gèÓ4„≤KîgÇ≈E≈“Ì \"MŸkµZJL‹x‚±«‰g9ˇ¬ÈÖó^Ré™@mµË›_x¢ú7XF~HÓ◊–÷‹,™T<Ω£(*∏iÜDì¿d@¸9eE_u°ÚÑü¿.hı@†—Á/¸[7«	¢„√i∆›g∏≈Õ∫eÂ!Z¸˚vôTc‡©ùe4±%à4Ü»XÀ.H]˚•[œÎÍ¥i˘!ZÇZ ŸÓ“ªMπvò©!ÿ∑5ãÊ~∑âûﬁÖFú›C9Í>*J´È£ˇŒï˜òv˝)YÂ6|PÄœ3ö>xÔmÂ/‡7j˜.]‰d`ﬂk{Oúw5m(©˜∫éMÈaèÅBÙ’R‰‰qJÀO`¥z,‚h)æ`Ù‘æn_à\"ƒ˜îq›e‡í≠¯û8RX\'æ∞:∆^x2uÔﬂ∂AV+3~~∏¯=fÀ9Áx±“\")⁄„/@ñÏó◊›`˘ìe‚êΩõ3ï=∆gÒÎ°1”<4d∞∞â–A{K|Ap€4eèÒ~-¿p˚Ÿc.≠ÀñÇàÊ›F\'èË$ÁkÌ±v¡>eè‰|1÷˘:…0,Å[=≠üÙ2Øﬂu\'¯˝fˆ\nëÁ⁄¡æ?≠d∂≤ÃÂÏÌ+ ∏çü‰	¸ZÄ7,ﬁ/ó˙ò¡@q⁄√ÎßZ¬ÚøvJãÎÅëy–•0ü€à ∂¨Á[íﬂ0_Ø¡Bï®ewÇËk3„`¨∆ëSc‚π)«‹	¶\'˛˙Îz˝ç∑Èæ¶ß˛˜,}˘’7tb‹o˘ò?GKjU3û%4)©Óõ«w•∑∞à=	ƒ_õﬁr„Öqø`D>ØûøWiô@§ØmU†ÊÇ‰U{i$:2\"¥.F[áÜ◊œU»åY6¿}çËÁ£˚›yk<ˆooXô1±j’∫Ì?w”πSœìmL1Ëê¿¿Ëız˙pÊ\'4e⁄‘w¿∫Ûû˚ËÌwﬂßﬂ~ˇSä/Dx¸Ñsi‰®”È∫´Ø¶›ªÊ4o.∏n—πˇ˘˚ÔtÓ9Á–ØΩFyÂÌœh€•QDP˝ΩZÌ…ÂZDN+L`ø∂…¸ø=€»•¨´µæ0Gû”SXøÓ±NùÿS∫∑ëî√Ëê„íÍ3Ìî4û€÷†7 ÂLfÏÕS#Zzœ¶LzfWÂà˚@Ùµ%»‡≈‘≥k˜zÎÌ˜húøÀØ∫ñÊÃôGππıﬂ?\n!¥î6“ÙÛ/¶_zïvÏ‹%◊€Bâµ«ã-¢I&–ˇûzJfºj)ÊiùNGªvÓ§∑ﬁxÉN9ínπÒF˙CàrÖEı%F¥ù:PlH˝@ΩRÔûÅü34Z-EL8Si1ﬁ¬oxˇ6kÎe˝êï ]§fƒÀ‚søﬂDe%ˆkØˆ=•É≤Gî{ºÑjmÇ¡lA%%sZHÄ¥ïñ òlû¯{HWŸ— ∂û,¨KFGﬂZë\"óìKsÊŒßÛ.ºîŒùrΩÒ÷;t‡!˘<ƒ*%%Yæg©%À∂;VØYKW]{£^\":Ÿ~}˚–CﬁG?|˜˝ª‡ö˚˜üB_•Û¶O•ˆÌÎc\n>ˇÙS∫·⁄k©®®eÂ„§¸ä˜ÇlX¶kÊÕùK˜‹y\'Ë◊Oä˝ˆm€¸ªÊ∞_◊!Ω∫Qlp˝‡ºHÁ˛x[ÇR)(∂~ääÒ~+¿[WYØ˚mg#fÓ\0…6¬#BËá∑ó€XBPï9E$Ç¶æGºNXπˆ@¿ÿﬂ_oTZ‚&∂\nC˝◊ÁÎ® ªå.ªÎ4è¨—µ\\´ ¯»Í’⁄¿¸Á!≤W_w#ç<ÌL∫ÌéªhÀ”iÄ≤Ω{ı§æ˝ä˛˙„i˘∂‘Ø≤eÎ6öq≈52_3Ëﬁ≠-[<ü~˝˘{∫˛⁄´i–¿‘>#É∫tÈLÁLO/>ˇ˝ªp=ıÙ”r}/X∑v-]9cÜºVö,`±çVı&!≤wﬂsEEE’Y∆87˚©ÁûK√¢ô~(Ö∏E”.˛+êû&§_äPæsPX[ÌÒy`πˆó›œ^«/œ8r6c]´%(∏‡	¶ﬂ8\\X*¡Ù…3Ûe*JK0_{í∞íÕ¿•˚›K© «zÎÒÉÙÂ+ãÑ≈Y|‘§^V˘ù!Ú9¬Bæ∂Qn	\"≥\nÙ€rpgé≤¯‰–£è˝ù1f<Mò8Öñ/_©<c¢cáˆÙÍÀœ”íEÛË∑_~†Å˚+œ¥å}˚˜”U◊‹†¥ànº·:Ò˚øß§§F2ù	·üq˘Â¥`—\"j€∂≠<¥s«∫ÂÜ‹DÖÅ∆mˇ˘≠^∑éf˝˝∑ \\aÂfGéÈÁü}V\nÒ¥…ìÈ∑_Uûq`?∂ÄÉ¢£(zÿ`äQío‡ì‰’X˜=Ó$8=ï¬Üú¨¥o‚óâ8v≠?Fˇ|[oM\"j¯∆\'∆S∞ÕßªÄÿˇıÂz9ãÏZ(æ`¶Zà⁄œÔØîEÃ¿öàOâí÷sEYçú∂<À{§–πWïV0ƒyŒ7dp÷ƒÀI˜≥ß@ Ã•ÓPZ&⁄tàßKˇsö“Ú!‹îà¢˚˚Ô≥hÓº˘¥a„¶¬’&5ï.º‡<3ÊÍ€ßOÉy^w$‚∏ÒÊ€i·øã‰>ä4<¸–˝R¸%$\\Ù∆¶N¯·√tŸEQvv6°†˙?˝DÖ06ï∆qîîî–Ú•KÂ|ø πbK0h8ıÙ”i˙yÁ… KÕû˜x1a—˚q5§Í’(Û…ÁhGπ…C£°ûQÒrﬂ›D]4ô¢.û¨¥¸Nƒ·]rlÇá5ÏnÒ≈|-ä+d*êI,.∏yı–ñÊ˝∞â˛Çâ˘S&Ñs“ïC(Ωc}≠Mt÷Ö¬\nŒ:\\H≈˘ı‚ã>°SØT)æ [6{ß¨Tî‹6é.ºu§_s HÀπbw±ﬂNÇîHƒRò@˘õ/YJ˜ﬁ˜ ùv∆Xzˆ˘i›˙u‚õòò@„«ç•˜ﬂ}ãñ-Y@w›y;ù‹Ø_Û≈ƒ	+VÆ™_à˝Ω˜‹Èö¯ã|∆;vîÓh`ü„ëár¿’bccÈúIìËΩ?§•+W“ùwﬂM˝N>πŒûüüOøK¯ja-è;ÛL˙˝˜iœÓ›Ú=5_s˛gWXÅy‡»∞p“*◊@ôÆñ ≈ÊnÇb£e˙IF¸RÄNXGÉ∂ÔÍæ≈„:ùÅ6/?Dﬂº∂îÔ…•\nE±&˝QÈ¯Å|˙‚•e’¢ra«&DH◊Ò∞±›(<*T≠ıå!~kÄGOÎK.$K~˙Ï⁄æ˙à¨S<Âö°“ä%2ØıÃˇÕ£L!˛ÓrP egÊ°B•Uñs·3˚;∞‘≤≤N–KØº&-÷În∏Ö~ˇÛØ:ë\n£é:–3ˇ˚?Zæ‰_z˜Ì◊iÏYg6¯Æ‹Õgü})1ßˇ≈g3ÎüGº/õÇc«ç£Qßû*˜˜ÓŸC€∂÷œ[{Çîî∫„Œ;È◊?˛†˘ˇ˛KSßOßD¨QUŒ¨Úüû&û}∂å‘^$,fóÉƒº¢è˛+¬àäöv•ÑÜÀ6>…° ñG¡€Ç»gMÑÈo0ﬁ«/]–üÒÇPô9_XßÓ·≤‚*˙ı√U2Ω$¢™/æ˝TY–3!ã’ﬂ_≠ó‚ä‰√«˜†é›S§eÎ‚	qNo/k\n√’ºE{ˆ±\")zßMÓM˝-Ç∏Ã‡ÎÄÂåÍJ∞Lauü-Dª•Ï\\Lfÿ≤Ö‡.˜)\\tAÎÙz˙ÊõÔË≠∑ﬂ•Ra˘ZÆÕ°°°t˚≠7—ó_&ÉçöjÂ∂‘}∆ô„Èxf&uÓ‹âÊ˝3K9ÍÚ@Ø]≥Ü.ΩË\"πˇÄ∞Çoº˘fπÔ*-Õçö√Gé°\'}Tæ[0¿@M‚gû{é∫útír‘t9(»Ôi‡Çˆ\0ÀìÀ )˜Í€isN&’2‰ò$\nu£ß&˘„ó((ﬁ∫Êπﬂ¡≈ºä¢øı–_¢©€◊=6∂Æ‹^K¯·ùÂ2*ÖPM©±Hd)ƒs“{∑d ˜!,]î)ƒ¸.\"¢i,›º‚4wÓŸÜ˙ÔHiù<êáøw¿®Œ4zz_ÂôÊÒ„ª+§ÂnﬁÁıèè´≥¿}\'—ù;w>}ˇ√O¥u€v9oi	D`˙¥)4mÍdÍ’´\'EÑ7ÑﬂF!ˇ~Ü»üù|ÓDzÌïïg\\¿AßíìùM#O9EÓè;ñﬁü9SÓªä;ã1däÅD¯≥O?•≠õ7+GÎÈ‘π3ùv⁄itÂ5◊ààEëwÃ˝bÿ”† øó%ƒ@•¯Ö7È¿¸ÖîYm:_m√\"©]∏{Ê∂£Øπà\"œ´¥¸`ÔQú_!ÎÁöÅÄ‹˙Ã9nq%\"µ$,BÀtëÆ´÷mÅ∞ûx%ìÑà3J…mc)UX¡·ëMøH•úíC—-`¿Zˇ„ìÜ÷\nÄ^/0∂Y≤T«é\0c˜ü9ÛËÔÊ `$K0GyÍ®4·ÏÒ4nÏäãsœ®æ%º{˜ö4≈îIsø∑‹T	›(∞~a€ÄeL˝zô“£ˆÌ€ó~õ’´Z‡âjH87;∂oßŸ˝EsÁÃ°É¨”®bŒ{»–°4q“$wˆŸîöú$FØûãÍ≠√¡9Ù\'•eî{√›¥V∞¯ﬁ∫E∆Qà,`Md%Ω˜¨å∏ˆ{8À{`.”õªÊÒê£1ÒÖ’ã$ ∂Y∏ê≤≤mßDÍ{JGYºa‰Ñû23◊†3∫Pán…ƒ?ﬂX–πWjãƒ‰µvé“m™Ñ‚Ë—c4Û„OiÙòÒt…eW“güY\'æËÿªû‘ÖnæÈzZªj)Õ¸=∫‡¸ÈnﬂñrËeè(=≠)UfƒıÏ@8¬Ö5oæﬁë)À¿˚È#˜?¯ Õ]∞Äæ¸Êi˘öóY!ıÊÍU´Ë…«ßSáß€nπÖñØX)ÉÂ<ã_Ÿv	äâ¶®Ò£©´^‘vã¯Üh)˛…ªC|˝ø‡ärÎıø∞.Ω…“?∑”üü≠ïÆÁñÄeT?æª^&èÅﬂçHns…D{$¶F{l›qs—’÷“∫uhÚ¥hÙÿ	Ù¸ãØ–±„¶ÚâËÏ1Ø;i‚9¥|ÈB˙gˆtﬂ=w…ÃNæFmm}î≤9äÿ%úåÊÒ˘ÕøÀvâê/Ä˜7b‰H˙ÙÀ/iı˙ı2ö∫]FF]‰∑AàÒú9sÂ∫ËÉá”ˇûyû\nã‰`ÀÌHµØËk.£`wIﬂOƒ‰q“’∫2£~\'¿∂Kí›S|¡éÌœßÌkéRÁﬁmú}≠öªõÌvû‡\"≠C<Âfñ–˙Eı%›	‹ÇﬁBáv9ûJ`“ˆÏŸC∑ﬁtç1Ç.Ω¸*È¬’XåPFçN_˘)≠ZæàﬁxÌ%Jn,ëÖø¢$`∆çO/¶ÖKñ–£O<A	â÷Î>ˇ‚+u˙ö0i*}ÙÒßb–‚∆•6FÔ18B4cÔø]iÿG.[:Ô•ÂòàsŒ§ËÀ¶)≠zjtª∆Ä^o§≤*ï◊∏¥ÈddÏ„ws¿˚∂fI´ŒÃπW°Æ}ÎÎ‹z\n∏r±t¡_ó›}∫åívƒGˇù\':I.9r~ﬂwo-•≤¢*ÂN7pUEÕˇqK£Ö˝¡}Àœ∂™–‰mé;Fﬂ˜-^∏êvÓ‹)ñƒ\nÀ∂D)B€œﬂSﬂæ}‰æ∑h…¨øf”]˜< ˜_ı%:wR„§¯Và¬úª{uÎ&Ö\nKÇ÷+≥)xb∏)‹qÎ≠Ù˜ÏŸ2=<,å*î‘úf©>b¯0qÆ&“Ñ≥«5Õs`∞àÂC†ˇ®¨—QEU-UVÎ®\nAö: )®êÀuzlF)|‹ƒuCè∫#«…XSKF9°è¶©<%%¿ÕBµπdÁ5Ø‚∏imÒX!~∂øÃÙc4ÕÀ]DÖki 4ºWärƒ√pñ˜8∞˝˝ÒÈZ•EtÒÌ£(Ωì˚Û@€Ç%Gª7e“§´ÜP7ã¬ˆˆ¯©πrﬁ◊ô\0ÉÉ;≥È˜è◊»»h¨1VÓßfÉØ¢ª‰è“f⁄#61íÆ}‰,•Â]rsrË±G°ÛÁ+GL¿ÖŸ°cG:UXª_tÕõ∑ÄﬁzÁ=˘\\s9ûW¨ZM€∑Ô†Ç¬BJÿ…\'˜£ë√O°ﬁΩ◊z6„u÷äÅ]#∞7y†ó-]J+ñ/óÀèÙ:•••—»SOïô∞MßiÉYÄ###h˝öÙ«üâÛÙ7mÿ∏ë À≠#£‚„ÈŒ;o£ó^\"ØãfÊ=(Éﬂ„π•TXRM\'\n (ø§JlïV÷RyeU	ÒµÏqÉ≈ ∏≠ó/,v´ÿ:\"¸Ã5É-µﬁspñ˜∂Y7k€ˆU‚Bı£∆ƒ∑)tÓere£∞DYqÛ£B±‘	ıÉayˇı≈zóƒ∏cÈVs˘k÷,+ÒE¶SÜßØÖ5å‹«O=˘ò,à–\\P∫ÔÊ[ÔêUé^~Âu9ΩzıZö˝˜z˛Öói ÙÈﬁ˚Ú≠ä?q?c¿±y”&1t(›|√Ù≈gü…DKó,°¯ÅÓ˛œhÃÈßÀ*JÕÛ¬Áü7ç>˝¯Zπl›%ƒ6#£ù¨\nãäËˇûzÜääÍ”º6O¶ª¥Ì”ü≠§˜~›Dﬂ-ÿIã6•≠˚sÈ`V1ÂU»ÁmµmÀ%ïÿ√π∑‹ ò-ﬁƒﬂ(ØÆë˚ﬁ†≤F/ﬂ;„ø‡ÎUΩÙOª~8çΩ¿=…˘-9WX‘g_:ê¢cõ∂V◊6jˇÚ·*˙HX‹?ø∑≤AÅä∆àâW/ŒŸÁúC1BtìììÈÉè>¢Â´W”Wﬂ~K√î5Æ-%œ{Õ_Ørƒ>øˇ9KŒ?∂®Éw\'Aæ3äˇAÑ.æ‡ß5àÀÀÀÈ∂õo¶\'{L9“|\"##Èˆ[o°˘s˛¢%ˇŒ£ó],è_zÒÖﬂ—K≈Ï¡˙]\'§Ö€ àô≈%îU\\*≠”LlE%t‹bCª≈[q1ÿx<EBt(M“éÇZÍ“k¯ù∫§∞RV&2sÈùßQõˆûIRﬁ\\\\ôv,WÇEãJKYGädA,≈¬1Wñ19„îq›iƒŸ=îñ˜Ås|v›ã :‡7ﬁ|ßI.h,yπ¯“+h”Ê-≤›æ}=ıƒc‘ßOoäàå† ä\nY©ˇ>SY=d ˙ÚÛOÑÂ’–˙Ùö∫	ÛïûvAØZπínºÓ:Y	ﬂÕEó\\BW_s••ßÀv~û¯˝ÙΩ˜ÓªÚwa>˜ç∑ﬂ¶s&NT~Éc,]–õ÷ØvöôY∑êB¥E¿5	•¯˜Õ¥˝`û“≤.ı∞`#ÖÖhƒ£ÿ◊j(T\\v∏Ù–F(⁄°bŒ=lñã<éi≈fy◊‡∏Vcîï¨^m˙3¡¶c‚˙ï]ΩÏÌ±èGÒª≈œ\0#<xZX ‡w„9Ûœhƒ?°!Aükr‘à_jæmCÇ5E!â=ƒ˚\n™;Ó5xÿ{ =#2aôﬂıE∑çjPÿ^mv¨;*ó˜§u®/–`i*MçbHUY+FÃ»íõ¯lxÑË¢∏µXT[2›4ÓÁ¨ÛO¶~#:*-£ô¸…g_–≥œô2NuÌz}ÛÂg≤¯Ç-\'≤≥Èöko¢Ω˚LQË®øã\"¯∂xMÄõ–âxZÄ\'!EŸCà„Ω<@7‹x£]°¸Û˜ﬂÈﬁªÔñø¡SàvNJvûˆé[n°øˇ˛€%vRz6áù«À©W;˚rµ‚æ}Ù√%T]Soq#∂qrﬂ j+¯»P\"aäGç(]UEµºÁqmI·ÁÆbìË’ã§|^æF∂‰kM«LœyìÑî8äå1{Œ†¥¯˚‚;ÁXì–xLÖG‡9`ÔÅ5´ñnËZõÑæ@Ô!ÌàoQn9˝˝ı˙Ï˘Ö4ˇ«Õ≤4‡Æ«dR,Ç;ô∏ê\nıéaÈWWzN|Å√Ï\0„˜ﬂˇîèHG˘”˜_€_ê÷¶ΩÛ÷k¢34◊¸˘˘®\n∞~}§Ap‹Æù¶ƒ-Cá£õnæŸ°HNû:ïÆñ2Ä;z≈ärﬂ9ﬁõìïQs–πE;Ø˝?∂Á®ï¯ÇQù54™ãÜ:\'i®MåÜ¢¬Òø,˚X>‰Sqæ∏◊ ®¥®ú K*©≤¨ä™ ´ÂJÜÍJ”Ü:ﬁêÎj±È•h◊	µ7Ô›™Íú¯0ö¯§I§û¯˙9~\'¿¿ræ™Ø≥uÂa˙Ï≈Ö≤\ní/dü@¬l—vÍÿAZeŒ@ÅsèıÎ7J´RP˜◊G¯˙´ØÍ:ˆ+Æ∫J>:uÅÕ,_∂LŸsÄtszY40ÇuÉóTÍ®∞ºñNŸè≥à˚ˆ[ä®µ~Æ[™„˚S%ç±6mÓF6q/õ7)X÷àGd∫CöY,5è£à(±EáS§ÿ¢b\"(*.íb‚£(6!ö‚í¢)>9ÜRc)±M%•«Sr€JmóHm⁄\'Sz«\nfºÒ}ãv+»Ö5ø‡(ã5∏ïeæ+¿Ë»¸¥Ö˛˝u´Ï|DO˘˘TScQÃ˘¢crûGr\0˜Ç∑ºéVth>T0`ø2ÄPˆìúRø÷3;À˘∫s2®tΩπ·Ôñ\né	5ê∂Ïêrƒ√¡√îPa]$Ÿ¡¯◊-61öS„L\"óë$éaKñ[Z”cõ)rønÎh⁄ ÜÈùÍ∑∂SÂ±î∂âîî/‚EëBp#¢¬)<\"îB≈¶¬¨’◊ƒ·⁄Üu≠´Fö‹ZiâWñVQYIïñQQn	Âü@J!d…◊ üÉ◊Xv∆5¸RÄ-óœîz!©{3Yˆ◊Nπƒ»rôÅ/QlQ“1®¨™øbc]KMôÑ\nñ?Ô§ÎŸ¬¢,Û3GE7æÜiAÕ4∫§KÔøúZF∑Ù=NIî›‡˜Èé%CI)≈UYÁ∂éãp<\0Ñ¡ÚÑ5\n´2$Tàa∂`%?ª≤	+ñl›d⁄§µk∂~1–ˇÊSŒ±| =^ ∂B À[¶¥P$FŸƒk\nÖêBLãÛJ•º∏†L\nlIaπËO≈V\\Ne≈“%^^ZIBÑ·ØîÆÒjÈ«>˛E¥!\nO&cuë¥àô¶·óóX-ZîÔõÓèkè“˙E˚ïñoRp¬˝æAßÈ¶‡ ˇ@BΩÓ~6”ÚøFU¨Å]lzkWsph>Eﬁ;ï‚⁄‘˜K∞≠LòØ\"ÊçœÓmèV>`Ui\"”H”¡ß<9˛Ç_û1dp2Sê„Èä*M\'?´ÑÊˇ‘∞>™Ø·ãÁÆ’ÄåW·÷Ç ï€Î”éõå˙˙©.cÖE~uX√5%’%Ö⁄Ù´Øxï≠°ö=ôTÙﬁ?T¸¡*˛xÑ’ËIRbe˘S© MÏ◊Õ˚FÖK¥ú˜çç§h9˜kûˇ[b4≈&≈P\\råt[«ãﬂÖàg∏»Â|0∂¥¯∫y·6I‚µ±81d,⁄#ô¶„üpRΩ\0Êñ˘úãwˆ◊≈¯},â¬r(∆À`ŸÑü◊©m2jπüÕËøÉáè“°£%-≠ﬁ“c é¿ ÑY˜8áFúVGÂ≥÷í± $‹Ü¢\n™ﬁ^_û“ÑEÑ\nëL†‰ÙD”&ˆMÛ¡¶9a4Ñ\'ƒ66[4≈$àMqåÂh!Œh5ñ¡E.Áç±	1èì.s-+√Ô\"˙b}ã≠k@3Æ·óúêb17%tÆÃ≈‘ãﬁ`Å∞|±å»_X¸«veèÒ\n~ºf±EXXê™ 3b9ÁÊ–3/ø£¥¨˘˜HΩ∂©=Ωπ9ÉﬁŸíF˘•¶œc,?!ALxΩG#*Rt≠äáV5∂ºYÎ≈˚p¸äÚJ(Îpn›v€lyî}‘ºÂÀ%LòÎï€qeŒ7”¥ôÊ}M[˛	±e…πZ9Ô+~ë≤Ï	sæX˙Ñπ›Ê#>ãXi˚í&∆GÛ	¯8~)¿pØ —Öô¢|ﬂ&By¡Î,F«~\0÷∑4£„\"àxnç‚Î≈têNq‡^∂dÎé=¥e˚.•Uœ¡BUÈÉ®† H˚Ú+)≥Hó^OÂ_ˇNeﬂ/ßíœQÿ¶Ω ´Iàd!Ω_D/WÜ”;•Z˙±XCŸ,z\\˚”h;!—êy3\'Ê—ÎÙr˝Øi”ëÆF\'¯»≠ZG5’µ2j[µ∞∏ÕÎá±DëÃBd+J+MAU≈Rxl!FPõç°FXøû)©⁄K{‘/(pRpﬁ[ i∆OÔ≠ê7å?Å¿ç-´Ï/≠`‹Hê÷Á\"ûΩÜØÃ6‚ÔﬂΩΩtÁd¢älÂH=z£F¶h‹ûyúé‰”oÎí>\'è\n˛\\MÂˇn£ÍU{(tÅ©L*“:˛Ωc?-	ä†∆Z°ç§ﬂBcË	m\"˝±ˆ®|ç-àdÜ;ÿa4¥6®>\"ZYÔk	›0˜›ld˛ra·ó6µô&·∑‹πw}¿√ë=*¨ﬂ¥a”≤ÉRÑ˝ëe≥väQ≤gDZ=≠mŒ◊Ωè‹ç∏¡√Ö¯ù6†ıKÇ¢≥û÷\n(SE*VÙ>1ËﬂΩv}y,óæ9ûG:q<®ÿlIj(8§·`?˘ÎJ˚eo=∞iK°4¨˝ïÎS©≠yÎl⁄⁄ui#7Ï„5ñ\nü\'$Y°r.7W¥Jä¶89˜e\n∏JäUﬁA30Ëd,M|7Â\0”¸VÄ-ó\"årÅjqto≠û∑Gi˘\';◊9Ó¶Ÿ¿˝ÏÇÎ◊k∏Í/±ò\nÉjëí≥¥™ñ÷˝m™∂U©7P©NOµu”Fa…Ü	AM¢®∏DäåM÷lò|flˇz√¡¿Üï\\ú_F5“E]kZ∑[VEeEÂTbûFÍÀ‚JÈä>°Ã/ÁœókÖÒ|yIÖËS´•€€Qd∏	1X)∆rK˙é˝ø‡Ë∏pÈñp˚n[©é(2]˘j≤WY=Ø∏}\'òÕÔÅÀKçZ;nHÇ·V\\ç∆ÆÃ∑8Ñá† èÜBÇÎ=YÍ„=¥‚πj≠IÄS#*®KB5=:¶î^;∑Ñ=-üNiWCzt†gtëØÒ4p_;À\\¸¡4œlö_∆tl`é∏(ØîÚ≥ä§0gÃ°ÃC92ËÀú˝ ä⁄R2ñ7íç±ãﬂ\n0ƒÚÕÏ‹†N”¸∑ƒzZb≠ûÔﬂVºo†1E:#øsÁÊ_`ºùF|oÜ“L™=ºà™∑|B˙cKïgÑ¨!à∂(èXõSø84HCU⁄Pä	©°ªn•áŒ(¶æmj)=FO}¢sËﬁ)V¸éßˇ—”ÛÛÙÙ˙\"Ωµÿ@-7–«+ÙıZ}≥Œ@?m2–_€4óÿvhŸ~#≠9l§ç«å¥-ÀH€≈∂+€H˚Ûåt§–HY≈F +3í0f	iÒÖéJí⁄ƒSJ€π¸Ké∞ÃKã∞§.È–∞)“∞ñ]ôCÜ`#Ë÷tB¢≈Ä%◊j≠4„~+¿`¯¯Óuñ˛xªÿ¡¡ùŸ‚o˙W‘≥3∂Ø9Bπ«}§8Ω?Çy^‘ÙmçëŒˆÄµÈKÓgâx?˚”U∆⁄\n™ﬁÒ-ÈN¨\'Cy6’6 \"BM]e§ízS[UIùÈ˜†\n	\n¢™ê0ä	≠÷oEÜ≈Ô´¢⁄„ª»PdZ™§’FP^9—â¢C˘&›~¬H[Ö®Æ=bZÓº]Föµ]l€åRê!ÃüØ6–L!‘âÌ˝e&Ò~u°Å^òo†ßÁË…Ÿzz‰O=›ˇõûÓ˛YOà«ßÊ”´ÀBhÊÜp˙ng$Õ:MÀsbhoU<ek®<2âåÒ…§MN°∞±%%Rh|Ö«ESxtÑjSPò)˚ëıê:Ç√Hì‹ü4≠5»∞¯µ\0#Î\\—f˝∂M∫Rº\n‚ˇ˘Ÿ:ﬂÎ_Z\0>À?ﬂnTZåÀ`%z·∂z-ÒUã»A%\"MXegV”—ÉÂrJ…X],¨:Sp\"\\– 2‘$@ë≈˘Úƒ¬íè∞Ä≥ £i’—2Tì.s/QM˝¥NÖ—;SËíP±\\ú˛‹2!ˆF⁄!Ñ~ù˘{åÙ˝!Ê+Ù¶∞¬_˛‹\\=;œHœ-¢Áá–sK√È˘QÙ ⁄X˙rO<Õ…J†≠ât‹ò@≈UvÆÔ*q.ƒπböé_0¨ﬂÀë*≈7¢Ë·˘ÿíÇ\n˙Óç•r≠^†Qê]&H0.†/D‚À¬kçi¢Qi¯XegiTmy1‰VSY±ér2´§ı´œ⁄ ü3pÑbó◊WˇI	5y<é¡[$óé=N˙Ï‹Ôõ2+iGVÌ<QHªîmwv!Ì….í€ﬁúb:ê[LÛJËHA)-(£„EÂt¢∏BXÕîWVIÖ’T\\YM%ï5T^]K5:™¨’	¡5’n¯)¸(∫3l:qj`« Æıh!—Ü£D	ã¸Û5F˙øøıtﬂØzzTX€œÃ—”Bƒÿh†-{S-~êi£Û7üß¨∏í>}n°ƒ2sÍ§^4‰ÃÆJÀΩ@‰˝hÂ‹÷^ÛËXä±.xùj”º˙oæCoΩÛû‹øÌ÷õ®]€∂rﬂÖEEÙ“ÀØ…˝°C”YcŒî˚Œò;w>mÿ∏IÓﬂuÁÌîjQ^îóW–3œΩ ;©ﬁ={–ó_&Ó—√›‹»“¢-õ6—wﬂ~+˜ßLõFΩ{˜ñ˚-Â≈Áüó4®w¸ËO(G]„ë⁄h§¡Cá“^®≠Á”è?¶Ω{L±\0wﬂwÖYT;≤GUu5Ω˛ +røSßNt„-∑»}È~∂3ˇ˚Õw?–∂m€)22Ç6≠_-+˚®æ;õb˙ö*⁄¸ÃD°Õ:äå÷R«ÆQî“è¬œxñv/ß_◊Ê»eHè°∂óQ⁄:SÙ)	—trl˝ﬂÖ>IÈCÔòM\'E…ÁÃTÍµ4u’Ö‚:jŸ@Õ ﬁõﬁ\\u	É>±ip=*è0J≠ç˝‡`ÃÒõ⁄¯Oº<H¸É˚;èÚµıèr_ºœô€¶Õt¨10O>ºW*M—A˛Ø·«ŸÂ¸^Ä¡o3W”°]	“„/@Ωá∂WZÓÓÌﬂfÆ°c˚Ûî#ÅK◊~È4Òä¡ﬁΩë,1[Ô“[oø+˜=ng)∏Qör6˚}æHKﬁsS~622R*ıÿx. º[^<ètÂED]{«»„”~§CÖF˙v˘	)¿õè•ˆKgQ“Nìu<)5Å⁄FÑ“◊I=Ë◊§ÆÙ˜àÔ,≠dma:=≤£ÒacT‰*‹tœÇi±xhÇ¥ £ÿÑ@k‡…ë\"nzù‹0@±¯ÿ”Qàÿ¬CÇ)L´•P±&ˆ1ˇB…QtJœ!D∏ôóPÛcVÒÍw˝GuVˆÍô˚˝&⁄¥¸†Ëî-62]µÒ˚∂f—Å3yõn]O7≥ÁÔfW∆°b¥™Ïπàáﬂ∑+Ôπ…¥‰=7·g„„‚ºÚΩ:≈fé¢£ç0ânmMΩK’èÃ.hºcXå°ıePCQò@å√\"(1\\g˜4l)NUˆZFƒ≤ ;Ü⁄j“WóìÆ≤ÑjÀ©¶$è™ã≥©∫(ã™≥®™‡8UÊõup)ŒD≠ﬁ ]ﬁÂ’îU\\NáJ•Î|{V≠:êM;2§¨ˆ◊ÍOÑåè„ª+d^cKê™≠mßöv˝)2ÇØπîW—˜o/kuÎd‡vÕ√g’≠∑ˆ*ä¨”ÈÈÿ±cT]„j@èëjkkeá·Òô0jFo!F¸°! æå¬Í–4√Z√µâ˜„n ZºÁf–ÿg1Ëı§s®‰∏;±…yﬂZÁ	˛!ºIâ	îîî§QD≠√˙Sÿ˜≈˝Tºgµ‹œËA1Ò°6Íq*çHÔŒ=&Ø´m«èQ◊_>¢ú„“5{E˚\nè·˜ﬁFÜﬁÈ∫ÙN˘ÛñÃ1ûGªK©®¬@Öz ,÷SÅÿo2‚z“Î™•òQ\n÷0∆èhãÔMìªÏL4Ö∞¯t\nm⁄4‘cóûBÁQ≠Ë+Ω¿.hı9º;WŒÕ⁄#&>\\Z…NÎB⁄&à	NÕÜ≈h›¢}TYÊ£ùf–\'—Èì›3wŸ$ˆ∞$B≠Á\07†˜â?≠≈“…P»]ı3ôıÜ‹èO\n•Ùˆ§Ìz.˚‹@Ø¸e\nN‹ûuú∫}˝ÖPò‰œ»HëBˇÃ£§Õ¶™ÔóØ´C\\kCnÉH#dK≈\0o≠A#6\"‘C)„4ù8®3‚òÜ*ÖñVÈ4T-ˆ´ı¶v~ôÅJ´T.~ÑÇ^Q+DŸ°÷	qññºÿƒﬂÖ%lzD€TˇB.≈[∫mÒ®—ÜPX\\”≠ˆûÌhÊ=Hv5ÎXKaV\\d?Ωøíé®_`Kt\\ıﬁÅ2NJ¢‘∂qﬁ–*Fdsan9›üGó†b©¥§ë—at√ì„§’‚U<.¿b ÎáqËJjpø¯YóbaWÁ•mØÕê˚°aAtRØ“D•Q¯9“ãBg§˝π9‘ÌΩ\'I_[Kë¡AtiªdÈëH|Û9“ÑßÍïœ…üØ,◊QqA-≈$ESÚwPiIUÀ*	0gl\nñ2f¿£êL™\"]\\e-D\\ºœZ!‰àdoC&È(´1PYµQ3äGïà◊VàcïBÃ!‚ïbÀóZBBL8˝Úƒ\n5ä?»‹(#¿\0Æ‚Oü]`?]öR£(©M,ÖGÜà˚O#‘ü8\\Hµ-Ω\nà®ÿ0∫˛q`∆PÙﬁW\n/4Ö`Î¥°õüû@∫™\n“j5‘µO¨∏ˆâ\"Œ˘òﬁ[QMEBÕÚÚs)˘ıáÂ0#VL	∆›ëÙÈ[d»ùGµ;æñøÁ¿ÓR™Æ4PHd4ıùqØºÊêkŸî_Yº\0÷\'^àG±„ÈÆ’îÇëT——»mç66ÒÃbK<ø\\OyÂ ÷ˆ—B=Ìœ´•ÏÉxŒH’b´b]!Ãv{´éP–‚˜ˇõF—ZÒãXÄ%†,üΩã÷.¨ØÀ…4èåÆI4‘.‘πW9‚ˆ:,¿˛G5ì¸¥;±ààﬁı˛çT~lóºD∫∆ız Ù√ënt(∑íB˜l°Í/ﬂîØM\n—“ymMsŸ)?}J5õﬂ$˝—%≤Ω{Kâ‰\nâä•>óﬁ-~èù\0*Ø≈9√Îı®˘+DZß‘÷ã˝Zùéﬁ*u*Nñ-‘^G*KîHîÉqLºEÈ	X~†äûòeΩ‹\n¸˙ƒTJç?œ‹(\'¿¯8ﬂºæÑrè◊/îgÀ∂Kü6‘c`;JlCQ1a¢éËZ¬Ï_ ™ÖA?™Çe7 ∫‡É?˛è\n6œì˚ùªGSxd∞úûo<ü6.•êıK©Ê∑œÂÛ›¢¬itriBC)Âóœ®j˛]d(⁄/£®˜Ì0’)◊F%P“H¨7›oı[}œ¡ç--Q≈25Ôõ€≤˛Ø¯}úi3ıw¶¬\nb”±÷#z[l¬R’£«Zíúy£S⁄%*≠z˜Ô˘%ü÷∂ûÛb∆p:UüXÄ≈4Ò@‡bw·\0ß’@òzŒ∫‡dö|ıPÍﬁø-%ß≈PDT®∏·U_∆ø@`è?ã/ÄX(Çôj.Ú¢°¢≤`“ERM—qä«öY°”ôáîÁâÑeÇí‰y0îö zV`‚UA´$wÅ`J°¨Ø@Ñ5’µTSUKUï5TÅ≤Å≈T\\PFÖπ%î¢Ht‚He •¨√9î},üÚ≤\n©0ßòäÛJeı¢ ≤J˘ª\"£√).1ÜRc)9=A÷F›`‘\nFù`‘NiõHIiÒük™åBqëÚgÕ˘ü-◊ˇk¨ ¡πò“∑· vÀ¡÷±T”úlf’º=¥jŒn•≈8‚∂g\'äŒ+l˚ﬁåxı•UF9Áô_©°“≤\n™™™&càÛ£˙™*\n©Æ§–jÒ(+≤K:ÖùK!!àETUPHA5•ì—ù¢“∫PêQO·a-JÎUöØrπPK¨S[B√Öµ*÷`†P[´ì∞¥“ÌP\\e†IÔZÁË’>ëfﬁq∫˜Æ	vA˚p…|˘Ú\"1JÙpGÓ«¿“˝œÁ*-Éÿ?@\'ˆc0µ:gß\\•ÌIzGeRÁ»Ü+5 ¬X{≠ØEç^}ùïå@xD€‘S¡6=‘!è(Ì®0Yä–[à∑E„ﬁ:A5˙˙7ÑåYãüù\"ﬁpc¨\0î(Ñ3ˆ	”“≠œú£¥|è∞—#Üi¢Î®ˆ√eGv»*÷”˙cûw£áhÙ46i\'iöwŒLñ3˛7? ÉÚ9Ä˘bG÷™\'Ä\0O|˜Ñ\\ól…‹ˇN¢(•Ñ£«·9`ﬂ$)5äŒú‹]i1∂®í· W∞Ó/òÊÄ§r\"”„ÇÈÃn°‘1Aòr,\",ò\"√µu[Ñ∞bñ9êC±â{ä∏\"|µ∆`:^›∏Ö\nã∑≤ºä™*™≈V#·◊T’»y^dá3Yƒ¶sè‡,YDAã9jÔâ/¿ü√g∑•ÎôòF	`X|¨ö*2tÙ˝ËƒQéä∂©&±∆◊\'Ò¥ån6å-‡f\0ÆgG M‰∂z\nkûUÖ.”∫à>ÆÖŸfé∑{d6uã≤.c	~>˚hût?7à∞‘a˘hﬁlèõ⁄¶}SÅ´Q1ëR–]m ˚ŸTTi˝^øªoµOˆ“˝≈∞¢´W≤^^\\Á^÷◊7çT¶U[¿LÀ@“ç\0%-6òpk»\0©fò\'Ës`¬BÜ≈‡zN–ñ”¿ò#N≈ò\"•õÒá‰\0@˛s¥µÆ.⁄∫∫Jl¬öÜU]Y^MïeUTQZIÂ%ïTú_&-Ó¶Ò∂•˘5ôF	ÃÀ\",Ú—F«Ü—…ß¥SZå¨-dò&É5ø∏«îuGPËﬁHeµT*Ñ™§‹¥aøLlÂï‚˘*UUÎ®∫I28•@∞GB ilÚNôpÄ⁄Ü7^GÛ∏XwNQari¢õCÑò√J≈¿YÆ	v›Pu¸Ì¶bc‡K™Ö3çò.h‰£µÈ ê^ÚÀ7◊PI°ÛJ-≠âî∂±4„û3îñè¡AXæIÄ∫ûÖ~“æ<)4»tã-óñêG˘QN‘ñ—¯É“≠(≠íâ2†ZR∞ÂˇÊGÅ8fz4˝Sﬂ;[Ï[º+R€%	AÜp*/¶Áï◊Âáù˝>¨˝E∆´¶ÄÛ6ÈΩ2«¥%Ôﬁ<ä˙wrœr®Fa¥·`tÙ©NRZ@–F´≈∫ø`\\˜U#•˝ë£Ez˙woÌÕ’∑X|Ñ‚äπ_Ï÷F—ûÚ6îõ]JÂ%“Ì[YQ-]¡’UÆ™ï‚\\ãAVÿîtî¶•H¶ÂHp)ÀøW˛nî&4cI—ˇ»M©πHÉeægl∞†MõV&‹ê[Xà\\Î€TÒ5#ﬁflÁΩ˚ñ\0#èìå<\'ıJñë—å	≠Rdúa\\BŒ˚V«\n¡›r\\\'x\nÉ∞Ü˜V§“Œ∞°T¨Mg–±Ô∏NH-‘R8-E3<Ñ¢b\"ƒÎ‘HW÷®∆Œπ≥Áég8.håŒe)4Á‰î”óoÆï£∆÷\n-LΩnò“Ú18\n⁄∑◊JGçê[f†’áΩ˚π‚4%tr∏©`å±Œj5’∂∆£lª°ª2âª“∞\0álèÀ◊*˚fƒª¥˙ËBÓ©§ÁÁ6ú◊~Á¶Q4†3ª†#0°Ûæç∏n>c5ÂÊä¶ÄÁÃ§¥|`ﬂ^•\0t=É#Öz⁄íÈ˝5´ﬂÃYA˘≈§GüÖˇ≈&\'Œ(ñ=ÿÖÆ≠Q ú¬∞n\0ä@X∆Î`Áµ¬ ØÔ	∞Ïπ†gﬁ~ı RF.ûVåŒ]ºB·⁄9˜“æ‚‚≤suµ2bM’_∆!∏Øjw…QµêáO–ºÌá®≤∆{B\\≠íEÒQÚ·á+ÇÜÂøn2oÓ_Äﬂc˘{Õ[≠¯õ¯ªuõxx?x_∂Ç≠Ã≤_Ÿ_%Dëiˇ`d„ib%ñ‰¥h±±ıìî£Ï1å§¯¬S‰&Arä´h”ë:ZPBÀˆSézmÄÆ¡á5=§[JM‡˛’¸€›◊ÿ÷5ô¥‡˜÷]-È Œ§ƒ‘h•Âc∞Ze æ‚ﬁÚÛ*GçÒÁñ˙t≈~πüëC„˚tñ˚ûÊá˘ÎiV√¢jÇYË !ÚQ¥Éç“ä˝‡∫cF“ c\n”SJR••∆Qrr%ä≠SáÍ—.A& ÒjÖ,ûV7¨G¸πÂTQf]L∫µJ7?u∂“ÚA<.¿Ç0|¯R|Ω?7Ímæ^ìC?o8,˜{¶\'—»ÆﬁIÿ”ÓèØ(dÔN*\n• †`™≤V©	˚Z™“òˆk—VéÈ-fiC\"CÌN°A4√Ñ8Üà-¬iQ!\\¸Üpq\\nÂõQOa‚{é—WShm-È±ÙIlÜZÒ›À∑ñá’¸>ƒCHF[J8E@§Û‚‡çÿÀHÒÖÂ€≤∑˛Ôü{hÛ™„J´uÅ¸Ø¨¥|`ı¿úØ!\"ûÌ1syÕﬁjr=ÓîF˝€ß }O”ˆÔÔ)a˚•’4¢Rb)$‹ÛÇÉ5«eŸ≈Ú—eÇ4îÒ‚ˇ($%éÿ¸o\"Yd0∫j°¯ÇN›ìîΩ÷Gó>mî=Ü±\0ç≠D|Ayu˝gç\nı^\'‘.ï¬:$SHj«ERPD®/W(œ+•≤‹˘Xû_FeTYT.∂\n™*[I•øVQMy5’V÷àÓ≤V|≠:ìeãÑ¢u≈Óí•]|OuåT¸œ<•¡4ÜY¿2O•xtœ[Æ(Ø°ü]Æ¥Z»\nv›cc)<R‹Ùæ\n[¿ﬁÎ|∏»Ç=ﬁ^tåÓ í˚£{t†.©ﬁY:ì^Ωó⁄‘ñád;î‘@≈†¿(î*Ò}Ë»àËÏΩ8Æ#CY%Ñ®j∞6IºèFd√Ø3àÁç:Ò:ÑQ„˜»ÁÑä◊⁄€¥ôˇæÿ◊◊	/ƒ∫≤∏º…∂é&<ú:æ˚iöYÛ∏…∞⁄‡m÷àã¡Õ|˙ J*.ÄE›z8cjxZ•Â£∞\0{óV(æ‡ÔÙÌÍΩr*Û¸!=dØ7hSsPà∞)¯´•»Z¿»í%”Möƒ‘î=ô¥Ç•† ™IÒ.≠\"}yïhãG—÷WíÆTá‡C∞·n∆#˙[<¬„Ë@¿ù—˛µˇí6>Viy`#≥\\yf9ƒ_m°;}+—ì y˚Õˇù@°Jô4üÖÿ{†tßæıâ/X∏∑Ü2ã™hN!ËêJ¡≤®ÅÁI©9BÌ™˜(-œ#É∂Lˇ£Q˜(≠o≠Ü¥¡Z±èG!⁄∞àÒzEÑê•/*ßöºR“ÂñPmv1’dwl∏¥}Ú^\nÎ‘^iy`Çâ|Ã˘zËm.˛k/m\\·ΩıjÇ\\≤ﬂ>äR⁄≈)G|`ÔÄuÙ•;[Û˜‘–◊´vQqE5EáÖ–C{z≈\nÓ^@}£èô‹ƒ¢o´{›úπçåXòØµ,¬P∑/6î@Ù$∞¨1`«cT\\$EFá+œò0†xÑ„ÏOˇ%ÉM·6w›@ë˝˚(-√AX¬√‚¬#¸Ûãk*∞xOü“€?ƒóÒ≠\\|™ˆîTöŒA•∞Ù<ÿ’XQZZC\'é‰Qé∞$Û≥ã®(øîJÑïY^Z!ã‚◊‘‘äÓO/-WT)\nèìÖb£)!5N÷NÔîBÈS®M˚dŸNJãóœ≈\'≈ ◊EC4≈œ‘’V*…9^∆TdB•¶Ú‚ÜyˆÉƒÔC Y®¯€∂‘û»Uˆg¯Æ,óµlùØ+lXvÑñ¸Ìûπ_aë°‚Ê•N=RhËì(*÷zÎ”∞ÏY¥∏BS˘}k}æ|ª‹˜Ãï#Ωì¶6VóK]*7+≠ñÅ˜+Á}≈/W\\Rål7Ü¥¢uz“âÕT‚Ç+6tÈã\\7äæ√$˛ˆ(Yæã\n˛Xß¥Lƒú>úíØπDiyvAª/&_ª¯0-ü{@i˘>∏±\"cƒh6TKë—a°•∏ƒ(1¬Ìò01˙ç¢¯î(äMàT~¬Oaˆàß0ziç¶èÛ›˙˙a≠)#≤;Õ·∑i¥.ü∫VnTZÓÂ\nS3º∑ƒ≤˙H.eΩ3GiôÔ~•?|á“Ú0,¿nƒÀ#ÛÛ–öE¶L8æDHX0>µ=uÓïFqQ“ÖåQé≠`˜É[].„ÛÏ‹°?Ò…™Böµiü‹OàßÈÉªÀ}OØ-ßq˚L.oXö≤6=ö-O∏Ä1œk^ª´‘`∞(Œ/^cè8∏ü„ΩófU_^MGˇ˚£“2G^{Jiyûv∏Ú`ızŸ-VYÓ[n8xøFéÎB7>4äÜèÈLm“#(6:HŒU∑Òe‹èú“A…N_3:!`5Â|¬ë√ÿKËç¡¶ÂCpÀ%CÿLÉlÃ’bŒ6\"*ú¢c#•Î7>9ñ€ƒQrz¢úÛMÔîJÌ∫¥°∂‚1MôNmó(-_oä/éh„∂◊óêQœ^ñ∆çùäÈ´ê{∂¥ÿ∑ñ_§µè£a£; duHó<wûL3¡†÷ç	lÖt;\"&–[Ëåçœ3#\0™≤ºJŸ™ep∂Í π’T’P-ñ!˘Ü∞êÕ\"®«≥8.7XÀä≈\\mÌ∆kA¸YçÌ‡E¸~CY√¿-∆ı]–z!.2µ§:|Ò˙j*»ıëE\\»^?ê⁄uríç«è›-MÇ]–Ó°ïUh≈UFöπ,ãñÔ3ÂÉÔëñH£∫e»}O¢——¯‰ùJ´!p9gÚ^$1πê˝\nñwÇ∞∂±ﬂé¸ﬂ2Có%œ<D!m”îñat3¡®\\EÒ≈ÿ£0œÛë÷Æíö„\\|Ê»ΩŒ¯9W#sãØCjuF™ÖÂ®™ıûZé∂ù‡mªVreYïó6£±ÛqïÍıÌ˛Ç:\\ÁrVwé†¨§∆Î∫32:ªòá÷GŒ„£`m/ƒ◊áÆm_§÷`$ù3!.,›q\'F\'\"åíX€ãπ_Ua8&!J.äàóñ™ Ô94<TÆ∆±∞\n¡z_∞i Îåd2Á≥Õ<≠=ö–fTZ2Í^kÜÍ÷Ω∆‹ºÏÇJ¶ΩÛç/Ê¯¡\"˙q¶gñ4áqÁı§>É”ïñãáiq√4Õe‰Û∞∫È F\0òπƒ—B=}≤‚m>ö#€√:ßSﬂåπÔiP·˜î†µP.9N≤úõïõπmu\\˘a;¥iü$É∏\\≈¸;M•-vë?\0¡aMÂ–#ﬂà~›:F•Õù7P‰\0/,Îb¥H´≠“gƒ˙ñ+72™’â§µ#>w∫≠y∞W§) \n⁄$;&êà√[@ ä+®º§í*J+e†ï9¿™¶™ñjkî@*sîÒX¢‘dÚ§öîÈ&ïHlXÃÕ_ôÜ“F|Å±÷∑Vò¯\"ﬁ`Ç¯‡˙C_´Ç§iÓ∑ÅÛäÛãBÍLÎﬂ}uπPv˜5TÌ≥–_®í≤„ö&ôà∑	—Ñ≈Æ•Ñîÿfπç›EÕâ\"eœÜf¿÷Ég]–X˛ÄëπˇDKò˝›v⁄≥’‰~ÚŒù—ó∫ˆn°ù‹“˛)Õ.hÁ‡ûíÓf≤j.;≥uÙ„∫„¥IqAè8©-ıjõ,˜=M∞FO£c∂âGÉºeQ–PQc⁄÷/\n@¿å¬\nF€<4ê6ª∞êçµ-7fÇ¬¥§	’JA∑EÉú—a¢±Ûú-ek˜QÈ™ΩJ´vA7égn0å»}<››7ÔÆ£ú„•JK}∆MÔI}Ü4qÿA¡&!∆£?¬Ï\0/∂pÔ˘Ê¿÷_ÿñ•£ﬂ7g—˙C\'d{hÁ4Íóë*˜=MPmı˛Í“TTHÅïuxåÙ«Ó¢ì:)-‚Øl4∏Ÿ¡≠s7˚˛\\TIÅoÕóó∫—ÖåAêtKãÔ√«\\ˇL3¡ö˘Í\nìWâ≈∑≈ËÖÌaô˝™ \"+ñ7–ïU…µ≥Å(æD!mº–ÊwòΩW5n`9):z‰.± Ú™™Ù≠˜ZòÔÅæÁH!ÊN€/ëåòÁEÃáÓ∫V¯XÑ`\"o‚Â9gè\"WBAëë2tÏ¯—Ì›îòæè∏w·π¬Ω¨§\\nôZ*πË¸0Ú2Îh	}ˇ˛z•Â¥iCóﬁ:Diy∏§µ·æÛ≥⁄t_y∏vkf˝±Z⁄ü[Mﬂ≠6e§“—Â#˙x• øFWK=ﬁñÇ´ƒ‡ÿóÁ\"(&ZkÖáQç¶‡ƒ\nNJ ≠ÿBíìH€&ïÇ\"\"H#ŒìF´%çsÿ^“pAÀ\"C0¯¨ÔÂÊ	0:∏¡¸PxÕ ¯\nAXæÑ6$àn}‚t1òÙÇ8 9bq—y/ˇmìhÕ,É—ÅÒ‘Å\'Y¥ñ≤J4kÛ> )©†¥∏(:Á‰ìº≤¢>Hc§3bäH+økΩ…çGdÊ2w…‚«ç¢ü5÷ Jº÷`”]„˛5/˜¥ŸºÑ!7ÄÂÅÖ*éÀ◊bè‚µR,CBL‚âüèu«‰Ü ≠fúLyK|UÄqˇ\"Jû˚2Î∫\0„e∏X‡“Äéa€⁄Löˇõ©®/ñ∞◊¿⁄\'≥˚íU‹⁄˜T›˝Â⁄-…¥X¿Y≈™÷È)Ø¥Ç⁄∆Gã[¿;˜\0∆ÿgu•0≠˛û¢!ˆ°{∏50Óay/7˛˘ï°ì#DGÄ_\"Áw·∑Fd≥ˇã/0¯h\'óìÈÂ®l9JC@\0Ê≈cÄ|ø~ÆA9G/:+Ã”K´ó≈◊[+ZÖB¸Ìbº&ænÆﬁ˜0_G^Eˆ£Ba8@/]|8`ÒÂ·ãƒ9íÅÔ:∞ààÙAóÖ† WúsµÄ\0@p…ed|{úWÛ†V«y…R`¨Héíñ®Zx‰Ó™ªáÕbÃ˜∞GÅQäs-–bøâ‘0Ê‰(J˘ÚE0È‚î=ﬂ¢⁄W\"≥q1A p=»[∆-¬“ìÑ-\0µ˛FF\\0çÔF£ªÜ“‡ˆZj‰qnDàÜ:&ãøB°f‹SH1VÆ∑&Xeå0†±‘IôÅÆ˘Éç±¶3˝≠r§ÙÛ«õËËÅB•Âú>±+’^i˘Ëù0ﬂÑ\0.lÕŒùÈ˛>óDV’¥Œ˚ÀAåSEçë*kçT£«#⁄ò\'ó§ÿpL/^d ß°Zçú◊ç–Ö±Ö‡¢ç§Rë æ∫àøè\0¨∫˚˜∞ﬁS†Ã„æ≈Á¿Ωå{⁄ÕStcUi´Ìr≥ d$taûÕ¯\0Ì:≈—Ù´˚ì÷\"9ÄO∆fcππÈfˆ\'∆Mjæ9ÂÕäéß’ﬁVåø!Ô_EåÂ†Z‹√-Ωè˝QÄÂ YπóÕ˜±õ◊ñV-¿\0A‡á˜–°=îu§ò™*j≠™è‡˘∫∂˘†56qù¢Œ¶ÈQ9\\wÀâBBÉ):6å\"¢B)\"R+~FC·bxå #axb´#„‘∂1#.$Gû‹Ã¢,è◊˝„>\'¿∏1ï]¬ bÀ2‚^≈≤%ÛΩlæw]Ωè}YÄÎ˙qÒhæè•ó ≥bkèV/¿∂‡ªë+≥î≥Ç}Ï⁄[≠%dVÍÆGÏ+M{ä3fÍNå<7 ËEiõG›x^s,û,øW|ﬂÊÔWŸóõ∏!ÂfÒ√¥j,nRπkqÔö€@&‚“˝\"óQBÄ-ÓS˘∑≈&Á\n–Ü¿ \'u;™√Ã0√0*`1daÜa∆[∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\np&,ÜqÄ±∫ñ*wß™=ôTs(èj≥ã»PZIÜ %≈ù∏Å¥¡F¡qëíëDa]R)¢wÖvLëœ˚µ\'ä®jÁ1™⁄wÇjèÊìÆ∞åÂ’‚s*•5bD*>O8iSb)¥C2ÖwOßàæ‰gd∆Ω∞\03å◊™›«©¯œıT∫tó·Ê“&ûbœ@1£˚H!”´„l™Õ,§≤’{©¯ØTΩ7K9⁄D4äv≈MLë\'w§‡Ñ(Â	ÜaZ0√åµ:*¸iÂæ?O9‚>B2©Ì„k≤≠01-íŸ{\n£ëtÂt¸±o©j«1Â†õÔ?~ Jæa,Gá+Üi,¿L´\'Ô„ÖTÙ€Z“óx∞JS¶\'P€\'/§Bà=DÕ±| zÊa≈gÈ=W^-(2LZ˜mÓ9ó4˛Røöa|`¶’R)¨√Ïóˇ†Í˝Ÿ / Ñ8n¬\0JΩ˝∑œ´Ê~4üä~YCÜäjÂàÁ—∂â£‘[∆1Ó+zÂ √0.¡Ã¥>F*¸u5Âºı∑j•A§’ˆ…(Ï§4ÂHÛ—ÂïRÊﬂSÂˆ£ /£—P‚eßR“ßÀ .Üa\\ÉòiUkıt‚≈ﬂ©dÓfÂàzhBµîÒÚïyr)bÕÕGnùŸÏ`1w9∏µ˚Ô≈ƒs√„,¿L´¡®7–ë€?v`RK“P€\'.§ò3˚(\\À£é‹˙± ÛÒ›È”€H£Â”|ó0≠à‘ÒGæïÎ`}\nÉë≤û˛ôä˛XßpYªÔKü_Ps$è]ˇ^›:iÜa√Ã>F#Â}¥Ä WÌQmŒ◊Fùûrﬁ¸õäf≠Wé8ßzﬂ	:zÔÁ§/ˆ`‘v®9òCáoüiJX¬0åCXÄôÄßxˆF*¯~Ö“ÚM`…Êº˛ï.Ÿ!éÄÂ{Ë˙˜…PZ•ÒM™∂£¸œ;˝,”⁄afCYï¥.˝à!öπl•}KñÔ·õ>ÙQ+¯vï-ﬂ≠¥Ü±Öò	hé=Ú™¸»*¥5Û±Ô®xûuîv’ﬁ,:r◊ß~gQfø1€ÁÊ©∆W`fñäı®rõJkc[\0¢µ≥_˙£nN∏˙@∂∏Úu∑≥=t9≈îÛŒ•≈0å%ºâ	H\0t‡¬WI_Z©Ò?∞N8Â¶q2√ï±J˝uæÕ%8&Ç:{óx‰ı¡c	[¿L@Ç4ì˛,æ¿X£ìŸ∫¸Y|æáú∑g+-ÜaÃ∞\03	r<3æCŸ‚ù§/Û?:√x`&‡®⁄ï)Î‡2æ·™‘ UÕ0>\n0pîØŸ´Ï1>Éë(wÊ•¡0`fπéñÒ9™˜dë.øTi1√Ã˙íJﬂ*∂¿XQ}0GŸcÜò	(*∑Qˆ_§ÊPÆ≤«00P \0ãÒ]*wWˆÜafä⁄,é~ˆejèÊ+{√∞\03Ö°‹w÷öEÖQÏŸd±}MH∞r‘Ki(˙‘û;a\0«E*’ßˆDë≤«00P†¢ê/†	¢N3o°ÙG¶S€ˇªà“ø@y∆;$^r*µ{ÊRJx:µÌjÂ®˙ËK|≥Ü1√®0P†êÅ/\0Î781ZiEÙŒPˆ<è&,ÑíØ≠¥à¬∫§Rhá$••2N=œ0fXÄôÄB‰ó48(T´¥à¥I1§MçUZû%¥}í,‰PáFCÒSÜ*Üa|`&∞ˆ\\´\"˙vwóFi	ƒ~“ß+œ5¨´≤WO‘»÷ÔG%Ç¬Cî=ÜaXÄôÄ¬W:¯®ë›ïΩz‚&ˆ|0¨›È√îF=⁄¯HÒ∑-¨bïNäQˆÜafäê‘8eO]¢Ü7`ç∞@µ…ûuCá˜lk˜EÖShád••æ∆W`fä–N) ûz`æ782LiY ¨”ﬁÌîÜg∞\'¸f/•Ï©GXÁTeèa`&†à8π£≤ßŒÇ≠‚ßz6*zÑcñÎë√‘u—{3úa|`&†móH⁄duÁC“‚ïΩÜDˆÔdµ<…ùÑ§\'Pxè∂Jã»PQM5«îñ0¿ÉÉ‰k‘$$√GñC1å¿Ã—à¯Uëû÷nf£Œzmrs¨@WÇ∑lÉØ\nZ’†2T¯IÍπÄÉ\"B(¨£˙S„+∞\03G‘n û:DÙiØÏô(˛sù≤g\"rpeØqbŒÍG›˛~Ñ∫ÕyåRn´µOîÂÔ5©dﬁ*_ΩW9`\"f‹… û˜Iúq∫Ëq‘_\n≈0æ0p`8(<Tiyç6ò¬ª[∏ÅÀ´®xˆ•e¬Ÿ<≠%H¶ëvˇ\näìÓ„∏©CŒ·j\"B≠\"åçµ:“ÂñH∂Ã5¥´L‚m`¡«NËØ¥Ü,¿L¿AâWú¶¥º¢∞5aıÎm+∑£™}\'HWP¶1Õ’ÜuKWZé	ÕH§ !¨fÇ£√)n¬\0•eM‚Ö#¨≤_ï.ﬁAÜ “óTRÂ∂£ Q”\0¡÷B˜!Ìídt8√0ı∞\03I‹Ÿ§’Ëm¬∫ZkÂ÷#“\\<{£rƒDÏô}î=«Ñ⁄ô/ç;ß°\0„s&\\4Bi	åF ˘`û“ *_±[Ÿ31†ì≤Á%4Jh™œ§	e_ÅÔ& A¬ã¯)Cîñ˜Ôñ¶Ïô®⁄õ%ÀñÌîèf\"˙7æ\\*r`geØû–éÉ®Umi)£&≤>ØTiâAÄM \"±ΩIDﬂˆﬁãó1å-,¿L`¢!Jπ}Ç◊›û(Ñ`â.ßX>÷f G3a]⁄àªœy@Êkm	ä•¯i÷kâë˚Æe3ï;é+{&™˜ù £E\"dÀ\nä	WZFXÁ©‚{`¶!,¿L¿QJπy\\£BÁNBl8∑D>Íã+‰\\∞V≈ú—[i5Ûƒ!mÌØŸM∫ztΩ‡äœñxŸ©¶}Ö¢?÷*{&∞ÿ“çüç9µó“Ú,»æeª,ãa,¿L@;æ?≈ziÈÇØB”ÍESóW\"É†Ã‰∂HŸ3ëp˛pi©€√û˚Ÿå6.í¥)¶l[à|µHnQ{¢à*7VZı˝π^Ÿ3ÌD¸›j\'_U_óòakXÄôÄ\'ÌÅ©^…¿$E”¬⁄.[n¸T&¨PD&õ	ÌòLAñŸŒ[˛QÙ(S≤Yˆ–€uøf§⁄\"!Hò¯€û&„ï´¨\"¬Ü±Fc¨*≠übò\0ñ°≠Ín¢OÎU\'å‡ÿ˝_R˘ö}JK†—PÁ/oß–ˆä¯å¥ˇ‚◊ÍÊâ-È8Ûf\n∑X™îÛ÷ﬂîz«9JãH_TN˚œ{ô2^ª *®Í¯√ﬂH°∑Îpª˛˘P]∞÷gøÙá‹w;bﬁ)VÔüaòÜ∞\03åÄ¿Ì?ˇe“ñ+GL¥π˚\\´ ™¸/óPﬁÃJÀ¨∆n≥Æ[◊ã9‹}S_§._ﬂiUË!Û?Q€GœØ≥∫Â’Bî_\"CU≠l€íˆtáÎàÜÒ>ÏÇf`¨¨!cµNi’SÙ«:Ò§“$Lf¡¢GÙ∞J™Q≤`ktTj≥î)ıñÒV.Ô‚y[ä/(¯nπ\\#Ã0åo¿Ã0ÓFh\\’˛÷Û∂\n’‚xÌâ˙%IA—·“.Qiôà9´Ø≤g¢xñ)Ä™l˘.˘h∆∂∏È¬≠ û}jÊPÕ—|•≈0å⁄∞öiï´k)ÔìÖVÎc›EÕ°\\™ÿxêåµzÂà5ÈO\\@±gıSZDYˇ˚âJÊ+‚),⁄Œ_˝GñUqÃı¬çåW\'˝ˆ\0«F»ÁlŸ7˘y´®k{@cF˜ñÀ†‹Üx_…Wú°JéiÜÒgXÄôVK’ÓL:|ÎGD6Â=MÏ9)˝°iJÀç‡)\0wt◊?¨H¨#>p…Îd‘ôƒ<È 3(˘∫1rﬂí“eª(Û—oïñ˜¿|u€\'/§Ëë=EC9»0åK∞öiµ†x}ßèn¶‡∏HÂàw∞[°HX¶\0≈,≠S§≤4ã/(B€\0£ëÚ?˝Wixè†πƒ+zã/√4`¶UÉîêÌ_Ω ´\"¨/(3iP¿°»A¶Zæ ≤§‰üM û	Ã·™¨Áñ·vÆ9íß¥ºÉ,ï¯–tä´^}aÜÒwXÄôVOX◊4jˇÊµr.”[î˛ªMŸ35DpêF∫ßÕ¿Ú-]b˘å:ø˘ü-VZ&jéÊ…(ioíÒ“„BE\'Üa√Ã0Ç∞N)‘ÒÉΩ&¬Uª¨& ô“KZñP¨9,¨Z;ÀÜä~[#˝KPz≠L˚^\0ño˚7ØÒzE%Ü	DXÄFôõ0\'Â˘JA’s≠÷	#-•Ÿm¶˙Pé≤g\"£èﬁÛÂº9õé=¸M1˜»¢ï˛¯˘&ÒÂ9_Üi1,¿cAÿIm®√€◊RpB¥rƒ3`TÒ\\ã˘]ç∆îX√Ç MáîΩÜ@t^MÂ+˜(G<Æ⁄<0ïbN˜|Üi-∞\03å¶¿¨+=æÆµó5BâïÜ¿*L/_≥_i®ñF•?y!≈é±N¬0LÀ`f;@Ñ;ºuùGÁÑıπ%\"öÕ‘œ∑ ò•AAîÒ ï=≤æ»√0ÓÅòa\0w¥\'≥ÙÂU§À-UZ÷TltÏ~ˆö∞j˜‹•p≈0Çòaú ≥>æ≈3ÎÑF*¸uµ“∞∆rù∞ ‡*Ì¡©=º;\\1åá`fòFÎúÍ±d(¥ÄµΩ∂†hÉZòílL≥ WÕ0å˚afê…:ﬁ∏∆ÌÓh$–∞≠Pd‘Î©˙†˝%Hﬁ†›3(f4\'Ÿ`O√Ã0.KXŒ	[‘‡u∂ÎxKÔ$≤»Ì-êÉå®Åùï#√x`Üiu…:‹XŒØh÷aˆ÷ØG*˘g£≤Á=díç\'.†»H≤¡ìæ„∏!√4Ã—\"ïæ®\\9“2‚¶•ò”zQÕë\\ }oÆ√Z¬û@£T5‚9_ÜÒ.,¿”L™˜g”ë;>&Cyµrƒˇ@íç∂O]D—ßˆTé0„-ÿÕ0ÕD¶≠D%7œ	{Òæeí_ÜQ`ÜiàéÓ¯¡M~\'¬H≤ëÒ¸N≤¡0*¬Ã0-$º{:u˙‰VØıo	2…∆CS)ÍînBâïÉ√x`ÜqX¢wÆØã0íl¥yp*≈é·Ä+ÜQ¬b7Ç¿¨C7æO§Û˛:ﬁF÷n∆KWR‘–ìî√®	[¿„Fdáwoπ9aD;∑ıjäb]Ùüaı`f7ﬁ£-u¸&9◊Í†ò~˙„P‰†ŒBây“óa|`ÜÒ\0»ò’˛ÌÎ(8>J9¢Aa!‘Êæ)3∫∑rÑa_Åòa<Dx◊4 x˘\n\nä\nWéx∏ù”;üb«ù¨a∆ó‡ ,ÜÒ0U{O–afºx´i®˝+Wô‹Œ√¯$l3åá	ÔñFﬂw%G`©ëL≤¡Uç∆ßaf/Ä¿¨N3o°†ÿÂàg@¿U⁄É”8…√¯,¿„%∞D	naO%ÎêI6ÓüJ±c9…√¯<Ã0^¶zﬂ	:|”dtg≤çÜ2^ºú¢ÜuU0„Î∞Ã0^: Yáõ÷‰öíl\\≈Æ∆œ`fê…:>∏Q√o	®jî˛\'Ÿ`ÑòaTBä0íu4sN‚õvﬂdä9Éìl0å?¬Ã0*÷-ù2^æíÇ¢¬î#Æ∑s˙£ÁQÏ¯˛ Üa¸¬b†jO&æÒC\"£∑£I6Æ§»¡\\XÅa¸∂Ä∆Ôﬁñ:æ◊x`V]íŒp≈0~0√¯·Ω⁄Q«o§†h˚π£ÂúÔS)j8ílp¿√¯;,¿„C¿nˇÚlì1K&Ÿ∏o2V`ò\0ÇÁÄ∆©⁄uúé‹ˆ1uziÌ∂{Ó2ä—]yñaò@Ä-`ÜÒA¬{∂£ˆo^#£ùQ“0ngÜa\n∂Ä∆á—Âïê6)V‹© Üa`ÜaÜQvA3√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0å\n∞\03√0åó1äçòaÜaºåNodfÜaoSYk ç±™ñ0√0√0B´¬[•3…Æfœ˛CFô6ÉÚ(6Éÿüx⁄ÿ1∑Ò´Ãè ˇ\nVâMS¡˛QÜaÜi˝?-xki@-«8\0\0\0\0IENDÆB`Ç");
-
-
-
-SET FOREIGN_KEY_CHECKS=1;
