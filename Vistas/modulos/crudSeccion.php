@@ -27,6 +27,7 @@
 -----------------------------------------------------------------------
     Programador           Fecha                      Descripcion
 Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE DESCRIPCION COMO TEXTO ORACION
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -185,7 +186,8 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label>Nombre Sección</label>
-                                          <input id="bloquear1"  type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5" required   autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
+                                          <input id="bloquear1"  
+                                           type="text"  value ="<?php echo $var2; ?>" onkeyup="mayus(this);" class="form-control"  maxlength="30" minlength="5" required   autocomplete = "off" type="text"  name="editar_nombre" id="editar_nombre">
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
@@ -256,7 +258,8 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Sección</label>
-                                    <input id="bloquear"  type="text"  class="form-control"  maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la sección" name="nombre_seccion"  required="">
+                                    <input id="bloquear"  type="text"  class="form-control" 
+                                    maxlength="40" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la sección" name="nombre_seccion"  required="">
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                    </div>
@@ -365,6 +368,29 @@ $(document).ready(function () {
         }, false)
       })
   })()
+</script>
+<script type="text/javascript">
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
 </script>
 
 

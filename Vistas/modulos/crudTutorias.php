@@ -27,6 +27,8 @@
     Programador           Fecha                      Descripcion
 Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRECIONES DE DESCRIPCION
+
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -180,7 +182,8 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                           <input  id="bloquear1"  type="text"  
                                           value ="<?php echo $var2; ?>" class="form-control"  
                                           maxlength="20" minlength="5" onkeyup="mayus(this);" 
-                                            autocomplete = "off" type="text" onkeypress="return soloLetras(event);"
+                                            autocomplete = "off" onblur="quitarespacios(this);" onKeyDown="quitarespacios(this);" 
+                                             type="text" onkeypress="return soloLetras(event);"
                                               name="editar_nombre" id="editar_nombre" required =" ">
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
@@ -275,7 +278,8 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Tutoría</label>
-                                    <input id="bloquear" required type="text"  value ="" class="form-control"  maxlength="100" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
+                                    <input id="bloquear" required type="text"  value ="" class="form-control"  onblur="quitarespacios(this);" onKeyDown="quitarespacios(this);" 
+                                   maxlength="100" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                    </div>
@@ -383,4 +387,28 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
           }, false)
         })
     })()
+</script>
+
+<script type="text/javascript">
+  function quitarespacios(e) {
+    var cadena =  e.value;
+    cadena = cadena.trim();
+    e.value = cadena;
+  };
+
+  function sinespacio(e) {
+    var cadena =  e.value;
+    var limpia = "";
+    var parts = cadena.split(" ");
+    var length = parts.length;
+    for (var i = 0; i < length; i++) {
+     nuevacadena = parts[i];
+     subcadena = nuevacadena.trim();
+     if(subcadena != "") {
+       limpia += subcadena + " ";
+      }
+    }
+   limpia = limpia.trim();
+   e.value = limpia;
+  };
 </script>

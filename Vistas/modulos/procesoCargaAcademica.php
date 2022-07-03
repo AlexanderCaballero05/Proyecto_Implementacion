@@ -1,3 +1,36 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+
+
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a de cargar academica 
+Fecha:             
+Programador:         
+descripcion:       Pantalla que contrala cargar academica 
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+Programador               Fecha                      Descripcion
+ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
+
+----------------------------------------------------------------------->
+
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -5,13 +38,14 @@
  include "conexionpdo.php";
 ?>
 <?php
-  $Fechaactual ="FECHAINICIAL";
+  $Fechaactual ="MAX_MESES_DE_TUTURIA";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($Fechaactual));
   $row=$sentencia->fetchColumn();
   if($row>0){
     $valor = $row;
   }
+
 ?>
 <?php
   $horainicial="HORA_INICIO_CARGAACADEMICA";
@@ -46,7 +80,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 btn-light">
       <h1>
-          <h4> AGREGAR CARGA ACADÉMICA/ESPIRITUAL  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Agregar Carga Acadèmica/Espiritual  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
         <div class="card">
@@ -68,32 +102,32 @@
             <form  class=" was-validated"  id="FORMREGISTRAR" method="POST">
               <div class="row">
                 <div class="col-md-3 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Inicio Tutoria:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora Inicio Tutoría:</label> 
                     <div class="form-group">
-                    <input class="form-control"  type="time" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"    name="hora"  required >
+                    <input class="form-control"  type="time" min="<?php echo $horainicio ?>"  max="<?php echo $horafinalcarga ?>"    name="hora"  required >
                         <div class="invalid-feedback">
-                        Complete este campo con una hora valida.
+                        Complete este campo con una hora valida dentro de los margenes de <?php echo $horainicio ?> a <?php echo $horafinalcarga ?> .
                         </div>
                     </div>
                   </div>
                   <div class="col-md-3 mb-3"> <!--HORA-->
-                    <label for="validationCustom03"  class="control-label">Hora Final Tutoria:</label> 
+                    <label for="validationCustom03"  class="control-label">Hora Final Tutoría:</label> 
                     <div class="form-group">
-                    <input class="form-control"  type="time"  name="hora_final" min="<?=($horainicio)?>"  max="<?=($horafinalcarga)?>"  required >
+                    <input class="form-control"  type="time"  name="hora_final" min="<?php echo $horainicio ?>"  max="<?php echo $horafinalcarga ?>"  required >
                         <div class="invalid-feedback">
-                        Complete este campo con una hora valida.
+                        Complete este campo con una hora valida dentro de los margenes de <?php echo $horainicio ?> a <?php echo $horafinalcarga ?> .
                         </div>
                     </div>
                   </div>
                   <?php  
                         date_default_timezone_set("America/Guatemala");/* Establece una zona horaria para la fecha actual  */
-                        $Fechaactual=  date("$valor"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
-                        $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
+                        $Fechaactual=  date("Y-m-d"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ $valor month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
                   ?>
                   <div class="col-md-3 mb-3"> <!--FECHA INICIO-->
                     <label  class="control-label">Fecha Inicio:</label> 
                     <div class="form-group">
-                    <input class="form-control" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima?>"  type="date" 
+                    <input class="form-control"  type="date" min= "<?php $MI=date("Y-m-d"); echo $MI;?>"   max ="<?php echo $fechamaxima?>"  
                        name="fecha_inicio" required>
                         <div class="invalid-feedback">
                         Complete este campo con una fecha valida.
@@ -102,14 +136,14 @@
                   </div>
                   <?php  
                         date_default_timezone_set("America/Guatemala");
-                        $Fechaactual1=  date("$valor"); 
-                        $fechamaxima1= date("$valor",strtotime($Fechaactual1."+ 6 month"));
+                        $Fechaactual1=  date("Y-m-d"); 
+                        $fechamaxima1= date("Y-m-d",strtotime($Fechaactual1."+ $valor month"));
                   ?>
 
                   <div class="col-md-3 mb-3"> <!--FECHA FINAL-->
                     <label  class="control-label">Fecha final:</label> 
                     <div class="form-group">
-                    <input class="form-control" type="date" min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima1?>" 
+                    <input class="form-control" type="date" min="<?php $MIN=date("Y-m-d"); echo $MIN;?>" max = "<?php echo $$fechamaxima1 ?>"  
                       name="fecha_final" required>
                         <div class="invalid-feedback">
                         Complete este campo con una fecha valida.
@@ -134,7 +168,7 @@
                       $filas_area= $conn->query($query);
                       ?>
                     <div class="form-group">
-                    <label  class="control-label">Area de la tutoria:</label> 
+                    <label  class="control-label">Area de la tutoría:</label> 
                      <select class="form-control select2"  name="area_tutoria" id="area_tutoria" required>
                        <option selected disable value="">--Seleccione un Area--</option>
                        <?php
@@ -160,10 +194,10 @@
                      WHERE CODIGO_AREA = 1";
                     $resultadod=$conn->query($query);                
                     ?>
-                    <label for="identidad" class="control-label">Nombre Tutoria:</label> 
+                    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
                     <div class="form-group">
                       <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" >
-                        <option selected disabled value="" >--Seleccionar Tutoria--</option>
+                        <option selected disabled value="" >--Seleccionar Tutoría--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                             while($row = $resultadod->fetch_assoc()) { 
@@ -189,10 +223,10 @@
                      WHERE CODIGO_AREA = 4";
                     $resultadod=$conn->query($query);                
                     ?>
-                    <label for="identidad" class="control-label">Nombre Tutoria:</label> 
+                    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
                     <div class="form-group">
                       <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" >
-                        <option selected disabled value="" >--Seleccionar Tutoria--</option>
+                        <option selected disabled value="" >--Seleccionar Tutoría--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                             while($row = $resultadod->fetch_assoc()) { 
@@ -307,7 +341,7 @@
                     <label for="identidad" class="control-label">Sección:</label> 
                     <div class="form-group">
                     <select style="width: 100%"   class="form-control select2" name="seccion" required>
-                        <option selected disabled value="" >--Seleccionar Seccion--</option>
+                        <option selected disabled value="" >--Seleccionar Sección--</option>
                         <?php 
                           if ($resultadod->num_rows > 0) {
                             while($row = $resultadod->fetch_assoc()) { 
@@ -330,9 +364,9 @@
                     $query = "SELECT * FROM tbl_tutoria";
                     $resultadod=$conn->query($query);                
                     ?>
-                    <label for="identidad" class="control-label">Periodo:</label> 
+                    <label for="identidad" class="control-label">Período:</label> 
                     <div class="input-group ">
-                            <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" placeholder=" Ej: 3 " name="periodo" required >
+                            <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" onkeypress="return solonumeros(event);" placeholder=" Ej: 3 " name="periodo" required >
                             <div class="input-group-append">
                               <span class="input-group-text">Meses</span>
                             </div>
@@ -421,6 +455,16 @@
     })()
 </script>
 
+<script type="text/javascript"> function solonumeros(e) {
+       tecla = (document.all) ? e.keyCode : e.which;
+       if (tecla==8) return true;
+       else if (tecla==0||tecla==9)  return true;
+          // patron =/[0-9\s]/;// -> solo letras
+          patron =/[0-9\s]/;// -> solo numeros
+          te = String.fromCharCode(tecla);
+          return patron.test(te);
+        }
+      </script>
 
                     
   
