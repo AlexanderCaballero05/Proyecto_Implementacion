@@ -244,12 +244,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita</h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
-                                                                <form method="POST"  class="needs-validation" >
+                                                                <form method="POST"  class="needs-validation">
                                                                 <?php  
                                                                     date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
                                                                     $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
@@ -343,12 +342,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Ver Cita  
-                                                                    </h4>
+                                                                    <h4 class="text-center">Ver Cita </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  
@@ -360,20 +358,20 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         hidden class="form-control"
                                                                         name="estado_cita" id="cod_edit_cita" >
 
-                                                                        <h2 class="text-center">Informacion de cita</h2>
+                                                                        <h2 class="text-center">Información de Cita</h2>
                                                                         <br>
                                                                     <div class="row"> 
                                             
                                                                         <div class="col-sm-6">
                                                                                 <div class="form-group">
-                                                                                    <p><b class="p-1">Fecha de la cita:</b> <?php echo $var2; ?></p>
+                                                                                    <p><b class="p-1">Fecha de la Cita:</b> <?php echo $var2; ?></p>
                                                                                 </div>
                                                                         </div>
 
 
                                                                         <div class="col-sm-6">
                                                                                 <div class="form-group">
-                                                                                    <p><b class="p-1">Hora de la cita:</b> <?php echo $var3; ?></p>
+                                                                                    <p><b class="p-1">Hora de la Cita:</b> <?php echo $var3; ?></p>
                                                                                 </div>
                                                                         </div>
                                                                     </div>

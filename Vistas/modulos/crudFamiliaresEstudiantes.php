@@ -28,7 +28,7 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
- 
+  Diana Rut Garcia           30/06/2022                Cambios en el titulo
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -57,7 +57,7 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
        <div class="content-header text-xl-center mb-3 "> 
-          <h4> PARENTESCO DE ESTUDIANTES CON FAMILIARES </h4>
+          <h4> Parentesco Estudiantes con Familiares </h4>
         </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">

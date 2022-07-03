@@ -28,7 +28,7 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
- 
+ Diana Rut Garcia           30/06/2022                Cambios en el titulo
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -56,9 +56,9 @@ bitacora($codigoObjeto,$accion,$descripcion);
         <div class="col-md-12">
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
+    <section class="content-header text-xl-center mb-3 ">
           <h1>
-              <h4>MANTENIMIENTO FAMILIARES</h4>
+              <h4>Mantenimiento Familiares</h4>
           </h1>     
       </section>
         <div class="card">

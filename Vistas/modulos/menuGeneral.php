@@ -507,7 +507,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class="nav-icon fas fa-briefcase "></i>
                           <p>
-                            Area Academica
+                           Área Académica
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -557,7 +557,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class=" nav-icon fas fa-briefcase"></i>
                           <p>
-                            Area Espiritual
+                            Área Espiritual
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -621,7 +621,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
             <p>
-              Area Medica
+              Área Médica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -629,7 +629,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclinica</p>
+                <p>Proceso de Preclínica</p>
              </a>
            </li>
           </ul>
@@ -670,7 +670,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-briefcase-medical "></i>
             <p>
-              Area Medica
+              Área Médica
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
@@ -702,7 +702,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclinica</p>
+                <p>Proceso de Preclínica</p>
              </a>
            </li>
 
@@ -713,13 +713,13 @@
            <li class="nav-item">
              <a href="ProcesoCitasMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso consultas</p>
+                <p>Proceso Consultas</p>
              </a>
            </li>
            <li class="nav-item">
              <a href="crudPacientesMedicos"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Lista de pacientes Medicos</p>
+                <p>Lista de Pacientes Medicos</p>
              </a>
            </li>
             
@@ -730,7 +730,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-briefcase-medical"></i>
             <p>
-              Mantenimiento medico
+              Mantenimiento Médico
               <i class="nav-icon "></i>
             </p>
           </a>
@@ -738,13 +738,13 @@
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento alergias</p>
+                <p>Mantenimiento Alergias</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudtiposangre" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento tipo sangre</p>
+                <p>Mantenimiento Tipo Sangre</p>
               </a>
             </li>
             <li class="nav-item">
@@ -764,7 +764,7 @@
               <li>
               <a href="crudTranstornos" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento transtornos</p>
+                <p>Mantenimiento Trastornos</p>
               </a>
             </li>
 
@@ -772,7 +772,7 @@
             <li class="nav-item">
               <a href="crudAparienciaFisica" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento apariencias fisicas</p>
+                <p>Mantenimiento Apariencias Físicas</p>
               </a>
             </li>
           </ul>
@@ -908,7 +908,7 @@
               <li class="nav-item">
               <a href="area" class="nav-link" > 
               <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Areas</p>
+                  <p>Mantenimiento de Áreas</p>
               </a>
               </li>
               
