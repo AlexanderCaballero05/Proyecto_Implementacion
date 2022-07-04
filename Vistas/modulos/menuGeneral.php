@@ -20,8 +20,8 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Menú general
-    Fecha:             
-    Programador:       
+    Fecha:             20/03/2022
+    Programador:       Arnold Caballero
     descripcion:       Menú general que aparece en todo el sistema
 -----------------------------------------------------------------------
   Historial de Cambio

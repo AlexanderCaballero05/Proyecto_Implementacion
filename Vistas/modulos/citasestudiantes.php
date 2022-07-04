@@ -3,9 +3,9 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto =63;///cambiar
-$accion = 'INGRESO A LA PANTALLA DE MANTENIMIENTO DE CITAS MEDICAS ESTUDIANTES';
-$descripcion = 'MANTENIMIENTO A LAS CITAS MÉDICAS ESTUDIANTE ';
+$codigoObjeto =51;///cambiar
+$accion = 'CONSULTA DE CITAS MEDICAS DE ESTUDIANTES';
+$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA DE DE CITAS MEDICAS';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 

@@ -3,9 +3,9 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto = 48;///cambiar
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
+$codigoObjeto = 51;///cambiar
+$accion = 'CONSULTA DE MATRICULA ESTUDIANTE';
+$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA PARA VER SU MATRICULA';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 

@@ -149,7 +149,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                     </div><!--Fin de una fila -->
                     <div class="row">
                       <div class="col-md-4"><!--INICIO 1er APELLIDO-->
-                        <label  class="control-label">Pimer Apellido:</label> 
+                        <label  class="control-label">Primer Apellido:</label> 
                         <div class="form-group">
                           <input class="form-control" type="text" required pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
                           <div class="invalid-feedback">
@@ -240,7 +240,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
 
                     <div class="row">
                       <div class="col-md-4"><!--telefono-->
-                      <label class="control-label">Telefono:</label> 
+                      <label class="control-label">Teléfono:</label> 
                         <div class="input-group">
                           <input class="form-control" type="text" autocomplete = "off" onkeypress="return telfono(event,this);" required pattern="[0-9]{8,8}" title="Tamaño minimo de 8" maxlength="8" minlength="8" id="telefono"  name="telefono"   onblur="quitarespacios(this);" >
                           <div class="invalid-feedback">

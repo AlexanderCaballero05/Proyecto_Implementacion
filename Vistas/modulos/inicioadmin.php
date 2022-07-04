@@ -14,7 +14,7 @@ include "conexionpdo.php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 px-3">Panel Administrador</h1>
+            <h1 class="m-0 px-3">Bienvenido</h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -55,6 +55,32 @@ include "conexionpdo.php";
           </div>
         </div>      
         <div class="box-body"><!--Usuarios -->
+
+
+        <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '25'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 25.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>        
           <div class="panel-content"> 
             <!--INICIO-->
             <!--COLLAPSE1-->
@@ -363,7 +389,10 @@ include "conexionpdo.php";
         <!--COLLAPSE2-->
         <!--COLLAPSE3-->
       
-
+                 <?php 
+                    }
+                    
+                    ?>  
 </section></div>
       
  

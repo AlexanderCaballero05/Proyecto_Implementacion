@@ -1,12 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
 
-<?php
- include_once "conexion.php";
- include_once "conexion3.php";
- $codigoObjeto=4;
- $accion='Ingreso a mantenimiento de Familiar';
- $descripcion='Aqui se visualiza los familiares que se han registrado';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+Programa:          Pantalla que realiza la restauración de datos de prosecar
+Fecha:             01-06-2022
+Programador:       Arnold Caballero
+descripcion:       Pantalla que realiza el restauración de la base de datos 
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+----------------------------------------------------------------------->
 
 
 
@@ -73,7 +96,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 			<option Selected disabled value="">Selecciona un punto...</option>
 			<?php
 				include_once 'Connet.php';
-				$ruta="C:/xampp/htdocs/Proyecto_Implementacion7/vistas/modulos/Backup/" ;
+				$ruta="C:/xampp/htdocs/Proyecto_Implementacion8/vistas/modulos/Backup/" ;
 				if(is_dir($ruta)){
 				    if($aux=opendir($ruta)){
 				        while(($archivo = readdir($aux)) !== false){

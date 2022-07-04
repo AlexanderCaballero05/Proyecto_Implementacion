@@ -1,13 +1,36 @@
-<?php
- include_once "conexion.php";
- include_once "conexion3.php";
- $codigoObjeto=4;
- $accion='Ingreso a mantenimiento de Familiar';
- $descripcion='Aqui se visualiza los familiares que se han registrado';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
 
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
 
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+Programa:          Pantalla de Respaldo de datos de prosecar
+Fecha:             01-06-2022
+Programador:       Arnold Caballero
+descripcion:       Pantalla que realiza el respaldo de la base de datos 
+-----------------------------------------------------------------------
+Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+Arnol Caballero        		17-06-2022                 Validacion de los maximos y minimos de los inputs 
+----------------------------------------------------------------------->
 
 
 <body oncopy="return false" onpaste="return false">
@@ -60,6 +83,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   
 
                   </div>
+                  <!--
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="input-group">
@@ -67,7 +91,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">...</button>
                        </div>
                      </div>
-                  </div>
+                  </div>-->
                   <br>
                   <?php
                             include "conexionpdo.php";
