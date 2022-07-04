@@ -125,7 +125,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                     </script>";
                                     $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN ADMINISTRADOR';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN ADMINISTRADOR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                   }else{
@@ -164,7 +164,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   </script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN TUTOR';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN TUTOR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
@@ -202,6 +202,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
+                                  
                                   exit;
                                 }else{
                                   echo "<script> 
@@ -210,7 +211,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   </script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN ENFERMERO';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN ENFERMERO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }
@@ -241,7 +242,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   </script>";
                                     $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN ESTUDIANTE';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN ESTUDIANTE';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
@@ -283,7 +284,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   </script>";
                                     $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN MEDICO';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN MEDICO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
@@ -324,7 +325,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   location.href = 'crudpersonas';</script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN PSICOLOGO';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN PSICOLOGO';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
@@ -362,7 +363,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   </script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UN CATEQUISTA';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN CATEQUISTA';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
@@ -377,7 +378,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                             }
                           }else{ //para insertar familiares
                             try{
-                              //Insertar  personas mortales ok no :v ,demas personas no importantes del sistema :)
+                              //Insertar  personas FAMILIARES
                               $estado_civil = ($_POST['estado_civil']);
                               $nivel_edu = ($_POST['nivel_educativo']);
                               $ingresos = ($_POST['ingresos']);
@@ -394,7 +395,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                 </script>";
                                    $codigoObjeto=13;
                                     $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO UNA PERSONA';
+                                    $descripcion= 'SE REGISTRO AL USUARIO'.$nombre_usuario.' COMO UN FAMILIAR';
                                     bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                               }else{
