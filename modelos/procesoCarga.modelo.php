@@ -267,7 +267,6 @@ if(isset($_POST['IDCARGA'])){
               }else{
                     try{
                         $corre = "UPDATE `tbl_carga_academica` SET 
-                        
                         HORA = '$hora_modi' , 
                         FECHA_INICIO = '$fecha_inicio_modi',
                         FECHA_FINAL = '$fecha_final_modi' , 
@@ -282,7 +281,7 @@ if(isset($_POST['IDCARGA'])){
                         $row=$conn->query($corre);
                         if($row >0){
                             echo "<script>
-                            
+                            alert('Modificación Exitosamente');
                             window.location = 'crudCargaAcademica';
                             </script>";
                             exit;
