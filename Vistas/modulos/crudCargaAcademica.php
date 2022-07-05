@@ -28,6 +28,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
+  Diana Rut Garcia         	3-07-2022                 Cambio en el titulo y el modal de editar
 ----------------------------------------------------------------------->
 
 <?php 
@@ -92,7 +93,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   <div class="content-header">
     <div class="container-fluid">
     </div>
-    <section class="content-header text-xl-center mb-3 btn-light">
+    <section class="content-header text-xl-center mb-3 ">
       <h1>
           <h4> Lista de Carga Academica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
@@ -102,10 +103,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Ver carga academica</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Ver Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
@@ -116,90 +117,32 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
           <div class="row">
             <div class="col-md-12">
             <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '20'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
-                    <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-                    ?>  
+               include "conexionpdo.php";
+               $usuario=$_SESSION['vario'];
+               //Evaluo si existe el tipo de Rol
+               $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+               $evaluar_usuario->execute(array($usuario));
+               $row=$evaluar_usuario->fetchColumn();
+                if($row > 0){
+                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                  //llamar al procedimiento almacenado
+                  $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                  $evaluar_permiso->execute(array($usuariomo, '20'));
+                  $row1=$evaluar_permiso->fetchColumn();
+                  $permiso_registrar =$row1;             
+                }
+                ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                <?php 
+                if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                ?>  
                 <a href="procesoCargaAcademica" >
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-            </br></br>
-                  <?php
-                    }
-                    ?>
-          <!--
-            <div class="row">
-                   <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
-                    </div>
-                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" max="<?= date("Y-m-d") ?>"  id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
-                    </div>
-                    <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Filtrar por Fecha</button>  
-                </div>
-                  -->
-                
-                <?php 
-                    if(isset($_POST['excel'])){
-                      $desde = date("Y-m-d", strtotime($_POST['bdesde']));
-                    $hasta = date("Y-m-d", strtotime($_POST['bhasta']));
-                    $conexion =@mysqli_connect('localhost','root', '','db_Proyecto_Prosecar') or die ("Problema en la conexion");
-                    $sql = "SELECT COUNT(*) FROM `tbl_bitacora_sistema`
-                    WHERE  `FECHA`  BETWEEN '$desde' AND '$hasta'";
-
-                    $result = mysqli_query($conexion, $sql);
-                    while($fila = mysqli_fetch_assoc($result)){
-                      $_SESSION['bcontador2'] = $fila["COUNT(*)"];} 
-                      echo "<script>
-                      window.open('/ProyectoFinal/vistas/modulos/ReportesBitacoraex.php','_blank');
-                      window.open(this.href,'_self');
-                      </script>";
-                    } 
-                  ?>
-                  <?php 
-                    if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST["bhasta"])
-                    &&($_POST["bdesde"])>($_POST["bhasta"])){
-
-                    echo '<script>
-                      Swal.fire({
-                      type: "error",
-                      title: "¡La fecha de entrada no debe ser menor al la fecha actual! ",
-                      showConfirmButton: "true",
-                      confirmButtonText: "Ok",
-                      closeOnConfirm: "false",
-                      background:"rgb(0,0,0,0.95)"
-                      }).then((result)=>{
-                    if (result.value){
-                    window.location = "Formbitacora";
-                    }
-                    });
-                    </script>';
-                    } 
-                    if(isset($_POST["tipo"]) && !Empty($_POST["tipo"]) && $_POST["tipo"] == "Venta")
-                  ?>
-                
+               </br></br>
+               <?php
+                }
+                ?>
             <form  method="POST">
               <div class= "card">
                 <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -216,10 +159,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Tutoría</th>
                         <th class="text-center">Tutor</th>
                         <th class="text-center">Sección</th>
-                        <th class="text-center">Hora inicio</th>
-                        <th class="text-center">Hora final</th>
-                        <th class="text-center">Fecha inicio</th>
-                        <th class="text-center">Fecha final</th>
+                        <th class="text-center">Hora Inicio</th>
+                        <th class="text-center">Hora Final</th>
+                        <th class="text-center">Fecha Inicio</th>
+                        <th class="text-center">Fecha Final</th>
                         <th class="text-center">Período</th>
                       </tr>
                     </thead>
@@ -227,12 +170,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
                       as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO
-                                          FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
-                                          WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-                                          AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-                                          AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
-                                          AND c.CODIGO_SECCION = s.CODIGO_SECCION
-                                          AND t.CODIGO_AREA  = 1; ";
+                       FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
+                       WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+                       AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+                       AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+                       AND c.CODIGO_SECCION = s.CODIGO_SECCION
+                       AND t.CODIGO_AREA  = 1; ";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         $contador = 0;
@@ -333,11 +276,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST" >
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="card-title">Editar Carga Academica</h4>
+                                  <h4 class="card-title">Editar Carga Académica</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                                <form  method="POST">
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                     <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="IDCARGA">

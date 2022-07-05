@@ -244,18 +244,18 @@ if(isset($_POST['IDCARGA'])){
         $usuario_modi = $_SESSION['vario'];
         $codigo_carga = ($_POST['IDCARGA']);
         try{
-            $query = mysqli_query($conn," SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica 
-            WHERE CODIGO_SECCION = '$seccion_modi' AND CODIGO_TUTORIA = '$tutoria_modi' and CODIGO_CARGA <> '$codigo_carga' ");
-            $fila = mysqli_fetch_array($query);
+            $query = $db->prepare(" SELECT COUNT(*) FROM tbl_carga_academica 
+            WHERE CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?) and CODIGO_CARGA <> (?) ");
+            $query->execute(array($seccion_modi,$tutoria_modi,$codigo_carga));
+            $fila=$query->fetchColumn();
             if($fila >0){ 
-               
                 echo "<script> 
                 alert('La seccion y la clase ya esta creada ');
                 window.location = 'crudCargaAcademica';
                 </script>";
                 exit;
             }else{
-              $consulta = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica 
+              $consulta = $db->prepare("SELECT COUNT(*) FROM tbl_carga_academica 
               WHERE CODIGO_PERSONA <> (?) AND CODIGO_TUTORIA = (?)  and HORA = (?) and FECHA_INICIO = (?)");
               $consulta->execute(array($tutor_modi ,$tutoria_modi,$hora_modi, $fecha_inicio_modi));
               if($consulta >0){
@@ -267,7 +267,6 @@ if(isset($_POST['IDCARGA'])){
               }else{
                     try{
                         $corre = "UPDATE `tbl_carga_academica` SET 
-                        
                         HORA = '$hora_modi' , 
                         FECHA_INICIO = '$fecha_inicio_modi',
                         FECHA_FINAL = '$fecha_final_modi' , 
@@ -282,7 +281,7 @@ if(isset($_POST['IDCARGA'])){
                         $row=$conn->query($corre);
                         if($row >0){
                             echo "<script>
-                            
+                            alert('Modificación Exitosamente');
                             window.location = 'crudCargaAcademica';
                             </script>";
                             exit;
