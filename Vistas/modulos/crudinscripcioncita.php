@@ -292,12 +292,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         include "conexion1.php";
                                                                         $queryr = "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
                                                                         FROM tbl_estado es
-                                                                        WHERE  es.CODIGO_ESTADO <> 1 
-                                                                        and es.CODIGO_ESTADO <> 2 
-                                                                        and es.CODIGO_ESTADO <> 3 
-                                                                        and es.CODIGO_ESTADO <> 4
-                                                                        and es.CODIGO_ESTADO <> 6
-                                                                        and es.CODIGO_ESTADO <> 8;";
+                                                                        WHERE  es.CODIGO_ESTADO = 5 or  es.CODIGO_ESTADO = 7;";
                                                                         $resultador=$conn->query($queryr);
                                                                         ?>  
 

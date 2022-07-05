@@ -283,7 +283,8 @@
                                       <div class="col-sm-6 mb-3">
                                        <?php
                                         $query= "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
+                                        FROM tbl_estado es  
+                                        WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
                                         ;
                                         ";
                                         $result1= $conn->query($query);

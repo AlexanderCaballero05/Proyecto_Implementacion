@@ -141,11 +141,10 @@ if (isset($_POST['reporte_estudiante'])) {
     <fieldset>
       <?php
       $query = "SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE, p.DNI, 
-      concat_ws(' ', p.LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO) as LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO, tel.NUMERO_TELEFONO, co.CORREO_PERSONA, se.SEXO ,p.DIRECCION
-      FROM tbl_persona p ,tbl_estudiante es, tbl_telefono tel, tbl_correo_electronico co, tbl_sexo se
+      concat_ws(' ', p.LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO) as LUGAR_NACIMIENTO, p.FECHA_NACIMIENTO, tel.NUMERO_TELEFONO, se.SEXO ,p.DIRECCION
+      FROM tbl_persona p ,tbl_estudiante es, tbl_telefono tel, tbl_sexo se
            where es.CODIGO_PERSONA = p.CODIGO_PERSONA
            AND p.CODIGO_PERSONA = tel.CODIGO_PERSONA
-           AND p.CODIGO_PERSONA = co.CODIGO_PERSONA
            AND p.SEXO = se.CODIGO_SEXO
            AND CODIGO_ESTUDIANTE = '$persona'
            GROUP BY es.CODIGO_ESTUDIANTE";
@@ -158,7 +157,6 @@ if (isset($_POST['reporte_estudiante'])) {
         $fecha = $row['FECHA_NACIMIENTO'];
         $lugar = $row['LUGAR_NACIMIENTO'];
         $telefono = $row['NUMERO_TELEFONO'];
-        $correo = $row['CORREO_PERSONA'];
         $direccion = $row['DIRECCION'];
 
         $fechaEntera = strtotime($fecha);
@@ -176,7 +174,6 @@ if (isset($_POST['reporte_estudiante'])) {
       <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
       <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
       <label style="padding-right: 85px;" ><b>Telefono: </b><?php echo $telefono; ?></label>
-      <label ><b>Correo: </b><?php echo $correo; ?></label><br>
       <label style="margin-bottom: 30px;" ><b>Direccion:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
 
     </fieldset>
@@ -326,12 +323,11 @@ if (isset($_POST['reporte_estudiante'])) {
        <table>
        <?php
        $consulta = "SELECT est.CODIGO_ESTUDIANTE, GROUP_CONCAT(' ',sac.NOMBRE) as sacramentos
-       FROM tbl_persona per, tbl_estudiante est, tbl_sacramento_persona psa, tbl_sacramento sac
-       WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
-             AND per.CODIGO_PERSONA = psa.CODIGO_PERSONA
-             AND psa.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
+       FROM  tbl_estudiante est, tbl_sacramento_estudiante psa, tbl_sacramento sac
+       WHERE EST.CODIGO_ESTUDIANTE = psa.CODIGO_ESTUDIANTE
+       		AND psa.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
              AND est.CODIGO_ESTUDIANTE = '$persona'
-             group by psa.CODIGO_PERSONA
+             group by psa.CODIGO_ESTUDIANTE
                       ";
        $resul=$conn->query($consulta);
        if ($resul->num_rows > 0) {
