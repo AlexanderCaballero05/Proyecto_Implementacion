@@ -27,7 +27,7 @@ descripcion:       Pantalla que contrala cargar academica
 
 Programador               Fecha                      Descripcion
 ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
-
+Diana Rut Garcia        03/07/2022                   Cambio en el titulo
 ----------------------------------------------------------------------->
 
 
@@ -78,7 +78,7 @@ ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAM
   </div>
   <section class="content">
     <div class="container-fluid">
-    <section class="content-header text-xl-center mb-3 btn-light">
+    <section class="content-header text-xl-center">
       <h1>
           <h4> Agregar Carga Acadèmica/Espiritual  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>

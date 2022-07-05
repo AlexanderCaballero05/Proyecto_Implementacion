@@ -27,7 +27,8 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
-  ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia 
+  ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia
+  Diana Rut Garcia          03/07/2022                 Cambio en el titulo y modal editar 
 ----------------------------------------------------------------------->
 
 <?php 
@@ -77,7 +78,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   <div class="content-header">
     <div class="container-fluid">
     </div>
-    <section class="content-header text-xl-center mb-3 btn-light">
+    <section class="content-header text-xl-center">
       <h1>
           <h4> Lista de Carga Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
@@ -128,63 +129,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
-    
-                  <?php
-                    }
-                    ?>
-          <!--
-            <div class="row">
-                   <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Desde:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" max="<?= date("Y-m-d") ?>" id="bd-desde" id="bd-desde" name="bdesde" value="<?php echo $_SESSION['bdesde']?>" />
-                    </div>
-                    <label class=" col-sm-1 control-label" style=" text-align: right; width: 150px">Hasta:</label>
-                    <div class="col-sm-2">
-                      <input class="form-control" type="date" max="<?= date("Y-m-d") ?>"  id="bd-hasta" name="bhasta" value="<?php echo $_SESSION['bhasta']?>" />
-                    </div>
-                    <button type="submit" class="btn btn-primary"  name="filtrartutor" class="col-sm-1 col-form"><span> <i class="nav-icon fa fa-search mx-1"></i></span>Filtrar por Fecha</button>  
-                </div>
-                  -->
+                <?php
+                   }
+                ?>
                 </br></br>
-                <?php 
-                    if(isset($_POST['excel'])){
-                      $desde = date("Y-m-d", strtotime($_POST['bdesde']));
-                    $hasta = date("Y-m-d", strtotime($_POST['bhasta']));
-                    $conexion =@mysqli_connect('localhost','root', '','db_Proyecto_Prosecar') or die ("Problema en la conexion");
-                    $sql = "SELECT COUNT(*) FROM `tbl_bitacora_sistema`
-                    WHERE  `FECHA`  BETWEEN '$desde' AND '$hasta'";
-
-                    $result = mysqli_query($conexion, $sql);
-                    while($fila = mysqli_fetch_assoc($result)){
-                      $_SESSION['bcontador2'] = $fila["COUNT(*)"];} 
-                      echo "<script>
-                      window.open('/ProyectoFinal/vistas/modulos/ReportesBitacoraex.php','_blank');
-                      window.open(this.href,'_self');
-                      </script>";
-                    } 
-                  ?>
-                  <?php 
-                    if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST["bhasta"])
-                    &&($_POST["bdesde"])>($_POST["bhasta"])){
-
-                    echo '<script>
-                      Swal.fire({
-                      type: "error",
-                      title: "¡La fecha de entrada no debe ser menor al la fecha actual! ",
-                      showConfirmButton: "true",
-                      confirmButtonText: "Ok",
-                      closeOnConfirm: "false",
-                      background:"rgb(0,0,0,0.95)"
-                      }).then((result)=>{
-                    if (result.value){
-                    window.location = "Formbitacora";
-                    }
-                    });
-                    </script>';
-                    } 
-                    if(isset($_POST["tipo"]) && !Empty($_POST["tipo"]) && $_POST["tipo"] == "Venta")
-                  ?>
-                
             <form  method="POST">
               <div class= "card">
                 <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -201,7 +149,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Tutoría</th>
                         <th class="text-center">Tutor</th>
                         <th class="text-center">Sección</th>
-                        <th class="text-center">Hora inicio</th>
+                        <th class="text-center">Hora Inicio</th>
                         <th class="text-center">Hora final</th>
                         <th class="text-center">Fecha inicio</th>
                         <th class="text-center">Fecha final</th>
@@ -318,11 +266,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST">
                                 <div class="modal-header" style="background-color: #0CCDE3">
                                   <h4 class="card-title">Editar Carga Espiritual</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                                <form  method="POST">
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                     <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="IDCARGA">
