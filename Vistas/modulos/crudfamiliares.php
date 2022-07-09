@@ -21,7 +21,7 @@
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de parametros
     Fecha:             
-    Programador:       Luz María Montoya Medina
+    Programador:       Arnold Caballero
     descripcion:       Permite llevar un mantenimiento de los datos de los familiares registrados
                        en el sistema,editar,eliminar nuevo
 -----------------------------------------------------------------------
@@ -30,14 +30,7 @@
     Programador               Fecha                      Descripcion
  Diana Rut Garcia           30/06/2022                Cambios en el titulo
 ----------------------------------------------------------------------->
-<?php
- include_once "conexion.php";
- include_once "conexion3.php";
- $codigoObjeto=4;
- $accion='Ingreso a mantenimiento de Familiar';
- $descripcion='Aqui se visualiza los familiares que se han registrado';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
+
 
 
 
@@ -100,7 +93,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '43'));
+                                $evaluar_permiso->execute(array($usuariomo, '26'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -181,7 +174,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                       $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                       $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '43'));
+                                      $evaluar_permiso_eliminar->execute(array($usuariomo, '26'));
                                       $row1=$evaluar_permiso_eliminar->fetchColumn();
                                       $permiso_eliminar =$row1; 
                                   }
@@ -201,7 +194,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                                    //llamar al procedimiento almacenado
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '43'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '26'));
                                   $row1=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row1; 
                                     

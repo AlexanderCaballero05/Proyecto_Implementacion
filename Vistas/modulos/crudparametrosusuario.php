@@ -92,7 +92,7 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '9'));
+                                $evaluar_permiso->execute(array($usuariomo, '25'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -159,7 +159,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '9'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '25'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -181,7 +181,7 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '9'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '25'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }

@@ -67,7 +67,7 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
           if($row > 0){
            $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
            $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-           $evaluar_permiso->execute(array($usuariomo, '39'));
+           $evaluar_permiso->execute(array($usuariomo, '30'));
            $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
            }
@@ -124,7 +124,7 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
                                 if($row > 0){
                                   $usuariomo = $row;
                                   $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '39'));
+                                  $evaluar_permiso_eliminar->execute(array($usuariomo, '30'));
                                   $row1=$evaluar_permiso_eliminar->fetchColumn();
                                   $permiso_eliminar =$row1; 
                                 }
@@ -150,7 +150,7 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
                                if($row > 0){
                                   $usuariomo = $row;
                                   $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '39'));
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '30'));
                                   $row2=$evaluar_permiso_actualizar->fetchColumn();
                                   $permiso_actualizar =$row2; 
                                }
