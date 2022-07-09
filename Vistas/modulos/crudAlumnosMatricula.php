@@ -21,7 +21,7 @@
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de alumnos matrículadas
     Fecha:            
-    Programador:       Arnold Caballero
+    Programador:       
     descripcion:       Permite llevar un mantenimiento de los alummnos ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio
@@ -34,10 +34,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
- $codigoObjeto=59;
- $accion='INGRESO A LA PANTALLA LISTA DE ALUMNOS';
- $descripcion= 'SE VISUALIZAN LOS ALUMNOS MATRICULADOS A UNA TUTORIA  ';
- bitacora($codigoObjeto, $accion,$descripcion);
 ?>
                  
 <head>
@@ -105,7 +101,7 @@
 
                         <th class="text-center">Período</th>
 
-                        <th class="text-center">Estado matrícula</th>
+                        <th class="text-center">Estado Matrícula</th>
                         <th class="text-center">Acción</th>
                       </tr>
                     </thead>
@@ -283,8 +279,7 @@
                                       <div class="col-sm-6 mb-3">
                                        <?php
                                         $query= "SELECT es.CODIGO_ESTADO ,es.NOMBRE AS Nombre_estado
-                                        FROM tbl_estado es  
-                                        WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
+                                        FROM tbl_estado es  WHERE es.CODIGO_ESTADO = 7 or  es.CODIGO_ESTADO = 9 or  es.CODIGO_ESTADO = 13
                                         ;
                                         ";
                                         $result1= $conn->query($query);
@@ -316,7 +311,7 @@
                                       <div class="col-sm-8">
                                           <div class="form-group">
                                               <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
-                                                <textarea type="textarea" name="observacion_academica" class="form-control"  onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" required><?php echo $observacion_matricula;?></textarea> 
+                                                <textarea type="textarea" name="observacion_academica" class="form-control"   onkeypress="return soloLetrasnumeros(event)" required><?php echo $observacion_matricula;?></textarea> 
                                           </div>
                                           <div class="invalid-feedback">
                                                 Llene este campo.

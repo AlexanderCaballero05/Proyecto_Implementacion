@@ -30,12 +30,6 @@
  
 ----------------------------------------------------------------------->
 <?php
- include_once "conexion.php";
- include_once "conexion3.php";
- $codigoObjeto=23;
- $accion='Ingreso al proceso de matricula';
- $descripcion='Proceso que permite matricular tutorias al estudiante';
-bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
 
@@ -137,7 +131,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                $query = "SELECT ma.CODIGO_MATRICULA, concat_ws (' ',p.PRIMER_NOMBRE,' ',p.PRIMER_APELLIDO) as ESTUDIANTE,
                (select concat_ws (' ', tp2.PRIMER_NOMBRE,' ',tp2.PRIMER_APELLIDO) from tbl_persona tp2
                 where ca.CODIGO_PERSONA = tp2.CODIGO_PERSONA) as NOMBRE_TUTOR, tu.NOMBRE as ASIGNATURA,
-                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA, es.CODIGO_ESTUDIANTE, est.NOMBRE as ESTADO_MATRICULA
+                mo.TIPO as MODALIDAD, es.GRADO_ACTUAL, se.NOMBRE as SECCION, ca.HORA, es.CODIGO_ESTUDIANTE, est.NOMBRE as ESTADO_MATRICULA, tu.CODIGO_TUTORIA
          FROM tbl_matricula_academica ma, tbl_carga_academica ca, tbl_seccion se, tbl_tutoria tu, 
                tbl_modalidad mo, tbl_estudiante es, tbl_persona p, tbl_estado est
          WHERE ma.CODIGO_CARGA = ca.CODIGO_CARGA
@@ -160,6 +154,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                   $var8 = $row['HORA'];
                   $var9 = $row['CODIGO_ESTUDIANTE'];
                   $var10 = $row['ESTADO_MATRICULA'];
+                  $var11 = $row['CODIGO_TUTORIA'];
                         ?>
                         <tr>
                           <td>
@@ -252,6 +247,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 </div>
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
+                                  <input type="text" value ="<?php echo $var11; ?>" hidden class="form-control" name="asignaturaEliminar" id="asignaturaEliminar">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="MatriEliminar" id="MatriEliminar">
                                     <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudianteElim">
                                     <h4 class="text-center">¿Está seguro de eliminar la matrícula académica  <?php echo $var2; ?>?</h4>

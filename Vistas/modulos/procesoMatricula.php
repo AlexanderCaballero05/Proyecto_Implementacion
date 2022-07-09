@@ -27,17 +27,13 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
-  
+
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- 
  $codigoObjeto=23;
- $accion='Ingreso Matricula';
- $descripcion= 'Ingreso al proceso/registros de matricula ';
- bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
     
@@ -333,7 +329,7 @@
                       </thead>
                       <tbody>
                         <?php                      
-               $query = "SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE,
+               $query = "SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE, t.CODIGO_TUTORIA,
                CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,m.TIPO as MODALIDAD,se.NOMBRE as SECCION , c.HORA, c.CODIGO_CARGA 
                 FROM tbl_carga_academica c, tbl_seccion se ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
                 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
@@ -352,7 +348,7 @@
                   $var4 = $row['SECCION'];
                   $var5 = $row['HORA'];
                   $var6 = $row['CODIGO_CARGA'];
-                  //$var7 =  $row['CODIGO_TUTORIA'];
+                  $var7 =  $row['CODIGO_TUTORIA'];
                   $var8 =  $row['CODIGO_MATRICULA'];
                   $var9 =  $row['CODIGO_ESTUDIANTE'];
 
@@ -384,6 +380,7 @@
                                 </div>
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
+                                  <input type="text" value ="<?php echo $var7; ?>" hidden class="form-control" name="eliminartutoria">
                                     <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
                                     <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
                                     <h4 class="text-center">¿Está seguro de eliminar la clase? <?php echo $var1; ?>?</h4>

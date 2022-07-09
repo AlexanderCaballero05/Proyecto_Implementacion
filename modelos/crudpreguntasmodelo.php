@@ -144,10 +144,6 @@ if(isset($_POST['pregunta_eliminar'])){
             window.location = 'crudpreguntas';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=4;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ UNA PREGUNTA ';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>

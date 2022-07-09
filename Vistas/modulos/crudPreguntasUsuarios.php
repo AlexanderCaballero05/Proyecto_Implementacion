@@ -55,7 +55,25 @@ include_once 'conexionpdo.php';
       $descripcion= 'Ver los registros de los usuarios';
       bitacora($codigoObjeto, $accion,$descripcion);
       ?>
-      
+      <?php
+  $Min = "MIN_RESPUESTA_PREGUNTAS";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Min));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+
+<?php
+  $Max = "MAX_RESPUESTA_PREGUNTAS";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Max));
+  $row1=$sentencia->fetchColumn();
+  if($row1>0){
+    $valor1 = $row1;
+  }
+?>
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -239,8 +257,8 @@ include_once 'conexionpdo.php';
                    <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Respuesta:</label>
-                      <input type="text" name="respuesta_usuario_individual" id="respuesta_usuario_individual" class="form-control" id="" onkeyup="mayus(this);" 
-                         placeholder="respuesta de seguridad" onkeypress="return soloLetras(event);" autocomplete = "off" required="">
+                      <input type="text" name="respuesta_usuario_individual" id="respuesta_usuario_individual" class="form-control" id="" onkeyup="mayus(this);"minlength="<?php echo $valor; ?>" maxlength="<?php echo $valor1; ?>" 
+                         placeholder="respuesta de seguridad" onkeypress="return soloLetras(event);" autocomplete = "off" required pattern="[A-Z, 1-9]{<?php echo $valor;?>,<?php echo $valor1;?>}">
                        </div>
 
                        <div class="valid-feedback">

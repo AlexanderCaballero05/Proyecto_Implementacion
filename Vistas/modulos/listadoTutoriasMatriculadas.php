@@ -36,7 +36,7 @@ session_start();
                 <div class="col-sm-3">
                   <select class="form-control" id="buscar">
                    <option selected disabled value="">--Seleccione--</option>
-                     <option value="1">Tutorias</option>
+                     <option value="1">Tutorías</option>
                      <option value="2">Sección</option>
                   </select>
                 </div>
@@ -54,7 +54,7 @@ session_start();
                             $resultadod=$conn->query($query);                
                             ?>
                         <select style="width: 100%" class="form-control select2"  name ="tutoria" >
-                            <option selected enable value="" >--Seleccionar Tutoria--</option>
+                            <option selected enable value="" >--Seleccionar Tutoría--</option>
                                 <?php 
                                 if ($resultadod->num_rows > 0) {
                                     while($row = $resultadod->fetch_assoc()) { 
@@ -74,7 +74,7 @@ session_start();
                             $resulta=$conn->query($query1);                
                             ?>
                         <select style="width: 100%" class="form-control select2"  name ="seccion" >
-                            <option selected enable value="" >--Seleccionar Grado/seccion--</option>
+                            <option selected enable value="" >--Seleccionar Grado/sección--</option>
                                 <?php 
                                 if ($resulta->num_rows > 0) {
                                     while($row = $resulta->fetch_assoc()) { 
@@ -116,9 +116,9 @@ session_start();
                  <table id="tabla" class="table table-bordered table-striped">
                    <thead>
                        <tr>
-                          <th class="text-center">Tutoria</th>
-                          <th class="text-center">Nombre tutor</th>
-                          <th class="text-center">Nombre del estudiante</th> 
+                          <th class="text-center">Tutoría</th>
+                          <th class="text-center">Nombre Tutor</th>
+                          <th class="text-center">Nombre del Estudiante</th> 
                           <th class="text-center">Modalidad</th>
                           <th class="text-center">Sección</th>
                           <th class="text-center">Hora</th> 
@@ -199,9 +199,9 @@ session_start();
                  <table id="tabla" class="table table-bordered table-striped">
                    <thead>
                        <tr>
-                          <th class="text-center">Tutoria</th>
-                          <th class="text-center">Nombre tutor</th>
-                          <th class="text-center">Nombre del estudiante</th> 
+                          <th class="text-center">Tutoría</th>
+                          <th class="text-center">Nombre Tutor</th>
+                          <th class="text-center">Nombre del Estudiante</th> 
                           <th class="text-center">Modalidad</th>
                           <th class="text-center">Sección</th>
                           <th class="text-center">Hora</th> 

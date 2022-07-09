@@ -7,6 +7,7 @@
   include_once 'function_bitacora.php';
   
 ?>
+
 <?php
 
 //AGREGAR/REGISTRAR LA MATRICULA
@@ -17,6 +18,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
       $usuario = $_SESSION['vario']; //variable que trae el usuario que está logeado
       $fechaActual = date('Y-m-d');  
       $tutoria = ($_POST['tutoria']);
+      $nombreestudiante = ($_POST['nombreestudiante']);
    try{
      $consulta = "";
      $consulta = $db->prepare("SELECT ma.CODIGO_CARGA ,ma.CODIGO_ESTUDIANTE, ca.CODIGO_TUTORIA 
@@ -38,9 +40,13 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
 
       if($resul >0){
         echo "<script> 
-        
         window.location = 'crudMatricula';
         </script>";
+        $codigoObjeto=23;
+        $accion='INSERCIÓN';
+        $descripcion= 'SE MATRICULÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$ESTUDIANTE;
+        bitacora($codigoObjeto, $accion,$descripcion);
+        exit;
       }else{
         echo "<script> 
         
@@ -84,10 +90,14 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
      $resul=$conn->query($matricula);
 
      if($resul >0){
-       echo "<script> 
-       
+       echo "<script>  
        window.location = 'crudMatricula';
        </script>";
+       $codigoObjeto=23;
+       $accion='INSERCIÓN';
+       $descripcion= 'SE MATRICULÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$ESTUDIANTE;
+       bitacora($codigoObjeto, $accion,$descripcion);
+       exit;
      }else{
        echo "<script> 
        
@@ -109,6 +119,7 @@ if(isset($_POST['ma_eliminar'])){
   if(isset($_POST['ELIMINAR_MATRICULA'])){
     $code = ($_POST['ma_eliminar']);//asigna a una variable el id del estado a eliminar
     $estudiante = ($_POST['estudiante_eli']);
+    $tutoria = ($_POST['eliminartutoria']);
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
           mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
@@ -117,6 +128,10 @@ if(isset($_POST['ma_eliminar'])){
             
             window.location = 'crudMatricula';
             </script>";
+            $codigoObjeto=23;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$estudiante;
+            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
@@ -138,6 +153,7 @@ if(isset($_POST['MatriEliminar'])){
   if(isset($_POST['ELIMINARMATRICULA2'])){
     $code = ($_POST['MatriEliminar']);//asigna a una variable el id del estado a eliminar
     $estudiante = ($_POST['estudianteElim']);
+    $tutoria = ($_POST['asignaturaEliminar']);
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
           mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
@@ -146,6 +162,10 @@ if(isset($_POST['MatriEliminar'])){
             
             window.location = 'crudMatricula';
             </script>";
+            $codigoObjeto=23;
+            $accion='ELIMINACIÓN';
+            $descripcion=  $descripcion= 'SE ELIMINÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$estudiante;
+            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
