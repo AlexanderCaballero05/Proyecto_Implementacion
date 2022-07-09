@@ -3,10 +3,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
- $codigoObjeto=58;
- $accion='IINGRESO A LA PANTALLA TUTORIAS TUTOR';
- $descripcion= 'SE VISUALIZAN LAS TUTORIAS QUE SE LE HAN ASIGNADO A UN TUTOR';
- bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
 
@@ -68,7 +64,7 @@
                         <th class="text-center">Hora</th>
                         <th class="text-center">Período</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">Notas alumnos</th>
+                        <th class="text-center">Notas Alumnos</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -119,7 +115,7 @@
                                           if($row > 0){
                                           $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                           $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                          $evaluar_permiso->execute(array($usuariomo, '24'));
+                                          $evaluar_permiso->execute(array($usuariomo, '38'));
                                           $row1=$evaluar_permiso->fetchColumn();
                                             $permiso_registrar =$row1;             
                                           }
@@ -182,7 +178,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar tutoría:",
+        "search": "Buscar Tutoría:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

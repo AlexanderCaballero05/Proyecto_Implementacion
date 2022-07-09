@@ -39,20 +39,6 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- $codigoObjeto=4;
- $accion='INGRESO A MANTENIMIENTO PREGUNTA';
- $descripcion='MANTENIMIENTO AL REGISTRO DE PREGUNTAS';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
-<?php
-  //Parametro de maximo contraseña
-  $maxpregunta = "NUM_MAX_CARACTER";
-  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
-  $sentencia2->execute(array($maxpregunta));
-  $row2=$sentencia2->fetchColumn();
-  if($row2>0){
-    $valores3 = $row2;
-  }
 ?>
 <?php
 //Parametro de minimo contraseña
@@ -64,6 +50,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
     $valores4 = $row3;
   }
   ?>
+<?php
+  //Parametro de maximo contraseña
+  $maxpregunta = "NUM_MAX_CARACTER";
+  $sentencia2 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia2->execute(array($maxpregunta));
+  $row2=$sentencia2->fetchColumn();
+  if($row2>0){
+    $valores3 = $row2;
+  }
+?>
 
 <head>
 
@@ -202,11 +198,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="pregunta_eliminar" id="pregunta_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar la pregunta? <?php echo $var2; ?></h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la pregunta? <?php echo $var2; ?></h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_PREGUNTA" id="ELIMINAR_PREGUNTA"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_PREGUNTA" id="ELIMINAR_PREGUNTA"  class="btn btn-primary">Si, eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
