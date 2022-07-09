@@ -5,7 +5,7 @@
           Departamento de Informatica administrativa
          Analisis, Programacion y Evaluacion de Sistemas
                    Segundo Periodo 2022
-
+  
   Equipo:
   Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
   Luz Maria Montoya Medina (luz.montoya@unah.hn)
@@ -13,14 +13,14 @@
   Any Melissa Hernandez (anyhernandez@unah.hn)
   Gissela Yamileth Diaz (gdiaza@unah.hn)
   Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
-
+  
   Catedratico:
   Lic. Claudia Nuñez (Analisis)
   Lic. Giancarlo Martini Scalici Aguilar (Implementación)
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 
----------------------------------------------------------------------
-
+  ---------------------------------------------------------------------
+   
     Programa:          Pantalla de registro de permisos a los objetos o pantallas del sistema
     Fecha:             04-Marzo-2022
     Programador:       Arnold Caballero 
@@ -29,16 +29,16 @@
 -----------------------------------------------------------------------
                       Historial de Cambio
 -----------------------------------------------------------------------
-
+    
     Programador               Fecha                      Descripcion
-
+    
     Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
     Luz Montoya             16-06-2022                 Cambio en el encabezado de la tabla, el orden de la columna de permisos
     Luz Montoya             18-06-2022                 Cambio de los nombre de permisos a editar y consultar/ y que si la opción de consultar no está seleccionada las otras no se muestren
 
 
------------------------------------------------------------------------>
+  ----------------------------------------------------------------------->
 
 
 <?php 
@@ -598,3 +598,4 @@ $("#consultar1").change( function() {
 }); 
   
 </script>
+

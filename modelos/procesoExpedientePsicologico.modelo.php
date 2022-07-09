@@ -8,7 +8,6 @@
 
 <?php
     if(isset($_POST['codigo_paciente_expediente_psicologico'])){
-        
             $codigo_expediente_paciente = ($_POST['codigo_paciente_expediente_psicologico']);
             $antecedentes_familiares = ($_POST['antecedentes_familiares']);
             $antecedentes_personales = ($_POST['antecedentes_personales']);
@@ -16,11 +15,8 @@
             date_default_timezone_set("America/Guatemala");
             $Fechaactual=  date('Y-m-d'); 
 
-         
-
-
             $insertar_expediente ="INSERT INTO TBL_EXPEDIENTE_PSICOLOGICO_UNICO (CODIGO_PERSONA, CODIGO_ESTADO, ANTECEDENTES_FAMILIARES , ANTECEDENTES_PERSONALES , ANTECEDENTES_CLINICOS, FECHA_CREACION) 
-                                                                VALUES ('$codigo_expediente_paciente', '2', '$antecedentes_familiares','$antecedentes_personales', '$antecedentes_clinicos', '$Fechaactual')";
+            VALUES ('$codigo_expediente_paciente', '2', '$antecedentes_familiares','$antecedentes_personales', '$antecedentes_clinicos', '$Fechaactual')";
             $consulta=$conn->query($insertar_expediente);
             $codigo= mysqli_insert_id($conn);
 
@@ -33,16 +29,16 @@
                       $conn->commit();
                     }
                    
-                        }//fin Para insertar neuroticos
-    
-                        echo "<script>
-                        window.location = 'procesoconsultapsicologia'
-                     </script>";
-
-        
-
-            
-
+                }//fin Para insertar neuroticos
+                echo "<script>
+                window.location = 'procesoconsultapsicologia'
+                </script>";
+                
+                $codigoObjeto=31;
+                $accion='REGISTRAR';
+                $descripcion= 'SE REGISTRO EL EXPEDIENTE PSICOLÓGICO A LA PERSONA CON CODIGO'.$codigo_expediente_paciente;
+                bitacora($codigoObjeto, $accion,$descripcion);
+                exit;
     }
 
 
@@ -85,8 +81,6 @@ if(isset($_POST['Crear_plan_terapeutico'])){
             </script>";  
             exit;
         }
-  
-
 }
 
 

@@ -231,7 +231,7 @@ if(isset($_POST['eliminarPermiso'])){
                                         from  tbl_permisos p ,tbl_roles r, tbl_objetos o
                                         where r.CODIGO_TIPO_ROL  = p.CODIGO_TIPO_ROL 
                                         AND   o.CODIGO_OBJETO = p.CODIGO_OBJETO
-                                        and r.CODIGO_TIPO_ROL  = (?);;");
+                                        and r.CODIGO_TIPO_ROL  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){

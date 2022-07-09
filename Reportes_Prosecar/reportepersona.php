@@ -17,7 +17,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(115);
-		$this->Cell(100, 8, utf8_decode('Reporte general de  personas'));
+		$this->Cell(100, 8, utf8_decode('Reporte General de Personas'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
@@ -193,20 +193,17 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) as PERSONA, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
-	FROM TBL_PERSONA p, tbl_telefono tl, tbl_tipo_persona t, tbl_correo_electronico c
-	WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
-	AND tl.CODIGO_PERSONA = p.CODIGO_PERSONA
-	AND c.CODIGO_PERSONA = p.CODIGO_PERSONA 
-    AND p.CODIGO_PERSONA  > 1;";
+  
+	$strquery ="SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) as PERSONA, p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
+	FROM TBL_PERSONA p
+	left join tbl_telefono tl     on tl.CODIGO_PERSONA = p.CODIGO_PERSONA
+	left join tbl_tipo_persona t  on t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
+	left join tbl_correo_electronico c  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA WHERE p.CODIGO_PERSONA >1;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -226,7 +223,7 @@ $pdf->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
 $pdf->Cell(28, 11, 'DNI', 1, 0, 'C', 1);
 $pdf->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
 $pdf->Cell(32, 11, 'Lugar Nacimiento', 1, 0, 'C', 1);
-$pdf->Cell(30, 11, 'Direccion', 1, 0, 'C', 1);
+$pdf->Cell(30, 11, utf8_decode('Dirección'), 1, 0, 'C', 1);
 $pdf->Cell(15, 11, 'Genero', 1, 0, 'C', 1);
 $pdf->Cell(20, 11, 'Telefono', 1, 0, 'C', 1);
 $pdf->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);

@@ -19,16 +19,25 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(125
-	
-	);
-		$this->Cell(170, 8, utf8_decode('Reporte de cita'));
+		$this->SetX(125);
+		$this->Cell(170, 8, utf8_decode('Reporte de Cita'));
+		$this->Ln(6);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(90);
+		$this->Cell(170, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(122);
+		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
+		$this->Cell(55, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
 		$this->SetX(5);
 		$this->Ln(5);
-		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
-		
-		$this->Ln(10);
 	}
 
 // Pie de página
@@ -100,13 +109,13 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(25, 12, 'Codigo', 1, 0, 'C', 1);
+			$this->Cell(25, 12, 'Código', 1, 0, 'C', 1);
 			$this->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
 			$this->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
 			$this->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
 			$this->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
 			$this->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-			$this->Cell(30, 12, 'Area', 1, 1, 'C', 1);
+			$this->Cell(30, 12, ('Área'), 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 			
 		}
@@ -210,13 +219,13 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 $pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(25, 12, 'Codigo', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Código'), 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Area', 1, 1, 'C', 1);
+$pdf->Cell(30, 12, utf8_decode('Área'), 1, 1, 'C', 1);
 
 
 

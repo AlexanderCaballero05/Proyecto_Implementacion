@@ -12,15 +12,26 @@ class PDF extends FPDF {
 		$this->SetX(35);
 		$this->SetFont('Arial','B',14);
 		$this->Cell(10, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
-		$this->SetFont('Arial','',12);
-		$this->SetX(83);
+		$this->SetFont('Arial','',16);
+		$this->SetX(74);
 		$this->Cell(45, 12, utf8_decode('Reporte de Sacramentos'));
+		$this->Ln(8);
 		$this->SetX(5);
-		$this->Ln(11);
-		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
-        $this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
-		$this->Ln(10);
+		$this->SetFont('Arial','',12);
+		$this->SetX(47);
+		$this->Cell(30, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(80);
+		$this->Cell(70, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
+		$this->Cell(58, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
+		$this->SetX(5);
+		$this->Ln(5);
 	}
 
 // Pie de página
