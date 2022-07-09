@@ -251,10 +251,8 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       <div class="col-md-4"><!--CORREO ELECTRONICO-->
                         <label  class="control-label">Correo Electrónico:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="email" onkeyup="noespacio(this, event);" maxlength="50"  id="correo" name="correo" autocomplete = "off"  onKeyDown="sinespacio(this);"  required  >
-                          <div class="invalid-feedback">
-                              Campo obligatorio.
-                          </div>
+                          <input class="form-control" type="email" maxlength="50"  id="correo" name="correo" autocomplete = "off" >
+                          
                         </div>
                       </div>
                     </div><!--Fin de otra fila :v -->

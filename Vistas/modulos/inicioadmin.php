@@ -197,7 +197,7 @@ include "conexionpdo.php";
               $poradmin = number_format($Por, 2);
             ?>
             <div class="col-lg-4 col-xs-7">
-              <div class="info-box bg-yellow">
+              <div class="info-box bg-orange">
                 <span class="info-box-icon"><i class="fa fa-child"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text"><b>Tutores registrados</b></span>
@@ -254,7 +254,7 @@ include "conexionpdo.php";
             $porventa = number_format($Por, 2);
           ?>
             <div class="col-lg-4 col-xs-7">
-              <div class="info-box bg-green">
+              <div class="info-box bg-red">
                 <span class="info-box-icon"><i class="fa fa-child"></i></span>
                   <div class="info-box-content">
                     <span class="info-box-text"><b>Medicos registrados</b></span>
@@ -282,7 +282,7 @@ include "conexionpdo.php";
             $porsup = number_format($Por, 2);
             ?>
           <div class="col-lg-4 col-xs-7">
-            <div class="info-box bg-info">
+            <div class="info-box bg-pink">
               <span class="info-box-icon"><i class="fa fa-child"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text"><b>Psicólogos registrados</b></span>
@@ -338,7 +338,7 @@ include "conexionpdo.php";
             $poradmin = number_format($Por, 1);
           ?>
           <div class="col-lg-4 col-xs-7">
-            <div class="info-box bg-yellow">
+            <div class="info-box bg-purple">
             <span class="info-box-icon"><i class="fa fa-child"></i></span>
               <div class="info-box-content">
                 <span class="info-box-text"><b>Enfermeros registrados</b></span>
