@@ -16,13 +16,24 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(115);
-		$this->Cell(170, 8, utf8_decode('Reporte de citas generales'));
+		$this->Cell(170, 8, utf8_decode('Reporte de Citas Generales'));
+		$this->Ln(6);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(90);
+		$this->Cell(170, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(122);
+		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
+		$this->Cell(57, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
 		$this->SetX(5);
 		$this->Ln(5);
-		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
-		
-		$this->Ln(10);
 	}
 
 // Pie de página
@@ -40,18 +51,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
 
 	}
 
@@ -107,13 +106,13 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(25, 8, 'Codigo', 1, 0, 'C', 0);
+			$this->Cell(25, 8,  utf8_decode('Código'), 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Fecha', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
 			$this->Cell(60, 8, 'Paciente', 1, 0, 'C', 0);
 			$this->Cell(50, 8, 'Especialista', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Estado', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Area', 1, 1, 'C', 0);
+			$this->Cell(30, 8, utf8_decode('Área'), 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -205,10 +204,6 @@ class PDF extends FPDF {
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -223,13 +218,13 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 $pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(25, 12, 'Codigo', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode('Código'), 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
 $pdf->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Area', 1, 1, 'C', 1);
+$pdf->Cell(30, 12, utf8_decode('Área'), 1, 1, 'C', 1);
 
 
 

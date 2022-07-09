@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+$usuario = $_SESSION['vario'];
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
 
@@ -18,10 +19,6 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','',16);
 		$this->SetX(120);
 		$this->Cell(180, 8, utf8_decode('Reporte de Usuarios'));
-		$this->SetX(5);
-		$this->Ln(5);
-		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
 		
 		
 		$this->Ln(10);
@@ -42,17 +39,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
 
 
 	}
@@ -119,7 +105,6 @@ class PDF extends FPDF {
             $this->Cell(35, 12, 'Rol', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 			
-		
 		}
 
 		if ($setX == 100) {
@@ -193,21 +178,20 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
-    e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR
-    FROM tbl_usuario u ,tbl_roles r, tbl_estado e ,tbl_persona p, tbl_correo_electronico c
-    where u.CODIGO_ESTADO = e.CODIGO_ESTADO AND
-    u.CODIGO_TIPO_ROL = r.CODIGO_TIPO_ROL AND u.CODIGO_PERSONA = p.CODIGO_PERSONA AND  p.CODIGO_PERSONA = c.CODIGO_PERSONA and
-    u.CODIGO_USUARIO >1
-    ORDER BY CODIGO_USUARIO ASC;";
+	$strquery ="SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA, u.NOMBRE_USUARIO , p.PRIMER_NOMBRE, p.PRIMER_APELLIDO,
+	e.NOMBRE as ESTADO , r.NOMBRE as ROLL, u.CODIGO_TIPO_ROL,u.CODIGO_ESTADO, c.correo_persona, u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR,
+	u.FECHA_CREACION,u.FECHA_MODIFICACION
+	FROM tbl_usuario u
+	left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
+	left join tbl_estado e on e.CODIGO_ESTADO = u.CODIGO_ESTADO
+	left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
+	left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+	where
+	u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 

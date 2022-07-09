@@ -16,12 +16,23 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','',14);
 		$this->SetX(83);
 		$this->Cell(45, 12, utf8_decode('Reporte de Objetos'));
+		$this->Ln(8);
 		$this->SetX(5);
-		$this->Ln(11);
-		//$this->Cell(40,5,date('d/m/Y') ,00,1,'R');
-        $this->SetFont('Arial','',10);
+		$this->SetFont('Arial','',12);
+		$this->SetX(47);
+		$this->Cell(30, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(80);
+		$this->Cell(70, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
 		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
-		$this->Ln(10);
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
+		$this->SetX(5);
+		$this->Ln(5);
 	}
 
 // Pie de página
@@ -90,8 +101,8 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(25, 8, utf8_decode('N'), 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Nombre', 1, 0, 'C', 0);
+			$this->Cell(10, 8, utf8_decode('N'), 1, 0, 'C', 0);
+			$this->Cell(55, 8, 'Nombre', 1, 0, 'C', 0);
 			$this->Cell(110, 8, utf8_decode('Descripción'), 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
 			
@@ -177,10 +188,7 @@ class PDF extends FPDF {
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama select_all ya que es el que haria uso del fetchall tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo select hara uso de fetch y este solo selecciona una linea*/
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 

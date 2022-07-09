@@ -225,11 +225,25 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
 <?php
 if(isset($_POST['ELIMINAR_PERMISO'])){
   if(isset($_POST['ELIMINAR_PERMISO'])){
-    $code = ($_POST['ELIMINAR_PERMISO']);//asigna a una variable el id del estado a eliminar
-    $code1 = ($_POST['ELIMINAR_ROL']);
-    $code2 = ($_POST['ELIMINAR_OBJETO']);
-     
-      
+
+    $code = ($_POST['eliminarPermiso']);//asigna a una variable el id del estado a eliminar
+    try{
+      $relacion_tablas =  $db->prepare("SELECT r.CODIGO_TIPO_ROL, o.CODIGO_OBJETO
+                                        from  tbl_permisos p ,tbl_roles r, tbl_objetos o
+                                        where r.CODIGO_TIPO_ROL  = p.CODIGO_TIPO_ROL 
+                                        AND   o.CODIGO_OBJETO = p.CODIGO_OBJETO
+                                        and r.CODIGO_TIPO_ROL  = (?);");
+      $relacion_tablas->execute(array($code));
+      $row = $relacion_tablas->fetchColumn();
+      if($row >0){
+        echo "<script>
+        alert('¡No se pueden eliminar estos permisos,estan relacionado con otras tablas!');
+        window.location = 'crudPermisos';
+        </script>";
+        exit;
+      }else{
+
+  
         try{
           
           $ELIMINAR_PERMISO = "DELETE CODIGO_PERMISO,CODIGO_TIPO_ROL,CODIGO_OBJETO FROM tbl_permisos
