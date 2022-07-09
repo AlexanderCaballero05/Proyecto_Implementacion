@@ -223,8 +223,9 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
 ?>
 
 <?php
-if(isset($_POST['eliminarPermiso'])){
+if(isset($_POST['ELIMINAR_PERMISO'])){
   if(isset($_POST['ELIMINAR_PERMISO'])){
+
     $code = ($_POST['eliminarPermiso']);//asigna a una variable el id del estado a eliminar
     try{
       $relacion_tablas =  $db->prepare("SELECT r.CODIGO_TIPO_ROL, o.CODIGO_OBJETO
@@ -241,12 +242,19 @@ if(isset($_POST['eliminarPermiso'])){
         </script>";
         exit;
       }else{
+
+  
         try{
-          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_permisos WHERE  CODIGO_TIPO_ROL = '$code' ");
-          if(mysqli_affected_rows($link)>0){
+          
+          $ELIMINAR_PERMISO = "DELETE CODIGO_PERMISO,CODIGO_TIPO_ROL,CODIGO_OBJETO FROM tbl_permisos
+           WHERE  CODIGO_PERMISO = '$code'
+           AND CODIGO_TIPO_ROL = '$code1'
+           AND CODIGO_OBJETO = '$code2' ";
+            $consulta = $conn->query($ELIMINAR_PERMISO);
+
+          if($consulta > 0){
             echo "<script>
-            alert('¡Rol eliminado!');
+            alert('¡Permiso eliminado!');
             window.location = 'crudPermisos';
             </script>";
             include_once 'function_bitacora.php';
@@ -267,11 +275,9 @@ if(isset($_POST['eliminarPermiso'])){
         return false;
        }
       }
-    }catch(PDOException $e){
-     echo $e->getMessage(); 
-     return false;
+    
     }
-  }
-}//Cerre del if padre
+
+
 
 ?>

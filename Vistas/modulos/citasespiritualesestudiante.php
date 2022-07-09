@@ -4,8 +4,8 @@
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
 $codigoObjeto = 51;///cambiar
-$accion = 'CONSULTA DE CITAS ESPIRITUALES DE ESTUDIANTES';
-$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA DE CITAS ESPIRITUALES';
+$accion = 'CONSULTA DE CITAS ESPIRITUALES';
+$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA DE SUS CITAS ESPIRITUALES';
 bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 

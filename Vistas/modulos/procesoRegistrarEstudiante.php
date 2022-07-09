@@ -405,7 +405,7 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '16'));
+                                $evaluar_permiso->execute(array($usuariomo, '26'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }

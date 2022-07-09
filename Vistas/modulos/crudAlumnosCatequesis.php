@@ -188,7 +188,7 @@
                                     if($row > 0){
                                     $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                     $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                    $evaluar_permiso->execute(array($usuariomo, '53'));
+                                    $evaluar_permiso->execute(array($usuariomo, '52'));
                                     $row1=$evaluar_permiso->fetchColumn();
                                       $permiso_registrar =$row1;             
                                     }

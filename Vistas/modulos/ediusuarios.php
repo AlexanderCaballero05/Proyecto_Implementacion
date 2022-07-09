@@ -49,13 +49,7 @@ include_once "conexion3.php";
     $valor1 = $row1;
   }
 ?>
-    <!--llamada de la fuction bitacora -->
-  <?php 
-  $codigoObjeto=14;
-  $accion='INGRESO A LA PANTALLA MANTENIMIENTO USUARIOS';
-  $descripcion= 'SE AUTENTIFICO';
-  bitacora($codigoObjeto, $accion,$descripcion);
-  ?>
+    
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
@@ -175,7 +169,7 @@ include_once "conexion3.php";
                               $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                               //llamar al procedimiento almacenado
                               $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                              $evaluar_permiso_actualizar->execute(array($usuariomo, '14'));
+                              $evaluar_permiso_actualizar->execute(array($usuariomo, '25'));
                               $row1=$evaluar_permiso_actualizar->fetchColumn();
                               $permiso_actualizar =$row1; 
                             }
@@ -190,7 +184,7 @@ include_once "conexion3.php";
                             if($row > 0){
                               $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                               $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                              $evaluar_permiso_eliminar->execute(array($usuariomo, '14'));
+                              $evaluar_permiso_eliminar->execute(array($usuariomo, '25'));
                               $row1=$evaluar_permiso_eliminar->fetchColumn();
                               $permiso_eliminar =$row1; 
                             }

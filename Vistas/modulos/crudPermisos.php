@@ -134,7 +134,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                         $query = "CALL Sp_mostrar_permisos()";//Procedimiento para traer los datos de la tabla permisos
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {// if que valida que si es mayor a 0 se encontro un registro
+                          $contador = 0;
                           while($row = $result->fetch_assoc()) {//while para capturar cada dato del registro en una variable
+                            $contador = $contador + 1 ;
                             $var1 = $row['CODIGO_PERMISO'];// variable que almacena el dato capturado
                             $var2 = $row['CODIGO_TIPO_ROL'];
                             $var3 = $row['CODIGO_OBJETO'];
@@ -147,7 +149,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             
                            
                         ?>
-                            <?php
+                           
+
+
+                    <tr> <!-- INICIO DE LINEA DE LOS DATOS DE LA TABLA-->
+                          <td> <!-- TABLE DATA en donde estan los botones de eliminar e modificar -->
+                            <div class="text-center" >
+                              <div class="btn-group">
+                              <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -190,25 +199,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             ?> 
 
 
-
-                    <tr> <!-- INICIO DE LINEA DE LOS DATOS DE LA TABLA-->
-                          <td> <!-- TABLE DATA en donde estan los botones de eliminar e modificar -->
-                            <div class="text-center" >
-                              <div class="btn-group">
-
-                                <?php
-                                  if($permiso_eliminar == 'SI')
-                                   {
-                                ?>
-                                
-                               <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ROL" name="ELIMINAR_ROL" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+<?php
+                                 if($permiso_eliminar == 'SI'){
+                               ?>                            
+                                <a href="#ELIMINAR_PERMISO<?php echo $var1;?>" data-toggle="modal">
+                                <button id="ELIMINAR_PERMISO" name="ELIMINAR_PERMISO" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
-
                                <?php
-                                  }
-                                ?>
+                                }
+                               ?><!--Fin del boton de eliminar -->
 
 
                                 <?php 
@@ -228,15 +228,37 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             </div><!-- final del text-center -->
                           </td>
 
-                          <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $contador ; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var5; ?></td>
+                          <td class="text-center"><?php echo $var9; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td>
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
-                          <td class="text-center"><?php echo $var9; ?></td>
                           
-                          
+                                                   <!--INICIO DEL MODAL ELIMINAR   -->
+                         <div id="ELIMINAR_PERMISO<?php echo $var1 ?>"  name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO"class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                <form id="FORMEeliminar" method="POST">
+                                  <div class="modal-body">
+                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO">
+                                    <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="ELIMINAR_ROL" id="ELIMINAR_PERMISO">
+                                    <input type="text" value ="<?php echo $var3; ?>" hidden class="form-control" name="ELIMINAR_OBJETO" id="ELIMINAR_PERMISO">
+                                    <h4 class="text-center">¿Está seguro de eliminar el permiso al rol <?php echo $var4; ?>?</h4>
+                                </div> <!--fin el card body -->
+                                    <div class="modal-footer ">
+                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                      <button type="submit"  name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO"  class="btn btn-primary">Si,eliminar</button>      
+                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                               </form>
+                               </div><!--fin del modal contener -->
+                            </div><!--fin del modal dialog -->
+                          </div><!--fin del modal de eliminar -->
 
 
               <!--------------------------------------------------------------
@@ -347,27 +369,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             </div>
                           </div><!-- FIN DEL MODAL EDITAR -->  
                             
-                          <!--INCICIO DEL MODAL ELIMINAR   -->
-                          <div id="ELIMINAR<?php echo $var1 ?>"  name="div_eliminar" id="div_eliminar"class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                </div>
-                                <form id="FORMEeliminar" method="POST">
-                                  <div class="modal-body">
-                                    <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminarPermiso" id="rol_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar los permisos al rol <?php echo $var4; ?>?</h4>
-                                </div> <!--fin el card body -->
-                                    <div class="modal-footer ">
-                                      <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO"  class="btn btn-primary">Si,eliminar</button>      
-                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
-                               </form>
-                               </div><!--fin del modal contener -->
-                            </div><!--fin del modal dialog -->
-                          </div><!--fin del modal de eliminar -->
+
                     </tr>             
                         <?php
                         }
@@ -402,7 +404,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <?php
             include "conexion1.php";
             $queryr = "SELECT o.CODIGO_OBJETO , o.NOMBRE AS Nom_modulo
-                        FROM tbl_objetos o;";
+                        FROM tbl_objetos o
+                        WHERE o.CODIGO_OBJETO <> 54
+                        ORDER BY o.nombre ASC;";
             $resultador=$conn->query($queryr);
             ?>  
 
@@ -420,11 +424,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
-                                        <option selected disabled value="">Seleccionar rol...</option>
+                                        <option selected disabled value="">Seleccionar un rol...</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
+                                          $contador = 0;
                                         while($rowt = $resultadod->fetch_assoc()) { ?>
-                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php echo $rowt['NOMBRE']; ?></option>
+                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php $contador = $contador +1; echo $contador.'-) '.$rowt['NOMBRE']; ?></option>
                                       <?php } 
                                               }?>
                                     </select>
@@ -439,12 +444,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Modulo:</label>
-                                    <select class="form-control" name="MODUSUARIO" required="">
-                                        <option selected disabled value="">Seleccionar modulo...</option>
+                                    <select class="form-control select2" name="MODUSUARIO" required="">
+                                        <option selected disabled value="">Seleccionar un modulo...</option>
                                                 <?php 
                                                   if ($resultador->num_rows > 0) {
+                                                    $contador = 0;
                                                     while($rowr = $resultador->fetch_assoc()) { ?>
-                                        <option value="<?php echo $rowr['CODIGO_OBJETO'];?>"><?php echo $rowr['Nom_modulo']; ?></option>
+                                                    
+                                        <option style="color:blue;" value="<?php echo $rowr['CODIGO_OBJETO'];?>"><?php $contador = $contador +1; echo $contador.'-) '.$rowr['Nom_modulo']; ?></option>
                                                 <?php } 
                                                       }?>
                                       </select>

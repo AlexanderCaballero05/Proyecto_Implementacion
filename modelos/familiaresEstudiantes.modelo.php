@@ -47,7 +47,11 @@
                         alert('¡Se agrego correctamente!');
                         window.location = 'crudFamiliaresEstudiantes';
                         </script>";
-                        
+                        $codigoObjeto=26;
+                        $accion='INSERTAR';
+                        $descripcion= 'SE REGISTRO EL PARENTESCO DEL CODIGO '.$EstudianteParentesco.' DE ESTUDIANTE CON EL CODIGÓ '.$familiar_parentesco.' DE FAMILIAR ';
+                        bitacora($codigoObjeto, $accion,$descripcion);
+                        exit;
 
                         //<!--llamada de la fuction bitacora -->
     

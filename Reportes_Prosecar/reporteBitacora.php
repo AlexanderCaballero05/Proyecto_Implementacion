@@ -13,7 +13,7 @@ require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
 
 //Inicamos la sesion de las fechas para poder filtrar los Resultados que el usuario requiere desde una fecha de incio y de final
-
+ 
 class PDF extends FPDF {
 
 // Cabecera de página
@@ -25,7 +25,7 @@ class PDF extends FPDF {
 		$this->SetY(20);
 		$this->SetX(86);
 		$this->SetFont('Arial','B',14);
-        $this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
+        $this->Cell(175, 9, 'PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
         $this->SetFont('Arial','',16);
 		$this->SetX(120);
 		$this->Cell(180, 8, utf8_decode('Reporte de Bitacora Universal'));
@@ -33,11 +33,9 @@ class PDF extends FPDF {
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
 		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
-		
-		
 		$this->Ln(10);
 	}
-
+          
 // Pie de página
 
 	function Footer() {
@@ -225,16 +223,17 @@ $pdf->AddPage('L'); //añade l apagina / en blanco
 $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
+
 // -----------ENCABEZADO------------------
 $pdf->SetX(32);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(20, 12, 'Número', 1, 0, 'C', 1);
+$pdf->Cell(20, 12, 'Numero', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Acción', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripción', 1, 1, 'C', 1);
+$pdf->Cell(50, 12, 'Accion', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -254,4 +253,5 @@ for ($i = 0; $i < count($data); $i++) {
 // cell(ancho, largo, contenido,borde?, salto de linea?)
 
 $pdf->Output();
+
 ?>
