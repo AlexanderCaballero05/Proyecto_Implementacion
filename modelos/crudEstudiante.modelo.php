@@ -1,3 +1,41 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+    Programa:          Archivo que valida el ingreso, modificación, y eliminacion de los estudiantes
+    Fecha:             04-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       VArchivo que valida el ingreso, modificación, y eliminacion de los estudiantes
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+
+    Programador               Fecha                      Descripcion
+    Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
+.
+
+----------------------------------------------------------------------->
 <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -80,11 +118,20 @@
                             $sentencia->execute(array($sacramento,$codigo));
                             $conn->commit();
                           }
+
+
+                              
+
                         }//fin del insert de sacramentos estudiantes
                       echo "<script>
                       window.location = 'crudEstudiante';
                       </script>";
-                      exit; 
+                      $codigoObjeto=26;
+                      $accion='INSERTAR';
+                      $descripcion= 'SE REGISTRO LOS DATOS ESCOLARES DEL CODIGO '.$codigo.' DE ESTUDIANTE';
+                      bitacora($codigoObjeto, $accion,$descripcion);
+                      exit;
+                      
                     
                       
                     }catch(PDOException $e){
@@ -122,16 +169,26 @@
                                                 METAS = '$editar_metas' 
                                                 WHERE CODIGO_ESTUDIANTE = '$codigo_estudiante' ";
             $consulta=$conn->query($sql);
+
+           
             if ($consulta>0){
               echo "<script>
               alert('¡Estudiante modificado exitosamente!');
               window.location = 'crudEstudiante';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un estudiante ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+
+              $nombre_estudiante = "SELECT p.PRIMER_NOMBRE
+              from tbl_persona p , tbl_estudiante e
+              WHERE p.codigo_persona = e.CODIGO_PERSONA
+               AND e.CODIGO_ESTUDIANTE = '$codigo_estudiante'; ";
+
+                  $consulta_nombre =$conn->query($nombre_estudiante);
+                      include_once 'function_bitacora.php';
+                      $codigoObjeto=26;
+                      $accion='MODIFICACIÓN';
+                      $descripcion= 'SE MODIFICÓ LOS DATOS ESCOLARES DEL CODIGO '.$codigo_estudiante.' DE ESTUDIANTE';
+                      bitacora($codigoObjeto, $accion,$descripcion);
+                      exit;
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el estudiante!');
@@ -153,7 +210,8 @@ if(isset($_POST['estudiante_eliminar'])){
     $code = ($_POST['estudiante_eliminar']);//asigna a una variable el id del estudiante a eliminar
     try{
       $relacion_tablas =  $db->prepare("SELECT u.CODIGO_TIPO_ROL, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_roles r
-      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL  and r.CODIGO_TIPO_ROL  = (?);;");
+      where r.CODIGO_TIPO_ROL  = u.CODIGO_TIPO_ROL
+        and r.CODIGO_TIPO_ROL  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -172,10 +230,11 @@ if(isset($_POST['estudiante_eliminar'])){
             window.location = 'estudiante';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un estudiante ';
+            $codigoObjeto=26;
+            $accion='ELIMINACIÓN';
+            $descripcion= 'SE ELIMINÓ EL ESTUDIANTER CON CODIGO '.$codigo_estudiante.'';
             bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>

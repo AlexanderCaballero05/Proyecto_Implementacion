@@ -35,13 +35,8 @@ include_once "conexion.php";
 include_once "conexion3.php";
 
 ?>
-      <!--llamada de la fuction bitacora -->
-     <?php 
-      $codigoObjeto=43;
-      $accion='Ingreso a la pantalla de mantenimiento familiares estudiantes';
-      $descripcion= 'Aqui se visualiza los registros existentes de la tabla de familiares-estudiantes';
-      bitacora($codigoObjeto, $accion,$descripcion);
-      ?>
+      
+   
       
  <head>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> <!--Para que funcione el selecrt2 -->
@@ -97,7 +92,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '43'));
+                                $evaluar_permiso->execute(array($usuariomo, '26'));
                                 $row1=$evaluar_permiso->fetchColumn();
                                 $permiso_registrar =$row1;             
                             }
@@ -172,7 +167,7 @@ include_once "conexion3.php";
 
                                 //llamar al procedimiento almacenado
                                 $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                $evaluar_permiso_actualizar->execute(array($usuariomo, '43'));
+                                $evaluar_permiso_actualizar->execute(array($usuariomo, '26'));
                                 $row1=$evaluar_permiso_actualizar->fetchColumn();
                                 $permiso_actualizar =$row1; 
                                 
@@ -194,7 +189,7 @@ include_once "conexion3.php";
                                 $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
                                 $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                                $evaluar_permiso_eliminar->execute(array($usuariomo, '43'));
+                                $evaluar_permiso_eliminar->execute(array($usuariomo, '26'));
                                 $row1=$evaluar_permiso_eliminar->fetchColumn();
                                 $permiso_eliminar =$row1; 
                             }
