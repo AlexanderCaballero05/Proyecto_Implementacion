@@ -19,8 +19,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
 
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CITAS ESPIRITUALES PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+    <section class="content-header text-xl-center mb-3 "> 
+          <h4> Citas Espirituales</h4>
         </section>
     <section class="content">
        <div class="card"> 
@@ -139,15 +139,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     
                                                     <div  class="modal fade"  
                                                     id="editar_cita<?php echo $var1 ?>" role="dialog"  >
-                                                        <div class="modal-dialog modal-lg">
+                                                        <div class="modal-dialog modal-md">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
+                                                                
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita  
                                                                     </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
@@ -167,9 +168,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                         ?>  
 
 
-                                                                    <div class="col-sm-6">
+                                                                    <div class="col-sm-12">
                                                                         <div class="form-group">
-                                                                          <label for="txtcodigo_persona">Estado cita:</label>
+                                                                          <label for="txtcodigo_persona">Estado Cita:</label>
                                                                             <select class="form-control" name="MODUSUARIO" required="">
                                                                                 <option selected disabled value="">Elegir...</option>
                                                                                             <?php 
@@ -206,12 +207,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                                <form method="POST">
+                                                                
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Ver Cita  
                                                                     </h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
+                                                                <form method="POST">
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->  

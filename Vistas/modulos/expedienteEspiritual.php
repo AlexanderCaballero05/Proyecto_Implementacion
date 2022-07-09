@@ -20,26 +20,26 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <section class="content-header text-xl-center mb-3 btn-light"> 
-                <h4> EXPEDIENTE ESPIRITUAL PACIENTE <i class="nav-icon fas fa-stethoscope"></i></h4>
+            <section class="content-header text-xl-center mb-3 "> 
+                <h4> Infome Espiritual Paciente</h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
                 <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Citas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">consulta Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de personas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Personas</a>
             </li>
           </ul>
                 </div><!--FIN DEL CARD HEADER -->
@@ -51,13 +51,10 @@
                 <!--Form del archivo expediente -->
                 <form method="POST" id="form">
 
-               
-               <hr>
-
-                <div style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                      <h5>Datos de persona</h5>
+                <div>
+                      <h5>Datos Personales</h5>
                   </div>
-                  <hr> 
+                  <hr color= "blue"> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
                      <?php
@@ -116,10 +113,10 @@
                  ?>
                   </div><!--fin row -->
                   <HR>
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
+                  <div >
                       <h5>Expediente Paciente</h3>
                   </div>
-                  <hr>
+                  <hr color="blue">
 
                   <div class="form-group">
              <?php
@@ -138,14 +135,14 @@
                    <div class= "row">                      
                         <div class="col-md-6">
                                 <input type="text" name="codigoexpediente" value="<?php echo $var5?>" Hidden> <!--CODGIO DEL EXPEDIENTE PARA Q SALGA TODA INFO  --> 
-                                <label for="" class="control-label">Nombre iglesia</label> 
+                                <label for="" class="control-label">Nombre Iglesia</label> 
                                 <div class="form-group">
                                 <textarea required class="form-control"  type="textarea" required value=""disabled ="disabled" 
                                 name="sintomasneuraticos" id="sintomasneuraticos"><?php echo $var6?></textarea>
                                 </div>
                         </div><!--fin del Sintomas Neuroticos-->
                         <div  class="col-md-6">
-                                <label for="" class="control-label">Grupo de iglesia</label> 
+                                <label for="" class="control-label">Grupo de Iglesia</label> 
                                     <div class="form-group">
                                 <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled"
                                  name="Familiares" id="Familiares"><?php echo $var7?></textarea>
@@ -160,7 +157,7 @@
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->    
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Motivacion en la iglesia</label> 
+                            <label for="" class="control-label">Motivación en la Iglesia</label> 
                                 <div class="form-group">
                             <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var8?></textarea>
                                 </div>
@@ -172,10 +169,10 @@
              </div><!--fin del div de row DE EXPEDIENTE-->
 
                   <hr>
-                  <div  style="background:#E4F8F3" class="pt-2 pb-2 px-2">
-                     <h5>Datos de consulta</h5> 
+                  <div>
+                     <h5>Datos de Consulta</h5> 
                   </div>
-                  <hr> 
+                  <hr color="blue"> 
 
                   <div class="row">
                       <?php
@@ -212,10 +209,6 @@
                              <textarea  readonly class="form-control" ><?php echo $observaciones_espiritual ; ?></textarea>
                           </div>
                       </div>
-                    
-                  
-
-                
                       
                       <?php
                        }
@@ -223,25 +216,22 @@
                       ?>
                    </div><!-- fin row-->
                 
-                 
-
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar consulta</button>
-
-                </form>
-                <!--fin form del archivo expediente-->
-
+                  <div class="modal-footer justify-content-start">
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                 </form><!--fin form del archivo expediente-->
                  <!--form para el reporte de la consulta-->
-                 <a> 
                   <form action="Reportes_Prosecar/reporteConsultaEspiritual.php" method="POST"> 
                   <div class="row"> 
                     <input hidden name="codigo_cita_reporte" value="<?php echo $codigo_cita;?>">  
                     <input type="text" name="id_persona"  hidden value="<?php echo $persona ?>">
                     <input type="hidden" name="id_usuario" value="<?php echo $cod_usuario ?>">
                   </div>
-                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 mb-3 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
                   </form>
 
-                </a>
+                
+                </div> 
+
                 <!--fin form para el reporte de la consulta-->
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->

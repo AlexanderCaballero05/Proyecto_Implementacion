@@ -11,26 +11,26 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>PACIENTES DEL AREA ESPIRITUAL<i class="nav-icon fas fa-stethoscope"></i> </h4>
+        <section class="content-header text-xl-center mb-3 ">
+              <h4>Pacientes del Área Espiritual</h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="procesoCitasEspirituales">Citas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="procesoCitasEspirituales">Citas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consulta Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudPacientesEspirituales">Lista de personas</a>
+            <a class="nav-link active" style="color:#000000;" href="crudPacientesEspirituales">Lista de Personas</a>
             </li>
           </ul>
         </div>
@@ -50,8 +50,8 @@
                       <tr>
                         <th class="text-center">Acción</th>
                         <th class="text-center">Fecha creación</th>
-                        <th class="text-center">Codigo expediente</th>
-                        <th class="text-center">Nombre de la persona</th>
+                        <th class="text-center">Código Expediente</th>
+                        <th class="text-center">Nombre de la Persona</th>
                         <th class="text-center">DNI</th>
                         <th class="text-center">Estado</th>
                       </tr>
@@ -100,7 +100,7 @@
                                     }
                                   ?>
                                   <a href="#AGREGAR_CITA<?php echo $var1; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar cita</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
                                   </a>
 
                                   <a><!--Para descargar el reporte individual uwu -->
@@ -122,11 +122,11 @@
                         <div id="AGREGAR_CITA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="text-center">Programar cita </h4>
+                                  <h4 class="text-center">Programar Cita </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                                <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_paciente_espiritual">
@@ -134,19 +134,19 @@
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre de la persona:</label>
+                                          <label for="txtcodigo_persona">Nombre de la Persona</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">DNI:</label>
+                                          <label for="txtcodigo_persona">DNI</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var4; ?>" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Hora cita:</label>
+                                          <label for="txtcodigo_persona">Hora Cita</label>
                                           <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800" class="form-control" name="hora_cita">
                                         </div>
                                          <div class="invalid-feedback">
@@ -241,7 +241,7 @@
 
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reportePacientesPsicologia.php','_blank');
+      window.open('Reportes_Prosecar/reportePacientesEspiritual.php','_blank');
       window.open(this.href,'_self');
     }
   </script>

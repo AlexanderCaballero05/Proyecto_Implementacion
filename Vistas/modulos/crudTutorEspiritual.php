@@ -13,8 +13,8 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>LISTA DE CATEQUESIS  <p style="font-style: italic; color:chocolate"><?php echo "TUTOR ESPIRITUAL ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
+        <section class="content-header text-xl-center mb-3 ">
+              <h4>Lista de Catequesis<p style="font-style: italic; color:chocolate"><?php echo "Tutor Espiritual ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">

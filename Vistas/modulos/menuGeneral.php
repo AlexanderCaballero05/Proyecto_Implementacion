@@ -28,6 +28,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
     Luz Montoya         		18-06-2022                 cambio del orden en las opciones de seguridad 
+    Diana Rut Garcia       09-07-2022                 cambio en el nombre del nombres del menu
 ----------------------------------------------------------------------->
 
 <?php
@@ -127,7 +128,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  Gestion Usuarios
+                  Gestión Usuarios
                   <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right"></span>
                 </p>
@@ -143,7 +144,7 @@
                 <li class="nav-item">
                   <a href="crudparametrosusuario" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                      <p>Mantenimiento de Parametros usuarios</p>
+                      <p>Mantenimiento de Parametros Usuarios</p>
                   </a>
               </li>
               <li class="nav-item">
@@ -193,7 +194,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-graduation-cap"></i>
                 <p>
-                  Gestion de Estudiantes
+                  Gestión de Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -201,7 +202,7 @@
                 <li class="nav-item">
                   <a href="crudEstudiante"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Proceso de estudiantes</p>
+                    <p>Proceso de Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -213,19 +214,19 @@
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Tipo de contenido</p>
+                    <p>Mantenimiento Tipo de Contenido</p>
                   </a>
                 </li> 
                 <li class="nav-item">
                   <a href="crudtiposocioeconomico" class="nav-link" >
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Tipo socieconomico</p>
+                    <p>Mantenimiento Tipo Socieconómico</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de parentesco</p>
+                    <p>Mantenimiento de Parentesco</p>
                   </a>
                 </li>
               </ul>
@@ -264,7 +265,7 @@
                           <a href="" class="nav-link bg-gradient-navy">
                             <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
-                              Gestion de Citas 
+                              Gestión de Citas 
                               <i class="right fas fa-angle-left"></i>
                             </p>
                           </a>
@@ -322,13 +323,13 @@
                 <li class="nav-item">
                   <a href="citasestudiantes"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>CITAS</p>
+                    <p>Citas</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="matriculaestudiantes" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Tutorias</p>
+                    <p>Tutorías</p>
                   </a>
                 </li>
               </ul>
@@ -367,7 +368,7 @@
             <a href="#" class="nav-link bg-gradient-navy">
             <i class="nav-icon fas fa-edit"></i>
               <p>
-                Gestión Carga Academica y Espiritual
+                Gestión Carga Académica y Espiritual
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -377,13 +378,13 @@
             <li class="nav-item">
                 <a href="crudCargaAcademica" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                  <p>Proceso carga academica</p>
+                  <p>Proceso Carga Académica</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento tutorias</p>
+                  <p>Mantenimiento Tutorías</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -401,7 +402,7 @@
               <li class="nav-item">
                 <a href="crudmodalidad" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento modalidad</p>
+                  <p>Mantenimiento Modalidad</p>
                 </a>
               </li>
               
@@ -447,7 +448,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-school"></i>
             <p>
-              Matricula Academica y Espiritual
+              Matricula Académica y Espiritual
               <i class="fas fa-angle-left "></i>
             </p>
           </a>
@@ -503,7 +504,7 @@
                           <li class="nav-item">
                             <a href="crudTutoriasTutor" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias academicas</p>
+                              <p>Proceso Tutorías Académicas</p>
                             </a>
                           </li>         
                         </ul>
@@ -553,14 +554,14 @@
                           <li class="nav-item">
                             <a href="crudTutorEspiritual" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso tutorias espirituales</p>
+                              <p>Proceso Tutorías Espirituales</p>
                             </a>
                           </li>      
                           
                           <li class="nav-item">
                             <a href="procesoCitasEspirituales" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
-                              <p>Proceso eventos espirituales</p>
+                              <p>Proceso Eventos Espirituales</p>
                             </a>
                           </li>      
                         </ul>

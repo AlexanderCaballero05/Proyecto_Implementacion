@@ -1,14 +1,4 @@
 <?php
-if(isset($_POST['codigo_tutor_espiritual'])){
-$codigo_tutor = $_POST['codigo_tutor_espiritual'];
-$codigo_carga = $_POST['codigo_carga_espritual'];
-
-
-}
-
-?>
-
-<?php
 
 require('../Vistas/modulos/REPORTES/fpdf/fpdf.php');
 include('../Vistas/modulos/REPORTES/conexion/Conexion.php'); 
@@ -26,8 +16,8 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(105);
-		$this->Cell(180, 8, utf8_decode('Reporte Alumnos de Catequesis'));
+		$this->SetX(96);
+		$this->Cell(180, 8, utf8_decode('Reporte de Pacientes del Área Espiritual'));
 		$this->Ln(6);
 		$this->SetX(5);
 		$this->SetFont('Arial','',12);
@@ -40,7 +30,7 @@ class PDF extends FPDF {
 		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
 		$this->Ln(13);
 		$this->SetFont('Arial','',10);
-		$this->Cell(55, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->Cell(53, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
 		$this->SetFont('Arial','',12);
 		$this->SetX(22);
 		$this->SetX(5);
@@ -51,7 +41,7 @@ class PDF extends FPDF {
 
 	function Footer() {
 	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
+	$this->SetFont('helvetica', 'B', 10);
 	$this->SetY(-18);
 	$this->SetX(28);
 	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
@@ -62,17 +52,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
 
 
 	}
@@ -126,21 +105,18 @@ class PDF extends FPDF {
 			$this->AddPage($this->CurOrientation);
 			$this->SetX($setX);
            
-			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(15, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Alumno', 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Catequesis', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Grado', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Período'), 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Año'), 1, 0, 'C', 0);
-			$this->Cell(25, 8, utf8_decode('Matrícula'), 1, 0, 'C', 0);
-			$this->Cell(55, 8, utf8_decode('Observación'), 1, 1, 'C', 0);
-			$this->SetFont('Arial', '', 10);
-			
-		
+			//volvemos a definir el  encabezado cuando se crea una nueva pagina	
+            $this->SetFont('Helvetica', 'B', 10);
+            $this->Cell(15, 11, 'N', 1, 0, 'C', 1); 
+            $this->Cell(65, 11, 'Nombre completo del paciente', 1, 0, 'C', 1);
+            $this->Cell(30, 11, 'DNI', 1, 0, 'C', 1);
+            $this->Cell(35, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
+            $this->Cell(26, 11, 'Estado', 1, 0, 'C', 1);
+            $this->Cell(25, 11, 'Sexo', 1, 0, 'C', 1);
+            $this->Cell(22, 11, utf8_decode('Teléfono'), 1, 0, 'C', 1);
+            $this->Cell(50, 11, 'Correo', 1, 1, 'C', 1);
+            $this->SetFont('Arial', '', 10);
+
 		}
 
 		if ($setX == 100) {
@@ -212,24 +188,18 @@ class PDF extends FPDF {
 //------------------OBTENES LOS DATOS DE LA BASE DE DATOS-------------------------
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT   mat.CODIGO_MATRICULA, concat_ws(' ',per.PRIMER_NOMBRE, per.SEGUNDO_NOMBRE, per.PRIMER_APELLIDO) as ALUMNO ,t.NOMBRE as NOMBRE_TUTORIA ,s.NOMBRE AS SECCION,
-	 c.HORA, C.ANIO, c.PERIODO, esta.NOMBRE AS ESTADO_MATRICULA, mat.OBSERVACION_MATRICULA
-    FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s, tbl_matricula_academica mat, tbl_estudiante est, tbl_persona per, tbl_estado esta
-    WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-    AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-    AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
-    AND c.CODIGO_SECCION = s.CODIGO_SECCION
-    AND c.CODIGO_CARGA = mat.CODIGO_CARGA
-    AND mat.CODIGO_ESTUDIANTE = est.CODIGO_ESTUDIANTE
-    AND mat.OBSERVACION = esta.CODIGO_ESTADO
-    AND est.CODIGO_PERSONA = per.CODIGO_PERSONA
-    AND mat.CODIGO_CARGA =  '$codigo_carga'
-    AND c.CODIGO_PERSONA = '$codigo_tutor';";
+	$strquery ="SELECT p.CODIGO_PERSONA, p.DNI, es.NOMBRE AS ESTADO, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) AS PACIENTE ,p.FECHA_NACIMIENTO,  
+     ex.CODIGO_EXPEDIENTE, ex.FECHA_CREACION ,t.NUMERO_TELEFONO as telefono,s.SEXO ,c.CORREO_PERSONA
+    FROM tbl_expediente_espiritual ex  
+    LEFT JOIN tbl_persona p on ex.CODIGO_PERSONA = p.CODIGO_PERSONA
+     LEFT JOIN tbl_sexo s on s.CODIGO_SEXO = p.SEXO 
+     LEFT JOIN  tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+     LEFT JOIN tbl_estado es on es.CODIGO_ESTADO = ex.CODIGO_ESTADO
+     LEFT JOIN tbl_telefono t on  t.CODIGO_PERSONA = p.CODIGO_PERSONA";
+    
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
-
-
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -241,35 +211,32 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(10);
+$pdf->SetX(16);
 $pdf->SetFillColor(72, 208, 234);
-$pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Alumno', 1, 0, 'C', 1);
-$pdf->Cell(35, 12, 'Catequesis', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Grado', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Período'), 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Año'), 1, 0, 'C', 1);
-$pdf->Cell(25, 12, utf8_decode('Matrícula'), 1, 0, 'C', 1);
-$pdf->Cell(55, 12, utf8_decode('Observación'), 1, 1, 'C', 1);
-
-
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(15, 11, 'N', 1, 0, 'C', 1); 
+$pdf->Cell(65, 11, 'Nombre Completo del Paciente', 1, 0, 'C', 1);
+$pdf->Cell(30, 11, 'DNI', 1, 0, 'C', 1);
+$pdf->Cell(35, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
+$pdf->Cell(26, 11, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(25, 11, 'Sexo', 1, 0, 'C', 1);
+$pdf->Cell(22, 11, utf8_decode('Teléfono'), 1, 0, 'C', 1);
+$pdf->Cell(50, 11, 'Correo', 1, 1, 'C', 1);
 
 
 // -------TERMINA----ENCABEZADO------------------
 
 $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
 $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
-
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15, 50, 35, 25,25,25,25,25,55)); //???
+$pdf->SetWidths(array(15,65,30,35,26,25,22,50)); //cambiar
 
 for ($i = 0; $i < count($data); $i++) {
-
-	$pdf->Row(array($i + 1, $data[$i]['ALUMNO'], ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_TUTORIA']))),ucwords(strtolower(utf8_decode($data[$i]['SECCION']))), ucwords(strtolower(utf8_decode($data[$i]['HORA']))),ucwords(strtolower(utf8_decode($data[$i]['PERIODO']))),ucwords(strtolower(utf8_decode($data[$i]['ANIO']))),ucwords(strtolower(utf8_decode($data[$i]['ESTADO_MATRICULA']))),ucwords(strtolower(utf8_decode($data[$i]['OBSERVACION_MATRICULA']))) ),10); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['PACIENTE'],ucwords(strtolower(utf8_decode($data[$i]['DNI']))),ucwords(strtolower(utf8_decode($data[$i]['FECHA_NACIMIENTO']))) 
+    ,ucwords(strtolower(utf8_decode($data[$i]['ESTADO'])))  ,ucwords(strtolower(utf8_decode($data[$i]['SEXO']))) ,ucwords(strtolower(utf8_decode($data[$i]['telefono']))) 
+ ,ucwords(strtolower(utf8_decode($data[$i]['CORREO_PERSONA']))) ,),16); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

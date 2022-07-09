@@ -28,6 +28,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  Diana Rut              		09/07/2022                 Cambio en el titulo
 ----------------------------------------------------------------------->
 
 <?php
@@ -46,8 +47,8 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> Lista de Jovenes <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "CATEQUESIS DE ".$_SESSION['catequesis'] ?></p> </h4>
+        <section class="content-header text-xl-center mb-3 ">
+              <h4> Lista de Jovenes <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Catequesis de ".ucwords(strtolower($_SESSION['catequesis'])) ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -229,11 +230,12 @@
                         <div id="CALIFICAR_CATEQUESIS<?php echo $codigo_matricula ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
+                              
                                 <div class="modal-header" style="background-color: #0CCDE3">
                                   <h4 class="text-center">Agregar Observación </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                                <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $codigo_matricula; ?>" hidden  class="form-control" name="codigo_matricula_alumno">
@@ -241,19 +243,19 @@
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre:</label>
+                                          <label for="txtcodigo_persona">Nombre</label>
                                           <input type="text"  readonly value ="<?php echo $var1; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Catequesis:</label>
+                                          <label for="txtcodigo_persona">Catequesis</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var2; ?>" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Grado:</label>
+                                          <label for="txtcodigo_persona">Grado</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control">
 
                                         </div>
@@ -305,7 +307,7 @@
                                       
                                   </div><!--fin row -->
                                   <div class="row">
-                                      <div class="col-sm-8">
+                                      <div class="col-sm-12">
                                           <div class="form-group">
                                               <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
                                                 <textarea type="textarea" name="observacion_catequesis" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
@@ -317,7 +319,7 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="MODIFICAR_OBSERVACION_CATEQUESIS"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar observación</button>
+                                  <button type="submit" name="MODIFICAR_OBSERVACION_CATEQUESIS"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Modificar Observación</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>
