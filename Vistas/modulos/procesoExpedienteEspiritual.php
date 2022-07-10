@@ -150,11 +150,11 @@ include_once 'conexionpdo.php';
 
                     <div class="row mb-5 pl-3">
                         <?php //
-                        $query = "SELECT GROUP_CONCAT(sac.NOMBRE) as sacramentos
-                        FROM tbl_sacramento_persona sacp, tbl_persona per, tbl_sacramento sac 
-                        WHERE per.CODIGO_PERSONA = sacp.CODIGO_PERSONA
-                        AND sacp.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
-                        AND sacp.CODIGO_PERSONA = '$codigo2';";
+                        $query = "SELECT GROUP_CONCAT(sac.NOMBRE) AS sacramentos
+                        FROM tbl_sacramento sac, tbl_estudiante es, tbl_sacramento_estudiante se
+                        WHERE es.CODIGO_ESTUDIANTE = se.CODIGO_ESTUDIANTE
+                        AND   se.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
+                        AND   se.CODIGO_ESTUDIANTE = '$codigo2';";
                         $resultSacramentos=$conn->query($query); 
 
                         ?>
