@@ -128,7 +128,7 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
                 <div class="col-md-6 mb-3"><!--INICIO 2er NOMBRE-->
                  <label  class="control-label mb-2">Segundo Nombre</label> 
                   <div class="form-group">
-                   <input type="text" name="nombre2" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required=""> 
+                   <input type="text" name="nombre2" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   > 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3"><!--INICIO 1er APELLIDO-->
@@ -140,7 +140,7 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
                 <div class="col-md-6 mb-3"><!--INICIO 2er APELLIDO-->
                  <label  class="control-label mb-2">Segundo Apellido</label> 
                   <div class="form-group">
-                   <input type="text" name="apellido2" class="form-control"  aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                   <input type="text" name="apellido2" class="form-control"  aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   >
                   </div>
                 </div>
              </div><!--fin del row -->
