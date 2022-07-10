@@ -82,17 +82,22 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
     margin: 8px;
     border: 1px solid #404141;
   }
-  
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
   .pagenum:before {
         content: counter(page);
     }
     </style>
-    <title>Historial psicologico paciente</title>
+    <title>Historial Espiritual</title>
   </head>
   <body>
     <header>
+    <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Historial espiritual de la persona</p>
+      <p  style="text-align: center; font-size: 18px;">Historial Espiritual de la Persona</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
       
     </header>
@@ -150,9 +155,9 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
       <thead>
          <tr>
            <th>Nombre Iglesia</th>
-           <th>Grupo_iglesia</th>
-           <th>Tiempo de asistir</th>
-           <th>Motivacion en la iglesia</th>
+           <th>Grupo Iglesia</th>
+           <th>Tiempo de Asistir</th>
+           <th>Motivación en la Iglesia</th>
           
          </tr>
       </thead>
@@ -196,12 +201,12 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
   
 
 <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
-<div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB;"><label style="font-size: 18px;">Cita espiritual <?php echo $fecha;?></label></div>
-      <p><b>Datos consulta Espiritual</b></p><hr><br>
-      <div class="c1" ><label><b>Motivo consulta</b></label> 
+<div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB;"><label style="font-size: 18px;">Cita Espiritual <?php echo $fecha;?></label></div>
+      <p><b>Datos Consulta Espiritual</b></p><hr><br>
+      <div class="c1" ><label><b>Motivo consulta:</b></label> 
         <?php  echo ucwords(strtolower($motivo_consulta)) ?> 
       </div>
-      <div class="c1" > <label><b>Observaciones</b></label> <?php  echo ucwords(strtolower($observaciones_espiritual))  ?></div>
+      <div class="c1" > <label><b>Observaciones:</b></label> <?php  echo ucwords(strtolower($observaciones_espiritual))  ?></div>
       <div>
      <br>
 

@@ -27,13 +27,24 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
         $this->Cell(175, 9, 'PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
         $this->SetFont('Arial','',16);
-		$this->SetX(120);
+		$this->SetX(109);
 		$this->Cell(180, 8, utf8_decode('Reporte de Bitacora Universal'));
+		$this->Ln(6);
 		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(90);
+		$this->Cell(170, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
 		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(122);
+		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
-		$this->Ln(10);
+		$this->Cell(68, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
+		$this->Ln(6);
 	}
           
 // Pie de página
@@ -50,17 +61,6 @@ class PDF extends FPDF {
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
 
 
 	}
@@ -115,14 +115,13 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(10, 8, 'Número', 1, 0, 'C', 0);
+            $this->SetFont('Helvetica', 'B', 12);
+			$this->Cell(20, 8, utf8_decode('Número'), 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Fecha', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Usuario', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Accion', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Descripcion', 1, 1, 'C', 0);
+			$this->Cell(45, 8, 'Objeto', 1, 0, 'C', 0);
+			$this->Cell(45, 8, utf8_decode('Acción'), 1, 0, 'C', 0);
+			$this->Cell(70, 8, utf8_decode('Descripción'), 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
 			
 		
@@ -209,10 +208,6 @@ class PDF extends FPDF {
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -225,15 +220,15 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(32);
+$pdf->SetX(30);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(20, 12, 'Numero', 1, 0, 'C', 1);
+$pdf->Cell(20, 12, utf8_decode('Número'), 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Accion', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(45, 12, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(45, 12, utf8_decode('Acción'), 1, 0, 'C', 1);
+$pdf->Cell(70, 12, utf8_decode('Descripción'), 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -243,11 +238,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(20, 30, 30, 40,50,50)); //???
+$pdf->SetWidths(array(20, 30, 30, 45,45,70)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_USUARIO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_OBJETO']))), utf8_decode($data[$i]['ACCION']), $data[$i]['DESCRIPCION']   ),32 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),(ucwords(utf8_decode($data[$i]['NOMBRE_USUARIO']))), (ucwords(utf8_decode($data[$i]['NOMBRE_OBJETO']))), (utf8_decode($data[$i]['ACCION'])), (ucwords(utf8_decode($data[$i]['DESCRIPCION'])))   ),30 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

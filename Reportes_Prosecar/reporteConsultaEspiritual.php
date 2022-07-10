@@ -82,21 +82,30 @@ if (isset($_POST['id_persona'])) {
     margin: 8px;
     border: 1px solid #404141;
   }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
+  .pagenum:before {
+        content: counter(page);
+    }
   
     </style>
-    <title>Reporte</title>
+    <title>Reporte Espiritual</title>
   </head>
   <body>
     <header>
+      <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 20px;">Consulta Espiritual hoy</p>
+      <p  style="text-align: center; font-size: 20px;">Consulta Espiritual Paciente</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
    
-
-   <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+    <footer>
+     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+      <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -145,9 +154,9 @@ if (isset($_POST['id_persona'])) {
       <thead>
          <tr>
            <th>Nombre Iglesia</th>
-           <th>Grupo_iglesia</th>
-           <th>Tiempo de asistir</th>
-           <th>Motivacion en la iglesia</th>
+           <th>Grupo Iglesia</th>
+           <th>Tiempo de Asistir</th>
+           <th>Motivacion en la Iglesia</th>
           
          </tr>
       </thead>
@@ -193,7 +202,7 @@ if (isset($_POST['id_persona'])) {
          
       ?>
       
-      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas espirituales  <?php echo $fecha; ?> </legend><br><hr>
+      <legend style="padding-bottom: 4px; margin-bottom:5px;"> Citas Espirituales  <?php echo $fecha; ?> </legend><br><hr>
       <div>
       <div class="c"  ><label><b>Motivo consulta: </b></label> 
         <?php  echo ucwords(strtolower($motivo_consulta)) ?> </div>
@@ -242,6 +251,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("Reporte_ConsultaEspiritual.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>
