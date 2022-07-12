@@ -29,16 +29,16 @@
     Programador               Fecha                      Descripcion
 DIANA RUT GARCIA    		09-06-2022                 Cambio en el titulo y en el modal de editar
 DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
+D'aniel Martinez        11-07-2022                 Quitar bitacora de acceso al mantenimiento
+D'aniel Martinez        11-07-2022                 Arreglar ortografía.
+D'aniel Martinez        11-07-2022                 Arreglar minimo y maximo de los inputs.
+D'aniel Martinez        11-07-2022                 Quitar espacios inicio y final para evitar campos vacios
+D'aniel Martinez        11-07-2022                 Agregar funcion para input descripcion acepte letras y numeros unicamente.
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- 
- $codigoObjeto=39;
- $accion='INGRESO AL MANTENIMIENTO DE ALERGIAS';
- $descripcion= 'USUARIO SE AUTENTIFICO';
- bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
 
@@ -86,7 +86,7 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->
                <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
             </div>
-            <form  method="POST"><!-- form start -->
+            <form  method="POST"class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                   
                 <div class="table-responsive">
@@ -181,20 +181,26 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
                                   <h4 class="text-center">Editar Alergia</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST">
+                                <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_alergia" >
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Nombre Alergia</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="20" minlength="5" required onkeyup="mayus(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_nombre" >
+                                          <input  type="text" class="form-control" value ="<?php echo $var2; ?>"pattern=".{6,35}"maxlength="35" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"   autocomplete = "off" type="text" name="editar_nombre" onblur="quitarespacios(this);" required>
+                                          <div class="invalid-feedback">
+                                       Campo Obligatorio.
+                                   </div>
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción Alergia</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text" class="form-control" value ="<?php echo $var3; ?>" pattern=".{6,100}"  maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion" onblur="quitarespacios(this);"required>
+                                          <div class="invalid-feedback">
+                                       Campo Obligatorio.
+                                   </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -219,11 +225,11 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="alergia_eliminar" >
-                                    <h4 class="text-center">¿Está seguro de eliminar la alergia <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar la alergia? <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_ALER" id="ELIMINAR_ALER"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_ALER" id="ELIMINAR_ALER"  class="btn btn-primary">Si, eliminar</button>      
                                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                </form>
                                </div><!--fin del modal contener -->
@@ -259,18 +265,18 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Alergia</label>
-                                    <input  type="text" onkeyup="mayus(this);" class="form-control"  maxlength="20" minlength="6"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" required="">
+                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" onblur="quitarespacios(this);" required>
                                      <div class="invalid-feedback">
-                                       Campo obligatorio.
+                                       Campo Obligatorio.
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción Alergia</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia"  required=""></textarea>
+                                    <input  type="text"   class="form-control"  pattern=".{6,100}"maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia" onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
-                                       Campo obligatorio.
+                                       Campo Obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -323,19 +329,53 @@ DIANA RUT GARCIA    		21-06-2022                 Cambio en ortografia
 </script>
 
 <script>
-    (function () {
-    'use strict'
-    var forms = document.querySelectorAll('.needs-validation')
-    Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-            }
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
 
-            form.classList.add('was-validated')
-        }, false)
-        })
-    })()
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+
+<script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
 </script>
+
+ <script>
+     function soloLetrasNum(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?1234567890";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+    </script>

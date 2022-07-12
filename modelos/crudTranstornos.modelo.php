@@ -125,7 +125,7 @@ if(isset($_POST['transtorno_eliminar'])){
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE  CODIGO_TRANSTORNO = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_examenes_medicos WHERE  CODIGO_EXAMEN_MEDICO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             alert('Se elimino correctamente'); 

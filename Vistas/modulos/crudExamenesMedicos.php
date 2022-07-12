@@ -1,11 +1,39 @@
+<!-- 
+-----------------------------------------------------------------------
+Universidad Nacional Autonoma de Honduras (UNAH)
+		Facultad de Ciencias Economicas
+Departamento de Informatica administrativa
+Analisis, Programacion y Evaluacion de Sistemas
+           Primer Periodo 2016
+
+Equipo:
+Catedratico:
+Lic. Claudia Nuñez (Analisis)
+Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+---------------------------------------------------------------------
+
+Programa:         Pantalla de Ingreso a mantenimiento Tipos de Exámenes Médicose
+Fecha:             01-jan-2016
+Programador:       Gissela Diaz 
+descripcion:       Pantalla que contrala el tipo de exámenes médicos de las personas pacientes
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+Programador               Fecha                      Descripcion
+D'aniel Martinez          11-07-2022                 Quitar bitacora de acceso al mantenimiento
+D'aniel Martinez          11-07-2022                 Arreglar ortografía.
+D'aniel Martinez          11-07-2022                 Arreglar minimo y maximo de los inputs.
+D'aniel Martinez          11-07-2022                 Renombar inputs para el modal eliminar.
+D'aniel Martinez          11-07-2022                 Quitar espacios inicio y final para evitar campos vacios
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- $codigoObjeto=19;
- $accion='Ingreso a mantenimiento examenes';
- $descripcion='mantenimiento examenes medicos';
-bitacora($codigoObjeto,$accion,$descripcion);
+
 ?>
 
 <head>
@@ -148,7 +176,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                              <div class="modal-content">
                                  <!-- Modal content-->
                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                         <h4 class="text-center">Editar Exámen Médico</h4>
+                                         <h4 class="text-center">Editar Examen Medico</h4>
                                          <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                  <form method="POST">
@@ -157,16 +185,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                              <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="id_examen" id="id_examen" >
                                              <div class="col-sm-12">
                                                  <div class="form-group">
-                                                     <label>Exámen Médico</label>
-                                                     <input required type="text"  value="<?php echo $var2; ?>" class="form-control" maxlength="30" minlength="5" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                     name="editar_examen" id="editar_examen">
+                                                     <label>Examen Medico</label>
+                                                     <input required type="text"  value="<?php echo $var2; ?>" class="form-control" pattern=".{5,70}"  maxlength="30" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text" 
+                                                     name="editar_examen" id="editar_examen" onblur="quitarespacios(this);" required>
                                                  </div>
                                              </div>
                                              <div class="col-sm-12">
                                                  <div class="form-group">
                                                      <label>Descripción</label>
-                                                     <textarea type="text"  class="form-control" maxlength="35" minlength="5"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                                      name="editar_descripcionexamen" id="editar_descripcionexamen"><?php echo $var3; ?></textarea>
+                                                     <input type="text" value="<?php echo $var3; ?>" class="form-control" pattern=".{5,100}" maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"   autocomplete="off" type="text"
+                                                      name="editar_descripcionexamen" id="editar_descripcionexamen" onblur="quitarespacios(this);" required>
                                                  </div>
                                              </div>
                                          </div> <!-- FIN DE EL PRIMER ROW -->
@@ -184,8 +212,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                          </div> <!-- FIN DEL MODAL EDITAR --> 
                             
                             
-                      <div id="ELIMINAR<?php echo $var1 ?>"  
-                                                    name="eliminar_medicamento" id="eliminar_medicamento"class="modal fade" role="dialog">
+                                                  <div id="ELIMINAR<?php echo $var1 ?>"  
+                                                    name="eliminar_examen" id="eliminar_examen"class="modal fade" role="dialog">
                                                     <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -194,14 +222,14 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         </div>
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
-                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamento" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Está seguro de eliminar el examen <?php echo $var2; ?>?</h4>
+                                                            <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="examen_eliminar" id="examen_eliminar">
+                                                            <h4 class="text-center">¿Está seguro de eliminar el examen? <?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
                                                             <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                                                             <button type="submit"  
-                                                            name="eliminar_medica" id="eliminar_medica"  class="btn btn-primary">Si,eliminar</button>      
+                                                            name="ELIMINAR_EXAMEN" id="ELIMINAR_EXAMEN"  class="btn btn-primary">Si, eliminar</button>      
                                                             </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                                     </form>
                                                     </div><!--fin del modal contener -->
@@ -243,7 +271,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Nombre Examen</label>
-                                    <input  type="text"  class="form-control"  maxlength="30" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese el examen" name="nombre_examen" id="nombre_examen" required="">
+                                    <input  type="text"  class="form-control" pattern=".{5,70}"  maxlength="30" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese el examen" name="nombre_examen" id="nombre_examen" onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                    </div>
@@ -253,7 +281,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="500"   onkeyup="mayus(this);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del examen" name="descripcion_examen" id="descripcion_examen" required=""></textarea>
+                                    <input  type="text"   class="form-control" pattern=".{5,100}" maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción del examen" name="descripcion_examen" id="descripcion_examen" onblur="quitarespacios(this);"required></textarea>
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
@@ -324,3 +352,33 @@ bitacora($codigoObjeto,$accion,$descripcion);
       })
   } );
 </script>
+<script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
+    </script>
+
+
+ <script>
+     function soloLetrasNum(e){
+   key = e.keyCode || e.which;
+   tecla = String.fromCharCode(key).toLowerCase();
+   letras = " ¿áéíóúabcdefghijklmnñopqrstuvwxyz?1234567890";
+   especiales = ["8-37-39-46"];
+   tecla_especial = false
+   for(var i in especiales){
+    if(key == especiales[i]){
+      tecla_especial = true;
+      break;
+    }
+  }
+  if(letras.indexOf(tecla)==-1 && !tecla_especial){
+    return false;
+  }
+ }
+    </script>

@@ -1,3 +1,36 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  D'aniel Ferdinand Martinez Moradel (ferdinand.martinez@unah.hn)
+  
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Perfil usuario (código)
+    Fecha:             
+    Programador:      
+    descripcion:       Permite actualizar los datos del perfil y contraseña
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+ D'aniel Martinez          11-07-2022                 Cambio nombre bitacora
+----------------------------------------------------------------------->
+
 <?php 
  include_once "conexion3.php";
  include_once "conexion.php";
@@ -51,9 +84,9 @@
                                         if($resul >0){
                                            echo "<script> 
                                            alert('¡Se ha actualizado la contraseña!');  location.href = 'perfilUsuario'; </script>";
-                                           $codigoObjeto=1;
-                                           $accion='salio al modulo de administrador';
-                                           $descripcion= 'Usuario se saliÃ³ del sistema';
+                                           $codigoObjeto=54;
+                                           $accion='USUARIO CAMBIÓ CONTRASEÑA';
+                                           $descripcion= 'CONTRASEÑA ACTUALIZADA';
                                            bitacora($codigoObjeto, $accion,$descripcion);
                                            
                                            session_destroy();

@@ -16,10 +16,10 @@ Lic. Karla Melisa Garcia Pineda (Evaluación)
 
 ---------------------------------------------------------------------
 
-Programa:         Pantalla de Ingreso a mantenimiento modalidad
+Programa:         Pantalla de Ingreso a Apariencia Física
 Fecha:             
 Programador:       
-descripcion:       Pantalla que contrala la modalidad de las tutorias 
+descripcion:       Pantalla que contrala los tipos de Apariencia fisica 
 
 -----------------------------------------------------------------------
                       Historial de Cambio
@@ -29,14 +29,14 @@ Programador               Fecha                      Descripcion
 Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
                                                     y descripción
 Diana Rut Garcia          21/06/2022                Cambios en el modal con validaciones                                        
+D'aniel Martinez          11-07-2022                 Quitar bitacora de acceso al mantenimiento
+D'aniel Martinez          11-07-2022                 Arreglar ortografía.
+D'aniel Martinez          11-07-2022                 Arreglar minimo y maximo de los inputs.
+D'aniel Martinez          11-07-2022                 Quitar espacios inicio y final para evitar campos vacios
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=40;
- $accion='INGRESO A MANTENIMIENTO APARIENCIA FISICA';
- $descripcion='DAR MANTENIMIENTO A LOS REGISTROS DE APARIENCIA FISICA';
-bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 
 <head>
@@ -207,8 +207,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                              <div class="col-sm-12">
                                                  <div class="form-group">
                                                      <label>Apariencia Física</label>
-                                                     <input required type="text"  value="<?php echo $var2; ?>" class="form-control" maxlength="50" minlength="5" onKeyDown="sinespacio(this);"  onkeyup="mayus(this);"onkeyup="mayus(this);"  autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                     name="editar_apariencia" id="editar_apariencia">
+                                                     <input  type="text"  value="<?php echo $var2; ?>" class="form-control" pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"  
+                                                     name="editar_apariencia" id="editar_apariencia" onblur="quitarespacios(this);" required>
                                                  </div>
                                              
                                              </div>
@@ -238,7 +238,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_aparienciafisica" id="eliminar_aparienciafisica">
-                                                            <h4 class="text-center">¿Está seguro de eliminar la Apariencia <?php echo $var2;?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar la Apariencia? <?php echo $var2;?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
@@ -288,7 +288,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           <div class="col-sm-12">
                               <div class="form-group">
                                   <label >Nombre Apariencia Física</label>
-                                    <input  type="text"  class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" required="">
+                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete = "off" type="text" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" onblur="quitarespacios(this);" required="">
                                 <div class="invalid-feedback">
                                   Campo obligatorio.
                                 </div>
@@ -355,3 +355,13 @@ bitacora($codigoObjeto,$accion,$descripcion);
       })
   } );
 </script>
+<script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
+    </script>

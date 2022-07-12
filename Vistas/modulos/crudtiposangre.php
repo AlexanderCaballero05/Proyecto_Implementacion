@@ -7,6 +7,13 @@ Analisis, Programacion y Evaluacion de Sistemas
            Primer Periodo 2016
 
 Equipo:
+Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  D'aniel Ferdinand Martinez Moradel (ferdinand.martinez@unah.hn)
 Catedratico:
 Lic. Claudia Nuñez (Analisis)
 Lic. Giancarlo Martini Scalici Aguilar (Implementación)
@@ -23,15 +30,16 @@ descripcion:       Pantalla que contrala el tipo de sangre de las personas pacie
                       Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
+  D'aniel Martinez          11-07-2022                 Arreglar ortografía
+  D'aniel Martinez          10-07-2022                 Eliminar bitacora de ingreso al mantenimiento
+  D'aniel Martinez          11-07-2022                 Arreglar validación minimo y maximo.
+  D'aniel Martinez          11-07-2022                 Permitir que valide bien los campos en modal editar
+  D'aniel Martinez          11-07-2022                 Arreglar Validaciones inputs (No espacio al inicio y final,)
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto = 37;
- $accion='INGRESO A MANTENIMIENTO TIPO SANGRE';
- $descripcion='MANTENIMIENTO A LOS REGISTRO DE TIPO DE SANGRE';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
+ ?>
 <head>
 
 </head>
@@ -193,20 +201,20 @@ bitacora($codigoObjeto,$accion,$descripcion);
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar tipo de sangre</h4>
+                                    <h4 class="text-center">Editar Tipo de Sangre</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEDITARTIPOSANGRE" method="POST" class="needs-validation" novalidate>
+                                <form id="FORMEDITARTIPOSANGRE" method="POST"  >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_tiposangre" id="id_tiposangre">
                                       <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">tipo de sangre</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeypress="return soloLetrascaracteres(event);" onKeyDown="sinespacio(this);" maxlength="20" minlength="5"  onkeyup="mayus(this);"  
-                                          autocomplete = "off"   name="editar_tiposangre" id="tisangre" required="">
+                                        <div class="form-group" >
+                                          <label for="txtcodigo_persona">Tipo de Sangre</label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" pattern=".{6,15}"  maxlength="15"oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');"   
+                                          autocomplete = "off"   name="editar_tiposangre" id="tisangre"onblur="quitarespacios(this);" required>
                                           <div class="invalid-feedback">
-                                       campo obligatorio.
+                                       Campo Obligatorio.
                                    </div>
                                         </div>
                           </div>
@@ -232,11 +240,11 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <form id="FORMeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_tiposangre" id="eliminar_tiposangre">
-                                    <h4 class="text-center">¿Está seguro de eliminar el tipo de sangre <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el tipo de sangre? <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                      <button type="submit"  name="ELIMINAR_TIPOSANGRE" id="ELIMINAR_TIPOSANGRE"  class="btn btn-primary">Si,eliminar</button>      
+                                      <button type="submit"  name="ELIMINAR_TIPOSANGRE" id="ELIMINAR_TIPOSANGRE"  class="btn btn-primary">Si, eliminar</button>      
                                     </div>
                                </form>
                                </div><!--fin del modal contener -->
@@ -264,18 +272,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar tipo de sangre</h4>
+                        <h4 class="text-center">Agregar Tipo de Sangre</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                         <div class="row"><!-- INICIO PRIMERA ROW -->  
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_pregunta">Tipo de sangre</label>
-                                    <input  type="text"   class="form-control"  maxlength="20" minlength="5" onkeypress="return soloLetrascaracteres(event);" onKeyDown="sinespacio(this);" onkeyup="mayus(this);"  autocomplete = "off" type="text"  
-                                    name="tiposangre" id="sangretipo" required="">
+                                    <label for="txtcodigo_pregunta">Tipo de Sangre</label>
+                                    <input  type="text"   class="form-control" pattern=".{6,15}"  maxlength="15" oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangre" id="sangretipo"onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
-                                       campo obligatorio.
+                                       Campo Obligatorio.
                                    </div>
                                 </div>
                             </div>
@@ -390,7 +397,7 @@ tisangre.addEventListener('keydown', function(keyboardEvent) {
    key = e.keyCode || e.which;
    tecla = String.fromCharCode(key).toLowerCase();
    letras = "áéíóúabcdefghijklmnñopqrstuvwxyz-";
-   especiales = ["8-37-39-46"];
+   especiales = ["8-37-39-46" ];
    tecla_especial = false
    for(var i in especiales){
     if(key == especiales[i]){
@@ -450,3 +457,13 @@ tisangre.addEventListener('keydown', function(keyboardEvent) {
     e.value = cadena;
   };
 </script>
+<script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
+    </script>

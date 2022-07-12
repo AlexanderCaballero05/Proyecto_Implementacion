@@ -30,6 +30,10 @@
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
   Diana Rut Garcia        	21-06-2022                 Arreglos en los modales con funcionalidades
+  D'aniel Martinez          10-07-2022                 Eliminar bitacora de ingreso al mantenimiento
+  D'aniel Martinez          10-07-2022                 Arreglar validación minimo y maximo en Modales.
+  D'aniel Martinez          10-07-2022                 Arreglar Validaciones inputs (No espacio al inicio y final,)
+  D'aniel Martinez          10-07-2022                 Agregar funcion script para convertir todos los inputs en mayuscula sin necesidad de colocarlo en cada uno
 ----------------------------------------------------------------------->
 
 
@@ -210,7 +214,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Tipo</label>
-                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control"  maxlength="50"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);"  name="editar_tipo" id="editar_tipo" required="">
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="editar_tipo" id="editar_tipo" onblur="quitarespacios(this);" required="">
                                         </div>
                                       </div>
                                       </div>
@@ -275,7 +279,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Tipo</label>
-                                    <input  type="text"  class="form-control"  maxlength="50" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" name="agregar_tipo"  required>
+                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="agregar_tipo" onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                    </div>
@@ -349,7 +353,16 @@
       })
   } );
 </script>
-
+<script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
+    </script>
 
  
 

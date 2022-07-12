@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  D'aniel Ferdinand Martinez Moradel (ferdinand.martinez@unah.hn)
+  
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Proceso preclinica (código)
+    Fecha:             
+    Programador:      
+    descripcion:       Permite insertar registros a la base de datos
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+ D'aniel Martinez          11-07-2022                 Eliminar bitacora de editar registro
+----------------------------------------------------------------------->
 <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -91,10 +123,6 @@ if(isset($_POST['codigo_paciente'])){
               window.location = 'crudPreClinica';
               </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un registro en la Preclinica ';
-              bitacora($codigoObjeto, $accion,$descripcion);
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar un registro en Preclinica!');
@@ -128,7 +156,7 @@ if(isset($_POST['preclinica_eliminar'])){
             window.location = 'crudPreclinica';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=1;
+            $codigoObjeto=50;
             $accion='Modificacion';
             $descripcion= 'Se elimino un registro en la tabla preclinica';
             bitacora($codigoObjeto, $accion,$descripcion);

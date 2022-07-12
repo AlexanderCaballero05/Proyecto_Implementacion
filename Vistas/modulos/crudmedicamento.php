@@ -26,18 +26,17 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
-Gissela Diaz              08/06/2022                cambios de nombres de variables y nombre objeto 
-                                                    y descripción
+Gissela Diaz              08/06/2022                 cambios de nombres de variables y nombre objeto 
+D'aniel Martinez          11-07-2022                 Quitar bitacora de acceso al mantenimiento
+D'aniel Martinez          11-07-2022                 Arreglar ortografía.
+D'aniel Martinez          11-07-2022                 Arreglar minimo y maximo de los inputs.
+D'aniel Martinez          11-07-2022                 Quitar espacios inicio y final para evitar campos vacios
+                                                    
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
 
-
-$codigoObjeto = 35;
-$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO DE MEDICAMENTO  ';
-$descripcion = 'MANTENIMIENTO A LOS MEDICAMENTOS REGISTRADOS';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <body oncopy="return false" onpaste="return false" >
@@ -62,7 +61,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           <div class="form-group">
                               <label for="txtcodigo_persona">
                               Código del Medicamento</label>
-                              <input type="text"  class="form-control" required pattern="[A-Z,0-9]{2,10}"  maxlength="10" minlength="2" onkeyup="mayus(this);" autocomplete="off"   onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" ; 
+                              <input type="text"  class="form-control" pattern=".{2,50}" maxlength="10" autocomplete="off"oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');"
                               name="agregar_cod_medi" id="agregar_codd_medi" required>
                               <div class="invalid-feedback">
                                        campo obligatorio.
@@ -73,8 +72,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Nombre del Medicamento</label>
-                                <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
-                                 name="agregar_medicamento" id="agregar_medicamento" required >
+                                <input type="text" class="form-control" pattern=".{5,50}"  maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete="off" type="text"
+                                 name="agregar_medicamento" id="agregar_medicamento" onblur="quitarespacios(this);" required >
                                  <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -85,8 +84,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="form-group">
                                 <label for="txtcodigo_persona">
                                     Descripción</label>
-                                <textarea type="text" class="form-control" maxlength="100" minlength="5"  autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" ; 
-                                 name="agregar_med_desc" id="agregar_med_desc" required></textarea>
+                                <input type="text" class="form-control" pattern=".{5,100}" maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete="off" type="text" 
+                                 name="agregar_med_desc" id="agregar_med_desc"onblur="quitarespacios(this);"required>
                                  <div class="invalid-feedback">
                                        campo obligatorio.
                                    </div>
@@ -290,8 +289,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                     Nombre del Medicamento</label>
-                                                                                    <input type="text" value="<?php echo $var2; ?>" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" 
-                                                                                    name="edit_nom_medi" id="edit_nom_medi" required>
+                                                                                    <input type="text" value="<?php echo $var2; ?>" class="form-control" pattern=".{5,50}"  maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"  
+                                                                                    name="edit_nom_medi" id="edit_nom_medi"onblur="quitarespacios(this);" required>
                                                                                     <div class="invalid-feedback">
                                                                                         Campo obligatorio.
                                                                                     </div>
@@ -302,8 +301,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                 <div class="form-group">
                                                                                     <label for="txtcodigo_persona">
                                                                                         Descripción del Medicamento</label>
-                                                                                    <textarea type="text" class="form-control" maxlength="100" minlength="5"   autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" ; 
-                                                                                     name="edit_desc_medi" id="edit_desc_medi" required><?php echo $var3; ?></textarea>
+                                                                                    <input type="text" value="<?php echo $var3; ?>"class="form-control" pattern=".{5,100}" maxlength="100"onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"
+                                                                                     name="edit_desc_medi" id="edit_desc_medi"onblur="quitarespacios(this);" required></textarea>
                                                                                      <div class="invalid-feedback">
                                                                                         campo obligatorio.
                                                                                     </div>
@@ -334,7 +333,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <form id="FORMEeliminar" method="POST">
                                                         <div class="modal-body">
                                                             <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="eliminar_medicamentos" id="eliminar_medicamento">
-                                                            <h4 class="text-center">¿Está seguro de eliminar este medicamento <?php echo $var2; ?>?</h4>
+                                                            <h4 class="text-center">¿Está seguro de eliminar este medicamento?<?php echo $var2; ?>?</h4>
                                                         </div> <!--fin el card body -->
                                                             <div class="modal-footer ">
 
@@ -420,14 +419,16 @@ bitacora($codigoObjeto, $accion, $descripcion);
   }
  }
  </script>
-
-
-
-
-
-
-
-
+ <script>
+     $(document).ready( function () {
+      $("input").on("keypress", function () {
+       $input=$(this);
+       setTimeout(function () {
+        $input.val($input.val().toUpperCase());
+       },50);
+      })
+     })
+    </script>
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable
   $(document).ready( function () {
@@ -480,4 +481,13 @@ bitacora($codigoObjeto, $accion, $descripcion);
         }, false)
       })
   })()
+</script>
+<script language="javascript">
+  function noespacio(campo, event) {
+    CadenaaReemplazar = " ";
+    CadenaReemplazo = "";
+    CadenaTexto = campo.value;
+    CadenaTextoNueva = CadenaTexto.split(CadenaaReemplazar).join(CadenaReemplazo);
+    campo.value = CadenaTextoNueva;
+  }
 </script>
