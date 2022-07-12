@@ -128,7 +128,7 @@
          try{
           $relacion_tablas =  $db->prepare("SELECT to2.CODIGO_OBJETO, tp.CODIGO_PERMISO 
           from tbl_objetos to2 , tbl_permisos tp 
-          where to2.CODIGO_OBJETO = tp.CODIGO_OBJETO and to2.CODIGO_OBJETO = (?);;");
+          where to2.CODIGO_OBJETO = tp.CODIGO_OBJETO and to2.CODIGO_OBJETO = (?);");
           $relacion_tablas->execute(array($code));
           $row = $relacion_tablas->fetchColumn();
           if($row >0){

@@ -247,8 +247,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO">
-                                    <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="ELIMINAR_ROL" id="ELIMINAR_PERMISO">
-                                    <input type="text" value ="<?php echo $var3; ?>" hidden class="form-control" name="ELIMINAR_OBJETO" id="ELIMINAR_PERMISO">
+                                  
                                     <h4 class="text-center">¿Está seguro de eliminar el permiso al rol <?php echo $var4; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
@@ -429,7 +428,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         if ($resultadod->num_rows > 0) {
                                           $contador = 0;
                                         while($rowt = $resultadod->fetch_assoc()) { ?>
-                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php $contador = $contador +1; echo $contador.'-) '.$rowt['NOMBRE']; ?></option>
+                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php $contador = $contador +1; echo $contador.'- Rol: '.$rowt['NOMBRE']; ?></option>
                                       <?php } 
                                               }?>
                                     </select>
@@ -451,7 +450,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                     $contador = 0;
                                                     while($rowr = $resultador->fetch_assoc()) { ?>
                                                     
-                                        <option style="color:blue;" value="<?php echo $rowr['CODIGO_OBJETO'];?>"><?php $contador = $contador +1; echo $contador.'-) '.$rowr['Nom_modulo']; ?></option>
+                                        <option style="color:blue;" value="<?php echo $rowr['CODIGO_OBJETO'];?>"><?php $contador = $contador +1; echo $contador.'- '.$rowr['Nom_modulo']; ?></option>
                                                 <?php } 
                                                       }?>
                                       </select>
