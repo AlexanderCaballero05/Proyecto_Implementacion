@@ -1,3 +1,37 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  D'aniel Ferdinand Martinez Moradel (ferdinand.martinez@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Perfil usuario 
+    Fecha:             
+    Programador:      
+    descripcion:       Permite actualizar los Datos personales del perfil de cada usuario y de restablecer la contraseña.
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  D'aniel Martinez          31-05-2022                 Agregar validacion no aceptar espacio en blanco enmedio.
+    D'aniel Martinez          31-05-2022               Arreglar ortografía
+  D'aniel Martinez          10-07-2022                 Arreglar mensaje de validacion (Minimo caracter)
+----------------------------------------------------------------------->
 <?php
   include_once "conexion.php";
   include_once "conexion3.php";
@@ -18,7 +52,7 @@
   $sentencia3 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia3->execute(array($min_clave));
   $row3 = $sentencia3->fetchColumn();
-  if($row1>0){
+  if($row3>0){
     $valor4 = $row3;
   }
 ?>

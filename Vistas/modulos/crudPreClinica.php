@@ -1,3 +1,35 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  D'aniel Ferdinand Martinez Moradel (ferdinand.martinez@unah.hn)
+  
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de los trastornos 
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de los trastornos  es su relación  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  D'aniel Martinez         		11-07-2022                 revision de ortagrafia
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -63,7 +95,7 @@
                         <th class="text-center">MASA CORPORAL</th>
                         <th class="text-center">PULSO</th>
                         <th class="text-center">TEMPERATURA</th>
-                        <th class="text-center">ESTATUS DE DESNUTRICION</th>
+                        <th class="text-center">ESTATUS DE DESNUTRICIÓN</th>
                         <th class="text-center">FECHA PRE-CLINICA</th>
                       </tr>
                     </thead>
@@ -192,7 +224,7 @@
                                       </div>
                                       <div  class="col-sm-4 mb-3">
                                         <div class="form-group">
-                                          <label for="" class="control-label">Estatus de desnutrición</label>
+                                          <label for="" class="control-label">Estatus de Desnutrición</label>
                                           <select class="form-control " required name="editar_desnutricion" required> 
                                           <option  value="10">--Seleccione--</option>
                                             <option  value="No tiene">No tiene</option>
