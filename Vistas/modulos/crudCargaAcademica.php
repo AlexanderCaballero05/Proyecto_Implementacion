@@ -60,6 +60,16 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <!-- Trae los parametros de la hora inicial y final -->
 <?php
+  $Fechaactual ="MAX_MESES_DE_TUTURIA";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+
+?>
+<?php
   $Fechaactual ="FECHAINICIAL";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($Fechaactual));
@@ -288,7 +298,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
 
-                                        <input  type="time"  min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+                                        <input  type="time"  min= "<?php echo $horainicial ?>" step="1800"   max= "<?php echo $horafinal ?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
                                         <div class="invalid-feedback">
                                          Horario no valido, sobrepasa la hora limite establecida
                                         </div>
@@ -299,7 +309,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
 
-                                        <input  type="time"min= "<?= ($horainicial)?>" step="1800"   max= "<?= ($horafinal)?>"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+                                        <input  type="time"min= "<?php echo $horainicial ?>" step="1800"   max= "<?php echo $horafinal ?>"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
                                         <div class="invalid-feedback">
                                         Horario no valido, sobrepasa la hora limite establecida
                                        </div>
@@ -308,21 +318,20 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     </div>
                                     <?php  
                                           date_default_timezone_set("America/Guatemala");/* Establece una zona horaria para la fecha actual  */
-                                          $Fechaactual=  date("$valor"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
-                                          $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
+                                          $Fechaactual=  date("Y-m-d"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                          $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ $valor month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
                                     ?>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Inicio:</label>
-                                        <input  type="date"  value ="<?php echo $var7; ?>"   min= "<?= date ($valor)?>"  
-                                        max= "<?=  $fechamaxima?>" class="form-control" name="fecha_inicio1" >
+                                        <input  type="date"  value ="<?php echo $var7; ?>"    min= "<?php $MIN1=date("Y-m-d"); echo $MIN1;?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_inicio1" >
                                       </div>
                                     </div>
                                   </div>
                                   <?php  
                                         date_default_timezone_set("America/Guatemala");
-                                        $Fechaactual1=  date("$valor"); 
-                                        $fechamaxima1= date("$valor",strtotime($Fechaactual1."+ 6 month"));
+                                        $Fechaactual1=  date("Y-m-d"); 
+                                        $fechamaxima1= date("Y-m-d",strtotime($Fechaactual1."+ $valor month"));
                                   ?>
                                     
                                     <div class="row">
@@ -330,7 +339,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Final:</label>
                                         <input  type="date"  value ="<?php echo $var8; ?>" class="form-control" name="fecha_final1" 
-                                        min= "<?= date ($valor)?>"  max= "<?=  $fechamaxima1?>"  >
+                                        min= "<?php $MIN1=date("Y-m-d"); echo $MIN1;?>"  max = "<?php echo $fechamaxima1 ?>">
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
