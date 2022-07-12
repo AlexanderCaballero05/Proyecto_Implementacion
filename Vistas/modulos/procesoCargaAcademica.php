@@ -143,7 +143,7 @@ Diana Rut Garcia        03/07/2022                   Cambio en el titulo
                   <div class="col-md-3 mb-3"> <!--FECHA FINAL-->
                     <label  class="control-label">Fecha final:</label> 
                     <div class="form-group">
-                    <input class="form-control" type="date" min="<?php $MIN=date("Y-m-d"); echo $MIN;?>" max = "<?php echo $$fechamaxima1 ?>"  
+                    <input class="form-control" type="date" min="<?php $MIN=date("Y-m-d"); echo $MIN;?>" max = "<?php echo $fechamaxima1 ?>"  
                       name="fecha_final" required>
                         <div class="invalid-feedback">
                         Complete este campo con una fecha valida.
