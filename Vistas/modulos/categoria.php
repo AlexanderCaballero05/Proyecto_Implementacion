@@ -303,6 +303,323 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       </div>
                     </div>
                     </br>
+<!---------------------------------------------ESTUDIANTES----------------------------------------------------------------->
+        <div style ="display:none;" id="estudiantes" >
+               <h5>Datos escolares</h5><hr color="blue"><br><!--Inicio de datos escolares estudiantes-->
+                    <div class="row">
+                      <div class="col-md-3"> <!--INICIO IDENTIDAD-->
+                          <label for="identidad" class="control-label">Grado Actual</label> 
+                          <div class="form-group">
+                             <input class="form-control" type="text" name="GRADO" id="GRADO" onkeyup="mayus(this);" autocomplete = "off" onblur="quitarespacios(this);" required pattern="[A-Z,1-9]{<?php echo $valor4;?>,<?php echo $valor3;?>}"  maxlength="15" placeholder="Ej: 2" required="" >
+                              <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <label  class="control-label pl-4">¿Repite curso?</label>
+                        <br>
+                        <div class="form-check form-check-inline pl-4 pr-4">
+                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio1" value="SI" required="">
+                          <label class="form-check-label" for="inlineRadio1">SI</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="REPITENTE" id="inlineRadio2" value="NO" required="">
+                          <label class="form-check-label" for="inlineRadio2">NO</label>
+                        </div>
+                      </div>
+                        <div class="col-md-3"> <!--INICIO INDICE ACADEMICO-->
+                          <label for="identidad" class="control-label">Índice académico</label> 
+                          <div class="form-group">
+                            <input class="form-control" type="text" maxlength="3" minlength="2" name="INDICE" id="INDICE" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);" placeholder="Ej: 90" required="" >
+                            <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
+                          <label for="MATERIAS" class="control-label">Materias con bajo rendimiento</label> 
+                          <div class="form-group">
+                          <textarea class="form-control" type="textarea"  name="MATERIAS" id="MATERIAS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Español" required="" ></textarea>
+                               <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                        </div>
+                    </div><!--Primera row-->
+
+
+                    <div class="row">
+                        <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+                          <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
+                          <div class="form-group">
+                          <textarea class="form-control" type="textarea" maxlength="255" name="PASATIEMPOS" id="PASATIEMPOS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+                          <label for="DISTRACTORES" class="control-label">Distractores</label> 
+                          <div class="form-group">
+                          <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="col-md-4"> <!--INICIO IDENTIDAD-->
+                          <label for="METAS" class="control-label">Metas</label> 
+                          <div class="form-group">
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                          <div class="invalid-feedback">
+                                  campo obligatorio.
+                              </div>
+                          </div>
+                        </div>
+                  </div><!--Cierre del row general de datos escolares de estudiantes -->
+
+                  
+                  <!--Inicio de datos socieconomicos-->
+                  <h5>Datos socieconomicos</h5><hr color="blue"><br>
+             <div class="row md-3 ">
+                     <!-- inicio del checkbox de dispositivos-->  
+                 <div class="col-sm-3">
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Con qué dispositivos cuenta?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query1= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 1;";
+                              $result1= $conn->query($query1);
+                           ?>
+                     <?php 
+                        if ($result1->num_rows > 0) {
+                        while($row1 = $result1->fetch_assoc()) { 
+                        $codigo = $row1['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                        $nombre = $row1['NOMBRE_TIPO'];
+                        ?>
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="dispositivos[]" id="dispositivos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="dispositivos<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
+                   </div>
+                </div> <!-- fin del checkbox de dispositivos-->  
+                        
+                <div class="col-sm-3"> <!--inicio del checkbox de servicios-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Qué servicios de internet utiliza?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query2= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 2;";
+                              $result2= $conn->query($query2);
+                           ?>
+                             <?php 
+                                    if ($result2->num_rows > 0) {
+                                    while($row2 = $result2->fetch_assoc()) { 
+                                    $codigo = $row2['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                    $nombre = $row2['NOMBRE_TIPO'];
+                                    ?>
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="servicios[]" id="servicios<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="servicios<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
+                   </div>
+                </div> <!--fin del checkbox de servicios--> 
+
+
+                <div class="col-sm-3"> <!--inicio del checkbox de proveedor-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Quién provee el ingreso familiar?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query3= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 3;";
+                              $result3= $conn->query($query3);
+                           ?>
+                                 <?php 
+                                    if ($result3->num_rows > 0) {
+                                    while($row3 = $result3->fetch_assoc()) { 
+                                    $codigo = $row3['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                    $nombre = $row3['NOMBRE_TIPO'];
+                                    ?>
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="proveedor[]" id="proveedor<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="proveedor<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
+                   </div>
+                </div> <!--fin del checkbox de proveedor--> 
+
+                <div class="col-sm-3"> <!--inicio del checkbox de basicos-->
+                  <div class="card">
+                     <div class="card-header" style="background-color:#DFD4FE;">
+                             <strong>¿Con qué servicios básicos cuenta en su casa?</strong>
+                          </div>
+                          <div class="card-body">
+                          <?php
+                              include_once "conexion3.php";
+                              $query4= "SELECT s.CODIGO_CONTENIDO_SOCIOECONOMICO ,s.NOMBRE_TIPO FROM tbl_contenido_socioeconomico s WHERE S.CODIGO_TIPOSOCIO = 4;";
+                              $result4= $conn->query($query4);
+                           ?>
+                                 <?php 
+                                    if ($result4->num_rows > 0) {
+                                    while($row4 = $result4->fetch_assoc()) { 
+                                    $codigo = $row4['CODIGO_CONTENIDO_SOCIOECONOMICO'];
+                                    $nombre = $row4['NOMBRE_TIPO'];
+                                    ?>
+                        <div  class="form-check icheck-green" >
+                            <input  class="form-check-input" type="checkbox" name="basicos[]" id="basicos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                            <label class="form-check-label" for="basicos<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                            </label>
+                            </br>
+                           
+                          </div>
+                      <?php 
+                      } 
+                      }
+                      ?>
+                     </div>
+                   </div>
+                </div> <!--fin del checkbox de basicos--> 
+            </div><!--FINAL DEL ROW Socieconomico-->
+
+                    <!--Fin de datos socieconomicos-->
+
+                   <!--Inicio de sacramentos-->
+                    <h5>Sacramentos</h5><hr color="blue"><br>
+                    <div class="row">
+                      <div  id="sacramentos" class="col-md-12">
+                          <?php 
+                          $query = "SELECT CODIGO_SACRAMENTO,NOMBRE from tbl_sacramento ";
+                          $resultado=$conn->query($query);                
+                          ?>
+                          <?php 
+                          if ($resultado->num_rows > 0) {
+                          while($row = $resultado->fetch_assoc()) { 
+                          $codigo = $row['CODIGO_SACRAMENTO'];
+                          $nombre= $row['NOMBRE'];
+                          ?>
+                        <div class="icheck-yellow d-inline">
+                        <input class="form-check mx-2" type="checkbox" name="sacramento[]" id="sacramento<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                          <label class="form-check-label mx-2"  for="sacramento<?php echo $codigo;?>">
+                            <?php echo $nombre;?>
+                          </label>
+                          
+                          
+                        </div>
+                       
+                        
+                          <?php 
+                            } 
+                            }
+                          ?>
+                           
+                      </div>
+                    </div>
+                    <br>
+                    <br>
+                     <!--Inicio de sacramentos-->
+
+
+                     <!--Inicio para agregar parentesco-->
+                                          <?php //
+                                            $query = "SELECT	fam.CODIGO_FAMILIAR,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                                            FROM tbl_persona per, tbl_familiar fam
+                                            WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
+                                            AND per.CODIGO_TIPO_PERSONA = 7;";
+                                            $resultadod=$conn->query($query);                
+                                            ?>
+                            <h5>Agregar parentesco</h5><hr color="blue"><br>
+                               <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
+                                 <div class="col-sm-6">
+                                      <label for="">Familiar: </label>
+                                        <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco">
+                                          <option selected disabled value=""> Buscar familiares...</option>
+                                                <?php 
+                                                  if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo = $row['CODIGO_FAMILIAR'];
+                                                  $nombre = $row['NOMBRE'];
+                                                  
+                                                  ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                <?php 
+                                                } 
+                                                }
+                                                ?>
+                                        </select>
+                                  </div>
+                                      
+
+                                  <?php
+                                      $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
+                                      FROM tbl_parentesco pa";
+                                      $parentesco=$conn->query($querypare)
+                                    ?>
+                                  <div class="col-sm-6">
+                                      <label>Parentesco</label>
+                                      <select class="form-control select2" name="parentesco">
+                                        <option selected disabled value="">Seleccione el parentesco...</option>
+                                                <?php 
+                                                  if ($parentesco->num_rows > 0) {
+                                                  while($rowt = $parentesco->fetch_assoc()) { ?>
+                                                  <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
+                                                <?php } 
+                                                        }?>
+                                      </select>
+                                 </div>
+                              </div> 
+                     <!--Fin para agregar parentesco-->
+
+
+
+
+            </div><!--fin de display de estudiantes-->
+
+<!---------------------------------------------FIN ESTUDIANTES----------------------------------------------------------------->
+
+
+
                     <div style ="display:none;" id="usuarios"><!--Contiene los datos de usuario como los adicioneles de especialidades y los oculta -->
                        <h5>Registrar Usuario</h5><hr color="blue"><br>
                       <div class="row"> 
@@ -571,6 +888,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
+          document.getElementById('estudiantes').style.display = "none";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('medico').required = false;
           document.getElementById('iglesia').required = false;
@@ -582,12 +900,22 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
           document.getElementById('correo').required = true; 
+
+          document.getElementById('GRADO').required = false;
+          document.getElementById('inlineRadio1').required = false; 
+          document.getElementById('inlineRadio2').required = false; 
+          document.getElementById('INDICE').required = false; 
+          document.getElementById('MATERIAS').required = false; 
+          document.getElementById('PASATIEMPOS').required = false; 
+          document.getElementById('DISTRACTORES').required = false; 
+          document.getElementById('METAS').required = false;
         }else if($(this).val() ===  "4" ){//para estudiantes
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
           document.getElementById('usuarios').style.display = "block";
+          document.getElementById('estudiantes').style.display = "block";
           document.getElementById('medico').required = false;
           document.getElementById('iglesia').required = false;
           document.getElementById('ingreso').required = false;
@@ -598,6 +926,15 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
           document.getElementById('correo').required = false;
+
+          document.getElementById('GRADO').required = true;
+          document.getElementById('inlineRadio1').required = true; 
+          document.getElementById('inlineRadio2').required = true; 
+          document.getElementById('INDICE').required = true; 
+          document.getElementById('MATERIAS').required = true;
+          document.getElementById('PASATIEMPOS').required = true; 
+          document.getElementById('DISTRACTORES').required = true; 
+          document.getElementById('METAS').required = true;
         }else if ($(this).val() === "7"){ //es para un familiar
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "none";

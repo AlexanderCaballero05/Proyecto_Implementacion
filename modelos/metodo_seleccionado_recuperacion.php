@@ -189,7 +189,7 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                         
                         
                         <div style='width: 100%; text-align: center'>
-                          <a style='text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db' href='http://localhost/Proyecto_Implementacion2/login'>Ir a la página</a>	
+                          <a style='text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #3498db' href='http://localhost/Proyecto_Implementacion11/login'>Ir a la página</a>	
                         </div>
                         <p style='color: #000105; font-size: 12px; text-align: center;margin: 30px 0 0'><h3>Gracias, Atentamente Proyecto Prosecar</h3></p>
                       </div>

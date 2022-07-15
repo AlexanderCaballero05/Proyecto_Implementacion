@@ -209,11 +209,14 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                               </div>
                           </div>
                         </div>
-                  </div><!--Cierre del row general -->
+                  </div><!--Cierre del row general de datos escolares de estudiantes -->
+
                   <br>
                    <!--Sacramentos -->
                     <div>
                        <h2 class="card-title"><strong>Sacramentos de Estudiante</strong></h2><br><hr>
+
+
                     <div class="row">
                       <div  id="sacramentos" class="col-md-12">
                           <?php 
@@ -242,16 +245,14 @@ Arnold Caballero        17/06/2022            Se valido el maximo y minimo de lo
                           ?>
                            
                       </div>
-                     
-                      
                     </div><!--fin row -->
-                    </div>
+              </div>
                       </br>
                     <div class="card-header "> <!-- TITULO ENCABEZADO DATOS SOCIECONOMICOS -->
                         <h2 class="card-title"> <strong>Datos Socioeconómicos</strong></h2>
                     </div></br>
 
-                <div class="row md-3 ">
+          <div class="row md-3 ">
                      <!-- inicio del checkbox de dispositivos-->  
                  <div class="col-sm-3">
                   <div class="card">

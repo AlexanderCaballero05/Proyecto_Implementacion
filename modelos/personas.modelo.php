@@ -221,7 +221,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                             return false;
                             }//fin regisrtrar enfermeros
 
-                          }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes(porque se les pego la gana hacerlos estudiantes :v)
+                          }elseif($tipo_persona == "4" ){ //para insertar usuarios estudiantes
                            try{
                               $sentencia = $db->prepare("SELECT COUNT(*)  FROM `tbl_usuario`  where NOMBRE_USUARIO = (?) ");
                               $sentencia->execute(array($nombre_usuario));
@@ -231,11 +231,102 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                 exit;
                               }else{
                                 $rol= "8";
-                                $insert = "CALL Sp_insertar_usuario('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
-                                '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo','$nombre_usuario',
-                                '$estado','$rol','$contrasena');" ;
-                                 $consulta=$conn->query($insert);
-                                if($resultado = mysqli_fetch_assoc($consulta)>0 ){
+                                $fechaActual = date('Y-m-d');
+
+                                 $insert = "INSERT INTO TBL_PERSONA (PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO, SEGUNDO_APELLIDO,
+                                 DNI, FECHA_NACIMIENTO, LUGAR_NACIMIENTO, CODIGO_TIPO_PERSONA, SEXO, DIRECCION, FECHA_INSCRIPCION)
+                                            VALUES ('$primer_nombre','$segundo_nombre','$primer_apellido','$segundo_apellido','$identidad',
+                                             '$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$sexo','$direccion','$fechaActual' )";
+                                           $consulta=$conn->query($insert);
+                                           $codigo_persona = mysqli_insert_id($conn);
+
+
+                                     $insert_telefono = "INSERT INTO tbl_telefono(NUMERO_TELEFONO, CODIGO_PERSONA)
+                                                         VALUES('$telefono', '$codigo_persona')";
+                                      $consulta_telefono=$conn->query($insert_telefono);
+
+
+                                        $insert_correo = "INSERT INTO tbl_correo_electronico(correo_persona,CODIGO_PERSONA) 
+                                                          VALUES ('$correo', '$codigo_persona')";
+                                         $consulta_correo=$conn->query($insert_correo);
+
+
+                                          $insert_usuario = "INSERT INTO tbl_usuario(CODIGO_PERSONA,NOMBRE_USUARIO,CODIGO_ESTADO, CODIGO_TIPO_ROL, CONTRASENA, CREADO_POR, FECHA_CREACION)
+                                                           VALUES ('$codigo_persona', '$nombre_usuario', '$estado','$rol','$contrasena', '$usuario','$fechaActual')";      
+                                          
+                                          $consulta_usuario=$conn->query($insert_usuario);
+                                         
+                                         
+                                          
+                                          
+                                      
+
+                                 $grado = ($_POST['GRADO']);
+                                 $repitente = ($_POST['REPITENTE']);
+                                 $indice = ($_POST['INDICE']);
+                                 $materias = ($_POST['MATERIAS']);
+                                 $pasatiempos = ($_POST['PASATIEMPOS']);
+                                 $distractores = ($_POST['DISTRACTORES']);
+                                 $metas = ($_POST['METAS']);
+
+                                 $query_estudiante = "INSERT INTO tbl_estudiante(CODIGO_PERSONA, GRADO_ACTUAL, REPITENTE, INDICE_ACADEMICO, MATE_BAJO_RENDI, PASATIEMPOS, DISTRACTORES_ESCOLARES, METAS)
+                                 VALUES ('$codigo_persona','$grado','$repitente','$indice','$materias', '$pasatiempos', '$distractores', '$metas'); ";
+                                $resul=$conn->query($query_estudiante);
+                                $codigo = mysqli_insert_id($conn);
+
+
+                                    //inicio del insert de dispositivos
+                      if(is_array($_POST['dispositivos'])){
+                        foreach ($_POST['dispositivos'] as $dispositivos){
+                          $query_contenido = $db->prepare("CALL Sp_insertar_socieconomico_dispositivos(?,?);");
+                          $query_contenido->execute(array($dispositivos,$codigo));     
+                         $conn->commit();
+                        }
+                    }  //fin del insert de dispositivos
+
+                     //inicio del insert de servicios
+                     if(is_array($_POST['servicios'])){
+                        foreach($_POST['servicios'] as $servicios){
+                          $sp_servicios = $db->prepare("CALL Sp_insertar_socieconomico_servicios(?,?);");
+                          $sp_servicios->execute(array($servicios,$codigo));
+                          $conn->commit();
+                        }
+                     } //fin del insert de servicios
+
+                      //inicio del insert de proveedor
+                     if(is_array($_POST['proveedor'])){
+                       foreach($_POST['proveedor'] as $proveedor){
+                       $sp_proveedor = $db->prepare("CALL Sp_insertar_socieconomico_proveedor(?,?);");
+                       $sp_proveedor->execute(array($proveedor,$codigo));
+                       $conn->commit();
+                        }
+                     } //fin del insert de servicios
+
+                        //inicio del insert de basicos
+                     if(is_array($_POST['basicos'])){
+                       foreach($_POST['basicos'] as $basicos){
+                       $sp_basicos = $db->prepare("CALL Sp_insertar_socieconomico_basicos(?,?);");
+                       $sp_basicos->execute(array($basicos,$codigo));
+                       $conn->commit();
+                      }
+                     } //fin del insert de servicios
+
+                      if(is_array($_POST['sacramento'])) {//codigo para insertar los sacramentos
+                        foreach ($_POST['sacramento'] as $sacramento){
+                          $sentencia = $db->prepare(" CALL Sp_insertar_sacramentos(?,?);");
+                          $sentencia->execute(array($sacramento,$codigo));
+                          $conn->commit();
+                        }
+
+
+                            
+
+                      }//fin del insert de sacramentos estudiantes
+
+
+
+
+                                if($consulta >0 ){
                                   echo "<script> 
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
@@ -388,6 +479,14 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                               '$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo',
                                '$estado_civil','$nivel_edu','$ingresos','$iglesia');" ;
                               $consulti =$conn->query($insert_persona);
+
+                                
+
+
+
+
+
+
                               if($resultado = mysqli_fetch_assoc($consulti)>0 ){
                                 echo "<script> 
                                 alert('persona registrada correctamente');
