@@ -359,10 +359,12 @@ $result3= $conn->query($query);
                     
                    </div>
                    <?php  
+
                         date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
-                        $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
-                        $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                        $Fechaactual=  date('d-m-Y');
+                        $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                    ?>
+
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
 

@@ -410,24 +410,19 @@ include_once "conexion3.php";
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
-                      <div class="row mb-2"><!-- INICIO PRIMERA ROW -->
-                        
-                                             <?php //
+
+
+                                         <?php //
                                             $query = "SELECT	fam.CODIGO_FAMILIAR,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
                                             FROM tbl_persona per, tbl_familiar fam
                                             WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
                                             AND per.CODIGO_TIPO_PERSONA = 7;";
                                             $resultadod=$conn->query($query);                
                                             ?>
-                        <!-- ***********BUSCAR AL FAMILIAR*********** -->
-                                   <a href="categoria">
-                                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3 mt-2"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
-                                      </a>
-                              
-                                      <div class="col-sm-12">
+                               <div class="row mb-2"><!-- INICIO PRIMERA ROW -->
+                                 <div class="col-sm-12">
                                       <label for="">Familiar: </label>
-                                          <div class="col-sm-12 mt-2 mb-4">
-                                            <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco" required="" >
+                                            <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco">
                                             <option selected disabled value=""> Buscar familiares...</option>
                                                 <?php 
                                                   if ($resultadod->num_rows > 0) {
@@ -442,17 +437,8 @@ include_once "conexion3.php";
                                                 }
                                                 ?>
                                               </select>
-                                                  
-                                              <div class="invalid-feedback">
-                                                  Agregue un nombre!
-                                              </div>
-
-                                              <div class="valid-feedback">
-                                                ¡Se ve bien!
-                                               </div>
-                                </div>
-                            </div>
-                      </div> 
+                                  </div>
+                              </div> 
 
 
                             <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
@@ -496,6 +482,8 @@ include_once "conexion3.php";
 
                           
                         </div> <!-- FIN DE EL PRIMER ROW --> 
+
+                        
                           <?php
                             $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
                             FROM tbl_parentesco pa";
