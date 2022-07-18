@@ -51,7 +51,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
   <section class="content">
     <div class="container-fluid">
      <div class="content-header text-xl-center mb-3 ">
-        <h4>Mantenimiento Tutorías</h4>     
+        <h4>Tutorías</h4>     
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -72,11 +72,11 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
            <?php
            if($permiso_registrar == 'SI' ){
            ?> 
-            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Tutoría</button>
+            <button  data-toggle="modal"  href="#AGREGAR_TUTORIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
            <?php
             }
            ?>
-           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+           <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
           <!-- Inicio del card -->
           <div class="card card-primary">
             <div class="card-header text-center" style="background-color: #0CCDE3"><!-- TITULO ENCABEZADO DATOS PERSONALES -->

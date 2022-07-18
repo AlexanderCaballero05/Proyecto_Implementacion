@@ -118,11 +118,15 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(50, 8, 'Sección', 1, 0, 'C', 0);
-			$this->Cell(60, 8, 'Modalidad', 1, 0, 'C', 0);
-			$this->Cell(80, 8, 'Tutoria', 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Tutor', 1, 1, 'C', 0);
-			$this->Cell(35, 8, 'Hora', 1, 1, 'C', 0);
+			$this->Cell(10, 12, 'N', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Seccion', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Modalidad', 1, 0, 'C', 1);
+			$this->Cell(40, 12, 'Tutoria', 1, 0, 'C', 1);
+			$this->Cell(55, 12, 'Tutor', 1, 0, 'C', 1);
+			$this->Cell(25, 12, 'Hora Inicio', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Fecha Inicio', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Fecha final', 1, 0, 'C', 1);
+			$this->Cell(30, 12, 'Estado', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 12);
 			
 		
@@ -204,10 +208,14 @@ class PDF extends FPDF {
 	
 	 } 
 	$strquery ="SELECT c.FECHA_CREACION,c.CODIGO_CARGA,t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-	as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, ts.NOMBRE, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL
-	FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m,tbl_seccion ts 
-	WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA and c.CODIGO_SECCION =ts.CODIGO_SECCION 
-	AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA  and c.CODIGO_CARGA = '$carga'";
+	as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, ts.NOMBRE, c.HORA, c.FECHA_INICIO, c.FECHA_FINAL, te.NOMBRE as ESTADO 
+	FROM tbl_carga_academica c 
+	left join tbl_tutoria t   on  c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+	left join tbl_persona p   on  c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+	left join tbl_modalidad m on  c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+	left join tbl_seccion ts  on  c.CODIGO_SECCION =ts.CODIGO_SECCION 
+	left join tbl_estado te     on te.CODIGO_ESTADO = c.CODIGO_ESTADO 
+	WHERE c.CODIGO_CARGA = '$carga'";
 	
 	$result = $conexion->prepare($strquery);
 	$result->execute();
@@ -228,7 +236,7 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(10);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
@@ -238,7 +246,8 @@ $pdf->Cell(40, 12, 'Tutoria', 1, 0, 'C', 1);
 $pdf->Cell(55, 12, 'Tutor', 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Hora Inicio', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Fecha Inicio', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Fecha final', 1, 1, 'C', 1);
+$pdf->Cell(30, 12, 'Fecha final', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Estado', 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -248,11 +257,17 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10,30, 30, 40, 55,25,30,30)); //???
+$pdf->SetWidths(array(10,30, 30, 40, 55,25,30,30,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1,$data[$i]['NOMBRE'], ucwords(strtolower(utf8_decode($data[$i]['MODALIDAD']))),ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_COMPLETO']))), utf8_decode($data[$i]['HORA']), $data[$i]['FECHA_INICIO'], $data[$i]['FECHA_FINAL']   ),20 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,$data[$i]['NOMBRE'], 
+	ucwords(strtolower(utf8_decode($data[$i]['MODALIDAD']))),
+	ucwords(strtolower(utf8_decode($data[$i]['TUTORIA']))), 
+	ucwords(strtolower(utf8_decode($data[$i]['NOMBRE_COMPLETO']))),
+	 utf8_decode($data[$i]['HORA']), $data[$i]['FECHA_INICIO'], 
+	 $data[$i]['FECHA_FINAL'],
+	 $data[$i]['ESTADO']   ),10 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

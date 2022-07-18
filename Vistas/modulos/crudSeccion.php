@@ -53,7 +53,7 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3 ">
-        <h4>Mantenimiento Secciones</h4>   
+        <h4>Secciones</h4>   
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -75,8 +75,8 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
           <?php
           if($permiso_registrar == 'SI'){
           ?>
-          <button  data-toggle="modal"  href="#AGREGAR_SECCION" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Sección</button>
-          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+          <button  data-toggle="modal"  href="#AGREGAR_SECCION" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
           <?php
            }
           ?>

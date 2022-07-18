@@ -50,7 +50,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
   
   <section class="content">
       <div class="content-header text-xl-center mb-3 ">
-          <h4>Mantenimiento Áreas</h4>   
+          <h4>Áreas</h4>   
       </div>
     <div class="container-fluid">
       <div class="row">
@@ -74,8 +74,8 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                     <?php 
                     if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                     ?> 
-                     <button  data-toggle="modal" href="#AGREGAR_AREA"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Área</button>
-                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                     <button  data-toggle="modal" href="#AGREGAR_AREA"  type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                     <?php 
                       }  
                     ?> 
