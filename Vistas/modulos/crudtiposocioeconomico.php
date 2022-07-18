@@ -104,12 +104,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      ?>
                     <button type="button" style="color:white;"class="btn btn-primary mb-3" data-toggle="modal" data-target="#ADDOBJETO">
                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar
-                        Tipo Socioeconomico
                     </button>
                     <?php 
                       }
                      ?>
-                        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                    
                     <!-- jquery validation -->
                     <div class="card card-primary">

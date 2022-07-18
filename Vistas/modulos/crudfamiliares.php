@@ -57,14 +57,14 @@
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+          <li class="nav-item">
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+            </li>
+              <li class="nav-item ">
+                <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Agregar Parentesco Estudiante-Familiar</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="crudfamiliares">Ver Datos de Familiares</a>
+              <li class="nav-item ">
+                <a class="nav-link active"  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
               </li>
             </ul>
             
@@ -107,10 +107,10 @@
               
                 <a href="categoria">
 
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Familiar</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3" ><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                 </a>
                
-                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                 <button hidden  onclick="Descargar1()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-danger mb-3" > <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>PDF Familiar</button>
               
                 </a>
