@@ -68,11 +68,10 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                                try{
                                    if($area == 1){ 
                                     $insert = "INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
-                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`) 
-                                    VALUES ('$tutoria_academica','$tutor_academico','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`,`CODIGO_ESTADO`) 
+                                    VALUES ('$tutoria_academica','$tutor_academico','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo','2'); ";
                                     $resul=$conn->query($insert);
         
-
                                         echo "<script> 
                                         window.location = 'crudCargaAcademica';
                                         </script>";
@@ -131,6 +130,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
         $anio = date("Y");
         $periodo = ($_POST['periodo']);
         $area = ($_POST['area_tutoria']);
+        $estado = ($_POST['ESTEDITADO']);   
 
        try{
              $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
@@ -147,7 +147,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                  try{
                      //Si la carga tiene los mismos datos de una carga exsitente,
                      $sentencia = $db->prepare("SELECT CODIGO_PERSONA,CODIGO_TUTORIA,HORA,FECHA_INICIO FROM tbl_carga_academica
-                     WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and CODIGO_SECCION =(?) AND   CODIGO_MODALIDAD = (?) ");
+                     WHERE CODIGO_PERSONA =(?) AND CODIGO_TUTORIA = (?) and HORA = (?) and FECHA_INICIO = (?) and CODIGO_SECCION =(?) AND CODIGO_MODALIDAD = (?) ");
                      $sentencia->execute(array($tutor_espiritual,$tutoria_espritual,$hora,$fech_inicio,$seccion,$modalidad));
                      $row=$sentencia->fetchColumn();
                      if($row >0){ 
@@ -172,9 +172,9 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                             }else{
                                try{
                                   if($area ==4 ){
-                                    $insert2 = "INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`, 
-                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`) 
-                                    VALUES ('$tutoria_espritual','$tutor_espiritual','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo'); ";
+                                    $insert2 = "INSERT INTO `tbl_carga_academica`(`CODIGO_TUTORIA`, `CODIGO_PERSONA`, `CODIGO_MODALIDAD`, `CODIGO_SECCION`,
+                                    `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`,`CODIGO_ESTADO`) 
+                                    VALUES ('$tutoria_espritual','$tutor_espiritual','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo','2'); ";
                                     $resul2=$conn->query($insert2);
         
 
@@ -243,6 +243,8 @@ if(isset($_POST['IDCARGA'])){
         $fecha_modi = date('Y-m-d'); //fecha del sistema
         $usuario_modi = $_SESSION['vario'];
         $codigo_carga = ($_POST['IDCARGA']);
+        $estado = ($_POST['ESTEDITADO']);       
+        
         try{
             $query = $db->prepare(" SELECT COUNT(*) FROM tbl_carga_academica 
             WHERE CODIGO_SECCION = (?) AND CODIGO_TUTORIA = (?) and CODIGO_CARGA <> (?) ");
@@ -275,7 +277,8 @@ if(isset($_POST['IDCARGA'])){
                         MODIFICADO_POR = '$usuario_modi' ,
                         FECHA_MODIFICACION = '$fecha_modi' ,
                         CODIGO_PERSONA = '$tutor_modi' ,
-                        HORA_FINAL = '$hora_final_modi'
+                        HORA_FINAL = '$hora_final_modi',
+                        CODIGO_ESTADO ='$estado'
                         WHERE CODIGO_CARGA = '$codigo_carga';";   
                         
                         $row=$conn->query($corre);

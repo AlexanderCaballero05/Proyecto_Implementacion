@@ -29,6 +29,7 @@
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia
   Diana Rut Garcia          03/07/2022                 Cambio en el titulo y modal editar 
+  ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
 ----------------------------------------------------------------------->
 
 <?php 
@@ -163,19 +164,22 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Hora final</th>
                         <th class="text-center">Fecha inicio</th>
                         <th class="text-center">Fecha final</th>
+                        <th class="text-center">Estado</th>
                         <th class="text-center">Período</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO
-                                          FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
-                                          WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-                                          AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-                                          AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
-                                          AND c.CODIGO_SECCION = s.CODIGO_SECCION
-                                          AND t.CODIGO_AREA  = 4; ";
+                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL,
+                      c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO, te.NOMBRE, te.CODIGO_ESTADO 
+                      FROM tbl_carga_academica c 
+                      left join tbl_tutoria t  on c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
+                      left join tbl_persona p  on c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+                      left join tbl_modalidad m on c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
+                      left join tbl_seccion s   on c.CODIGO_SECCION = s.CODIGO_SECCION
+                      left join tbl_estado te  on c.CODIGO_ESTADO = te.CODIGO_ESTADO 
+                      where t.CODIGO_AREA  = 4;  ";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
                         $contador=0;
@@ -195,6 +199,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         $var12 = $row['HORA_FINAL'];
                         $var13 = $row['CODIGO_SECCION'];
                         $var14 = $row['PERIODO'];
+                        $var15 = $row['NOMBRE'];
+                        $var16 = $row['CODIGO_ESTADO']; 
 
                       ?>
                       <tr>
@@ -270,6 +276,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <td class="text-center"><?php echo $var12; ?></td>
                         <td class="text-center"><?php echo $var7; ?></td>
                         <td class="text-center"><?php echo $var8; ?></td>
+                        <td class="text-center"><?php echo $var15; ?></td>
                         <td class="text-center"><?php echo $var14; ?></td>
                         
 
@@ -390,7 +397,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         </select> 
                                       </div>
                                     </div><!--cierre de modalidad-->
-                                    <div class="col-sm-8"> 
+                                    <div class="col-sm-4"> 
                                       <?php //
                                       $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
                                       FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
@@ -414,6 +421,18 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         </select> 
                                       </div>
                                     </div><!--CIERRE DEL ENCARAGADO -->
+                                    <div class="col-sm-4"> 
+                                  <label>Selecionar Estado</label>
+                                  <div class="input-group">
+                                  <span class="input-group-addon"><i  aria-hidden="true"></i></span>
+                                  <select class="form-control" name="ESTEDITADO" id="ESTEDITADO" required="">
+                                    <option value="<?php echo $var16 ?>"><?php echo $var15; ?></option>
+                                      <option value="2">ACTIVO</option>
+                                      <option value="3">INACTIVO</option>
+                                  </select>
+                                </div>
+                              </div>
+                                                                  
                                   </div><!--fin row -->
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
