@@ -44,17 +44,18 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+            </li>
+          <li class="nav-item">
               <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+              <li class="nav-item ">
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
-              </li>
+              
           </ul>
         </div>
         <div class="card-body">
@@ -86,10 +87,10 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-             <a  href="procesoRegistrarEstudiante">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar estudiante</button>
+             <a  href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
               </a>
-             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
+             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                      <?php
                         }
                         ?>

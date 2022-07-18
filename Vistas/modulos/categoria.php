@@ -925,7 +925,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('psico').required = false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
-          document.getElementById('correo').required = false;
+          document.getElementById('correo').required = true;
 
           document.getElementById('GRADO').required = true;
           document.getElementById('inlineRadio1').required = true; 

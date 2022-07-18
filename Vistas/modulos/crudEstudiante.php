@@ -55,17 +55,18 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+            </li>
+          <li class="nav-item">
               <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" href="procesoRegistrarEstudiante">Agregar Estudiante</a>
+              <li class="nav-item ">
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="crudFamiliaresEstudiantes">Relación Estudiante-Familiar</a>
-              </li>
+             
           </ul>
         </div>
         <div class="card-body">
@@ -98,10 +99,10 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-             <a  href="procesoRegistrarEstudiante">
-              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Estudiante</button>
+             <a  href="categoria">
+              <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
               </a>
-             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
+             <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
               
            </div>
                        <?php
@@ -132,6 +133,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <th class="text-center">Distractores Escolares</th>
                           <th class="text-center">Metas</th>
                           <th class="text-center">Sacramentos</th>
+                          <th class="text-center">Estado</th>
                           
     
                         </tr>
@@ -139,11 +141,14 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                       <tbody>
                         <?php
                         $query = "SELECT e.CODIGO_ESTUDIANTE, p.PRIMER_NOMBRE , p.PRIMER_APELLIDO, p.CODIGO_PERSONA, e.GRADO_ACTUAL, e.REPITENTE,
-                        e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS,GROUP_CONCAT(sac.NOMBRE) as sacramentos
-                       FROM  tbl_sacramento_estudiante sacp, tbl_sacramento sac, tbl_estudiante e, tbl_persona p
+                        e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI ,e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS,GROUP_CONCAT(sac.NOMBRE) as sacramentos, es.NOMBRE
+                       FROM  tbl_sacramento_estudiante sacp, tbl_sacramento sac, tbl_estudiante e, tbl_persona p , tbl_usuario u, tbl_estado es
                        WHERE sacp.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
                              AND sacp.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
                              AND e.CODIGO_PERSONA= p.CODIGO_PERSONA
+                             AND p.CODIGO_PERSONA = u.CODIGO_PERSONA
+                             AND u.CODIGO_ESTADO = es.CODIGO_ESTADO
+                             
                            GROUP BY e.CODIGO_ESTUDIANTE;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
@@ -158,6 +163,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                             $var8 = $row['DISTRACTORES_ESCOLARES'];
                             $var9 = $row['METAS'];
                             $var10 = $row['sacramentos'];
+                            $var11 = $row['NOMBRE'];
                             
                         ?>
                         <tr>
@@ -257,6 +263,8 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
                           <td class="text-center"><?php echo $var10; ?></td>
+                          <td class="text-center"><?php echo $var11; ?></td>
+
 
                          
                           
