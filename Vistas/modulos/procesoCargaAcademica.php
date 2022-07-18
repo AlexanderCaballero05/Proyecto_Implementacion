@@ -28,6 +28,7 @@ descripcion:       Pantalla que contrala cargar academica
 Programador               Fecha                      Descripcion
 ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
 Diana Rut Garcia        03/07/2022                   Cambio en el titulo
+ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LOS DATOS 
 ----------------------------------------------------------------------->
 
 
@@ -100,6 +101,151 @@ Diana Rut Garcia        03/07/2022                   Cambio en el titulo
           <div class="card-body"><!--Cuerpo del card body principal -->
             </br>
             <form  class=" was-validated"  id="FORMREGISTRAR" method="POST">
+            <div class="row">
+
+<div class="col-md-3 mb-3"> <!--columna para selecionar el area-->
+<?php
+     $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  
+     where CODIGO_AREA <> 6
+     AND CODIGO_AREA <> 2
+     AND CODIGO_AREA <> 3";
+     $filas_area= $conn->query($query);
+     ?>
+   <div class="form-group">
+   <label  class="control-label">Area de la tutoría:</label> 
+    <select class="form-control select2"  name="area_tutoria" id="area_tutoria" required>
+      <option selected disable value="">--Seleccione un Area--</option>
+      <?php
+         if($filas_area->num_rows >0){ 
+           while($filas=$filas_area->fetch_assoc()){ 
+      ?>
+      <option value="<?php echo $filas['CODIGO_AREA'];?>"><?php echo $filas['NOMBRE'];?></option>
+       <?php
+         }
+       }
+       ?>
+    </select>
+      <div class="invalid-feedback">
+        Complete este campo.
+       </div>
+   </div>
+ </div><!--fin de columna para selecionar el area-->
+
+ <div style ="display:none;" id="tutorias_academicas" class="col-md-3"> <!--inicio seleccionar tutoria academica-->
+   <?php //
+   $query = "SELECT CODIGO_TUTORIA, NOMBRE
+    FROM tbl_tutoria
+    WHERE CODIGO_AREA = 1";
+   $resultadod=$conn->query($query);                
+   ?>
+   <label for="identidad" class="control-label">Nombre Tutoría:</label> 
+   <div class="form-group">
+     <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" >
+       <option selected disabled value="" >--Seleccionar Tutoría--</option>
+       <?php 
+         if ($resultadod->num_rows > 0) {
+           while($row = $resultadod->fetch_assoc()) { 
+           $codigo_tutoria = $row['CODIGO_TUTORIA'];
+           $nombre = $row['NOMBRE'];
+         ?>
+       <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
+       <?php 
+       } 
+       }
+       ?>
+     </select> 
+     <div class="invalid-feedback">
+     Complete este campo.
+       </div>
+   </div>
+ </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
+
+ <div style ="display:none;" id="tutorias_espirituales" class="col-md-3"> <!--inicio seleccionar tutoria espirituales-->
+   <?php //
+   $query = "SELECT CODIGO_TUTORIA, NOMBRE
+    FROM tbl_tutoria
+    WHERE CODIGO_AREA = 4";
+   $resultadod=$conn->query($query);                
+   ?>
+   <label for="identidad" class="control-label">Nombre Tutoría:</label> 
+   <div class="form-group">
+     <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" >
+       <option selected disabled value="" >--Seleccionar Tutoría--</option>
+       <?php 
+         if ($resultadod->num_rows > 0) {
+           while($row = $resultadod->fetch_assoc()) { 
+           $codigo_tutoria = $row['CODIGO_TUTORIA'];
+           $nombre = $row['NOMBRE'];
+         ?>
+       <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
+       <?php 
+       } 
+       }
+       ?>
+     </select> 
+     <div class="invalid-feedback">
+     Complete este campo.
+       </div>
+   </div>
+ </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
+ 
+<div style="display:none" id="tutores_academicos" class="col-md-6 mb-3"> <!--Fila para tutores academicos-->
+ <?php 
+ $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
+ FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
+ $resultadod=$conn->query($query);                
+ ?>
+ <div class="form-group">
+   <label  class="control-label">Encargado-Tutor:</label>
+   <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico" >
+     <option selected disabled value="">--Seleccionar Tutor--</option>
+     <?php 
+       if ($resultadod->num_rows > 0) {
+         while($row = $resultadod->fetch_assoc()) { 
+         $codigo_tutor = $row['CODIGO_PERSONA'];
+         $nombre = $row['NOMBRE'];
+       ?>
+     <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
+     <?php 
+     } 
+     }
+     ?>
+   </select> 
+    <div class="invalid-feedback">
+    Complete este campo.
+    </div>
+ </div>
+</div><!--CIERRE DE tutores academico-->
+
+ 
+<div style="display:none" id="tutores_espirituales" class="col-md-6 mb-3"> <!--Fila para tutores_espirituales-->
+ <?php 
+ $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
+ FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
+ $resultadod=$conn->query($query);                
+ ?>
+ <div class="form-group">
+   <label  class="control-label">Catequista/ Asesor Espiritual:</label>
+   <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" >
+     <option selected disabled value="">--Seleccionar Catequista o Asesor Espiritual--</option>
+     <?php 
+       if ($resultadod->num_rows > 0) {
+         while($row = $resultadod->fetch_assoc()) { 
+         $codigo_tutor = $row['CODIGO_PERSONA'];
+         $nombre = $row['NOMBRE'];
+       ?>
+     <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
+     <?php 
+     } 
+     }
+     ?>
+   </select> 
+    <div class="invalid-feedback">
+    Complete este campo.
+    </div>
+ </div>
+</div><!--CIERRE DE tutores academico-->
+</div><!--FINAL DEL ROW -->
               <div class="row">
                 <div class="col-md-3 mb-3"> <!--HORA-->
                     <label for="validationCustom03"  class="control-label">Hora Inicio Tutoría:</label> 
@@ -152,161 +298,7 @@ Diana Rut Garcia        03/07/2022                   Cambio en el titulo
                   </div>
               </div><!--Cierre del row general -->
 
-
-
-
-
-
-              <div class="row">
-
-                 <div class="col-md-3 mb-3"> <!--columna para selecionar el area-->
-                 <?php
-                      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  
-                      where CODIGO_AREA <> 6
-                      AND CODIGO_AREA <> 2
-                      AND CODIGO_AREA <> 3";
-                      $filas_area= $conn->query($query);
-                      ?>
-                    <div class="form-group">
-                    <label  class="control-label">Area de la tutoría:</label> 
-                     <select class="form-control select2"  name="area_tutoria" id="area_tutoria" required>
-                       <option selected disable value="">--Seleccione un Area--</option>
-                       <?php
-                          if($filas_area->num_rows >0){ 
-                            while($filas=$filas_area->fetch_assoc()){ 
-                       ?>
-                       <option value="<?php echo $filas['CODIGO_AREA'];?>"><?php echo $filas['NOMBRE'];?></option>
-                        <?php
-                          }
-                        }
-                        ?>
-                     </select>
-                       <div class="invalid-feedback">
-                         Complete este campo.
-                        </div>
-                    </div>
-                  </div><!--fin de columna para selecionar el area-->
-
-                  <div style ="display:none;" id="tutorias_academicas" class="col-md-3"> <!--inicio seleccionar tutoria academica-->
-                    <?php //
-                    $query = "SELECT CODIGO_TUTORIA, NOMBRE
-                     FROM tbl_tutoria
-                     WHERE CODIGO_AREA = 1";
-                    $resultadod=$conn->query($query);                
-                    ?>
-                    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
-                    <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_academicas" >
-                        <option selected disabled value="" >--Seleccionar Tutoría--</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                            while($row = $resultadod->fetch_assoc()) { 
-                            $codigo_tutoria = $row['CODIGO_TUTORIA'];
-                            $nombre = $row['NOMBRE'];
-                          ?>
-                        <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select> 
-                      <div class="invalid-feedback">
-                      Complete este campo.
-                        </div>
-                    </div>
-                  </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
-
-                  <div style ="display:none;" id="tutorias_espirituales" class="col-md-3"> <!--inicio seleccionar tutoria espirituales-->
-                    <?php //
-                    $query = "SELECT CODIGO_TUTORIA, NOMBRE
-                     FROM tbl_tutoria
-                     WHERE CODIGO_AREA = 4";
-                    $resultadod=$conn->query($query);                
-                    ?>
-                    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
-                    <div class="form-group">
-                      <select style="width: 100%"   class="form-control select2" name="tutorias_espirituales" >
-                        <option selected disabled value="" >--Seleccionar Tutoría--</option>
-                        <?php 
-                          if ($resultadod->num_rows > 0) {
-                            while($row = $resultadod->fetch_assoc()) { 
-                            $codigo_tutoria = $row['CODIGO_TUTORIA'];
-                            $nombre = $row['NOMBRE'];
-                          ?>
-                        <option value="<?php echo $codigo_tutoria?>" ><?php echo $nombre;?></option>
-                        <?php 
-                        } 
-                        }
-                        ?>
-                      </select> 
-                      <div class="invalid-feedback">
-                      Complete este campo.
-                        </div>
-                    </div>
-                  </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
-                  
-                <div style="display:none" id="tutores_academicos" class="col-md-6 mb-3"> <!--Fila para tutores academicos-->
-                  <?php 
-                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <div class="form-group">
-                    <label  class="control-label">Encargado-Tutor:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_academico" >
-                      <option selected disabled value="">--Seleccionar Tutor--</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutor = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                     <div class="invalid-feedback">
-                     Complete este campo.
-                     </div>
-                  </div>
-                </div><!--CIERRE DE tutores academico-->
-
-                  
-                <div style="display:none" id="tutores_espirituales" class="col-md-6 mb-3"> <!--Fila para tutores_espirituales-->
-                  <?php 
-                  $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                  FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
-                  $resultadod=$conn->query($query);                
-                  ?>
-                  <div class="form-group">
-                    <label  class="control-label">Catequista/ Asesor Espiritual:</label>
-                    <select  class="form-control select2"  style="width: 100%;"  name="tutor_espiritual" id="tutor" >
-                      <option selected disabled value="">--Seleccionar Catequista o Asesor Espiritual--</option>
-                      <?php 
-                        if ($resultadod->num_rows > 0) {
-                          while($row = $resultadod->fetch_assoc()) { 
-                          $codigo_tutor = $row['CODIGO_PERSONA'];
-                          $nombre = $row['NOMBRE'];
-                        ?>
-                      <option value="<?php echo $codigo_tutor?>" ><?php echo $nombre;?></option>
-                      <?php 
-                      } 
-                      }
-                      ?>
-                    </select> 
-                     <div class="invalid-feedback">
-                     Complete este campo.
-                     </div>
-                  </div>
-                </div><!--CIERRE DE tutores academico-->
-
-                
-              </div><!--FINAL DEL ROW -->
-
-              <div class="row">
-                  
+              <div class="row"> 
                 <div class="col-md-4"> 
                   <?php //
                   $query = "SELECT * FROM tbl_modalidad";
