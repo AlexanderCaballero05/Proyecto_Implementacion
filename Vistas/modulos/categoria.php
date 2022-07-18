@@ -99,14 +99,14 @@ Diana Rut               27/05/2022            Se agrego con js required en false
      <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
+            <li class="nav-item">
+             <a class="nav-link active" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
+             <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
           </ul>
         </div>
@@ -122,73 +122,11 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                      <hr color="blue"></br>
                     <!-- DATOS PERSONALES -->
                     <div class="row">
-                      <div class="col-md-4"> <!--INICIO DNI-->
-                        <label  class="control-label">Número de Identidad:</label> 
-                        <div class="form-group">
-                          <input required pattern="[0-9]{13,13}" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
-                          <div class="invalid-feedback">
-                              Campo obligatorio,requerido 13 caracteres.
-                          </div>                     
-                        </div>
-                      </div>
-                      <div class="col-md-4"><!--INICIO 1er NOMBRE-->
-                        <label  class="control-label">Primer Nombre:</label> 
-                        <div class="form-group">
-                          <input  id="pri_nombre" class="form-control" onkeyup="noespacio(this, event);mayus(this)" required pattern="[A-Z]{3,20}" type="text" maxlength="20" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);">
-                          <div class="invalid-feedback">
-                             Campo obligatorio.
-                          </div>  
-                        </div>
-                      </div>
-                      <div class="col-md-4"><!--INICIO er NOMBRE-->
-                        <label  class="control-label">Segundo Nombre:</label> 
-                        <div class="form-group">
-                          <input class="form-control" type="text"   maxlength="20" minlength="3" name="segundo_nombre" id="seg_nombre" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
-                        </div>
-                      </div>
-                    </div><!--Fin de una fila -->
-                    <div class="row">
-                      <div class="col-md-4"><!--INICIO 1er APELLIDO-->
-                        <label  class="control-label">Primer Apellido:</label> 
-                        <div class="form-group">
-                          <input class="form-control" type="text" required pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
-                          <div class="invalid-feedback">
-                              Campo obligatorio.
-                          </div> 
-                        </div>
-                      </div>
-                      <div class="col-md-4"><!--INICIO 2er APELLIDO-->
-                        <label  class="control-label">Segundo Apellido:</label> 
-                        <div class="form-group">
-                          <input class="form-control" type="text"  pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="segundo_apellido" id="seg_apellido" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
-                        </div>
-                      </div>
-                      <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
-                        <label  class="control-label">Fecha Nacimiento:</label> 
-                        <div class="form-group">
-                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2012-01-01" min="1950-01-01" required  >
-                          <div class="invalid-feedback">
-                            Campo obligatorio.
-                          </div> 
-                        </div>
-                      </div>
-                    </div><!--Fin de otra fila :v -->
-
-                    <div class="row">
-                      <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
-                        <label  class="control-label">Lugar Nacimiento:</label> 
-                        <div class="form-group">
-                          <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4"   name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
-                          <div class="invalid-feedback">
-                             Campo obligatorio.
-                          </div> 
-                        </div>
-                      </div>
-                      <div class="col-md-4"><!--INICIO TIPO PERSONA-->
-                      <?php 
-                      $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
-                      $resultadod=$conn->query($query);                
-                      ?>
+                       <div class="col-md-4"><!--INICIO TIPO PERSONA-->
+                          <?php 
+                          $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
+                          $resultadod=$conn->query($query);                
+                          ?>
                          <label class="control-label">Tipo Persona:</label>
                          <div class="form-group">
                             <select class="form-control select2"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
@@ -209,7 +147,70 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                                  Eliga una opción.
                              </div>
                          </div>
+                       </div>
+                      <div class="col-md-4"> <!--INICIO DNI-->
+                        <label  class="control-label">Número de Identidad:</label> 
+                        <div class="form-group">
+                          <input required pattern="[0-9]{13,13}" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" class="form-control" type="text" maxlength="13" minlength="13" name="identidad" id="identidad" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);"  placeholder="Ej: 0801199716227" required="" >
+                          <div class="invalid-feedback">
+                              Campo obligatorio,requerido 13 caracteres.
+                          </div>                     
+                        </div>
                       </div>
+                      <div class="col-md-4"><!--INICIO 1er NOMBRE-->
+                        <label  class="control-label">Primer Nombre:</label> 
+                        <div class="form-group">
+                          <input  id="pri_nombre" class="form-control" onkeyup="noespacio(this, event);mayus(this)" required pattern="[A-Z]{3,20}" type="text" maxlength="20" minlength="3" name="primer_nombre"  onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return letrascaracter(event);">
+                          <div class="invalid-feedback">
+                             Campo obligatorio.
+                          </div>  
+                        </div>
+                      </div>
+                    </div><!--Fin de una fila -->
+                    <div class="row">
+                      <div class="col-md-4"><!--INICIO er NOMBRE-->
+                        <label  class="control-label">Segundo Nombre:</label> 
+                        <div class="form-group">
+                          <input class="form-control" type="text"   maxlength="20" minlength="3" name="segundo_nombre" id="seg_nombre" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
+                        </div>
+                      </div>
+                      <div class="col-md-4"><!--INICIO 1er APELLIDO-->
+                        <label  class="control-label">Primer Apellido:</label> 
+                        <div class="form-group">
+                          <input class="form-control" type="text" required pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="primer_apellido" id="pri_apellido" onKeyDown="sinespacio(this);" required="" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" required="">
+                          <div class="invalid-feedback">
+                              Campo obligatorio.
+                          </div> 
+                        </div>
+                      </div>
+                      <div class="col-md-4"><!--INICIO 2er APELLIDO-->
+                        <label  class="control-label">Segundo Apellido:</label> 
+                        <div class="form-group">
+                          <input class="form-control" type="text"  pattern="[A-Z]{3,20}"  maxlength="20" minlength="4" name="segundo_apellido" id="seg_apellido" onKeyDown="sinespacio(this);" onkeypress="return soloLetras(event);" onkeyup="mayus(this);" autocomplete = "off" > 
+                        </div>
+                      </div>
+                    </div><!--Fin de otra fila :v -->
+
+                    <div class="row">
+                      <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
+                        <label  class="control-label">Fecha Nacimiento:</label> 
+                        <div class="form-group">
+                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2012-01-01" min="1950-01-01" required  >
+                          <div class="invalid-feedback">
+                            Seleccione una fecha correcta.
+                          </div> 
+                        </div>
+                      </div>
+                      <div class="col-md-4"><!--INICIO lugar de NACIMIENTO-->
+                        <label  class="control-label">Lugar Nacimiento:</label> 
+                        <div class="form-group">
+                          <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4"   name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
+                          <div class="invalid-feedback">
+                             Campo obligatorio.
+                          </div> 
+                        </div>
+                      </div>
+                      
                       <div class="col-md-4"><!--INICIO SEXO--> 
                        <?php
                         $query = "SELECT CODIGO_SEXO, SEXO FROM TBL_SEXO;";
@@ -940,6 +941,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('usuarios').style.display = "none";
+          document.getElementById('estudiantes').style.display = "none";
           document.getElementById('familiares').style.display = "block";
           document.getElementById('medico').required = false;
           document.getElementById('cate').required = false;
@@ -971,6 +973,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
+          document.getElementById('estudiantes').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('medico').required = false;
@@ -986,6 +989,7 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('familiares').style.display = "none";
+          document.getElementById('estudiantes').style.display = "none";
           document.getElementById('catequistas').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('psico').required = false;
