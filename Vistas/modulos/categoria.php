@@ -197,7 +197,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="form-group">
                           <input class="form-control" type="date"  name="fecha_nacimiento" max="2012-01-01" min="1950-01-01" required  >
                           <div class="invalid-feedback">
-                            Campo obligatorio.
+                            Seleccione una fecha correcta.
                           </div> 
                         </div>
                       </div>
