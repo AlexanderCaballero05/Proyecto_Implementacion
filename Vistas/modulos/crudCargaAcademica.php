@@ -30,6 +30,7 @@
   ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
   Diana Rut Garcia         	3-07-2022                 Cambio en el titulo y el modal de editar
   ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
+  ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
  ----------------------------------------------------------------------->
 
 <?php 
@@ -147,9 +148,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                 if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                 ?>  
                 <a href="procesoCargaAcademica" >
-                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Carga</button>
+                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                 </a>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                </br></br>
                <?php
                 }
@@ -268,7 +269,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
-                                    <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                    <button type='submit' title='Imprimir' style="color:white; background-color:#FA0079"class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
                                 </a>
                                 <?php
                                     }
@@ -419,8 +420,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     </div><!--cierre de modalidad-->
                                     <div class="col-sm-4"> 
                                       <?php //
-                                      $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
-                                      FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
+                                      $query = "SELECT p.CODIGO_PERSONA, CONCAT_WS(' ',PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
+                                      FROM tbl_persona p 
+                                      left join tbl_usuario tu  on tu.CODIGO_PERSONA = p.CODIGO_PERSONA 
+                                      left join tbl_roles tr  on tr.CODIGO_TIPO_ROL = tu.CODIGO_TIPO_ROL 
+                                      where tr.CODIGO_TIPO_ROL   = 2;";
                                       $resultadod=$conn->query($query);                
                                       ?>
                                       <div class="form-group">

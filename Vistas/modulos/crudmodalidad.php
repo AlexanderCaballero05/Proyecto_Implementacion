@@ -48,7 +48,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
     </div><!-- /.container-fluid -->
   </div>
   <div class="content-header text-xl-center mb-3">
-    <h4>Mantenimiento Modalidad </h4>
+    <h4>Modalidad </h4>
   </div>
 
   <section class="content">
@@ -80,8 +80,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
 
                              ?>
 
-                              <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Modalidad</button>
-                              <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                              <button  data-toggle="modal"  href="#AGREGAR_MODALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+                              <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                             <?php
                               }
                             ?>
