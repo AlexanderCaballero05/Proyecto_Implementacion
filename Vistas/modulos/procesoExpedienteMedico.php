@@ -5,9 +5,27 @@ include_once 'conexionpdo.php';
  include "conexionpdo.php";
 ?>
 <head>
- 
+<script languaje="javascript">
+                                        function verificar_uno(){
+                                        var suma = 0;
+                                        var checks = document.getElementsByName('alergia[]');
+                                        for (var i = 0, j = checks.length; i < j; i++) {
+                                            if(checks[i].checked == true){
+                                            suma++;
+                                            }
+                                        }
+                                        
+                                        if(suma == 0){
+                                            alert('Debes seleccionar un registro');
+                                            return false;
+                                        }
+                                        
+                                        }
+                                        
+                                      </script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
+
 </head>
 
 <body oncopy="return false" onpaste="return false">
@@ -47,11 +65,11 @@ include_once 'conexionpdo.php';
           </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
-             <form method="POST" class="needs-validation" novalidate id="form">
+             <form method="POST" class="needs-validation" novalidate id="form" >
                     <H5>Datos Generales del Expediente</H5>
                     <hr color="blue">
                     <div class= "row"> 
-                        <div  class="col-sm-4">
+                        <div  class="col-sm-6">
                                    <?php
                                         $usuario= $_SESSION['vario'];
                                         //Consulta que trae el codigo del usuario
@@ -83,7 +101,8 @@ include_once 'conexionpdo.php';
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                 <label for="" class="control-label">Nombre delPaciente</label> 
+                                    
+                                 <label for="" class="control-label">Nombre del Paciente</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre2;?>">
                             <input  hidden name="codigo_paciente_expediente" value="<?php echo $codigo2;?>">
@@ -97,46 +116,54 @@ include_once 'conexionpdo.php';
 
                         <div  class="col-sm-2">
                             <?php 
-                            $queryTipo = "SELECT CODIGO_TIPO_SANGRE ,TIPO from tbl_tipo_sangre ";
+                            $queryTipo = "SELECT CODIGO_TIPO_SANGRE ,TIPO, CODIGO_ESTADO from tbl_tipo_sangre ";
                             $resultadotipo=$conn->query($queryTipo);                
                             ?>
-                          <label for="" class="control-label">Tipo Sangre</label> 
+                          <label for="" class="control-label">Tipo de Sangre</label> 
                            <div class="form-group">
-                             <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"> 
-                                <option selected >--Seleccione tipo--</option>
+                             <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"required> 
+                                <option selected enable  value="">-- Seleccione --</option>
                                 <?php 
                                     if ($resultadotipo->num_rows > 0) {
-                                    while($rowtipo = $resultadotipo->fetch_assoc()) { 
-                                    $codigo_tipo = $rowtipo['CODIGO_TIPO_SANGRE'];
-                                    $tipo_sangre= $rowtipo['TIPO'];
-                                    ?>
-                                <option value="<?php echo $codigo_tipo; ?>" ><?php echo $tipo_sangre;?></option>
-                                <?php 
-                                } 
-                                }
-                                ?>
+                                      while($rowtipo = $resultadotipo->fetch_assoc()) { 
+                                        $codigo_tipo = $rowtipo['CODIGO_TIPO_SANGRE'];
+                                        $tipo_sangre= $rowtipo['TIPO'];
+                                        $estado=$rowtipo['CODIGO_ESTADO']
+                                        ?>
+                                        <?php 
+                                        if ($estado==2) {
+                                          ?>
+                                            <option value="<?php echo $codigo_tipo; ?>" ><?php echo $tipo_sangre;?></option>
+                                          <?php 
+                                        }
+                                      } 
+                                      
+                                    }
+                                  ?></select>
                                  <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
-                             </select>
+                             
                             
                             </div>
                         </div><!--fin del tipo sangre -->
-
-                        <div class="col-sm-3">
+                           </br>                   
+                        <div class="col-sm-6">
+                        
                          <label for="" class="control-label">Tratamientos que Toma Actualmente</label> 
                             <div class="form-group">
-                            <textarea onkeypress="return soloLetrasnumeros(event)" class="form-control" type="textarea" name="tratamientos"></textarea>
+                            <textarea minlength="5" maxlength="150"  onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');" class="form-control" type="textarea" name="tratamientos" onblur="quitarespacios(this);" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
                             </div>
+                            
                         </div><!--fin del peso -->
 
-                        <div  class="col-sm-3">
-                          <label for="" class="control-label">¿Padece de alguna enfermedad?</label> 
+                        <div  class="col-sm-6">
+                          <label for="" class="control-label">¿Padece de Alguna Enfermedad?</label> 
                             <div class="form-group">
-                            <textarea class="form-control" onkeypress="return soloLetrasnumeros(event)" type="textarea" name="enfermedades"  autocomplete = "off" ></textarea>
+                            <textarea class="form-control"minlength="5" maxlength="150" onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');"  type="textarea" name="enfermedades"  autocomplete = "off" onblur="quitarespacios(this);" required></textarea>
                             </div>
                         </div><!--fin del la estatura -->
 
@@ -150,64 +177,69 @@ include_once 'conexionpdo.php';
                      
                   <div class="col-md-3">
                        <div class="card">
-                          <div class="card-header" style="background-color:#DFD4FE;">
+                          <div class="card-header text-center" style="background-color:#DFD4FE;">
                              <strong>Alergias</strong>
                           </div>
                        <div class="card-body">
                         <?php 
-                          $queryALE = "SELECT CODIGO_ALERGIAS,NOMBRE from tbl_alergias ";
+                          $queryALE = "SELECT CODIGO_ALERGIAS,NOMBRE,CODIGO_ESTADO from tbl_alergias ";
                           $resultadodALE=$conn->query($queryALE);                
                           ?>
                           <?php 
-                          if ($resultadodALE->num_rows > 0) {
-                            while($rowALE = $resultadodALE->fetch_assoc()) { 
-                            $codigoALE = $rowALE['CODIGO_ALERGIAS'];
-                            $nombreALE= $rowALE['NOMBRE'];
-                          ?>
-                        <div  class="form-check icheck-green" >
-                            <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigoALE;?>" value="<?php echo $codigoALE;?>">
-                            <label class="form-check-label" for="alergia<?php echo $codigoALE;?>">
-                              <?php echo $nombreALE;?>
-                            </label>
-                            </br>
-                            
-                          </div>
-                          <?php 
-                          } 
+                            if ($resultadodALE->num_rows > 0) {
+                              while($rowALE = $resultadodALE->fetch_assoc()) { 
+                                $codigoALE = $rowALE['CODIGO_ALERGIAS'];
+                                $nombreALE= $rowALE['NOMBRE'];
+                                $estad2=$rowALE['CODIGO_ESTADO']
+                         ?>
+                                  <?php 
+                                  
+                                  if ($estad2==2) {
+                                    ?>
+                                      <div  class="form-check icheck-pink" >
+                                      <input  class="form-check-input" type="checkbox" name="alergia[]" id="alergia<?php echo $codigoALE;?>" value="<?php echo $codigoALE;?>" >
+                                      <label class="form-check-label" for="alergia<?php echo $codigoALE;?>"> <?php echo $nombreALE;?></label>
+                                      </br>
+                                    </div> 
+                                      <?php 
+                                  }
+                              } 
                           }
                           ?>
                          </div>
                          </div>
                   </div>
                       <!-- End: checkbox -->
-                      <div class="col-md-3">
+                      <div class="col-md-4">
                         <div class="card">
-                            <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>Transtornos Sistemas Corporales</strong>
+                            <div class="card-header text-center" style="background-color:#DFD4FE;">
+                              <strong>Trastornos Sistemas Corporales</strong>
                             </div>
                         <div class="card-body">
                         
                             <?php 
-                                $query = "SELECT CODIGO_TRANSTORNO ,TIPO from `TBL_TRANSTORNOS_CORPORALES` ";
+                                $query = "SELECT CODIGO_TRANSTORNO ,TIPO,CODIGO_ESTADO from `TBL_TRANSTORNOS_CORPORALES` ";
                                 $resultadod=$conn->query($query);                
-                                ?>
+                            ?>
                                 <?php 
-                                if ($resultadod->num_rows > 0) {
-                                while($row = $resultadod->fetch_assoc()) { 
-                                $codigo = $row['CODIGO_TRANSTORNO'];
-                                $nombre= $row['TIPO'];
+                                  if ($resultadod->num_rows > 0) {
+                                    while($row = $resultadod->fetch_assoc()) { 
+                                      $codigo = $row['CODIGO_TRANSTORNO'];
+                                      $nombre= $row['TIPO'];
+                                      $estado3=$row['CODIGO_ESTADO'];
                                 ?>
-                            <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="transtornos[]" id="transtornos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
-                                <label class="form-check-label" for="transtornos<?php echo $codigo;?>">
-                                    <?php echo $nombre;?>
-                                </label>
-                                </br>
-                                
-                                </div>
-                                <?php 
-                                } 
-                                }
+                                      <?php 
+                                      if ($estado3==2) {
+                                        ?>
+                                          <div  class="form-check icheck-pink" >
+                                            <input  class="form-check-input" type="checkbox" name="transtornos[]" id="transtornos<?php echo $codigo;?>" value="<?php echo $codigo;?>">
+                                            <label class="form-check-label" for="transtornos<?php echo $codigo;?>"><?php echo $nombre;?> </label>
+                                            </br>
+                                          </div>
+                                        <?php 
+                                      }
+                                    } 
+                                  }
                                 ?>
                       </div><!--fin otros antecedentes--> 
                       </div>
@@ -216,32 +248,35 @@ include_once 'conexionpdo.php';
 
                       <div class="col-md-3">
                         <div class="card">
-                            <div class="card-header" style="background-color:#DFD4FE;">
+                            <div class="card-header text-center" style="background-color:#DFD4FE;">
                               <strong>Apariencia Física</strong>
                             </div>
                         <div class="card-body">
                         
                             <?php 
-                                $query1 = "SELECT CODIGO_APARIENCIA ,TIPO from TBL_APARIENCIA_FISICA  ";
+                                $query1 = "SELECT CODIGO_APARIENCIA ,TIPO,CODIGO_ESTADO from TBL_APARIENCIA_FISICA  ";
                                 $resultadod1=$conn->query($query1);                
                                 ?>
                                 <?php 
-                                if ($resultadod1->num_rows > 0) {
-                                while($row1 = $resultadod1->fetch_assoc()) { 
-                                $codigo1 = $row1['CODIGO_APARIENCIA'];
-                                $nombre1= $row1['TIPO'];
-                                ?>
-                            <div  class="form-check icheck-pink" >
-                                <input  class="form-check-input" type="checkbox" name="apariencia[]" id="apariencia<?php echo $codigo1;?>" value="<?php echo $codigo1;?>">
-                                <label class="form-check-label" for="apariencia<?php echo $codigo1;?>">
-                                    <?php echo $nombre1;?>
-                                </label>
-                                </br>
-                                
-                                </div>
-                                <?php 
-                                } 
-                                }
+                                  if ($resultadod1->num_rows > 0) {
+                                    while($row1 = $resultadod1->fetch_assoc()) { 
+                                      $codigo1 = $row1['CODIGO_APARIENCIA'];
+                                      $nombre1= $row1['TIPO'];
+                                      $estado4=$row1['CODIGO_ESTADO']
+                                      ?>
+                                      <?php 
+                                      if ($estado4==2) {
+                                        ?>
+                                          <div  class="form-check icheck-pink" >
+                                            <input  class="form-check-input" type="checkbox" name="apariencia[]" id="apariencia<?php echo $codigo1;?>" value="<?php echo $codigo1;?>">
+                                            <label class="form-check-label" for="apariencia<?php echo $codigo1;?>">
+                                            <?php echo $nombre1;?></label>
+                                            </br>
+                                          </div>
+                                        <?php
+                                      }
+                                    } 
+                                  }
                                 ?>
                       </div><!--fin otros antecedentes--> 
                       </div>
@@ -333,4 +368,31 @@ if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
         })
 })()
 </script>
-
+<script>
+function validar_checkbox() {
+   // Obtener hijos dentro de etiqueta <div>
+   var cont = document.getElementsByClassName('form-check');
+   var i = 0;
+   var al_menos_uno = false;
+   //Recorrido de checkbox's
+   while (i < cont.length) {
+      // Verifica si el elemento es un checkbox
+      if (cont[i].tagName == 'INPUT' && cont[i].type == 'checkbox') {
+         // Verifica si esta checked
+         if (cont[i].checked) {
+               al_menos_uno = true;
+         }
+      }
+      i++
+    }                 
+    //Valida si al menos un checkbox es checked
+    if (!al_menos_uno) {
+        alert('Seleccione al menos uno');
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+          e.returnValue = false;
+        }
+    }
+}
+</script>

@@ -10,10 +10,11 @@
 
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ESTADO
 if(isset($_POST['agregar_tipo'])){
+  
   try{
      if(isset($_POST['agregar_patologia'])){
           $agregar_tipo = ($_POST['agregar_tipo']);
-        
+          $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']);
              
          try{ 
              $consulta_estado = $db->prepare("SELECT COUNT(*) FROM tbl_transtornos_corporales WHERE TIPO = (?);");
@@ -27,7 +28,7 @@ if(isset($_POST['agregar_tipo'])){
              exit;
              }else{
                try{
-                 $query_estado = " INSERT INTO `tbl_transtornos_corporales`(`TIPO`) VALUES ('$agregar_tipo'); ";
+                 $query_estado = " INSERT INTO `tbl_transtornos_corporales`(TIPO, CODIGO_ESTADO) VALUES ('$agregar_tipo','$estado_mantenimiento'); ";
                  $resul=$conn->query($query_estado);
                  if($resul >0){
                    echo "<script> 
@@ -64,6 +65,7 @@ if(isset($_POST['agregar_tipo'])){
     if(isset($_POST['editar_nopatologia'])){
       $codigo_nopatologia = ($_POST['EDITARNOPATOLOGIA']);
       $editar_tipo = ($_POST['editar_tipo']);
+      $editar_estado = ($_POST['EDITARESTADO']);
        //cODIGO PARA VERIFICAR QUE NO EXISTA EL TRANSTORNO YA
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_transtornos_corporales WHERE TIPO = (?) and CODIGO_TRANSTORNO <> (?) ;");
        $sentencia->execute(array($editar_tipo,$codigo_nopatologia));
@@ -76,7 +78,7 @@ if(isset($_POST['agregar_tipo'])){
           exit;
         }else{
           try{
-            $sql = "UPDATE tbl_transtornos_corporales SET TIPO = '$editar_tipo'
+            $sql = "UPDATE tbl_transtornos_corporales SET TIPO = '$editar_tipo', CODIGO_ESTADO='$editar_estado'
                   WHERE CODIGO_TRANSTORNO = '$codigo_nopatologia'; ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
@@ -85,10 +87,6 @@ if(isset($_POST['agregar_tipo'])){
               window.location = "crudTranstornos";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un registro ';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>

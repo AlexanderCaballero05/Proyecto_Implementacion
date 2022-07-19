@@ -13,7 +13,8 @@ if(isset($_POST['apariencia'])){
      if(isset($_POST['nuevo'])){
           $nombre_apariencia= ($_POST['apariencia']);
           $fechaActual = date('Y-m-d');
-          $usuario =$_SESSION['vario'];    
+          $usuario =$_SESSION['vario'];
+          $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']);    
               try{ 
                   $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_apariencia_fisica WHERE TIPO = (?);");
                   $consulta_modalidad->execute(array($nombre_apariencia));
@@ -26,7 +27,7 @@ if(isset($_POST['apariencia'])){
                   exit;
                   }else{
                     try{
-                      $query_modalidad = " INSERT INTO tbl_apariencia_fisica (TIPO) VALUES ('$nombre_apariencia' ); ";
+                      $query_modalidad = " INSERT INTO tbl_apariencia_fisica (TIPO,CODIGO_ESTADO) VALUES ('$nombre_apariencia','$estado_mantenimiento' ); ";
                       $resul=$conn->query($query_modalidad);
                       if($resul >0){
                         echo "<script> 
@@ -71,7 +72,7 @@ if(isset($_POST['apariencia'])){
       $editar_examen = ($_POST['editar_apariencia']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
-
+      $editar_estado = ($_POST['EDITARESTADO']); 
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_apariencia_fisica where TIPO = (?) and CODIGO_APARIENCIA <> (?) ;");
@@ -85,8 +86,8 @@ if(isset($_POST['apariencia'])){
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_apariencia_fisica SET TIPO = '$editar_examen'
-            WHERE CODIGO_APARIENCIA = '$codigo_examen' ";
+            $sql = " UPDATE tbl_apariencia_fisica SET TIPO = '$editar_examen' , CODIGO_ESTADO='$editar_estado'
+            WHERE CODIGO_APARIENCIA = '$codigo_examen'";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo '<script>

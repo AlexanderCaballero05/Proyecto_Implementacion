@@ -105,21 +105,18 @@ Programador               Fecha                      Descripcion
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Tipo</th>
-                         
-                          
-                      
+                          <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT  CODIGO_TIPO_SANGRE, TIPO FROM tbl_tipo_sangre;";
+                        $query = "SELECT  CODIGO_TIPO_SANGRE, TIPO,CODIGO_ESTADO FROM tbl_tipo_sangre;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_TIPO_SANGRE'];
                             $var2 = $row['TIPO'];
-                            
-                         
+                            $var4= $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -193,6 +190,11 @@ Programador               Fecha                      Descripcion
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php
+                                                  $consulta1 = mysqli_query($conn,"SELECT NOMBRE FROM tbl_estado WHERE CODIGO_ESTADO='$var4'");
+                                                  $IDE2=mysqli_fetch_array($consulta1); 
+                                                  ECHO $IDE2['NOMBRE'];
+                          ?></td>
 
                           
 
@@ -214,9 +216,23 @@ Programador               Fecha                      Descripcion
                                           <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" pattern=".{6,15}"  maxlength="15"oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');"   
                                           autocomplete = "off"   name="editar_tiposangre" id="tisangre"onblur="quitarespacios(this);" required>
                                           <div class="invalid-feedback">
-                                       Campo Obligatorio.
-                                   </div>
+                                              Campo Obligatorio.
+                                          </div>
                                         </div>
+                                        <div class="col-md-4"><!--INICIO estado--> 
+                                            <label class="control-label">Estado:</label>
+                                            <div class="form-group">
+                                            
+                                              <select class="form-control select2 select2-primary"   style="width: 100%;" name="EDITARESTADO" id="EDITARESTADO" required>
+                                                <option  disabled value="">-- Seleccione --</option>
+                                                <option value="2"<?php if ($var4==2) { ECHO "selected"; } ?>>ACTIVO</option>
+                                                <option value="3"<?php if ($var4==3) { ECHO "selected"; } ?>>INACTIVO</option>
+                                            </select> 
+                                                <div class="invalid-feedback">
+                                                        Elija una opción.
+                                                </div>
+                                            </div>
+                                      </div> <!--Fin estado -->
                           </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -280,12 +296,22 @@ Programador               Fecha                      Descripcion
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Tipo de Sangre</label>
-                                    <input  type="text"   class="form-control" pattern=".{6,15}"  maxlength="15" oninput="this.value = this.value.replace(/[^a-zA-Z ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangre" id="sangretipo"onblur="quitarespacios(this);" required>
+                                    <input  type="text"   class="form-control" pattern=".{6,10}"  maxlength="10" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangre" id="sangretipo"onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
                                        Campo Obligatorio.
                                    </div>
                                 </div>
                             </div>
+                            <div class="col-sm-12">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOMANTENIMIENTO" id="ESTADOMANTENIMIENTO" required>
+                                              <option selected disabled value="">-- Seleccione --</option>
+                                              <option value="2">ACTIVO</option>
+                                              <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div> 
+                              </div>
                           
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       

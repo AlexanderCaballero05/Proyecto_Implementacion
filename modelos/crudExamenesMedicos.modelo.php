@@ -47,7 +47,8 @@ if(isset($_POST['nombre_examen'])){
           $nombre_examen= ($_POST['nombre_examen']);
           $descripcion_examen = ($_POST['descripcion_examen']);
           $fechaActual = date('Y-m-d');
-          $usuario =$_SESSION['vario'];    
+          $usuario =$_SESSION['vario'];  
+          $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']);   
               try{ 
                   $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_medicos WHERE EXAMEN_MEDICO = (?);");
                   $consulta_modalidad->execute(array($nombre_examen));
@@ -60,7 +61,7 @@ if(isset($_POST['nombre_examen'])){
                   exit;
                   }else{
                     try{
-                      $query_modalidad = " INSERT INTO tbl_examenes_medicos( EXAMEN_MEDICO,DESCRIPCION) VALUES ('$nombre_examen','$descripcion_examen' ); ";
+                      $query_modalidad = " INSERT INTO tbl_examenes_medicos( EXAMEN_MEDICO,DESCRIPCION,CODIGO_ESTADO) VALUES ('$nombre_examen','$descripcion_examen' , '$estado_mantenimiento'); ";
                       $resul=$conn->query($query_modalidad);
                       if($resul >0){
                         echo "<script> 
@@ -106,7 +107,7 @@ if(isset($_POST['nombre_examen'])){
       $editar_descripcion = ($_POST['editar_descripcionexamen']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
-
+      $editar_estado = ($_POST['EDITARESTADO']); 
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_medicos where EXAMEN_MEDICO = (?) and CODIGO_EXAMEN_MEDICO <> (?) ;");
@@ -120,7 +121,7 @@ if(isset($_POST['nombre_examen'])){
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_examenes_medicos SET EXAMEN_MEDICO = '$editar_examen',DESCRIPCION = '$editar_descripcion'
+            $sql = " UPDATE tbl_examenes_medicos SET EXAMEN_MEDICO = '$editar_examen',DESCRIPCION = '$editar_descripcion', CODIGO_ESTADO='$editar_estado'
             WHERE CODIGO_EXAMEN_MEDICO = '$codigo_examen' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

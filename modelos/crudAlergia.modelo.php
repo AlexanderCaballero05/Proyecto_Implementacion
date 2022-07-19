@@ -10,7 +10,8 @@
                $nombre_alergia = ($_POST['nombre_alergia']);
                $descripcion = ($_POST['descripcion_alergia']);
                $fechaActual = date('Y-m-d');
-               $usuario =$_SESSION['vario'];   
+               $usuario =$_SESSION['vario'];  
+               $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']); 
               try{ 
                   $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_alergias WHERE NOMBRE = (?);");
                   $consulta_rol->execute(array($nombre_alergia));
@@ -23,7 +24,7 @@
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO tbl_alergias( NOMBRE, DESCRIPCION, FECHA_CREACION,CREADO_POR) VALUES ('$nombre_alergia','$descripcion','$fechaActual','$usuario'); ";
+                      $query_rol = " INSERT INTO tbl_alergias( NOMBRE, DESCRIPCION,CODIGO_ESTADO,FECHA_CREACION,CREADO_POR) VALUES ('$nombre_alergia','$descripcion','$estado_mantenimiento','$fechaActual','$usuario'); ";
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
@@ -31,10 +32,6 @@
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=39;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRO UNA ALERGIA';
-                         bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
@@ -69,7 +66,7 @@
       $editar_descripcion = ($_POST['editar_descripcion']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
-
+      $editar_estado = ($_POST['EDITARESTADO']); 
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_alergias where NOMBRE = (?) and CODIGO_ALERGIAS <> (?) ;");
@@ -83,7 +80,7 @@
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_alergias SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
+            $sql = " UPDATE tbl_alergias SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user',CODIGO_ESTADO = '$editar_estado'
             WHERE CODIGO_ALERGIAS = '$codigo_alergia' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
