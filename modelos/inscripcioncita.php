@@ -69,6 +69,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
+                          alert('Cita agregada correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
@@ -88,9 +89,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
-
-                  
-
+                          alert('Cita agregada correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $accion='INSERCIÓN';
@@ -108,6 +107,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
+                          alert('Cita agregada correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
