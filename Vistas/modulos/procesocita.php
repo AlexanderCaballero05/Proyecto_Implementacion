@@ -150,23 +150,21 @@ $result3= $conn->query($query);
                    }  
                  
                   ?>              
-                 <div class="col-sm-9">
-                
+                 <div class="col-sm-9">  
                  
-
                  <?php
-      $query = "SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE
-      FROM tbl_persona p 
-      WHERE p.CODIGO_PERSONA = '$persona'";
-    $resul=$conn->query($query);  
-    if($resul->num_rows > 0){
-      while($row = $resul->fetch_assoc()){
-        $codigo_estudiante =  $row['CODIGO_PERSONA'];
-        $nombreEstudiante = $row['NOMBRE'];
-        
-      }
-    }
-      ?>   
+                      $query = "SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE
+                      FROM tbl_persona p 
+                      WHERE p.CODIGO_PERSONA = '$persona'";
+                    $resul=$conn->query($query);  
+                    if($resul->num_rows > 0){
+                      while($row = $resul->fetch_assoc()){
+                        $codigo_estudiante =  $row['CODIGO_PERSONA'];
+                        $nombreEstudiante = $row['NOMBRE'];
+                        
+                              }
+                        }
+                          ?>   
                  <label for="" class="control-label">Nombre Estudiante</label>
                  <div class="form-group">
                             <input  hidden name="CODPACIENTE" value="<?php echo $codigo_estudiante;?>">
@@ -415,52 +413,7 @@ $result3= $conn->query($query);
 <!-- Cierre del div wraper -->
 
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
 
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-/*
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}*/
-/*
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from   = event.relatedTarget || event.toElement;
-if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
-}
-
-} ); 
-} ); */
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
  <script>

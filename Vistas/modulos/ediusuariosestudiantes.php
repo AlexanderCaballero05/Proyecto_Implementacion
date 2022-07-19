@@ -225,13 +225,15 @@ include_once "conexion3.php";
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
                                  <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
+
+                                <!--Boton para agregar cita al estudiante-->
                                 <a>
                                 <form method="post"  action="procesocita" target="_blank"> 
                                 <input type="text" hidden name="ingresarCitaEstudiante" value="<?php echo $var2 ?>">
                                 <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>cita</button>
                                 </form>
                                 </a>
-                               
+                               <!--Fin de Boton para agregar cita al estudiante-->
                                 <?php
                                   }
                                  ?>
