@@ -97,6 +97,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                           <th class="text-center">Código Alergia</th>
                           <th class="text-center">Nombre Alergia</th>
                           <th class="text-center">Descripción</th>
+                          <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -109,6 +110,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                             $var1 = $row['CODIGO_ALERGIAS'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
+                            $var4= $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -173,6 +175,11 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
+                          <td class="text-center"><?php
+                                                  $consulta1 = mysqli_query($conn,"SELECT NOMBRE FROM tbl_estado WHERE CODIGO_ESTADO='$var4'");
+                                                  $IDE2=mysqli_fetch_array($consulta1); 
+                                                  ECHO $IDE2['NOMBRE'];
+                          ?></td>
                         
                           <div id="EDITAR_ALERGIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -199,11 +206,25 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                                           <label for="txtcodigo_persona">Descripción Alergia</label>
                                           <input  type="text" class="form-control" value ="<?php echo $var3; ?>" pattern=".{6,100}"  maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"   name="editar_descripcion" id="editar_descripcion" onblur="quitarespacios(this);"required>
                                           <div class="invalid-feedback">
-                                       Campo Obligatorio.
-                                   </div>
+                                             Campo Obligatorio.
+                                          </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
+                                    <div class="col-md-4"><!--INICIO estado--> 
+                                            <label class="control-label">Estado:</label>
+                                            <div class="form-group">
+                                            
+                                              <select class="form-control select2 select2-primary"   style="width: 100%;" name="EDITARESTADO" id="EDITARESTADO" required>
+                                                <option  disabled value="">-- Seleccione --</option>
+                                                <option value="2"<?php if ($var4==2) { ECHO "selected"; } ?>>ACTIVO</option>
+                                                <option value="3"<?php if ($var4==3) { ECHO "selected"; } ?>>INACTIVO</option>
+                                            </select> 
+                                                <div class="invalid-feedback">
+                                                        Elija una opción.
+                                                </div>
+                                            </div>
+                                      </div> <!--Fin estado -->
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
@@ -265,7 +286,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Alergia</label>
-                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" onblur="quitarespacios(this);" required>
+                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35"onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" onblur="quitarespacios(this);" required>
                                      <div class="invalid-feedback">
                                        Campo Obligatorio.
                                     </div>
@@ -274,12 +295,22 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción Alergia</label>
-                                    <input  type="text"   class="form-control"  pattern=".{6,100}"maxlength="100" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia" onblur="quitarespacios(this);" required>
+                                    <input  type="text"   class="form-control"  pattern=".{6,100}"maxlength="100"onkeyup="mayus(this);" onkeypress="return soloLetrasNum(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia" onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
                                        Campo Obligatorio.
                                    </div>
                                 </div>
                             </div>
+                            <div class="col-sm-6">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOMANTENIMIENTO" id="ESTADOMANTENIMIENTO" required>
+                                              <option selected disabled value="">-- Seleccione --</option>
+                                              <option value="2">ACTIVO</option>
+                                              <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div> 
+                              </div> 
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">

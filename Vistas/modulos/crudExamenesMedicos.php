@@ -86,10 +86,11 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                   <table id="tabla_Examen" class="table table-bordered table-striped">
                       <thead class="text-center">
                         <tr>
-                        <th>Acción</th>
-                        <th>ID</th>
-                        <th>Exámen Médico</th>
-                        <th>Descripción</th>        
+                        <th class="text-center">Acción</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Exámen Médico</th>
+                        <th class="text-center">Descripción</th>
+                        <th class="text-center">Estado</th>        
                         </tr>
                       </thead>
                       <tbody>
@@ -101,6 +102,7 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                              $var1 = $row['CODIGO_EXAMEN_MEDICO'];
                              $var2 = $row['EXAMEN_MEDICO'];
                              $var3 = $row['DESCRIPCION'];
+                             $var4= $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -169,7 +171,11 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                                                    
+                          <td class="text-center"><?php
+                              $consulta1 = mysqli_query($conn,"SELECT NOMBRE FROM tbl_estado WHERE CODIGO_ESTADO='$var4'");
+                              $IDE2=mysqli_fetch_array($consulta1); 
+                              ECHO $IDE2['NOMBRE'];
+                          ?></td>                    
                         <!--INICIO DEL MODAL DE EDITAR -->
                         <div id="EDITAREXAMEN<?php echo $var1; ?>" class="modal fade" role="dialog">
                          <div class="modal-dialog modal-md">
@@ -197,6 +203,22 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                                                       name="editar_descripcionexamen" id="editar_descripcionexamen" onblur="quitarespacios(this);" required>
                                                  </div>
                                              </div>
+                                             <div class="col-sm-6"><!--INICIO estado--> 
+                                                <label class="control-label">Estado</label>
+                                            <div class="form-group">
+                                            
+                                              <select class="form-control select2 select2-primary"   style="width: 100%;" name="EDITARESTADO" id="EDITARESTADO" required>
+                                                <option  disabled value="">-- Seleccione --</option>
+                                                <option value="2"<?php if ($var4==2) { ECHO "selected"; } ?>>ACTIVO</option>
+                                                <option value="3"<?php if ($var4==3) { ECHO "selected"; } ?>>INACTIVO</option>
+                                            </select> 
+                                                <div class="invalid-feedback">
+                                                        Elija una opción.
+                                                </div>
+                                            </div>
+                                      </div> <!--Fin estado -->
+
+
                                          </div> <!-- FIN DE EL PRIMER ROW -->
                                      </div>
                                      <!--FINAL DEL CARD BODY -->
@@ -285,10 +307,21 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                                     <div class="invalid-feedback">
                                   campo obligatorio.
                                    </div>
-                                   <div class="col-sm-12">
                             </div>
+                            </div>
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOMANTENIMIENTO" id="ESTADOMANTENIMIENTO" required>
+                                              <option selected disabled value="">-- Seleccione --</option>
+                                              <option value="2">ACTIVO</option>
+                                              <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div> 
+                              </div> 
+                              </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
-                        </div>
                     </div><!--FINAL DEL CARD BODY -->                       
                       <div class="modal-footer">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>

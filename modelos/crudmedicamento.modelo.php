@@ -12,6 +12,7 @@
     $descripcion = $_POST['agregar_med_desc'];
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
+    $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']); 
     try {
         $consulta_objeto = $db->prepare("SELECT COUNT(*)  from tbl_medicamento tm  where tm.NOMBRE_MEDICAMENTO  =(?) || tm.CODIGO_MEDICAMENTO  =(?); ");
         $consulta_objeto->execute(array($medicamento,$codigo));
@@ -24,8 +25,8 @@
           exit;  
         } else{
             try {
-              $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-              VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
+              $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION, CODIGO_ESTADO)
+              VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual','$estado_mantenimiento');";
                $resul=$conn->query($query_medicamento);
                if ($resul >0){
                    echo "<script> 
@@ -66,6 +67,7 @@
     $descripcion = $_POST['edit_desc_medi'];
     $fechaActual = date('Y-m-d');
     $usuario =$_SESSION['vario'];
+    $editar_estado = ($_POST['EDITARESTADO']); 
       try {
         $sentencia = $db->prepare(" SELECT COUNT(*) from tbl_medicamento tm  
         where tm.NOMBRE_MEDICAMENTO  = (?) and  tm.CODIGO_MEDICAMENTO <> (?);");
@@ -80,7 +82,7 @@
         }else{
           try{
             $sql = "UPDATE tbl_medicamento tm set tm.NOMBRE_MEDICAMENTO = '$medicamento', tm.DESCRIPCION = '$descripcion', 
-            tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
+            tm.MODIFICADO_POR = '$usuario' , tm.FECHA_MODIFICACION = '$fechaActual' , tm.CODIGO_ESTADO='$editar_estado' where tm.CODIGO_MEDICAMENTO  = '$codigo' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>

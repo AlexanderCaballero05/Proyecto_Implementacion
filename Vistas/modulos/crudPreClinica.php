@@ -20,10 +20,10 @@
   Lic. Giancarlo Martini Scalici Aguilar (Implementación)
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
-    Programa:          Mantenimiento de los trastornos 
+    Programa:          Preclinica 
     Fecha:             
     Programador:      
-    descripcion:       Permite llevar un mantenimiento de los trastornos  es su relación  ,editar,eliminar nuevo
+    descripcion:       Permite registrar los datos de una previa evaluacion del paciente
 -----------------------------------------------------------------------
   Historial de Cambio
 -----------------------------------------------------------------------
@@ -305,4 +305,5 @@
       })
   } );
 </script>
+
 

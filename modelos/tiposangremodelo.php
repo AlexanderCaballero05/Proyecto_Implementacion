@@ -12,7 +12,8 @@
           if(isset($_POST['agregar_tiposangre'])){
                $tiposangre = ($_POST['tiposangre']);
                $fechaActual = date('Y-m-d');  
-               $usuario=$_SESSION['vario']; 
+               $usuario=$_SESSION['vario'];
+               $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']); 
               try{ 
                   $consulta_tipo = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_sangre WHERE tipo = (?);");
                   $consulta_tipo->execute(array($tiposangre));
@@ -25,17 +26,13 @@
                   exit;
                   }else{
                     try{
-                      $query_tiposangre = " INSERT INTO `tbl_tipo_sangre`( `TIPO`, `CREADO_POR`, `FECHA_CREACION`) VALUES ('$tiposangre',' $usuario','$fechaActual'); ";
+                      $query_tiposangre = " INSERT INTO `tbl_tipo_sangre`( `TIPO`, `CREADO_POR`, `FECHA_CREACION`, `CODIGO_ESTADO`) VALUES ('$tiposangre',' $usuario','$fechaActual','$estado_mantenimiento'); ";
                       $resul=$conn->query($query_tiposangre);
                       if($resul >0){
                         echo "<script> 
                         window.location = 'crudtiposangre';
                         </script>";
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=37;
-                        $accion='INSERCIÓN';
-                        $descripcion='SE REGISTRÓ UN NUEVO TIPO DE SANGRE';
-                       bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
@@ -70,6 +67,7 @@
       $fechaActual = date('Y-m-d');  
       $codigo_tipo = ($_POST['id_tiposangre']);
       $editar_tipo = ($_POST['editar_tiposangre']);
+      $editar_estado = ($_POST['EDITARESTADO']); 
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_sangre where TIPO = (?) and CODIGO_TIPO_SANGRE <> (?) ;");
@@ -88,7 +86,8 @@
             $sql = " UPDATE tbl_tipo_sangre
             SET tipo = '$editar_tipo',
             MODIFICADO_POR = '$usuario', 
-            FECHA_MODIFICACION = '$fechaActual'
+            FECHA_MODIFICACION = '$fechaActual',
+            CODIGO_ESTADO='$editar_estado'
             WHERE CODIGO_TIPO_SANGRE = '$codigo_tipo' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

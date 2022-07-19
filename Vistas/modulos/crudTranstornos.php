@@ -110,17 +110,19 @@
                         <th class="text-center">Acción</th>
                         <th class="text-center">Id</th>
                         <th class="text-center">Tipo de Trastorno</th>
+                        <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                         $query = "SELECT np.CODIGO_TRANSTORNO, np.TIPO
+                         $query = "SELECT np.CODIGO_TRANSTORNO, np.TIPO, np.CODIGO_ESTADO
                          FROM tbl_transtornos_corporales np;";
                          $result = $conn->query($query);
                          if ($result->num_rows > 0) {
                              while ($row = $result->fetch_assoc()) {
                                  $var1 = $row['CODIGO_TRANSTORNO'];
                                  $var2 = $row['TIPO'];
+                                 $var4= $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -196,7 +198,11 @@
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
-                          
+                          <td class="text-center"><?php
+                              $consulta1 = mysqli_query($conn,"SELECT NOMBRE FROM tbl_estado WHERE CODIGO_ESTADO='$var4'");
+                              $IDE2=mysqli_fetch_array($consulta1); 
+                              ECHO $IDE2['NOMBRE'];
+                          ?></td>                         
                          
 
                         <!--INICIO DEL MODAL DE EDITAR TRANSTORNO -->
@@ -218,6 +224,21 @@
                                         </div>
                                       </div>
                                       </div>
+                                      <div class="col-md-12"><!--INICIO estado--> 
+                                      <div class="form-group">
+                                      <label class="control-label">Estado</label>
+                                            
+                                            
+                                              <select class="form-control select2 select2-primary"   style="width: 100%;" name="EDITARESTADO" id="EDITARESTADO" required>
+                                                <option  disabled value="">-- Seleccione --</option>
+                                                <option value="2"<?php if ($var4==2) { ECHO "selected"; } ?>>ACTIVO</option>
+                                                <option value="3"<?php if ($var4==3) { ECHO "selected"; } ?>>INACTIVO</option>
+                                            </select> 
+                                                <div class="invalid-feedback">
+                                                        Elija una opción.
+                                                </div>
+                                            </div>
+                                      </div> <!--Fin estado -->
                                   </div><!--FINAL DEL CARD BODY --> 
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
@@ -286,6 +307,17 @@
 
                                 </div>
                             </div>
+
+                            <div class="col-sm-6">
+                            <div class="form-group">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                          <select class="form-control select2 select2-primary"   style="width: 100%;" name="ESTADOMANTENIMIENTO" id="ESTADOMANTENIMIENTO" required>
+                                              <option selected disabled value="">-- Seleccione --</option>
+                                              <option value="2">ACTIVO</option>
+                                              <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div> 
+                              </div> 
                            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                     
