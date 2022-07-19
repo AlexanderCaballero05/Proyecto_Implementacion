@@ -92,7 +92,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class=" nav-link" style="color:#000000;" href="crudinscripcioncita">Citas Hoy</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesocita">Agregar Cita</a>
+            <a class="nav-link" style="color:#000000;" href="#">Agregar Cita</a>
             </li>
           </ul>
         </div>
@@ -120,10 +120,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                      <?php 
                       if($permiso_registrar == 'SI'){
                      ?>
-                    <a href="procesocita">
-                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Cita</button>
+                    <a href="ediusuariosestudiantes">
+                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                     </a>
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar</button>
                    </br></br>
                     <!-- Codigo de permiso de insertar -->
                     <?php 

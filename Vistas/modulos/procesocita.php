@@ -136,44 +136,43 @@ $result3= $conn->query($query);
             <a class=" nav-link" style="color:#000000;" href="crudinscripcioncita">Citas Hoy</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="procesocita">Agregar Cita</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Agregar Cita</a>
             </li>
           </ul>
           </div>
           <div class="card-body">  
             <form method="POST" class="was-validated" >
                 <div class="row pl-2 mb-3 mt-4">
+                  
                  <?php
-                  $query= "SELECT concat_ws (' ' ,tp.PRIMER_NOMBRE, tp.PRIMER_APELLIDO ) 
-                  as BENEFICIARIO  , tp.CODIGO_PERSONA ,tp.CODIGO_TIPO_PERSONA
-                  from tbl_persona tp  ,tbl_tipo_persona pt
-                  WHERE tp.CODIGO_TIPO_PERSONA = pt.CODIGO_TIPO_PERSONA AND tp.CODIGO_TIPO_PERSONA <> 5 and  tp.CODIGO_TIPO_PERSONA <> 6 
-                  and tp.CODIGO_TIPO_PERSONA <> 8 and tp.CODIGO_TIPO_PERSONA <> 3 and tp.CODIGO_TIPO_PERSONA <> 2 and tp.CODIGO_TIPO_PERSONA <> 1";
-                  $resultado = $conn->query($query);
-                  ?>
-                  <a href="categoria">
-                  <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  
-                  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-2"></i></span>  Agregar persona </button>
-                 </a>
+                 if(isset($_POST['ingresarCitaEstudiante'])) {
+                  $persona =($_POST['ingresarCitaEstudiante']);
+                   }  
+                 
+                  ?>              
                  <div class="col-sm-9">
-                   <!-- <label for="txtcodigo_cita">Beneficiario</label>-->
-                    <select  style="width: 100%;"  class="form-control select2" name="CODPACIENTE"  type="text" required >
-                      <option selected disabled value="">--Seleccione  Beneficiario--</option>
-                        <?php 
-                          if ($resultado->num_rows > 0) {
-                          while($row = $resultado->fetch_assoc()) { 
-                          $codigo = $row['CODIGO_PERSONA'];
-                          $nombre = $row['BENEFICIARIO'];
-                          ?>
-                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                        <?php 
-                         } 
-                         }
-                        ?>
-                    </select>
-                      <div class="invalid-feedback">
-                      Complete este campo.
-                      </div>
+                
+                 
+
+                 <?php
+      $query = "SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE
+      FROM tbl_persona p 
+      WHERE p.CODIGO_PERSONA = '$persona'";
+    $resul=$conn->query($query);  
+    if($resul->num_rows > 0){
+      while($row = $resul->fetch_assoc()){
+        $codigo_estudiante =  $row['CODIGO_PERSONA'];
+        $nombreEstudiante = $row['NOMBRE'];
+        
+      }
+    }
+      ?>   
+                 <label for="" class="control-label">Nombre Estudiante</label>
+                 <div class="form-group">
+                            <input  hidden name="CODPACIENTE" value="<?php echo $codigo_estudiante;?>">
+                            <input  readonly class="form-control" value="<?php echo $nombreEstudiante;?>">
+                 </div>
+                  
                   </div>
                 </div> 
                
