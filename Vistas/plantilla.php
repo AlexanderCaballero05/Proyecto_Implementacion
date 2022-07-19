@@ -99,6 +99,7 @@ session_start();
          $_GET["ruta"] == "salir" ||
          $_GET["ruta"] == "perfilUsuario" ||
          $_GET["ruta"] == "ediusuarios" ||
+         $_GET["ruta"] == "ediusuariosestudiantes" ||
          $_GET["ruta"] == "roles" ||
          $_GET["ruta"] == "registrar_personas" ||
          $_GET["ruta"] == "crudespecialidad" ||

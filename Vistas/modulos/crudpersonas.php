@@ -30,8 +30,10 @@
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
   Diana Rut Garcia        		21-06-2022                 Validaciones de no permitir datos vacios y otras cosas
-   ANY HERNANDEZ         		18-07-2022                 eliminacion de mayus en correo 
------------------------------------------------------------------------>
+
+  ANY HERNANDEZ         		18-07-2022                 eliminacion de mayus en correo 
+  Diana Rut                      13/07/2022                Se modifico el orden de la grilla
+
 
 
 
@@ -69,13 +71,13 @@ include_once "conexion3.php";
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
+            <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
+             <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
           </ul>
         </div>
@@ -84,7 +86,9 @@ include_once "conexion3.php";
             <div class="row">
                 <div class="col-md-12">
                    <!-- Codigo de permiso de insertar -->
-                   <?php
+                   
+                     <div class="row">
+                     <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
                             //Evaluo si existe el tipo de Rol
@@ -104,24 +108,21 @@ include_once "conexion3.php";
                       if($permiso_registrar == 'SI'){
                      ?> 
                       <a href="categoria"> 
-                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Persona</button>
+                      <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar </button>
                     </a> 
-                    
-                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte General</button>
-                   
                     <?php 
                       }
                      ?> 
-                     <div class="row"> <!--Inicio del codigo del filtrado de personas -->
-                         <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Filtrar por:</label>
+                         <!--Inicio del codigo del filtrado de personas -->
+                         <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Filtrar Por</label>
                         <div class="col-sm-3">
                         <?php 
                             $query = "SELECT * FROM tbl_tipo_persona WHERE CODIGO_TIPO_PERSONA <> '3' and  CODIGO_TIPO_PERSONA BETWEEN 1 AND 8;";
                             $resul=$conn->query($query);                
                         ?>
-                        <form method="POST" action="crudpersonas" class="needs-validation" novalidate>
-                            <select class="form-control" name="BUSCAR" required>
-                               <option  value="" >Seleccione</option>
+                        <form method="POST" action="crudpersonas" >
+                            <select class="form-control" name="BUSCAR" id="buscador" required>
+                               <option  selected enable value="">Seleccione</option>
                                <?php 
                                 if ($resul->num_rows > 0) {
                                     while($row = $resul->fetch_assoc()) { 
@@ -133,6 +134,7 @@ include_once "conexion3.php";
                                 } 
                                 }
                                 ?>
+                                <option  value="3" >TODOS</option>
                             </select>
                             <div class="invalid-feedback">
                                   Campo Obligatorio.
@@ -144,6 +146,7 @@ include_once "conexion3.php";
                      </form>
                      </div>  <!--final del codigo del filtrado de personas -->
                      <br>
+                     
                      <?php
                         if(isset($_POST['BUSCAR'])){ 
                         $personita = $_POST['BUSCAR']; 
@@ -155,10 +158,12 @@ include_once "conexion3.php";
                             $nom = $row['NOMBRE'];
                          }
                         }
+                        $tipo = $_POST['BUSCAR'];
+                        if($tipo ==1 || $tipo ==2 ||$tipo ==4 ||$tipo ==5 ||$tipo ==6 ||$tipo ==7 ||$tipo ==8 ||$tipo ==9 ){
 
                         
                     ?>
-                    <button  onclick="Descargar2()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte por <?php echo ucwords(strtolower($nom)); ?></button>
+                    <button  onclick="Descargar2()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                     <div class="card">
                         <div class="card-header text-center" >
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
@@ -543,8 +548,10 @@ include_once "conexion3.php";
                                     </tbody>
                                 </table>
                             <?php
-                            }else{// este else es lo que se muestra al inicio ,osea el reporte general de todas las citas si :)
+                             
+                            }else if($tipo ==3){// este else es lo que se muestra al inicio ,osea el reporte general de todas las citas si :)
                              ?>
+                             <button id="botoncito" onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                             <div class="table-responsive">
                                 <table id="tabla_personas" class="table table-bordered table-striped">
                                     <thead>
@@ -930,7 +937,8 @@ include_once "conexion3.php";
                              </tbody>
                                 </table>
                              <?php
-                            } //cierre del else
+                             }
+                            } //cierre del if
                             ?>
                             </div>
                             <!--fin del div de responsivi -->
@@ -994,25 +1002,8 @@ include_once "conexion3.php";
 
 <!-- funciones del sistema -->
 <script>
-function soloLetras(e) {
-    key = e.keyCode || e.which;
-    tecla = String.fromCharCode(key).toLowerCase();
-    letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-    especiales = ["8-37-39-46"];
-    tecla_especial = false
-    for (var i in especiales) {
-        if (key == especiales[i]) {
-            tecla_especial = true;
-            break;
-        }
-    }
-    if (letras.indexOf(tecla) == -1 && !tecla_especial) {
-        return false;
-    }
-}
-//funcion para solu numeros ingresar en el campo
+ 
 function telfono(evt,input){
-        // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43
         var key = window.Event ? evt.which : evt.keyCode;   
         var chark = String.fromCharCode(key);
         var tempValue = input.value+chark;
@@ -1027,40 +1018,7 @@ function telfono(evt,input){
         var preg = /^([9,3,8]{1}[0-9]{0,7})$/; 
         return (preg.test(__val__) === true);
     }
-//funcion para quitar espacios
-function quitarespacios(e) {
-    var cadena = e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-};
-//funcion para poner mayusculas
-function mayus(e) {
-    e.value = e.value.toUpperCase();
-}
-//funcion sin espacios 
-function sinespacio(e) {
-    var cadena = e.value;
-    var limpia = "";
-    var parts = cadena.split(" ");
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-        nuevacadena = parts[i];
-        subcadena = nuevacadena.trim();
-        if (subcadena != "") {
-            limpia += subcadena + " ";
-        }
-    }
-    limpia = limpia.trim();
-    e.value = limpia;
-};
-//otra funcion para quitar espacios :V
-function quitarespacios(e) {
-    var cadena = e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-};
 </script>
-
 <script>
     
     window.onload = function() {

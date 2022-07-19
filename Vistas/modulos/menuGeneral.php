@@ -29,6 +29,7 @@
     Programador               Fecha                      Descripcion
     Luz Montoya         		18-06-2022                 cambio del orden en las opciones de seguridad 
     Diana Rut Garcia       09-07-2022                 cambio en el nombre del nombres del menu
+    Diana Rut Garcia       09-07-2022                 cambio en el orden del menu de personas
 ----------------------------------------------------------------------->
 
 <?php
@@ -135,7 +136,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="crudpersonas" class="nav-link" >
+                  <a href="categoria" class="nav-link" >
                    <i class="far fa-user nav-icon"></i>
                     <p>Proceso Personas/Usuarios</p>
                   </a>
