@@ -107,9 +107,9 @@ include_once "conexion3.php";
           if($permiso_registrar == 'SI'){
         ?> 
         <a href="categoria"> 
-            <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+            <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
         </a>
-         <button onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+         <button onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
          <?php 
          }
         ?>
@@ -152,7 +152,7 @@ include_once "conexion3.php";
                           left join tbl_estudiante est on est.CODIGO_PERSONA = p.CODIGO_PERSONA
                           where
                           u.CODIGO_USUARIO > 1
-                          And r.CODIGO_TIPO_ROL = 8 ORDER BY CODIGO_USUARIO ASC;";
+                          And r.CODIGO_TIPO_ROL = 8 ORDER BY p.CODIGO_PERSONA ASC;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
@@ -224,6 +224,12 @@ include_once "conexion3.php";
                                  ?>
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
                                  <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                </a>
+                                <a>
+                                <form method="post"  action="procesocita" target="_blank"> 
+                                <input type="text" hidden name="ingresarCitaEstudiante" value="<?php echo $var2 ?>">
+                                <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>cita</button>
+                                </form>
                                 </a>
                                
                                 <?php

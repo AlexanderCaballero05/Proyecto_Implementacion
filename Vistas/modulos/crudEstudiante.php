@@ -243,9 +243,13 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                                 <a>
                                 <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
                                 <input type="text" hidden name="reporte_estudiante" value="<?php echo $var1 ?>">
-                                <button type='submit' title='Imprimir'  style="color:white; "class="btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                <button type='submit' title='Imprimir' style="color:white;background-color:#FA0079"class="btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
+                                <a>
+                                
+
+                                
 
                                 <?php 
                                 }
