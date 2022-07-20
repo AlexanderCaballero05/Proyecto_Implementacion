@@ -13,6 +13,7 @@
        try{
           if(isset($_POST['agregar_pregunta'])){
                $pregunta = ($_POST['pregunta']);
+               $estado= 2;
                $fechaActual = date('Y-m-d');  
                $usuario=$_SESSION['vario']; 
               try{ 
@@ -27,7 +28,7 @@
                   exit;
                   }else{
                     try{
-                      $query_pregunta = " INSERT INTO `tbl_preguntas`( `PREGUNTA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`) VALUES ('$pregunta',' $usuario','$fechaActual'); ";
+                      $query_pregunta = " INSERT INTO `tbl_preguntas`( `CODIGO_ESTADO`, `PREGUNTA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`) VALUES ('$estado','$pregunta',' $usuario','$fechaActual'); ";
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
