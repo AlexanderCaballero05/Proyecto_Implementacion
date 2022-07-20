@@ -193,14 +193,16 @@ class PDF extends FPDF {
   if (isset($_POST['imprimirmatriculaindividual'])) {
 	$codigo_estudiante=($_POST['imprimirmatriculaindividual']);
 }
-	$strquery ="SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO)
-    as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL,                             c.CREADO_POR_USUARIO
-    FROM tbl_carga_academica c ,tbl_tutoria t, tbl_persona p, tbl_modalidad m , tbl_seccion s
-    WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-    AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-    AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
-    AND c.CODIGO_SECCION = s.CODIGO_SECCION
-    AND t.CODIGO_AREA = 4; ";
+	$strquery ="SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE,
+	CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,m.TIPO as MODALIDAD,se.NOMBRE as SECCION , c.HORA, c.CODIGO_CARGA 
+	 FROM tbl_carga_academica c, tbl_seccion se ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
+	 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
+	 AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA 
+	 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
+	 AND ma.CODIGO_CARGA = c.CODIGO_CARGA
+	 AND c.CODIGO_SECCION = se.CODIGO_SECCION
+	 AND t.CODIGO_AREA = 4
+	 AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante'; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -246,7 +248,7 @@ $pdf->SetWidths(array(12, 40, 80, 40,35,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['TUTORIA']))),ucwords((utf8_decode($data[$i]['NOMBRE_COMPLETO']))), ucwords((utf8_decode($data[$i]['MODALIDAD']))), ucwords((utf8_decode($data[$i]['SECCION']))), $data[$i]['HORA'] ),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i+1,ucwords((utf8_decode($data[$i]['TUTORIA']))),ucwords((utf8_decode($data[$i]['TUTOR']))), ucwords((utf8_decode($data[$i]['MODALIDAD']))), ucwords((utf8_decode($data[$i]['SECCION']))), $data[$i]['HORA'] ),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

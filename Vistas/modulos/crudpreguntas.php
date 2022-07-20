@@ -103,8 +103,8 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                              if ($permiso_registrar == 'SI'){
 
                           ?>
-            <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Pregunta</button>
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            <button  data-toggle="modal"  href="#AGREGAR_PREGUNTA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar </button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
                           <?php
                               }
                           ?>
@@ -125,6 +125,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                         <tr>
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
+                          <th class="text-center">Código Estado</th>
                           <th class="text-center">Pregunta</th>
                      
                           
@@ -133,11 +134,13 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_PREGUNTAS, PREGUNTA from tbl_preguntas;";
+                        $query = "SELECT P.CODIGO_PREGUNTAS,P.CODIGO_ESTADO, e.NOMBRE as Nombre, P.PREGUNTA from tbl_preguntas P, tbl_estado E
+                        WHERE  E.CODIGO_ESTADO = P.CODIGO_ESTADO";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_PREGUNTAS'];
+                            $var3 = $row['Nombre'];
                             $var2 = $row['PREGUNTA'];
             
                          
@@ -181,6 +184,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
 
 
@@ -242,7 +246,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                                       onkeyup="mayus(this);" autocomplete = "off" type="text"  name="pregunta" id="pregu" required pattern="[A-Z,¿ ?]{<?php echo $valores4;?>,<?php echo $valores3;?>}">
                                       <div class="invalid-feedback">
                                        campo obligatorio.
-                                   </div>
+                                   </div> 
                                 </div>
                             </div>
                           

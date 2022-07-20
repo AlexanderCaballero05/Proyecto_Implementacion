@@ -27,7 +27,7 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
- 
+ Gissela Diaz                14-07-2022          Correcciones de uniformidad en los botones             
 ----------------------------------------------------------------------->
 <?php
 ?>
@@ -92,13 +92,13 @@
 
                           ?>
                 <a href="procesoMatricula">
-                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span> Agregar Matrícula</button>
+                <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
 
                 </a>
               
 
                  <!-- boton para descargar el reporte -->
-                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
                  <?php
                    }
                  ?>
@@ -191,7 +191,7 @@
                               <a>
                                 <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
                                 <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $var1 ?>">
-                                <button type='submit' title='Imprimir'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079 "class=" form-control btn btn-danger"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
                                 <?php
@@ -214,7 +214,7 @@
                               <div class="modal-content"><!-- Modal content-->
                                 <form id="FORMEDITARMATRICULA" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Matr´´icula Académica </h4>
+                                    <h4 class="text-center">Editar Matrícula Académica </h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->

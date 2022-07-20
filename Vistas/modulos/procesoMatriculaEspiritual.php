@@ -1,3 +1,34 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de parametros
+    Fecha:             
+    Programador:       Luz María Montoya Medina y Diana Rut Garcia Amador
+    descripcion:       Permite realizar el procesod de matricula a las tutorias,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+    Gissela Diaz                                        Cambios en la  Ortografía
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -31,7 +62,7 @@
                 <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="procesoMatricula">Agregar Matrícula Académica</a>
+                <a class="nav-link" style="color:#000000;" href="procesoMatricula">Agregar Matrícula Académica</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar Matrícula Espiritual</a>
@@ -181,7 +212,7 @@
                             <div class="text-center" >
                               <div class="btn-group">
                                 <a href="#MODAL<?php echo $var6; ?>" data-toggle="modal">
-                                <button type='button' name="btnmatricular_espritual" id="btnmatricular_espritual"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular Catequesis</button>
+                                <button type='button' name="btnmatricular_espritual" id="btnmatricular_espritual"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Matricular</button>
                               </a>
                               </div>
                             </div><!-- final del text-center -->
@@ -274,7 +305,7 @@
             <!-- boton para descargar el reporte -->
             <form method="post"  action="Reportes_Prosecar/reporteMatriculaespiritualindividual.php" target="_blank"> 
             <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_es ?>">
-            <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
             </form>
            </div><!-- cierre del col-md-12 -->
           </div><!-- cierre del botón -->
