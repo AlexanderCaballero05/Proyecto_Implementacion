@@ -27,7 +27,7 @@ include "conexionpdo.php";
       </div> <!-- container-fluid -->
    </div> <!-- content-header-->
         <div class="content-header text-xl-center mb-3 "> 
-          <h4> Plan Terapéutico <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> Plan Terapéutico </h4>
       </div>
     <section class="content">
       <div class="card">

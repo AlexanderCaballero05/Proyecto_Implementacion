@@ -19,7 +19,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 "> 
-          <h4>Citas Psicológicas <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4>Citas Psicológicas </h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -51,8 +51,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                 <div class="col-md-12">
                     <div class="card ">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
-                            <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Citas previas</strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">
@@ -194,12 +192,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                      <div class="row"> 
                                                                         <div class="col-sm-6">
                                                                             <div class="form-group">
-                                                                                <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
+                                                                                <p><b class="p-1">Fecha de la Cita:</b> <?php echo $var3; ?></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <div class="form-group">
-                                                                              <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
+                                                                              <p><b class="p-1">Hora de la Cita:</b> <?php echo $var4; ?></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -222,7 +220,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </div> 
                                                              <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_psicologica"  class="btn btn-success"><span></span>Atender consulta</button>
+                                                                <button type="submit" name="enviar_cita_psicologica"  class="btn btn-success"><span></span>Atender Consulta</button>
                                                              </div>
                                                                 </div><!--FIN CUERPO DEL MODAL editar --> 
                                                             </form>
