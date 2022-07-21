@@ -2,10 +2,7 @@
 include_once "conexion.php";
 include_once "conexion3.php";
 include "conexionpdo.php";
-$codigoObjeto = 32;///CAMBIAR 
-$accion = 'INGRESO AL MATENIMIENTO CITAS HOY ';
-$descripcion = 'MANTENIMIENTO A LAS CITAS DEL DIA DE HOY';
-bitacora($codigoObjeto, $accion, $descripcion);
+
 ?>
 <?php 
 date_default_timezone_set("America/Guatemala");

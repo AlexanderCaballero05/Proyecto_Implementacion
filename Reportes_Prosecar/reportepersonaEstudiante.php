@@ -16,8 +16,8 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(100);
-		$this->Cell(180, 8, utf8_decode('Reporte Datos Escolares Estudiantes'));
+		$this->SetX(104);
+		$this->Cell(180, 8, utf8_decode('Reporte General de Estudiantes'));
 		$this->Ln(6);
 		$this->SetX(5);
 		$this->SetFont('Arial','',12);
@@ -41,13 +41,13 @@ class PDF extends FPDF {
 
 	function Footer() {
 	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
+	$this->SetFont('helvetica', 'B', 10);
 	$this->SetY(-18);
 	$this->SetX(28);
-	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	$this->Cell(100,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 	
-	$this->SetX(27);
-	$this->Line(27,197,270,197);
+	$this->SetX(6);
+	$this->Line(6,200,290,200);
 	
 	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
@@ -117,21 +117,19 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Nombre', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Grado', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Repite', 1, 0, 'C', 0);
-			$this->Cell(15, 8, 'Indice', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Materias', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Pasatiempos', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Distractores', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Metas', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Contenido socieco', 1, 0, 'C', 0);
-			$this->Cell(40, 8, 'Contenido tipo', 1, 1, 'C', 0);
+			$this->SetFont('Helvetica', 'B', 10);
+			$this->SetFont('Helvetica', 'B', 10);
+			$this->Cell(11, 11, 'N', 1, 0, 'C', 1); 
+			$this->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
+			$this->Cell(28, 11, 'DNI', 1, 0, 'C', 1);
+			$this->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
+			$this->Cell(32, 11, 'Lugar Nacimiento', 1, 0, 'C', 1);
+			$this->Cell(30, 11, 'Direccion', 1, 0, 'C', 1);
+			$this->Cell(15, 11, 'Genero', 1, 0, 'C', 1);
+			$this->Cell(20, 11, 'Telefono', 1, 0, 'C', 1);
+			$this->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);
+			$this->Cell(45, 11, 'Correo', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
-			
 		
 		}
 
@@ -206,22 +204,17 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT es.CODIGO_ESTUDIANTE as codigo_estudiante, CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO) as nombre_estudiante, e.GRADO_ACTUAL, e.REPITENTE, e.INDICE_ACADEMICO, e.MATE_BAJO_RENDI, e.PASATIEMPOS, e.DISTRACTORES_ESCOLARES, e.METAS , GROUP_CONCAT(t.TIPO) as tipo_contenido, GROUP_CONCAT(c.NOMBRE_TIPO) as nombre_tipo_contenido
-    FROM tbl_tipo_socioeconomico t, tbl_contenido_socioeconomico c, tbl_estudiante_socioeconomico es, tbl_estudiante e , tbl_persona p
-                            WHERE es.CODIGO_ESTUDIANTE = e.CODIGO_ESTUDIANTE
-                            AND es.CODIGO_CONTENIDO_SOCIOECONOMICO = c.CODIGO_CONTENIDO_SOCIOECONOMICO
-                            AND t.CODIGO_TIPOSOCIO = c.CODIGO_TIPOSOCIO
-                            AND e.CODIGO_PERSONA = p.CODIGO_PERSONA
-                            GROUP BY E.CODIGO_ESTUDIANTE
-                            order by e.CODIGO_ESTUDIANTE;";
+  
+	$strquery ="SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) as PERSONA, p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
+	FROM TBL_PERSONA p
+	left join tbl_telefono tl     on tl.CODIGO_PERSONA = p.CODIGO_PERSONA
+	left join tbl_tipo_persona t  on t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
+	left join tbl_correo_electronico c  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA WHERE p.CODIGO_PERSONA >1 AND p.CODIGO_TIPO_PERSONA = 4;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
 
-/* IMPORTANTE: si estan usando MVC o algún CORE de php les recomiendo hacer uso del metodo
-que se llama *select_all* ya que es el que haria uso del *fetchall* tal y como ven en la linea 161
-ya que es el que devuelve un array de todos los registros de la base de datos
-si hacen uso de el metodo *select* hara uso de fetch y este solo selecciona una linea*/
+
 
 //--------------TERMINA BASE DE DATOS-----------------------------------------------
 
@@ -235,18 +228,17 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 // -----------ENCABEZADO------------------
 $pdf->SetX(6);
 $pdf->SetFillColor(72, 208, 234);
-$pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Grado', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Repite', 1, 0, 'C', 1);
-$pdf->Cell(15, 12, 'Indice', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Materias', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Pasatiempos', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Distractores', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Metas', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido socieco', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Contenido tipo', 1, 1, 'C', 1);
+$pdf->SetFont('Helvetica', 'B', 10);
+$pdf->Cell(11, 11, 'N', 1, 0, 'C', 1); 
+$pdf->Cell(42, 11, 'Persona', 1, 0, 'C', 1);
+$pdf->Cell(28, 11, 'DNI', 1, 0, 'C', 1);
+$pdf->Cell(32, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
+$pdf->Cell(32, 11, 'Lugar Nacimiento', 1, 0, 'C', 1);
+$pdf->Cell(30, 11, utf8_decode('Dirección'), 1, 0, 'C', 1);
+$pdf->Cell(15, 11, 'Genero', 1, 0, 'C', 1);
+$pdf->Cell(20, 11, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(30, 11, 'Tipo Persona', 1, 0, 'C', 1);
+$pdf->Cell(45, 11, 'Correo', 1, 1, 'C', 1);
 
 
 
@@ -258,13 +250,15 @@ $pdf->SetFillColor(252, 254, 254); //color de fondo rgb
 $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 
 $pdf->SetFont('Arial', '', 10);
-
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 30, 15, 15,15,30,30,30,30,40,40)); //???
+$pdf->SetWidths(array(11,42,28,32,32,30,15,20,30,45)); //cambiar
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['nombre_estudiante'], $data[$i]['GRADO_ACTUAL'] , ucwords(strtolower(utf8_decode($data[$i]['REPITENTE']))), utf8_decode($data[$i]['INDICE_ACADEMICO']), $data[$i]['MATE_BAJO_RENDI'], $data[$i]['PASATIEMPOS'] , $data[$i]['DISTRACTORES_ESCOLARES'] , $data[$i]['METAS'] , $data[$i]['tipo_contenido'] , $data[$i]['nombre_tipo_contenido']  ),6 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['PERSONA']))),ucwords(strtolower(utf8_decode($data[$i]['DNI']))),ucwords(strtolower(utf8_decode($data[$i]['FECHA_NACIMIENTO'])))
+    ,ucwords(strtolower(utf8_decode($data[$i]['LUGAR_NACIMIENTO']))),ucwords(strtolower(utf8_decode($data[$i]['DIRECCION'])))  
+    ,ucwords(strtolower(utf8_decode($data[$i]['SEXO']))) ,ucwords(strtolower(utf8_decode($data[$i]['NUMERO_TELEFONO']))) 
+    ,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['CORREO_PERSONA']))) ,),6); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -560,11 +560,11 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
         $Respuesta=$conn->query($actualizaresatado);
         if($Respuesta>0){
           echo "<script>
-          window.location = 'ediusuarios';
+          window.location = 'ediusuariosestudiantes';
           </script>";
         }else{
           echo "<script>
-          window.location = 'ediusuarios';
+          window.location = 'ediusuariosestudiantes';
           </script>";
         }
       }
@@ -581,7 +581,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> alert('Usuario modificado exitosamente');
-                    window.location = 'ediusuarios'; </script>";
+                    window.location = 'ediusuariosestudiantes'; </script>";
                     $codigoObjeto=14;
                     $accion='MODIFICACIÓN';
                     $descripcion= 'SE MODIFICO UN USUARIO';
