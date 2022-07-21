@@ -243,7 +243,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
       
       
       <div class="caja3"> 
-        <p>Datos plan terapéutico </p><hr><br>
+        <p>Datos Plan Terapéutico </p><hr><br>
         <div class="c1" ><label><b><b>Actividades a realizar: </b></label>
             <?php  echo ucwords(strtolower($plan)); ?>
         </div>

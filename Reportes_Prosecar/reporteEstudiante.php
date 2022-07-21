@@ -28,7 +28,8 @@ try {
 
 if (isset($_POST['reporte_estudiante'])) {
 	$persona =($_POST['reporte_estudiante']);
-   }  
+  $codigo_persona =($_POST['reporte_codigo']);
+}  
 
 
    
@@ -487,123 +488,98 @@ if (isset($_POST['reporte_estudiante'])) {
     <br>
 <!------------------------------------- Are medica------------------------------------------------->
     <fieldset>
-      <legend>Expediente Área Médica</legend>
+      <legend>Citas Área Médica</legend>
       <br>
-      <table>
-          <thead>
-                <tr>
-                  <th class="text-center">Código expediente</th>
-                  <th class="text-center">Fecha Creación</th>
-                  <th class="text-center">Estado</th>
-                  <th class="text-center">Cantidad de Citas</th>
-                </tr>
-          </thead>
+      <table >
+              <thead style=" background-color:#73E8FD;">
+                    <tr>
+                     <th class="text-center">Fecha Cita</th>
+                     <th class="text-center">Medico</th>
+                     <th class="text-center">Hora</th>
+                    </tr>
+              </thead>
           <tbody>
-            <?php
-               $sentencia = $db->prepare("SELECT ex.CODIGO_CONSULTA
-               FROM tbl_consulta_medica ex ,tbl_persona pe , tbl_estudiante est, tbl_inscripcion_cita cita
-               WHERE cita.CODIGO_PERSONA = pe.CODIGO_PERSONA
-               and ex.CODIGO_CITA = cita.CODIGO_CITA
-               and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-               and est.CODIGO_ESTUDIANTE = (?); " );
-                $sentencia->execute(array($persona));
-                $row1=$sentencia->fetchColumn();
-                if($row1>0){
-                  $basicos = $row1;
-                }
-            ?>
+            
           <?php
-       $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
-       FROM tbl_expediente_medico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
-       WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
-       and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
-       and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-       and est.CODIGO_ESTUDIANTE = '$persona';
-";
-       $resul=$conn->query($consulta);
-       if ($resul->num_rows > 0) {
-        while($row = $resul->fetch_assoc()) { 
-          $nombre = $row['CODIGO_EXPEDIENTE'];
-          $edad = $row['FECHA_CREACION'];
-          $estadocivil = $row['ESTADO'];
-        ?>
-            <tr>
+            $consulta = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA,
+            CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO,
+            i.HORARIO AS HORA
+              FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_preclinica pre,
+             tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med ,tbl_persona_especialidad pes, tbl_persona pee
+              WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+              AND pes.CODIGO_PERSONA_ESPECIALIDAD = i.CODIGO_ESPECIALISTA
+              AND pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
+              AND i.CODIGO_CITA = pre.CODIGO_CITA
+              AND con.CODIGO_CITA = i.CODIGO_CITA
+              AND con.CODIGO_CONSULTA = recp.CODIGO_CONSULTA
+              AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
+              AND  i.AREA_CITA = '2'
+              AND pe.CODIGO_PERSONA= '$codigo_persona'
+              GROUP BY con.CODIGO_CONSULTA;";
+            $resul=$conn->query($consulta);
+            if ($resul->num_rows > 0) {
+              while($row = $resul->fetch_assoc()) { 
+                $Hora_medi = $row['HORA'];
+                $creacion = $row['FECHA_CREACION'];
+                $medico = $row['MEDICO'];
 
-            <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($row1)); ?></td>
-
-            </tr>
-          </tbody>
-          <?php
-                        }
-                        }
-                      ?>
-      </table>
-
-
+              ?>
+                  <tr>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($creacion)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($medico)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($Hora_medi)); ?></td>
+                  </tr>
+                </tbody>
+                <?php
+                  }
+                  }
+                ?>
+            </table>
     </fieldset>
 <!--fin de -- Are medica-->
 <br>
 <!---------------------------------------------------- Are Psicologica------------------------------------------------>
     <fieldset>
-      <legend>Expediente en Área Psicológica</legend>
+      <legend>Citas  Área Psicológica</legend>
       <br>
-      <table>
-          <thead>
+      <table class="table table-bordered table-striped">
+              <thead style=" background-color:#73E8FD;">
                 <tr>
-                  <th class="text-center">Codigo Expediente</th>
-                  <th class="text-center">Fecha Creación</th>
-                  <th class="text-center">Estado</th>
-                  <th class="text-center">Cantidad de Citas</th>
+                  <th class="text-center">Fecha Cita</th>
+                  <th class="text-center">Psicólogo</th>
+                  <th class="text-center">Hora</th>
                 </tr>
-          </thead>
-          <tbody>
-            <?php
-               $sentencia = $db->prepare("SELECT ex.CODIGO_EXPEDIENTE_PSICO
-               FROM tbl_expediente_psicologico_consulta ex ,tbl_persona pe , tbl_estudiante est, tbl_inscripcion_cita cita
-               WHERE cita.CODIGO_PERSONA = pe.CODIGO_PERSONA
-               and ex.CODIGO_CITA = cita.CODIGO_CITA
-               and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-               and est.CODIGO_ESTUDIANTE = (?); " );
-                $sentencia->execute(array($persona));
-                $row11=$sentencia->fetchColumn();
-                if($row1>0){
-                  $basicos = $row1;
-                }
-            ?>
-          <?php
-       $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
-       FROM tbl_expediente_psicologico_unico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
-       WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
-       and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
-       and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-       and est.CODIGO_ESTUDIANTE = '$persona';
-";
-       $resul=$conn->query($consulta);
-       if ($resul->num_rows > 0) {
-        while($row = $resul->fetch_assoc()) { 
-          $nombre = $row['CODIGO_EXPEDIENTE'];
-          $edad = $row['FECHA_CREACION'];
-          $estadocivil = $row['ESTADO'];
-        ?>
-            <tr>
-
-            <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
-            <td style="text-align: center"><?php echo ucwords(strtolower($row1)); ?></td>
-
-            </tr>
-          </tbody>
-          <?php
-                        }
-                        }
-                      ?>
-      </table>
-
-
+                </thead>
+                <tbody>
+                <?php
+                 $consulti = "SELECT con.FECHA_CREACION, cit.HORARIO AS HORA,
+                  CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO
+                 FROM tbl_expediente_psicologico_consulta con , tbl_inscripcion_cita cit, tbl_persona per, tbl_plan_terapeutico pla,tbl_persona pee, tbl_persona_especialidad pes
+                 WHERE con.CODIGO_CITA = cit.CODIGO_CITA
+                 AND pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
+                 AND pes.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
+                 AND cit.CODIGO_PERSONA = per.CODIGO_PERSONA
+                 AND pla.CODIGO_CONSULTA = con.CODIGO_EXPEDIENTE_PSICO
+                 AND cit.AREA_CITA = '3'
+                 AND cit.CODIGO_PERSONA = '$codigo_persona'";
+                  $resul=$conn->query($consulti);
+                  if ($resul->num_rows > 0) {
+                    while($row = $resul->fetch_assoc()) { 
+                    $fecha_psico= $row['FECHA_CREACION'];
+                    $hora_psico = $row['HORA'];
+                    $psicologo = $row['MEDICO'];
+                    ?>
+                  <tr>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($fecha_psico)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($psicologo)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($hora_psico)); ?></td>
+                  </tr>
+                </tbody>
+                <?php
+                  }
+                  }
+                ?>
+            </table>
     </fieldset>
 
 

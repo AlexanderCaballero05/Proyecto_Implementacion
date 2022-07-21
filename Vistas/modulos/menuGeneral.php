@@ -30,6 +30,7 @@
     Luz Montoya         		18-06-2022                 cambio del orden en las opciones de seguridad 
     Diana Rut Garcia       09-07-2022                 cambio en el nombre del nombres del menu
     Diana Rut Garcia       09-07-2022                 cambio en el orden del menu de personas
+    Diana Rut Garcia       21-07-2022                 cambio en el orden del menu de estudiante
 ----------------------------------------------------------------------->
 
 <?php
@@ -201,7 +202,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="crudEstudiante"class="nav-link">
+                  <a href="ediusuariosestudiantes"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
                     <p>Proceso de Estudiantes</p>
                   </a>
