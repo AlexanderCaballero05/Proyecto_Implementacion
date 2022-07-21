@@ -27,6 +27,7 @@ descripcion:       Pantalla que contrala la modalidad de las tutorias
 
 Programador               Fecha                      Descripcion
 Diana Rut Garcia         30/06/2022                  Cambios en el titulo
+Diana Rut Garcia         20/07/2022                  Cambios en el ortografia
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -142,17 +143,14 @@ $result3= $conn->query($query);
           </div>
           <div class="card-body">  
             <form method="POST" class="was-validated" >
-                <div class="row pl-2 mb-3 mt-4">
-                  
+                <div class="row">
                  <?php
                  if(isset($_POST['ingresarCitaEstudiante'])) {
                   $persona =($_POST['ingresarCitaEstudiante']);
                    }  
-                 
                   ?>              
-                 <div class="col-sm-9">  
-                 
-                 <?php
+                 <div class="col-sm-12">  
+                    <?php
                       $query = "SELECT p.CODIGO_PERSONA, CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE
                       FROM tbl_persona p 
                       WHERE p.CODIGO_PERSONA = '$persona'";
@@ -161,30 +159,26 @@ $result3= $conn->query($query);
                       while($row = $resul->fetch_assoc()){
                         $codigo_estudiante =  $row['CODIGO_PERSONA'];
                         $nombreEstudiante = $row['NOMBRE'];
-                        
-                              }
-                        }
-                          ?>   
-                 <label for="" class="control-label">Nombre Estudiante</label>
-                 <div class="form-group">
-                            <input  hidden name="CODPACIENTE" value="<?php echo $codigo_estudiante;?>">
-                            <input  readonly class="form-control" value="<?php echo $nombreEstudiante;?>">
-                 </div>
-                  
+                      }
+                    }
+                    ?>   
+                   <label for="" class="control-label">Nombre del Estudiante</label>
+                   <div class="form-group">
+                      <input  hidden name="CODPACIENTE" value="<?php echo $codigo_estudiante;?>">
+                      <input  readonly class="form-control" value="<?php echo $nombreEstudiante;?>">
+                   </div>
                   </div>
                 </div> 
                
                 <div class="row">
-
-
                    <div class="col-sm-3 mb-3">
                      <?php
                       $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
                       $filas_area= $conn->query($query);
                       ?>
-                            <label for="txtcodigo_especialista">Area de la cita</label>
+                            <label for="txtcodigo_especialista">Área de la Cita</label>
                             <select class="form-control select2" name="area_cita" id="area_cita" required>
-                            <option selected disabled value= "">--Seleccione un Area--</option>
+                            <option selected disabled value= "">--Seleccione un Área--</option>
                                 <?php
                                 if ($filas_area->num_rows > 0){
                                 while($row = $filas_area->fetch_assoc()){ 
@@ -277,7 +271,7 @@ $result3= $conn->query($query);
                    <!--Solo esta para ver de forma visual,no se manda insertar ni nada -->
                     <div  id="mostrar_ecita" class="col-sm-5 mb-3">
                         <div class="form-group">
-                            <label for="txtcodigo_especialista">Encargados citas</label>
+                            <label for="txtcodigo_especialista">Encargados Citas</label>
                             <select class="form-control select2"  >
                             <option value= "">--Seleccione Encargado--</option>
                             </select>
@@ -365,7 +359,7 @@ $result3= $conn->query($query);
                    <div class="col-sm-3 mb-3">
                         <div class="form-group">
 
-                            <label for="fecha" class="form-label">Fecha de la cita </label>
+                            <label for="fecha" class="form-label">Fecha de la Cita </label>
                             <input type="date" min= "<?= date ($valor)?>" 
                             max="<?= date($fechamaxima)?>"                             
                             class="form-control" 
@@ -376,7 +370,7 @@ $result3= $conn->query($query);
                         </div>
                       </div>
                  </div> <!-- fin de algo--> 
-              </br></br></br>
+              </br>
               <?php
                             include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];

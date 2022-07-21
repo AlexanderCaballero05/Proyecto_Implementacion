@@ -55,7 +55,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos Generales</a>
             </li>
           <li class="nav-item">
               <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
@@ -128,7 +128,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <th class="text-center">Apellido</th>
                           <th class="text-center">Grado Actual</th>
                           <th class="text-center">Repitente</th>
-                          <th class="text-center">Indice Académico</th>
+                          <th class="text-center">Índice Académico</th>
                           <th class="text-center">Pasatiempos</th>
                           <th class="text-center">Distractores Escolares</th>
                           <th class="text-center">Metas</th>
