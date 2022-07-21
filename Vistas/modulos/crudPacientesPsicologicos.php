@@ -12,7 +12,7 @@
     </div>
       <section class="content">
         <div class="content-header text-xl-center mb-3 ">
-              <h4>Lista de Pacientes <i class="nav-icon fas fa-stethoscope"></i> </h4>
+              <h4>Lista de Pacientes </h4>
         </div>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -40,7 +40,7 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
             <form  method="POST">
               <div class= "card">
                  <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -52,8 +52,8 @@
                     <thead>
                       <tr>
                         <th class="text-center">Acción</th>
-                        <th class="text-center">Fecha creación</th>
-                        <th class="text-center">Código expediente</th>
+                        <th class="text-center">Fecha Creación</th>
+                        <th class="text-center">Código Expediente</th>
                         <th class="text-center">Nombre Paciente</th>
                         <th class="text-center">DNI</th>
                         <th class="text-center">Estado</th>
@@ -104,13 +104,17 @@
                                     }
                                   ?>
                                   <a href="#AGREGAR_CITA<?php echo $var1; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar cita</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
                                   </a>
-
+                                  <a><!--Para descargar el reporte individual uwu -->
+                                     <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
+                                     <input type="hidden" value="<?php echo $var1?>">
+                                     </form>
+                                 </a>
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
                                      <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var1?>">
-                                     <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                     <button type='submit' style="color:white; background-color:#FA0079" class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
                             </div>

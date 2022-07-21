@@ -23,6 +23,7 @@ descripcion:       Pantalla que contrala los expedientes unicos
 
 Programador                   Fecha               Descripción
 Diana Rut Garcia            20/06/2022          Modificaciones en el modal
+Diana Rut Garcia            20/07/2022          Modificaciones en el boton del reporte
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -54,7 +55,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
       <div class="row">
         <div class="col-md-12">
         
-        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
           
     
           <!-- jquery validation -->

@@ -81,7 +81,11 @@ if (isset($_POST['reporte_estudiante'])) {
   @page {
     margin: 0cm 0cm;
   }
-  
+  img{
+    float: right;
+    width: 80px; 
+    padding-right: 1.5cm;
+  }
   footer {
    position: fixed; 
    bottom: 0.5cm; 
@@ -123,19 +127,20 @@ if (isset($_POST['reporte_estudiante'])) {
   }
 
     </style>
-    <title>Reporte paciente uwu</title>
+    <title>Reporte Estudiante</title>
   </head>
   <body>
     <header>
+    <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Reporte estudiante</p>
-      <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
+      <p  style="text-align: center; font-size:20px;">Reporte del Estudiante</p>
+      <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
    
 
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+      <p style="  text-align: center;"><b> Proyecto Prosecar. <?php  echo date("Y");?></b></p> 
    </footer>
    <main>
     <fieldset>
@@ -168,13 +173,13 @@ if (isset($_POST['reporte_estudiante'])) {
     }
       ?>      
       <legend>  Datos Personales Estudiante</legend><br>
-      <label style="margin-bottom: 100px;" ><b>Nombre completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
-      <label style="margin-bottom: 30px;" ><b>Lugar y fecha de nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Nombre Completo Estudiante:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
+      <label style="margin-bottom: 30px;" ><b>fecha de Nacimiento:</b> <?php  echo ucwords(strtolower($fecha)); ?></label> <br>
       <label style="padding-right: 80px;" ><b>DNI: </b><?php echo $dni; ?></label>
       <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
       <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
-      <label style="padding-right: 85px;" ><b>Telefono: </b><?php echo $telefono; ?></label>
-      <label style="margin-bottom: 30px;" ><b>Direccion:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
+      <label style="padding-right: 85px;" ><b>Teléfono: </b><?php echo $telefono; ?></label>
+      <label style="margin-bottom: 30px;" ><b>Dirección:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
 
     </fieldset>
     <br>
@@ -205,7 +210,7 @@ if (isset($_POST['reporte_estudiante'])) {
          <tr>
          <th>Grado Actual</th>
            <th>Repitente</th>
-           <th>Indice Academico</th>
+           <th>Indíce Académico</th>
            <th>Materias</th>
            <th>Pasatiempos</th>
            <th>Distractores</th>
@@ -296,8 +301,8 @@ if (isset($_POST['reporte_estudiante'])) {
     <table>
       <thead>
          <tr>
-           <th>Dispositivos electronicos</th>
-           <th>Servicios de internet</th>
+           <th>Dispositivos Electrónicos</th>
+           <th>Servicios de Internet</th>
            <th>Proveedor(es)</th>
            <th>Servicios Basicos</th>
           
@@ -318,7 +323,7 @@ if (isset($_POST['reporte_estudiante'])) {
      <br>
 <!--formacion espritual-->
      <fieldset>
-       <legend>Formacion espiritual</legend>
+       <legend>Formación Espiritual</legend>
        <br>
        <table>
        <?php
@@ -336,8 +341,8 @@ if (isset($_POST['reporte_estudiante'])) {
         ?>
          <thead>
            <tr>
-             <th>Iglesia asistente</th>
-             <th>Sacramentos realizados</th>
+             <th>Iglesia Asistente</th>
+             <th>Sacramentos Realizados</th>
            </tr>
          </thead>
          <tbody>
@@ -357,18 +362,18 @@ if (isset($_POST['reporte_estudiante'])) {
 <br>
     <fieldset>
 
-      <legend>Situacion familiar (Personas con quienes vive)</legend>
+      <legend>Situación familiar (Personas con quienes vive)</legend>
     <br>
     <table>
     <thead>
          <tr>
          <th>Nombre Apellido</th>
            <th>Edad</th>
-           <th>Estado civil</th>
+           <th>Estado Civil</th>
            <th>Parentesco</th>
-           <th>Nivel educativo</th>
+           <th>Nivel Educativo</th>
            <th>Ingresos Mensuales</th>
-           <th>Iglesia asiste</th>
+           <th>Iglesia Asiste</th>
           
          </tr>
       </thead>
@@ -423,17 +428,17 @@ if (isset($_POST['reporte_estudiante'])) {
  <br>
  <br>
     <fieldset>
-      <legend>Tutorias que ha cursado</legend>
+      <legend>Tutorias que ha Cursado</legend>
       <br>
       <table>
         <thead>
           <tr>
-                        <th class="text-center">Numero</th>
-                        <th class="text-center">Tutoria</th>
+                        <th class="text-center">Número</th>
+                        <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">periodo</th>
-                        <th class="text-center">observacion</th>
+                        <th class="text-center">Período</th>
+                        <th class="text-center">Observación</th>
 
 
           </tr>
@@ -482,15 +487,15 @@ if (isset($_POST['reporte_estudiante'])) {
     <br>
 <!------------------------------------- Are medica------------------------------------------------->
     <fieldset>
-      <legend>Expediente en Area Medica</legend>
+      <legend>Expediente Área Médica</legend>
       <br>
       <table>
           <thead>
                 <tr>
-                  <th class="text-center">Codigo expediente</th>
-                  <th class="text-center">Fecha creación</th>
+                  <th class="text-center">Código expediente</th>
+                  <th class="text-center">Fecha Creación</th>
                   <th class="text-center">Estado</th>
-                  <th class="text-center">Cantidad de citas</th>
+                  <th class="text-center">Cantidad de Citas</th>
                 </tr>
           </thead>
           <tbody>
@@ -543,15 +548,15 @@ if (isset($_POST['reporte_estudiante'])) {
 <br>
 <!---------------------------------------------------- Are Psicologica------------------------------------------------>
     <fieldset>
-      <legend>Expediente en Area Psicologica</legend>
+      <legend>Expediente en Área Psicológica</legend>
       <br>
       <table>
           <thead>
                 <tr>
-                  <th class="text-center">Codigo expediente</th>
-                  <th class="text-center">Fecha creación</th>
+                  <th class="text-center">Codigo Expediente</th>
+                  <th class="text-center">Fecha Creación</th>
                   <th class="text-center">Estado</th>
-                  <th class="text-center">Cantidad de citas</th>
+                  <th class="text-center">Cantidad de Citas</th>
                 </tr>
           </thead>
           <tbody>
@@ -628,6 +633,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('a4','landscape');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("Reporte_Estudiante.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>

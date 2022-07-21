@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="content-header text-xl-center mb-3"> 
-                <h4>Informe Plan Terapéutico <i class="nav-icon fas fa-stethoscope"></i></h4>
+                <h4>Informe Plan Terapéutico</h4>
             </div>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -275,7 +275,7 @@
                     <input type="hidden" name="id_usuario_plan" value="<?php echo $cod_usuario ?>">
                     <input type="hidden" name="codigo_consulta_reporte_Plan" value="<?php echo $codigo_consulta ?>">
 
-                      <button  type="submit" name ="reporte_consulta_psicologica_plan"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1  "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                      <button  type="submit" name ="reporte_consulta_psicologica_plan"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1  "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                   </form><!--fin form para el reporte de la consulta-->
                 </div>
                 </div><!--fin card body -->

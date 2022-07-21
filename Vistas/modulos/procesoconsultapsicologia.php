@@ -94,7 +94,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                           
                           ?>
                       <input type="text" name="codigocita3" value="<?php echo $var3?>" hidden>
-                       <label for="">Nombre del paciente</label> 
+                       <label for="">Nombre del Paciente</label> 
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">

@@ -70,7 +70,7 @@ include_once "conexion3.php";
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-              <a class=" nav-link active" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+              <a class=" nav-link active" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
               <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
@@ -123,25 +123,25 @@ include_once "conexion3.php";
                       <thead >
                         <tr>
                           <th class="text-center">Acción</th>
-                          <th class="text-center">Codigo persona</th>
+                          <th class="text-center">Código Persona</th>
                           <th class="text-center">DNI</th>
                           <th class="text-center">Primer Nombre</th>
                           <th class="text-center">Segundo Nombre</th>
                           <th class="text-center">Primer Apellido</th>
                           <th class="text-center">Segundo Apellido</th>
-                          <th class="text-center">Telefono</th>
+                          <th class="text-center">Teléfono</th>
                           <th class="text-center">Correo Electrónico</th>
                           <th class="text-center">Dirección</th>
-                          <th class="text-center">grado</th>
+                          <th class="text-center">Grado</th>
                           <th class="text-center">Nombre Usuario</th>
-                          <th class="text-center">Fecha creación</th>
+                          <th class="text-center">Fecha Creación</th>
                           <th class="text-center">Estado</th>
                           
                         </tr>
                       </thead>
                       <tbody class="text-center">
                         <?php
-                          $query = "SELECT u.CODIGO_USUARIO, p.CODIGO_PERSONA,p.DNI, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, t.NUMERO_TELEFONO, c.correo_persona, p.DIRECCION, u.NOMBRE_USUARIO, e.NOMBRE as ESTADO ,u.CODIGO_ESTADO,  u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR,
+                          $query = "SELECT u.CODIGO_USUARIO, est.CODIGO_ESTUDIANTE, p.CODIGO_PERSONA,p.DNI, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, t.NUMERO_TELEFONO, c.correo_persona, p.DIRECCION, u.NOMBRE_USUARIO, e.NOMBRE as ESTADO ,u.CODIGO_ESTADO,  u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR,
                           u.FECHA_CREACION,u.FECHA_MODIFICACION, est.GRADO_ACTUAL
                           FROM tbl_usuario u
                           left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
@@ -157,6 +157,7 @@ include_once "conexion3.php";
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
                               $var2 = $row['CODIGO_PERSONA'];
+                              $var5 = $row['CODIGO_ESTUDIANTE'];
                               $var19 = $row['DNI'];
                               $var3 = $row['PRIMER_NOMBRE'];
                               $var20 = $row['SEGUNDO_NOMBRE'];
@@ -214,7 +215,7 @@ include_once "conexion3.php";
                                 if($permiso_eliminar == 'SI'){ //PERMISO DE ELIMINAR
                               ?>                     
                                <a href="#ELIMINAR<?php echo $var2;?>" data-toggle="modal">
-                                  <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
+                                  <button id="ELIMINAR_USUARIO" name="ELIMINAR_USUARIO" type='button'   class="form-control btn btn-danger pt-4 pb-4" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i></button>
                                </a>
                                <?php
                                   }
@@ -223,16 +224,28 @@ include_once "conexion3.php";
                                   if ($permiso_actualizar == 'SI'){//PERMISO DE ACTUALIZAR
                                  ?>
                                 <a href="#EDITARPERSONA<?php echo $var2; ?>" data-toggle="modal">
-                                 <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                 <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning pt-4 pb-4"><span> <i class="nav-icon fas fa-edit mx-1 "></i></span></button>
                                 </a>
+                                 <!--codigo para que funcionen todos los botones -->
+                                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
+                                  <input type="text" hidden name="reporte_estudiante"  value="<?php echo $persona; ?>">
+                                </form>
 
                                 <!--Boton para agregar cita al estudiante-->
                                 <a>
                                 <form method="post"  action="procesocita" target="_blank"> 
                                 <input type="text" hidden name="ingresarCitaEstudiante" value="<?php echo $var2 ?>">
-                                <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>cita</button>
+                                <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Cita</button>
                                 </form>
                                 </a>
+                                
+                                <a> <!--Boton para ver el expediente del estudiante -->
+                                <form method="post"  action="consultaEstudiante" target="_blank"> 
+                                <input type="text" hidden name="codigo_estu" value="<?php echo $var5 ?>">
+                                <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file "></i></span>Expediente</button>
+                                </form>
+                                </a>
+
                                <!--Fin de Boton para agregar cita al estudiante-->
                                 <?php
                                   }
@@ -258,7 +271,7 @@ include_once "conexion3.php";
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center"> Editar Usuario</h4>
+                                    <h4 class="text-center"> Editar Estudiante</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST" >
@@ -310,7 +323,7 @@ include_once "conexion3.php";
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label>Telefono</label>
+                                          <label>Teléfono</label>
                                           <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
                                         </div>
                                       </div>
@@ -402,7 +415,7 @@ include_once "conexion3.php";
                                 <form id="FORMEeliminar" method="POST" >
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el usuario <?php echo $var6; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el usuario <?php echo $var6; ?>?</h4>
                                 </div> <!--fin el card body -->
                                   <div class="modal-footer ">
                                     <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -456,8 +469,8 @@ include_once "conexion3.php";
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar un  Usuario:",
-        "zeroRecords": "El usuario no existe",
+        "search": "Buscar Estudiante:",
+        "zeroRecords": "El Estudiante No Existe",
         "paginate": {
             "first": "Primero",
             "last": "Ultimo",
