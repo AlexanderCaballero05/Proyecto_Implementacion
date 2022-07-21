@@ -27,7 +27,7 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
-
+    Gissela Diaz                                        Cambios en la  Ortografía
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -208,7 +208,7 @@
                             <div class="text-center" >
                               <div class="btn-group">
                                 <a href="#MODAL_MATRICULA<?php echo $var6; ?>" data-toggle="modal">
-                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matricular</button>
+                                <button type='button' name="btnmatricular" id="btnmatricular"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Matricular</button>
                               </a>
                               </div>
                             </div><!-- final del text-center -->
@@ -301,7 +301,7 @@
             <!-- boton para descargar el reporte -->
             <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
             <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $codigo_estudiante ?>">
-            <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            <button   type='submit' title='Imprimir' style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
             </form>
            </div><!-- cierre del col-md-12 -->
           </div><!-- cierre del botón -->

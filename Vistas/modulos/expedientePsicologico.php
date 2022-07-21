@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <section class="content-header text-xl-center mb-3 "> 
-                <h4> Informe de Consulta Psicológica<i class="nav-icon fas fa-stethoscope"></i></h4>
+                <h4> Informe de Consulta Psicológica</h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -247,7 +247,7 @@
               <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
                   Crear Plan Terapéutico
                 </button>
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar</button>
 
                 </form><!--fin form del archivo expediente-->
                 <!--form para el reporte de la consulta-->
@@ -257,7 +257,7 @@
                     <input type="text" name="id_persona"  hidden value="<?php echo $persona ?>">
                     <input type="hidden" name="id_usuario" value="<?php echo $cod_usuario ?>">
                   </div>
-                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079" class="btn btn-danger btn"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079" class="btn btn-danger btn"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                   </form>
                    <!--fin form para el reporte de la consulta-->
               </div>

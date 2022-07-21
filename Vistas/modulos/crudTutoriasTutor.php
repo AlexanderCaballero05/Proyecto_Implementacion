@@ -43,7 +43,7 @@
 
         <form method="POST" action="Reportes_Prosecar/reporteTutoriasTutor.php" target="_blank">
          <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor">
-        <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        <button  type="submit" title='Imprimir'     id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
         </form>
 
           <div class="row">

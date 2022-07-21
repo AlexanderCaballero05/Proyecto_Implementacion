@@ -182,7 +182,7 @@ class PDF extends FPDF {
   if (isset($_POST['imprimirmatriculaindividual'])) {
 	$codigo_estudiante=($_POST['imprimirmatriculaindividual']);
 }
-	$strquery ="SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE,
+	$strquery ="SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE, t.CODIGO_TUTORIA,
 	CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,m.TIPO as MODALIDAD,se.NOMBRE as SECCION , c.HORA, c.CODIGO_CARGA 
 	 FROM tbl_carga_academica c, tbl_seccion se ,tbl_tutoria t, tbl_persona p, tbl_modalidad m, tbl_matricula_academica ma  
 	 WHERE c.CODIGO_PERSONA= p.CODIGO_PERSONA 
@@ -190,6 +190,7 @@ class PDF extends FPDF {
 	 AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
 	 AND ma.CODIGO_CARGA = c.CODIGO_CARGA
 	 AND c.CODIGO_SECCION = se.CODIGO_SECCION
+	 AND t.CODIGO_AREA = 1
 	 AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante' ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
