@@ -33,8 +33,12 @@
  include_once "conexion3.php";
  include "conexionpdo.php";
 ?>
-
-
+<?php
+  if (isset($_POST['codigo_estu'])) {
+       $persona =($_POST['codigo_estu']);
+       $codigo_persona =($_POST['codigo_persona']);
+    }  
+ ?>
 <head>
 </head>
 <body oncopy="return false" onpaste="return false"></body>
@@ -74,14 +78,11 @@
            }
           ?>
           <div class="card ">
-              <?php
-                if (isset($_POST['codigo_estu'])) {
-                   $persona =($_POST['codigo_estu']);
-                }  
-              ?>
+              
               <div class="modal-footer">
                 <button onclick="location.href='ediusuariosestudiantes'"  type="button"  style="color:white;"class="btn btn- lg btn-success"><span><i class="nav-icon fa fa-arrow-left mx-2"></i></span>Regresar</button>
-                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
+                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank">
+                 <input type="text" hidden name="reporte_codigo"  value="<?php echo $codigo_persona; ?>"> 
                   <input type="text" hidden name="reporte_estudiante"  value="<?php echo $persona; ?>">
                   <button type='submit'  style="color:white; background-color:#FA0079" class="btn btn-danger "><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button> 
                 </form>
@@ -92,7 +93,6 @@
                 <h5>Datos Personales Estudiante</h5>
                 <hr color="blue">
                 <div class="row">
-                    
                     <?php
                     $query = "SELECT CONCAT_WS(' ', p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO) AS NOMBRE, u.CODIGO_USUARIO, est.CODIGO_ESTUDIANTE, p.CODIGO_PERSONA, p.DNI,
                      t.NUMERO_TELEFONO, c.correo_persona, p.DIRECCION,p.FECHA_NACIMIENTO,p.LUGAR_NACIMIENTO,se.SEXO
@@ -250,6 +250,20 @@
                 <!--espacio para la informacion de parientes -->
                 <h5>Situacion familiar (Personas con quienes vive)</h5>
                 <hr color="blue">
+                <table  class="table table-bordered table-striped">
+                <thead style=" background-color:#73E8FD;">
+                  <tr>
+                  <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Estado civil</th>
+                    <th>Parentesco</th>
+                    <th>Nivel educativo</th>
+                    <th>Ingresos Mensuales</th>
+                    <th>Iglesia asiste</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
                 <?php
                 $consulta = "SELECT fest.CODIGO_FAMILIAR_ESTUDIANTE, fam.CODIGO_FAMILIAR,  concat_ws(' ', per.PRIMER_NOMBRE, per.PRIMER_APELLIDO) as FAMILIAR,
                 per.FECHA_NACIMIENTO ,fam.ESTADO_CIVIL, fam.NIVEL_EDUCATIVO, fam.INGRESOS_DE_FAMILIAR, fam.NOMBRE_IGLESIA, par.NOMBRE as PARENTESCO
@@ -276,21 +290,6 @@
                     $anio = date("Y", $fechaEntera);
                     $edad = $f - $anio;
                   ?>
-                <table  class="table table-bordered table-striped">
-                <tbody>
-                <thead style=" background-color:#73E8FD;">
-                  <tr>
-                  <th>Nombre</th>
-                    <th>Edad</th>
-                    <th>Estado civil</th>
-                    <th>Parentesco</th>
-                    <th>Nivel educativo</th>
-                    <th>Ingresos Mensuales</th>
-                    <th>Iglesia asiste</th>
-                    
-                  </tr>
-                </thead>
-                <tr>
                 <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
                 <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
                 <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
@@ -366,36 +365,45 @@
                 <hr><br>
                 <h5>Citas Medicas</h5>
                 <hr color="blue">
+                
             <table class="table table-bordered table-striped">
               <thead style=" background-color:#73E8FD;">
                     <tr>
-                      <th class="text-center">Codigo expediente</th>
-                      <th class="text-center">Fecha creación</th>
-                      <th class="text-center">Estado</th>
-                      <th class="text-center">Cantidad de citas</th>
+                     <th class="text-center">Fecha Cita</th>
+                     <th class="text-center">Medico</th>
+                     <th class="text-center">Hora</th>
                     </tr>
               </thead>
           <tbody>
             
           <?php
-            $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
-            FROM tbl_expediente_medico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
-            WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
-            and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
-            and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-            and est.CODIGO_ESTUDIANTE = '$persona';";
+            $consulta = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA,
+            CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO,
+            i.HORARIO AS HORA
+              FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_preclinica pre,
+             tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med ,tbl_persona_especialidad pes, tbl_persona pee
+              WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+              AND pes.CODIGO_PERSONA_ESPECIALIDAD = i.CODIGO_ESPECIALISTA
+              AND pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
+              AND i.CODIGO_CITA = pre.CODIGO_CITA
+              AND con.CODIGO_CITA = i.CODIGO_CITA
+              AND con.CODIGO_CONSULTA = recp.CODIGO_CONSULTA
+              AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
+              AND  i.AREA_CITA = '2'
+              AND pe.CODIGO_PERSONA= '$codigo_persona'
+              GROUP BY con.CODIGO_CONSULTA;";
             $resul=$conn->query($consulta);
             if ($resul->num_rows > 0) {
               while($row = $resul->fetch_assoc()) { 
-                $nombre = $row['CODIGO_EXPEDIENTE'];
-                $edad = $row['FECHA_CREACION'];
-                $estadocivil = $row['ESTADO'];
+                $Hora_medi = $row['HORA'];
+                $creacion = $row['FECHA_CREACION'];
+                $medico = $row['MEDICO'];
+
               ?>
                   <tr>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($canti)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($creacion)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($medico)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($Hora_medi)); ?></td>
                   </tr>
                 </tbody>
                 <?php
@@ -409,32 +417,34 @@
                 <table class="table table-bordered table-striped">
               <thead style=" background-color:#73E8FD;">
                 <tr>
-                  <th class="text-center">Codigo expediente</th>
-                  <th class="text-center">Fecha creación</th>
-                  <th class="text-center">Estado</th>
-                  <th class="text-center">Cantidad de citas</th>
+                  <th class="text-center">Fecha Cita</th>
+                  <th class="text-center">Psicólogo</th>
+                  <th class="text-center">Hora</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                  $consulta = "SELECT ex.CODIGO_EXPEDIENTE, es.NOMBRE AS ESTADO, ex.FECHA_CREACION
-                  FROM tbl_expediente_psicologico_unico ex ,tbl_persona pe , tbl_estado es, tbl_estudiante est
-                  WHERE pe.CODIGO_PERSONA = ex.CODIGO_PERSONA 
-                  and es.CODIGO_ESTADO = ex.CODIGO_ESTADO
-                  and pe.CODIGO_PERSONA = est.CODIGO_PERSONA
-                  and est.CODIGO_ESTUDIANTE = '$persona';";
-                  $resul=$conn->query($consulta);
+                 $consulti = "SELECT con.FECHA_CREACION, cit.HORARIO AS HORA,
+                  CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO
+                 FROM tbl_expediente_psicologico_consulta con , tbl_inscripcion_cita cit, tbl_persona per, tbl_plan_terapeutico pla,tbl_persona pee, tbl_persona_especialidad pes
+                 WHERE con.CODIGO_CITA = cit.CODIGO_CITA
+                 AND pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
+                 AND pes.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
+                 AND cit.CODIGO_PERSONA = per.CODIGO_PERSONA
+                 AND pla.CODIGO_CONSULTA = con.CODIGO_EXPEDIENTE_PSICO
+                 AND cit.AREA_CITA = '3'
+                 AND cit.CODIGO_PERSONA = '$codigo_persona'";
+                  $resul=$conn->query($consulti);
                   if ($resul->num_rows > 0) {
                     while($row = $resul->fetch_assoc()) { 
-                      $nombre = $row['CODIGO_EXPEDIENTE'];
-                      $edad = $row['FECHA_CREACION'];
-                      $estadocivil = $row['ESTADO'];
+                    $fecha_psico= $row['FECHA_CREACION'];
+                    $hora_psico = $row['HORA'];
+                    $psicologo = $row['MEDICO'];
                     ?>
                   <tr>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($edad)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($estadocivil)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($row1)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($fecha_psico)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($psicologo)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($hora_psico)); ?></td>
                   </tr>
                 </tbody>
                 <?php

@@ -240,8 +240,9 @@ include_once "conexion3.php";
                                 </a>
                                 
                                 <a> <!--Boton para ver el expediente del estudiante -->
-                                <form method="post"  action="consultaEstudiante" target="_blank"> 
-                                <input type="text" hidden name="codigo_estu" value="<?php echo $var5 ?>">
+                                <form method="post"  action="consultaEstudiante" target="_blank">
+                                 <input type="text" hidden name="codigo_persona" value="<?php echo $var2; ?>"> 
+                                  <input type="text" hidden name="codigo_estu" value="<?php echo $var5; ?>">
                                 <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file "></i></span>Expediente</button>
                                 </form>
                                 </a>

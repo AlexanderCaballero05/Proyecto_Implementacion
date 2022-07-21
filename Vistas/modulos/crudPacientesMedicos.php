@@ -32,6 +32,7 @@ descripcion:       Pantalla que permite ver los pacientes y poder programar cita
 Programador               Fecha                      Descripcion
   D'aniel Martinez          11-07-2022                 Arreglar ortografía
   D'aniel Martinez          11-07-2022                 Arreglar programar cia (permita seleccionar el paciente correcto)
+  Diana Rut                 20-07-2022                 Se agrego un form para que funcione el boton del reporte
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -140,6 +141,8 @@ Programador               Fecha                      Descripcion
                                   <a href="#AGREGAR_CITA<?php echo $var6; ?>" data-toggle="modal">
                                    <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
                                   </a>
+                                    <form method="POST"  action="Vistas/REPORTE.php" target="_blank"> 
+                                     </form>
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
                                      <input type="hidden" name="expediente" value="<?php echo $var6?>">

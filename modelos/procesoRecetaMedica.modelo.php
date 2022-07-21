@@ -33,7 +33,6 @@ include "conexionpdo.php";
                 echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
              }else{
                 echo "<script> 
-                  alert('Ocurrio un eror');
                 window.location = 'procesoRecetaMedica'; </script>"; exit;
              }
           }//fin del elseif de insertar examenes medicoa

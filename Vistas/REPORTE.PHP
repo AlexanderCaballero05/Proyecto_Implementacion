@@ -100,17 +100,17 @@ if (isset($_POST['expediente'])) {
       content: counter(page);/*Es para que salga la enumeracion de la pagina si */
     }
    </style>
-    <title>Historial medico paciente</title>
+    <title>Historial Medico Paciente</title>
   </head>
   <body>
     <header>
     <img src="LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 19px;">Historial medico del paciente</p>
+      <p  style="text-align: center; font-size: 19px;">Historial Medico del Paciente</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
-    <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+    <p style="text-align: center; "><b> Prosecar <?php  echo date("Y");?> </b><b style="color:white;"></b>
       <label >Página<span  class="pagenum"></label></p>
       
    </footer>
@@ -145,7 +145,7 @@ if (isset($_POST['expediente'])) {
     </fieldset>
     <br>
     <fieldset>
-      <legend>Expediente clinico</legend>
+      <legend>Expediente Clínico</legend>
     <br>
     <table>
     <?php
@@ -172,7 +172,7 @@ if (isset($_POST['expediente'])) {
         ?>
       <thead>
          <tr>
-           <th>Tipo sangre</th>
+           <th>Tipo Sangre</th>
            <th>Tratamientos</th>
            <th>Enfermedades</th>
            <th>Alergias</th>
@@ -249,8 +249,8 @@ if (isset($_POST['expediente'])) {
        <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Consulta medica fecha: <?php echo $fecha;?></label></div>
        <br>
        <fieldset>
-         <legend>Datos generales de la consulta</legend><br>
-         <label  ><b>Nombre del medico: </b><?php  echo ucwords(strtolower($MEDICO)); ?></label><br>
+         <legend>Datos Generales de la Consulta</legend><br>
+         <label  ><b>Nombre del Medico: </b><?php  echo ucwords(strtolower($MEDICO)); ?></label><br>
          <label style="padding-right: 22px;"><b>Hora</b><?php echo $HORA; ?></label>
          <label><b>Fecha: </b><?php echo $fecha; ?></label>
        </fieldset>
@@ -282,8 +282,8 @@ if (isset($_POST['expediente'])) {
       <br>
       
       <div id="caja3">
-        <p>Datos de consulta medica </p><hr><br>
-        <div class="c"  ><label><b>Sintomas:</b></label> 
+        <p>Datos de Consulta Medica </p><hr><br>
+        <div class="c"  ><label><b>Síntomas:</b></label> 
           <?php  echo utf8_decode(strtolower($sintomas)) ?>
         </div>
         <div class="c" > <label><b>Diagnóstico Ingreso: </b></label> <?php  echo utf8_decode(strtolower($diagnostico_ingreso))?> </div>
@@ -291,11 +291,11 @@ if (isset($_POST['expediente'])) {
         <div class="c"  > <label><b>Diagnóstico Egreso: </b></label> <?php echo utf8_decode(strtolower($diagnostico_egreso))?></div>
       </div>
       <div id="caja3">
-        <p> Datos recetas/Examenes</p><hr><br>
-        <div class="c2" ><label><b>Medicamentos recetados: </b></label>
+        <p> Datos Recetas/Examenes</p><hr><br>
+        <div class="c2" ><label><b>Medicamentos Recetados: </b></label>
          <?php  echo utf8_decode(strtolower($medicamentos)) ?>
         </div>
-        <div class="c2" ><label><b> Examenes recetados:</b></label>
+        <div class="c2" ><label><b> Examenes Recetados:</b></label>
          <?php  echo utf8_decode(strtolower($examenes));?> 
         </div>
       </div>
