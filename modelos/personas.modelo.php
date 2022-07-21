@@ -474,16 +474,14 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                               $nivel_edu = ($_POST['nivel_educativo']);
                               $ingresos = ($_POST['ingresos']);
                               $iglesia = ($_POST['iglesia']);
+                              $codigo_Estudiante = ($_POST['EstudianteParentesco']);
+                              $codigo_parentesco = ($_POST['parentesco']);
+
 
                               $insert_persona = "CALL Sp_insertar_familiares('$primer_nombre','$segundo_nombre','$primer_apellido',
                               '$segundo_apellido','$identidad','$fecha_nacimiento','$lugar_nacimiento','$tipo_persona','$usuario','$sexo','$direccion','$telefono','$correo',
-                               '$estado_civil','$nivel_edu','$ingresos','$iglesia');" ;
+                               '$estado_civil','$nivel_edu','$ingresos','$iglesia', '$codigo_Estudiante','$codigo_parentesco');" ;
                               $consulti =$conn->query($insert_persona);
-
-                                
-
-
-
 
 
 

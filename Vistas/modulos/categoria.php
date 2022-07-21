@@ -270,6 +270,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         </div>
                       </div>
                     </div><!--Fin de otra row -->
+                    <!---------------------------DATOS DE FAMILIARES------------->
                     <div style ="display:none;" id="familiares" >
                       <h5> Datos Familiares</h5><hr color="blue"><br>
                       <div class="row"><!--Para agregar campos adicionales al familiar -->
@@ -301,8 +302,62 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                             <input name ="iglesia" id="iglesia"  required onkeypress="return soloLetras(event);" onkeyup="mayus(this);" maxlength="50" minlength="5" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
+
+
+                        
                       </div>
-                    </div>
+
+                       <!--Inicio para agregar parentesco-->
+                       <?php //
+                                            $query = "SELECT	est.CODIGO_ESTUDIANTE, CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
+                                            FROM tbl_persona per, tbl_estudiante est
+                                            WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
+                                            AND per.CODIGO_TIPO_PERSONA = 4;";
+                                            $resultadod=$conn->query($query);                
+                                            ?>
+                            <h5>Agregar parentesco</h5><hr color="blue"><br>
+                               <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
+                                 <div class="col-sm-6">
+                                      <label for="">Estudiante: </label>
+                                        <select  style="width: 100%;"  class="form-control select2" name="EstudianteParentesco" id="EstudianteParentesco" required="">
+                                          <option selected disabled value=""> Buscar Estudiante...</option>
+                                                <?php 
+                                                  if ($resultadod->num_rows > 0) {
+                                                  while($row = $resultadod->fetch_assoc()) { 
+                                                  $codigo = $row['CODIGO_ESTUDIANTE'];
+                                                  $nombre = $row['NOMBRE'];
+                                                  
+                                                  ?>
+                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                <?php 
+                                                } 
+                                                }
+                                                ?>
+                                        </select>
+                                  </div>
+                                      
+
+                                  <?php
+                                      $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
+                                      FROM tbl_parentesco pa";
+                                      $parentesco=$conn->query($querypare)
+                                    ?>
+                                  <div class="col-sm-6">
+                                      <label>Parentesco</label>
+                                      <select class="form-control select2" name="parentesco" id="parentesco">
+                                        <option selected disabled value="">Seleccione el parentesco...</option>
+                                                <?php 
+                                                  if ($parentesco->num_rows > 0) {
+                                                  while($rowt = $parentesco->fetch_assoc()) { ?>
+                                                  <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
+                                                <?php } 
+                                                        }?>
+                                      </select>
+                                 </div>
+                              </div> 
+                     <!--Fin para agregar parentesco-->
+
+                    </div><!--Fin de display de familiares-->
                     </br>
 <!---------------------------------------------ESTUDIANTES----------------------------------------------------------------->
         <div style ="display:none;" id="estudiantes" >
@@ -311,7 +366,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Grado Actual</label> 
                           <div class="form-group">
-                             <input class="form-control" type="text" name="GRADO" id="GRADO" onkeyup="mayus(this);" autocomplete = "off" onblur="quitarespacios(this);" required pattern="[A-Z,1-9]{<?php echo $valor4;?>,<?php echo $valor3;?>}"  maxlength="15" placeholder="Ej: 2" required="" >
+                             <input class="form-control" type="text" name="GRADO" id="GRADO" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" autocomplete = "off" onblur="quitarespacios(this);"  required pattern="[A-Z,1-9]{<?php echo $valor4;?>,<?php echo $valor3;?>}"  maxlength="15" placeholder="Ej: Octavo" required="" >
                               <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -355,7 +410,8 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" name="PASATIEMPOS" id="PASATIEMPOS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" name="PASATIEMPOS" id="PASATIEMPOS" autocomplete = "off" onblur="quitarespacios(this);" 
+                           onkeypress="return soloLetras(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -562,56 +618,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                      <!--Inicio de sacramentos-->
 
 
-                     <!--Inicio para agregar parentesco-->
-                                          <?php //
-                                            $query = "SELECT	fam.CODIGO_FAMILIAR,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
-                                            FROM tbl_persona per, tbl_familiar fam
-                                            WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
-                                            AND per.CODIGO_TIPO_PERSONA = 7;";
-                                            $resultadod=$conn->query($query);                
-                                            ?>
-                            <h5>Agregar parentesco</h5><hr color="blue"><br>
-                               <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
-                                 <div class="col-sm-6">
-                                      <label for="">Familiar: </label>
-                                        <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco">
-                                          <option selected disabled value=""> Buscar familiares...</option>
-                                                <?php 
-                                                  if ($resultadod->num_rows > 0) {
-                                                  while($row = $resultadod->fetch_assoc()) { 
-                                                  $codigo = $row['CODIGO_FAMILIAR'];
-                                                  $nombre = $row['NOMBRE'];
-                                                  
-                                                  ?>
-                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                <?php 
-                                                } 
-                                                }
-                                                ?>
-                                        </select>
-                                  </div>
-                                      
-
-                                  <?php
-                                      $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
-                                      FROM tbl_parentesco pa";
-                                      $parentesco=$conn->query($querypare)
-                                    ?>
-                                  <div class="col-sm-6">
-                                      <label>Parentesco</label>
-                                      <select class="form-control select2" name="parentesco">
-                                        <option selected disabled value="">Seleccione el parentesco...</option>
-                                                <?php 
-                                                  if ($parentesco->num_rows > 0) {
-                                                  while($rowt = $parentesco->fetch_assoc()) { ?>
-                                                  <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
-                                                <?php } 
-                                                        }?>
-                                      </select>
-                                 </div>
-                              </div> 
-                     <!--Fin para agregar parentesco-->
-
+                    
 
 
 
@@ -896,12 +903,15 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('ingreso').required = false;
           document.getElementById('educativo').required = false;
           document.getElementById('civil').required = false;
+          
           document.getElementById('cate').required = false;
           document.getElementById('psico').required = false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
           document.getElementById('correo').required = true; 
-
+          
+          document.getElementById('parentesco').required = false;
+          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -921,6 +931,8 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('iglesia').required = false;
           document.getElementById('ingreso').required = false;
           document.getElementById('educativo').required = false;
+          document.getElementById('parentesco').required = false;
+          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('civil').required = false;
           document.getElementById('cate').required = false;
           document.getElementById('psico').required = false;
@@ -953,10 +965,22 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('educativo').required = true;
           document.getElementById('civil').required = true;
           document.getElementById('correo').required = true; 
+
+          document.getElementById('parentesco').required = true;
+          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('GRADO').required = false;
+          document.getElementById('inlineRadio1').required = false; 
+          document.getElementById('inlineRadio2').required = false; 
+          document.getElementById('INDICE').required = false; 
+          document.getElementById('MATERIAS').required = false; 
+          document.getElementById('PASATIEMPOS').required = false; 
+          document.getElementById('DISTRACTORES').required = false; 
+          document.getElementById('METAS').required = false;
         }else if($(this).val() ===  "5" ){//para medico
           document.getElementById('especialidad_psico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
           document.getElementById('familiares').style.display = "none";
+          document.getElementById('estudiantes').style.display = "none";
           document.getElementById('especialidad_medico').style.display = "block";
           document.getElementById('usuarios').style.display = "block";
           document.getElementById('cate').required = false;
@@ -969,6 +993,17 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
+
+          document.getElementById('parentesco').required = true;
+          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('GRADO').required = false;
+          document.getElementById('inlineRadio1').required = false; 
+          document.getElementById('inlineRadio2').required = false; 
+          document.getElementById('INDICE').required = false; 
+          document.getElementById('MATERIAS').required = false; 
+          document.getElementById('PASATIEMPOS').required = false; 
+          document.getElementById('DISTRACTORES').required = false; 
+          document.getElementById('METAS').required = false;
         }else if($(this).val() ===  "6" ){// para psicologo
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('catequistas').style.display = "none";
@@ -985,6 +1020,17 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
+
+          document.getElementById('parentesco').required = true;
+          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('GRADO').required = false;
+          document.getElementById('inlineRadio1').required = false; 
+          document.getElementById('inlineRadio2').required = false; 
+          document.getElementById('INDICE').required = false; 
+          document.getElementById('MATERIAS').required = false; 
+          document.getElementById('PASATIEMPOS').required = false; 
+          document.getElementById('DISTRACTORES').required = false; 
+          document.getElementById('METAS').required = false;
         }else if($(this).val() ===  "8"){//para catequista
           document.getElementById('especialidad_medico').style.display = "none";
           document.getElementById('especialidad_psico').style.display = "none";
@@ -1002,6 +1048,17 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
+
+          document.getElementById('parentesco').required = true;
+          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('GRADO').required = false;
+          document.getElementById('inlineRadio1').required = false; 
+          document.getElementById('inlineRadio2').required = false; 
+          document.getElementById('INDICE').required = false; 
+          document.getElementById('MATERIAS').required = false; 
+          document.getElementById('PASATIEMPOS').required = false; 
+          document.getElementById('DISTRACTORES').required = false; 
+          document.getElementById('METAS').required = false;
         }
     });
   }); 

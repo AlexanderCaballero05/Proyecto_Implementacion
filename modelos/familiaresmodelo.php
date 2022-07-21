@@ -61,6 +61,14 @@
   if(isset($_POST['EDITARFAMILIAR'])){
     if(isset($_POST['edit_familiar'])){
       $codigo_familiares = ($_POST['EDITARFAMILIAR']);
+      $nombre_modi = ($_POST['nombre1']);
+      $nombre_modi2 = ($_POST['nombre2']);
+      $apellido_modi = ($_POST['apellido1']);
+      $apellido_modi2 = ($_POST['apellido2']);
+      $correo_mofi = ($_POST['correo_modi']);
+      $DNI = ($_POST['DNIFAMILIAR']);
+      $telefono = $_POST['telefono'];
+      $direccion = $_POST['direccion'];
       $editar_estado = ($_POST['editar_estado']);
       $editar_nivelE= ($_POST['editar_nivele']);
       $editar_ingresos= ($_POST['editar_ingresos']);
@@ -69,24 +77,15 @@
       
        // 
           try{
-            $sql = "UPDATE tbl_familiar SET ESTADO_CIVIL = '$editar_estado',
-                                          NIVEL_EDUCATIVO = '$editar_nivelE', 
-                                          INGRESOS_DE_FAMILIAR = '$editar_ingresos', 
-                                          NOMBRE_IGLESIA = '$editar_iglesia'
-                                        WHERE CODIGO_PERSONA = '$codigo_familiares'; ";
+            $sql = "CALL Sp_modificar_familiares('$codigo_familiares','$DNI','$nombre_modi', '$nombre_modi2', '$apellido_modi','$apellido_modi2',
+              '$telefono', '$correo_mofi','$direccion','$editar_estado','$editar_nivelE','$editar_ingresos' , '$editar_iglesia');" ;
             $consulta=$conn->query($sql);
             if ($consulta>0){
               echo "<script>
               alert('¡Modificación realizada correctamente!');
               window.location = 'crudfamiliares';
               </script>";
-
-              include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un familiar ';
-              bitacora($codigoObjeto, $accion,$descripcion);
-              exit;
+            
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el familiar!');
