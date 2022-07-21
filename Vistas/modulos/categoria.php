@@ -206,7 +206,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="form-group">
                           <input class="form-control" type="text" id="lugar" maxlength="30" minlength="4"   name="lugar_nacimiento" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);" autocomplete = "off" >
                           <div class="invalid-feedback">
-                             Campo obligatorio.
+                          Campo obligatorio.
                           </div> 
                         </div>
                       </div>
