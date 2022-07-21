@@ -104,9 +104,9 @@ include_once "conexion3.php";
           if($permiso_registrar == 'SI'){
         ?> 
         <a href="categoria"> 
-            <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar persona</button>
+            <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
         </a>
-         <button onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
          <?php 
          }
         ?>
@@ -211,7 +211,7 @@ include_once "conexion3.php";
                                 <a><!--Manda el codigo de usuario a la parte del reporte -->
                                   <form method="post"  action="Reportes_Prosecar/reporteUsuarioIndividual.php" target="_blank"> 
                                     <input type="hidden" name="imprimirreporteindividual" value="<?php echo $var2?>">
-                                    <button type='submit'  style="color:white; "class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                    <button type='submit'  style="color:white;background-color:#FA0079"class="form-control btn btn-danger mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                   </form>
                                 </a>
                                 <?php
