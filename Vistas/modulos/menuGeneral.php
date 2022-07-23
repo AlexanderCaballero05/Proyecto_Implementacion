@@ -31,6 +31,7 @@
     Diana Rut Garcia       09-07-2022                 cambio en el nombre del nombres del menu
     Diana Rut Garcia       09-07-2022                 cambio en el orden del menu de personas
     Diana Rut Garcia       21-07-2022                 cambio en el orden del menu de estudiante
+    Diana Rut Garcia       22-07-2022                 cambio en los nombres del menu
 ----------------------------------------------------------------------->
 
 <?php
@@ -96,7 +97,7 @@
             <a href="index" class="nav-link active">
                <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Menu general
+                Menu General
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -146,13 +147,13 @@
                 <li class="nav-item">
                   <a href="crudparametrosusuario" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                      <p>Mantenimiento de Parametros Usuarios</p>
+                      <p>Mantenimiento Parametros Usuarios</p>
                   </a>
               </li>
               <li class="nav-item">
                 <a href="crudtipopersona" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Tipo Persona</p>
+                  <p>Mantenimiento Tipo Persona</p>
                 </a>
               </li>
 
@@ -196,7 +197,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-graduation-cap"></i>
                 <p>
-                  Gestión de Estudiantes
+                  Gestión Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -204,7 +205,7 @@
                 <li class="nav-item">
                   <a href="ediusuariosestudiantes"class="nav-link">
                     <i class="far fa-edit nav-icon"></i>
-                    <p>Proceso de Estudiantes</p>
+                    <p>Proceso Estudiantes</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -228,7 +229,7 @@
                 <li class="nav-item">
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de Parentesco</p>
+                    <p>Mantenimiento Parentesco</p>
                   </a>
                 </li>
               </ul>
@@ -267,7 +268,7 @@
                           <a href="" class="nav-link bg-gradient-navy">
                             <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
-                              Gestión de Citas 
+                              Gestión Citas 
                               <i class="right fas fa-angle-left"></i>
                             </p>
                           </a>
@@ -275,7 +276,7 @@
                             <li class="nav-item">
                               <a href="crudcitasgenerales"class="nav-link">
                                 <i class="far fa-edit nav-icon"></i>
-                                <p>Proceso de Citas </p>
+                                <p>Proceso Citas </p>
                               </a>
                             </li>
                           </ul>
@@ -317,7 +318,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas  fa-copy"></i>
                 <p>
-                  Gestion de Estudiantes
+                  Gestión Estudiantes
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -392,7 +393,7 @@
               <li class="nav-item">
               <a href="area" class="nav-link" > 
               <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Áreas</p>
+                  <p>Mantenimiento Áreas</p>
               </a>
               </li>
               <li class="nav-item">
@@ -450,7 +451,7 @@
           <a href="#" class="nav-link bg-gradient-navy">
             <i class=" nav-icon fas fa-school"></i>
             <p>
-              Matricula Académica y Espiritual
+              Matrícula Académica y Espiritual
               <i class="fas fa-angle-left "></i>
             </p>
           </a>
@@ -458,7 +459,7 @@
               <li class="nav-item">
               <a href="crudMatricula" class="nav-link">
                  <i class="far fa-edit nav-icon"></i>
-                  <p>Proceso de matricula</p>
+                  <p>Proceso Matricula</p>
                 </a>
               </li>
             </ul>
@@ -619,7 +620,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclínica</p>
+                <p>Proceso Preclínica</p>
              </a>
            </li>
           </ul>
@@ -692,7 +693,7 @@
           <li class="nav-item">
              <a href="procesoCitaspPreclinica"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Preclínica</p>
+                <p>Proceso Preclínica</p>
              </a>
            </li>
 
@@ -815,7 +816,7 @@
             <li class="nav-item">
               <a href="ProcesoCitasPsicologicas" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
-                <p>Proceso de Consultas</p>
+                <p>Proceso Consultas</p>
               </a>
             </li>
                     
@@ -876,21 +877,21 @@
             <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Roles</p>
+                  <p>Mantenimiento Roles</p>
                 </a>
               </li>
 
               <li class="nav-item">
                 <a href="crudPermisos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Permisos</p>
+                  <p>Mantenimiento Permisos</p>
                 </a>
               </li>
               
               <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Objetos</p>
+                  <p>Mantenimiento Objetos</p>
                 </a>
               </li>
               </li>
@@ -900,20 +901,20 @@
               <li class="nav-item">
                 <a href="crudpreguntas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento de Preguntas</p>
+                  <p>Mantenimiento Preguntas</p>
                 </a>
               </li>
               <li class="nav-item">
                   <a href="estado" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento de Estados</p>
+                    <p>Mantenimiento Estados</p>
                   </a>
                 </li>
              
               <li class="nav-item">
                 <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                 <i class="nav-icon fas fa-table"></i>
-                   <p>Mantenimiento de Parametros</p>
+                   <p>Mantenimiento Parametros</p>
                 </a>
               </li>
             </ul>
@@ -950,7 +951,7 @@
                       <a href="Formbitacora" class="nav-link bg-gradient-navy">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
-                          Bitacora del sistema
+                          Bitacora del Sistema
                           <!-- <i class="fas fa-angle-left right"></i> -->
                         </p>
                       </a>

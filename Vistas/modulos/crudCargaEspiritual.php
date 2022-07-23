@@ -31,6 +31,7 @@
   Diana Rut Garcia          03/07/2022                 Cambio en el titulo y modal editar 
   ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
   ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
+  Diana Rut                 23/07/2022               detalles de estetica
 ----------------------------------------------------------------------->
 
 <?php 
@@ -100,10 +101,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
+            <a class="nav-link active" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
@@ -138,9 +139,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     {
                     ?>  
                 <a href="procesoCargaAcademica" >
-                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                 </a>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                 <?php
                    }
                 ?>
@@ -162,9 +163,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <th class="text-center">Tutor</th>
                         <th class="text-center">Sección</th>
                         <th class="text-center">Hora Inicio</th>
-                        <th class="text-center">Hora final</th>
-                        <th class="text-center">Fecha inicio</th>
-                        <th class="text-center">Fecha final</th>
+                        <th class="text-center">Hora Final</th>
+                        <th class="text-center">Fecha Inicio</th>
+                        <th class="text-center">Fecha Final</th>
                         <th class="text-center">Estado</th>
                         <th class="text-center">Período</th>
                       </tr>
@@ -260,7 +261,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
-                                    <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079"class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                    <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
                                 </a>
                                 <?php
                                     }

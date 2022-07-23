@@ -58,7 +58,7 @@
 
     <section class="content">
        <section class="content-header text-xl-center mb-3 ">
-              <h4> Matricular Alumno<i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+              <h4> Matrícula Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
     <div class="container-fluid">
         <div class="card">
@@ -76,8 +76,11 @@
             </ul>
           </div>
           <div class="card-body">
-          </br> 
-
+          <div class="row">
+              <div class="col-md-12 col-md-offset-2">
+              <button onclick="location.href='ediusuariosestudiantes'"  type="button"  style="color:white;"class="btn btn- lg btn-success float-right"><span><i class="nav-icon fa fa-arrow-left mx-2 "></i></span> Regresar </button>
+              </div>
+            </div><hr>
           <form method="POST">
            <div class="row">
               <?php
@@ -165,11 +168,11 @@
                           <div id="MODAL<?php echo $var6; ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMESTUDIANTE" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                      <H5>Información de la Catequesis</h5>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                  <form method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     </hr> 
                                     <div class="row"><!-- INICIO PRIMERA ROW --> 
@@ -314,7 +317,7 @@
                                    <div class="modal-body">
                                        <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
                                        <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
-                                       <h4 class="text-center">¿Está seguro de eliminar la clase? <?php echo $var1; ?>?</h4>
+                                       <h4 class="text-center">¿Está seguro de eliminar la clase <?php echo $var1; ?>?</h4>
                                     </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

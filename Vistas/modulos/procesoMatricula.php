@@ -52,7 +52,7 @@
 
     <section class="content">
        <section class="content-header text-xl-center mb-3 ">
-              <h4> Matricular Alumnos <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
+              <h4> Matrícula Académica <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
     <div class="container-fluid">
         <div class="card">
@@ -70,8 +70,12 @@
             </ul>
           </div>
           <div class="card-body">
-            <br>
-          <form method="POST">   
+            <div class="row">
+              <div class="col-md-12 col-md-offset-2">
+              <button onclick="location.href='ediusuariosestudiantes'"  type="button"  style="color:white;"class="btn btn- lg btn-success float-right"><span><i class="nav-icon fa fa-arrow-left mx-2 "></i></span> Regresar </button>
+              </div>
+            </div><hr>
+          <form method="POST"> 
             <div class="row">
               <?php
                 $query = "SELECT es.CODIGO_ESTUDIANTE, CONCAT_WS(' ',p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as NOMBRE
@@ -154,11 +158,11 @@
                           <div id="MODAL_MATRICULA<?php echo $var6 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMESTUDIANTE" method="POST">
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                      <h5 >Información de la Tutoría</h5>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                  <form  method="POST">
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <hr>
                                     <div class="row"><!-- INICIO PRIMERA ROW --> 

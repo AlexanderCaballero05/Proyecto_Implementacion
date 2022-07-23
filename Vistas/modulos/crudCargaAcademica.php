@@ -107,7 +107,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
     </div>
     <section class="content-header text-xl-center mb-3 ">
       <h1>
-          <h4> Lista de Carga Academica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Lista de Carga Académica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
       <section class="content">
@@ -148,9 +148,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                 if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
                 ?>  
                 <a href="procesoCargaAcademica" >
-                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-info mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+                   <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                 </a>
-                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
+                <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                </br></br>
                <?php
                 }
@@ -269,7 +269,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
-                                    <button type='submit' title='Imprimir' style="color:white; background-color:#FA0079"class=" form-control btn btn-info mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                    <button type='submit' title='Imprimir' style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
                                 </a>
                                 <?php
                                     }

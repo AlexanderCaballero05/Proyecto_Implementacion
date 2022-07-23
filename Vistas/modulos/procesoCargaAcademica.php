@@ -81,17 +81,17 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
     <div class="container-fluid">
     <section class="content-header text-xl-center">
       <h1>
-          <h4> Agregar Carga Acadèmica/Espiritual  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Agregar Carga Académica/Espiritual  <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver carga academica</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver carga espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
@@ -112,9 +112,9 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
      $filas_area= $conn->query($query);
      ?>
    <div class="form-group">
-   <label  class="control-label">Area de la tutoría:</label> 
+   <label  class="control-label">Área de la Tutoría:</label> 
     <select class="form-control select2"  name="area_tutoria" id="area_tutoria" required>
-      <option selected disable value="">--Seleccione un Area--</option>
+      <option selected disable value="">--Seleccione un Área--</option>
       <?php
          if($filas_area->num_rows >0){ 
            while($filas=$filas_area->fetch_assoc()){ 
@@ -183,8 +183,8 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
        }
        ?>
      </select> 
-     <div class="invalid-feedback">
-     Complete este campo.
+      <div class="invalid-feedback">
+        Complete este campo.
        </div>
    </div>
  </div><!--CIERRE DE LA TUTORIAS ACADEMICAS -->
@@ -212,7 +212,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
      ?>
    </select> 
     <div class="invalid-feedback">
-    Complete este campo.
+     Complete este campo.
     </div>
  </div>
 </div><!--CIERRE DE tutores academico-->
@@ -241,7 +241,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
      ?>
    </select> 
     <div class="invalid-feedback">
-    Complete este campo.
+     Complete este campo.
     </div>
  </div>
 </div><!--CIERRE DE tutores academico-->
@@ -276,7 +276,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                     <input class="form-control"  type="date" min= "<?php $MI=date("Y-m-d"); echo $MI;?>"   max ="<?php echo $fechamaxima?>"  
                        name="fecha_inicio" required>
                         <div class="invalid-feedback">
-                        Complete este campo con una fecha valida.
+                         Complete este campo con una fecha valida.
                         </div>
                     </div>
                   </div>
@@ -287,12 +287,12 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                   ?>
 
                   <div class="col-md-3 mb-3"> <!--FECHA FINAL-->
-                    <label  class="control-label">Fecha final:</label> 
+                    <label  class="control-label">Fecha Final:</label> 
                     <div class="form-group">
                     <input class="form-control" type="date" min="<?php $MIN=date("Y-m-d"); echo $MIN;?>" max = "<?php echo $fechamaxima1 ?>"  
                       name="fecha_final" required>
                         <div class="invalid-feedback">
-                        Complete este campo con una fecha valida.
+                          Complete este campo con una fecha valida.
                         </div>
                     </div>
                   </div>
@@ -321,7 +321,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                       ?>
                     </select>
                      <div class="invalid-feedback">
-                     Complete este campo.
+                       Complete este campo.
                       </div> 
                   </div>
                 </div><!--cierre de la modalidad  -->
@@ -330,7 +330,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                   $query = "SELECT * FROM tbl_seccion";
                   $resultadod=$conn->query($query);                
                   ?>
-                    <label for="identidad" class="control-label">Sección:</label> 
+                    <label class="control-label">Sección:</label> 
                     <div class="form-group">
                     <select style="width: 100%"   class="form-control select2" name="seccion" required>
                         <option selected disabled value="" >--Seleccionar Sección--</option>
@@ -347,7 +347,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                         ?>
                       </select>
                       <div class="invalid-feedback">
-                      Complete este campo.
+                       Complete este campo.
                       </div>
                     </div>
                   </div>
@@ -357,47 +357,42 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                     $resultadod=$conn->query($query);                
                     ?>
                     <label for="identidad" class="control-label">Período:</label> 
-                    <div class="input-group ">
-                            <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" onkeypress="return solonumeros(event);" placeholder=" Ej: 3 " name="periodo" required >
-                            <div class="input-group-append">
-                              <span class="input-group-text">Meses</span>
-                            </div>
-                             <div class="invalid-feedback">
-                             Complete este campo.
-                              </div>
-                          </div>
+                     <div class="input-group ">
+                        <input  maxlength="6"  type="text" class="form-control" autocomplete = "off" onkeypress="return solonumeros(event);" placeholder=" Ej: 3 " name="periodo" required >
+                        <div class="input-group-append">
+                          <span class="input-group-text">Meses</span>
+                        </div>
+                        <div class="invalid-feedback">
+                          Complete este campo.
+                        </div>
+                    </div>
                   </div><!--CIERRE DEL PERIODO -->
               </div><!--Fin del row -->
 
               <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '20'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
-                    <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-                    ?>  
-              </br></br></br>
+                include "conexionpdo.php";
+                 $usuario=$_SESSION['vario'];
+                //Evaluo si existe el tipo de Rol
+                 $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+                 $evaluar_usuario->execute(array($usuario));
+                $row=$evaluar_usuario->fetchColumn();
+                if($row > 0){
+                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                  //llamar al procedimiento almacenado
+                  $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                  $evaluar_permiso->execute(array($usuariomo, '20'));
+                  $row1=$evaluar_permiso->fetchColumn();
+                  $permiso_registrar =$row1;             
+                }
+              ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+              <?php 
+               if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                ?>  
+              </br>
               <button type="submit"  id="" name="GUARDAR_CARGA" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
-                  <?php
-                    }
-                    ?>
+              <?php
+                }
+              ?>
             </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
 

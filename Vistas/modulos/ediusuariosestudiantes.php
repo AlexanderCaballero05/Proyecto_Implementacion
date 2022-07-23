@@ -423,14 +423,14 @@ include_once "conexion3.php";
                             <div class="modal-dialog modal-dialog-scrollable modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h5 class="modal-title" id="exampleModalLabel"> Matricula Académica/Espiritual</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel"> Matrícula Académica/Espiritual</h5>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                     <div class="modal-body"><!--CUERPO DEL MODAL -->
                                       <div class="row">
                                         <div class="col-sm-12">
                                           <div class="form-group">
-                                          <h5>Escoja un Tipo de Matrícula</h5><br>
+                                          <h5>Seleccione un Tipo de Matrícula</h5><br>
                                             <form method="POST" action="procesoMatricula">
                                                <input type="text" hidden name="persona_codigo" value="<?php echo $var2; ?>"> 
                                                <input type="text" hidden name="estu_codigo" value="<?php echo $var5; ?>">

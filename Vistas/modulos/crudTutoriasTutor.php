@@ -12,7 +12,7 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
+        <section class="content-header text-xl-center mb-3">
               <h4>Lista de Tutorías  <p style="font-style: italic; color:chocolate"><?php echo "Tutor Académico ".$_SESSION['vario'] ?></p><i class="nav-icon"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
