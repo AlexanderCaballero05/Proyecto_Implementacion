@@ -25,7 +25,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
           if($row >0){ 
             echo "<script> 
             alert('No se puede porque tiene otra cita en la misma fecha y misma hora');
-            window.location = 'procesocita';
+            window.location = 'ediusuariosestudiantes';
             </script>";
             exit;
           }else{
@@ -36,7 +36,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
             if( $row2 > 0){
               echo "<script> 
               alert('El  medico  ya tiene asignada una cita en esa fecha y hora');
-              window.location = 'procesocita';
+              window.location = 'ediusuariosestudiantes';
               </script>";
               exit;
             }else{
@@ -48,7 +48,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                 if($row2 > 0){
                   echo "<script> 
                   alert('El psicologo ya tiene asignada una cita en esa fecha y hora');
-                  window.location = 'procesocita';
+                  window.location = 'ediusuariosestudiantes';
                   </script>";
                   exit;
                 }else{
@@ -58,8 +58,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                   $row2=$consulta2->fetchColumn();
                   if($row2 > 0){
                     echo "<script> 
-                    alert('El Catqeusis ya tiene asignada una cita en esa fecha y hora');
-                    window.location = 'procesocita';
+                    alert('El Catequita ya tiene asignada una cita en esa fecha y hora');
+                    window.location = 'ediusuariosestudiantes';
                     </script>";
                     exit;
                   }else{//else que hace los insert
@@ -79,7 +79,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          window.location = 'procesocita';
+                          window.location = 'ediusuariosestudiantes';
                           </script>";
                           exit;
                         }
@@ -98,7 +98,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          window.location = 'procesocita';
+                          window.location = 'ediusuariosestudiantes';
                           </script>";
                           exit;
                         }
@@ -117,13 +117,13 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           exit;
                         }else{
                           echo "<script> 
-                          window.location = 'procesocita';
+                          window.location = 'ediusuariosestudiantes';
                           </script>";
                           exit;
                         }
                       }else{
                           echo "<script> 
-                          window.location = 'procesocita';
+                          window.location = 'ediusuariosestudiantes';
                           </script>";
                           exit;
                       }//fin del elseif

@@ -30,7 +30,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
      if($row > 0){
       echo "<script> 
       alert('No puede adicionar esta clase,ya la tiene matriculada');
-      window.location = 'procesoMatricula';
+      window.location = 'ediusuariosestudiantes';
       </script>";
 
      }else{
@@ -49,7 +49,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
         exit;
       }else{
         echo "<script> 
-        
+        alert('Tutoría Matriculada Exitosamente');
         window.location = 'crudMatricula';
         </script>";
       }
@@ -91,6 +91,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
 
      if($resul >0){
        echo "<script>  
+       alert('Tutoría Matriculada Exitosamente');
        window.location = 'crudMatricula';
        </script>";
        $codigoObjeto=23;
@@ -100,7 +101,6 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
        exit;
      }else{
        echo "<script> 
-       
        window.location = 'crudMatricula';
        </script>";
      }

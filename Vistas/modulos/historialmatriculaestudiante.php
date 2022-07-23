@@ -18,18 +18,18 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>HISTORIAL DE TUTORIAS DE LOS ESTUDIANTES DE PROSECAR </h4>
+    <div class="content-header text-xl-center mb-3 ">
+        <h4>Historial de Tutorías del Estudiante </h4>
     </div>
     <section class="content">
        <div class="card"> 
        <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="matriculaestudiantes">TUTORIAS ACTUALES</a>
+            <a class=" nav-link " style="color:#000000;" href="matriculaestudiantes">Tutorías Actuales</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="">HISTORIAL DE TUTORIAS</a>
+            <a class=" nav-link active" style="color:#000000;" href="">Historial Tutorías</a>
             </li>
           </ul>
         </div>
@@ -42,7 +42,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <div class="modal-header" >
                     <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"
                          style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> 
-                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                         <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                         </div>
                         <!-- form start -->
@@ -51,14 +51,14 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Numero</th>
-                                            <th class="text-center">Fecha de Matrícula</th>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Fecha Matrícula</th>
                                             <th class="text-center">Tutoría</th>
-                                            <th class="text-center">Area</th>
-                                            <th class="text-center">Hora de Inicio</th>
+                                            <th class="text-center">Área</th>
+                                            <th class="text-center">Hora Inicio</th>
                                             <th class="text-center">Hora Final</th>
-                                            <th class="text-center">Fecha de Inicio</th>
-                                            <th class="text-center">Fecha de Finalización</th>
+                                            <th class="text-center">Fecha Inicio</th>
+                                            <th class="text-center">Fecha Final</th>
                                             <th class="text-center">Modalidad</th>
                                             <th class="text-center">Grado</th>
                                         </tr>

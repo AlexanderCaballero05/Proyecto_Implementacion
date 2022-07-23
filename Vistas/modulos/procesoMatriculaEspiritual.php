@@ -68,7 +68,7 @@
                 <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="procesoMatricula">Agregar Matrícula Académica</a>
+                <a class="nav-link" style="color:#000000;">Agregar Matrícula Académica</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar Matrícula Espiritual</a>

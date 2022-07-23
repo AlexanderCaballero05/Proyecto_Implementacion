@@ -12,7 +12,7 @@ session_start();
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
+        <section class="content-header text-xl-center mb-3 ">
               <h4> Listado de Tutorías y Secciones <i class=" nav-icon fas  fa-graduation-cap"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
@@ -22,7 +22,7 @@ session_start();
                 <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link " style="color:#000000;" aria-current="true" href="procesoMatricula">Matrícula</a>
+                <a class="nav-link " style="color:#000000;">Matrícula</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatricula">Lista de Clases</a>
@@ -111,7 +111,7 @@ session_start();
                 if($row>0){
 
                 ?>
-                <button  onclick="Descargar()"href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                <button  onclick="Descargar()"href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                 <div class="table-responsive">
                  <table id="tabla" class="table table-bordered table-striped">
                    <thead>
@@ -169,7 +169,7 @@ session_start();
                 <?php
                  }else{
                 ?>
-                <p >No se enconto informacion </p>
+                <p >No se encontro Información </p>
                 <?php
                  }
                 }
@@ -194,7 +194,7 @@ session_start();
                 if($row>0){
 
                 ?>
-                <button  onclick="Descargar1()"href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                <button  onclick="Descargar1()"href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                 <div class="table-responsive">
                  <table id="tabla" class="table table-bordered table-striped">
                    <thead>
@@ -252,7 +252,7 @@ session_start();
                 <?php
                  }else{
                 ?>
-                <p >No se encontro informació de la sección </p>
+                <p >No se Encontro Información de la Sección </p>
                 <?php
                  }
                 }

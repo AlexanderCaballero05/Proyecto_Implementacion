@@ -81,7 +81,7 @@
               
               <div class="modal-footer">
                 <button onclick="location.href='ediusuariosestudiantes'"  type="button"  style="color:white;"class="btn btn- lg btn-success"><span><i class="nav-icon fa fa-arrow-left mx-2"></i></span>Regresar</button>
-                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank">
+                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php">
                  <input type="text" hidden name="reporte_codigo"  value="<?php echo $codigo_persona; ?>"> 
                   <input type="text" hidden name="reporte_estudiante"  value="<?php echo $persona; ?>">
                   <button type='submit'  style="color:white; background-color:#FA0079" class="btn btn-danger "><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button> 
@@ -149,7 +149,7 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label >Correo</label>
+                            <label >Correo Electrónico</label>
                             <input  type="text"  value ="<?php echo $correo;  ?>" class="form-control"  maxlength="15" minlength="1" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL" id="editar_estudiante" 
                             autocomplete ="off" required ="">
                         </div>
@@ -248,18 +248,18 @@
                 </div>
                 <hr><br>
                 <!--espacio para la informacion de parientes -->
-                <h5>Situacion familiar (Personas con quienes vive)</h5>
+                <h5>Situación Familiar (Personas con quienes vive)</h5>
                 <hr color="blue">
                 <table  class="table table-bordered table-striped">
                 <thead style=" background-color:#73E8FD;">
                   <tr>
                   <th>Nombre</th>
                     <th>Edad</th>
-                    <th>Estado civil</th>
+                    <th>Estado Civil</th>
                     <th>Parentesco</th>
-                    <th>Nivel educativo</th>
+                    <th>Nivel Educativo</th>
                     <th>Ingresos Mensuales</th>
-                    <th>Iglesia asiste</th>
+                    <th>Iglesia Asiste</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -307,7 +307,7 @@
               </table>
               <hr><br>
               
-                <h5>Tutorias Matriculadas</h5>
+                <h5>Tutorías Matriculadas</h5>
                 <hr color="blue">
                 <div class="table-responsive text-center">
                 <table  id="tabla_roles" class="table table-bordered table-striped" >
@@ -317,7 +317,7 @@
                           <th class="text-center">Grado</th>
                           <th class="text-center">Año</th>
                           <th class="text-center">Período</th>
-                          <th class="text-center">Año</th>
+                          <th class="text-center">Observación</th>
                         </thead>
                     <tbody>
                         <tr>

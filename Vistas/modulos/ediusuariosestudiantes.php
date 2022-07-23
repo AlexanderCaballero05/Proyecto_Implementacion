@@ -65,7 +65,7 @@ include_once "conexion3.php";
   
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Estudiantes Procecar</h4>    
+          <h4>Estudiantes Prosecar</h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -74,13 +74,13 @@ include_once "conexion3.php";
               <a class=" nav-link active" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver Familiares</a>
               </li>
           </ul>
         </div>
