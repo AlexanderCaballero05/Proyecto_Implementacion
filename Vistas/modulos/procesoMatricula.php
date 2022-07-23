@@ -29,6 +29,7 @@
     Programador               Fecha                      Descripcion
     Gissela Diaz                                       Cambios en la  Ortografía
     Diana Rut Garcia          22/07/2022              Cambios del proceso de matricula,se trae el estudiante desde otra pantalla
+    Diana Rut Garcia          23/07/2022              Se agrego el estado a la consulta,para que traiga las cargas activas
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -125,7 +126,7 @@
                         AND c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
                         AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
                         AND c.CODIGO_SECCION = s.CODIGO_SECCION
-                        AND t.CODIGO_AREA = 1;";
+                        AND t.CODIGO_AREA = 1  AND c.CODIGO_ESTADO = 2;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {

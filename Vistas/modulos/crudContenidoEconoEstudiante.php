@@ -23,6 +23,7 @@ Historial de Cambio
 Programador               Fecha                      Descripcion
 Diana Rut               31/05/2022            Se agrego un tab al menu y un cierre de div
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+Diana Rut                 23/07/2022                 Cambios en los nombres del menu,pasarlos tipo oracion con modificacion estetica del modal
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -44,16 +45,16 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver Familiares</a>
               </li>
               
           </ul>
@@ -108,8 +109,8 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                           <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre Estudiante</th>
-                          <th class="text-center">Contenido Socio-económico</th>
-                          <th class="text-center">Nombre Tipo contenido</th>
+                          <th class="text-center">Contenido Socioeconómico</th>
+                          <th class="text-center">Tipo Contenido</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -171,7 +172,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                               if($permiso_eliminar == 'SI') {
                             ?>
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
                                <?php
@@ -181,7 +182,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                 if ($permiso_actualizar == 'SI'){
                                 ?>
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
                                 <?php 
                                 }
@@ -232,18 +233,18 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar Contenido socieconomico</h4>
+                                    <h4 class="text-center">Editar Contenido Socieconómico</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                  <form  method="POST" class="needs-validation" novalidate >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                     <input type="text" value ="<?php echo $var1;?>" hidden class="form-control" name="id_contenido" id="id_contenido">
                                       <input type="text" value ="<?php echo $var2;?>" hidden class="form-control" name="id_estudiante_conte" id="id_estudiante">
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre_Estudiante</label>
+                                          <label for="txtcodigo_persona">Nombre del Estudiante</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="2" minlength="1" onkeypress="return solonumero(event)"  autocomplete = "off" type="text"  name="editar_estudiante" id="editar_estudiante" disabled>
                                         </div>
                                       </div>
@@ -251,7 +252,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                       if ($var4 == 'DISPOSITIVO ELECTRONICO'){ 
                                       ?>
                                       <div class="col-sm-12">
-                                          <label for="DISPOSITIVOS" class="control-label">¿Con que dispositivos cuenta?</label> 
+                                          <label for="DISPOSITIVOS" class="control-label">¿Con que Dispositivos Cuenta?</label> 
                                             <select  style="width: 100%;"  class="form-control select2"  name="EDITDISPOSITIVOS" type="text" aria-placeholder="Buscar" required="" >
                                               <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
                                                 <?php 
@@ -276,7 +277,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <div class="col-sm-12">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">¿Qué servicios de internet utiliza?</label>
+                                          <label for="txtcodigo_persona">¿Qué Servicios de Internet Utiliza?</label>
                                            <select  style="width: 100%;"  class="form-control select2" name="EDITSERVICIOS"  id="EDITSERVICIOS" type="text" aria-placeholder="Buscar" required="" >
                                             <option hidden value="<?php echo $var5?>"> <?php echo $var5 ?></option>
                                              <?php 
@@ -368,7 +369,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estudiante_eliminar" id="estudiante_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar el estudiante<?php echo $var3; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar el estudiante<?php echo $var3; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

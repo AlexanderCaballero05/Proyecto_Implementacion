@@ -217,7 +217,7 @@
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Tipo de Contenido</p>
+                    <p>Mantenimiento Contenido Socieconómico</p>
                   </a>
                 </li> 
                 <li class="nav-item">

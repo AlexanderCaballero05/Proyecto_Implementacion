@@ -126,8 +126,8 @@ include_once "conexion3.php";
                           <th class="text-center">Correo Electrónico</th>
                           <th class="text-center">Estado</th>
                           <th class="text-center">Rol</th>
-                          <th class="text-center">Fecha creación</th>
-                          <th class="text-center">Fecha modificación</th>
+                          <th class="text-center">Fecha Creación</th>
+                          <th class="text-center">Fecha Modificación</th>
                         </tr>
                       </thead>
                       <tbody class="text-center">

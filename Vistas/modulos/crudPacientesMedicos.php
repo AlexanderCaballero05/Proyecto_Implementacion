@@ -33,6 +33,7 @@ Programador               Fecha                      Descripcion
   D'aniel Martinez          11-07-2022                 Arreglar ortografía
   D'aniel Martinez          11-07-2022                 Arreglar programar cia (permita seleccionar el paciente correcto)
   Diana Rut                 20-07-2022                 Se agrego un form para que funcione el boton del reporte
+  Diana Rut                 23-07-2022                 Cambio en el titulo de la pantalla y estetica del modal
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -48,7 +49,7 @@ Programador               Fecha                      Descripcion
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 ">
-              <h4> PACIENTES DEL ÁREA MÉDICA<i class="nav-icon fas fa-stethoscope"></i> </h4>
+              <h4>Lista de Pacientes <i class="nav-icon fas fa-stethoscope"></i> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -162,11 +163,11 @@ Programador               Fecha                      Descripcion
                         <div id="AGREGAR_CITA<?php echo $var6 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-header" style="background-color: #0CCDE3">
                                   <h4 class="text-center">Programar Cita </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                                <form  method="POST"  class="needs-validation" novalidate>
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_persona">
@@ -174,19 +175,19 @@ Programador               Fecha                      Descripcion
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre del Paciente:</label>
+                                          <label for="txtcodigo_persona">Nombre del Paciente</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">DNI:</label>
+                                          <label for="txtcodigo_persona">DNI</label>
                                           <input type="text"   class="form-control"readonly value ="<?php echo $var4; ?>" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Hora Cita:</label>
+                                          <label for="txtcodigo_persona">Hora Cita</label>
                                     <input type="time" required min="09:00:00"  step="1800" max= "19:00:00"  step="1800"class="form-control" name="hora_cita" id="agregar_hora">
                                         </div>
                                          <div class="invalid-feedback">

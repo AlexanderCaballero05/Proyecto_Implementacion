@@ -31,6 +31,7 @@ Historial de Cambio
 Programador               Fecha                      Descripcion
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
 Arnol Caballero        		17-06-2022                 Validacion de los maximos y minimos de los inputs 
+Diana Rut                 23/07/2022                 Cambios en los nombres del menu,pasarlos tipo oracion con modificacion estetica del modal
 ----------------------------------------------------------------------->
 
 <?php
@@ -55,16 +56,16 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos Generales</a>
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
-              <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+              <a class=" nav-link active" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver Familiares</a>
               </li>
              
           </ul>
@@ -223,7 +224,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                                 
                                 
                                <a href="#ELIMINAR<?php echo $var1;?>" data-toggle="modal">
-                                <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class="btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
+                                <button id="ELIMINAR_ESTUDIANTE" name="ELIMINAR_ESTUDIANTE" type='button'   class=" form-control btn btn-danger" data-dismiss="modal"><i class="nav-icon fas fa-trash"></i>
                                </button>
                                </a>
                                <?php
@@ -237,13 +238,13 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                                 ?>
 
                                 <a href="#EDITARESTUDIANTE<?php echo $var1; ?>" data-toggle="modal">
-                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <button type='button' id="btnGuardar"  style="color:white;"class=" form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                 </a>
 
                                 <a>
                                 <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
                                 <input type="text" hidden name="reporte_estudiante" value="<?php echo $var1 ?>">
-                                <button type='submit' title='Imprimir' style="color:white;background-color:#FA0079"class="btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                <button type='submit' title='Imprimir' style="color:white;background-color:#FA0079"class="form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
                                 <a>
@@ -277,11 +278,11 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                           <div id="EDITARESTUDIANTE<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
-                                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate >
                                   <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center">Editar Estudiante</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
+                                  <form  method="POST" class="needs-validation" novalidate >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_estudiante" id="id_estudiante">
@@ -351,7 +352,7 @@ Arnol Caballero        		17-06-2022                 Validacion de los maximos y 
                                 <form id="FORMEeliminar" method="POST">
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="estudiante_eliminar" id="estudiante_eliminar">
-                                    <h4 class="text-center">¿Esta seguro de eliminar al estudiante <?php echo $var2; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar al estudiante <?php echo $var2; ?>?</h4>
                                 </div> <!--fin el card body -->
                                     <div class="modal-footer ">
                                       <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

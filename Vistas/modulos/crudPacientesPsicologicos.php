@@ -134,15 +134,15 @@
                                   <h4 class="text-center">Programar Cita </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                              <form  method="POST"  >
+                              <form  method="POST">
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
-                                        <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_paciente_psicologo">
+                                        <input type="text" value ="<?php echo $var1;?>" hidden  class="form-control" name="codigo_paciente_psicologo">
                                   </div><!--fin row -->
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre del Paciente</label>
+                                          <label >Nombre del Paciente</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>

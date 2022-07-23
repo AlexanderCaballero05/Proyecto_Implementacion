@@ -1,3 +1,36 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:         Parte logica para la creacion de las citas 
+    Fecha:           
+    Programador:      
+    descripcion:      El codigo regista,actualiza y elimina la cita
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador           Fecha                  Descripcion
+    Diana Rut            23/07/2022          Se agregaron las validaciones para registrar una cita por parte de los usuarios
+                                              medicos psicologos y catequistas,ya que no consultaba si habia choque de citas e insertaba directamente la cita
+----------------------------------------------------------------------->
+
+
 <?php
   include_once 'conexion3.php';
   include_once 'conexion.php';
@@ -35,7 +68,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
             $row2=$consulta2->fetchColumn();
             if( $row2 > 0){
               echo "<script> 
-              alert('El  medico  ya tiene asignada una cita en esa fecha y hora');
+              alert('El  Medico  ya tiene asignada una cita en esa fecha y hora');
               window.location = 'ediusuariosestudiantes';
               </script>";
               exit;
@@ -47,7 +80,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
               try{
                 if($row2 > 0){
                   echo "<script> 
-                  alert('El psicologo ya tiene asignada una cita en esa fecha y hora');
+                  alert('El Psicológo ya tiene asignada una cita en esa fecha y hora');
                   window.location = 'ediusuariosestudiantes';
                   </script>";
                   exit;
@@ -58,7 +91,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                   $row2=$consulta2->fetchColumn();
                   if($row2 > 0){
                     echo "<script> 
-                    alert('El Catequita ya tiene asignada una cita en esa fecha y hora');
+                    alert('El Catequista ya tiene asignada una cita en esa fecha y hora');
                     window.location = 'ediusuariosestudiantes';
                     </script>";
                     exit;
@@ -107,7 +140,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                         $consulta=$conn->query($sql);
                         if($consulta >0){ 
                           echo "<script> 
-                          alert('Cita agregada correctamente');
+                          alert('Cita Agregada Correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
                           $codigoObjeto=32;
@@ -192,16 +225,15 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                $accion='MODIFICACIÓN';
                $descripcion='SE MODIFICÓ UNA CITA';
                bitacora($codigoObjeto,$accion,$descripcion);
-               
                }
           }
 
           } // fin else 
       }///  fin foreach
      }catch(PDOException $e){
-          echo $e->getMessage(); 
-        return false;
-          } 
+      echo $e->getMessage(); 
+      return false;
+    } 
   }
   }
 
@@ -209,18 +241,13 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 
 
 
-
+//envia la cita al usuario correspondiente
   if (isset($_POST['cod_enviar_cita'])){
     if(isset($_POST['enviar_cita'])){
         $codigo_cita = ($_POST['cod_enviar_cita']);
         $estado_cita = ($_POST['estado_cita']);
-
-        $enviar_cita = "UPDATE tbl_inscripcion_cita
-                         SET CODIGO_ESTADO = '9'
-                         WHERE CODIGO_CITA = '$codigo_cita'";
-
+        $enviar_cita = "UPDATE tbl_inscripcion_cita SET CODIGO_ESTADO = '9' WHERE CODIGO_CITA = '$codigo_cita'";
         $consulta_cita =$conn->query($enviar_cita);
-
     }
   }
   
@@ -229,9 +256,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
   
   //boton de eliminar
   if (isset ($_POST['eliminar_nue_cita'])){
-  
    if (isset($_POST['eliminar_cita'])){
-  
        $cod = $_POST['eliminar_nue_cita'];
        try {
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
@@ -253,14 +278,12 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
               </script>";
               exit;
             }
-  
           }catch(PDOException $e){
           echo $e->getMessage(); 
         return false;
           }
         }
       }      
-   
 ?>
 
 
@@ -275,25 +298,50 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $area_cita = "2";
       $estado = "5";
       $fechaactual = date('Y-m-d'); 
-      $user = "Admin";
+      $user = $_SESSION['vario'];
 
-      $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
-      $consulta=$conn->query($insertar);
-      if($consulta >0){ 
-          echo "<script> window.location = 'crudPacientesMedicos';</script>";
-          $codigoObjeto=32;
-          $accion='INSERCIÓN';
-          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
-           exit;
-      }else{
-        echo "<script> window.location = 'crudPacientesMedicos';</script>";
+      //SE DECLARAR LA SENTENCIA PARA HACER LAS CONSULTAS PARA QUE LA CITA NO SE REPITA EN ESTUDIANTE ,NI FECHA
+      $sentencia = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+      from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+      $sentencia->execute(array($codigo_persona,$hora_cita,$fecha_cita));
+      $row=$sentencia->fetchColumn();
+      if($row >0){ 
+        echo "<script> 
+        alert('No se puede porque tiene otra cita en la misma fecha y misma hora');
+        window.location = 'crudPacientesMedicos';
+        </script>";
         exit;
+      }else{
+        $consulta2 = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita   where  CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+        $consulta2->execute(array($codigo_medico,$hora_cita,$fecha_cita));
+        $row2=$consulta2->fetchColumn();
+        if( $row2 > 0){
+          echo "<script> 
+          alert('El  Medico  ya tiene asignada una cita en esa fecha y hora');
+          window.location = 'crudPacientesMedicos';
+          </script>";
+          exit;
+        }else{
+          $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
+          $consulta=$conn->query($insertar);
+          if($consulta >0){ 
+            echo "<script>
+             alert('Cita Registrada Exitosamente');
+             window.location = 'crudPacientesMedicos';</script>";
+            $codigoObjeto=32;
+            $accion='INSERCIÓN';
+            $descripcion='SE REGISTRÓ UNA NUEVA CITA';
+            bitacora($codigoObjeto,$accion,$descripcion);
+              exit;
+          }else{
+            echo "<script> window.location = 'crudPacientesMedicos';</script>";
+            exit;
+          }//fin de la consulta
+        }
       }
-
     }
  }
-
  //fin de incripcion cita por parte de un usuario medico
 ?>
 
@@ -309,30 +357,61 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $area_cita = "3";
       $estado = "5";
       $fechaactual = date('Y-m-d'); 
-      $user = "Admin";
+      $user = $_SESSION['vario'];
 
-      $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
-      $consulta=$conn->query($insertar);
-      if($consulta >0){ 
-          echo "<script> 
-          alert('Cita registrada exitosamente');
-          window.location = 'crudPacientesPsicologicos';</script>";
-          $codigoObjeto=32;
-          $accion='INSERCIÓN';
-          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
-           exit;
-      }else{
+      //Consulta para que no se repitan las citas piscologicas,fecha o medico 
+      $sentencia = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+      from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+      $sentencia->execute(array($codigo_persona,$hora_cita,$fecha_cita));
+      $row=$sentencia->fetchColumn();
+      if($row >0){ 
         echo "<script> 
-        alert('Ocurrio algun problema');
-        window.location = 'crudPacientesPsicologicos';</script>";
+        alert('No se puede porque tiene otra cita en la misma fecha y misma hora');
+        window.location = 'crudPacientesPsicologicos';
+        </script>";
         exit;
-      }
-
+      }else{
+        $consulta2 = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita   where  CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+        $consulta2->execute(array($encargado_psicologo, $hora,$fecha));
+        $row2=$consulta2->fetchColumn();
+        try{
+          if($row2 > 0){
+            echo "<script> 
+            alert('El Psicológo ya tiene asignada una cita en esa fecha y hora');
+            window.location = 'crudPacientesPsicologicos';
+            </script>";
+            exit;
+          }else{//si no tiene choque de fechas o pacientes etc,entonces si se puede registrar la cita
+            $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_medico', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
+            $consulta=$conn->query($insertar);
+            if($consulta >0){ 
+              echo "<script> 
+              alert('Cita Registrada Exitosamente');
+              window.location = 'crudPacientesPsicologicos';</script>";
+              $codigoObjeto=32;
+              $accion='INSERCIÓN';
+              $descripcion='SE REGISTRÓ UNA NUEVA CITA';
+              bitacora($codigoObjeto,$accion,$descripcion);
+              exit;
+            }else{
+              echo "<script> 
+              alert('Ocurrio algun problema');
+              window.location = 'crudPacientesPsicologicos';</script>";
+              exit;
+            }
+          }// Fin else interno
+        }catch(PDOException $e){
+          echo $e->getMessage(); 
+          return false;
+        }
+      }//else
     }
  }
 //fin de inscripcion cita por parte de un usuario psicologo
 ?>
+
+
 
 <?php
 //Codigo para la inscripcion cita por parte de un usuario catequista
@@ -345,26 +424,51 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $area_cita = "4";
       $estado = "5";
       $fechaactual = date('Y-m-d'); 
-      $user = "Admin";
+      $user = $_SESSION['vario'];
 
-      $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_catequista', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
-      $consulta=$conn->query($insertar);
-      if($consulta >0){ 
-          echo "<script>
-           window.location = 'crudPacientesEspirituales';
-          </script>";
-          $codigoObjeto=32;
-          $accion='INSERCIÓN';
-          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
-           exit;
-      }else{
+      //Consultas para que no se repita la cita
+      $sentencia = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+      from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+      $sentencia->execute(array($codigo_persona,$hora_cita,$fecha_cita));
+      $row=$sentencia->fetchColumn();
+      if($row >0){ 
         echo "<script> 
+        alert('No se puede porque tiene otra cita en la misma fecha y misma hora');
         window.location = 'crudPacientesEspirituales';
         </script>";
         exit;
-      }
-
+      }else{
+        $consulta2 = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita   where  CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
+        $consulta2->execute(array($codigo_catequista,$hora_cita,$fecha_cita));
+        $row2=$consulta2->fetchColumn();
+        if($row2 > 0){
+          echo "<script> 
+          alert('El Catequista ya tiene asignada una cita en esa fecha y hora');
+          window.location = 'crudPacientesEspirituales';
+          </script>";
+          exit;
+        }else{// Si no tiene choque de citas,entonces si se puede registrar la cita :D
+          $insertar ="call sp_insert_inscripcion_cita('$codigo_persona','$codigo_catequista', '$estado','$area_cita', '$fecha_cita','$hora_cita','$fechaactual','$user');";
+          $consulta=$conn->query($insertar);
+          if($consulta >0){ 
+            echo "<script>
+            alert('Cita Registrada Exitosamente');
+            window.location = 'crudPacientesEspirituales';
+            </script>";
+            $codigoObjeto=32;
+            $accion='INSERCIÓN';
+            $descripcion='SE REGISTRÓ UNA NUEVA CITA';
+            bitacora($codigoObjeto,$accion,$descripcion);
+            exit;
+          }else{
+            echo "<script> 
+            window.location = 'crudPacientesEspirituales';
+            </script>";
+            exit;
+          }
+        }//Fin else interno
+      }//Fin else
     }
  }
 //fin de inscripcion cita por parte de un usuario catequista

@@ -69,10 +69,10 @@ include "conexionpdo.php";
       echo "<script> alert('el examen  $nombre_examen ya se encuentra registrado');
       window.location = 'procesoRecetaMedica'; </script>";
     }else{
-        try{
-        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario'); ";
+        try{// se agreo la parte del codigo de estado 
+        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO,CODIGO_ESTADO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario','2'); ";
         $resul=$conn->query($insertar_examen);
-          if($consulta>0){
+          if($resul>0){
             echo "<script>
             alert('Examen Registrado Correctamente');
             window.location = 'procesoRecetaMedica'; </script>"; exit;
@@ -105,8 +105,8 @@ include "conexionpdo.php";
             exit;
           }else{
            try{
-               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
+               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,CODIGO_ESTADO)
+               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual','2');"; //se agrega el estado a 2 que es activo
                $resul=$conn->query($query_medicamento);
                if($resul >0){
                   echo "<script>
