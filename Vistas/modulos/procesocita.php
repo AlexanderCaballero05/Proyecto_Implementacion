@@ -142,6 +142,11 @@ $result3= $conn->query($query);
           </ul>
           </div>
           <div class="card-body">  
+          <div class="row">
+              <div class="col-md-12 col-md-offset-2">
+              <button onclick="location.href='ediusuariosestudiantes'"  type="button"  style="color:white;"class="btn btn- lg btn-success float-right"><span><i class="nav-icon fa fa-arrow-left mx-2 "></i></span> Regresar </button>
+              </div>
+            </div><hr>
             <form method="POST" class="was-validated" >
                 <div class="row">
                  <?php

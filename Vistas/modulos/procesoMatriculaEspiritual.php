@@ -66,13 +66,16 @@
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula</a>
+                <a class="nav-link"  style="color:#000000;" href="crudMatricula">Ver Matrícula Académica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;">Agregar Matrícula Académica</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudMatriculaEspiritual">Ver Matrícula Espiritual</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="procesoMatriculaEspiritual">Agregar Matrícula Espiritual</a>
+              <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Agregar Matrícula</a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" style="color:#000000;" active href="listadoTutoriasMatriculadas">Lista de clases</a>
               </li>
             </ul>
           </div>

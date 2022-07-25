@@ -167,6 +167,7 @@ session_start();
          $_GET["ruta"] == "procesoMatricula" ||
          $_GET["ruta"] == "procesoMatriculaEspiritual" ||
          $_GET["ruta"] == "crudMatricula" ||
+         $_GET["ruta"] == "crudMatriculaEspiritual" ||
          $_GET["ruta"] == "crudAlumnosMatricula" ||
          $_GET["ruta"] == "crudAlumnosCatequesis" ||
          $_GET["ruta"] == "crudtipopersona" ||
