@@ -220,14 +220,35 @@ include_once "conexion3.php";
                               </div>
                             </div><!-- final del text-center -->
                           </td>
+
+                          <?php
+                            if($var7 == 'ACTIVO' OR $var7 =='NUEVO'){
+                          ?>
                           <td><?php echo $var3; ?></td>
                           <td><?php echo $var4; ?></td>
                           <td><?php echo $var6; ?></td>
                           <td><?php echo $var15; ?></td>
-                          <td><?php echo $var7; ?></td>
+                          <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var7; ?></td>
                           <td><?php echo $var8; ?></td>
                           <td><?php echo $var17; ?></td>
                           <td><?php echo $var18; ?></td>
+
+                          <?php
+                             }else{ //si no e; texto de los datos de la tabla no cambian
+                          ?>
+
+                          <td><?php echo $var3; ?></td>
+                          <td><?php echo $var4; ?></td>
+                          <td><?php echo $var6; ?></td>
+                          <td><?php echo $var15; ?></td>
+                          <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var7; ?></td>
+                          <td><?php echo $var8; ?></td>
+                          <td><?php echo $var17; ?></td>
+                          <td><?php echo $var18; ?></td>
+
+                          <?php
+                            }
+                          ?>
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
