@@ -249,6 +249,12 @@ include_once "conexion3.php";
                                 <!--fin del Boton para agregar cita al estudiante-->
 
 
+                              
+                                <!--Boton para agregar la matricula del estudiante -->
+                                <a href="#MATRICULAR<?php echo $var2; ?>" data-toggle="modal"><!--Boton para abrir modal para matricula-->
+                                 <button type='button'  style="color:white;"class=" btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1 "></i></span>Matricular</button>
+                                </a>
+                               
                                 <a> <!--Boton para ver el expediente del estudiante -->
                                   <form method="post"  action="consultaEstudiante" >
                                     <input type="text" hidden name="codigo_persona" value="<?php echo $var2; ?>"> 
@@ -256,12 +262,6 @@ include_once "conexion3.php";
                                     <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file "></i></span>Expediente</button>
                                   </form>
                                 </a>
-
-                                <a href="#MATRICULAR<?php echo $var2; ?>" data-toggle="modal"><!--Boton para abrir modal para matricula-->
-                                 <button type='button'  style="color:white;"class=" btn btn-secondary"><span> <i class="nav-icon fa fa-plus-square mx-1 "></i></span>Matricular</button>
-                                </a>
-                               
-
 
                                 
                                 <?php
