@@ -14,7 +14,7 @@ Clauidia Nuñez -- Analisis y diseño
 ---------------------------------------------------------------------
 Programa:          Pantalla que muestra los datos del usuario
 Fecha:             01-jan-2016
-Programador:       Diana Rut Garcia
+Programador:       Arnold Caballero
 descripcion:       Mantenimiento de usuario,edita elimina 
 -----------------------------------------------------------------------
 Historial de Cambio
@@ -123,6 +123,7 @@ include_once "conexion3.php";
                       <thead >
                         <tr>
                           <th class="text-center">Acción</th>
+                          <th class="text-center">Estado</th>
                           <th class="text-center">Código Persona</th>
                           <th class="text-center">DNI</th>
                           <th class="text-center">Primer Nombre</th>
@@ -135,7 +136,7 @@ include_once "conexion3.php";
                           <th class="text-center">Grado</th>
                           <th class="text-center">Nombre Usuario</th>
                           <th class="text-center">Fecha Creación</th>
-                          <th class="text-center">Estado</th>
+                          
                           
                         </tr>
                       </thead>
@@ -231,6 +232,10 @@ include_once "conexion3.php";
                                   <input type="text" hidden name="reporte_estudiante"  value="<?php echo $persona; ?>">
                                 </form>
 
+                                <?php
+                                    if($var7 == 'ACTIVO' OR $var7 =='NUEVO'){
+                                 ?>
+
                                 <!--Boton para agregar cita al estudiante-->
                                 <a>
                                 <form method="post"  action="procesocita" target="_blank"> 
@@ -238,7 +243,8 @@ include_once "conexion3.php";
                                 <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Cita</button>
                                 </form>
                                 </a>
-                                
+                                <!--fin del Boton para agregar cita al estudiante-->
+
                                 <a> <!--Boton para ver el expediente del estudiante -->
                                 <form method="post"  action="consultaEstudiante" target="_blank">
                                  <input type="text" hidden name="codigo_persona" value="<?php echo $var2; ?>"> 
@@ -247,13 +253,26 @@ include_once "conexion3.php";
                                 </form>
                                 </a>
 
-                               <!--Fin de Boton para agregar cita al estudiante-->
+                                
+                                <?php
+                                     }else{ //si no e; texto de los datos de la tabla no cambian
+                                 ?>
+                               
+
+                                <?php
+                                  }
+                                 ?>
+                             
                                 <?php
                                   }
                                  ?>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
+                          <?php
+                            if($var7 == 'ACTIVO' OR $var7 =='NUEVO'){
+                          ?>
+                          <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var7; ?></td> <!--Estado-->
                           <td><?php echo $var2; ?></td> <!--CODIGO PERSONA-->
                           <td><?php echo $var19; ?></td> <!--DNI-->
                           <td><?php echo $var3; ?></td> <!-- Nombre1-->
@@ -265,8 +284,28 @@ include_once "conexion3.php";
                           <td><?php echo $var23; ?></td> <!--Direccion-->
                           <td><?php echo $var24; ?></td><!--grado-->
                           <td><?php echo $var6; ?></td> <!--Nombre usuario-->
-                          <td><?php echo $var17; ?></td> <!--Estado-->
-                          <td><?php echo $var7; ?></td><!--Fecha creacion-->
+                          <td><?php echo $var17; ?></td><!--Fecha creacion-->
+
+                          <?php
+                             }else{ //si no e; texto de los datos de la tabla no cambian
+                          ?>
+                          <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var7; ?></td> <!--Estado-->
+                          <td><?php echo $var2; ?></td> <!--CODIGO PERSONA-->
+                          <td><?php echo $var19; ?></td> <!--DNI-->
+                          <td><?php echo $var3; ?></td> <!-- Nombre1-->
+                          <td><?php echo $var20; ?></td> <!-- Nombre2-->
+                          <td><?php echo $var4; ?></td> <!-- Apellido1-->
+                          <td><?php echo $var21; ?></td> <!-- Apellido2-->
+                          <td><?php echo $var22; ?></td> <!--Telefono-->
+                          <td><?php echo $var15; ?></td> <!--corre-->
+                          <td><?php echo $var23; ?></td> <!--Direccion-->
+                          <td><?php echo $var24; ?></td><!--grado-->
+                          <td><?php echo $var6; ?></td> <!--Nombre usuario-->
+                          <td><?php echo $var17; ?></td><!--Fecha creacion-->
+
+                          <?php
+                            }
+                          ?>
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
