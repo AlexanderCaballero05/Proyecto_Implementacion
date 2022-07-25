@@ -18,8 +18,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <div class="content-header text-xl-center mb-3 btn-light">
-              <h4>Citas Médicas Pendientes Estudiantes Prosecar</h4>
+    <div class="content-header text-xl-center mb-3 ">
+              <h4>Citas Médicas Pendientes del Estudiante</h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -45,7 +45,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     <div class="modal-header" >
                         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"
                          style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> 
-                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                         </div>
                         <!-- form start -->
@@ -54,15 +54,15 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Numero</th>
-                                            <th class="text-center">Fecha cita</th>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">Fecha Cita</th>
                                             <th class="text-center">Hora</th>
                                             <th class="text-center">Beneficiario</th>
-                                            <th class="text-center">Encargado cita</th>
+                                            <th class="text-center">Encargado Cita</th>
                                             <th class="text-center">Especialidad</th>
                                             <th class="text-center">Área</th>
-                                            <th class="text-center">Estado cita</th>
-                                            <th class="text-center">Detalle de citas</th>
+                                            <th class="text-center">Estado Cita</th>
+                                            <th class="text-center">Detalle Cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>

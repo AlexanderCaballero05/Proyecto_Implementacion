@@ -39,8 +39,8 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Descripción del Examen</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción al examen" name="descripcion_examen"  required=""></textarea>
+                                    <label>Descripción del Examen</label>
+                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción al examen" name="descripcion_examen"  required></textarea>
                                     <div class="invalid-feedback">
                                       campo obligatorio.
                                    </div>
@@ -69,7 +69,7 @@
                         <div class="row"><!-- INICIO PRIMERA ROW --> 
                              <div class="col-sm-12">
                                   <div class="form-group">
-                                   <label for="txtcodigo_persona"> Código del Medicamento</label>
+                                   <label> Código del Medicamento</label>
                                     <input type="text" required pattern="[A-Z,0-9]{2,10}"  maxlength="10" minlength="2"  class="form-control" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetrasnumeros(event)" onKeyDown="sinespacio(this);" name="agregar_cod_medi" required>
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
@@ -78,7 +78,7 @@
                               </div>
                             <div class="col-sm-12">
                               <div class="form-group">
-                                <label for="txtcodigo_persona">Nombre del Medicamento</label>
+                                <label>Nombre del Medicamento</label>
                                 <input type="text" class="form-control" maxlength="50" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                  name="agregar_medicamento" required >
                                  <div class="invalid-feedback">
@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-sm-12">
                                <div class="form-group">
-                                  <label for="txtcodigo_persona">Descripción</label>
+                                  <label>Descripción</label>
                                   <input type="text" class="form-control" maxlength="100" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
                                    name="agregar_med_desc" required >
                                    <div class="invalid-feedback">
@@ -185,7 +185,7 @@
             
           
          <div class="col-sm-3 mb-3">
-          <label for="" class="form-label">Fecha de receta</label>
+          <label for="" class="form-label">Fecha de Receta</label>
           <input class="form-control" type="text" hidden value="<?php echo $fecha_cita?>" name="fecha_receta" id="" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
           <input class="form-control" type="text" readonly value="<?php echo $fecha_cita?>" onKeyDown="sinespacio(this);"  autocomplete = "off" onblur="quitarespacios(this);" onkeypress="return solonumeros(event);">
       </div>
@@ -222,7 +222,8 @@
         <div style ="display:none;"  id="medicamentos"> 
                <?php
                 $query1 = "SELECT me.CODIGO_MEDICAMENTO , me.NOMBRE_MEDICAMENTO
-                FROM tbl_medicamento me; ";
+                FROM tbl_medicamento me
+                where CODIGO_ESTADO ='2'; ";
                 $resultado2=$conn->query($query1);
                 ?>
                 <div class="row pl-4 mb-3 " >
@@ -251,7 +252,7 @@
               </div>
               <div style ="display:none;"  id="examenes"> 
                   <?php
-                  $query3 = "SELECT * FROM `tbl_examenes_medicos`; ";
+                  $query3 = "SELECT * FROM `tbl_examenes_medicos` where CODIGO_ESTADO = '2'; ";
                   $resultado3=$conn->query($query3);
                   ?>
                 <div class="row pl-4 mb-3 "  >

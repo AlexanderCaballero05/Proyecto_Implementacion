@@ -58,7 +58,7 @@
                 <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matrícula</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" active href="procesoMatricula">Matrícula</a>
+                <a class="nav-link" style="color:#000000;" active href="">Matrícula</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" active href="listadoTutoriasMatriculadas">Lista de clases</a>

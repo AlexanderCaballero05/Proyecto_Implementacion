@@ -28,6 +28,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia 
+  ANY HERNANDEZ         		22-07-2022                 Cambio en aspecto del titulo 
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -43,10 +44,8 @@
     <div class="container-fluid">
     </div>
       <section class="content">
-        <section class="content-header text-xl-center mb-3 btn-light">
-
+        <section class="content-header text-xl-center mb-3 ">
               <h4> Lista de Alumnos <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Tutoría de ".$_SESSION['tutoria'] ?></p> </h4>
-
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -90,17 +89,13 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-
                         <th class="text-center">Código</th>
-
                         <th class="text-center">Alumno</th>
                         <th class="text-center">Tutoría</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
                         <th class="text-center">Año</th>
-
                         <th class="text-center">Período</th>
-
                         <th class="text-center">Estado Matrícula</th>
                         <th class="text-center">Acción</th>
                       </tr>
@@ -140,15 +135,11 @@
                           $codigo_estado_matricula = $row['OBSERVACION'];
                           $codigo_matricula = $row['CODIGO_MATRICULA'];
                           $observacion_matricula = $row['OBSERVACION_MATRICULA'];
-
-                          
-                          
-
                       ?>
                       <tr>
 
                       <?php
-                                 if($codigo_estado_matricula == 13){//si el codigo de estado de la matricula es igual a 13 que es ya finalizado el texto de los datos de la tabla cambian a rojo y tachado
+                        if($codigo_estado_matricula == 13){//si el codigo de estado de la matricula es igual a 13 que es ya finalizado el texto de los datos de la tabla cambian a rojo y tachado
                         ?>
                         <td class="text-center" style="color:#FA0079;text-decoration: line-through;"><?php echo $contador; ?></td>
                         <td class="text-center" style="color:#FA0079;text-decoration: line-through;"><?php echo $var1; ?></td>
@@ -228,13 +219,11 @@
                         <div id="CALIFICAR<?php echo $codigo_matricula ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
-                              <form  method="POST"  class="needs-validation" >
                                 <div class="modal-header" style="background-color: #0CCDE3">
-
-                                  <h4 class="text-center">Agregar Observación </h4>
-
+                                  <h4 class="text-center">Agregar Observación</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
+                              <form  method="POST"  class="needs-validation">
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                         <input type="text" value ="<?php echo $codigo_matricula; ?>" hidden  class="form-control" name="codigo_matricula_alumno">
@@ -308,9 +297,9 @@
                                       
                                   </div><!--fin row -->
                                   <div class="row">
-                                      <div class="col-sm-8">
+                                      <div class="col-sm-12">
                                           <div class="form-group">
-                                              <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
+                                              <label for="observacion_catequesis" class="form-label">Observación del Rendimiento del Joven</label>
                                                 <textarea type="textarea" name="observacion_academica" class="form-control"   onkeypress="return soloLetrasnumeros(event)" required><?php echo $observacion_matricula;?></textarea> 
                                           </div>
                                           <div class="invalid-feedback">

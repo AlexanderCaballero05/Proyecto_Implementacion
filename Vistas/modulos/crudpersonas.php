@@ -182,14 +182,14 @@ include_once "conexion3.php";
                                             <th class="text-center">Segundo Nombre</th>
                                             <th class="text-center">Primer Apellido</th>
                                             <th class="text-center">Segundo Apellido</th>
-                                            <th class="text-center">Dni</th>
+                                            <th class="text-center">DNI</th>
                                             <th class="text-center">Sexo</th>
                                             <th class="text-center">Fecha Nacimiento</th>
                                             <th class="text-center">Lugar Nacimiento</th>
                                             <th class="text-center">Dirección</th>
-                                            <th class="text-center">Tipo de Persona</th>
+                                            <th class="text-center">Tipo Persona</th>
                                             <th class="text-center">Teléfono</th>
-                                            <th class="text-center">Córreo</th>                                            
+                                            <th class="text-center">Correo</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -414,7 +414,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label >Córreo</label>
+                                                                            <label >Correo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
@@ -569,7 +569,7 @@ include_once "conexion3.php";
                                             <th class="text-center">Dirección</th>
                                             <th class="text-center">Tipo Persona</th>
                                             <th class="text-center">Teléfono</th>
-                                            <th class="text-center">Córreo</th>                                            
+                                            <th class="text-center">Correo</th>                                            
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -687,7 +687,7 @@ include_once "conexion3.php";
                                                 <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                    <div class="modal-header" style="background-color: #0CCDE3">
-                                                     <h4 class="text-center">Editar información Persona</h4>
+                                                     <h4 class="text-center">Editar Información Persona</h4>
                                                      <button type="button" class="close"data-dismiss="modal">&times;</button>
                                                    </div>
                                                         <!-- Modal content-->
@@ -798,7 +798,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
-                                                                            <label>Córreo</label>
+                                                                            <label>Correo</label>
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"

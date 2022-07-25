@@ -49,7 +49,7 @@
                     <thead>
                       <tr>
                         <th class="text-center">Acción</th>
-                        <th class="text-center">Fecha creación</th>
+                        <th class="text-center">Fecha Creación</th>
                         <th class="text-center">Código Expediente</th>
                         <th class="text-center">Nombre de la Persona</th>
                         <th class="text-center">DNI</th>
@@ -71,8 +71,7 @@
                           $var3 = $row['PACIENTE'];
                           $var4 = $row['DNI'];
                           $var5 = $row['ESTADO'];
-                          $var6 = $row['CODIGO_PERSONA'];
-                          
+                          $var6 = $row['CODIGO_PERSONA'];  
                       ?>
                       <tr>
                         <td>
@@ -102,7 +101,9 @@
                                   <a href="#AGREGAR_CITA<?php echo $var1; ?>" data-toggle="modal">
                                    <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
                                   </a>
-
+                                  <form method="post"  action="Reportes_Prosecar/reporteHistorialEspiritual.php">
+                                     <input type="hidden"  value="<?php echo $var6?>">
+                                  </form>
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="post"  action="Reportes_Prosecar/reporteHistorialEspiritual.php" target="_blank">
                                      <input type="hidden" name="reporteHistoricoEspiritual" value="<?php echo $var6?>">

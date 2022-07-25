@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
  Diana Rut Garcia           30/06/2022                Cambios en el titulo
+ Diana Rut Garcia           23/07/2022                Cambios en el menu,pasarlo a tipo oracion
 ----------------------------------------------------------------------->
 
 
@@ -50,24 +51,22 @@
   <section class="content">
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 ">
-          <h1>
-              <h4>Mantenimiento Familiares</h4>
-          </h1>     
+          <h4>Mantenimiento Familiares</h4>     
       </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver datos generales</a>
+              <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link active"  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
+                <a class="nav-link active"  style="color:#000000;"href="crudfamiliares">Ver Familiares</a>
               </li>
           </ul>
  
@@ -269,7 +268,7 @@
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label>Correo</label>
+                                          <label>Correo Electrónico</label>
                                           <input  type="text"  value ="<?php echo $var13; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
@@ -282,7 +281,7 @@
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label>Telefono</label>
+                                          <label>Teléfono</label>
                                           <input  type="text"  value ="<?php echo $var12; ?>" required class="form-control"  maxlength="8" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
                                         </div>
                                       </div>
@@ -367,7 +366,7 @@
                                 <form id="FORMEeliminar" method="POST" >
                                   <div class="modal-body">
                                     <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="usuario_eliminar" id="usuario_eliminar">
-                                    <h4 class="text-center">¿¿Esta seguro de eliminar los datos de <?php echo $var8; ?>?</h4>
+                                    <h4 class="text-center">¿Está seguro de eliminar los datos de <?php echo $var8; ?>?</h4>
                                 </div> <!--fin el card body -->
                                   <div class="modal-footer ">
                                     <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

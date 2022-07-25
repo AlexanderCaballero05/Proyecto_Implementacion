@@ -114,7 +114,7 @@
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
                                      <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var1?>">
-                                     <button type='submit' style="color:white; background-color:#FA0079" class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                     <button type='submit' style="color:white; background-color:#FA0079" class=" form-control btn btn "><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
                             </div>
@@ -131,18 +131,18 @@
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
                               <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="text-center">Programar cita </h4>
+                                  <h4 class="text-center">Programar Cita </h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                              <form  method="POST"  >
+                              <form  method="POST">
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
-                                        <input type="text" value ="<?php echo $var6; ?>" hidden  class="form-control" name="codigo_paciente_psicologo">
+                                        <input type="text" value ="<?php echo $var1;?>" hidden  class="form-control" name="codigo_paciente_psicologo">
                                   </div><!--fin row -->
                                   <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Nombre del paciente</label>
+                                          <label >Nombre del Paciente</label>
                                           <input type="text"  readonly value ="<?php echo $var3; ?>" class="form-control" name="nombre_paciente">
                                         </div>
                                       </div>
@@ -154,7 +154,7 @@
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Hora cita</label>
+                                          <label for="txtcodigo_persona">Hora Cita</label>
                                           <input type="time" required min="09:00:00"  step="1800" max= "17:00:00"  step="1800" class="form-control" name="hora_cita">
                                         </div>
                                          <div class="invalid-feedback">
@@ -219,7 +219,7 @@
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
                                   <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                  <button type="submit" name="REGISTRAR_CITA_PACIENTE_PSICOLOGICO"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registra cita</button>
+                                  <button type="submit" name="REGISTRAR_CITA_PACIENTE_PSICOLOGICO"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registra Cita</button>
                                 </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                               </form>
                             </div>

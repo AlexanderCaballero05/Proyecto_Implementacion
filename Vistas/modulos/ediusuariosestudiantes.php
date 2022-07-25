@@ -25,6 +25,7 @@ Diana Rut               1/06/2022            Se agrego una validacion de input
 Diana Rut               09/06/2022           Se modifico los datos de la bitacora
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 Diana Rut Garcia        21-06-2022            Se valido las validaciones de editar
+Diana Rut Garcia        22-07-2022            Se agrego boton para realizar los diferentes tipos de matricula
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -64,7 +65,7 @@ include_once "conexion3.php";
   
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Estudiantes Procecar</h4>    
+          <h4>Estudiantes Prosecar</h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -73,13 +74,13 @@ include_once "conexion3.php";
               <a class=" nav-link active" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
             </li>
           <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver datos Escolares</a>
+              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver familiares</a>
+                <a class="nav-link "  style="color:#000000;"href="crudfamiliares">Ver Familiares</a>
               </li>
           </ul>
         </div>
@@ -228,10 +229,12 @@ include_once "conexion3.php";
                                  <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-warning pt-4 pb-4"><span> <i class="nav-icon fas fa-edit mx-1 "></i></span></button>
                                 </a>
                                  <!--codigo para que funcionen todos los botones -->
-                                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" target="_blank"> 
+                                <form method="post"  action="Reportes_Prosecar/reporteEstudiante.php" > 
                                   <input type="text" hidden name="reporte_estudiante"  value="<?php echo $persona; ?>">
                                 </form>
 
+
+                                
                                 <?php
                                     if($var7 == 'ACTIVO' OR $var7 =='NUEVO'){
                                  ?>
@@ -245,13 +248,20 @@ include_once "conexion3.php";
                                 </a>
                                 <!--fin del Boton para agregar cita al estudiante-->
 
+
                                 <a> <!--Boton para ver el expediente del estudiante -->
-                                <form method="post"  action="consultaEstudiante" target="_blank">
-                                 <input type="text" hidden name="codigo_persona" value="<?php echo $var2; ?>"> 
-                                  <input type="text" hidden name="codigo_estu" value="<?php echo $var5; ?>">
-                                <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file "></i></span>Expediente</button>
-                                </form>
+                                  <form method="post"  action="consultaEstudiante" >
+                                    <input type="text" hidden name="codigo_persona" value="<?php echo $var2; ?>"> 
+                                    <input type="text" hidden name="codigo_estu" value="<?php echo $var5; ?>">
+                                    <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file "></i></span>Expediente</button>
+                                  </form>
                                 </a>
+
+                                <a href="#MATRICULAR<?php echo $var2; ?>" data-toggle="modal"><!--Boton para abrir modal para matricula-->
+                                 <button type='button'  style="color:white;"class=" btn btn-secondary"><span> <i class="nav-icon fa fa-plus-square mx-1 "></i></span>Matricular</button>
+                                </a>
+                               
+
 
                                 
                                 <?php
@@ -263,6 +273,7 @@ include_once "conexion3.php";
                                   }
                                  ?>
                              
+
                                 <?php
                                   }
                                  ?>
@@ -310,7 +321,7 @@ include_once "conexion3.php";
                           <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
                               <div class="modal-content"><!-- Modal content-->
-                                <div class="modal-header" style="background-color: #0CCDE3">
+                                 <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center"> Editar Estudiante</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
@@ -343,18 +354,14 @@ include_once "conexion3.php";
                                           <input  type="text"  value ="<?php echo $var21; ?>" class="form-control" required  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi2" id="apellido_modi2">
                                         </div>
                                       </div>
-                                      
-                                      
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
-
                                     <div class="row">
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label>Correo</label>
+                                          <label>Correo Electrónico</label>
                                           <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
-
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>DNI</label>
@@ -363,16 +370,12 @@ include_once "conexion3.php";
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
-
-                                          <label>Telefono</label>
+                                          <label>Teléfono</label>
                                           <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="8" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
-
                                         </div>
                                       </div>
-
                                   </div>
                                     <div class="row"> <!-- INICIO SEGUNDO ROW -->
-                                    
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                           <label>Dirección</label>
@@ -401,16 +404,13 @@ include_once "conexion3.php";
                                            $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
                                            $resultadod=$conn->query($query);                
                                          ?> 
-                                       
                                     </div> <!-- FIN ROW --> 
-
                                      <div class="row">
                                       <div class="col-sm-6">
                                         <button type="button"  class="btn btn-primary mb-3" onclick="Mostar_div(<?php echo $var2?>)">Resetear Contraseña</button>
                                       </div>
                                     </div>
                                    <div  class="row">
-
                                       <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group">
@@ -423,7 +423,6 @@ include_once "conexion3.php";
                                           </div>
                                         </div>
                                       </div>
-
                                       <div style="display:none;" id="Mostrar_reseteo1<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label  class="control-label">Confirmar Contraseña</label> 
                                         <div class="input-group">
@@ -467,6 +466,40 @@ include_once "conexion3.php";
                                </div><!--fin del modal contener -->
                             </div><!--fin del modal dialog -->
                           </div><!--fin del modal de eliminar -->
+                          
+                          <!--MODAL PARA ESCOGER LA MATRICULA -->
+                          <div id="MATRICULAR<?php echo $var2 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-dialog-scrollable modal-md">
+                              <div class="modal-content"><!-- Modal content-->
+                                <div class="modal-header" style="background-color: #0CCDE3">
+                                  <h5 class="modal-title" id="exampleModalLabel"> Matrícula Académica/Espiritual</h5>
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                </div>
+                                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                                      <div class="row">
+                                        <div class="col-sm-12">
+                                          <div class="form-group">
+                                          <h5>Seleccione un Tipo de Matrícula</h5><br>
+                                            <form method="POST" action="procesoMatricula">
+                                               <input type="text" hidden name="persona_codigo" value="<?php echo $var2; ?>"> 
+                                               <input type="text" hidden name="estu_codigo" value="<?php echo $var5; ?>">
+                                               <button type="submit" class="btn btn-outline-primary  btn-block"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matrícula Académica</button>
+                                           </form>
+                                            <form method="POST" action="procesoMatriculaEspiritual">
+                                            <input type="text" hidden name="persona_codigo1" value="<?php echo $var2; ?>"> 
+                                               <input type="text" hidden name="estu_codigo1" value="<?php echo $var5; ?>">
+                                              <button type="submit" class="btn btn-outline-primary btn-block"><span> <i class="nav-icon fas fa-edit mx-1"></i></span>Matrícula Espiritual</button>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div><!--Fin del cuerpo del modal -->
+                                    <div class="modal-footer ">
+                                      <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                              </div>
+                            </div>
+                          </div>
                       </tr>             
                         <?php
                         }
@@ -494,6 +527,8 @@ include_once "conexion3.php";
   </aside>
 </div><!--  -->
 </body>
+
+
 
 
 <script type="text/javascript"> 
