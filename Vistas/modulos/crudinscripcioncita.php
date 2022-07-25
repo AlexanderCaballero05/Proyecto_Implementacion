@@ -69,7 +69,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
             <a class=" nav-link active" style="color:#000000;" href="crudinscripcioncita">Citas Hoy</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Agregar Cita</a>
+            <a class="nav-link" style="color:#000000;" href="ediusuariosestudiantes">Agregar Cita</a>
             </li>
           </ul>
         </div>

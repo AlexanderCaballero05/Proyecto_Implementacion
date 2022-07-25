@@ -15,7 +15,7 @@ class PDF extends FPDF {
 		$this->Cell(175, 5, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(105);
-		$this->Cell(180, 8, utf8_decode('Reporte de Matrícula Académica'));
+		$this->Cell(180, 8, utf8_decode('Reporte de Matrícula Espiritual'));
 		$this->Ln(6);
 		$this->SetX(5);
 		$this->SetFont('Arial','',12);
@@ -118,12 +118,12 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(50, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(60, 8, 'Asignatura', 1, 0, 'C', 0);
+			$this->Cell(60, 8, 'Catequesis', 1, 0, 'C', 0);
 			$this->Cell(80, 8, utf8_decode('Sección'), 1, 0, 'C', 0);
 			$this->Cell(35, 8, 'Hora', 1, 1, 'C', 0);
 			$this->Cell(35, 8, 'Modalidad', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
-			$this->Cell(35, 8, 'Nombre del tutor', 1, 1, 'C', 0);
+			$this->Cell(35, 8, 'Nombre del catequista', 1, 1, 'C', 0);
 			$this->Cell(35, 8, 'Estudiante', 1, 0, 'C', 0);
 			$this->Cell(35, 8, 'Grado Actual', 1, 1, 'C', 0);
 			
@@ -213,7 +213,7 @@ AND tu.CODIGO_TUTORIA = ca.CODIGO_TUTORIA
 AND mo.CODIGO_MODALIDA = ca.CODIGO_MODALIDAD
 AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
 AND p.CODIGO_PERSONA = es.CODIGO_PERSONA
-AND tu.CODIGO_AREA = 1;";
+AND tu.CODIGO_AREA = 4;";
            
 	$result = $conexion->prepare($strquery);
 	$result->execute();
@@ -238,11 +238,11 @@ $pdf->SetX(18);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Asignatura', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Catequesis', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, utf8_decode('Sección'), 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(35, 12, 'Modalidad', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Nombre del Tutor', 1, 0, 'C', 1);
+$pdf->Cell(50, 12, 'Nombre del Catequista', 1, 0, 'C', 1);
 $pdf->Cell(40, 12, 'Estudiante', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Grado Actual', 1, 1, 'C', 1);
 

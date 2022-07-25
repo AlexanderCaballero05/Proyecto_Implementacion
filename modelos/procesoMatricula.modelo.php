@@ -81,7 +81,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
     if($row > 0){
      echo "<script> 
      alert('No puede adicionar esta clase,ya la tiene matriculada');
-     window.location = 'procesoMatricula';
+     window.location = 'ediusuariosestudiantes';
      </script>";
 
     }else{

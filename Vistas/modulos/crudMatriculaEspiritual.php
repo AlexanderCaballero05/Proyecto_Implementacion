@@ -49,16 +49,16 @@
   <section class="content">
     <div class="container-fluid">
      <div class="content-header text-xl-center mb-3 ">
-          <h4> Matrícula Académica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Matrícula Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
     </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
               <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matrícula Académica</a>
+                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudMatricula">Ver Matrícula Académica</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" aria-current="true" href="crudMatriculaEspiritual">Ver Matrícula Espiritual</a>
+                <a class="nav-link active" style="color:#000000;" aria-current="true" href="#">Ver Matrícula Espiritual</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" style="color:#000000;" active href="ediusuariosestudiantes">Agregar Matrícula</a>
@@ -120,11 +120,11 @@
                         <tr>
                         <th>Acción</th>
                           <th class="text-center">Código</th>
-                          <th class="text-center">Asignatura </th>
+                          <th class="text-center">Catequesis</th>
                           <th class="text-center">Sección</th>
                           <th class="text-center">Hora</th>
                           <th class="text-center">Modalidad</th>
-                          <th class="text-center">Nombre del Tutor</th>
+                          <th class="text-center">Nombre del Catequista</th>
                           <th class="text-center">Estudiante</th>
                           <th class="text-center">Estado de la matrícula</th>
                         </tr>
@@ -144,12 +144,12 @@
            AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
            AND p.CODIGO_PERSONA = es.CODIGO_PERSONA
            AND est.CODIGO_ESTADO = ma.OBSERVACION
-           AND tu.CODIGO_AREA = 1;";
+           AND tu.CODIGO_AREA = 4;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 $contador = 0;
                 while($row = $result->fetch_assoc()) {
-                  $contador = $contador +1;
+                  $contador =  $contador +1;
                   $var1 = $row['CODIGO_MATRICULA'];
                   $var2 = $row['ESTUDIANTE'];
                   $var3 = $row['NOMBRE_TUTOR'];
@@ -211,8 +211,8 @@
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
                           <td class="text-center"><?php echo $var5; ?></td>
-                          <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo ucwords(strtolower($var2)); ?></td>
+                          <td class="text-center"><?php echo ucwords(strtolower($var3));?></td>
+                          <td class="text-center"><?php echo ucwords(strtolower($var2));?></td>
                           <td class="text-center"><?php echo $var10; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
                           <div id="EDITARMATRICULA<?php echo $var1 ?>" class="modal fade" role="dialog">
@@ -292,7 +292,7 @@
 
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteMatricula.php','_blank');
+      window.open('Reportes_Prosecar/reporteMatriculaEspiritual.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
