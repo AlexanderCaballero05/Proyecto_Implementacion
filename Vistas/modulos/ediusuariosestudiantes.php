@@ -365,13 +365,13 @@ include_once "conexion3.php";
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>DNI</label>
-                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" id="DNI">
+                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control"  maxlength="20" minlength="5" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" id="DNI">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Teléfono</label>
-                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="8" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
+                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="8" minlength="5"  onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
                                         </div>
                                       </div>
                                   </div>
@@ -379,7 +379,7 @@ include_once "conexion3.php";
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                           <label>Dirección</label>
-                                          <input  type="text"  value ="<?php echo $var23; ?>" required class="form-control"  maxlength="200" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="direccion" id="direccion">
+                                          <input  type="text"  value ="<?php echo $var23; ?>" required class="form-control"  maxlength="200" minlength="5"  onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="direccion" id="direccion">
                                         </div>
                                       </div>
                                       <?php //--INICIO DEL ESTADO
