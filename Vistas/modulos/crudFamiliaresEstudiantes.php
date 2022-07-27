@@ -442,7 +442,7 @@ include_once "conexion3.php";
 
 
                             <!-- ***********BUSCAR AL ESTUDIANTE*********** -->
-         <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
+                      <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
                            
                             <?php //
                     $query = "SELECT  est.CODIGO_ESTUDIANTE,CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE

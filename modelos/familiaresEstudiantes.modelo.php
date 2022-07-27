@@ -22,16 +22,16 @@
                $Parentesco = ($_POST['parentesco']);
 
               try{ 
-                  $consulta_nom = $db->prepare("SELECT CODIGO_FAMILIAR 
+                  $consulta_nom = $db->prepare("SELECT CODIGO_FAMILIAR, CODIGO_ESTUDIANTE
                                                   FROM tbl_familiares_estudiante 
-                                                  WHERE CODIGO_FAMILIAR = (?);");
-                  $consulta_nom->execute(array($familiar_parentesco));
+                                                  WHERE CODIGO_ESTUDIANTE  = (?)
+                                                  AND CODIGO_FAMILIAR = (?);");
+                  $consulta_nom->execute(array($EstudianteParentesco, $familiar_parentesco));
                   $row=$consulta_nom->fetchColumn();
                   if($row>0){
                     echo "<script>
-                    alert('el familiar ya se encuentra relacionado');
-=
-                    window.location = 'crudFamiliaresEstudiantes';
+                    alert('El familiar ya se encuentra relacionado con el estudiante');
+                    window.location = 'ediusuariosestudiantes';
                     </script>";
                   exit;
                   }else{
@@ -45,7 +45,7 @@
                       if($resul >0){
                         echo "<script> 
                         alert('¡Se agrego correctamente!');
-                        window.location = 'crudFamiliaresEstudiantes';
+                        window.location = 'ediusuariosestudiantes';
                         </script>";
                         $codigoObjeto=26;
                         $accion='INSERTAR';
@@ -60,7 +60,7 @@
                         echo "<script> 
                         alert'error'
 
-                        window.location = 'crudFamiliaresEstudiantes';
+                        window.location = 'ediusuariosestudiantes';
                         </script>";
                         
                         //<!--llamada de la fuction bitacora -->

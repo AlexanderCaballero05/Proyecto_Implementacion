@@ -92,7 +92,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
      if($resul >0){
        echo "<script>  
        alert('Tutoría Matriculada Exitosamente');
-       window.location = 'crudMatricula';
+       window.location = 'crudMatriculaEspiritual';
        </script>";
        $codigoObjeto=23;
        $accion='INSERCIÓN';
