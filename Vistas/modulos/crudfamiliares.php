@@ -111,7 +111,7 @@
                       <thead >
                         <tr>
                           <th class="text-center">Accion</th>
-                          <th class="text-center">Codigo persona</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">DNI</th>
                           <th class="text-center">Primer Nombre</th>
                           <th class="text-center">Segundo Nombre</th>
@@ -276,13 +276,13 @@
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>DNI</label>
-                                          <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="15" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNIFAMILIAR" id="DNI">
+                                          <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="15" minlength="5"  onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNIFAMILIAR" id="DNI">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Teléfono</label>
-                                          <input  type="text"  value ="<?php echo $var12; ?>" required class="form-control"  maxlength="8" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
+                                          <input  type="text"  value ="<?php echo $var12; ?>" required class="form-control"  maxlength="8" minlength="8" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
                                         </div>
                                       </div>
 
@@ -292,7 +292,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                           <label>Dirección</label>
-                                          <input  type="text"  value ="<?php echo $var14; ?>" required class="form-control"  maxlength="400" minlength="5"    autocomplete = "off" type="text"   name="direccion" id="direccion">
+                                          <input  type="text"  value ="<?php echo $var14; ?>" required class="form-control"  maxlength="400" minlength="5"   onkeypress="return soloLetras(event);" autocomplete = "off" type="text"   name="direccion" id="direccion">
                                         </div>
                                       </div>
                                        

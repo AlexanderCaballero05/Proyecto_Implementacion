@@ -431,7 +431,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="METAS" class="control-label">Metas</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" minlength="2" name="METAS" id="METAS" onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="<?php echo $valor4;?>" name="METAS" id="METAS" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
