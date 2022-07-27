@@ -125,7 +125,7 @@ include_once "conexion3.php";
                         <tr>
                           <th class="text-center">Acción</th>
                           <th class="text-center">Estado</th>
-                          <th class="text-center">Código Persona</th>
+                          <th class="text-center">Código</th>
                           <th class="text-center">DNI</th>
                           <th class="text-center">Primer Nombre</th>
                           <th class="text-center">Segundo Nombre</th>
@@ -396,7 +396,6 @@ include_once "conexion3.php";
                                             <option value="2">ACTIVO</option>
                                             <option value="3">INACTIVO</option>
                                             <option value="1">NUEVO</option>
-                                            <option value="4">BLOQUEADO</option>
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
