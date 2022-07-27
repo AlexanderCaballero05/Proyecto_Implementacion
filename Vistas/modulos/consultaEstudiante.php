@@ -500,7 +500,7 @@
                                             AND per.CODIGO_TIPO_PERSONA = 7;";
                                             $resultadod=$conn->query($query);                
                                             ?>
-                               <div class="row mb-2"><!-- INICIO PRIMERA ROW -->
+                               <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
                                  <div class="col-sm-12">
                                       <label for="">Familiar: </label>
                                             <select  style="width: 100%;"  class="form-control select2" name="FamiliarParentesco">
