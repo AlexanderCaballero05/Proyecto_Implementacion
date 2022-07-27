@@ -13,7 +13,7 @@ include "conexionpdo.php";
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 px-3">Bienvenido</h1>
+            <h1 class="m-0 px-3">Bienvenido <?php  echo $_SESSION['vario'];  ?></h1>
           </div>
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
