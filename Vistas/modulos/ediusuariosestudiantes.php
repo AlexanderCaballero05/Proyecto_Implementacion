@@ -26,6 +26,7 @@ Diana Rut               09/06/2022           Se modifico los datos de la bitacor
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 Diana Rut Garcia        21-06-2022            Se valido las validaciones de editar
 Diana Rut Garcia        22-07-2022            Se agrego boton para realizar los diferentes tipos de matricula
+Diana Rut Garcia        26-07-2022            Cambios en el modal de editar los datos ( post:actualicen el historial de cambios :v)
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -72,9 +73,6 @@ include_once "conexion3.php";
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
               <a class=" nav-link active" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
-            </li>
-          <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
@@ -138,13 +136,13 @@ include_once "conexion3.php";
                           <th class="text-center">Nombre Usuario</th>
                           <th class="text-center">Fecha Creación</th>
                           
-                          
                         </tr>
                       </thead>
                       <tbody class="text-center">
                         <?php
                           $query = "SELECT u.CODIGO_USUARIO, est.CODIGO_ESTUDIANTE, p.CODIGO_PERSONA,p.DNI, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, t.NUMERO_TELEFONO, c.correo_persona, p.DIRECCION, u.NOMBRE_USUARIO, e.NOMBRE as ESTADO ,u.CODIGO_ESTADO,  u.FECHA_CREACION ,u.FECHA_MODIFICACION , u.CREADO_POR,
-                          u.FECHA_CREACION,u.FECHA_MODIFICACION, est.GRADO_ACTUAL
+                          u.FECHA_CREACION,u.FECHA_MODIFICACION, est.GRADO_ACTUAL,est.GRADO_ACTUAL, est.REPITENTE,
+                        est.INDICE_ACADEMICO, est.MATE_BAJO_RENDI ,est.PASATIEMPOS, est.DISTRACTORES_ESCOLARES, est.METAS
                           FROM tbl_usuario u
                           left join tbl_roles r on r.CODIGO_TIPO_ROL = u.CODIGO_TIPO_ROL
                           left join tbl_estado e on e.CODIGO_ESTADO = u.CODIGO_ESTADO
@@ -170,13 +168,15 @@ include_once "conexion3.php";
                               $var6 = $row['NOMBRE_USUARIO'];
                               $var15 = $row['correo_persona'];
                               $var7 = $row['ESTADO'];
-                            
                               $var13 = $row['CODIGO_ESTADO']; 
-                              
                               $var16 = $row['CODIGO_USUARIO'];
                               $var17 = $row['FECHA_CREACION'];
                               $var18 = $row['FECHA_MODIFICACION'];
                               $var24 = $row['GRADO_ACTUAL'];
+                              $metas = $row['METAS'];
+                              $distractores = $row['DISTRACTORES_ESCOLARES'];
+                              $pasatiempos = $row['PASATIEMPOS'];
+                              $indice = $row['INDICE_ACADEMICO']; 
                         ?>
                           <?php
                             include "conexionpdo.php";
@@ -241,7 +241,7 @@ include_once "conexion3.php";
 
                                 <!--Boton para agregar cita al estudiante-->
                                 <a>
-                                <form method="post"  action="procesocita" target="_blank"> 
+                                <form method="post"  action="procesocita"> <!--Le quite la opcion de que se habra en otra pantalla,para que se vea mejor :) -->
                                 <input type="text" hidden name="ingresarCitaEstudiante" value="<?php echo $var2 ?>">
                                 <button type='submit' title='Imprimir' style="color:white;"class="form control btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Cita</button>
                                 </form>
@@ -267,13 +267,11 @@ include_once "conexion3.php";
                                 <?php
                                      }else{ //si no e; texto de los datos de la tabla no cambian
                                  ?>
-                               
-
+                              
                                 <?php
                                   }
                                  ?>
                              
-
                                 <?php
                                   }
                                  ?>
@@ -318,8 +316,8 @@ include_once "conexion3.php";
                             }
                           ?>
                         <!--INICIO DEL MODAL DE EDITAR -->
-                          <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
-                            <div class="modal-dialog modal-lg">
+                        <div id="EDITARPERSONA<?php echo $var2 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-xl">
                               <div class="modal-content"><!-- Modal content-->
                                  <div class="modal-header" style="background-color: #0CCDE3">
                                     <h4 class="text-center"> Editar Estudiante</h4>
@@ -327,6 +325,8 @@ include_once "conexion3.php";
                                   </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
+                                   <h5>Datos Generales Estudiante</h5>
+                                   <hr color="blue">
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
                                       <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="NOMUSUARIO" id="CODUSUARIO">
@@ -356,7 +356,7 @@ include_once "conexion3.php";
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <div class="row">
-                                      <div class="col-sm-6">
+                                      <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Correo Electrónico</label>
                                           <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
@@ -365,21 +365,37 @@ include_once "conexion3.php";
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>DNI</label>
-                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control"  maxlength="20" minlength="5" onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" id="DNI">
+                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control" onkeypress="return solonumeros(event);"  maxlength="13" minlength="13"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Teléfono</label>
-                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="8" minlength="5"  onkeyup="noespacio(this, event);" onkeypress="return solonumeros(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
+                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control" onkeypress="return solonumeros(event);" maxlength="8" minlength="8"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono">
                                         </div>
                                       </div>
+                                      <div class="col-sm-3">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
+                                            <option value="<?php echo $var13?>"><?php echo $var7;?></option>
+                                            <option value="2">ACTIVO</option>
+                                            <option value="3">INACTIVO</option>
+                                            <option value="1">NUEVO</option>
+                                            <option value="4">BLOQUEADO</option>
+                                          </select> 
+                                        </div>  
+                                      </div> <!--FIN DE ESTADO--> 
+                                        <?php
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
+                                           $resultadod=$conn->query($query);                
+                                         ?> 
                                   </div>
                                     <div class="row"> <!-- INICIO SEGUNDO ROW -->
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
                                           <label>Dirección</label>
-                                          <input  type="text"  value ="<?php echo $var23; ?>" required class="form-control"  maxlength="200" minlength="5"  onkeypress="return soloLetras(event);" onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="direccion" id="direccion">
+                                          <input  type="text"  value ="<?php echo $var23; ?>" required class="form-control"  maxlength="200" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="direccion" id="direccion">
                                         </div>
                                       </div>
                                       <?php //--INICIO DEL ESTADO
@@ -388,28 +404,66 @@ include_once "conexion3.php";
                                       AND CODIGO_ESTADO <> '12'   AND CODIGO_ESTADO <> '13' ";
                                       $resultadod=$conn->query($query);                
                                       ?> 
-                                      <div class="col-sm-6">
-                                        <label for="cbx_persona" class="control-label">Estado</label>  
-                                        <div class="form-group">
-                                          <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
-                                            <option value="<?php echo $var13?>"><?php echo $var7;?></option>
-                                            <option value="2">ACTIVO</option>
-                                            <option value="3">INACTIVO</option>
-                                            <option value="1">NUEVO</option>
-                                          </select> 
-                                        </div>  
-                                      </div> <!--FIN DE ESTADO--> 
-                                        <?php
-                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
-                                           $resultadod=$conn->query($query);                
-                                         ?> 
                                     </div> <!-- FIN ROW --> 
-                                     <div class="row">
+                                     <hr>
+                                    <!-- Parte de los datos escolares-->
+                                       <h5>Datos Escolares</h5>
+                                      <hr color="blue">
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Pasatiempos</label>
+                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $pasatiempos; ?></textarea>
+                                              <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                              </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Distractores Escolares</label>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $distractores; ?></textarea>
+                                           <div class="invalid-feedback">
+                                              Campo Obligatorio.
+                                           </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Metas</label>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $metas; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo Obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div><!--fin row -->
+                                    <div class="row">
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label >Grado Actual</label>
+                                          <input  type="text"  value ="<?php echo $var24; ?>" class="form-control"   maxlength="15" minlength="3" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL"  autocomplete ="off" required ="">
+                                          <div class="invalid-feedback">
+                                            Campo Obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-group">
+                                          <label >Índice Académico</label>
+                                          <input  type="text"  value ="<?php echo $indice; ?>" class="form-control" onkeypress="return solonumeros(event);"  maxlength="3" minlength="2" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="indice"  autocomplete ="off" required ="">
+                                          <div class="invalid-feedback">
+                                            Campo Obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div><!--fin row -->
+                                    <div class="row">
                                       <div class="col-sm-6">
                                         <button type="button"  class="btn btn-primary mb-3" onclick="Mostar_div(<?php echo $var2?>)">Resetear Contraseña</button>
                                       </div>
                                     </div>
-                                   <div  class="row">
+                                    <div  class="row">
                                       <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>" class="col-sm-6 mb-2">
                                         <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group">
@@ -527,7 +581,24 @@ include_once "conexion3.php";
 </div><!--  -->
 </body>
 
-
+  <script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 
 <script type="text/javascript"> 
@@ -554,20 +625,12 @@ include_once "conexion3.php";
             "previous": "Anterior"
         }
       },
-        
       })
   } );
 </script>
   <script>
    function Descargar() {
       window.open('Reportes_Prosecar/reportepersonaEstudiante.php','_blank');
-      window.open(this.href,'_self');
-    }
-  </script>
-
-<script>
-   function Descargar3() {
-      window.open('Reportes_Prosecar/reportecitaMedica.php','_blank');
       window.open(this.href,'_self');
     }
   </script>

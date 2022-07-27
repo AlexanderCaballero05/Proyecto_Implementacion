@@ -53,10 +53,7 @@
 
                 <form method="POST"id="form">
                
-
-                <div  class="pt-2 pb-2 px-2">
-                      <h5>Datos del Paciente</h5>
-                  </div>
+                  <h5>Datos Generales del Paciente</h5>
                   <hr color="blue"> 
                   <div class="row">
                      <div  class="col-sm-5 mb-3">
@@ -265,7 +262,7 @@
                        }
                       ?>
                 <div class="modal-footer justify-content-start">
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
                 </form>
 
                   <form action="Reportes_Prosecar/reporteConsultaPlanTerapeutico.php" method="POST"> <!--form para el reporte de la consulta-->

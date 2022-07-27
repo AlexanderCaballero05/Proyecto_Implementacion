@@ -178,6 +178,7 @@ session_start();
          $_GET["ruta"] == "matriculaestudiantes" ||
 
          $_GET["ruta"] == "crudCargaEspiritual" ||
+         $_GET["ruta"] == "prueba" ||
          
 
          $_GET["ruta"] == "crudTranstornos" ||

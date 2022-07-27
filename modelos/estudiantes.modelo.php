@@ -535,13 +535,17 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
   if(isset($_POST['CODUSUARIO'])) { 
     $userregis = ($_SESSION['vario']);
     if (isset($_POST['MODIFICAR_ESTUDIANTE'])){
+      $editar_grado = ($_POST['editGRADOACTUAL']);
+      $editar_pasatiempos = ($_POST['ediTPASATIEMPOS']);
+      $editar_distractores = ($_POST['editDISTRACTORES']);
+      $editar_metas = ($_POST['editMETAS']);
+      $indice = ($_POST['indice']);
+
       $CODUSUARIO = ($_POST['CODUSUARIO']);
       $USUARIO = ($_POST['NOMUSUARIO']); 
       $PASS = ($_POST['clave_nueva']);
       $CONFIRMA = ($_POST['confirmar_clave']);
       $ESTADO = ($_POST['ESTADOUSUARIO']);
-     
-      
       $nombre_modi = ($_POST['nombre_modi']);
       $nombre_modi2 = ($_POST['nombre_modi2']);
       $apellido_modi = ($_POST['apellido_modi']);
@@ -576,7 +580,8 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
             $ID_PERSONA_CORREO = $row;
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
-                $sql = "CALL Sp_modificar_usuarios_estudiantes('$CODUSUARIO','$DNI','$nombre_modi', '$nombre_modi2', '$apellido_modi','$apellido_modi2',  '$telefono', '$correo_mofi','$direccion','$USUARIO','$ESTADO','$userregis');" ;
+                $sql = "CALL Sp_modificar_usuarios_estudiantes('$CODUSUARIO','$DNI','$nombre_modi', '$nombre_modi2', '$apellido_modi','$apellido_modi2',  '$telefono', '$correo_mofi','$direccion',
+                '$USUARIO','$ESTADO','$userregis','$editar_pasatiempos','$editar_metas','$editar_distractores','$editar_grado','$indice');" ;
                 $consulta=$conn->query($sql);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
@@ -591,14 +596,14 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                   }else{ //Si las contraseñas son diferentes ,no permitira que se registre
                     if($connueva<>$confconn){
                       echo "<script>
-                      alert('Las contraseñas no son iguales');window.location = 'ediusuarios'; </script>";
+                      alert('Las contraseñas no son iguales');window.location = 'ediusuariosestudiantes'; </script>";
                     }else{
                       if(preg_match($expre,$connueva)){ //evalua la expresion regular,que define una contraseña segura :3
                         $pass= crypt($connueva,'$2a$07$usesomesillystringforsalt$');
                         $sql = "CALL Sp_reset_contrasena('$CODUSUARIO', '$pass');" ; //Al cumplir con los requerimientos ,se llama al procedimiento alamcenado y se actualiza la contraseña
                         $consulta=$conn->query($sql);
                         if (($consulta)>0) {
-                          echo "<script> alert('Cambio exitosamente');window.location = 'ediusuarios';</script>";
+                          echo "<script> alert('Cambio exitosamente');window.location = 'ediusuariosestudiantes';</script>";
                           $codigoObjeto=14;
                           $accion='MODIFICACIÓN';
                           $descripcion= 'SE MODIFICO UNA CONTRASEÑA';
@@ -607,13 +612,13 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                         }
                       }else{
                         echo "<script>
-                        alert('La contraseña que ingreso no es segura');window.location = 'ediusuarios';</script>";
+                        alert('La contraseña que ingreso no es segura');window.location = 'ediusuariosestudiantes';</script>";
                       }
                     }
                   }
                 }else{ //En caso que surja algun error que no se puede manejar saldra el mensaje que no se pudo actualizar 
                   echo "<script>
-                  alert('Error al actualizar el registro');window.location = 'ediusuarios';</script>";
+                  alert('Error al actualizar el registro');window.location = 'ediusuariosestudiantes';</script>";
                 }
                 return true;
                 }catch(PDOException $e) {
@@ -623,7 +628,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
             }elseif($ID_PERSONA_CORREO <> $CODUSUARIO){  //validacion que si el numero de telefono a existe
               echo "<script>
               alert('Ya existe una persona con el número de telefono: $correo_mofi');
-              window.location = 'ediusuarios';</script>";
+              window.location = 'ediusuariosestudiantes';</script>";
               }//if del correo 
             return true;
           } catch(PDOException $e) {

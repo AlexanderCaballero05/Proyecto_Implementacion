@@ -97,8 +97,8 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     {
                     ?>                
 
-                       <button  data-toggle="modal"  href="#agregar_permisos" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar permiso</button>
-                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar reporte</button>
+                       <button  data-toggle="modal"  href="#agregar_permisos" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
+                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"  class="btn  mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                     
                     <?php
                     }
@@ -276,7 +276,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                             <div class="modal-dialog modal-md">
                               <div class="modal-content"><!-- Modal content-->
                                  <div class="modal-header" style="background-color: #0CCDE3">
-                                    <h4 class="text-center">Editar permisos</h4>
+                                    <h4 class="text-center">Editar Permiso</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                   </div>
                                 <form id="FORMEDITRAPERSONAS" method="POST">
@@ -413,7 +413,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
            <div class="modal-content"><!-- Modal content-->
                 <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
                     <div class="modal-header" style="background-color: #0CCDE3">
-                        <h4 class="text-center">Agregar Permisos</h4>
+                        <h4 class="text-center">Agregar Permiso</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body"><!--CUERPO DEL MODAL -->
@@ -423,7 +423,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
-                                        <option selected disabled value="">Seleccionar un rol...</option>
+                                        <option selected disabled value="">--Seleccionar un rol--</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
                                           $contador = 0;
@@ -442,9 +442,9 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="txtcodigo_persona">Modulo:</label>
+                                    <label for="txtcodigo_persona">Módulo:</label>
                                     <select class="form-control select2" name="MODUSUARIO" required="">
-                                        <option selected disabled value="">Seleccionar un modulo...</option>
+                                        <option selected disabled value="">--Seleccionar un modulo--</option>
                                                 <?php 
                                                   if ($resultador->num_rows > 0) {
                                                     $contador = 0;
@@ -466,7 +466,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="input-group">
                                 <span class="input-group-append"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                                   <select class="form-control" name="MOSTRAR" required="" id="consultar1">
-                                  <option selected disabled value="">Seleccionar...</option>
+                                  <option selected disabled value="">--Seleccionar--</option>
                                     <option value="SI">SI</option>
                                     <option value="NO">NO</option>
                                   </select>
@@ -481,7 +481,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Insertar:</label>
                                     <select class="form-control" name="INSERTAR" required>
-                                        <option selected disabled value="">Seleccionar...</option>
+                                        <option selected disabled value="">--Seleccionar--</option>
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -494,7 +494,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Eliminar:</label>
                                     <select class="form-control"name="ELIMINAR" required="">
-                                    <option selected disabled value="">Seleccionar...</option>
+                                    <option selected disabled value="">--Seleccionar--</option>
 
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
@@ -507,7 +507,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Editar:</label>
                                     <select class="form-control"name="ACTUALIZAR" required="">
-                                    <option selected disabled value="">Seleccionar...</option>
+                                    <option selected disabled value="">--Seleccionar--</option>
                                         <option value="SI">SI</option>
                                         <option value="NO">NO</option>
                                     </select>
@@ -549,7 +549,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar permiso:",
+        "search": "Buscar Permiso:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

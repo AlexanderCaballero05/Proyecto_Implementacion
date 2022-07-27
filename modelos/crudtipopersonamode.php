@@ -13,8 +13,8 @@
           if(isset($_POST['agregar_persona'])){
                $persona = ($_POST['TIPO_PERSONA']);
                
-              try{ 
-                  $consulta_pregunta = $db->prepare("SELECT NOMBRE FROM tbl_tipo_persona WHERE NOMBRE = (?);");
+              try{  //Cambien la consulta :D
+                  $consulta_pregunta = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_persona WHERE NOMBRE = (?);");
                   $consulta_pregunta->execute(array($persona));
                   $row=$consulta_pregunta->fetchColumn();
                   if($row>0){
@@ -70,7 +70,7 @@
       $editar_persona = ($_POST['editar_persona']);
       try{
        // 
-       $sentencia = $db->prepare("SELECT * FROM tbl_tipo_persona where NOMBRE = (?) and CODIGO_TIPO_PERSONA <> (?) ;");
+       $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_persona where NOMBRE = (?) and CODIGO_TIPO_PERSONA <> (?) ;");
        $sentencia->execute(array($editar_persona,$codigo_persona));
        $row=$sentencia->fetchColumn();
         if($row>0){

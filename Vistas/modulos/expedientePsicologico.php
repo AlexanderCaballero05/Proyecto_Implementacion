@@ -244,10 +244,10 @@
                   </div>
                  
               <div class="modal-footer justify-content-start">
-              <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-info"><span><i class="nav-icon fas fa-edit mx-1"></i></span>
+                <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-success btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar</button>
+                <button type="submit"  id="" name="Crear_plan_terapeutico" class="btn btn-primary"><span><i class="nav-icon fa fa-plus-square mx-1"></i></span>
                   Crear Plan Terapéutico
                 </button>
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_EXPEDIENTE_PSICOLOGICO" class="btn btn-warning btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar</button>
 
                 </form><!--fin form del archivo expediente-->
                 <!--form para el reporte de la consulta-->

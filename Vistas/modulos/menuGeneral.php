@@ -729,13 +729,13 @@
             <li class="nav-item">
               <a href="crudAlergias" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Alergias</p>
+                <p>Alergias</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudtiposangre" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Tipo Sangre</p>
+                <p>Tipo Sangre</p>
               </a>
             </li>
             <li class="nav-item">
@@ -743,19 +743,19 @@
             <li class="nav-item">
               <a href="crudmedicamento" class="nav-link">
                <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Medicamentos</p>
+                <p>Medicamentos</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="crudExamenesMedicos" class="nav-link">
                <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Examenes</p>
+                <p>Exámenes</p>
               </a>
             </li>
               <li>
               <a href="crudTranstornos" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Trastornos</p>
+                <p>Trastornos</p>
               </a>
             </li>
 
@@ -763,7 +763,7 @@
             <li class="nav-item">
               <a href="crudAparienciaFisica" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Apariencias Físicas</p>
+                <p>Apariencias Físicas</p>
               </a>
             </li>
           </ul>
