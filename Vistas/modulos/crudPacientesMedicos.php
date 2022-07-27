@@ -86,6 +86,16 @@ Programador               Fecha                      Descripcion
                     <h5 class=" card-title text-center"><strong style="color:black;"></strong></h5>
                  </div>
               <div class="card-body">
+              <?php
+                        $usuario= $_SESSION['vario'];
+                        //Consulta que trae el codigo del usuario
+                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                        FROM tbl_usuario u, tbl_persona p 
+                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                        AND NOMBRE_USUARIO = (?);");
+                        $sentencia1->execute(array($usuario));
+                        $cod_usuario=$sentencia1->fetchColumn();
+                     ?>   
                 
                 <div class="table-responsive">
                   <table id="tabla_pacientes" class="table table-bordered table-striped">

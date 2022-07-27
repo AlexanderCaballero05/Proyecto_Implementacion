@@ -397,7 +397,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-3"> <!--INICIO PASATIEMPOS-->
                           <label for="MATERIAS" class="control-label">Materias con bajo rendimiento</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea"  name="MATERIAS" id="MATERIAS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Español" required="" ></textarea>
+                          <textarea class="form-control" type="textarea"  name="MATERIAS" id="MATERIAS" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetrasComa(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Español" required="" ></textarea>
                                <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -411,7 +411,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
                           <div class="form-group">
                           <textarea class="form-control" type="textarea" maxlength="255" name="PASATIEMPOS" id="PASATIEMPOS" autocomplete = "off" onblur="quitarespacios(this);" 
-                           onkeypress="return soloLetras(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
+                           onkeypress="return soloLetrasComa(event);"  maxlength="255"  minlength="<?php echo $valor4;?>"  placeholder="Ejemplo: Ver Telelevision" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -421,7 +421,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="DISTRACTORES" class="control-label">Distractores</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetras(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetrasComa(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -431,7 +431,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="METAS" class="control-label">Metas</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" minlength="<?php echo $valor4;?>" name="METAS" id="METAS" autocomplete = "off" onkeypress="return soloLetras(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                          <textarea class="form-control" type="textarea" maxlength="255" minlength="<?php echo $valor4;?>" name="METAS" id="METAS" autocomplete = "off" onkeypress="return soloLetrasComa(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
                           <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -994,8 +994,8 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
 
-          document.getElementById('parentesco').required = true;
-          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('parentesco').required = false;
+          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -1021,8 +1021,8 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
 
-          document.getElementById('parentesco').required = true;
-          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('parentesco').required = false;
+          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -1049,8 +1049,8 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
 
-          document.getElementById('parentesco').required = true;
-          document.getElementById('EstudianteParentesco').required = true;
+          document.getElementById('parentesco').required = false;
+          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -1081,3 +1081,21 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
   //Toda la pantalla elaborada por Diana Rut ,algunas cosas agregadas por terceros : )
 </script>
 
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
