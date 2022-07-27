@@ -144,10 +144,10 @@ ANY HERNANDEZ       01-JUN-2022       PARAMETROS DE MAXIMO Y MINIMO DE LA RESPUE
         })()
   </script>
   <script>
-      function soloLetrasComa(e){
+      function soloLetras(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
-       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
        especiales = ["8-37-39-46"];
        tecla_especial = false
        for(var i in especiales){
