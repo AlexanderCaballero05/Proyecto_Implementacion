@@ -29,7 +29,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 
        <div class="content-header text-xl-center mb-3"> 
-          <h4>Consulta Psicológica<i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4>Consulta Psicológica</h4>
       </div>
     <section class="content">
        <div class="card"> 
@@ -207,7 +207,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
+                    <button type="submit"  id="Guardar_Consulta3" name="Guardar_Consulta3" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->

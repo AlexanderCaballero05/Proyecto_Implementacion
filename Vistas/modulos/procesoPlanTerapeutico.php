@@ -159,7 +159,7 @@ include "conexionpdo.php";
             
          
           <div class="modal-footer justify-content-start">
-          <button  type="submit"  id="" name="GUARDAR_PLAN" class="btn btn-info btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Plan Terapéutico</button>
+          <button  type="submit"  id="" name="GUARDAR_PLAN" class="btn btn-success btn "><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar Plan Terapéutico</button>
         </form>
         <form method="POST">
         <?php //Codigo que sirve para traer el codigo de cita y asi actualizar el registro en caso de cancelar

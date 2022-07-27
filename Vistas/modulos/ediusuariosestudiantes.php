@@ -267,13 +267,11 @@ include_once "conexion3.php";
                                 <?php
                                      }else{ //si no e; texto de los datos de la tabla no cambian
                                  ?>
-                               
-
+                              
                                 <?php
                                   }
                                  ?>
                              
-
                                 <?php
                                   }
                                  ?>
@@ -367,13 +365,13 @@ include_once "conexion3.php";
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>DNI</label>
-                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" id="DNI">
+                                          <input  type="text"  value ="<?php echo $var19; ?>" required class="form-control" onkeypress="return solonumeros(event);"  maxlength="13" minlength="13"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="DNI" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Teléfono</label>
-                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control"  maxlength="8" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono" id="telefono">
+                                          <input  type="text"  value ="<?php echo $var22; ?>" required class="form-control" onkeypress="return solonumeros(event);" maxlength="8" minlength="8"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="telefono">
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
@@ -415,7 +413,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pasatiempos</label>
-                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $pasatiempos; ?></textarea>
+                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $pasatiempos; ?></textarea>
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -424,7 +422,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $distractores; ?></textarea>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $distractores; ?></textarea>
                                            <div class="invalid-feedback">
                                               Campo Obligatorio.
                                            </div>
@@ -433,7 +431,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Metas</label>
-                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetras(event);" required=""><?php echo $metas; ?></textarea>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $metas; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -444,7 +442,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label >Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var24; ?>" class="form-control"  maxlength="15" minlength="1" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL"  autocomplete ="off" required ="">
+                                          <input  type="text"  value ="<?php echo $var24; ?>" class="form-control"   maxlength="15" minlength="3" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL"  autocomplete ="off" required ="">
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -453,7 +451,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label >Índice Académico</label>
-                                          <input  type="text"  value ="<?php echo $indice; ?>" class="form-control"  maxlength="3" minlength="2" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="indice"  autocomplete ="off" required ="">
+                                          <input  type="text"  value ="<?php echo $indice; ?>" class="form-control" onkeypress="return solonumeros(event);"  maxlength="3" minlength="2" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="indice"  autocomplete ="off" required ="">
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -583,7 +581,24 @@ include_once "conexion3.php";
 </div><!--  -->
 </body>
 
-
+  <script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 
 <script type="text/javascript"> 
@@ -610,20 +625,12 @@ include_once "conexion3.php";
             "previous": "Anterior"
         }
       },
-        
       })
   } );
 </script>
   <script>
    function Descargar() {
       window.open('Reportes_Prosecar/reportepersonaEstudiante.php','_blank');
-      window.open(this.href,'_self');
-    }
-  </script>
-
-<script>
-   function Descargar3() {
-      window.open('Reportes_Prosecar/reportecitaMedica.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
