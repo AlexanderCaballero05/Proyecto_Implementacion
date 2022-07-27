@@ -260,7 +260,8 @@ if(isset($_POST['IDCARGA'])){
               $consulta = $db->prepare("SELECT COUNT(*) FROM tbl_carga_academica 
               WHERE CODIGO_PERSONA <> (?) AND CODIGO_TUTORIA = (?)  and HORA = (?) and FECHA_INICIO = (?)");
               $consulta->execute(array($tutor_modi ,$tutoria_modi,$hora_modi, $fecha_inicio_modi));
-              if($consulta >0){
+              $fila3=$consulta->fetchColumn();
+              if($fila3 >0){
                  echo "<script>
                  alert('Ya existe esta carga ');
                  window.location = 'crudCargaAcademica';

@@ -23,7 +23,8 @@ Historial de Cambio
 Programador               Fecha                      Descripcion
 Diana Rut               31/05/2022            Se agrego un tab al menu y un cierre de div
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
-Diana Rut                 23/07/2022                 Cambios en los nombres del menu,pasarlos tipo oracion con modificacion estetica del modal
+Diana Rut                 23/07/2022          Cambios en los nombres del menu,pasarlos tipo oracion con modificacion estetica del modal
+Diana Rut              27/07/2022             Cambios en el menu,se quito los datos escolares
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -46,9 +47,6 @@ Diana Rut                 23/07/2022                 Cambios en los nombres del 
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
               <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
-            </li>
-          <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link active"  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>

@@ -30,6 +30,7 @@
     Programador               Fecha                      Descripcion
  Diana Rut Garcia           30/06/2022                Cambios en el titulo
  Diana Rut Garcia           23/07/2022                Cambios en el menu,pasarlo a tipo oracion
+ Diana Rut                  27/07/2022                Cambios en el menu,se quito los datos escolares
 ----------------------------------------------------------------------->
 
 
@@ -58,9 +59,6 @@
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
               <a class=" nav-link" style="color:#000000;" href="ediusuariosestudiantes">Ver Datos Generales</a>
-            </li>
-          <li class="nav-item">
-              <a class=" nav-link" style="color:#000000;" href="crudEstudiante">Ver Datos Escolares</a>
             </li>
               <li class="nav-item ">
                 <a class="nav-link "  style="color:#000000;"href="crudContenidoEconoEstudiante">Ver Datos Socioeconómicos</a>
@@ -110,7 +108,7 @@
                   <table id="tabla_usuarios" class="table table-bordered table-striped">
                       <thead >
                         <tr>
-                          <th class="text-center">Accion</th>
+                          <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">DNI</th>
                           <th class="text-center">Primer Nombre</th>
@@ -420,7 +418,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar un  Usuario:",
+        "search": "Buscar Familiar:",
         "zeroRecords": "El usuario no existe",
         "paginate": {
             "first": "Primero",
@@ -441,123 +439,12 @@
   </script>
 
 
-
-<script>//funcion que muestra/oculta el div de resetear contraseña
-  function Mostar_div(e){
-    console.log('object');
-     console.log(e);
-    let x = document.getElementById('Mostrar_reseteo'+e);
-   let  y = document.getElementById('Mostrar_reseteo1'+e);
-    if(x.style.display === "none" && y.style.display === "none"){
-      x.style.display = "block";
-      y.style.display = "block";
-    }else{
-      x.style.display = "none";
-      y.style.display = "none";
-    }
-  }
-</script> 
-
-<script  type="text/javascript">
-  function mostrar1(e){
-    var cambio1 = document.getElementById("confirmar_clave"+e);
-    if(cambio1.type == "password"){
-        cambio1.type = "text";
-    $('.icon1').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-    }else{
-        cambio1.type = "password";
-    $('.icon1').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-    }        
-  }
-</script>
-<script type="text/javascript">
-  function mostrar2(e){
-    var cambio2 = document.getElementById("clave_nueva"+e);
-    if(cambio2.type == "password"){
-        cambio2.type = "text";
-    $('.icon2').removeClass('fa fa-eye-slash').addClass('fa fa-eye');
-    }else{
-        cambio2.type = "password";
-    $('.icon2').removeClass('fa fa-eye').addClass('fa fa-eye-slash');
-    }        
-  }
-</script>
-<script>
-function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- //funcion para solu numeros ingresar en el campo
- function soloNumeros_tel(e){
-   var teclaPulsada=window.event ? window.event.keyCode:e.which;
-    // capturamos el contenido del input
-    var valor=document.getElementById("tele").value;
-    if(valor.length<9){
-      if(teclaPulsada==9){
-        return true;
-      }
-    // devolvemos true o false dependiendo de si es numerico o no
-    return /\d/.test(String.fromCharCode(teclaPulsada));
-    }else{
-    return false;
-    }
-  }
-   //funcion para quitar espacios
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-  //funcion para poner mayusculas
-  function mayus(e) {
-    e.value = e.value.toUpperCase();
-  }
-  function mayus(e) {
-    e.value = e.value.toUpperCase();
-  }
-   //funcion sin espacios 
-  function sinespacio(e) {
-    var cadena =  e.value;
-    var limpia = "";
-    var parts = cadena.split(" ");
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-     nuevacadena = parts[i];
-     subcadena = nuevacadena.trim();
-     if(subcadena != "") {
-       limpia += subcadena + " ";
-      }
-    }
-   limpia = limpia.trim();
-   e.value = limpia;
-  };
-  //otra funcion para quitar espacios :V
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-</script>
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -566,7 +453,6 @@ function soloLetras(e){
           event.preventDefault()
           event.stopPropagation()
         }
-
         form.classList.add('was-validated')
       }, false)
     })
