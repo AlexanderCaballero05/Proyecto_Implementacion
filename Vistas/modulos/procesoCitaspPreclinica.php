@@ -112,7 +112,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                 </a>
 
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
-                                                                    <button type='button' style="color:white;" class="form-control btn btn-success"><span></span>Enviar</button>
+                                                                    <button type='button' style="color:white;" class="form-control btn btn-success"><span></span>Atender</button>
                                                               </a>
 
 

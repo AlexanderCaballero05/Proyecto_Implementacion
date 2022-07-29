@@ -20,7 +20,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 
     <div class="content-header text-xl-center mb-3 "> 
-          <h4> Citas Medicas <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> Citas Médicas <i class="nav-icon fas fa-stethoscope"></i></h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -44,7 +44,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
             <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudPacientesMedicos">Lista de pacientes</a>
+            <a class="nav-link" style="color:#000000;" href="crudPacientesMedicos">Lista de Pacientes</a>
             </li>
           </ul>
         </div>
@@ -71,7 +71,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                             <th class="text-center">Fecha cita</th>
                                             <th class="text-center">Hora</th>
                                             <th class="text-center">Paciente</th>
-                                            <th class="text-center">Esatdo de cita</th>
+                                            <th class="text-center">Estado de cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>

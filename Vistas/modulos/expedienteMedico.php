@@ -348,15 +348,15 @@ include_once 'conexionpdo.php';
                           }
                           }
                         ?>
-                  </div>
-                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-info btn mx-1"><span><i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
-                  <a >
+                  </div><a >
+                  <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-success"><span><i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                  
                     <form method="POST"  action="Vistas/reporte_medico.php" target="_blank"> 
                      <input type="hidden" name="persona" value="<?php echo $persona?>">
                      <input type="hidden" name="codigo_cita" value="<?php echo $codigo_cita?>">
                      <input type="hidden" name="consulta" value="<?php echo $codigo_consulta?>">
-                     <button  onclick="Descargar1()" type="submit" id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte Consulta</button>
-                     <button  onclick="Descargar2()" type="submit"   style="color:white; background-color:#D200FA"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte Recetas</button>
+                     <button  onclick="Descargar1()" type="submit" id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Consulta</button>
+                     <button  onclick="Descargar2()" type="submit"   style="color:white; background-color:#FA0079"class="btn btn-danger "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte Recetas</button>
                     </form>
                   </a>
                 </form>

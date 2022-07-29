@@ -33,6 +33,7 @@ include "conexionpdo.php";
                 echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
              }else{
                 echo "<script> 
+                  
                 window.location = 'procesoRecetaMedica'; </script>"; exit;
              }
           }//fin del elseif de insertar examenes medicoa
@@ -69,10 +70,10 @@ include "conexionpdo.php";
       echo "<script> alert('el examen  $nombre_examen ya se encuentra registrado');
       window.location = 'procesoRecetaMedica'; </script>";
     }else{
-        try{// se agreo la parte del codigo de estado 
-        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO,CODIGO_ESTADO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario','2'); ";
+        try{
+        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario'); ";
         $resul=$conn->query($insertar_examen);
-          if($resul>0){
+          if($consulta>0){
             echo "<script>
             alert('Examen Registrado Correctamente');
             window.location = 'procesoRecetaMedica'; </script>"; exit;
@@ -105,8 +106,8 @@ include "conexionpdo.php";
             exit;
           }else{
            try{
-               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,CODIGO_ESTADO)
-               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual','2');"; //se agrega el estado a 2 que es activo
+               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
+               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
                $resul=$conn->query($query_medicamento);
                if($resul >0){
                   echo "<script>
@@ -123,7 +124,143 @@ include "conexionpdo.php";
             }
          }//fin else
  }
+
+
+///// editar examenes receta medica ////
+if (isset( $_POST['cod_edit_examenes']) && isset($_POST['guardar_examenes'])){
+   $codigo = $_POST['cod_edit_examenes'];
+   $nomExam = $_POST['nom_exam'];
+   $indicacion = $_POST['edit_indicacion'];
+   $observacion = ($_POST['edit_obs']); 
+     
+         try{
+            $sql = "UPDATE tbl_examenes_pacientes EP set EP.INDICACIONES='$indicacion', EP.OBSERVACIONES='$observacion'
+            where EP.CODIGO_EXAMEN_PACIENTE  = '$codigo' ";
+            $consulta=$conn->query($sql);
+           if ($consulta>0){
+             echo "<script>
+             window.location = 'procesoRecetaMedica';
+             </script>";
+            
+             exit;
+           }else{
+             echo "<script>
+             alert('¡Error al  intentar modificar el medicamento!');
+             window.location = 'procesoRecetaMedica';
+             </script>";
+           }
+         }catch(PDOException $e){
+           echo $e->getMessage(); 
+           return false;
+         }
+
+       
+  }//FIN DEL CODIGO PARA EDITAR
+
+//// eliminar examen  /////
+
+
 ?>
+
+<?php
+if(isset($_POST['eliminar_ex'])){
+  if(isset($_POST['eliminar_exm'])){
+    $codExm = ($_POST['eliminar_ex']);//asigna a una variable el id de la pregunta a  eliminar
+    
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_examenes_pacientes WHERE  CODIGO_EXAMEN_PACIENTE = '$codExm' ");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el Exámen!');
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+      }
+    
+}//Cerre del if padre
+?>
+
+
+<?php
+///// ------------------------------------------medicamento---------------------------------------   ////
+
+///// editar medicamento receta medica   ////
+if (isset( $_POST['cod_edit_Medicamento']) && isset($_POST['guardar_Medicamento'])){
+   $codigo = $_POST['cod_edit_Medicamento'];
+   $indicacion = $_POST['edit_indicacion_Medic'];
+   $observacion = ($_POST['edit_obs_Medic']); 
+     
+         try{
+            $sql = "UPDATE tbl_receta_medica RM set RM.INDICACIONES_RECETA='$indicacion', RM.OBSERVACIONES='$observacion'
+            where RM.CODIGO_RECETA_MEDICA  = '$codigo' ";
+            $consulta=$conn->query($sql);
+           if ($consulta>0){
+             echo "<script>
+             window.location = 'procesoRecetaMedica';
+             </script>";
+            
+             exit;
+           }else{
+             echo "<script>
+             alert('¡Error al  intentar modificar el medicamento!');
+             window.location = 'procesoRecetaMedica';
+             </script>";
+           }
+         }catch(PDOException $e){
+           echo $e->getMessage(); 
+           return false;
+         }
+
+       
+  }//FIN DEL CODIGO PARA EDITAR
+
+//// eliminar examen  /////
+
+
+?>
+
+<?php
+if(isset($_POST['eliminar_Medic'])){
+  if(isset($_POST['eliminar_Medicamento'])){
+    $codMedic = ($_POST['eliminar_Medic']);//asigna a una variable el id de la pregunta a  eliminar
+    
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_receta_medica WHERE  CODIGO_RECETA_MEDICA = '$codMedic' ");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el Medicamento!');
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+      }
+    
+}//Cerre del if padre
+?>
+
+
+
 
 
 
