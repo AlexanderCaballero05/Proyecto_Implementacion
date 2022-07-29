@@ -291,8 +291,18 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         FROM tbl_estado es
                                                                         WHERE  es.CODIGO_ESTADO = 5 or  es.CODIGO_ESTADO = 7;";
                                                                         $resultador=$conn->query($queryr);
+                                                                        ?> 
+                                                                                   <?php
+                                                                        include "conexion1.php";
+                                                                        $queryr1 = "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPECIALIDAD:', te.NOMBRE )  
+                                                                        as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
+                                                                        from tbl_persona tp ,
+                                                                        tbl_persona_especialidad tpe,
+                                                                        tbl_especialidad  te 
+                                                                        where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
+                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 ";
+                                                                        $resultador2=$conn->query($queryr1);
                                                                         ?>  
-
 
                                                                 <div class="row">
                                                                     <div class="col-sm-6">
@@ -304,6 +314,24 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
                                                                                 <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
+                                                                                        <?php } 
+                                                                                            }?>
+                                                                            </select>
+                                                                                    <div class="invalid-feedback">
+                                                                                    Campo obligatorio, seleccione una opción.
+                                                                                    </div>
+                                                                        </div>
+                                                                    </div>
+                                                                  
+                                                                    <div class="col-sm-6">
+                                                                        <div class="form-group">
+                                                                          <label for="txtcodigo_encargado">Encargado Cita:</label>
+                                                                            <select class="form-control" name="encargadocitados" id ="encargadocitados" required >
+                                                                                <option  value="">--Seleccione...</option>
+                                                                                            <?php 
+                                                                                        if ($resultador2->num_rows > 0) {
+                                                                                            while($rowr1 = $resultador2->fetch_assoc()) { ?>
+                                                                                <option value="<?php echo $rowr1['CODIGO_PERSONA_ESPECIALIDAD'];?>"><?php echo $rowr1['ESPECIALISTA']; ?></option>
                                                                                         <?php } 
                                                                                             }?>
                                                                             </select>

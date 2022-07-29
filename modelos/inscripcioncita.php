@@ -185,6 +185,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
     $hora =$_POST['edit_hora'];
     $estado =$_POST['estado_edit'];
     $cod =$_POST['cod_edit_cita'];
+    $ENCARGADO =$_POST['encargadocitados'];
      try {
       $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
         from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
@@ -215,7 +216,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                  </script>";
                  exit;
            } else {
-            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado' where CODIGO_CITA ='$cod' ;";
+            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
             $consulta=$conn->query($sql);
             if ($consulta > 0){
              echo "<script>
