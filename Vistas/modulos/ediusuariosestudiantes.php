@@ -413,7 +413,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Pasatiempos</label>
-                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $pasatiempos; ?></textarea>
+                                            <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="ediTPASATIEMPOS" id="editar_pasatiempos" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $pasatiempos; ?></textarea>
                                               <div class="invalid-feedback">
                                               Campo Obligatorio.
                                               </div>
@@ -422,7 +422,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Distractores Escolares</label>
-                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $distractores; ?></textarea>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editDISTRACTORES" id="editar_distractores"  autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $distractores; ?></textarea>
                                            <div class="invalid-feedback">
                                               Campo Obligatorio.
                                            </div>
@@ -431,7 +431,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Metas</label>
-                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  onkeyup="mayus(this);" autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $metas; ?></textarea>
+                                          <textarea class="form-control"  type="textarea" maxlength="255" minlength="2"  name="editMETAS" id="editar_metas"  autocomplete = "off" onkeypress="return soloLetrasComa(event);" required=""><?php echo $metas; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -442,7 +442,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label >Grado Actual</label>
-                                          <input  type="text"  value ="<?php echo $var24; ?>" class="form-control"   maxlength="15" minlength="3" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="editGRADOACTUAL"  autocomplete ="off" required ="">
+                                          <input  type="text"  value ="<?php echo $var24; ?>" class="form-control"   maxlength="15" minlength="3" onkeyup="mayus(this);"  onkeypress="return soloLetrasComa(event);" autocomplete = "off" type="text"  name="editGRADOACTUAL"  autocomplete ="off" required ="">
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -451,7 +451,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-4">
                                         <div class="form-group">
                                           <label >Índice Académico</label>
-                                          <input  type="text"  value ="<?php echo $indice; ?>" class="form-control" onkeypress="return solonumeros(event);"  maxlength="3" minlength="2" onkeyup="mayus(this);" autocomplete = "off" type="text"  name="indice"  autocomplete ="off" required ="">
+                                          <input  type="text"  value ="<?php echo $indice; ?>" class="form-control" onkeypress="return solonumeros(event);"  maxlength="3" minlength="2" autocomplete = "off" type="text"  name="indice"  autocomplete ="off" required ="">
                                           <div class="invalid-feedback">
                                             Campo Obligatorio.
                                           </div>
@@ -675,6 +675,25 @@ include_once "conexion3.php";
     }        
   }
 </script>
+
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 
 <!--Ordenado y comentado para su mejor compresion ,psdt si lo toca ,ordenelo :) -->
