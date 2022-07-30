@@ -192,7 +192,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" onkeypress="return soloLetrasComa(event);" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -269,7 +269,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"  class="form-control"  maxlength="150"    onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la area" name="descripcion_area" id="descripcion_area" required="" onkeypress="return soloLetras(event);" ></textarea>
+                                    <textarea  type="text"  class="form-control"  maxlength="150"  onkeypress="return soloLetrasComa(event);" onkeyup="mayus(this);" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la area" name="descripcion_area" id="descripcion_area" required="" onkeypress="return soloLetras(event);" ></textarea>
                                     <div class="invalid-feedback">
                                      Campo obligatorio.
                                     </div>
@@ -348,4 +348,26 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
   function mayus(e) {
     e.value = e.value.toUpperCase();
   }
+
   </script>
+
+  <script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
+
+ 

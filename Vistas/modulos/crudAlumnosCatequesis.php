@@ -48,7 +48,7 @@
     </div>
       <section class="content">
         <section class="content-header text-xl-center mb-3 ">
-              <h4> Lista de Jovenes <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Catequesis de ".ucwords(strtolower($_SESSION['catequesis'])) ?></p> </h4>
+              <h4> Lista de Jóvenes <i class="nav-icon fas fa-graduation-cap"></i><p style="font-style: italic; color:#3757FF"><?php echo "Catequesis de ".ucwords(strtolower($_SESSION['catequesis'])) ?></p> </h4>
         </section>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -57,7 +57,7 @@
             <a class=" nav-link" style="color:#000000;" href="crudTutorEspiritual">Lista de Catequesis</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Lista de Jovenes</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Lista de Jóvenes</a>
             </li>
           </ul>
         </div>
@@ -81,7 +81,7 @@
          <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor_espiritual">
          <input type="text"  hidden value="<?php echo $codigo_carga_espiritual; ?>" name="codigo_carga_espritual">
 
-        <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        <button  type="submit" title='Imprimir'  id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
         </form>
 
 
@@ -203,14 +203,14 @@
                                   ?>
                                  
                                   <a href="#CALIFICAR_CATEQUESIS<?php echo $codigo_matricula; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;text-decoration: line-through"class="form-control btn btn-danger"><span>Observacion</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;text-decoration: line-through"class="form-control btn btn-danger"><span>Observación</span></button>
                                   </a>
 
                                   <?php
                                     }else{ //sino el boton permanene en verde
                                   ?>
                                   <a href="#CALIFICAR_CATEQUESIS<?php echo $codigo_matricula; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observacion</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Observación</span></button>
                                   </a>
 
 
@@ -309,8 +309,8 @@
                                   <div class="row">
                                       <div class="col-sm-12">
                                           <div class="form-group">
-                                              <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Joven</label>
-                                                <textarea type="textarea" name="observacion_catequesis" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
+                                              <label for="observacion_catequesis" class="form-label">Observación del rendimiento del Jóven</label>
+                                                <textarea type="textarea" onkeypress="return soloLetrasComa(event);" name="observacion_catequesis" class="form-control"> <?php echo $observacion_matricula;?> </textarea>
 
                                           </div>
                                       </div>
@@ -346,7 +346,24 @@
 <div>
 </div>
 
-
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 <script type="text/javascript"> 
    //funcion de mostrar el estilo de la datatable

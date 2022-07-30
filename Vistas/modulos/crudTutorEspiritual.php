@@ -20,10 +20,10 @@
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="crudTutorEspiritual">Lista de catequesis</a>
+            <a class=" nav-link active" style="color:#000000;" href="crudTutorEspiritual">Lista de Catequesis</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Lista de Jovenes</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Lista de Jóvenes</a>
             </li>
           </ul>
         </div>
@@ -44,7 +44,7 @@
 
         <form method="POST" action="Reportes_Prosecar/reporteTutoriasTutor.php" target="_blank">
          <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_tutor">
-        <button  type="submit" title='Imprimir'  style="color:white;"   id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+        <button  type="submit" title='Imprimir'     id="btnGuardar"  style="color:white; background-color:#FA0079 " class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
         </form>
 
           <div class="row">
@@ -59,13 +59,13 @@
                   <table id="tabla_pacientes" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th class="text-center">Numero</th>
+                        <th class="text-center">Número</th>
                         <th class="text-center">Catequesis</th>
                         <th class="text-center">Grado</th>
                         <th class="text-center">Hora</th>
-                        <th class="text-center">Periodo</th>
+                        <th class="text-center">Período</th>
                         <th class="text-center">Año</th>
-                        <th class="text-center">Obsevacion Jovenes</th>
+                        <th class="text-center">Obsevación Jóvenes</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -130,7 +130,7 @@
                                   <form method="POST">
                                     <input type="text"  hidden value="<?php echo $codigo_carga; ?>" name="codigo_carga_matricula_espiritual">
                                     <input type="text"  hidden value="<?php echo $var1; ?>" name="nombre_catequesis">
-                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista Jovenes</span></button>
+                                   <button type="submit" style="color:white;"class="form-control btn btn-success"><span>Lista Jóvenes</span></button>
                                   </form>
                                   <?php
                                            }
@@ -179,7 +179,7 @@
         "lengthMenu": "Mostrar _MENU_ Entradas",
         "loadingRecords": "Cargando...",
         "processing": "Procesando...",
-        "search": "Buscar tutoria:",
+        "search": "Buscar Tutoría:",
         "zeroRecords": "Sin resultados encontrados",
         "paginate": {
             "first": "Primero",

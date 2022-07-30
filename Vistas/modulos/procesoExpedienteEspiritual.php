@@ -19,31 +19,31 @@ include_once 'conexionpdo.php';
   <section class="content">
     <div class="container-fluid">
         <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> REGISTRO DE EXPEDIENTE ESPIRITUAL  <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> Registro de Expediente Espiritual  <i></i></h4>
         </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Citas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link active" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">consulta Espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de personas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Personas</a>
             </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                    <strong>Datos generales de expediente</strong>
+                    <strong>Datos Generales de Expediente</strong>
                     <hr>
                     <div class= "row"> 
                         <div  class="col-sm-8">
@@ -134,7 +134,7 @@ include_once 'conexionpdo.php';
                         <div class="col-sm-4">
                          <label for="motivacion_iglesia" class="control-label">¿Qué le motiva a estar involucrado en la iglesia?</label> 
                             <div class="form-group">
-                            <textarea class="form-control" type="text" name="motivacion_iglesia" id="motivacion_iglesia" autocomplete= "off" required></textarea>
+                            <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  name="motivacion_iglesia" id="motivacion_iglesia" autocomplete= "off" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -270,4 +270,21 @@ $(document).ready(function() {
 })()
 
 </script>
-
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>

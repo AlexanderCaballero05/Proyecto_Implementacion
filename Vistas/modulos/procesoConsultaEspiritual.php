@@ -22,26 +22,26 @@ bitacora($codigoObjeto, $accion, $descripcion);
     </div>
 
     <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> CONSULTA ESPIRITUAL PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+          <h4> Consulta Espiritual PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
         </section>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Citas en espera</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Citas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">consulta Espiritual</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Consulta Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Lista de personas</a>
+            <a class="nav-link" style="color:#000000;" href="#">Lista de Personas</a>
             </li>
           </ul>
         </div>
@@ -49,7 +49,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <body oncopy="return false" onpaste="return false" >
         <form method="POST" class="needs-validation" novalidate id="form">
             
-            <h5>Datos de la persona</h5>
+            <h5>Datos de la Persona</h5>
             <hr>
                       
             <div class="row mb-8">
@@ -116,31 +116,31 @@ bitacora($codigoObjeto, $accion, $descripcion);
                    <div class= "row">                      
                         <div class="col-md-6">
                                 <input type="text" name="codigoexpediente" value="<?php echo $var5?>" Hidden> <!--CODGIO DEL EXPEDIENTE PARA Q SALGA TODA INFO  --> 
-                                <label for="" class="control-label">Nombre iglesia</label> 
+                                <label for="" class="control-label">Nombre Iglesia</label> 
                                 <div class="form-group">
-                                <textarea required class="form-control"  type="textarea" required value=""disabled ="disabled" 
+                                <textarea required class="form-control" onkeypress="return soloLetrasComa(event);"   type="textarea" required value=""disabled ="disabled" 
                                 name="sintomasneuraticos" id="sintomasneuraticos"><?php echo $var6?></textarea>
                                 </div>
                         </div><!--fin del Sintomas Neuroticos-->
                         <div  class="col-md-6">
-                                <label for="" class="control-label">Grupo de iglesia</label> 
+                                <label for="" class="control-label">Grupo de Iglesia</label> 
                                     <div class="form-group">
-                                <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled"
+                                <textarea required class="form-control" onkeypress="return soloLetrasComa(event);"   type="textarea" required value="" disabled ="disabled"
                                  name="Familiares" id="Familiares"><?php echo $var7?></textarea>
                                     </div>
                         </div><!--fin del la Antecedentes Familiares -->   
                     </div> <!--fin del row primer de expediente  -->
                     <div class="row">
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Tiempo de asistir a la iglesia</label> 
+                            <label for="" class="control-label">Tiempo de Asistir a la Iglesia</label> 
                                 <div class="form-group">
-                            <textarea required class="form-control"  type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var9?></textarea>
+                            <textarea required class="form-control" onkeypress="return soloLetrasComa(event);"   type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var9?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->    
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Motivacion en la iglesia</label> 
+                            <label for="" class="control-label">Motivación en la Iglesia</label> 
                                 <div class="form-group">
-                            <textarea required class="form-control"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var8?></textarea>
+                            <textarea required class="form-control" onkeypress="return soloLetrasComa(event);"  type="textarea" required value="" disabled ="disabled" name="Clinicos" id="Clinicos"><?php echo $var8?></textarea>
                                 </div>
                         </div><!--fin del la Antecedentes Personales -->       
                     </div><!--fin del row segundo de expediente -->
@@ -155,7 +155,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Motivo de consulta:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" minlength="5"  name="Motivo_consulta" id="Motivo_consulta" autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="5"  name="Motivo_consulta" id="Motivo_consulta" autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -165,7 +165,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Observaciónes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" type="text" minlength="3" name="observaciones_espiritual" id="observaciones_espiritual"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="3" name="observaciones_espiritual" id="observaciones_espiritual"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -174,7 +174,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  name="Consulta_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar consulta</button>
+                    <button type="submit"  name="Consulta_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->
@@ -189,6 +189,24 @@ bitacora($codigoObjeto, $accion, $descripcion);
   </section><!-- FINAL SECTION -->
 
    <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   <script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
    <script>
  var isSubmitting = false
 

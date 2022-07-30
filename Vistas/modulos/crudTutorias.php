@@ -182,7 +182,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                                           <input  id="bloquear1"  type="text"  
                                           value ="<?php echo $var2; ?>" class="form-control"  
                                           maxlength="20" minlength="5" onkeyup="mayus(this);" 
-                                            autocomplete = "off" onblur="quitarespacios(this);" onKeyDown="quitarespacios(this);" 
+                                            autocomplete = "off"
                                              type="text" onkeypress="return soloLetras(event);"
                                               name="editar_nombre" id="editar_nombre" required =" ">
                                               <div class="invalid-feedback">
@@ -278,7 +278,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Tutoría</label>
-                                    <input id="bloquear" required type="text"  value ="" class="form-control"  onblur="quitarespacios(this);" onKeyDown="quitarespacios(this);" 
+                                    <input id="bloquear" required type="text"  value ="" class="form-control"  
                                    maxlength="100" minlength="5"   onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese un nombre a la tutoria" name="nombre_tutoria">
                                     <div class="invalid-feedback">
                                      Campo obligatorio.

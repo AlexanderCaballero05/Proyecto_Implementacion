@@ -225,7 +225,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                         <div class="form-group">
                                           <label for="txtdescrpcion">Descripción</label>
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100" 
-                                           autocomplete = "off" type="text"   name="editar_descripcion1" id="edidemoda" required="">
+                                           autocomplete = "off" type="text" onkeypress="return soloLetrasComa(event);"  name="editar_descripcion1" id="edidemoda" required="">
                                           <div class="invalid-feedback">
                                            Campo Obligatorio.
                                            </div>
@@ -305,7 +305,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                 <div class="form-group">
                                     <label for="txtmodalidad">Descripción</label>
                                     <textarea  type="text"   class="form-control"  maxlength="100"   autocomplete = "off" type="text" 
-                                     placeholder="Ingrese una descripción a la modalidad" name="descripcionmodalidad" id= "modali" required=""></textarea>
+                                     placeholder="Ingrese una descripción a la modalidad" onkeypress="return soloLetrasComa(event);"name="descripcionmodalidad" id= "modali" required=""></textarea>
                                     <div class="invalid-feedback">
                                   Campo Obligatorio.
                                    </div>
@@ -350,7 +350,24 @@ bitacora($codigoObjeto,$accion,$descripcion);
       })
   } );
 </script>
-
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 <script>
   (function () {

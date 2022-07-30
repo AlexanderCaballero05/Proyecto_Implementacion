@@ -193,7 +193,8 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label>Descripción</label>
-                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100"     autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
+                                          <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100" 
+                                          onkeypress="return soloLetrasComa(event);"   autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
@@ -268,7 +269,8 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Descripción</label>
-                                    <textarea  type="text"   class="form-control"  maxlength="100"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la sección"  name="descripcion_seccion" required=""></textarea>
+                                    <textarea  type="text"   class="form-control"  maxlength="100" 
+                                     onkeypress="return soloLetrasComa(event);"  autocomplete = "off" type="text"  placeholder="Ingrese una descripción a la sección"  name="descripcion_seccion" required=""></textarea>
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
                                    </div>
@@ -392,5 +394,23 @@ $(document).ready(function () {
    e.value = limpia;
   };
 </script>
+<script>
+      function soloLetrasComa(e){
+       key = e.keyCode || e.which;
+       tecla = String.fromCharCode(key).toLowerCase();
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       especiales = ["8-37-39-46"];
+       tecla_especial = false
+       for(var i in especiales){
+        if(key == especiales[i]){
+          tecla_especial = true;
+          break;
+        }
+      }
+      if(letras.indexOf(tecla)==-1 && !tecla_especial){
+        return false;
+      }
+    }
+  </script>
 
 
