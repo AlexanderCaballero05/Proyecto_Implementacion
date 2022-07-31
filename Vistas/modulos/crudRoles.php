@@ -114,7 +114,7 @@
                         ?>
                         <tr>
                           <td>
-                            <div class="text-center" >
+                            <div class="text-center">
                               <div class="btn-group">
 
                               <!-- Codigo de permiso para Eliminar -->
