@@ -75,8 +75,6 @@
                           $var3 = $row['PACIENTE'];
                           $var4 = $row['DNI'];
                           $var5 = $row['ESTADO'];
-                          
-                          
                       ?>
                       <tr>
                         <td>
@@ -111,12 +109,19 @@
                                      <input type="hidden" value="<?php echo $var1?>">
                                      </form>
                                  </a>
-                                  <a><!--Para descargar el reporte individual uwu -->
+                                 <!--Para descargar el reporte individual uwu
+                                  <a> 
                                      <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
                                      <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $var1?>">
                                      <button type='submit' style="color:white; background-color:#FA0079" class=" form-control btn btn "><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
-                                 </a>
+                                 </a> -->
+                                 <a> <!--Boton para ver el expediente del estudiante -->
+                                  <form method="POST"  action="consultaPsicologia">
+                                    <input type="text" hidden name="personita" value="<?php echo $var1; ?>"> 
+                                    <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file mx-1"></i></span>Expediente</button>
+                                  </form>
+                                </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>

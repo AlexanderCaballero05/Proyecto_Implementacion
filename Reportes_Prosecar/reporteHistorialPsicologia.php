@@ -206,7 +206,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
       ?>
       <?php 
       if($actividades == '' and $tecnicas == '' and $materiales == '' and $tareas == '' and $resultados == ''){
-            $plan = 'No hay plan para esta cita.';  
+            $plan = 'No hay plan Terapéutico para esta cita.';  
         ?>
     <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
     <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB; "><label style="font-size: 18px;">Cita Psicológica Paciente <?php echo $fecha;?></label></div><br>
@@ -230,29 +230,14 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
       
       <div class="caja3"> 
         <p>Datos Plan Terapéutico </p><hr><br>
-        <div class="c1" ><label><b><b>Actividades a realizar: </b></label>
-           <?php echo ($plan);?>
+        <div class="c1" >
+           <?php echo ($plan);?><!--En caso que no tenga plan,solo decir que no tiene :v -->
         </div>
-        <div class="c1" ><label><b>Resultados: </b></label>
-          <?php echo ($plan);?>
-        </div><br>
-        <div class="c1" ><label><b>Técnicas: </b></label> 
-           <?php echo ($plan);?>
-          </div>
-          <div class="c1" ><label><b>Tareas: </b></label>
-             <?php echo ($plan);?>
-          </div>
-          <div class="c1" ><b><label>Materiales: </b></label>
-              <?php echo ($plan);?>
-          </div>
-      </div>
       </div>
           <br>
       <?php
-
       }else{ 
       ?>
-
 <div class="caja3"><!--no quiere hacer caso esta cajita :/ -->
 <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#FBFBFB;"><label style="font-size: 18px;">Cita Psicológica Paciente <?php echo $fecha;?></label></div><br>
        <fieldset>
@@ -301,20 +286,11 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
         } 
         ?>
       
-        
     <?php
        }
        }
       ?>
-
-      
-
-
-
-
    </main>
-
-    
   </body>
 </html>
 <?php
@@ -337,6 +313,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("reporte.pdf", array("Attachment" => false));
+$dompdf->stream("Historial_Psicológico.pdf", array("Attachment" => true)); // True significa que se descargara de inmediato al darle click
 echo $dompdf->output();
 ?>

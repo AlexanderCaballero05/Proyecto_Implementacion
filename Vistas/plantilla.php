@@ -174,11 +174,12 @@ session_start();
          $_GET["ruta"] == "crudParametros" ||
          $_GET["ruta"] == "crudCargaAcademica" ||
          $_GET["ruta"] == "consultaEstudiante" ||
-
+         $_GET["ruta"] == "consultaPsicologia" ||
          $_GET["ruta"] == "matriculaestudiantes" ||
 
          $_GET["ruta"] == "crudCargaEspiritual" ||
          $_GET["ruta"] == "prueba" ||
+        
          
 
          $_GET["ruta"] == "crudTranstornos" ||
