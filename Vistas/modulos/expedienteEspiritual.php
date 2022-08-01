@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <section class="content-header text-xl-center mb-3 "> 
-                <h4> Infome Espiritual Paciente</h4>
+                <h4> Informe Espiritual Paciente</h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -33,7 +33,7 @@
             <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">consulta Espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link active" style="color:#000000;" href="#">Informe de Consulta</a>
@@ -151,7 +151,7 @@
                     </div> <!--fin del row primer de expediente  -->
                     <div class="row">
                         <div  class="col-md-6">
-                            <label for="" class="control-label">Tiempo de asistir a la iglesia</label> 
+                            <label for="" class="control-label">Tiempo de Asistir a la Iglesia</label> 
                                 <div class="form-group">
                             <textarea required class="form-control"  type="textarea" required  disabled ="disabled" name="Personales" id="Personales"><?php echo $var9?></textarea>
                                 </div>
@@ -204,7 +204,7 @@
                           </div>
                       </div>
                       <div  class="col-sm-6 mb-3">
-                         <label  class="form-label">Observaciones</label>
+                         <label  class="form-label">Observaciónes</label>
                           <div class="form-group">
                              <textarea  readonly class="form-control" ><?php echo $observaciones_espiritual ; ?></textarea>
                           </div>
@@ -226,7 +226,7 @@
                     <input type="text" name="id_persona"  hidden value="<?php echo $persona ?>">
                     <input type="hidden" name="id_usuario" value="<?php echo $cod_usuario ?>">
                   </div>
-                      <button  type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Descargar Reporte</button>
+                      <button type="submit" name ="reporte_consulta_psicologica"  style="color:white; background-color:#FA0079"class="btn btn-danger btn mx-1 "> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                   </form>
 
                 
@@ -305,7 +305,7 @@ if (!leftWindow  && (!from || from.nodeName === 'HTML') ) {
 
   <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteRol.php','_blank');
+      window.open('Reportes_Prosecar/reporteConsultaEspiritual.php','_blank');
       window.open(this.href,'_self');
     }
   </script> 

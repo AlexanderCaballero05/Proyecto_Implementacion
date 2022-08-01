@@ -27,19 +27,19 @@ bitacora($codigoObjeto, $accion, $descripcion);
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
          <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="procesoCitasEspirituales">Citas en espera</a>
+            <a class=" nav-link active" style="color:#000000;" href="procesoCitasEspirituales">Citas en Espera</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="#">Registrar expediente</a>
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="#">Consulta Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="#">Informe de consulta</a>
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudPacientesEspirituales">Lista de personas</a>
+            <a class="nav-link" style="color:#000000;" href="crudPacientesEspirituales">Lista de Personas</a>
             </li>
           </ul>
         </div>
@@ -61,12 +61,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                 <table id="tabla_citas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">ACCION</th>
-                                            <th class="text-center">ID</th>
-                                            <th class="text-center">FECHA CITA</th>
-                                            <th class="text-center">HORA</th>
-                                            <th class="text-center">BENEFICIARIO</th>
-                                            <th class="text-center">ESTADO DE CITA</th>
+                                            <th class="text-center">Acción</th>
+                                            <th class="text-center">Código</th>
+                                            <th class="text-center">Fecha Cita</th>
+                                            <th class="text-center">Hora</th>
+                                            <th class="text-center">Beneficiario</th>
+                                            <th class="text-center">Estado de Cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -227,7 +227,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                         
 
-                                                                        <h2 class="text-center">Informacion de cita</h2>
+                                                                        <h2 class="text-center">Información de cita</h2>
                                                                         <br>
                                                                     <div class="row"> 
                                             
@@ -263,7 +263,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="row"> 
                                                                             <div class="col-sm-6">
                                                                                         <div class="form-group">
-                                                                                        <p><b class="p-1">estado: </b> <?php echo $var5; ?></p>
+                                                                                        <p><b class="p-1">Estado: </b> <?php echo $var5; ?></p>
 
                                                                                         </div>
                                                                                 </div>
@@ -275,7 +275,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_espiritual"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender consulta</button>
+                                                                <button type="submit" name="enviar_cita_espiritual"  class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Atender Consulta</button>
 
                                                               
                                                             </div>
@@ -284,50 +284,6 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                             </div>
                                                         </div>
                                                     </div><!-- FIN DEL MODAL editar -->
-
-
-                                                
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                                                     <!-- inicio modal eliminar  -->   
