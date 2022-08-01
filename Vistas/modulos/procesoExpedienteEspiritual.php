@@ -159,12 +159,10 @@ include_once 'conexionpdo.php';
 
                         ?>
                         <?php 
-                                    if ($resultSacramentos->num_rows > 0) {
-                                    while($row2 = $resultSacramentos->fetch_assoc()) { 
-                                    $nombre_sacramentos = $row2['sacramentos'];
-                                    ?>
-                             <button  data-toggle="modal"  href="#AGREGAR_SACRAMENTO" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar sacramento</button>
-        
+                            if ($resultSacramentos->num_rows > 0) {
+                            while($row2 = $resultSacramentos->fetch_assoc()) { 
+                            $nombre_sacramentos = $row2['sacramentos'];
+                            ?>
                         <div class="col-sm-10 order-2 pl-2">
                         <input  readonly class="form-control" value="<?php echo $nombre_sacramentos;?>">                       
                         </div>
