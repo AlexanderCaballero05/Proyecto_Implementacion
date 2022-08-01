@@ -229,10 +229,21 @@
              }
             ?>
             <hr>
-             <br>
-                <h5>Citas Psicológicas</h5>
-                <hr color="blue">
-                <table id="tabla_citas" class="table table-bordered table-striped">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Citas Finalizadas</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Citas Pendientes</button>
+              </li>
+
+            </ul>
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><!--INICIO DEL TAB DE CITAS  -->
+              <br>
+              <h5>Citas Psicológicas</h5>
+            <hr color="blue">
+            <table id="tabla_citas" class="table table-bordered table-striped">
               <thead style=" background-color:#73E8FD;">
                 <tr>
                   <th class="text-center">Acción</th>
@@ -283,8 +294,8 @@
                         </div>
                     </div>
                   </td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($psicologo)); ?></td>
                   <td style="text-align: center"><?php echo ucwords(strtolower($fecha)); ?></td>
+                  <td style="text-align: center"><?php echo ucwords(strtolower($psicologo)); ?></td>
                   <td style="text-align: center"><?php echo ucwords(strtolower($hora)); ?></td>
 
                        <div id="CITA<?php echo $fecha; ?>" class="modal fade" role="dialog" >
@@ -302,13 +313,13 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Síntomas</label>
-                                          <textarea  type="text" class="form-control"type="text"  ><?php echo $sintomas; ?></textarea>
+                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $sintomas; ?></textarea>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Diagnóstico Ingreso</label>
-                                          <textarea  type="text" class="form-control"type="text"  ><?php echo $diagnostico_ingreso; ?></textarea>
+                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $diagnostico_ingreso; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo obligatorio.
                                           </div>
@@ -319,13 +330,13 @@
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Evolución</label>
-                                          <textarea  type="text" class="form-control"type="text"  ><?php echo $observaciones; ?></textarea>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $observaciones; ?></textarea>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Diagnóstico Egreso</label>
-                                          <textarea  type="text" class="form-control"type="text"  ><?php echo $diagnostico_egreso; ?></textarea>
+                                          <textarea  type="text"  readonly class="form-control"type="text"  ><?php echo $diagnostico_egreso; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo obligatorio.
                                           </div>
@@ -334,9 +345,66 @@
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                     <H5>Datos del Plan Terapéutico</H5>
                                     <hr color="blue">
+                                    <?php 
+                                     if($actividades == '' and $tecnicas == '' and $materiales == '' and $tareas == '' and $resultados == ''){
+                                        $plan = 'No hay plan Terapéutico para esta cita.';  
+                                    ?>
+                                    <p > <?php  echo $plan; ?></p>
+                                    <?php
+                                     }else{ 
+                                    ?>
                                     <div class="row">
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Actividades a realizar</label>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $actividades; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Tecnicas</label>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $tecnicas; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Tareas</label>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $tareas; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-6">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Materiales</label>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $materiales; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Resultados</label>
+                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $resultados; ?></textarea>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                        </div>
+                                      </div>
 
-                                    </div>
+                                    </div><!--Fin del row del plan terapeutico -->
+                                    <?php
+                                      } 
+                                      ?>
+                                    
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>     
@@ -352,11 +420,67 @@
                  ?>
                 </tbody>
             </table>
+              </div><!--FINAL DEL TAB DE CITAS FINALIZADAS -->
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <br>
+                <H5>Citas Psicológicas Pendientes</H5>
+                <hr color="blue">
+                <table id="citas"class="table table-bordered table-striped">
+                  <thead style=" background-color:#73E8FD;">
+                   <tr>
+                    <th class="text-center">#</th>
+                     <th class="text-center">Fecha Cita</th>
+                     <th class="text-center">Hora</th>
+                     <th class="text-center">Psicólogo</th>
+                     <th class="text-center">Estado</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                  <?php
+                  $query = "SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                  MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
+                  FROM tbl_inscripcion_cita IC 
+                  left join tbl_persona_especialidad E   on IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
+                  left join  tbl_persona P               on P.CODIGO_PERSONA = E.CODIGO_PERSONA
+                  left join tbl_persona OT               on OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
+                  left join tbl_area a                   on IC.AREA_CITA = a.CODIGO_AREA 
+                  left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
+                  left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
+                  left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
+                  where   IC.CODIGO_PERSONA = '$codigo_persona' AND  IC.CODIGO_ESTADO =5 and IC.AREA_CITA =3;";
+                  $result = $conn->query($query);
+                  if ($result->num_rows > 0) {
+                    $contador = 0;
+                    while ($row = $result->fetch_assoc()) {
+                        $contador = ($contador+1);
+                        $var1 = $row['CODIGO_CITA'];
+                        $var2 = $row['FECHA_CITA'];
+                        $var3 = $row['HORARIO'];
+                        $var4 = $row['PACIENTE'];
+                        $var5 = $row['MEDICO'];
+                        $var6 = $row['nombre_estado'];
+                  ?>
+                  <tr>
+                  <td class="text-center"><?php echo $contador; ?></td>
+                  <td class="text-center"><?php echo $var2; ?></td>
+                  <td class="text-center"><?php echo $var3; ?></td>
+                  <td class="text-center"><?php echo ucwords(strtolower($var5));?></td>
+                  <td class="text-center"><?php echo $var6; ?></td>
+
+                  </tr>
+                  <?php
+                   }
+                   }
+                   ?>
+                  </tbody>
+                </table>
+
+              </div><!--FIN DEL TAB DE CITAS PENDIENTES -->
+              
+            </div>
+             <br>
               </div> <!-- /.card-body -->
             </form>
-
-  <!--fin Agregar familiares a los estudiantes-->
-
           </div><!-- fINAL DEL card PRIMARY -->
         </div><!--FINAL DE COL-M12-->
       </div><!-- FINAL ROW PADRE -->
@@ -399,7 +523,33 @@
       })
   } );
 </script>
-
+<script type="text/javascript"> 
+  $(document).ready( function () {
+      $('#citas').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Cita:",
+        "zeroRecords": "No encontrado",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+        
+      })
+  } );
+</script>
 <script>
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
