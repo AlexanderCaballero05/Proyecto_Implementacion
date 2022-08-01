@@ -20,8 +20,8 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de los alumnos de catequisis
-    Fecha:             
-    Programador:      
+    Fecha:             05-abril-2022
+    Programador:        Arnold Caballero
     descripcion:       Permite llevar un mantenimiento de los alumnos de catequisis ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio

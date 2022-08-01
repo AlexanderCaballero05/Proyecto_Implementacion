@@ -31,10 +31,7 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=32;
- $accion='Ingreso a mantenimiento preguntas';
- $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
-bitacora($codigoObjeto,$accion,$descripcion);
+
 ?>
 <head>
 

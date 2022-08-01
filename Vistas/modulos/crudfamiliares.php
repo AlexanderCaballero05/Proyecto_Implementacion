@@ -20,7 +20,7 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de familiares
-    Fecha:             
+    Fecha:             03-Marzo-2022
     Programador:       Arnold Caballero
     descripcion:       Permite llevar un mantenimiento de los datos de los familiares registrados
                        en el sistema,editar,eliminar nuevo

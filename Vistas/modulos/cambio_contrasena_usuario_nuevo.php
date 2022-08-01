@@ -1,3 +1,43 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+  ---------------------------------------------------------------------
+   
+    Programa:          Pantalla de cambio de contraseña
+    Fecha:             04-Marzo-2022
+    Programador:       Arnold Caballero 
+    descripcion:       Pantalla por medio del cual se hace el cambio de contraseña
+                       al momento de crear un nuevo usuario
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+    
+    Programador               Fecha                      Descripcion
+    
+    Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
+   
+
+  ----------------------------------------------------------------------->
+
 <?php
   session_start();
   include_once "../../modelos/conexion3.php";

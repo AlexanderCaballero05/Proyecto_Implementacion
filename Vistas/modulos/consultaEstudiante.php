@@ -22,7 +22,7 @@
     Programa:          Consulta del Estudiante
     Fecha:             09-Junio-2022
     Programador:       Diana Rut Garcia 
-    descripcion:       Muestra el expediente del estudiante en modo de consulta ,com opcion de descarga del mismo
+    descripcion:       Muestra el expediente del estudiante en modo de consulta ,con opcion de descarga del mismo
 -----------------------------------------------------------------------
   Historial de Cambio
 -----------------------------------------------------------------------
