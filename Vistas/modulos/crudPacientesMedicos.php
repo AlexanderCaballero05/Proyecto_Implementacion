@@ -79,7 +79,7 @@ Programador               Fecha                      Descripcion
         <div class="card-body">
           <div class="row">
             <div class="col-md-12">
-            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+            <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
             <form  method="POST">
               <div class= "card">
                  <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -150,14 +150,14 @@ Programador               Fecha                      Descripcion
                                     }
                                   ?>
                                   <a href="#AGREGAR_CITA<?php echo $var6; ?>" data-toggle="modal">
-                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
+                                   <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar</span></button>
                                   </a>
                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank"> 
                                      </form>
                                   <a><!--Para descargar el reporte individual uwu -->
                                      <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
                                      <input type="hidden" name="expediente" value="<?php echo $var6?>">
-                                     <button type='submit'  style="color:white; "class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                     <button type='submit'  style="color:white; background-color:#FA0079"class=" form-control btn  mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                      </form>
                                  </a>
                             </div>

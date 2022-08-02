@@ -152,7 +152,7 @@ include_once 'conexionpdo.php';
                         
                          <label for="" class="control-label">Tratamientos que Toma Actualmente</label> 
                             <div class="form-group">
-                            <textarea minlength="5" maxlength="150"  onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');" class="form-control" type="textarea" name="tratamientos" onblur="quitarespacios(this);" required></textarea>
+                            <textarea minlength="5" maxlength="150"onkeyup="mayus(this);"  onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');"  class="form-control" type="textarea" name="tratamientos" onblur="quitarespacios(this);" required></textarea>
                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
@@ -163,7 +163,7 @@ include_once 'conexionpdo.php';
                         <div  class="col-sm-6">
                           <label for="" class="control-label">¿Padece de Alguna Enfermedad?</label> 
                             <div class="form-group">
-                            <textarea class="form-control"minlength="5" maxlength="150" onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');"  type="textarea" name="enfermedades"  autocomplete = "off" onblur="quitarespacios(this);" required></textarea>
+                            <textarea class="form-control"minlength="5" maxlength="150"onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');"  type="textarea" name="enfermedades"  autocomplete = "off" onblur="quitarespacios(this);" required></textarea>
                             </div>
                         </div><!--fin del la estatura -->
 
@@ -396,3 +396,10 @@ function validar_checkbox() {
     }
 }
 </script>
+<script>
+    
+    //funcion para poner mayusculas
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+  </script>
