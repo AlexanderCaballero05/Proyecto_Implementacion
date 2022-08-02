@@ -1,3 +1,37 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Proceso receta medica
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia 
+    descripcion:       Permite llevar un mantenimiento de las alergias del area media ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+D'aniel Martinez        8-01-2022                        verificar las validaciones
+D'aniel Martinez        8-01-2022                        no permititr valores repetidos al agregar medicamento y examenes
+D'aniel Martinez        8-01-2022                        poder eliminar y editar exámenes y medicamentos
+
+----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -15,18 +49,45 @@ include "conexionpdo.php";
           $observaciones =  ($_POST['observaciones']);
           $tipo_receta = ($_POST['recetas']);
           $codigo_examen = ($_POST['codigo_examen']); 
-
+          $consultar=0;
           if($tipo_receta ==1){ //Para cuando es una receta de medicamentos
-             $insertar_reseta = "INSERT INTO `tbl_receta_medica` (`CODIGO_CONSULTA`, `CODIGO_MEDICAMENTO`, `INDICACIONES_RECETA`, `OBSERVACIONES`, `FECHA_RECETA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`)
-             VALUES('$codigo_consulta', '$codigo_medicamento', '$indicaciones', '$observaciones', '$fecha_receta', 'ADMIN', '$fecha_receta')";
-             $consulta_receta =$conn->query($insertar_reseta);
-             if($consulta_receta>0){
-                echo "<script> window.location = 'procesoRecetaMedica';</script>"; exit;
-             }else{
-                echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
-             }//fin del else si ocurrio algun error :/
+            $existe = $db->prepare("SELECT COUNT(*) FROM tbl_receta_medica WHERE CODIGO_MEDICAMENTO= '$codigo_medicamento'
+            AND CODIGO_CONSULTA='$codigo_consulta'");
+            $existe->execute(array($codigo_medicamento));
+            $row=$existe->fetchColumn();
+            if($row>0){
+            
+              
+              echo "<script> alert('el medicamento ya existe');
+              window.location = 'procesoRecetaMedica'; </script>";
+            }else {
+              try{
+                $insertar_reseta = "INSERT INTO `tbl_receta_medica` (`CODIGO_CONSULTA`, `CODIGO_MEDICAMENTO`, `INDICACIONES_RECETA`, `OBSERVACIONES`, `FECHA_RECETA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`)
+                VALUES('$codigo_consulta', '$codigo_medicamento', '$indicaciones', '$observaciones', '$fecha_receta', 'ADMIN', '$fecha_receta')";
+                $consulta_receta =$conn->query($insertar_reseta);
+                if($consulta_receta>0){
+                   echo "<script> window.location = 'procesoRecetaMedica';</script>"; exit;
+                }else{
+                   echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
+                }//fin del else si ocurrio algun error :/
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }
+             
           }else if($tipo_receta ==2){//Para cuando son examenenes medicos
-             $insertar_examen = "INSERT INTO `tbl_examenes_pacientes`(`CODIGO_CONSULTA`, `CODIGO_EXAMEN_MEDICO`, `OBSERVACIONES`, `INDICACIONES`)
+             
+            $existe2 = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_pacientes WHERE CODIGO_EXAMEN_MEDICO = '$codigo_examen'
+            AND CODIGO_CONSULTA='$codigo_consulta'");
+            $existe2->execute(array($codigo_medicamento));
+            $row=$existe2->fetchColumn();
+            if($row>0){
+              echo "<script> alert('El examen ya existe');
+              window.location = 'procesoRecetaMedica'; </script>";
+            }else {
+              try{
+            $insertar_examen = "INSERT INTO `tbl_examenes_pacientes`(`CODIGO_CONSULTA`, `CODIGO_EXAMEN_MEDICO`, `OBSERVACIONES`, `INDICACIONES`)
              VALUES('$codigo_consulta', '$codigo_examen', '$observaciones','$indicaciones')";
              $consulta_examen =$conn->query($insertar_examen);
              if($consulta_receta>0){
@@ -36,6 +97,15 @@ include "conexionpdo.php";
                   
                 window.location = 'procesoRecetaMedica'; </script>"; exit;
              }
+                
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }
+             
+             
+             
           }//fin del elseif de insertar examenes medicoa
        }  
    }//fin del if de insertar las recetas/examenes 

@@ -1,3 +1,37 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Proceso receta medica
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia 
+    descripcion:       Permite llevar un mantenimiento de las alergias del area media ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+D'aniel Martinez        8-01-2022                        verificar las validaciones
+D'aniel Martinez        8-01-2022                        Agregar tablas de los examenes y medicamentos agregados
+D'aniel Martinez        8-01-2022                        Permitir numeros, letras, puntos y comas
+
+----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -868,7 +902,7 @@ document.getElementById('OcultarExamen').style.display = 'block';
       function soloLetrasComa(e){
        key = e.keyCode || e.which;
        tecla = String.fromCharCode(key).toLowerCase();
-       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz ,.";
+       letras = " áéíóúabcdefghijklmnñopqrstuvwxyz1234567890 ,.";
        especiales = ["8-37-39-46"];
        tecla_especial = false
        for(var i in especiales){
