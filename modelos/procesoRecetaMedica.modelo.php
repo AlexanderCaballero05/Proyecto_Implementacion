@@ -1,3 +1,37 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Proceso receta medica
+    Fecha:             09-Junio-2022
+    Programador:       Diana Rut Garcia 
+    descripcion:       Permite llevar un mantenimiento de las alergias del area media ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+D'aniel Martinez        8-01-2022                        verificar las validaciones
+D'aniel Martinez        8-01-2022                        no permititr valores repetidos al agregar medicamento y examenes
+D'aniel Martinez        8-01-2022                        poder eliminar y editar exámenes y medicamentos
+
+----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
 include_once "conexion3.php";
@@ -15,26 +49,63 @@ include "conexionpdo.php";
           $observaciones =  ($_POST['observaciones']);
           $tipo_receta = ($_POST['recetas']);
           $codigo_examen = ($_POST['codigo_examen']); 
-
+          $consultar=0;
           if($tipo_receta ==1){ //Para cuando es una receta de medicamentos
-             $insertar_reseta = "INSERT INTO `tbl_receta_medica` (`CODIGO_CONSULTA`, `CODIGO_MEDICAMENTO`, `INDICACIONES_RECETA`, `OBSERVACIONES`, `FECHA_RECETA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`)
-             VALUES('$codigo_consulta', '$codigo_medicamento', '$indicaciones', '$observaciones', '$fecha_receta', 'ADMIN', '$fecha_receta')";
-             $consulta_receta =$conn->query($insertar_reseta);
-             if($consulta_receta>0){
-                echo "<script> window.location = 'procesoRecetaMedica';</script>"; exit;
-             }else{
-                echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
-             }//fin del else si ocurrio algun error :/
+            $existe = $db->prepare("SELECT COUNT(*) FROM tbl_receta_medica WHERE CODIGO_MEDICAMENTO= '$codigo_medicamento'
+            AND CODIGO_CONSULTA='$codigo_consulta'");
+            $existe->execute(array($codigo_medicamento));
+            $row=$existe->fetchColumn();
+            if($row>0){
+            
+              
+              echo "<script> alert('el medicamento ya existe');
+              window.location = 'procesoRecetaMedica'; </script>";
+            }else {
+              try{
+                $insertar_reseta = "INSERT INTO `tbl_receta_medica` (`CODIGO_CONSULTA`, `CODIGO_MEDICAMENTO`, `INDICACIONES_RECETA`, `OBSERVACIONES`, `FECHA_RECETA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`)
+                VALUES('$codigo_consulta', '$codigo_medicamento', '$indicaciones', '$observaciones', '$fecha_receta', 'ADMIN', '$fecha_receta')";
+                $consulta_receta =$conn->query($insertar_reseta);
+                if($consulta_receta>0){
+                   echo "<script> window.location = 'procesoRecetaMedica';</script>"; exit;
+                }else{
+                   echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
+                }//fin del else si ocurrio algun error :/
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }
+             
           }else if($tipo_receta ==2){//Para cuando son examenenes medicos
-             $insertar_examen = "INSERT INTO `tbl_examenes_pacientes`(`CODIGO_CONSULTA`, `CODIGO_EXAMEN_MEDICO`, `OBSERVACIONES`, `INDICACIONES`)
+             
+            $existe2 = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_pacientes WHERE CODIGO_EXAMEN_MEDICO = '$codigo_examen'
+            AND CODIGO_CONSULTA='$codigo_consulta'");
+            $existe2->execute(array($codigo_medicamento));
+            $row=$existe2->fetchColumn();
+            if($row>0){
+              echo "<script> alert('El examen ya existe');
+              window.location = 'procesoRecetaMedica'; </script>";
+            }else {
+              try{
+            $insertar_examen = "INSERT INTO `tbl_examenes_pacientes`(`CODIGO_CONSULTA`, `CODIGO_EXAMEN_MEDICO`, `OBSERVACIONES`, `INDICACIONES`)
              VALUES('$codigo_consulta', '$codigo_examen', '$observaciones','$indicaciones')";
              $consulta_examen =$conn->query($insertar_examen);
              if($consulta_receta>0){
                 echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
              }else{
                 echo "<script> 
+                  
                 window.location = 'procesoRecetaMedica'; </script>"; exit;
              }
+                
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }
+             
+             
+             
           }//fin del elseif de insertar examenes medicoa
        }  
    }//fin del if de insertar las recetas/examenes 
@@ -69,10 +140,10 @@ include "conexionpdo.php";
       echo "<script> alert('el examen  $nombre_examen ya se encuentra registrado');
       window.location = 'procesoRecetaMedica'; </script>";
     }else{
-        try{// se agreo la parte del codigo de estado 
-        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO,CODIGO_ESTADO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario','2'); ";
+        try{
+        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario'); ";
         $resul=$conn->query($insertar_examen);
-          if($resul>0){
+          if($consulta>0){
             echo "<script>
             alert('Examen Registrado Correctamente');
             window.location = 'procesoRecetaMedica'; </script>"; exit;
@@ -105,8 +176,8 @@ include "conexionpdo.php";
             exit;
           }else{
            try{
-               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,CODIGO_ESTADO)
-               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual','2');"; //se agrega el estado a 2 que es activo
+               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
+               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
                $resul=$conn->query($query_medicamento);
                if($resul >0){
                   echo "<script>
@@ -123,7 +194,143 @@ include "conexionpdo.php";
             }
          }//fin else
  }
+
+
+///// editar examenes receta medica ////
+if (isset( $_POST['cod_edit_examenes']) && isset($_POST['guardar_examenes'])){
+   $codigo = $_POST['cod_edit_examenes'];
+   $nomExam = $_POST['nom_exam'];
+   $indicacion = $_POST['edit_indicacion'];
+   $observacion = ($_POST['edit_obs']); 
+     
+         try{
+            $sql = "UPDATE tbl_examenes_pacientes EP set EP.INDICACIONES='$indicacion', EP.OBSERVACIONES='$observacion'
+            where EP.CODIGO_EXAMEN_PACIENTE  = '$codigo' ";
+            $consulta=$conn->query($sql);
+           if ($consulta>0){
+             echo "<script>
+             window.location = 'procesoRecetaMedica';
+             </script>";
+            
+             exit;
+           }else{
+             echo "<script>
+             alert('¡Error al  intentar modificar el medicamento!');
+             window.location = 'procesoRecetaMedica';
+             </script>";
+           }
+         }catch(PDOException $e){
+           echo $e->getMessage(); 
+           return false;
+         }
+
+       
+  }//FIN DEL CODIGO PARA EDITAR
+
+//// eliminar examen  /////
+
+
 ?>
+
+<?php
+if(isset($_POST['eliminar_ex'])){
+  if(isset($_POST['eliminar_exm'])){
+    $codExm = ($_POST['eliminar_ex']);//asigna a una variable el id de la pregunta a  eliminar
+    
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_examenes_pacientes WHERE  CODIGO_EXAMEN_PACIENTE = '$codExm' ");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el Exámen!');
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+      }
+    
+}//Cerre del if padre
+?>
+
+
+<?php
+///// ------------------------------------------medicamento---------------------------------------   ////
+
+///// editar medicamento receta medica   ////
+if (isset( $_POST['cod_edit_Medicamento']) && isset($_POST['guardar_Medicamento'])){
+   $codigo = $_POST['cod_edit_Medicamento'];
+   $indicacion = $_POST['edit_indicacion_Medic'];
+   $observacion = ($_POST['edit_obs_Medic']); 
+     
+         try{
+            $sql = "UPDATE tbl_receta_medica RM set RM.INDICACIONES_RECETA='$indicacion', RM.OBSERVACIONES='$observacion'
+            where RM.CODIGO_RECETA_MEDICA  = '$codigo' ";
+            $consulta=$conn->query($sql);
+           if ($consulta>0){
+             echo "<script>
+             window.location = 'procesoRecetaMedica';
+             </script>";
+            
+             exit;
+           }else{
+             echo "<script>
+             alert('¡Error al  intentar modificar el medicamento!');
+             window.location = 'procesoRecetaMedica';
+             </script>";
+           }
+         }catch(PDOException $e){
+           echo $e->getMessage(); 
+           return false;
+         }
+
+       
+  }//FIN DEL CODIGO PARA EDITAR
+
+//// eliminar examen  /////
+
+
+?>
+
+<?php
+if(isset($_POST['eliminar_Medic'])){
+  if(isset($_POST['eliminar_Medicamento'])){
+    $codMedic = ($_POST['eliminar_Medic']);//asigna a una variable el id de la pregunta a  eliminar
+    
+        try{
+          $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
+          mysqli_query($link, "DELETE FROM tbl_receta_medica WHERE  CODIGO_RECETA_MEDICA = '$codMedic' ");
+          if(mysqli_affected_rows($link)>0){
+            echo "<script>
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }else{
+            echo "<script>
+            alert('¡Error al eliminar el Medicamento!');
+            window.location = 'procesoRecetaMedica';
+            </script>";
+            exit;
+          }
+        }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+      }
+    
+}//Cerre del if padre
+?>
+
+
+
 
 
 

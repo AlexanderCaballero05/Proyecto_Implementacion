@@ -172,7 +172,7 @@ include_once 'conexionpdo.php';
                         </div><!--fin del temperatura -->
                         <div  class="col-sm-3 mb-3">
                           <div class="form-group">
-                            <label for="" class="control-label">Estatus de desnutrición</label>
+                            <label for="" class="control-label">Estatus de Desnutrición</label>
                             <select class="form-control " required name="desnutricion" required disabled ="disabled"> 
                              <option  value=""><?php echo $var4 ?></option>
                               <option  value="No tiene">No tiene</option>
@@ -233,7 +233,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Síntomas:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" minlength="4" maxlength="100" type="text" name="sintomas2" id="sintomas2" onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="150" type="text"onkeyup="mayus(this);" name="sintomas2" id="sintomas2" onkeypress="return soloLetrasnumeros(event)"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -242,7 +242,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" minlength="4" maxlength="100" type="text" onkeypress="return soloLetrasnumeros(event)" name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="150" type="text"onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" name="diagnostico1" id="diagnostico1"  autocomplete = "off" required ></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -254,7 +254,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6"> 
                         <label for="identidad" class="control-label">Evolución:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" minlength="4" maxlength="100" onkeypress="return soloLetrasnumeros(event)" type="text"  name="evolucion" id="evolucion"   autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="4" maxlength="150"onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" type="text"  name="evolucion" id="evolucion"   autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -263,7 +263,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-6">
                         <label for="identidad" class="control-label">Diagnóstico de Egreso/ Hallazgos Importantes:</label> 
                         <div class="form-group">
-                          <textarea class="form-control" minlength="5" maxlength="100" type="text" onkeypress="return soloLetrasnumeros(event)" name="diagnostico2" id="diagnostico2"  autocomplete = "off" required></textarea>
+                          <textarea class="form-control" minlength="5" maxlength="150" type="text"onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" name="diagnostico2" id="diagnostico2"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
                               Llene este campo.
                           </div>
@@ -358,3 +358,9 @@ if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
           })
     })()
 </script>
+<script>
+    
+  function mayus(e) {
+    e.value = e.value.toUpperCase();
+  }
+  </script>
