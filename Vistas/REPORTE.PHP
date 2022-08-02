@@ -177,7 +177,7 @@ if (isset($_POST['expediente'])) {
            <th>Enfermedades</th>
            <th>Alergias</th>
            <th>Trastornos</th>
-           <th>Enfermedades</th>
+           <th>Apariencia</th>
          </tr>
       </thead>
       <tbody>
@@ -330,6 +330,6 @@ $dompdf ->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
 
-$dompdf->stream("Reporte_historialMedico.pdf", array("Attachment" => false));
+$dompdf->stream("Reporte_historialMedico.pdf", array("Attachment" => true));
 echo $dompdf->output();
 ?>

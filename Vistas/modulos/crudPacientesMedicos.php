@@ -34,6 +34,7 @@ Programador               Fecha                      Descripcion
   D'aniel Martinez          11-07-2022                 Arreglar programar cia (permita seleccionar el paciente correcto)
   Diana Rut                 20-07-2022                 Se agrego un form para que funcione el boton del reporte
   Diana Rut                 23-07-2022                 Cambio en el titulo de la pantalla y estetica del modal
+  Diana Rut                 2-08-2022                  Se agrego boton para el expediente medico :D
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -154,12 +155,12 @@ Programador               Fecha                      Descripcion
                                   </a>
                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank"> 
                                      </form>
-                                  <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="POST"  action="Vistas/REPORTE.php" target="_blank">
-                                     <input type="hidden" name="expediente" value="<?php echo $var6?>">
-                                     <button type='submit'  style="color:white; background-color:#FA0079"class=" form-control btn  mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
-                                     </form>
-                                 </a>
+                                  <a> <!--Boton para ver el expediente del estudiante -->
+                                    <form method="post"  action="consultaEstudianteMedica" >
+                                     <input type="text" hidden name="persona" value="<?php echo $var6; ?>"> 
+                                     <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file mx-1 "></i></span>Expediente</button>
+                                    </form>
+                                  </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>
