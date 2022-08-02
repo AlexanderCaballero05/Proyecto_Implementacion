@@ -29,7 +29,7 @@ descripcion:       Pantalla que realiza el respaldo de la base de datos
 Historial de Cambio
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
-Arnol Caballero        		17-06-2022                 Validacion de los maximos y minimos de los inputs 
+
 ----------------------------------------------------------------------->
 
 

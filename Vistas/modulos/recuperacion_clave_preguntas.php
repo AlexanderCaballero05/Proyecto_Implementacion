@@ -11,8 +11,8 @@ Catedratico:
 Lic. Karla Melisa Garcia Pineda 
 ---------------------------------------------------------------------
 Programa:          Verificacion de preguntas de seguridad
-Fecha:             10-dic-2021
-Programador:       Erika Zuniga
+Fecha:             10-Febrero-2022
+Programador:       Diana Rut Garcia 
 Descripcion:       Pantalla de recuperacion por preguntas de seguridad
 -----------------------------------------------------------------------
  Historial de Cambio

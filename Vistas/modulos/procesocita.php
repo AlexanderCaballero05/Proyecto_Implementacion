@@ -357,7 +357,7 @@ $result3= $conn->query($query);
                    <?php  
 
                         date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
-                        $Fechaactual=  date('d-m-Y');
+                        $Fechaactual=  date('Y-m-d');
                         $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                    ?>
 
@@ -365,7 +365,7 @@ $result3= $conn->query($query);
                         <div class="form-group">
 
                             <label for="fecha" class="form-label">Fecha de la Cita </label>
-                            <input type="date" min= "<?= date ($valor)?>" 
+                            <input type="date" min= "<?= date ($Fechaactual)?>" 
                             max="<?= date($fechamaxima)?>"                             
                             class="form-control" 
                             name="agregar_fecha_cita" id="agregar_fecha_cita" required>

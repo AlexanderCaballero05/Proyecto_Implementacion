@@ -21,8 +21,8 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Perfil usuario 
-    Fecha:             
-    Programador:      
+    Fecha:             05-04-2022
+    Programador:       Rut Garcia
     descripcion:       Permite actualizar los Datos personales del perfil de cada usuario y de restablecer la contraseña.
 -----------------------------------------------------------------------
   Historial de Cambio

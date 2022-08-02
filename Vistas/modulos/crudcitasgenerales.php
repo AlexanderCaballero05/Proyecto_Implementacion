@@ -127,31 +127,7 @@ include "conexionpdo.php";
                       }
                      ?>
                      <div class="row"><!--Codigo para filtrar el reporte como la informacion de la datatable -->
-                         <label class=" col-sm-1 control-label" style="text-align: right; width: 150px;">Filtrar por:</label>
-                          <div class="col-sm-3">
-                              <?php 
-                              $query = "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
-                              $resul=$conn->query($query);                
-                              ?>
-                             <form method="POST" >
-                                <select class="form-control" name="BUSCAR" required>
-                                   <option selected disabled value="" >--Seleccione--</option>
-                                   <?php 
-                                    if ($resul->num_rows > 0) {
-                                        while($row = $resul->fetch_assoc()) { 
-                                        $codigo = $row['CODIGO_AREA'];
-                                        $nombre = $row['NOMBRE'];
-                                    ?>  
-                                    <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                    <?php 
-                                    } 
-                                    }
-                                    ?>
-                                </select>
-                         </div>
-                         <div class="col-md-1 mb-2">
-                             <button type="submit"  name="MANDAR" class=" form-control btn btn-info "> Generar</button>
-                        </div>
+                         
                         </form>
                         <div class="col-md-3 mb-2">
                           
@@ -477,13 +453,13 @@ include "conexionpdo.php";
                                                                         $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                                                                         //llamar al procedimiento almacenado
                                                                         $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '48'));
+                                                                        $evaluar_permiso_actualizar->execute(array($usuariomo, '32'));
                                                                         $row1=$evaluar_permiso_actualizar->fetchColumn();
                                                                         $permiso_actualizar =$row1; 
                                                                     }
                                                                     ?>  <!-- fin del codigo para sustraer el permiso de actualizar-->
                                                                      <?php 
-                                                                    if($permiso_actualizar == 'SI' and $var6 == 'PENDIENTE'){
+                                                                    if($var6 =='PENDIENTE' AND $permiso_actualizar== 'SI'){
                                                                     ?>
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="btn btn-warning"><span>
@@ -517,8 +493,8 @@ include "conexionpdo.php";
                                                                 <div class="modal-body"> 
                                                                 <?php  
                                                                     date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
-                                                                    $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
-                                                                    $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                                                                    $fechaActual = date('Y-m-d');  /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                                                    $fechamaxima= date('Y-m-d',strtotime($fechaActual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                                                                 ?>
                                                                 <div class="row"> <!-------- INICIO PRIMERA ROW editar -----------> 
                                                                     <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" name="cod_edit_cita2" id="cod_edit_cita2" >
@@ -526,7 +502,7 @@ include "conexionpdo.php";
 
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
-                                                                            <input type="date" value="<?php echo $var2; ?>"  min= "<?= date ($valor)?>" max="<?= date($fechamaxima)?>" 
+                                                                            <input type="date" value="<?php echo $var2; ?>"  min= "<?= date ($fechaActual)?>" max="<?= date($fechamaxima)?>" 
                                                                             class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1" required ="">
                                                                         </div>
                                                                         <div class="invalid-feedback">
