@@ -312,43 +312,43 @@
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Peso</label>
-                                                        <input value="<?php echo $peso; ?>" type="text" readonly class="form-control">
+                                                        <input value="<?php echo $peso ." lb"; ?>" type="text" readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Estatura</label>
-                                                        <input  type="text" value="<?php echo $estatura; ?>" readonly class="form-control">
+                                                        <input  type="text" value="<?php echo $estatura." m"; ?>" readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Temperatura</label>
-                                                        <input  type="text"  value="<?php echo $tempe; ?>" readonly class="form-control">
+                                                        <input  type="text"  value="<?php echo $tempe." °C"; ?>" readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Masa</label>
-                                                        <input  type="text"  value="<?php echo $masa; ?>" readonly class="form-control">
+                                                        <input  type="text"  value="<?php echo $masa ." Imc"; ?>" readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">FC</label>
-                                                        <input  type="text" value="<?php echo $fc; ?>"readonly class="form-control">
+                                                        <input  type="text" value="<?php echo $fc." fc"; ?>"readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-1">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">FR</label>
-                                                        <input  type="text" value="<?php echo $fr; ?>" readonly class="form-control">
+                                                        <input  type="text" value="<?php echo $fr." fr";; ?>" readonly class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-2">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Pulso</label>
-                                                        <input  type="text" value="<?php echo $pulso; ?>" readonly class="form-control">
+                                                        <input  type="text" value="<?php echo $pulso." lpm"; ?>" readonly class="form-control">
                                                     </div>
                                                 </div>
                                             </div> <!-- FIN DE EL PRIMER ROW --> 

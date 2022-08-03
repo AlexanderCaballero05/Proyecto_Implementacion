@@ -30,7 +30,7 @@
 D'aniel Martinez        8-01-2022                        verificar las validaciones
 D'aniel Martinez        8-01-2022                        no permititr valores repetidos al agregar medicamento y examenes
 D'aniel Martinez        8-01-2022                        poder eliminar y editar exámenes y medicamentos
-
+Diana Rut               02-08-2022                       Cambio en la consulta de si se repite la receta medica
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -51,14 +51,12 @@ include "conexionpdo.php";
           $codigo_examen = ($_POST['codigo_examen']); 
           $consultar=0;
           if($tipo_receta ==1){ //Para cuando es una receta de medicamentos
-            $existe = $db->prepare("SELECT COUNT(*) FROM tbl_receta_medica WHERE CODIGO_MEDICAMENTO= '$codigo_medicamento'
-            AND CODIGO_CONSULTA='$codigo_consulta'");
-            $existe->execute(array($codigo_medicamento));
+            $existe = $db->prepare("SELECT COUNT(*) FROM tbl_receta_medica WHERE CODIGO_MEDICAMENTO = (?)
+            AND CODIGO_CONSULTA = (?)");
+            $existe->execute(array($codigo_medicamento,$codigo_consulta));
             $row=$existe->fetchColumn();
             if($row>0){
-            
-              
-              echo "<script> alert('el medicamento ya existe');
+              echo "<script> alert('El medicamento ya se receto');
               window.location = 'procesoRecetaMedica'; </script>";
             }else {
               try{
@@ -78,12 +76,12 @@ include "conexionpdo.php";
              
           }else if($tipo_receta ==2){//Para cuando son examenenes medicos
              
-            $existe2 = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_pacientes WHERE CODIGO_EXAMEN_MEDICO = '$codigo_examen'
-            AND CODIGO_CONSULTA='$codigo_consulta'");
-            $existe2->execute(array($codigo_medicamento));
+            $existe2 = $db->prepare("SELECT COUNT(*) FROM tbl_examenes_pacientes WHERE CODIGO_EXAMEN_MEDICO = (?)
+            AND CODIGO_CONSULTA= (?)");
+            $existe2->execute(array($codigo_examen,$codigo_consulta));
             $row=$existe2->fetchColumn();
             if($row>0){
-              echo "<script> alert('El examen ya existe');
+              echo "<script> alert('El examen ya se receto');
               window.location = 'procesoRecetaMedica'; </script>";
             }else {
               try{
