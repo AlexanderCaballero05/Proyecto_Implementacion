@@ -68,10 +68,10 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         <tr>
                                             <th class="text-center">Acción</th>
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">Fecha cita</th>
+                                            <th class="text-center">Fecha Cita</th>
                                             <th class="text-center">Hora</th>
                                             <th class="text-center">Paciente</th>
-                                            <th class="text-center">Estado de cita</th>
+                                            <th class="text-center">Estado de Cita</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -157,7 +157,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
                                                                     <div class="col-sm-12">
                                                                         <div >
-                                                                          <label for="txtcodigo_persona">Estado cita:</label>
+                                                                          <label for="txtcodigo_persona">Estado Cita:</label>
                                                                             <select class="form-control" name="MODUSUARIO" required="">
                                                                                 <option selected disabled value="">--Seleccione--</option>
                                                                                   <?php 
@@ -214,12 +214,12 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                     <div class="row"> 
                                                                         <div class="col-sm-6">
                                                                            <div class="form-group">
-                                                                                <p><b class="p-1">Fecha de la cita:</b> <?php echo $var3; ?></p>
+                                                                                <p><b class="p-1">Fecha de la Cita:</b> <?php echo $var3; ?></p>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-6">
                                                                             <div class="form-group">
-                                                                                <p><b class="p-1">Hora de la cita:</b> <?php echo $var4; ?></p>
+                                                                                <p><b class="p-1">Hora de la Cita:</b> <?php echo $var4; ?></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>

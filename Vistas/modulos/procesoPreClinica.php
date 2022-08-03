@@ -166,7 +166,7 @@
                     </div><!--fin row -->
                     <br>
                  </br></br>
-                <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Preclínica</button>
+                <button type="submit"  id="" name="Guardar_PreClinica" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Preclínica</button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->

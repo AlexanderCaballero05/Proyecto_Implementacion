@@ -4,10 +4,6 @@ include_once "conexion3.php";
 include_once 'conexionpdo.php';
  include "conexionpdo.php";
  
- $codigoObjeto=23;
- $accion='Ingreso Matricula';
- $descripcion= 'Ingreso al proceso/registros de matricula ';
- bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 
 <head>
@@ -271,7 +267,7 @@ include_once 'conexionpdo.php';
                       </div>
                     </div><!--Fin de una fila -->
                     <br>
-                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
+                    <button type="submit"  id="Guardar_Consulta2" name="Guardar_Consulta2" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </form>   
                 </div><!--fin del div de responsivi -->
               </div> <!-- /.card-body -->
