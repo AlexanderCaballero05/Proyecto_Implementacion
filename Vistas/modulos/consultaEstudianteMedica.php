@@ -26,6 +26,7 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
+    Diana RuT Garcia        03-08-2022               Moodificacion en el query que trae los datos de la consulta,posdata pinches consultas feas :/
 ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
@@ -240,9 +241,9 @@
                                 $consulti = "SELECT con.FECHA_CREACION, con.CODIGO_CONSULTA, pe.CODIGO_PERSONA, con.CODIGO_CITA, con.SINTOMAS, 
                                 con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO, pre.PESO, pre.MASA_CORPORAL, pre.ESTATURA, 
                                 pre.TEMPERATURA, pre.PULSO, pre.FRECUENCIA_CARDIACA, pre.FRECUENCIA_RESPIRATORIA, pre.DESNUTRICION, 
-                                GROUP_CONCAT(med.NOMBRE_MEDICAMENTO) AS NOMBRE_MEDICAMENTO, GROUP_CONCAT(exa.EXAMEN_MEDICO) as NOMBRE_EXAMEN,
+                                GROUP_CONCAT(med.NOMBRE_MEDICAMENTO)  AS NOMBRE_MEDICAMENTO,  GROUP_CONCAT(exa.EXAMEN_MEDICO) as NOMBRE_EXAMEN,
                                 CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO,
-                                i.HORARIO AS HORA
+                                i.HORARIO AS HORA 
                                 FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_estado est, tbl_consulta_medica con, tbl_preclinica pre,
                                 tbl_examenes_pacientes exap, tbl_examenes_medicos exa, tbl_receta_medica recp, tbl_medicamento med ,tbl_persona_especialidad pes, tbl_persona pee
                                 WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
@@ -382,18 +383,21 @@
                                                 </div>
                                             </div><!--fin row-->
                                             <h5>Recetas/Medicamentos recetados</h5>
+                                            
+                                            
                                             <hr color="blue">
                                             <div class="row">
                                                <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Medicamentos Recetados</label>
-                                                        <textarea readonly type="text" class="form-control"><?php echo $medicamentos; ?></textarea>
+                                                        <textarea readonly type="text" class="form-control"><?php echo $medicamentos;  ?></textarea>
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <label for="txtcodigo_persona">Examenes Recetados</label>
-                                                        <textarea readonly  type="text" class="form-control"><?php echo $examenes; ?></textarea>
+                                                        <textarea readonly  type="text" class="form-control"><?php echo $examenes;  ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>

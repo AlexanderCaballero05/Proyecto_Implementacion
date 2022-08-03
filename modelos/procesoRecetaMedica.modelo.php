@@ -31,6 +31,7 @@ D'aniel Martinez        8-01-2022                        verificar las validacio
 D'aniel Martinez        8-01-2022                        no permititr valores repetidos al agregar medicamento y examenes
 D'aniel Martinez        8-01-2022                        poder eliminar y editar exámenes y medicamentos
 Diana Rut               02-08-2022                       Cambio en la consulta de si se repite la receta medica
+Diana Rut               03-08-2022                       Se agrego el codigo_estado a los insert de examenes y medicamentos
 ----------------------------------------------------------------------->
 <?php
 include_once "conexion.php";
@@ -127,7 +128,7 @@ include "conexionpdo.php";
  if(isset($_POST['nombre_examen'])){
    if(isset($_POST['agregar_examen_medico'])){
     $nombre_examen1 = ($_POST['nombre_examen']);
-    $descripcion = ($_POST['descripcion_examen']);
+    $descripcion_examen = ($_POST['descripcion_examen']);
     $fechaActual = date('Y-m-d');
     $usuario = $_SESSION['vario'];
 
@@ -139,8 +140,8 @@ include "conexionpdo.php";
       window.location = 'procesoRecetaMedica'; </script>";
     }else{
         try{
-        $insertar_examen = " INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario'); ";
-        $resul=$conn->query($insertar_examen);
+        $insertar_examen = "INSERT INTO tbl_examenes_medicos(EXAMEN_MEDICO,DESCRIPCION,FECHA_CREACION,CREADO_POR_USUARIO,CODIGO_ESTADO) VALUES ('$nombre_examen1','$descripcion_examen','$fechaActual','$usuario','2'); ";
+        $consulta=$conn->query($insertar_examen);
           if($consulta>0){
             echo "<script>
             alert('Examen Registrado Correctamente');
@@ -174,8 +175,8 @@ include "conexionpdo.php";
             exit;
           }else{
            try{
-               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)
-               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual');";
+               $query_medicamento = "INSERT INTO tbl_medicamento (CODIGO_MEDICAMENTO,NOMBRE_MEDICAMENTO,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,CODIGO_ESTADO)
+               VALUES ('$codigo','$medicamento','$descripcion','$usuario','$fechaActual','2');";
                $resul=$conn->query($query_medicamento);
                if($resul >0){
                   echo "<script>
