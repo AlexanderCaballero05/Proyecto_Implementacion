@@ -33,7 +33,7 @@
   ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
  ----------------------------------------------------------------------->
 
-<?php 
+ <?php 
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
   $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
@@ -277,6 +277,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             </div>
                           </div><!--fin del text-center -->
                         </td>
+                         <?php
+                            if ($var15 == 'ACTIVO') {
+                        
+                         ?>
                         <td class="text-center"><?php echo $contador; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>
                         <td class="text-center"><?php echo $var3; ?></td>
@@ -286,9 +290,29 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <td class="text-center"><?php echo $var12; ?></td>
                         <td class="text-center"><?php echo $var7; ?></td>
                         <td class="text-center"><?php echo $var8; ?></td>
-                        <td class="text-center"><?php echo $var15; ?></td>
+                        <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var15; ?></td>
                         <td class="text-center"><?php echo $var14; ?></td>
-                  
+                          <?php
+                            }else {
+                         ?>
+                        <td class="text-center"><?php echo $contador; ?></td>
+                        <td class="text-center"><?php echo $var2; ?></td>
+                        <td class="text-center"><?php echo $var3; ?></td>
+                        <td class="text-center"><?php echo $var4; ?></td>
+                        <td class="text-center"><?php echo $var5; ?></td>
+                        <td class="text-center"><?php echo $var6; ?></td>
+                        <td class="text-center"><?php echo $var12; ?></td>
+                        <td class="text-center"><?php echo $var7; ?></td>
+                        <td class="text-center"><?php echo $var8; ?></td>
+                        <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var15; ?></td>
+                        <td class="text-center"><?php echo $var14; ?></td>
+
+                          <?php
+                            }
+                         ?>
+
+
+
                         
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
@@ -331,7 +355,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Inicio:</label>
-                                        <input  type="date"  value ="<?php echo $var7; ?>"    min= "<?php $MIN1=date("Y-m-d"); echo $MIN1;?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_inicio1" >
+                                        <input  type="date"  value ="<?php echo $var7; ?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_inicio1" >
                                       </div>
                                     </div>
                                   </div>

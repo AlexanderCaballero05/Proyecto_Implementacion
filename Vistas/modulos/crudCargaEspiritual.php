@@ -19,22 +19,21 @@
   Lic. Giancarlo Martini Scalici Aguilar (Implementación)
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
-     Programa:          Mantenimiento de carga espiritual  
+    Programa:          Mantenimiento de carga academica  
     Fecha:           
     Programador:      
-    descripcion:        Permite llevar un mantenimiento de la carga espiritual ,editar,eliminar nuevo     
+    descripcion:        Permite llevar un mantenimiento de la carga academica ,editar,eliminar nuevo  
 -----------------------------------------------------------------------
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
-  ANY HERNANDEZ         		11-06-2022                 revision de ortagrfia
-  Diana Rut Garcia          03/07/2022                 Cambio en el titulo y modal editar 
+  ANY HERNANDEZ         		11-06-2022                 revision de ortografia 
+  Diana Rut Garcia         	3-07-2022                 Cambio en el titulo y el modal de editar
   ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
   ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
-  Diana Rut                 23/07/2022               detalles de estetica
------------------------------------------------------------------------>
+ ----------------------------------------------------------------------->
 
-<?php 
+ <?php 
 $fecha_actual = date("Y-m-d");
   $_SESSION["bdesde"] = date("Y-m-d",strtotime($fecha_actual."- 1 month"));
   $_SESSION["bhasta"] = date("Y-m-d",strtotime($fecha_actual."+ 1 day"));
@@ -50,10 +49,16 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- 
- 
+ include "conexionpdo.php";
+ $codigoObjeto=2;
+ $accion='Ingreso a la tabla de roles';
+ $descripcion= 'Usuario se autentifico ';
+ bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
+
+
+
 
 <!-- Trae los parametros de la hora inicial y final -->
 <?php
@@ -67,12 +72,22 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 ?>
 <?php
+  $Fechaactual ="FECHAINICIAL";
+  $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia->execute(array($Fechaactual));
+  $row=$sentencia->fetchColumn();
+  if($row>0){
+    $valor = $row;
+  }
+?>
+
+<?php
   $hora ="HORA_INICIO_CARGAACADEMICA";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($hora));
   $row=$sentencia->fetchColumn();
   if($row>0){
-    $horainicial2 = $row;
+    $horainicial = $row;
   }
 ?>
 <?php
@@ -81,16 +96,18 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
   $sentencia->execute(array($hora1));
   $row=$sentencia->fetchColumn();
   if($row>0){
-    $horafinal2= $row;
+    $horafinal= $row;
   }
 ?>
+
+
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div>
-    <section class="content-header text-xl-center">
+    <section class="content-header text-xl-center mb-3 ">
       <h1>
-          <h4> Lista de Carga Espiritual <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Lista de Carga Académica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
       <section class="content">
@@ -98,10 +115,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver Carga Académica</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Ver Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
             </li>
             <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
@@ -112,37 +129,32 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
           <div class="row">
             <div class="col-md-12">
             <?php
-                            include "conexionpdo.php";
-                            $usuario=$_SESSION['vario'];
-                            //Evaluo si existe el tipo de Rol
-                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
-                                                            FROM tbl_usuario 
-                                                            WHERE NOMBRE_USUARIO = (?);");
-                            $evaluar_usuario->execute(array($usuario));
-                            $row=$evaluar_usuario->fetchColumn();
-                            if($row > 0){
-                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
-
-                                //llamar al procedimiento almacenado
-                                $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-                                $evaluar_permiso->execute(array($usuariomo, '20'));
-                                $row1=$evaluar_permiso->fetchColumn();
-                                $permiso_registrar =$row1;             
-                            }
-                            ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
-
-                    <?php 
-                    if ($permiso_registrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
-                    {
-                    ?>  
+               include "conexionpdo.php";
+               $usuario=$_SESSION['vario'];
+               //Evaluo si existe el tipo de Rol
+               $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL FROM tbl_usuario WHERE NOMBRE_USUARIO = (?);");
+               $evaluar_usuario->execute(array($usuario));
+               $row=$evaluar_usuario->fetchColumn();
+                if($row > 0){
+                  $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+                  //llamar al procedimiento almacenado
+                  $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
+                  $evaluar_permiso->execute(array($usuariomo, '20'));
+                  $row1=$evaluar_permiso->fetchColumn();
+                  $permiso_registrar =$row1;             
+                }
+                ?> <!-- fin del codigo para sustraer el permiso de insertar.-->
+                <?php 
+                if ($permiso_registrar == 'SI'){ // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                ?>  
                 <a href="procesoCargaAcademica" >
                    <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
                 </a>
                 <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
-                <?php
-                   }
+               </br></br>
+               <?php
+                }
                 ?>
-                </br></br>
             <form  method="POST">
               <div class= "card">
                 <div class="card-header text-center" style="background-color: #F7F8F9;">
@@ -170,18 +182,17 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <tbody>
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL,
-                      c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO, te.NOMBRE, te.CODIGO_ESTADO 
+                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO , te.NOMBRE ,te.CODIGO_ESTADO 
                       FROM tbl_carga_academica c 
-                      left join tbl_tutoria t  on c.CODIGO_TUTORIA= t.CODIGO_TUTORIA
-                      left join tbl_persona p  on c.CODIGO_PERSONA= p.CODIGO_PERSONA 
-                      left join tbl_modalidad m on c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA 
-                      left join tbl_seccion s   on c.CODIGO_SECCION = s.CODIGO_SECCION
-                      left join tbl_estado te  on c.CODIGO_ESTADO = te.CODIGO_ESTADO 
-                      where t.CODIGO_AREA  = 4;  ";
+                      left join tbl_tutoria t  on  c.CODIGO_TUTORIA = t.CODIGO_TUTORIA
+                      left join tbl_persona p  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA
+                      left join tbl_modalidad m on c.CODIGO_MODALIDAD = m.CODIGO_MODALIDA 
+                      left join tbl_seccion s  on  c.CODIGO_SECCION = s.CODIGO_SECCION
+                      left join tbl_estado te  on  c.CODIGO_ESTADO  = te.CODIGO_ESTADO 
+                      WHERE t.CODIGO_AREA  = 1; ";
                       $result = $conn->query($query);
                       if ($result->num_rows > 0) {
-                        $contador=0;
+                        $contador = 0;
                         while($row = $result->fetch_assoc()) {
                         $contador=$contador+1;
                         $var1 = $row['CODIGO_CARGA'];
@@ -198,7 +209,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         $var12 = $row['HORA_FINAL'];
                         $var13 = $row['CODIGO_SECCION'];
                         $var14 = $row['PERIODO'];
-                        $var15 = $row['NOMBRE'];
+                        $var15 = $row['NOMBRE']; 
                         $var16 = $row['CODIGO_ESTADO']; 
 
                       ?>
@@ -258,7 +269,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
-                                    <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
+                                    <button type='submit' title='Imprimir' style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
                                 </a>
                                 <?php
                                     }
@@ -266,6 +277,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             </div>
                           </div><!--fin del text-center -->
                         </td>
+                         <?php
+                            if ($var15 == 'ACTIVO') {
+                        
+                         ?>
                         <td class="text-center"><?php echo $contador; ?></td>
                         <td class="text-center"><?php echo $var2; ?></td>
                         <td class="text-center"><?php echo $var3; ?></td>
@@ -275,15 +290,35 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                         <td class="text-center"><?php echo $var12; ?></td>
                         <td class="text-center"><?php echo $var7; ?></td>
                         <td class="text-center"><?php echo $var8; ?></td>
-                        <td class="text-center"><?php echo $var15; ?></td>
+                        <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var15; ?></td>
                         <td class="text-center"><?php echo $var14; ?></td>
-                        
+                          <?php
+                            }else {
+                         ?>
+                        <td class="text-center"><?php echo $contador; ?></td>
+                        <td class="text-center"><?php echo $var2; ?></td>
+                        <td class="text-center"><?php echo $var3; ?></td>
+                        <td class="text-center"><?php echo $var4; ?></td>
+                        <td class="text-center"><?php echo $var5; ?></td>
+                        <td class="text-center"><?php echo $var6; ?></td>
+                        <td class="text-center"><?php echo $var12; ?></td>
+                        <td class="text-center"><?php echo $var7; ?></td>
+                        <td class="text-center"><?php echo $var8; ?></td>
+                        <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var15; ?></td>
+                        <td class="text-center"><?php echo $var14; ?></td>
 
+                          <?php
+                            }
+                         ?>
+
+
+
+                        
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                  <h4 class="card-title">Editar Carga Espiritual</h4>
+                                  <h4 class="card-title">Editar Carga Académica</h4>
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
                                 <form  method="POST">
@@ -293,38 +328,49 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
-                                        <input  type="time" min= "<?php echo $horainicial2 ?>" step="1800"   max= "<?php echo $horafinal2 ?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
+
+                                        <input  type="time"  min= "<?php echo $horainicial ?>" step="1800"   max= "<?php echo $horafinal ?>" value ="<?php echo $var6;?>" class="form-control" name="hora1">
                                         <div class="invalid-feedback">
-                                        Horario no valido, sobrepasa la hora limite establecida
-                                       </div>
+                                         Horario no valido, sobrepasa la hora limite establecida
+                                        </div>
+
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Final:</label>
-                                        <input  type="time" mmin= "<?php echo $horainicial2 ?>" step="1800"   max= "<?php echo $horafinal2 ?>" value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
+
+                                        <input  type="time"min= "<?php echo $horainicial ?>" step="1800"   max= "<?php echo $horafinal ?>"  value ="<?php echo $var12; ?>" class="form-control" name="hora_final1" >
                                         <div class="invalid-feedback">
                                         Horario no valido, sobrepasa la hora limite establecida
                                        </div>
+
                                       </div>
                                     </div>
-                                    <?php
-                                    date_default_timezone_set("America/Guatemala");
-                                    $Fechaactual=  date('Y-m-d'); 
-                                    $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ $valor month"));
+                                    <?php  
+                                          date_default_timezone_set("America/Guatemala");/* Establece una zona horaria para la fecha actual  */
+                                          $Fechaactual=  date("Y-m-d"); /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                          $fechamaxima= date("Y-m-d",strtotime($Fechaactual."+ $valor month")); /* para la fecha maxima le sumo seis meses a la fecha actual */
                                     ?>
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Inicio:</label>
-                                        <input  type="date"  value ="<?php echo $var7; ?>"  min= "<?php $MIN=date("Y-m-d"); echo $MIN;?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_inicio1" >
+                                        <input  type="date"  value ="<?php echo $var7; ?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_inicio1" >
                                       </div>
                                     </div>
-                                  </div><!--fin row -->
-                                  <div class="row">
+                                  </div>
+                                  <?php  
+                                        date_default_timezone_set("America/Guatemala");
+                                        $Fechaactual1=  date("Y-m-d"); 
+                                        $fechamaxima1= date("Y-m-d",strtotime($Fechaactual1."+ $valor month"));
+                                  ?>
+                                    
+                                    <div class="row">
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Fecha Final:</label>
-                                        <input  type="date"  value ="<?php echo $var8; ?>" min= "<?php $MIN1=date("Y-m-d"); echo $MIN1;?>"  max = "<?php echo $fechamaxima ?>" class="form-control" name="fecha_final1" >
+                                        <input  type="date"  value ="<?php echo $var8; ?>" class="form-control" name="fecha_final1" 
+                                        min= "<?php $MIN1=date("Y-m-d"); echo $MIN1;?>"  max = "<?php echo $fechamaxima1 ?>">
                                       </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -334,7 +380,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       ?>
                                       <label  class="control-label">Tutoría:</label> 
                                       <div class="form-group">
-                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled">
+                                        <select style="width: 100%" class="form-control select2"   style="width: 100%;" name="tutoria1"  disabled = "disabled" >
                                           <option value="<?php echo $var9; ?>" ><?php echo $var3; ?></option> 
                                           <?php 
                                           if ($resultadod->num_rows > 0) {
@@ -402,11 +448,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       FROM tbl_persona p 
                                       left join tbl_usuario tu  on tu.CODIGO_PERSONA = p.CODIGO_PERSONA 
                                       left join tbl_roles tr  on tr.CODIGO_TIPO_ROL = tu.CODIGO_TIPO_ROL 
-                                      where tr.CODIGO_TIPO_ROL   = 6;";
+                                      where tr.CODIGO_TIPO_ROL   = 2;";
                                       $resultadod=$conn->query($query);                
                                       ?>
                                       <div class="form-group">
-                                        <label  class="control-label">Catequista/ Asesor Espiritual:</label>
+                                        <label  class="control-label">Encargado:</label>
                                         <select class="form-control select2"  style="width: 100%;"  name="tutor1" required>
                                           <option value="<?php echo $var11;?>"> <?php echo $var4; ?></option><!--Se muestra el nombre completo y se trae al value el codigo de la persona de la tabla carga -->
                                           <?php 
@@ -434,7 +480,6 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                   </select>
                                 </div>
                               </div>
-                                                                  
                                   </div><!--fin row -->
                                 </div><!--fin modal body -->
                                 <div class="modal-footer ">
@@ -489,7 +534,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
   <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteCargaEspiritual.php','_blank');
+      window.open('Reportes_Prosecar/reporteCargaAcademica.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
@@ -528,6 +573,27 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         
       })
   } );
+</script>
+
+<script>
+
+  (function () {
+    'use strict'
+    var forms = document.querySelectorAll('.needs-validation')
+    Array.prototype.slice.call(forms)
+
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()
+
+
 </script>
 
 
