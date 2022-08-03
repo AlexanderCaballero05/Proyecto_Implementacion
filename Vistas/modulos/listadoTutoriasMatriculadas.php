@@ -149,7 +149,7 @@ session_start();
                         $var3 = $row['NOMBRE_TUTOR'];
                         $var4 = $row['ASIGNATURA'];
                         $var5 = $row['MODALIDAD'];
-                        $var6 = $row['GRADO_ACTUAL'];
+                 
                         $var7 = $row['SECCION'];
                         $var8 = $row['HORA'];
                      ?>
