@@ -20,8 +20,8 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Mantenimiento de alumnos matrículadas
-    Fecha:            
-    Programador:       
+    Fecha:             05-Abril-2022
+    Programador:       Arnold Caballero
     descripcion:       Permite llevar un mantenimiento de los alummnos ,editar,eliminar nuevo
 -----------------------------------------------------------------------
   Historial de Cambio

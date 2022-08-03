@@ -34,10 +34,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=23;
- $accion='Ingreso al proceso de matricula';
- $descripcion='Proceso que permite matricular tutorias al estudiante';
-bitacora($codigoObjeto,$accion,$descripcion);
+ 
 ?>
 <head>
 
