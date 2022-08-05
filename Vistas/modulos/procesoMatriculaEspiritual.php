@@ -225,7 +225,7 @@
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                    <button type="submit"  name="AGREGAR_MATRICULA_ESPIRITUAL" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Matricular</button>      
+                                    <button type="submit"  name="AGREGAR_MATRICULA_ESPIRITUAL" style="color:white;"class="btn btn-primary"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Matricular</button>      
                                   </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                                 </div>
                               </form>
