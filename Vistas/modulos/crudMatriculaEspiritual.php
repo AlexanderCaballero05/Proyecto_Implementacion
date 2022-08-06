@@ -27,7 +27,8 @@
   Historial de Cambio
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
- Gissela Diaz                14-07-2022          Correcciones de uniformidad en los botones             
+ Gissela Diaz                14-07-2022          Correcciones de uniformidad en los botones  
+ Luz Montoya                 06-07-2022          Corrrección del reporte individual          
 ----------------------------------------------------------------------->
 <?php
 ?>
@@ -194,9 +195,14 @@
                                </button>
                                
                                </a>
+                               <a><!--Para descargar el reporte individual  -->
+                                     <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividualEsp.php" target="_blank">
+                                     <input type="hidden" value="<?php echo $var1?>">
+                                     </form>
+                                 </a>
                               <a>
-                                <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividual.php" target="_blank"> 
-                                <input type="hidden" name="imprimirmatriculaindividual" value="<?php echo $var1 ?>">
+                                <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividualEsp.php" target="_blank"> 
+                                <input type="hidden" name="imprimirmatriculaindividuales" value="<?php echo $var9 ?>">
                                 <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079 "class=" form-control btn btn-danger"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
                                 </form>
                                 </a>
