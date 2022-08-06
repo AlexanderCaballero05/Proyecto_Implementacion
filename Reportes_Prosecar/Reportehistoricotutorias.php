@@ -30,12 +30,12 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte Historial de las Tutorias'));
+		$this->SetX(108);
+		$this->Cell(180, 8, utf8_decode('Reporte Historial de las Tutorías'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(42, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -52,7 +52,6 @@ class PDF extends FPDF {
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
 
@@ -123,15 +122,15 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 10);
 			$this->SetFont('Helvetica', 'B', 10);
 			$this->Cell(10, 11, 'N', 1, 0, 'C', 1);
-            $this->Cell(40, 11, 'Nombre de la Tutoria', 1, 0, 'C', 1);
-			$this->Cell(30, 11, 'Area', 1, 0, 'C', 1);
+            $this->Cell(40, 11, utf8_decode('Nombre Tutoría'), 1, 0, 'C', 1);
+			$this->Cell(30, 11, utf8_decode('Área'), 1, 0, 'C', 1);
             $this->Cell(32, 11, 'Hora de Inicio', 1, 0, 'C', 1);
 			$this->Cell(32, 11, 'Hora Final', 1, 0, 'C', 1);
 			$this->Cell(35, 11, 'Fecha de Inicio', 1, 0, 'C', 1);
-			$this->Cell(35, 11, 'Fecha finilización', 1, 0, 'C', 1);
+			$this->Cell(35, 11, utf8_decode('Fecha Finalización'), 1, 0, 'C', 1);
             $this->Cell(25, 11, 'Modalidad', 1, 0, 'C', 1);
             $this->Cell(25, 11, 'Grado', 1, 0, 'C', 1);
-			$this->Cell(25, 11, 'Anio', 1, 0, 'C', 1);
+			$this->Cell(25, 11, utf8_decode('Año'), 1, 0, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -251,15 +250,15 @@ $pdf->SetX(5);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 10);
 $pdf->Cell(10, 11, 'N', 1, 0, 'C', 1); 
-$pdf->Cell(40, 11, 'Nombre de la Tutoria', 1, 0, 'C', 1);
-$pdf->Cell(30, 11, 'Area', 1, 0, 'C', 1);
+$pdf->Cell(40, 11, utf8_decode('Nombre Tutoría'), 1, 0, 'C', 1);
+$pdf->Cell(30, 11, utf8_decode('Área'), 1, 0, 'C', 1);
 $pdf->Cell(32, 11, 'Hora de Inicio', 1, 0, 'C', 1);
 $pdf->Cell(32, 11, 'Hora Final', 1, 0, 'C', 1);
 $pdf->Cell(35, 11, 'Fecha de Inicio', 1, 0, 'C', 1);
-$pdf->Cell(35, 11, 'Fecha finilizacion', 1, 0, 'C', 1);
+$pdf->Cell(35, 11, utf8_decode('Fecha finalización'), 1, 0, 'C', 1);
 $pdf->Cell(25, 11, 'Modalidad', 1, 0, 'C', 1);
 $pdf->Cell(25, 11, 'Grado', 1, 0, 'C', 1);
-$pdf->Cell(25, 11, 'Anio', 1, 1, 'C', 1);
+$pdf->Cell(25, 11, utf8_decode('Año'), 1, 1, 'C', 1);
 
 
 
