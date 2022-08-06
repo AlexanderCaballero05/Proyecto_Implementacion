@@ -1,3 +1,36 @@
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+  
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+  
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+
+  ---------------------------------------------------------------------
+    Programa:          Pantalla que muestra los pacientes del area psicologica
+    Fecha:             04-Marzo-2022
+    Programador:       Desconocido
+    descripcion:       Registra un cita y permite ver el expediente del paciene
+
+-----------------------------------------------------------------------
+                      Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+    Diana Rut               06/08/2022  02:24 am       Cambio en la consulta que trae al psicologo,ahora solo se traera los psicologos activos
+  ----------------------------------------------------------------------->
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -174,10 +207,11 @@
                                         as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
                                         from tbl_persona tp ,
                                         tbl_persona_especialidad tpe,
-                                        tbl_especialidad  te 
+                                        tbl_especialidad  te ,tbl_usuario u
                                         where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
                                         AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 3
-                                        ";
+                                        and u.CODIGO_PERSONA = tp.CODIGO_PERSONA
+                                        and u.CODIGO_ESTADO = 2";
                                         $result1= $conn->query($query);
                                         ?>
                                          <div class="form-group">

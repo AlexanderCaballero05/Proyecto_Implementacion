@@ -27,6 +27,7 @@
     Programador           Fecha                      Descripcion
 Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
 Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de registro correctamente
+Diana Rut Garcia        06-08-2022               Se agreo un update a la parte de actualizar el usuario
 ----------------------------------------------------------------------->
 <?php
  session_start();
@@ -547,6 +548,27 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
       $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
       date_default_timezone_set("America/Guatemala");
       $Fechaactual=  date("Y-m-d" );
+      if($ROLL == "1"){ //Determina depende del roll que tipo de persona le corresponde,asi poder actualizar con ese tipo de persona
+        $tipoPersona = "1"; // persona administrador
+      }elseif($ROLL == "2"){
+        $tipoPersona = "2"; // persona tutor
+      }elseif($ROLL == "3"){
+        $tipoPersona = "3"; //persona no definiada
+      }elseif($ROLL == "4"){
+        $tipoPersona = "6"; // persona psicologo
+      }elseif($ROLL == "5"){
+        $tipoPersona = "5"; // persona medico
+      }elseif($ROLL == "6"){
+        $tipoPersona = "8";// persona catequista
+      }elseif($ROLL == "7"){
+        $tipoPersona = "9"; // persona enfermero
+      }elseif($ROLL == "8"){
+        $tipoPersona = "4"; // persona estudiante
+      }else{
+        $tipoPersona = "3"; // En el caso de ser diferente
+      }
+      
+
       if($ESTADO == "3"){
         $actualizaresatado = "UPDATE TBL_CARGA_ACADEMICA SET FECHA_FINAL = '$Fechaactual' WHERE CODIGO_PERSONA = '$CODUSUARIO';";
         $Respuesta=$conn->query($actualizaresatado);
@@ -570,6 +592,9 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                 try{
                 $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis','$ROLL');" ;
                 $consulta=$conn->query($sql);
+                //Para cuando se cambie el rol de la persona tambien se cambie el tipo de persona 
+                $UPDA = "UPDATE TBL_PERSONA SET CODIGO_TIPO_PERSONA ='$tipoPersona' WHERE CODIGO_PERSONA= '$CODUSUARIO' ";
+                $updarespu=$conn->query($UPDA);
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> alert('Usuario modificado exitosamente');

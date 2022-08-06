@@ -53,28 +53,6 @@ try {
   fieldset {
     background-color: #FBFBFB;
   }
-  table ,th,td{
-    width: 100%;
-    border-collapse: collapse;
-    border: 0.5px solid #AFB5B8;
-    background-color:#FFFF;
-
-  }
-  th,td{
-    padding:8px;
-  }
-  thead{
-    background-color:#F4F8F9;
-  }
-    #caja1{
-    float:left;
-    }
-    #caja2{
-    float:left;
-    }
-    #caja3{
-      clear:both;
-    }
   legend {
     background-color: #04B6F6;
     color: white;
@@ -89,7 +67,6 @@ try {
   @page {
     margin: 0cm 0cm;
   }
-  
   footer {
    position: fixed; 
    bottom: 0.5cm; 
@@ -104,46 +81,26 @@ try {
     right: 0cm;
     height: 4cm;
   }
-  .c{
-    width: 24.5%;
-    margin:2px;
-    min-width: 24.5%;
-    min-height: 200px;
+  .pagenum:before {
+     content: counter(page);
   }
-  .c1{
-    width: 12%;
-    margin:10px;
-    max-width: 12%;
-    min-height: 40px;
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
   }
-  .c2{
-    width: 49.5%;
-    margin:2px;
-    min-width: 49.5%;
-    min-height: 200px;
-
-  }
-
-  .espacio{
-    padding-left: 4px;
-    padding-right: 4px;
-
-  }
-
     </style>
-    <title>Reporte citas medicas</title>
+    <title>Reporte Cita Medica</title>
   </head>
   <body>
     <header>
+      <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Reporte de citas de los estudiante</p>
+      <p  style="text-align: center; font-size: 18px;">Reporte de Cita Médica</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-    
-   
-
-   <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+   <footer style="text-align: center;">
+     <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -197,15 +154,15 @@ try {
        est.NOMBRE as nombre_estado,
        ar.NOMBRE as nombre_area, 
        espe.NOMBRE as nombre_especialidad
-     FROM tbl_inscripcion_cita IC 
-     left join tbl_persona_especialidad E   on IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
-     left join  tbl_persona P               on P.CODIGO_PERSONA = E.CODIGO_PERSONA
-     left join tbl_persona OT               on OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
-     left join tbl_area a                   on IC.AREA_CITA = a.CODIGO_AREA 
-     left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
-     left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
-     left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
-     where   IC.CODIGO_CITA = $cod_cita;";
+        FROM tbl_inscripcion_cita IC 
+        left join tbl_persona_especialidad E   on IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
+        left join  tbl_persona P               on P.CODIGO_PERSONA = E.CODIGO_PERSONA
+        left join tbl_persona OT               on OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
+        left join tbl_area a                   on IC.AREA_CITA = a.CODIGO_AREA 
+        left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
+        left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
+        left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
+        where   IC.CODIGO_CITA = $cod_cita;";
        $resul=$conn->query($consulta);
        if ($resul->num_rows > 0) {
         while($row = $resul->fetch_assoc()) { 
@@ -219,47 +176,37 @@ try {
            }
          ?>    
       <legend>  Datos Personales Estudiante</legend><br>
-      <label style="margin-bottom: 100px;" ><b>Nombre completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
-      <label style="margin-bottom: 30px;" ><b>Lugar y fecha de nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Nombre Completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
+      <label style="margin-bottom: 30px;" ><b>Lugar y Fecha Nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
       <label style="padding-right: 80px;" ><b>DNI: </b><?php echo $dni; ?></label>
       <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
       <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
-      <label style="padding-right: 85px;" ><b>Telefono: </b><?php echo $telefono; ?></label>
+      <label style="padding-right: 85px;" ><b>Teléfono: </b><?php echo $telefono; ?></label>
       <label ><b>Correo: </b><?php echo $correo; ?></label><br>
-      <label style="margin-bottom: 30px;" ><b>Direccion:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br><br>
-      <label style="margin-bottom: 100px;"><b>DATOS DE LA CITA</b></label><br>
-      <label style="margin-bottom: 100px;" ><b>Fecha de la cita:</b> <?php  echo ucwords(strtolower($var1)); ?></label> <br>
-      <label style="margin-bottom: 100px;" ><b>Hora de la cita:</b> <?php  echo ucwords(strtolower($var2)); ?></label> <br>
-      <label style="margin-bottom: 100px;" ><b>Especialista de la cita:</b> <?php  echo ucwords(strtolower($var3)); ?></label> <br>
-      <label style="margin-bottom: 100px;" ><b>Especialidad de la cita:</b> <?php  echo ucwords(strtolower($var5)); ?></label> <br>
-      <label style="margin-bottom: 100px;" ><b>Area de la cita:</b> <?php  echo ucwords(strtolower($var6)); ?></label> <br>
+      <label style="margin-bottom: 30px;" ><b>Dirección:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br><br>
     </fieldset>
     <br>
-
-  
-    
+    <fieldset>
+      <legend> Información de la Cita</legend><br>
+      <label style="margin-bottom: 100px;" ><b>Fecha de la Cita:</b> <?php  echo ucwords(strtolower($var1)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Hora de la Cita:</b> <?php  echo ucwords(strtolower($var2)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Especialista de la Cita:</b> <?php  echo ucwords(strtolower($var3)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Especialidad de la Cita:</b> <?php  echo ucwords(strtolower($var5)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Área de la Cita:</b> <?php  echo ucwords(strtolower($var6)); ?></label> <br>
+    </fieldset>
    </main>
-
-    
   </body>
 </html>
 <?php
 require_once '../libreria_reportes/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 $html = ob_get_clean();
-//echo $html;
-
-
-
 $dompdf = new Dompdf();
-
 $options = $dompdf->getOptions();
 $options->set(array('isRemoteEnabled' => true));
 $dompdf ->setOptions($options);
-
 $dompdf ->loadHtml($html);
-
-$dompdf->setPaper('a4','landscape');
+$dompdf->setPaper('letter');
 $dompdf->render();
 
 $dompdf->stream("reporte.pdf", array("Attachment" => false));

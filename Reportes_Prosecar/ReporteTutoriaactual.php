@@ -30,12 +30,12 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','B',14);
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
-		$this->SetX(120);
-		$this->Cell(180, 8, utf8_decode('Reporte de Tutorias en proceso'));
+		$this->SetX(108);
+		$this->Cell(170, 8, utf8_decode('Reporte de Tutorías en proceso'));
 		$this->SetX(5);
 		$this->Ln(5);
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
+		$this->Cell(42, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
 		
 		$this->Ln(10);
 	}
@@ -52,7 +52,7 @@ class PDF extends FPDF {
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+	
 	$this->SetX(10);
 	
 

@@ -104,6 +104,11 @@ try {
     right: 0cm;
     height: 4cm;
   }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
+  }
   .c{
     width: 24.5%;
     margin:2px;
@@ -121,29 +126,23 @@ try {
     margin:2px;
     min-width: 49.5%;
     min-height: 200px;
-
   }
-
-  .espacio{
-    padding-left: 4px;
-    padding-right: 4px;
-
-  }
+  .pagenum:before {
+        content: counter(page);
+    }
 
     </style>
-    <title>Reporte citas medicas</title>
+    <title>Reporte Citas Medicas Estudiante</title>
   </head>
   <body>
     <header>
+      <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Reporte de citas de los estudiante</p>
+      <p  style="text-align: center; font-size: 18px;">Reporte de Citas Médicas del Estudiante</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-    
-   
-
    <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
+      <p style="  text-align: center;">Página<span  class="pagenum"></p> 
    </footer>
    <main>
     <fieldset>
@@ -194,10 +193,20 @@ try {
 
     <br>
     <fieldset>
-      <legend>Datos de las citas medicas </legend>
+      <legend>Datos de las Citas Médicas </legend>
     <br>
     <table>
-    <?php
+      <thead>
+         <tr>
+           <th>Fecha Cita</th>
+           <th>Hora</th>
+           <th>Especialista</th>
+           <th>Especialidad</th>
+           <th>Área</th>  
+         </tr>
+      </thead>
+      <tbody>
+      <?php
        $consulta = "SELECT  IC.CODIGO_CITA,
        P.CODIGO_PERSONA,
        IC.FECHA_CITA,
@@ -212,36 +221,26 @@ try {
        est.NOMBRE as nombre_estado,
        ar.NOMBRE as nombre_area, 
        espe.NOMBRE as nombre_especialidad
-     FROM tbl_inscripcion_cita IC 
-     left join tbl_persona_especialidad E   on IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
-     left join  tbl_persona P               on P.CODIGO_PERSONA = E.CODIGO_PERSONA
-     left join tbl_persona OT               on OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
-     left join tbl_area a                   on IC.AREA_CITA = a.CODIGO_AREA 
-     left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
-     left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
-     left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
-     where   IC.CODIGO_PERSONA = '$cod_usuario' AND  IC.CODIGO_ESTADO =5 and IC.AREA_CITA =2; ";
-       $resul=$conn->query($consulta);
-       if ($resul->num_rows > 0) {
-        while($row = $resul->fetch_assoc()) { 
-          $var1 = $row['FECHA_CITA'];
-          $var2 = $row['HORARIO'];
-          $var3 = $row['MEDICO'];
-          $var4 = $row['PACIENTE'];
-          $var5 = $row['nombre_especialidad'];
-          $var6 = $row['nombre_area'];
+        FROM tbl_inscripcion_cita IC 
+        left join tbl_persona_especialidad E   on IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
+        left join  tbl_persona P               on P.CODIGO_PERSONA = E.CODIGO_PERSONA
+        left join tbl_persona OT               on OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
+        left join tbl_area a                   on IC.AREA_CITA = a.CODIGO_AREA 
+        left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
+        left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
+        left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
+        where   IC.CODIGO_PERSONA = '$cod_usuario' AND  IC.CODIGO_ESTADO =5 and IC.AREA_CITA =2; ";
+          $resul=$conn->query($consulta);
+          if ($resul->num_rows > 0) {
+            while($row = $resul->fetch_assoc()) { 
+              $var1 = $row['FECHA_CITA'];
+              $var2 = $row['HORARIO'];
+              $var3 = $row['MEDICO'];
+              $var4 = $row['PACIENTE'];
+              $var5 = $row['nombre_especialidad'];
+              $var6 = $row['nombre_area'];
        
-        ?>
-      <thead>
-         <tr>
-           <th>Fecha de la cita</th>
-           <th>Hora</th>
-           <th>Especialista</th>
-           <th>Especialidad</th>
-           <th>Area</th>  
-         </tr>
-      </thead>
-      <tbody>
+      ?>
          <tr>
          <td style="text-align: center"><?php echo ucwords(strtolower($var1)); ?></td>
          <td style="text-align: center"><?php echo ucwords(strtolower($var2)); ?></td>
@@ -278,7 +277,7 @@ $dompdf ->setOptions($options);
 
 $dompdf ->loadHtml($html);
 
-$dompdf->setPaper('a4','landscape');
+$dompdf->setPaper('letter');
 $dompdf->render();
 
 $dompdf->stream("reporte.pdf", array("Attachment" => false));

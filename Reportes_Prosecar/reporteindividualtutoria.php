@@ -123,28 +123,28 @@ try {
     min-height: 200px;
 
   }
-
-  .espacio{
-    padding-left: 4px;
-    padding-right: 4px;
-
+  .pagenum:before {
+     content: counter(page);
+  }
+  img{
+    float: right;
+    width: 70px; 
+    padding-right: 1.5cm;
   }
 
     </style>
-    <title>Reporte de Tutoria</title>
+    <title>Reporte de Tutoría</title>
   </head>
   <body>
     <header>
+     <img src="../Vistas/modulos/REPORTES/img/LOGO.jpg">
       <p font face="Arial"  style="text-align: center; font-size:20px"><b>PROYECTO SEMILLERO CARMELITANO PROSECAR</b> <img></p>
-      <p  style="text-align: center; font-size: 18px;">Reporte de tutoria</p>
+      <p  style="text-align: center; font-size: 18px;">Reporte de Tutoría</p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-    
-   
-
-   <footer>
-      <p style="  text-align: center;"><b> Prosecar © Todos los derechos reservados.</b></p> 
-   </footer>
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
+    </footer>
    <main>
     <fieldset>
       <?php
@@ -180,21 +180,21 @@ try {
     }
       ?>      
       <legend>  Datos Personales Estudiante</legend><br>
-      <label style="margin-bottom: 100px;" ><b>Nombre completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
-      <label style="margin-bottom: 30px;" ><b>Lugar y fecha de nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
+      <label style="margin-bottom: 100px;" ><b>Nombre Completo:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
+      <label style="margin-bottom: 30px;" ><b>Lugar y fecha Nacimiento:</b> <?php  echo ucwords(strtolower($lugar)); ?></label> <br>
       <label style="padding-right: 80px;" ><b>DNI: </b><?php echo $dni; ?></label>
       <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
       <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
-      <label style="padding-right: 85px;" ><b>Telefono: </b><?php echo $telefono; ?></label>
+      <label style="padding-right: 85px;" ><b>Teléfono: </b><?php echo $telefono; ?></label>
       <label><b>Correo: </b><?php echo $correo; ?></label><br>
-      <label style="margin-bottom: 30px;" ><b>Direccion:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
+      <label style="margin-bottom: 30px;" ><b>Dirección:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
 
     </fieldset>
     <br>
 
     <br>
     <fieldset>
-      <legend>Datos de la Tutoria</legend>
+      <legend>Datos de la Tutoría</legend>
     <br>
     <table>
     <?php
@@ -237,13 +237,13 @@ try {
         ?>
       <thead>
          <tr>
-           <th>Tutoria</th>
-           <th>Hora inicio</th>
-           <th>Hora final</th>
+           <th>Tutoría</th>
+           <th>Hora Inicio</th>
+           <th>Hora Final</th>
            <th>Grado</th>
            <th>Modalidad</th>  
-           <th>Fecha inicial</th>
-           <th>Fecha final</th> 
+           <th>Fecha Inicial</th>
+           <th>Fecha Final</th> 
            <th>Año</th>  
          </tr>
       </thead>

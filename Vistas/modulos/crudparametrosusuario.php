@@ -118,7 +118,7 @@ include_once "conexion3.php";
             <form  method="POST" class="needs-validation" novalidate><!-- form start -->
               <div class="card-body">
                 <div class="table-responsive">
-                  <table id="example1" class="table table-bordered table-striped">
+                  <table id="parametros" class="table table-bordered table-striped">
                       <thead>
                         <tr>
                           <th class="text-center">Editar</th>
@@ -237,7 +237,7 @@ include_once "conexion3.php";
                                     <h4 class="text-center">Editar Parametro Usuario</h4>
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 </div>
-                                <form id="FORMEDITRAPERSONAS" method="POST" >
+                                <form  method="POST" >
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                     <input  type="text"  value ="<?php echo $var4; ?>" hidden class="form-control"  maxlength="2" minlength="1"    autocomplete = "off" type="text" onkeypress="return solonumero(event)" name="codigo_usuario" id="editar_parvalor">
@@ -327,104 +327,9 @@ include_once "conexion3.php";
 </div><!-- ./wrapper -->
 
 
-<script type="text/javascript"> 
-$( function() {
-    $("#ESTADOUSUARIO").change( function() {
-        if ($(this).val() === "4") {
-          document.getElementById('CONUSUARIO').disable = true;
-        
-        } else{
-          document.getElementById('CONUSUARIO').disable = false;
-         
-        }
-    });
- }); 
 
-</script>
-
-
-
-<script type="text/javascript"> 
-   //funcion de mostrar el estilo de la datatable
-  $( function() {
-    $("#cbx_persona").change( function() {
-        if ($(this).val() === "2") {
-           document.getElementById("c").style.display="block";
-        } else {
-            document.getElementById("c").style.display="none";
-        }
-    });
-  });
-</script>
-
-                                  
+                             
 <!-- funciones del sistema -->
-<script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
- //funcion para solu numeros ingresar en el campo
- function soloNumeros_tel(e){
-   var teclaPulsada=window.event ? window.event.keyCode:e.which;
-    // capturamos el contenido del input
-    var valor=document.getElementById("tele").value;
-    if(valor.length<9){
-      if(teclaPulsada==9){
-        return true;
-      }
-    // devolvemos true o false dependiendo de si es numerico o no
-    return /\d/.test(String.fromCharCode(teclaPulsada));
-    }else{
-    return false;
-    }
-  }
-   //funcion para quitar espacios
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-  //funcion para poner mayusculas
-  function mayus(e) {
-    e.value = e.value.toUpperCase();
-  }
-   //funcion sin espacios 
-  function sinespacio(e) {
-    var cadena =  e.value;
-    var limpia = "";
-    var parts = cadena.split(" ");
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-     nuevacadena = parts[i];
-     subcadena = nuevacadena.trim();
-     if(subcadena != "") {
-       limpia += subcadena + " ";
-      }
-    }
-   limpia = limpia.trim();
-   e.value = limpia;
-  };
-  //otra funcion para quitar espacios :V
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
-</script>
-
 <script type="text/javascript"> function solonumero(e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla==8) return true;
@@ -442,3 +347,30 @@ $( function() {
       window.open(this.href,'_self');
     } 
   </script>
+  <script type="text/javascript"> 
+   //funcion de mostrar el estilo de la datatable
+  $(document).ready( function () {
+      $('#parametros').DataTable({
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+        "infoEmpty": "Mostrando 0 a 0 de 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total entradas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Entradas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar Parámetro:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        }
+      },
+      })
+  } );
+</script>
