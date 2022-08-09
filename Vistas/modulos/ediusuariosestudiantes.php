@@ -339,7 +339,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Segundo Nombre</label>
-                                          <input  type="text"  value ="<?php echo $var20; ?>" required   class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi2" >
+                                          <input  type="text"  value ="<?php echo $var20; ?>"    class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);"  onkeyup="mayus(this);" autocomplete = "off" type="text"  onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="nombre_modi2" >
                                         </div>
                                       </div>
                                       <div class="col-sm-3">
@@ -351,7 +351,7 @@ include_once "conexion3.php";
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Segundo Apellido</label>
-                                          <input  type="text"  value ="<?php echo $var21; ?>" class="form-control" required  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi2" id="apellido_modi2">
+                                          <input  type="text"  value ="<?php echo $var21; ?>" class="form-control" maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetras(event);" placeholder="Ingrese Nombre" name="apellido_modi2" id="apellido_modi2">
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
