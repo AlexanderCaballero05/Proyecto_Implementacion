@@ -112,8 +112,8 @@ include('conexion2.php');
    <main>
     <fieldset>
       <?php
-      if (isset($_POST['imprimirmatriculaindividual'])) {
-        $codigo_estudiante=($_POST['imprimirmatriculaindividual']);
+      if (isset($_POST['imprimirmatriculaindividuales'])) {
+        $codigo_estudiante=($_POST['imprimirmatriculaindividuales']);
       }
       $query = "SELECT DISTINCT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.PRIMER_NOMBRE,pe.SEGUNDO_NOMBRE,pe.PRIMER_APELLIDO, pe.SEGUNDO_APELLIDO) as ESTUDIANTE, pe.DNI, pe.FECHA_NACIMIENTO, es.GRADO_ACTUAL, es.INDICE_ACADEMICO
       FROM tbl_matricula_academica ma, tbl_estudiante es, tbl_persona pe
@@ -161,8 +161,8 @@ include('conexion2.php');
          </tr>
       </thead>
     <?php
-    if (isset($_POST['imprimirmatriculaindividual'])) {
-      $codigo_estudiante=($_POST['imprimirmatriculaindividual']);
+    if (isset($_POST['imprimirmatriculaindividuales'])) {
+      $codigo_estudiante=($_POST['imprimirmatriculaindividuales']);
     }
        $consulta = "SELECT  t.NOMBRE as TUTORIA, ma.CODIGO_MATRICULA, ma.CODIGO_ESTUDIANTE, t.CODIGO_TUTORIA,
        CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) as TUTOR,m.TIPO as MODALIDAD,se.NOMBRE as SECCION , c.HORA, c.CODIGO_CARGA 
@@ -172,7 +172,7 @@ include('conexion2.php');
         AND c.CODIGO_MODALIDAD= m.CODIGO_MODALIDA
         AND ma.CODIGO_CARGA = c.CODIGO_CARGA
         AND c.CODIGO_SECCION = se.CODIGO_SECCION
-        AND t.CODIGO_AREA = 1
+        AND t.CODIGO_AREA = 4
         AND ma.CODIGO_ESTUDIANTE = '$codigo_estudiante'";
        $resul=$conn->query($consulta);
        if ($resul->num_rows > 0) {

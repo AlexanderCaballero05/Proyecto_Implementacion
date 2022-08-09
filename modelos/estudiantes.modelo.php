@@ -29,7 +29,7 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora
 Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de registro correctamente
 ----------------------------------------------------------------------->
 <?php
- session_start();
+ //session_start();
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
