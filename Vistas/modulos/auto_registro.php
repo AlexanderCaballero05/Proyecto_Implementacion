@@ -27,7 +27,10 @@ Descripcion:       Pantalla que registra usuarios desde afuera del administrador
  Historial de Cambio
 -----------------------------------------------------------------------
 Programador            Fecha                Descripcion
-Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
+Diana Rut Garcia	 	26-may-2022       Cambio en validaciones 
+Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, y en colores y el tamaño de los botones
+-->
+
 <?php
   include_once "conexion3.php";
 ?>
@@ -118,62 +121,64 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
           <div class="card-body">
            <form  action="../../modelos/autoregistro_validar.php"  method="POST" class="formulario" id="formulario">
            <h5>Datos Personales</h5><hr size="5px;" style="color:blue;">
-             <div class="row">
+             <div class="row"><!--INICIO del segundo row-->
+             <div class="col-md-6 mb-3"><!--Campo del numero de identidad de la persona -->
+                 <label  class="control-label mb-2">Número de Idendidad:</label> 
+                  <div class="form-group">
+                    <input type="text" name="dni" class="form-control" placeholder="Ej: 0801199908495" aria-label="dni" minlength="13" maxlength="13" required pattern="[0-9]{13,13}" onkeypress="return solonumero(event)" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
+                  </div>
+                </div><!--Campo del numero de identidad de la persona -->
                 <div class="col-md-6 mb-2"><!--INICIO 1er NOMBRE-->
-                 <label  class="control-label mb-2">Primer Nombre</label> 
+                 <label  class="control-label mb-2">Primer Nombre:</label> 
                   <div class="form-group">
                    <input type="text" name="nombre1" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required=""> 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3"><!--INICIO 2er NOMBRE-->
-                 <label  class="control-label mb-2">Segundo Nombre</label> 
+                 <label  class="control-label mb-2">Segundo Nombre:</label> 
                   <div class="form-group">
                    <input type="text" name="nombre2" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   > 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3"><!--INICIO 1er APELLIDO-->
-                 <label  class="control-label mb-2">Primer Apellido</label> 
+                 <label  class="control-label mb-2">Primer Apellido:</label> 
                   <div class="form-group">
                    <input type="text" name="apellido1" class="form-control"  aria-label="primer apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
                   </div>
                 </div>
-                <div class="col-md-6 mb-3"><!--INICIO 2er APELLIDO-->
-                 <label  class="control-label mb-2">Segundo Apellido</label> 
+                
+             </div><!--FIN del primer row -->
+             <div class="row"><!--Inicio del segundorow -->
+             <div class="col-md-6 mb-3"><!--INICIO 2er APELLIDO-->
+                 <label  class="control-label mb-2">Segundo Apellido:</label> 
                   <div class="form-group">
                    <input type="text" name="apellido2" class="form-control"  aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   >
                   </div>
-                </div>
-             </div><!--fin del row -->
-             <div class="row">
-               <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">Telefono</label> 
+                </div><!--Fin 2er APELLIDO-->
+                <div class="col-md-6 mb-3"><!-- Inicio del campo fecha de nacimiento -->
+                 <label  class="control-label mb-2">Fecha Nacimiento:</label> 
                   <div class="form-group">
-                   <input type="text" name="telefono" class="form-control" placeholder="Eje:99001100" aria-label="Número de teléfono"  maxlength="8" minlength="8" onkeypress="return solonumero(event)" required pattern="[0-9]{8,8}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
+                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max="2011-01-01" min="1950-01-01">
                   </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">Dirección</label> 
+                </div><!-- Fin del campo fecha de nacimiento -->
+               
+              </div><!--fin del segundo row -->
+              <div class="row"><!--Inicio del tercer row-->
+              <div class="col-md-6 mb-3"><!-- Inicio del campo Lugar de nacimiento -->
+                 <label  class="control-label mb-2">Lugar Nacimiento:</label> 
                   <div class="form-group">
-                   <input type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="">
+                   <input type="text" name="lugarna" class="form-control"  aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
                   </div>
-                </div>
-              </div><!--fin row -->
-              <div class="row">
-               <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">DNI</label> 
-                  <div class="form-group">
-                    <input type="text" name="dni" class="form-control" placeholder="EJEM: 0801200308465" aria-label="dni" minlength="13" maxlength="13" required pattern="[0-9]{13,13}" onkeypress="return solonumero(event)" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">Sexo</label> 
+                </div><!-- Fin del campo Lugar de nacimiento -->
+                <div class="col-md-6 mb-3"><!--Inicio del campo sexo-->
+                 <label  class="control-label mb-2">Sexo:</label> 
                   <div class="form-group">
                     <select name="sexo" class="form-select">
                       <?php
                         $query = "SELECT CODIGO_SEXO, SEXO FROM TBL_SEXO;";
                         $resultado=$conn->query($query);
                        ?>
-                      <option selected disabled value="">--Seleccionar--</option>
+                      <option selected disabled value="">--Seleccionar Sexo--</option>
                         <?php 
                          if($resultado->num_rows > 0) {
                             while($row = $resultado->fetch_assoc()) { 
@@ -187,25 +192,25 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
                         ?>
                     </select>
                   </div>
-                </div>
-              </div><!--fin row -->
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">Fecha nacimiento</label> 
+                </div><!--fin del campo sexo-->
+              </div><!-- fin del tercer row -->
+              <div class="row"><!-- Inicio del cuarto row -->
+               <div class="col-md-6 mb-3"><!--inicio campo telefono-->
+                 <label  class="control-label mb-2">Teléfono:</label> 
                   <div class="form-group">
-                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max="2011-01-01" min="1950-01-01">
+                   <input type="text" name="telefono" class="form-control" placeholder="Eje:99001100" aria-label="Número de teléfono"  maxlength="8" minlength="8" onkeypress="return solonumero(event)" required pattern="[0-9]{8,8}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
                   </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                 <label  class="control-label mb-2">Lugar nacimiento</label> 
+                </div><!--final campo telefono-->
+                <div class="col-md-6 mb-3"><!--inicio campo dirección-->
+                 <label  class="control-label mb-2">Dirección:</label> 
                   <div class="form-group">
-                   <input type="text" name="lugarna" class="form-control" placeholder="Ciudad" aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
+                   <input type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="">
                   </div>
-                </div>
-              </div><!--fin row -->
+                </div><!--fin campo dirección-->
+              </div><!--fin del cuarto row -->
               <!-- datos que solo tiene que ver con la tabla de usuarios -->
               <h5>Datos de usuario</h5><hr size="5px;" style="color:blue;">
-              <div class="row">
+              <div class="row"><!-- Inicio del quinto  row -->
                <div class="col-md-6 mb-3">
                   <div class="input-group">
                     <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
@@ -219,8 +224,8 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
                   </div>
                 </div>
                 
-              </div><!-- fin row-->
-              <div class="row">
+              </div><!-- fin del quinto row-->
+              <div class="row"><!-- Inicio del ultimo  row -->
                 <div class="col-md-6 mb-3">
                   <div class="input-group mb-3" id="grupo__clave_nueva"><!--Para ingresar la contraseña -->
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
@@ -234,33 +239,32 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
                 <div class="col-md-6 mb-3">
                   <div class="input-group mb-3" id="grupo__confirmar_clave" ><!--Para ingresar la contraseña -->
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" id="confirmar_clave" name="confirmar_clave" class="form-control" placeholder="Ingresa tu contrase&ntilde;a" onkeyup="noespacio(this, event)"  minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
+                    <input type="password" id="confirmar_clave" name="confirmar_clave" class="form-control" placeholder="confirmar contrase&ntilde;a" onkeyup="noespacio(this, event)"  minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
                       <span class="input-group-text" onclick="mostrar2()"><i class=" icon2 fa fa-eye-slash"></i></span>
                       <div class="invalid-tooltip">
                           Llene este campo
                       </div>
                   </div>
                 </div>
-              </div>
+              </div><!-- Fin del ultimo  row -->
               <!-- botones -->
-              <div class="d-grid mb-2">
-                <button name = "btnregistrar" type="submit" class="btn btn-primary btn-block">REGISTRATE</button>
-              </div>
-              <div class="d-grid mb-2">
-                <button  onclick="location.href='../../index.php'" name = "btncancelar" type="button" class="btn btn-danger btn-block">CANCELAR</button>
-              </div>
+              <div class="d-grid gap-2 d-md-block"> 
+              <button  onclick="location.href='../../index.php'" name = "btncancelar" type="button" class="btn btn-outline-danger btn-lg">Cancelar</button>
+                <button name = "btnregistrar" type="submit" class="btn btn-primary btn-lg">Registrate</button>
+              </div> 
            </form>
-         </div>
+         </div><!-- div de cierre del card -->
         </div>
        </div>
      </div>
-   </div>
+   </div><!-- div de cierre del container(contenedor)-->
 
     <script src="../../js/cambio_clave.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   </body>
 </html>
 
+<!-- *********************************************script de las validaciones***************************************** -->
 <script>
       function soloLetras(e){
        key = e.keyCode || e.which;
@@ -297,6 +301,7 @@ Diana Rut Garcia	 	26-may-2022       Cambio en validaciones  -->
   }
 </script>
 
+<!-- No permite ingresar espacios -->
 <script type="text/javascript">
 
 function sinespacio(e) {
@@ -320,6 +325,7 @@ function sinespacio(e) {
 };
 </script>
 
+<!-- Quita los espacios ingresados -->
 <script type="text/javascript">
   function quitarespacios(e) {
     var cadena =  e.value;
@@ -352,6 +358,8 @@ function sinespacio(e) {
         }
       }
  </script>
+
+ <!-- Validación para que en el campo solo se ingresen números -->
 <script type="text/javascript"> function solonumero(e) {
         tecla = (document.all) ? e.keyCode : e.which;
         if (tecla==8) return true;
