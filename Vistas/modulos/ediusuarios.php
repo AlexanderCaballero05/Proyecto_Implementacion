@@ -64,7 +64,7 @@ include_once "conexion3.php";
   </div>
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Mantenimiento Usuarios</h4>    
+          <h4>Usuarios</h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">

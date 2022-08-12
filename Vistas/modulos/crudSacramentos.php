@@ -42,7 +42,7 @@ Luz Montoya             18/06/2022            Arreglo de errores de ortografía
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3 ">
-            <h4>Mantenimiento Sacramentos</h4>    
+            <h4>Sacramentos</h4>    
       </div>
       <div class="row">
         <div class="col-md-12">

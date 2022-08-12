@@ -44,7 +44,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
 
      <section class="content-header text-xl-center mb-3 btn-light">
           <h1>
-              <h4>Mantenimiento de Contenido Socioeconómico</h4>
+              <h4>Contenido Socioeconómico</h4>
           </h1>     
       </section>
 

@@ -76,7 +76,7 @@ include "conexionpdo.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 ">
-              <h4>Citas Generales Prosecar </h4>
+              <h4>Citas Generales</h4>
     </div>
     <section class="content">
        <div class="card"> 

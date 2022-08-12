@@ -52,7 +52,7 @@
   <section class="content">
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 ">
-          <h4>Mantenimiento Familiares</h4>     
+          <h4>Familiares</h4>     
       </section>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
