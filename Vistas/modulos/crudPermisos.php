@@ -119,9 +119,8 @@
                           <th class="text-center">Permiso Objeto</th>
                           <th class="text-center">Permiso Consultar</th>
                           <th class="text-center">Permiso Insertar</th>
-                          <th class="text-center">Permiso Eliminar</th>
                           <th class="text-center">Permiso Editar</th>
-                         
+                          <th class="text-center">Permiso Eliminar</th>
                                                    
 
                         </tr>
@@ -230,9 +229,8 @@
                           <td class="text-center"><?php echo $var5; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
-                          
+                          <td class="text-center"><?php echo $var7; ?></td>
                                                    <!--INICIO DEL MODAL ELIMINAR   -->
                          <div id="ELIMINAR_PERMISO<?php echo $var1 ?>"  name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO"class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -323,23 +321,25 @@
                                         </div>
                                       </div>
 
-                                         <!--Inicio combobox eliminar -->
-                                        <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Eliminar</label>
-                                            <select class="form-control" name="ediEliminar" id="editar_descripcion">
-                                                 <option hidden value="<?php echo $var7?>"> <?php echo $var7 ?></option>
-                                                 <option value="SI">SI</option>
-                                                 <Option value="NO">NO</Option>
-                                            </select>
-                                        </div>
-                                      </div>
+                                        
                                         <!--Inicio combobox Editar-->
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Editar</label>
                                             <select class="form-control" name="ediActualizar" id="editar_descripcion">
                                                  <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
+                                            </select>
+                                        </div>
+                                      </div>
+
+                                       <!--Inicio combobox eliminar -->
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Eliminar</label>
+                                            <select class="form-control" name="ediEliminar" id="editar_descripcion">
+                                                 <option hidden value="<?php echo $var7?>"> <?php echo $var7 ?></option>
                                                  <option value="SI">SI</option>
                                                  <Option value="NO">NO</Option>
                                             </select>

@@ -548,6 +548,16 @@ Diana Rut Garcia        06-08-2022               Se agreo un update a la parte d
       $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
       date_default_timezone_set("America/Guatemala");
       $Fechaactual=  date("Y-m-d" );
+
+            //Para cuando se cambie el estado a activo de la persona se modifique el par valor del usuario
+            if($ESTADO == '2'){
+            $sql = "UPDATE tbl_parametros_usuarios 
+            SET PAR_VALOR = '0'
+            WHERE CODIGO_USUARIO = '$CODUSUARIO'
+            AND CODIGO_PARAMETRO = '1'; ";
+            $consulta=$conn->query($sql); 
+            }
+
       if($ROLL == "1"){ //Determina depende del roll que tipo de persona le corresponde,asi poder actualizar con ese tipo de persona
         $tipoPersona = "1"; // persona administrador
       }elseif($ROLL == "2"){
@@ -590,11 +600,18 @@ Diana Rut Garcia        06-08-2022               Se agreo un update a la parte d
             $ID_PERSONA_CORREO = $row;
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
+
+               
+
                 $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis','$ROLL');" ;
                 $consulta=$conn->query($sql);
                 //Para cuando se cambie el rol de la persona tambien se cambie el tipo de persona 
                 $UPDA = "UPDATE TBL_PERSONA SET CODIGO_TIPO_PERSONA ='$tipoPersona' WHERE CODIGO_PERSONA= '$CODUSUARIO' ";
                 $updarespu=$conn->query($UPDA);
+              
+
+                 
+
                 if ($consulta>0) {
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> alert('Usuario modificado exitosamente');
