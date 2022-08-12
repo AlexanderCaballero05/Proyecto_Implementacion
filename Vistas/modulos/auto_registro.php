@@ -116,7 +116,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
        <div class="col-md-6 d-lg-block col-md-8  col-sm-10  col-xl-6">
         <div  class="card ">
           <div class="card-header  ">
-           <h3 class="fw-bold text-center py-3">REGISTRARSE</h3>
+           <h3 class="fw-bold text-center py-3">REGISTRATE</h3>
           </div>
           <div class="card-body">
            <form  action="../../modelos/autoregistro_validar.php"  method="POST" class="formulario" id="formulario">
@@ -125,25 +125,25 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
              <div class="col-md-6 mb-3"><!--Campo del numero de identidad de la persona -->
                  <label  class="control-label mb-2">Número de Idendidad:</label> 
                   <div class="form-group">
-                    <input type="text" name="dni" class="form-control" placeholder="Ej: 0801199908495" aria-label="dni" minlength="13" maxlength="13" required pattern="[0-9]{13,13}" onkeypress="return solonumero(event)" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
+                    <input type="text" name="dni" class="form-control" placeholder="Ej: 0801199908495" aria-label="dni" minlength="13" maxlength="13" required pattern="[0-9]{13,13}" onkeypress="return solonumero(event)" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)" autocomplete = "off">
                   </div>
                 </div><!--Campo del numero de identidad de la persona -->
                 <div class="col-md-6 mb-2"><!--INICIO 1er NOMBRE-->
                  <label  class="control-label mb-2">Primer Nombre:</label> 
                   <div class="form-group">
-                   <input type="text" name="nombre1" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required=""> 
+                   <input type="text" name="nombre1" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="" autocomplete = "off"> 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3"><!--INICIO 2er NOMBRE-->
                  <label  class="control-label mb-2">Segundo Nombre:</label> 
                   <div class="form-group">
-                   <input type="text" name="nombre2" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   > 
+                   <input type="text" name="nombre2" class="form-control"  onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);" autocomplete = "off"  > 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3"><!--INICIO 1er APELLIDO-->
                  <label  class="control-label mb-2">Primer Apellido:</label> 
                   <div class="form-group">
-                   <input type="text" name="apellido1" class="form-control"  aria-label="primer apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="">
+                   <input type="text" name="apellido1" class="form-control"  aria-label="primer apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"  required onblur="quitarespacios(this);" onkeydown="sinespacio(this);" required="" autocomplete = "off">
                   </div>
                 </div>
                 
@@ -152,7 +152,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
              <div class="col-md-6 mb-3"><!--INICIO 2er APELLIDO-->
                  <label  class="control-label mb-2">Segundo Apellido:</label> 
                   <div class="form-group">
-                   <input type="text" name="apellido2" class="form-control"  aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);"   >
+                   <input type="text" name="apellido2" class="form-control"  aria-label="segundo apellido" onkeyup="mayus(this);" minlength="3" maxlength="20" onkeypress="return soloLetras(event);" autocomplete = "off"  >
                   </div>
                 </div><!--Fin 2er APELLIDO-->
                 <div class="col-md-6 mb-3"><!-- Inicio del campo fecha de nacimiento -->
@@ -198,13 +198,13 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                <div class="col-md-6 mb-3"><!--inicio campo telefono-->
                  <label  class="control-label mb-2">Teléfono:</label> 
                   <div class="form-group">
-                   <input type="text" name="telefono" class="form-control" placeholder="Eje:99001100" aria-label="Número de teléfono"  maxlength="8" minlength="8" onkeypress="return solonumero(event)" required pattern="[0-9]{8,8}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)">
+                   <input type="text" name="telefono" class="form-control" placeholder="Eje:99001100" aria-label="Número de teléfono"  maxlength="8" minlength="8" onkeypress="return solonumero(event)" required pattern="[0-9]{8,8}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)" autocomplete = "off">
                   </div>
                 </div><!--final campo telefono-->
                 <div class="col-md-6 mb-3"><!--inicio campo dirección-->
                  <label  class="control-label mb-2">Dirección:</label> 
                   <div class="form-group">
-                   <input type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="">
+                   <input type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="" autocomplete = "off">
                   </div>
                 </div><!--fin campo dirección-->
               </div><!--fin del cuarto row -->
@@ -214,13 +214,13 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                <div class="col-md-6 mb-3">
                   <div class="input-group">
                     <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
-                    <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario"  onkeyup="noespacio(this, event);mayus(this)" minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeypress="return soloLetras(event);" required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" >
+                    <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario"  onkeyup="noespacio(this, event);mayus(this)" minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeypress="return soloLetras(event);" required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" autocomplete = "off">
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="input-group">
                   <span  class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
-                      <input name ="ingcorreo" type="email" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" onblur="quitarespacios(this);" onkeyup="noespacio(this, event);" onkeydown="sinespacio(this);" >
+                      <input name ="ingcorreo" type="email" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" onblur="quitarespacios(this);" onkeyup="noespacio(this, event);" onkeydown="sinespacio(this);" autocomplete = "off" >
                   </div>
                 </div>
                 
