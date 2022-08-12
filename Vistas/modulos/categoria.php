@@ -103,9 +103,6 @@ Diana Rut               27/05/2022            Se agrego con js required en false
              <a class="nav-link active" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
-            </li>
-            <li class="nav-item">
              <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
           </ul>

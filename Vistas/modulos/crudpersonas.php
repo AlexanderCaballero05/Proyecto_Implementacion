@@ -74,9 +74,6 @@ include_once "conexion3.php";
             <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
-            </li>
-            <li class="nav-item">
              <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
             </li>
           </ul>

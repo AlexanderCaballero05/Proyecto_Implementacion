@@ -96,7 +96,7 @@ Programador               Fecha                      Descripcion
 			<option Selected disabled value="">Selecciona un punto...</option>
 			<?php
 				include_once 'Connet.php';
-				$ruta="C:/xampp/htdocs/Proyecto_Implementacion8/vistas/modulos/Backup/" ;
+				$ruta="C:/xampp/htdocs/Proyecto_Implementacion22/vistas/modulos/Backup/" ;
 				if(is_dir($ruta)){
 				    if($aux=opendir($ruta)){
 				        while(($archivo = readdir($aux)) !== false){
