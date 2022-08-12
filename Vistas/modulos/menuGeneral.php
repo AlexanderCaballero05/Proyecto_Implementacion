@@ -484,7 +484,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class="nav-icon fas fa-briefcase "></i>
                           <p>
-                           Área Académica
+                           Área del Tutor
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>

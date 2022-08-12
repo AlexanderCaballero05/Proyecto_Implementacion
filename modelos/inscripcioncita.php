@@ -297,7 +297,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $fecha_cita = $_POST['fecha_cita'];
       $hora_cita = $_POST['hora_cita'];
       $area_cita = "2";
-      $estado = "5";
+      $estado = "9";
       $fechaactual = date('Y-m-d'); 
       $user = $_SESSION['vario'];
 
@@ -356,7 +356,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $fecha_cita = $_POST['fecha_cita'];
       $hora_cita = $_POST['hora_cita'];
       $area_cita = "3";
-      $estado = "5";
+      $estado = "9";
       $fechaactual = date('Y-m-d'); 
       $user = $_SESSION['vario'];
 
@@ -423,7 +423,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
       $fecha_cita = $_POST['fecha_cita'];
       $hora_cita = $_POST['hora_cita'];
       $area_cita = "4";
-      $estado = "5";
+      $estado = "9";
       $fechaactual = date('Y-m-d'); 
       $user = $_SESSION['vario'];
 
