@@ -79,7 +79,12 @@ try {
     alert('El numero de identidad $dni ya se encuentra registrado');
         window.location = '../Vistas/modulos/auto_registro.php';
         </script>";
-    // SI LOS DATOS DE USUARIO E IDENTIDAD NO EXISTEN PUEDE INSERTAR LOS DATOS EN LA BASE DE DATOS
+  } elseif (($filacor > 0) || ($correo == $buscarco)) {
+    echo "<script>
+    alert('El correo: $correo ya se encuentra registrado');
+          window.location = '../Vistas/modulos/auto_registro.php';
+         </script>";
+    // SI LOS DATOS DE USUARIO , IDENTIDAD Y CORREO NO EXISTEN PUEDE INSERTAR LOS DATOS EN LA BASE DE DATOS
   } else {
 
     //INSERTS A LA BASE DE DATOS

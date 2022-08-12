@@ -167,7 +167,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
               <div class="col-md-6 mb-3"><!-- Inicio del campo Lugar de nacimiento -->
                  <label  class="control-label mb-2">Lugar Nacimiento:</label> 
                   <div class="form-group">
-                   <input type="text" name="lugarna" class="form-control"  aria-label="lugar" onkeyup="mayus(this);" maxlength="30">
+                   <input type="text" name="lugarna" class="form-control"  aria-label="lugar" onkeyup="mayus(this);" maxlength="30" autocomplete = "off">
                   </div>
                 </div><!-- Fin del campo Lugar de nacimiento -->
                 <div class="col-md-6 mb-3"><!--Inicio del campo sexo-->
