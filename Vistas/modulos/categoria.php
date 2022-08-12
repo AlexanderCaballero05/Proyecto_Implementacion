@@ -23,16 +23,13 @@ Diana Rut               31/05/2022            Se agrego mas campos en el area de
 Diana Rut               07/05/2022            Se validaron los campos de contraseña y nombre de usuario que sean los tamaños requeridos
 Diana Rut               21/05/2022            Cambios pequeños en el menu
 Diana Rut               27/05/2022            Se agrego con js required en false a la parte de estudiantes
+Diana Rut               11/08/2022            Cambios en la parte de familiar ,se quita para agregar estudiante y se agrego el parametro de fecha maxima
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
 ?>
 <?php
   include_once "conexion3.php";
-  $codigoObjeto=13;
-  $accion='INGRESO A LA PANTALLA REGISTRO DE PERSONAS';
-  $descripcion= 'USUARIO SE AUTENTIFICO';
-  bitacora($codigoObjeto, $accion,$descripcion); 
 ?>
 <?php
   // Parametro de minimo nombre usuario
@@ -74,6 +71,16 @@ Diana Rut               27/05/2022            Se agrego con js required en false
     $valor4 = $row4;
   }
 ?>
+<?php
+  // Parametro de fecha de naciemiento
+  $fecha_nacimiento = "FECHA_NACIMIENTO";
+  $fecha = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $fecha->execute(array($fecha_nacimiento));
+  $row=$fecha->fetchColumn();
+  if($row>0){
+    $fechita = $row;
+  }
+  ?>
 <head>
  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script><!--Para que funcione el selecrt2 -->
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
@@ -195,7 +202,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       <div class="col-md-4"><!--INICIO FECHA NACIMIENTO-->
                         <label  class="control-label">Fecha Nacimiento:</label> 
                         <div class="form-group">
-                          <input class="form-control" type="date"  name="fecha_nacimiento" max="2012-01-01" min="1950-01-01" required  >
+                          <input class="form-control" type="date"  name="fecha_nacimiento" min="1950-01-01" max="<?php echo $fechita;?>"  required  >
                           <div class="invalid-feedback">
                             Seleccione una fecha correcta.
                           </div> 
@@ -288,7 +295,6 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                               Campo obligatorio.
                           </div>
                           </div>
-                          
                         </div>
                         <div class="col-md-3">
                           <label class="form-label">Ingresos mensuales:</label>
@@ -302,66 +308,12 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                             <input name ="iglesia" id="iglesia"  required onkeypress="return soloLetras(event);" onkeyup="mayus(this);" maxlength="50" minlength="5" autocomplete = "off"  type="text" minlength="5" maxlength="" class="form-control">
                           </div>
                         </div>
-
-
-                        
                       </div>
-
-                       <!--Inicio para agregar parentesco-->
-                       <?php //
-                                            $query = "SELECT	est.CODIGO_ESTUDIANTE, CONCAT_WS(' ',DNI, PRIMER_NOMBRE,SEGUNDO_NOMBRE,PRIMER_APELLIDO,SEGUNDO_APELLIDO) AS NOMBRE
-                                            FROM tbl_persona per, tbl_estudiante est
-                                            WHERE per.CODIGO_PERSONA = est.CODIGO_PERSONA
-                                            AND per.CODIGO_TIPO_PERSONA = 4;";
-                                            $resultadod=$conn->query($query);                
-                                            ?>
-                            <h5>Agregar parentesco</h5><hr color="blue"><br>
-                               <div class="row mb-5"><!-- INICIO PRIMERA ROW -->
-                                 <div class="col-sm-6">
-                                      <label for="">Estudiante: </label>
-                                        <select  style="width: 100%;"  class="form-control select2" name="EstudianteParentesco" id="EstudianteParentesco" required="">
-                                          <option selected disabled value=""> Buscar Estudiante...</option>
-                                                <?php 
-                                                  if ($resultadod->num_rows > 0) {
-                                                  while($row = $resultadod->fetch_assoc()) { 
-                                                  $codigo = $row['CODIGO_ESTUDIANTE'];
-                                                  $nombre = $row['NOMBRE'];
-                                                  
-                                                  ?>
-                                                <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
-                                                <?php 
-                                                } 
-                                                }
-                                                ?>
-                                        </select>
-                                  </div>
-                                      
-
-                                  <?php
-                                      $querypare ="SELECT pa.CODIGO_PARENTESCO, pa.NOMBRE
-                                      FROM tbl_parentesco pa";
-                                      $parentesco=$conn->query($querypare)
-                                    ?>
-                                  <div class="col-sm-6">
-                                      <label>Parentesco</label>
-                                      <select class="form-control select2" name="parentesco" id="parentesco">
-                                        <option selected disabled value="">Seleccione el parentesco...</option>
-                                                <?php 
-                                                  if ($parentesco->num_rows > 0) {
-                                                  while($rowt = $parentesco->fetch_assoc()) { ?>
-                                                  <option value="<?php echo $rowt['CODIGO_PARENTESCO'];?>"><?php echo $rowt['NOMBRE']; ?></option>
-                                                <?php } 
-                                                        }?>
-                                      </select>
-                                 </div>
-                              </div> 
-                     <!--Fin para agregar parentesco-->
-
                     </div><!--Fin de display de familiares-->
                     </br>
 <!---------------------------------------------ESTUDIANTES----------------------------------------------------------------->
         <div style ="display:none;" id="estudiantes" >
-               <h5>Datos escolares</h5><hr color="blue"><br><!--Inicio de datos escolares estudiantes-->
+               <h5>Datos Escolares</h5><hr color="blue"><br><!--Inicio de datos escolares estudiantes-->
                     <div class="row">
                       <div class="col-md-3"> <!--INICIO IDENTIDAD-->
                           <label for="identidad" class="control-label">Grado Actual</label> 
@@ -404,8 +356,6 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                           </div>
                         </div>
                     </div><!--Primera row-->
-
-
                     <div class="row">
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="PASATIEMPOS" class="control-label">Pasatiempos</label> 
@@ -421,18 +371,17 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="DISTRACTORES" class="control-label">Distractores</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetrasComa(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
-                          <div class="invalid-feedback">
+                            <textarea class="form-control" type="textarea" maxlength="255" name="DISTRACTORES" id="DISTRACTORES" autocomplete = "off" onblur="quitarespacios(this);"  onkeypress="return soloLetrasComa(event);"  maxlength="100"  minlength="<?php echo $valor4;?>" placeholder="Ejemplo: Redes Sociales" required="" ></textarea>
+                            <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
                           </div>
                         </div>
-
                         <div class="col-md-4"> <!--INICIO IDENTIDAD-->
                           <label for="METAS" class="control-label">Metas</label> 
                           <div class="form-group">
-                          <textarea class="form-control" type="textarea" maxlength="255" minlength="<?php echo $valor4;?>" name="METAS" id="METAS" autocomplete = "off" onkeypress="return soloLetrasComa(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
-                          <div class="invalid-feedback">
+                            <textarea class="form-control" type="textarea" maxlength="255" minlength="<?php echo $valor4;?>" name="METAS" id="METAS" autocomplete = "off" onkeypress="return soloLetrasComa(event);" placeholder="Ejemplo: Estudiar en la universidad" required="" ></textarea>
+                             <div class="invalid-feedback">
                                   campo obligatorio.
                               </div>
                           </div>
@@ -441,8 +390,8 @@ Diana Rut               27/05/2022            Se agrego con js required en false
 
                   
                   <!--Inicio de datos socieconomicos-->
-                  <h5>Datos socieconomicos</h5><hr color="blue"><br>
-             <div class="row md-3 ">
+                  <h5>Datos Socieconómicos</h5><hr color="blue"><br>
+                 <div class="row md-3 ">
                      <!-- inicio del checkbox de dispositivos-->  
                  <div class="col-sm-3">
                   <div class="card">
@@ -466,13 +415,11 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                             <label class="form-check-label" for="dispositivos<?php echo $codigo;?>">
                             <?php echo $nombre;?>
                             </label>
-                            
                             </br>
-                           
                           </div>
                       <?php 
-                      } 
-                      }
+                       } 
+                       }
                       ?>
                      </div>
                    </div>
@@ -481,7 +428,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                 <div class="col-sm-3"> <!--inicio del checkbox de servicios-->
                   <div class="card">
                      <div class="card-header" style="background-color:#DFD4FE;">
-                             <strong>¿Qué servicios de internet utiliza?</strong>
+                          <strong>¿Qué servicios de internet utiliza?</strong>
                           </div>
                           <div class="card-body">
                           <?php
@@ -500,14 +447,12 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                             <label class="form-check-label" for="servicios<?php echo $codigo;?>">
                             <?php echo $nombre;?>
                             </label>
-                            
                             </br>
-                           
                           </div>
-                      <?php 
-                      } 
-                      }
-                      ?>
+                       <?php 
+                        } 
+                        }
+                       ?>
                      </div>
                    </div>
                 </div> <!--fin del checkbox de servicios--> 
@@ -602,10 +547,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                             <?php echo $nombre;?>
                           </label>
                           
-                          
                         </div>
-                       
-                        
                           <?php 
                             } 
                             }
@@ -616,18 +558,9 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                     <br>
                     <br>
                      <!--Inicio de sacramentos-->
-
-
-                    
-
-
-
             </div><!--fin de display de estudiantes-->
 
 <!---------------------------------------------FIN ESTUDIANTES----------------------------------------------------------------->
-
-
-
                     <div style ="display:none;" id="usuarios"><!--Contiene los datos de usuario como los adicioneles de especialidades y los oculta -->
                        <h5>Registrar Usuario</h5><hr color="blue"><br>
                       <div class="row"> 
@@ -773,75 +706,8 @@ Diana Rut               27/05/2022            Se agrego con js required en false
 
 
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
-
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-function window_mouseout( obj, evt, fn ) {
-if ( obj.addEventListener ) {
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-event = event ? event : window.event;
-var from         = event.relatedTarget || event.toElement;
-let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-} );
-  </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
-
-<script> //previene que se deje la tecla como loca pulsada
-  var texto=document.getElementById('identidad');
-  texto.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-  var pri_nom=document.getElementById('pri_nombre');
-  pri_nom.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-  var seg_nom=document.getElementById('seg_nombre');
-  seg_nom.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-  var telefono =document.getElementById('telefono');
-  telefono.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-  var pri_ape =document.getElementById('pri_apellido');
-  pri_ape.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-  var seg_ape =document.getElementById('seg_apellido');
-  seg_ape.addEventListener('keydown', function(keyboardEvent) {
-    if (keyboardEvent.repeat)
-        keyboardEvent.preventDefault();
-  });
-</script>
-
-
 
 
 <!--funciones de mostrar y no imputs como contraseña y telefono -->
@@ -909,9 +775,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true; 
           document.getElementById('correo').required = true; 
-          
-          document.getElementById('parentesco').required = false;
-          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -931,8 +794,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('iglesia').required = false;
           document.getElementById('ingreso').required = false;
           document.getElementById('educativo').required = false;
-          document.getElementById('parentesco').required = false;
-          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('civil').required = false;
           document.getElementById('cate').required = false;
           document.getElementById('psico').required = false;
@@ -966,8 +827,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('civil').required = true;
           document.getElementById('correo').required = true; 
 
-          document.getElementById('parentesco').required = true;
-          document.getElementById('EstudianteParentesco').required = true;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -993,9 +852,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
-
-          document.getElementById('parentesco').required = false;
-          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -1021,8 +877,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
 
-          document.getElementById('parentesco').required = false;
-          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 
@@ -1048,9 +902,6 @@ let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
           document.getElementById('contrasena').required = true; 
           document.getElementById('nombre_usuario').required = true;
           document.getElementById('correo').required = true; 
-
-          document.getElementById('parentesco').required = false;
-          document.getElementById('EstudianteParentesco').required = false;
           document.getElementById('GRADO').required = false;
           document.getElementById('inlineRadio1').required = false; 
           document.getElementById('inlineRadio2').required = false; 

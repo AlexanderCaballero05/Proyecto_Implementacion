@@ -20,9 +20,9 @@
   Lic. Karla Melisa Garcia Pineda (Evaluación)
 ---------------------------------------------------------------------
     Programa:          Consulta del Estudiante
-    Fecha:             30-julio-2022
+    Fecha:             09-Agosto-2022
     Programador:       Diana Rut Garcia 
-    descripcion:       Muestra el expediente psicologico del estudiante en modo de consulta ,com opcion de descarga del mismo
+    descripcion:       Muestra el expediente espiritual del estudiante en modo de consulta ,com opcion de descarga del mismo
 -----------------------------------------------------------------------
   Historial de Cambio
 -----------------------------------------------------------------------
@@ -34,13 +34,13 @@
  include "conexionpdo.php";
 ?>
 <?php
-  if (isset($_POST['personita'])) {
-       $codigo_persona =($_POST['personita']);
+  if (isset($_POST['persona_estudiante'])) {
+       $codigo_persona =($_POST['persona_estudiante']);
     }  
  ?>
 <head>
 </head>
-<body ></body>
+<body >
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -78,10 +78,10 @@
           ?>
           <div class="card">
               <div class="modal-footer">
-                <button onclick="location.href='crudPacientesPsicologicos'"  type="button"  style="color:white;"class="btn btn- lg btn-success"><span><i class="nav-icon fa fa-arrow-left mx-2"></i></span>Regresar</button>
-                <form method="post"  action="Reportes_Prosecar/reporteHistorialPsicologia.php" target="_blank">
-                  <input type="hidden" name="reporteHistoricoPsicologico" value="<?php echo $codigo_persona?>">
-                  <button type='submit' style="color:white; background-color:#FA0079" class=" form-control btn btn "><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button> 
+                <button onclick="location.href='crudPacientesEspirituales'"  type="button"  style="color:white;"class="btn btn- lg btn-success"><span><i class="nav-icon fa fa-arrow-left mx-2"></i></span>Regresar</button>
+                 <form method="post"  action="Reportes_Prosecar/reporteHistorialEspiritual.php" target="_blank">
+                  <input type="hidden" name="reporteHistoricoEspiritual" value="<?php echo $codigo_persona;?>">
+                  <button type='submit'  style="color:white; background-color:#FA0079"  class=" form-control btn btn"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button> 
                 </form>
               </div>
              <hr>
@@ -180,46 +180,42 @@
                 </div> 
             <br>
               <hr>
-              <h5>Expediente Psicológico</h5>
+              <h5>Expediente Espiritual</h5>
               <hr color="blue">
               <?php
-                $consulta = "SELECT exp.CODIGO_EXPEDIENTE, CONCAT_WS(' ',per.PRIMER_NOMBRE,per.SEGUNDO_NOMBRE,per.PRIMER_APELLIDO,per.SEGUNDO_APELLIDO) as nombr, exp.ANTECEDENTES_FAMILIARES, 
-                exp.ANTECEDENTES_PERSONALES, exp.ANTECEDENTES_CLINICOS, GROUP_CONCAT(sin.TIPO) as TIPO
-                FROM tbl_expediente_psicologico_unico exp, tbl_persona per, tbl_personas_sintomas psin, tbl_sintomas_neuroticos sin            			       
-                WHERE exp.CODIGO_PERSONA = per.CODIGO_PERSONA
-                AND exp.CODIGO_EXPEDIENTE = psin.CODIGO_EXPEDIENTE
-                AND psin.CODIGO_SINTOMA_NEUROTICO = sin.CODIGO_SINTOMA_NEUROTICO
-                AND exp.CODIGO_PERSONA = '$codigo_persona'";
+                $consulta = "SELECT exp.CODIGO_EXPEDIENTE, exp.NOMBRE_IGLESIA, exp.GRUPO_IGLESIA, exp.TIEMPO_ASISTIR_IGLESIA, exp.MOTIVACION_IGLESIA
+                FROM tbl_expediente_espiritual exp
+                WHERE CODIGO_PERSONA = '$codigo_persona';";
                 $resul=$conn->query($consulta);
                 if ($resul->num_rows > 0) {
                     while($row = $resul->fetch_assoc()) { 
-                    $var1 = $row['ANTECEDENTES_FAMILIARES'];
-                    $var2 = $row['ANTECEDENTES_PERSONALES'];
-                    $var3 = $row['ANTECEDENTES_CLINICOS'];
-                    $var4 = $row['TIPO'];
+                        $var1 = $row['NOMBRE_IGLESIA'];
+                        $var2 = $row['GRUPO_IGLESIA'];
+                        $var3 = $row['TIEMPO_ASISTIR_IGLESIA'];
+                        $var4 = $row['MOTIVACION_IGLESIA'];
                     ?>
               <div class="row">
                 <div class="col-sm-3">
                  <div class="form-group">
-                    <label>Antecedentes Personales</label>
-                    <textarea class="form-control"><?php echo $var2; ?></textarea>
-                 </div>
-                </div>
-                <div class="col-sm-3">
-                 <div class="form-group">
-                    <label>Antecedentes Familiares</label>
+                    <label>Nombre Iglesia</label>
                     <textarea class="form-control"><?php echo $var1; ?></textarea>
                  </div>
                 </div>
                 <div class="col-sm-3">
                  <div class="form-group">
-                    <label>Antecedentes Clínicos</label>
+                    <label>Grupo Iglesia</label>
+                    <textarea class="form-control"><?php echo $var2; ?></textarea>
+                 </div>
+                </div>
+                <div class="col-sm-3">
+                 <div class="form-group">
+                    <label>Tiempo de Asistir</label>
                     <textarea class="form-control"><?php echo $var3; ?></textarea>
                  </div>
                 </div>
                 <div class="col-sm-3">
                  <div class="form-group">
-                    <label>Síntomas Neuróticos</label>
+                    <label>Motivación en la iglesia</label>
                     <textarea class="form-control"><?php echo $var4; ?></textarea>
                  </div>
                 </div>
@@ -241,48 +237,35 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><!--INICIO DEL TAB DE CITAS  -->
               <br>
-              <h5>Citas Psicológicas</h5>
+              <h5>Citas Espirituales</h5>
             <hr color="blue">
             <table id="tabla_citas" class="table table-bordered table-striped">
               <thead style=" background-color:#73E8FD;">
                 <tr>
                   <th class="text-center">Acción</th>
                   <th class="text-center">Fecha Cita</th>
-                  <th class="text-center">Psicólogo</th>
                   <th class="text-center">Hora</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $consulti = "SELECT con.FECHA_CREACION, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.DIAGNOSTICO_EGRESO, con.OBSEVARCIONES,
-                pla.ACTIVIDAD, pla.TECNICA, pla.MATERIALES, pla.TAREAS, pla.RESULTADOS, cit.HORARIO AS HORA,
-                CONCAT_WS(' ',pee.PRIMER_NOMBRE,pee.SEGUNDO_NOMBRE,pee.PRIMER_APELLIDO,pee.SEGUNDO_APELLIDO) as  MEDICO
-                FROM tbl_expediente_psicologico_consulta con 
-                LEFT JOIN  tbl_inscripcion_cita cit ON con.CODIGO_CITA = cit.CODIGO_CITA
-                LEFT JOIN tbl_persona_especialidad pes ON  pes.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
-                LEFT JOIN tbl_persona pee ON  pee.CODIGO_PERSONA = pes.CODIGO_PERSONA
-                LEFT JOIN tbl_persona per ON  cit.CODIGO_PERSONA = per.CODIGO_PERSONA
-                LEFT JOIN  tbl_persona_especialidad espe ON espe.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
-                LEFT JOIN  tbl_plan_terapeutico pla ON pla.CODIGO_CONSULTA = con.CODIGO_EXPEDIENTE_PSICO
-                WHERE  cit.AREA_CITA = '3' AND cit.CODIGO_PERSONA = '$codigo_persona'
-                ORDER BY con.FECHA_CREACION DESC;";
+                    $consulti = "SELECT con.FECHA_CREACION,i.HORARIO, con.MOTIVO_CONSULTA, con.OBSERVACIONES
+                    FROM tbl_inscripcion_cita i, tbl_persona pe ,tbl_consulta_espiritual con
+                    WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
+                    AND con.CODIGO_CITA = i.CODIGO_CITA
+                    AND pe.CODIGO_PERSONA = '$codigo_persona'
+                     AND  i.AREA_CITA = '4' ORDER BY con.FECHA_CREACION DESC";
+               
                     $resul=$conn->query($consulti);
                 ?>
                 <?php
                     if ($resul->num_rows > 0) {
                     while($row = $resul->fetch_assoc()) { 
-                    $sintomas = $row['SINTOMAS'];
-                    $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
-                    $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
-                    $observaciones = $row['OBSEVARCIONES'];
-                    $fecha = $row['FECHA_CREACION'];
-                    $hora = $row['HORA'];
-                    $psicologo = $row['MEDICO'];
-                    $actividades = $row['ACTIVIDAD'];
-                    $tecnicas = $row['TECNICA'];
-                    $materiales = $row['MATERIALES'];
-                    $tareas = $row['TAREAS'];
-                    $resultados = $row['RESULTADOS'];
+                        $fecha = $row['FECHA_CREACION'];
+                        $hora = $row['HORARIO'];
+                        $motivo_consulta = $row['MOTIVO_CONSULTA'];
+                        $observaciones_espiritual = $row['OBSERVACIONES'];
+                       
                 ?>
                   <tr>
                   <td>
@@ -295,7 +278,6 @@
                     </div>
                   </td>
                   <td style="text-align: center"><?php echo ucwords(strtolower($fecha)); ?></td>
-                  <td style="text-align: center"><?php echo ucwords(strtolower($psicologo)); ?></td>
                   <td style="text-align: center"><?php echo ucwords(strtolower($hora)); ?></td>
 
                        <div id="CITA<?php echo $fecha; ?>" class="modal fade" role="dialog" >
@@ -312,99 +294,21 @@
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Síntomas</label>
-                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $sintomas; ?></textarea>
+                                          <label for="txtcodigo_persona">Motivo Consulta</label>
+                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $motivo_consulta; ?></textarea>
                                         </div>
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label for="txtcodigo_persona">Diagnóstico Ingreso</label>
-                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $diagnostico_ingreso; ?></textarea>
+                                          <label for="txtcodigo_persona">Observación</label>
+                                          <textarea readonly type="text" class="form-control"type="text"  ><?php echo $observaciones_espiritual; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo obligatorio.
                                           </div>
                                         </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW -->
-                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Evolución</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $observaciones; ?></textarea>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Diagnóstico Egreso</label>
-                                          <textarea  type="text"  readonly class="form-control"type="text"  ><?php echo $diagnostico_egreso; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div> <!-- FIN DE EL PRIMER ROW --> 
-                                    <H5>Datos del Plan Terapéutico</H5>
-                                    <hr color="blue">
-                                    <?php 
-                                     if($actividades == '' and $tecnicas == '' and $materiales == '' and $tareas == '' and $resultados == ''){
-                                        $plan = 'No hay plan Terapéutico para esta cita.';  
-                                    ?>
-                                    <p > <?php  echo $plan; ?></p>
-                                    <?php
-                                     }else{ 
-                                    ?>
-                                    <div class="row">
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Actividades a realizar</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $actividades; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Tecnicas</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $tecnicas; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Tareas</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $tareas; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-6">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Materiales</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $materiales; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Resultados</label>
-                                          <textarea  type="text" readonly class="form-control"type="text"  ><?php echo $resultados; ?></textarea>
-                                          <div class="invalid-feedback">
-                                            Campo obligatorio.
-                                          </div>
-                                        </div>
-                                      </div>
-
-                                    </div><!--Fin del row del plan terapeutico -->
-                                    <?php
-                                      } 
-                                      ?>
-                                    
+                             
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>     
@@ -423,7 +327,7 @@
               </div><!--FINAL DEL TAB DE CITAS FINALIZADAS -->
               <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                 <br>
-                <H5>Citas Psicológicas Pendientes</H5>
+                <H5>Citas Espirituales Pendientes</H5>
                 <hr color="blue">
                 <table id="citas"class="table table-bordered table-striped">
                   <thead style=" background-color:#73E8FD;">
@@ -431,7 +335,7 @@
                     <th class="text-center">#</th>
                      <th class="text-center">Fecha Cita</th>
                      <th class="text-center">Hora</th>
-                     <th class="text-center">Psicólogo</th>
+                     <th class="text-center">Catequista</th>
                      <th class="text-center">Estado</th>
                    </tr>
                   </thead>
@@ -447,7 +351,7 @@
                   left join tbl_estado est               on IC.CODIGO_ESTADO = est.CODIGO_ESTADO
                   left join tbl_area ar                  on IC.AREA_CITA = ar.CODIGO_AREA 
                   left join tbl_especialidad espe        on E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD   
-                  where   IC.CODIGO_PERSONA = '$codigo_persona' AND  IC.CODIGO_ESTADO =5 and IC.AREA_CITA =3;";
+                  where   IC.CODIGO_PERSONA = '$codigo_persona' AND  IC.CODIGO_ESTADO =5 and IC.AREA_CITA =4;";
                   $result = $conn->query($query);
                   if ($result->num_rows > 0) {
                     $contador = 0;
@@ -554,8 +458,10 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
+
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
+
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -570,6 +476,4 @@
 })()
 
 
-
-
-    </script>
+ </script>

@@ -180,7 +180,7 @@ session_start();
          $_GET["ruta"] == "crudCargaEspiritual" ||
          $_GET["ruta"] == "prueba" ||
         
-         
+         $_GET["ruta"] == "consultaEspiritual" ||
          $_GET["ruta"] == "consultaEstudianteMedica" ||
          $_GET["ruta"] == "crudTranstornos" ||
          $_GET["ruta"] == "crudPersonaEspecialidad" ||

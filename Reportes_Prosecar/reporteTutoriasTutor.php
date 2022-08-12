@@ -56,8 +56,7 @@ class PDF extends FPDF {
 	
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+
 	$this->SetX(10);
 	
 
