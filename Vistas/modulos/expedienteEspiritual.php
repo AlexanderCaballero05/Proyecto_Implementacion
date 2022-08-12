@@ -21,7 +21,7 @@
     <section class="content">
         <div class="container-fluid">
             <section class="content-header text-xl-center mb-3 "> 
-                <h4> Informe Espiritual Paciente</h4>
+                <h4> Informe de Consulta</h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -217,7 +217,7 @@
                    </div><!-- fin row-->
                 
                   <div class="modal-footer justify-content-start">
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
                  </form><!--fin form del archivo expediente-->
                  <!--form para el reporte de la consulta-->
                   <form action="Reportes_Prosecar/reporteConsultaEspiritual.php" method="POST"> 

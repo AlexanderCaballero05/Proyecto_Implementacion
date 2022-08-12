@@ -19,9 +19,23 @@ class PDF extends FPDF {
 		$this->SetFont('Arial','',16);
 		$this->SetX(120);
 		$this->Cell(180, 8, utf8_decode('Reporte de Usuarios'));
-		
-		
-		$this->Ln(10);
+		$this->Ln(6);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(90);
+		$this->Cell(170, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(122);
+		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
+		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
+		$this->SetX(10);
+		$this->Ln(5);
 	}
 
 // Pie de página
@@ -36,7 +50,7 @@ class PDF extends FPDF {
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+
 	$this->SetX(10);
 	
 
@@ -94,7 +108,6 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
-	        $this->SetFillColor(72, 208, 234);
             $this->SetFont('Helvetica', 'B', 12);
             $this->Cell(12, 12, 'N', 1, 0, 'C', 1);
             $this->Cell(40, 12, 'Primer Nombre', 1, 0, 'C', 1);

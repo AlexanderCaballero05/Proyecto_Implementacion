@@ -33,7 +33,7 @@ class PDF extends FPDF {
 		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
 		$this->Ln(13);
 		$this->SetFont('Arial','',10);
-		$this->Cell(55, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->Cell(47, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
 		$this->SetFont('Arial','',12);
 		$this->SetX(22);
 		$this->SetX(5);
@@ -50,7 +50,6 @@ class PDF extends FPDF {
 	$this->Cell(100,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 	$this->SetX(6);
 	$this->Line(6,200,290,200);
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
 	
 	}

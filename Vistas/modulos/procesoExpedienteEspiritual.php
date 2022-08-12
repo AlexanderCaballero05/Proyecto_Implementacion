@@ -47,7 +47,7 @@ include_once 'conexionpdo.php';
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body >
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -55,7 +55,7 @@ include_once 'conexionpdo.php';
   </div>
   <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light"> 
+        <section class="content-header text-xl-center mb-3"> 
           <h4> Registro de Expediente Espiritual  <i></i></h4>
         </section>
         <div class="card">
@@ -80,8 +80,8 @@ include_once 'conexionpdo.php';
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                    <strong>Datos Generales de Expediente</strong>
-                    <hr>
+                    <h5>Datos Generales de Expediente</h5>
+                    <hr color="blue">
                     <div class= "row"> 
                         <div  class="col-sm-8">
                         <?php
@@ -119,7 +119,7 @@ include_once 'conexionpdo.php';
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                     <label for="" class="control-label">Persona</label> 
+                                     <label for="" class="control-label">Nombre de la Persona</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre2;?>">
                             <input  hidden name="codigo_paciente_expediente_espiritual" value="<?php echo $codigo2;?>">
@@ -180,37 +180,10 @@ include_once 'conexionpdo.php';
                      
                     </div><!--div del row -->  
                     <hr><br>
-                    <!--Sacramentos realizados por el estudiante-->
-                        <div class="row mb-3 pl-3">
-                           <h5>Sacramentos realizados</h5> 
-                        </div>
-
-                    <div class="row mb-5 pl-3">
-                        <?php //
-                        $query = "SELECT GROUP_CONCAT(sac.NOMBRE) AS sacramentos
-                        FROM tbl_sacramento sac, tbl_estudiante es, tbl_sacramento_estudiante se
-                        WHERE es.CODIGO_ESTUDIANTE = se.CODIGO_ESTUDIANTE
-                        AND   se.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
-                        AND   se.CODIGO_ESTUDIANTE = '$codigo2';";
-                        $resultSacramentos=$conn->query($query); 
-
-                        ?>
-                        <?php 
-                            if ($resultSacramentos->num_rows > 0) {
-                            while($row2 = $resultSacramentos->fetch_assoc()) { 
-                            $nombre_sacramentos = $row2['sacramentos'];
-                            ?>
-                        <div class="col-sm-10 order-2 pl-2">
-                        <input  readonly class="form-control" value="<?php echo $nombre_sacramentos;?>">                       
-                        </div>
-                        <?php 
-                                } 
-                                }
-                                ?>
-                    </div> 
+                     
 
                  </br></br>
-                <button type="submit"  id="" name="registrar_expediente_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar</button>
+                <button type="submit"  id="" name="registrar_expediente_espiritual" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar</button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->
@@ -219,56 +192,7 @@ include_once 'conexionpdo.php';
 </div>
 </div>
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
 
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
-}
-} );
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
 
