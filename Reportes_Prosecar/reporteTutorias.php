@@ -44,14 +44,14 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
-		$this->SetFont('helvetica', 'B', 9);
-		$this->SetY(-15);
-		$this->SetX(20);
-		$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+		$this->SetFont('helvetica', 'B', 10);
+		$this->SetY(-18);
+		$this->SetX(28);
+		$this->Cell(100,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 		
-		$this->SetX(20);
-		$this->Line(10,287,200,287);
-	
+		$this->SetX(6);
+		$this->Line(6,200,290,200);
+		
 		$this->SetX(10);
 		
 	}

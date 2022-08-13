@@ -50,19 +50,6 @@ class PDF extends FPDF {
 	$this->Line(6,200,290,200);
 	
 	$this->SetX(10);
-	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
 
 	}
 
