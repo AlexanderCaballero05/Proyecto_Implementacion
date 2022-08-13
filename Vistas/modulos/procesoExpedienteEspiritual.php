@@ -191,7 +191,6 @@ include_once 'conexionpdo.php';
   </section>
 </div>
 </div>
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 
 </body>
 

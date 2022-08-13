@@ -131,7 +131,7 @@
               <a href="" class="nav-link bg-gradient-navy">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  Gestión Usuarios
+                  Gestión de personas
                   <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right"></span>
                 </p>
@@ -254,7 +254,7 @@
                           <a href="" class="nav-link bg-gradient-navy">
                             <i class="nav-icon fas  fa-hospital-user"></i>
                             <p>
-                              Gestión Citas 
+                              Gestión de Citas 
                               <i class="right fas fa-angle-left"></i>
                             </p>
                           </a>
@@ -484,7 +484,7 @@
                      <a href="#" class="nav-link bg-gradient-navy">
                           <i class="nav-icon fas fa-briefcase "></i>
                           <p>
-                           Área Académica
+                           Área del Tutor
                             <i class="fas fa-angle-left right"></i>
                           </p>
                         </a>
@@ -677,7 +677,7 @@
                     {
                     ?> 
           <li class="nav-item">
-             <a href="procesoCitaspPreclinica"class="nav-link">
+             <a href="crudcitasMedicasPendientes"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
                 <p>Proceso Preclínica</p>
              </a>
@@ -800,7 +800,7 @@
 
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="ProcesoCitasPsicologicas" class="nav-link">
+              <a href="crudcitasPsicologicasPendientes" class="nav-link">
                 <i class="far fa-edit nav-icon"></i>
                 <p>Proceso Consultas</p>
               </a>

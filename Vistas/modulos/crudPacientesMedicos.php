@@ -56,7 +56,7 @@ Programador               Fecha                      Descripcion
         <div class="card-header" style="background-color:#B3F2FF;">
          <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class=" nav-link " style="color:#000000;" href="ProcesoCitasMedicos">Personas Consulta Médica</a>
+            <a class=" nav-link " style="color:#000000;" href="ProcesoCitasMedicos">En espera de Consulta</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>

@@ -23,7 +23,10 @@ $codigoObjeto = 32;///CAMBIAR
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
-         <li class="nav-item">
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasPsicologicasPendientes">Citas pendientes</a>
+            </li>
+            <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en Espera</a>
             </li>
             <li class="nav-item">
@@ -100,10 +103,11 @@ $codigoObjeto = 32;///CAMBIAR
                                                     <td>
                                                         <div class="text-center">
                                                             <div class="btn-group">
+                                                                <!--
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                                                </a>
+                                                                </a>-->
                                                                 <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class=" form-control btn btn-success"><span>
                                                                      Atender</span></button>
