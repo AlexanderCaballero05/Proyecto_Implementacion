@@ -177,8 +177,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 }// if padre
 
 
-  //con lo de ditar no toque,porque ya les daba y no tengo el procediemiento :v ,ya eso ustedes lo terminan 
- ///BOTON DE EDITAR 
+
+ ///BOTON DE EDITAR citas genereles
  if (isset($_POST['cod_edit_cita'])){
   if(isset($_POST['edit_cita'])){
     $fecha= $_POST['edit_fecha_cita'];
@@ -238,17 +238,241 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
   }
   }
 
+//BOTON DE EDITAR citas Medicas
+if (isset($_POST['cod_edit_cita'])){
+  if(isset($_POST['edit_cita_Medica'])){
+    $fecha= $_POST['edit_fecha_cita'];
+    $hora =$_POST['edit_hora'];
+    $estado =$_POST['estado_edit'];
+    $cod =$_POST['cod_edit_cita'];
+    $ENCARGADO =$_POST['encargadocitados'];
+     try {
+      $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
+       $sentencia ->execute(array($cod));
+       $ESPECIALISTAS = $sentencia->fetchALL();
+        foreach ( $ESPECIALISTAS AS $RESULTADOS){
+           $personas = $RESULTADOS['CODIGO_PERSONA'];
+           $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
+         $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
+          $row=$sentencia_paciente->fetchColumn();
+          if($row >0){
+            echo "<script>
+                alert('El ya tiene una cita registrada  a esa fecha ');
+               window.location = 'crudcitasMedicasPendientes';
+                </script>";
+                exit;
+          }else {
+            $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
+           $row=$sentencia_especialista->fetchColumn();
+           if($row >0){
+             echo "<script>
+                 alert('El ya tiene una cita registrada a esa fecha ');
+                window.location = 'crudcitasMedicasPendientes';
+                 </script>";
+                 exit;
+           } else {
+            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
+            $consulta=$conn->query($sql);
+            if ($consulta > 0){
+             echo "<script>
+                window.location = 'crudcitasMedicasPendientes';
+                 </script>";
+               $codigoObjeto=32;
+               $accion='MODIFICACIÓN';
+               $descripcion='SE MODIFICÓ UNA CITA';
+               bitacora($codigoObjeto,$accion,$descripcion);
+               }
+          }
+
+          } // fin else 
+      }///  fin foreach
+     }catch(PDOException $e){
+      echo $e->getMessage(); 
+      return false;
+    } 
+  }
+  }
+//FIN DE BOTON DE EDITAR citas Medicas
+
+//BOTON DE EDITAR citas Psicologicas
+if (isset($_POST['cod_edit_cita'])){
+  if(isset($_POST['edit_cita_psicologica'])){
+    $fecha= $_POST['edit_fecha_cita'];
+    $hora =$_POST['edit_hora'];
+    $estado =$_POST['estado_edit'];
+    $cod =$_POST['cod_edit_cita'];
+    $ENCARGADO =$_POST['encargadocitados'];
+    
+     try {
+      $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
+       $sentencia ->execute(array($cod));
+       $ESPECIALISTAS = $sentencia->fetchALL();
+        foreach ( $ESPECIALISTAS AS $RESULTADOS){
+           $personas = $RESULTADOS['CODIGO_PERSONA'];
+           $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
+         $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
+          $row=$sentencia_paciente->fetchColumn();
+          if($row >0){
+            echo "<script>
+                alert('El ya tiene una cita registrada  a esa fecha ');
+               window.location = 'crudcitasPsicologicasPendientes';
+                </script>";
+                exit;
+          }else {
+            $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
+           $row=$sentencia_especialista->fetchColumn();
+           if($row >0){
+             echo "<script>
+                 alert('El ya tiene una cita registrada a esa fecha ');
+                window.location = 'crudcitasPsicologicasPendientes';
+                 </script>";
+                 exit;
+           } else {
+            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
+            $consulta=$conn->query($sql);
+            if ($consulta > 0){
+             echo "<script>
+                window.location = 'crudcitasPsicologicasPendientes';
+                 </script>";
+               $codigoObjeto=32;
+               $accion='MODIFICACIÓN';
+               $descripcion='SE MODIFICÓ UNA CITA';
+               bitacora($codigoObjeto,$accion,$descripcion);
+               }
+          }
+
+          } // fin else 
+      }///  fin foreach
+     }catch(PDOException $e){
+      echo $e->getMessage(); 
+      return false;
+    } 
+  }
+  }
+//FIN DE BOTON DE EDITAR citas psicologicas
 
 
+//BOTON DE EDITAR citas espirituales
+if (isset($_POST['cod_edit_cita'])){
+  if(isset($_POST['edit_cita_espiritual'])){
+    $fecha= $_POST['edit_fecha_cita'];
+    $hora =$_POST['edit_hora'];
+    $estado =$_POST['estado_edit'];
+    $cod =$_POST['cod_edit_cita'];
+    $ENCARGADO =$_POST['encargadocitados'];
+    
+     try {
+      $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
+        from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
+       $sentencia ->execute(array($cod));
+       $ESPECIALISTAS = $sentencia->fetchALL();
+        foreach ( $ESPECIALISTAS AS $RESULTADOS){
+           $personas = $RESULTADOS['CODIGO_PERSONA'];
+           $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
+         $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
+         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
+          $row=$sentencia_paciente->fetchColumn();
+          if($row >0){
+            echo "<script>
+                alert('El ya tiene una cita registrada  a esa fecha ');
+               window.location = 'crudcitasEspiritualesPendientes';
+                </script>";
+                exit;
+          }else {
+            $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
+          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
+           $row=$sentencia_especialista->fetchColumn();
+           if($row >0){
+             echo "<script>
+                 alert('El ya tiene una cita registrada a esa fecha ');
+                window.location = 'crudcitasEspiritualesPendientes';
+                 </script>";
+                 exit;
+           } else {
+            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
+            $consulta=$conn->query($sql);
+            if ($consulta > 0){
+             echo "<script>
+                window.location = 'crudcitasEspiritualesPendientes';
+                 </script>";
+               
+               }
+          }
+
+          } // fin else 
+      }///  fin foreach
+     }catch(PDOException $e){
+      echo $e->getMessage(); 
+      return false;
+    } 
+  }
+  }
+//FIN DE BOTON DE EDITAR citas espirituales
 
 
-//envia la cita al usuario correspondiente
+//enviar la cita desde administracion
   if (isset($_POST['cod_enviar_cita'])){
     if(isset($_POST['enviar_cita'])){
         $codigo_cita = ($_POST['cod_enviar_cita']);
         $estado_cita = ($_POST['estado_cita']);
         $enviar_cita = "UPDATE tbl_inscripcion_cita SET CODIGO_ESTADO = '9' WHERE CODIGO_CITA = '$codigo_cita'";
         $consulta_cita =$conn->query($enviar_cita);
+     
+    }
+  }
+
+  //enviar la cita medica
+  if (isset($_POST['cod_enviar_cita'])){
+    if(isset($_POST['enviar_cita_medica'])){
+        $codigo_cita = ($_POST['cod_enviar_cita']);
+        $estado_cita = ($_POST['estado_cita']);
+        $enviar_cita = "UPDATE tbl_inscripcion_cita SET CODIGO_ESTADO = '9' WHERE CODIGO_CITA = '$codigo_cita'";
+        $consulta_cita =$conn->query($enviar_cita);
+        echo "<script>
+        window.location = 'procesoCitaspPreclinica';
+       </script>";
+       exit;
+    }
+  }
+
+  //enviar la cita medica
+  if (isset($_POST['cod_enviar_cita'])){
+    if(isset($_POST['enviar_cita_psicologica'])){
+        $codigo_cita = ($_POST['cod_enviar_cita']);
+        $estado_cita = ($_POST['estado_cita']);
+        $enviar_cita = "UPDATE tbl_inscripcion_cita SET CODIGO_ESTADO = '9' WHERE CODIGO_CITA = '$codigo_cita'";
+        $consulta_cita =$conn->query($enviar_cita);
+        echo "<script>
+        window.location = 'ProcesoCitasPsicologicas';
+       </script>";
+       exit;
+    }
+  }
+  
+
+  //enviar la cita espiritual
+  if (isset($_POST['cod_enviar_cita'])){
+    if(isset($_POST['enviar_cita_espiritual'])){
+        $codigo_cita = ($_POST['cod_enviar_cita']);
+        $estado_cita = ($_POST['estado_cita']);
+        $enviar_cita = "UPDATE tbl_inscripcion_cita SET CODIGO_ESTADO = '9' WHERE CODIGO_CITA = '$codigo_cita'";
+        $consulta_cita =$conn->query($enviar_cita);
+        echo "<script>
+        window.location = 'procesoCitasEspirituales';
+       </script>";
+       exit;
     }
   }
   

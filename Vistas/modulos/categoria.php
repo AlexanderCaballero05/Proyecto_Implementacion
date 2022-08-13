@@ -702,8 +702,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
 </body>
 
 
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+
 </body>
 
 

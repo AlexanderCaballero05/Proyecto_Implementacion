@@ -180,40 +180,7 @@ include_once 'conexionpdo.php';
   </section>
 </div>
 </div>
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
-
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ 
 </body>
 
 
