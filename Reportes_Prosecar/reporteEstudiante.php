@@ -120,12 +120,9 @@ if (isset($_POST['reporte_estudiante'])) {
     min-height: 200px;
 
   }
-
-  .espacio{
-    padding-left: 4px;
-    padding-right: 4px;
-
-  }
+  .pagenum:before {
+        content: counter(page);
+    }
 
     </style>
     <title>Reporte Estudiante</title>
@@ -140,8 +137,8 @@ if (isset($_POST['reporte_estudiante'])) {
     
    
 
-   <footer>
-      <p style="  text-align: center;"><b> Proyecto Prosecar. <?php  echo date("Y");?></b></p> 
+   <footer style="text-align: center;">
+   <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -175,9 +172,9 @@ if (isset($_POST['reporte_estudiante'])) {
       ?>      
       <legend>  Datos Personales Estudiante</legend><br>
       <label style="margin-bottom: 100px;" ><b>Nombre Completo Estudiante:</b> <?php  echo ucwords(strtolower($nombre)); ?> </label><br>
-      <label style="margin-bottom: 30px;" ><b>fecha de Nacimiento:</b> <?php  echo ucwords(strtolower($fecha)); ?></label> <br>
+      <label style="margin-bottom: 30px;" ><b>Fecha de Nacimiento:</b> <?php  echo ucwords(strtolower($fecha)); ?></label> <br>
       <label style="padding-right: 80px;" ><b>DNI: </b><?php echo $dni; ?></label>
-      <label style="padding-right: 110px;"><b>Edad: </b><?php echo $edad . " años"; ?></label>
+      <label style="padding-right: 110px;"><b>Edad:</b><?php echo $edad . " años"; ?></label>
       <label ><b>Sexo: </b><?php echo ucwords(strtolower($sexo)); ?></label><br>
       <label style="padding-right: 85px;" ><b>Teléfono: </b><?php echo $telefono; ?></label>
       <label style="margin-bottom: 30px;" ><b>Dirección:</b> <?php  echo ucwords(strtolower($direccion)); ?></label> <br>
@@ -240,8 +237,6 @@ if (isset($_POST['reporte_estudiante'])) {
     <br>
   
 
-
-
 <?php
     $sentencia = $db->prepare("SELECT GROUP_CONCAT(con.NOMBRE_TIPO) as DISPOSITIVOS
     FROM tbl_estudiante_socioeconomico es, tbl_contenido_socioeconomico con, tbl_tipo_socioeconomico tip
@@ -255,8 +250,6 @@ if (isset($_POST['reporte_estudiante'])) {
 	   $dispositivos = $row;
 	 }
 
-
-
      $sentencia = $db->prepare("SELECT GROUP_CONCAT(con.NOMBRE_TIPO) as SERVICIOS
      FROM tbl_estudiante_socioeconomico es, tbl_contenido_socioeconomico con, tbl_tipo_socioeconomico tip
      WHERE es.CODIGO_CONTENIDO_SOCIOECONOMICO = con.CODIGO_CONTENIDO_SOCIOECONOMICO
@@ -268,8 +261,6 @@ if (isset($_POST['reporte_estudiante'])) {
       if($row>0){
         $servcios = $row;
       }
-
-
       $sentencia = $db->prepare("SELECT GROUP_CONCAT(con.NOMBRE_TIPO) as PROVEEDOR
       FROM tbl_estudiante_socioeconomico es, tbl_contenido_socioeconomico con, tbl_tipo_socioeconomico tip
       WHERE es.CODIGO_CONTENIDO_SOCIOECONOMICO = con.CODIGO_CONTENIDO_SOCIOECONOMICO
@@ -297,7 +288,7 @@ if (isset($_POST['reporte_estudiante'])) {
 
 ?>
     <fieldset>
-      <legend>Datos Socieconomicos</legend>
+      <legend>Datos Socieconómicos</legend>
     <br>
     <table>
       <thead>
@@ -342,13 +333,11 @@ if (isset($_POST['reporte_estudiante'])) {
         ?>
          <thead>
            <tr>
-             <th>Iglesia Asistente</th>
              <th>Sacramentos Realizados</th>
            </tr>
          </thead>
          <tbody>
           <tr>
-            <td style="text-align: center"><?php echo $Iglesiaa = "Santa Teresa de Jesús"?></td>
             <td><?php echo  ucwords(strtolower($sacramentos));?></td>
           </tr>
           <?php
@@ -362,7 +351,6 @@ if (isset($_POST['reporte_estudiante'])) {
 <br>
 <br>
     <fieldset>
-
       <legend>Situación familiar (Personas con quienes vive)</legend>
     <br>
     <table>
@@ -379,7 +367,7 @@ if (isset($_POST['reporte_estudiante'])) {
          </tr>
       </thead>
     <?php
-       $consulta = "SELECT fest.CODIGO_FAMILIAR_ESTUDIANTE, fam.CODIGO_FAMILIAR,  concat_ws(' ', per.PRIMER_NOMBRE, per.PRIMER_APELLIDO) as FAMILIAR, fam.ESTADO_CIVIL, fam.NIVEL_EDUCATIVO, fam.INGRESOS_DE_FAMILIAR, fam.NOMBRE_IGLESIA, par.NOMBRE as PARENTESCO
+       $consulta = "SELECT per.FECHA_NACIMIENTO,fest.CODIGO_FAMILIAR_ESTUDIANTE, fam.CODIGO_FAMILIAR,  concat_ws(' ', per.PRIMER_NOMBRE, per.PRIMER_APELLIDO) as FAMILIAR, fam.ESTADO_CIVIL, fam.NIVEL_EDUCATIVO, fam.INGRESOS_DE_FAMILIAR, fam.NOMBRE_IGLESIA, par.NOMBRE as PARENTESCO
        from tbl_persona per, tbl_familiar fam, tbl_estudiante est, tbl_familiares_estudiante fest, tbl_parentesco par
        WHERE per.CODIGO_PERSONA = fam.CODIGO_PERSONA
        AND fest.CODIGO_ESTUDIANTE = est.CODIGO_ESTUDIANTE
@@ -392,17 +380,18 @@ if (isset($_POST['reporte_estudiante'])) {
        if ($resul->num_rows > 0) {
         while($row = $resul->fetch_assoc()) { 
           $nombre = $row['FAMILIAR'];
-          $edad = $row['INGRESOS_DE_FAMILIAR'];
           $estadocivil = $row['ESTADO_CIVIL'];
           $Parentesco = $row['PARENTESCO'];
           $Nivel = $row['NIVEL_EDUCATIVO'];
           $Ingresos = $row['INGRESOS_DE_FAMILIAR'];
           $Iglesia = $row['NOMBRE_IGLESIA'];
-       
-        ?>
 
-      
-      
+          $fecha = $row['FECHA_NACIMIENTO'];
+          $fechaEntera = strtotime($fecha);
+          $f = date("Y");
+          $anio = date("Y", $fechaEntera);
+          $edad = $f - $anio;
+        ?> 
       <tbody>
          <tr>
          <td style="text-align: center"><?php echo ucwords(strtolower($nombre)); ?></td>
@@ -424,10 +413,7 @@ if (isset($_POST['reporte_estudiante'])) {
     <br>
  <br>
  <br>
- <br>
- <br>
- <br>
- <br>
+
     <fieldset>
       <legend>Tutorias que ha Cursado</legend>
       <br>

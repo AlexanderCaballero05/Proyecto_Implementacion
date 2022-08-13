@@ -94,7 +94,6 @@ include_once 'conexionpdo.php';
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Citas previas</strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">

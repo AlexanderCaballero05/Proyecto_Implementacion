@@ -31,7 +31,7 @@
 -----------------------------------------------------------------------
     
     Programador               Fecha                      Descripcion
-    
+    Diana Rut            09/08/2022                 cambio en apariencia dejando estandar
   ----------------------------------------------------------------------->
 
 <?php
@@ -47,15 +47,15 @@ include_once 'conexionpdo.php';
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body >
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
 
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> Consulta Espiritual PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+    <section class="content-header text-xl-center mb-3 "> 
+          <h4> Consulta Espiritual</h4>
         </section>
     <section class="content">
        <div class="card"> 
@@ -83,7 +83,7 @@ include_once 'conexionpdo.php';
         <form method="POST" class="needs-validation" novalidate id="form">
             
             <h5>Datos de la Persona</h5>
-            <hr>
+            <hr color="blue">
                       
             <div class="row mb-8">
                                     <?php
@@ -117,11 +117,11 @@ include_once 'conexionpdo.php';
                           
                           ?>
                       <input type="text" name="codigo_cita_espiritual" value="<?php echo $var3?>" hidden>
-                       <label for="">Nombre de la persona:</label> 
+                       <label for="">Nombre de la Persona</label> 
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
-                         <label for="">DNI:</label>
+                         <label for="">DNI</label>
                          <input type="text" name="dni" class="form-control"  aria-label="dni"  value="<?php echo $var2 ?>" disabled ="disabled">
                     </div>
                     </div>
@@ -129,8 +129,8 @@ include_once 'conexionpdo.php';
                     }
                     ?>
                     <br></br>
-                    <h5>Expediente Espiritual</h5>
-                    <hr>
+                    <h5> Datos Expediente Espiritual</h5>
+                    <hr color ="blue">
             <!--INICIO COMBOBOX -->
              <div class="form-group">
              <?php
@@ -182,11 +182,11 @@ include_once 'conexionpdo.php';
                     ?> <!--METER EL CICLO TODO LOS TEXTOS Y DENTRO DEL ROW PRINCIPAL-->
              </div><!--fin del div de row DE EXPEDIENTE-->
                     
-                    <h5>Datos de consulta</h5>
-                    <hr>
+                    <h5>Datos de Consulta</h5>
+                    <hr color="blue">
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Motivo de consulta:</label> 
+                        <label for="identidad" class="control-label">Motivo de Consulta</label> 
                         <div class="form-group">
                           <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="5"  name="Motivo_consulta" id="Motivo_consulta" autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
@@ -196,7 +196,7 @@ include_once 'conexionpdo.php';
                       </div>               
                 
                       <div class="col-md-6">
-                        <label for="identidad" class="control-label">Observaciónes:</label> 
+                        <label for="identidad" class="control-label">Observaciónes</label> 
                         <div class="form-group">
                           <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="3" name="observaciones_espiritual" id="observaciones_espiritual"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
@@ -207,7 +207,7 @@ include_once 'conexionpdo.php';
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  name="Consulta_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
+                    <button type="submit"  name="Consulta_espiritual" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->
@@ -240,71 +240,13 @@ include_once 'conexionpdo.php';
       }
     }
   </script>
-   <script>
- var isSubmitting = false
 
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    localStorage.setItem( 'leftWindow', true );
-}
-} );
-  </script>
 </body>
 
  
 
  
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-//funcion para poner mayusculas
-function mayus(e) {
-        e.value = e.value.toUpperCase();
-    }
-
     (function () { 
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
