@@ -37,15 +37,15 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
-	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
-	$this->SetY(-15);
-	$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-  
-	//$this->Line(10,287,200,287);
-	$this->Cell(170,0,utf8_decode('Prosecar © Todos los derechos reservados.'),0,0,'C');
-	$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-	
+		$this->SetFont('helvetica', 'B', 9);
+		$this->SetY(-15);
+		$this->SetX(20);
+		$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+		
+		$this->SetX(20);
+		$this->Line(10,287,200,287);
+
+		$this->SetX(10);
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------

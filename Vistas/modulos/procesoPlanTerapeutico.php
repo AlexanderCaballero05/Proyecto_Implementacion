@@ -20,7 +20,7 @@ include "conexionpdo.php";
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body>
  <div class="content-wrapper">
    <div class="content-header">
       <div class="container-fluid">
@@ -55,9 +55,14 @@ include "conexionpdo.php";
         </div><!--CARD HEADER-->
         <div class="card-body">
         <form method="POST"  class=" needs-validation" novalidate id="form">
-            <div  class="pt-2 pb-2 px-2">
-              <h5>Datos del Paciente</h5>
-            </div>
+          <div class="alert alert" style="border-color:blue">
+            <h3 class="text-center"> Paso <i class="bi bi-5-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-5-circle" viewBox="0 0 16 16">
+             <path d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm15 0A8 8 0 1 0 0 8a8 8 0 0 0 16 0Zm-8.006 4.158c-1.57 0-2.654-.902-2.719-2.115h1.237c.14.72.832 1.031 1.529 1.031.791 0 1.57-.597 1.57-1.681 0-.967-.732-1.57-1.582-1.57-.767 0-1.242.45-1.435.808H5.445L5.791 4h4.705v1.103H6.875l-.193 2.343h.064c.17-.258.715-.68 1.611-.68 1.383 0 2.561.944 2.561 2.585 0 1.687-1.184 2.806-2.924 2.806Z"/>
+             </svg>   
+            </h3>
+          </div>
+          
+            <h5>Datos del Paciente</h5>
             <hr  color="blue"/> 
                <div class= "row">
                  <div class="col-md-6">

@@ -101,12 +101,8 @@ if (isset($_POST['id_persona'])) {
       <p  style="text-align: center; font-size: 22px;">Informe Consulta Psicológica Paciente </p>
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-    
-   
-
-   <footer>
-   <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b> 
-      <label >Página<span  class="pagenum"></label></p>
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>

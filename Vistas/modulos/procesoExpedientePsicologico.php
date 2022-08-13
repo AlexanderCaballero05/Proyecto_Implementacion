@@ -10,7 +10,7 @@ include_once 'conexionpdo.php';
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body >
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -19,7 +19,7 @@ include_once 'conexionpdo.php';
   <section class="content">
     <div class="container-fluid">
         <div class="content-header text-xl-center mb-3"> 
-          <h4>Registrar Expediente Psicológico</h4>
+          <h4>Registrar Expediente </h4>
        </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -46,9 +46,13 @@ include_once 'conexionpdo.php';
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                 <div  class="pt-2 pb-2 px-2">
-                      <h5>Datos Generales Expediente</h5>
-                  </div>
+             <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
+              </svg>
+              </h3>
+            </div>
+                    <h5>Datos Generales Expediente</h5>
                     <hr color="blue">
                     <div class= "row"> 
                         <div  class="col-sm-8">
@@ -139,7 +143,7 @@ include_once 'conexionpdo.php';
                       <div class="col-md-4">
                         <div class="card">
                             <div class="card-header" style="background-color:#DFD4FE;">
-                              <strong>Síntomas Neuróticos</strong>
+                              <strong>Síntomas Neuróticos </strong><button  data-toggle="modal"  href="#AGREGARSINTOMAS" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mx-2 "><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span></button>
                             </div>
                         <div class="card-body">
                         
@@ -172,7 +176,7 @@ include_once 'conexionpdo.php';
                     </div><!--div del row -->  
 
                  
-                <button type="submit"  id="" name="expediente_medico" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Expediente </button>
+                <button type="submit"  id="" name="expediente_medico" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Expediente </button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->
@@ -180,28 +184,45 @@ include_once 'conexionpdo.php';
   </section>
 </div>
 </div>
- 
+
 </body>
 
-
-
-
-
+<!--INICIO DEL MODAL DE AGREGAR UN NUEVo SINTOMA-->
+<div id="AGREGARSINTOMAs" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form method="POST" class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Síntoma Neurótico</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_sintoma">Nombre Síntoma</label>
+                                    <input  type="text"   class="form-control" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" maxlength="100"    autocomplete = "off" type="text"  name="sintomaN"  required>
+                                    <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                </div>
+                            </div>
+                          
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" name="AGREGAR_SINTOMAN" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+      </div>
+    </div><!-- FIN DEL MODAL AGREGAR NUEVO SINTOMA --> 
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-
-
-
 (function() {
     'use strict'
-
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
-
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms)
         .forEach(function(form) {
@@ -210,11 +231,9 @@ $(document).ready(function() {
                     event.preventDefault()
                     event.stopPropagation()
                 }
-
                 form.classList.add('was-validated')
             }, false)
         })
 })()
-
 </script>
 

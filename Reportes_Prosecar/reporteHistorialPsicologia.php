@@ -185,7 +185,7 @@ if (isset($_POST['reporteHistoricoPsicologico'])) {
        LEFT JOIN  tbl_persona_especialidad espe ON espe.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
        LEFT JOIN  tbl_plan_terapeutico pla ON pla.CODIGO_CONSULTA = con.CODIGO_EXPEDIENTE_PSICO
        WHERE  cit.AREA_CITA = '3' AND cit.CODIGO_PERSONA = '$persona'
-       ORDER BY con.FECHA_CREACION;";
+       ORDER BY con.FECHA_CREACION   DESC;";
         $resul=$conn->query($consulti);
       ?>
       <?php
