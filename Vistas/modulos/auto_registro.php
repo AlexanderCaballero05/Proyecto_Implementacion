@@ -201,13 +201,21 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                    <input type="text" name="telefono" class="form-control" placeholder="Eje:99001100" aria-label="Número de teléfono"  maxlength="8" minlength="8" onkeypress="return solonumero(event)" required pattern="[0-9]{8,8}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" onkeyup="noespacio(this, event)" autocomplete = "off">
                   </div>
                 </div><!--final campo telefono-->
-                <div class="col-md-6 mb-3"><!--inicio campo dirección-->
+                <div class="col-md-6 mb-3">
+                   <label  class="control-label mb-2">Correo electrónico:</label> 
+                  <div class="form-group">
+                      <input name ="ingcorreo" type="email" class="form-control" placeholder="nombre@dominio.com" minlength="8" maxlength="50" onblur="quitarespacios(this);" onkeyup="noespacio(this, event);" onkeydown="sinespacio(this);" autocomplete = "off" >
+                  </div>
+                </div>
+              </div><!--fin del cuarto row -->
+              <div class="row"><!--otro  row -->
+              <div class="col-md-12 mb-3"><!--inicio campo dirección-->
                  <label  class="control-label mb-2">Dirección:</label> 
                   <div class="form-group">
-                   <input type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="" autocomplete = "off">
+                  <textarea type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="" autocomplete = "off"></textarea>
                   </div>
                 </div><!--fin campo dirección-->
-              </div><!--fin del cuarto row -->
+              </div><!-- Fin del otro row -->
               <!-- datos que solo tiene que ver con la tabla de usuarios -->
               <h5>Datos de usuario</h5><hr size="5px;" style="color:blue;">
               <div class="row"><!-- Inicio del quinto  row -->
@@ -218,35 +226,18 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <div class="input-group">
-                  <span  class="input-group-text" id=""><i class="fa fa-envelope"></i></span> 
-                      <input name ="ingcorreo" type="email" class="form-control" placeholder="Ingresa un correo electronico" minlength="8" maxlength="50" onblur="quitarespacios(this);" onkeyup="noespacio(this, event);" onkeydown="sinespacio(this);" autocomplete = "off" >
-                  </div>
-                </div>
-                
-              </div><!-- fin del quinto row-->
-              <div class="row"><!-- Inicio del ultimo  row -->
-                <div class="col-md-6 mb-3">
                   <div class="input-group mb-3" id="grupo__clave_nueva"><!--Para ingresar la contraseña -->
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" id="clave_nueva" name="clave_nueva" class="form-control" placeholder="Ingresa tu contrase&ntilde;a"  onkeyup="noespacio(this, event)" minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
-                      <span class="input-group-text" onclick="mostrar1()"><i class=" icon1 fa fa-eye-slash"></i></span>
-                      <div class="invalid-tooltip">
-                          Llene este campo
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <div class="input-group mb-3" id="grupo__confirmar_clave" ><!--Para ingresar la contraseña -->
-                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                    <input type="password" id="confirmar_clave" name="confirmar_clave" class="form-control" placeholder="confirmar contrase&ntilde;a" onkeyup="noespacio(this, event)"  minlength="<?php echo $valor4;?>" maxlength="<?php echo $valor3;?>" required onblur="quitarespacios(this);"onkeyup="sinespacio(this);">
-                      <span class="input-group-text" onclick="mostrar2()"><i class=" icon2 fa fa-eye-slash"></i></span>
-                      <div class="invalid-tooltip">
-                          Llene este campo
-                      </div>
-                  </div>
-                </div>
-              </div><!-- Fin del ultimo  row -->
+                    <input class="form-control"  required pattern="[A-Z,1-9,a-z,@$!%*?&]{<?php echo $valor4;?>,<?php echo $valor3;?>}"; minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);" type="password" id="clave_nueva" name="clave_nueva" >
+                             <div class="input-group-append">
+                               <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
+                             </div>
+                          </div> 
+                           <FONT SIZE=2>*Debe teber minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
+                        </div>
+                
+              
+              
               <!-- botones -->
               <div class="d-grid gap-2 d-md-block"> 
               <button  onclick="location.href='../../index.php'" name = "btncancelar" type="button" class="btn btn-outline-danger btn-lg">Cancelar</button>
