@@ -63,17 +63,26 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
-          <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="#">Citas pendientes</a>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="crudcitasEspiritualesPendientes">Citas pendientes</a>
             </li>
             <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="procesoCitaspPreclinica">Personas Preclínica</a>
+            <a class=" nav-link" style="color:#000000;" href="procesoCitasEspirituales">Consultas en Espera</a>
             </li>
-            <li class="nav-item" disabled="disabled">
-            <a class="nav-link" style="color:#000000;" href="#">Registrar Preclínica</a>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
             </li>
-           
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Consulta Espiritual</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="#">Informe de Consulta</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" style="color:#000000;" href="crudPacientesEspirituales">Lista de Personas</a>
+            </li>
           </ul>
+
         </div>
         <div class="card-body">
         <div class="container-fluid">
@@ -150,7 +159,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA
                                         AND E.CODIGO_PERSONA = '$cod_usuario'
                                         AND IC.CODIGO_ESTADO = '5'
-                                        AND IC.AREA_CITA = '2'
+                                        AND IC.AREA_CITA = '4'
                                         order by IC.FECHA_CITA desc;
                                         ";
                                         $result = $conn->query($query);
@@ -341,7 +350,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="edit_cita_Medica"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                                                <button type="submit" name="edit_cita_espiritual"  id = "edit_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 
@@ -436,7 +445,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                         <!-- ------------------ FIN PRIMERA ROW editar---------------------- -->
                                                             <div class="modal-footer ">
                                                                 <button type="button" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                                                                <button type="submit" name="enviar_cita_medica"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar cita</button>
+                                                                <button type="submit" name="enviar_cita_espiritual"  id = "enviar_cita" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Enviar cita</button>
                                                               
                                                             </div>
                                                                     </div><!--FIN CUERPO DEL MODAL editar --> 

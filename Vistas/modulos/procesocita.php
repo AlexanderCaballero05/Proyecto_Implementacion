@@ -411,7 +411,6 @@ $result3= $conn->query($query);
   </div><!--fin del form group -->
 <!-- Cierre del div wraper -->
 
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 
 </body>
 

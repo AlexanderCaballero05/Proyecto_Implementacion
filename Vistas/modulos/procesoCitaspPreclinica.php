@@ -23,7 +23,7 @@ include_once 'conexionpdo.php';
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="crudcitasMedicasPendientes">Citas medicas</a>
+            <a class=" nav-link" style="color:#000000;" href="crudcitasMedicasPendientes">Citas pendientes</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Personas Preclínica</a>

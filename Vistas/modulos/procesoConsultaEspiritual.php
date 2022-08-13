@@ -221,7 +221,7 @@ include_once 'conexionpdo.php';
                       </div>
   </section><!-- FINAL SECTION -->
 
-   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   
    <script>
       function soloLetrasComa(e){
        key = e.keyCode || e.which;
@@ -289,7 +289,6 @@ if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 }
 } );
   </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
  
