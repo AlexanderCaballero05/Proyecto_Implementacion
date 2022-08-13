@@ -220,17 +220,19 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
               <h5>Datos de usuario</h5><hr size="5px;" style="color:blue;">
               <div class="row"><!-- Inicio del quinto  row -->
                <div class="col-md-6 mb-3">
+               <label  class="control-label mb-2">Nombre Usuario:</label> 
                   <div class="input-group">
                     <span class="input-group-text" id=""><i class="fas fa-user"></i></span>
                     <input name = "ingusuario" type="text" class="form-control" placeholder="Ingresa nombre de usuario"  onkeyup="noespacio(this, event);mayus(this)" minlength="<?php echo $valor1;?>" maxlength="<?php echo $valor2;?>"  onkeypress="return soloLetras(event);" required pattern="[A-Z]{<?php echo $valor1;?>,<?php echo $valor2;?>}" onblur="quitarespacios(this);" onkeydown="sinespacio(this);" autocomplete = "off">
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
+                <label  class="control-label mb-2">Contraseña:</label> 
                   <div class="input-group mb-3" id="grupo__clave_nueva"><!--Para ingresar la contraseña -->
                     <span class="input-group-text"><i class="fas fa-lock"></i></span>
                     <input class="form-control"  required pattern="[A-Z,1-9,a-z,@$!%*?&]{<?php echo $valor4;?>,<?php echo $valor3;?>}"; minlength="<?php echo $valor4;?>"  maxlength="<?php echo $valor3?>" onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);" type="password" id="clave_nueva" name="clave_nueva" >
                              <div class="input-group-append">
-                               <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
+                               <button id="show_password" class="form-control " onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                              </div>
                           </div> 
                            <FONT SIZE=2>*Debe teber minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
