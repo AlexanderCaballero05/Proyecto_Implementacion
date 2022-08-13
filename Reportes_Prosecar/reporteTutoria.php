@@ -46,7 +46,7 @@ class PDF extends FPDF {
 		
 		$this->SetX(20);
 		$this->Line(10,287,200,287);
-	
+
 		$this->SetX(10);
 		
 	}

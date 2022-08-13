@@ -4,14 +4,12 @@ include_once "conexion3.php";
 include_once 'conexionpdo.php';
  include "conexionpdo.php";
 $codigoObjeto = 32;///CAMBIAR 
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <head>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
+    
 </head>
 <div class="content-wrapper">
     <div class="content-header">
@@ -19,7 +17,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 "> 
-          <h4>Citas Psicológicas </h4>
+          <h4>Consultas en Espera</h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -178,7 +176,11 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Ver Cita </h4>
+                                                                
+                                                                    <h4 class="text-center">Ver cita  Paso <i class="bi bi-1-circle"></i> <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+                                                                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+                                                                </svg></h4>
+                                                                    
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <form method="POST"><!-- Modal content  editar-->

@@ -142,10 +142,8 @@ try {
       <p  style="font-size: 13px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
     
-   
-
-   <footer>
-      <p style="  text-align: center;">Página<span  class="pagenum"></p> 
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>

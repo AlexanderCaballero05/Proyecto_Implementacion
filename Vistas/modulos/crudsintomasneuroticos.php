@@ -231,7 +231,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   </section><!-- FINAL SECTION -->
 
   <!--INICIO DEL MODAL DE AGREGAR UN NUEVo SINTOMA-->
-  <div id="AGREGARSINTOMAs" class="modal fade" role="dialog">
+    <div id="AGREGARSINTOMAs" class="modal fade" role="dialog">
        <div class="modal-dialog modal-md">
            <div class="modal-content"><!-- Modal content-->
                 <form method="POST" class="needs-validation" novalidate>
@@ -260,10 +260,10 @@ bitacora($codigoObjeto,$accion,$descripcion);
                 </div>
             </form>
       </div>
-   </div><!-- FIN DEL MODAL AGREGAR NUEVO SINTOMA --> 
-   </body>
+    </div><!-- FIN DEL MODAL AGREGAR NUEVO SINTOMA --> 
+  </body>
 
-  <!-- Button trigger modal -->
+
 
 
 <!-- Modal -->

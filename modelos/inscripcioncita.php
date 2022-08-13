@@ -28,6 +28,7 @@
     Programador           Fecha                  Descripcion
     Diana Rut            23/07/2022          Se agregaron las validaciones para registrar una cita por parte de los usuarios
                                               medicos psicologos y catequistas,ya que no consultaba si habia choque de citas e insertaba directamente la cita
+    Diana Rut            12/08/2022         Se modifico la parte de editar una cita
 ----------------------------------------------------------------------->
 
 
@@ -52,8 +53,8 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
          $user = $_SESSION['vario'];
         
          $sentencia = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
-         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
-         $sentencia->execute(array($paciente,$hora,$fecha));
+         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO =(?)");
+         $sentencia->execute(array($paciente,$hora,$fecha,$estado));
           $row=$sentencia->fetchColumn();
           if($row >0){ 
             echo "<script> 
@@ -177,7 +178,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
 }// if padre
 
 
-  //con lo de ditar no toque,porque ya les daba y no tengo el procediemiento :v ,ya eso ustedes lo terminan 
+//Ordenado como debe ser :D
  ///BOTON DE EDITAR 
  if (isset($_POST['cod_edit_cita'])){
   if(isset($_POST['edit_cita'])){
@@ -185,58 +186,59 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
     $hora =$_POST['edit_hora'];
     $estado =$_POST['estado_edit'];
     $cod =$_POST['cod_edit_cita'];
-    $ENCARGADO =$_POST['encargadocitados'];
-     try {
-      $sentencia = $db->prepare("SELECT tic.CODIGO_PERSONA , tic.CODIGO_ESPECIALISTA
-        from tbl_inscripcion_cita tic  where tic.CODIGO_CITA = ?");
-       $sentencia ->execute(array($cod));
-       $ESPECIALISTAS = $sentencia->fetchALL();
-        foreach ( $ESPECIALISTAS AS $RESULTADOS){
-           $personas = $RESULTADOS['CODIGO_PERSONA'];
-           $especialistas = $RESULTADOS['CODIGO_ESPECIALISTA'];
-         $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
-         from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ?  ");
-         $sentencia_paciente->execute(array($personas,$hora,$fecha,$estado));
-          $row=$sentencia_paciente->fetchColumn();
-          if($row >0){
-            echo "<script>
-                alert('El ya tiene una cita registrada  a esa fecha ');
-               window.location = 'crudinscripcioncita';
-                </script>";
-                exit;
-          }else {
-            $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
-          from tbl_inscripcion_cita   where  CODIGO_PERSONA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = ? ");
-          $sentencia_especialista->execute(array($especialistas,$hora,$fecha,$estado));
-           $row=$sentencia_especialista->fetchColumn();
-           if($row >0){
-             echo "<script>
-                 alert('El ya tiene una cita registrada a esa fecha ');
-                window.location = 'crudinscripcioncita';
-                 </script>";
-                 exit;
-           } else {
-            $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
-            $consulta=$conn->query($sql);
-            if ($consulta > 0){
-             echo "<script>
-                window.location = 'crudinscripcioncita';
-                 </script>";
-               $codigoObjeto=32;
-               $accion='MODIFICACIÓN';
-               $descripcion='SE MODIFICÓ UNA CITA';
-               bitacora($codigoObjeto,$accion,$descripcion);
-               }
-          }
-
-          } // fin else 
-      }///  fin foreach
-     }catch(PDOException $e){
-      echo $e->getMessage(); 
-      return false;
-    } 
+    $ENCARGADO= $_POST['encargadocitados'];
+    $paciente1= $_POST['paciente_editar'];
+    try{
+       $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
+       from tbl_inscripcion_cita   where CODIGO_PERSONA  = (?) AND HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?)
+       and CODIGO_CITA <> (?) ");//El <> es el que hace la magia :v
+       $sentencia_especialista->execute(array($paciente1,$hora,$fecha,$estado,$cod));
+       $row=$sentencia_especialista->fetchColumn();
+      if($row >0){
+        // verifica que si el especialista nuevo que seleccionó no tiene algun compromiso en la misma fecha
+        echo "<script>
+        alert('No se puede porque tiene otra cita en la misma fecha y misma hora');
+        window.location = 'crudinscripcioncita';
+        </script>";
+        exit;
+      }else{
+       $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA , CODIGO_ESTADO, CODIGO_CITA
+       from tbl_inscripcion_cita   where CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?) 
+        AND CODIGO_CITA <> (?) ");
+       $sentencia_paciente->execute(array($ENCARGADO,$hora,$fecha,$estado,$cod));
+       $row=$sentencia_paciente->fetchColumn();
+       if($row > 0){
+        echo "<script> 
+        alert('El  Especialista  ya tiene asignada una cita en esa fecha y hora');
+        window.location = 'crudinscripcioncita';
+        </script>";
+         exit; 
+       }else{
+        $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
+        $consulta=$conn->query($sql);
+        if($consulta > 0){
+          echo "<script>
+          alert('Cita Actualizada');
+          window.location = 'crudinscripcioncita';
+          </script>";
+          $codigoObjeto=32;
+          $accion='MODIFICACIÓN';
+          $descripcion='SE MODIFICÓ UNA CITA';
+          bitacora($codigoObjeto,$accion,$descripcion);
+        }else{
+          echo "<script>
+          alert('Ocurrio un error');
+          window.location = 'crudinscripcioncita';
+          </script>";
+        }//Fin validaciones 
+       }
+      }//Fin primer else
+    }catch(PDOException $e){
+    echo $e->getMessage(); 
+    return false;
+   }
   }
-  }
+}
 
 
 
