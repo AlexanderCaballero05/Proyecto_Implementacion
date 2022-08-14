@@ -30,6 +30,7 @@
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
   Diana Rut             		27-07-2022                 cambios en los botones
+  Luz Montoya y José        13-08-2022                 Se agregaron los estados en la tabla de roles
 ----------------------------------------------------------------------->
 
 <?php
@@ -95,6 +96,7 @@
                           <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
+                          <th class="text-center">Estado</th>
                           <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
@@ -108,6 +110,7 @@
                             $var1 = $row['CODIGO_TIPO_ROL'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
+                            $var4 = $row['EST_ROL'];
                         ?>
                         <tr>
                           <td>
@@ -170,6 +173,19 @@
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center">
+                          <?php 
+                          if($var4 == "2"){
+                          ?>
+                          <B><FONT COLOR="green"> ACTIVO</FONT>
+                          <?php  
+                          }elseif($var4 =="3"){
+                          ?>
+                          <B><FONT COLOR="red"> INACTIVO</FONT>
+                          <?php 
+                          }
+                          ?>
+                          </td>
                           <td class="text-center"><?php echo $var3; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR ROL -->
                           <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog" >
@@ -193,6 +209,27 @@
                                         </div>
                                       </div>
                                       <div class="col-sm-12">
+                                      <label for="txtestado_persona">Estado</label>
+                                      <select class="form-control select2" name="Est_rol_u" id="Est_rol_u" required>
+                                          <option value= ""><?php
+                                          if ($var4 == 2){
+                                          ?>
+                                          Activo
+                                          <?php
+                                          }elseif($var4 == 3) {
+                                          ?>
+                                          Inactivo
+                                          <?php
+                                          }
+                                          ?></option>
+                                          <option value= "2">ACTIVO</option>
+                                          <option value= "3">INACTIVO</option>
+                                          </select>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
                                           <textarea  type="text" class="form-control"  required pattern="[A-Z]{5,255}" minlength="5" maxlength="255" autocomplete = "off" type="text" onkeyup="mayus(this);"   name="editar_descripcion"  onkeypress="return soloLetras(event);" id="editar_descripcion"><?php echo $var3; ?></textarea>
@@ -201,6 +238,7 @@
                                           </div>
                                         </div>
                                       </div>
+                                      
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
@@ -270,6 +308,19 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
+                               <div class="form-group">
+                                <label for="txtcodigo_persona">Estado</label>
+                                <select class="form-control select2" name="Est_rol" id="Est_rol" required>
+                                <option value= "">--Seleccione un estado--</option>
+                                <option value= "2">ACTIVO</option>
+                                <option value= "3">INACTIVO</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                   campo obligatorio.  
+                               </div>
+                               </div>
+                            </div>
+                            <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
                                     <textarea  type="text"   class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off"  onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
@@ -278,6 +329,7 @@
                                    </div>
                                 </div>
                             </div>
+                            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">

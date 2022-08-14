@@ -26,6 +26,7 @@ Diana Rut               09/06/2022           Se modifico los datos de la bitacor
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 Diana Rut Garcia        21-/06-2022            Se valido las validaciones de editar
 Diana Rut               11/08/2022           Se arreglo el bug que no muestra los dos campos de contraseñas
+Luz Montoya             13/08/2022           La Consulta para solo traer los roles con estados activos
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -298,7 +299,8 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
                                         <?php
-                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' 
+                                           AND EST_ROL <> '3' ;";
                                            $resultadod=$conn->query($query);                
                                          ?> 
                                         <div class="col-sm-6">
