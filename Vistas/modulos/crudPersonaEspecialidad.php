@@ -147,7 +147,7 @@
                               include_once "conexion3.php";
                               $query2= "SELECT esp.CODIGO_ESPECIALIDAD ,esp.NOMBRE
                               FROM tbl_especialidad esp
-                              WHERE esp.CODIGO_ESPECIALIDAD = 2;";
+                              WHERE esp.CODIGO_ESPECIALIDAD = 2 and CODIGO_ESTADO =2 ;";
                               $result2= $conn->query($query2);
                            ?>
 

@@ -654,7 +654,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                                                    
                        <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->
                         <?php 
-                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 3;";
+                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 3 and CODIGO_ESTADO = 2;";
                         $resultadod=$conn->query($query);                
                         ?>
                          <label class="control-label">Tipo Especialidad Psicologia:</label>
@@ -680,7 +680,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       </div>
                       <div style ="display:none;" class="col-md-4" id="especialidad_medico"><!--especialidad medico-->
                         <?php 
-                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 2;";
+                        $query = " SELECT * FROM  tbl_especialidad te WHERE te.CODIGO_AREA = 2 and CODIGO_ESTADO = 2";
                         $resultadod=$conn->query($query);                
                         ?>
                          <label class="control-label">Tipo Especialidad Medico:</label>
@@ -706,7 +706,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                       </div>
                       <div  style ="display:none;" class="col-md-4" id="catequistas"><!--catequistas-->
                         <?php 
-                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 4;";
+                        $query = " SELECT * FROM  tbl_especialidad WHERE CODIGO_AREA = 4 and CODIGO_ESTADO = 2;";
                         $resultadod=$conn->query($query);                
                         ?>
                          <label class="control-label">Catequistas:</label>

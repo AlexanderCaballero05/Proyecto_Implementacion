@@ -14,6 +14,7 @@
                $nombre_area = ($_POST['nombre_area']);
                $descripcion = ($_POST['descripcion_area']);
                $fechaActual = date('Y-m-d'); 
+            
               try{ 
                   $consulta_estado = $db->prepare("SELECT COUNT(*) FROM tbl_area WHERE NOMBRE = (?);");
                   $consulta_estado->execute(array($nombre_area));
@@ -26,7 +27,7 @@
                   exit;
                   }else{
                     try{
-                      $query_area = " INSERT INTO `tbl_area`( `NOMBRE`, `DESCRIPCION`, `FECHA_CREACION`, `CREADO_POR_USUARIO`) VALUES ('$nombre_area','$descripcion','$fechaActual','$usuario'); ";
+                      $query_area = " INSERT INTO `tbl_area`( `NOMBRE`, `DESCRIPCION`, `FECHA_CREACION`, `CREADO_POR_USUARIO`,`CODIGO_ESTADO`) VALUES ('$nombre_area','$descripcion','$fechaActual','$usuario','2'); ";
                       $resul=$conn->query($query_area);
                       if($resul >0){
                         echo "<script> 
@@ -71,7 +72,7 @@
       $codigo_area = ($_POST['id_area']);
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
-      
+      $estado = ($_POST['ESTADOUSUARIO']);
       
       try{
        // 
@@ -93,6 +94,7 @@
             SET NOMBRE = '$editar_nombre' ,
             DESCRIPCION = '$editar_descripcion', 
             FECHA_MODIFICACION = '$fechaActual',
+            CODIGO_ESTADO = '$estado',
             MODIFICADO_POR = '$usuario'
             WHERE CODIGO_AREA = '$codigo_area' ";
             $consulta=$conn->query($sql);
