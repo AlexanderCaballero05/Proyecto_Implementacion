@@ -29,31 +29,15 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
-	// Posición: a 1,5 cm del final
-	$this->SetFont('helvetica', 'B', 9);
-	$this->SetY(-18);
-	$this->SetX(28);
-	$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-//	$this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R');
-	$this->SetX(27);
-	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
-	$this->SetX(10);
-	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
-
+		$this->SetFont('helvetica', 'B', 9);
+		$this->SetY(-18);
+		$this->SetX(28);
+		$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+		// $this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R',);
+		$this->SetX(27);
+		$this->Line(27,197,270,197);
+		
+		$this->SetX(10);
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------
