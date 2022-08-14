@@ -10,6 +10,7 @@
        try{
           if(isset($_POST['agregar_seccion'])){
                $nombre_seccion = ($_POST['nombre_seccion']);
+               $estado_seccion = ($_POST['estadoseccion']);
                $descripcion = ($_POST['descripcion_seccion']); 
               try{ 
                   $consulta_seccion = $db->prepare("SELECT COUNT(*) FROM tbl_seccion WHERE NOMBRE = (?);");
@@ -23,7 +24,7 @@
                   exit;
                   }else{
                     try{
-                      $query_seccion = "INSERT INTO TBL_SECCION(NOMBRE, DESCRIPCION) VALUES ('$nombre_seccion','$descripcion'); ";
+                      $query_seccion = "INSERT INTO TBL_SECCION(NOMBRE,CODIGO_ESTADO, DESCRIPCION) VALUES ('$nombre_seccion','$estado_seccion','$descripcion'); ";
                       $resul=$conn->query($query_seccion);
                       if($resul >0){
                         echo "<script> 
@@ -68,6 +69,7 @@
       $codigo_seccion = ($_POST['id_seccion']);
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
+      $editar_estado= ($_POST['editar_estadosecci']);
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_seccion where NOMBRE = (?) and CODIGO_SECCION <> (?) ;");
@@ -81,7 +83,7 @@
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_seccion SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion'
+            $sql = " UPDATE tbl_seccion SET NOMBRE = '$editar_nombre', CODIGO_ESTADO = '$editar_estado=' ,DESCRIPCION = '$editar_descripcion'
             WHERE CODIGO_SECCION = '$codigo_seccion' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

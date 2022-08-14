@@ -73,7 +73,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4>Mantenimiento Preguntas </h4>
+              <h4> Preguntas </h4>
         </section>
   
   <section class="content">
@@ -125,7 +125,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                         <tr>
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
-                          <th class="text-center">Código Estado</th>
+                          <th class="text-center">Estado</th>
                           <th class="text-center">Pregunta</th>
                      
                           
@@ -142,6 +142,7 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                             $var1 = $row['CODIGO_PREGUNTAS'];
                             $var3 = $row['Nombre'];
                             $var2 = $row['PREGUNTA'];
+                            $var4 = $row['CODIGO_ESTADO'];
             
                          
                         ?>
@@ -180,14 +181,99 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                                 ?>
                                </a>
                                 
+                               <a href="#EDITARPREGUNTA<?php echo $var1; ?>" data-toggle="modal">
+                                <?php
+                                  include "conexionpdo.php";
+                                  $usuario=$_SESSION['vario'];
+                                  //Evaluo si existe el tipo de Rol
+                                  $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                                  FROM tbl_usuario 
+                                                                  WHERE NOMBRE_USUARIO = (?);");
+                                  $evaluar_usuario->execute(array($usuario));
+                                  $row=$evaluar_usuario->fetchColumn();
+                                  if($row > 0){
+                                      $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                   //llamar al procedimiento almacenado
+                                  $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
+                                  $evaluar_permiso_actualizar->execute(array($usuariomo, '4'));
+                                  $row1=$evaluar_permiso_actualizar->fetchColumn();
+                                  $permiso_actualizar =$row1; 
+                                    
+                                  }
+                                ?>
+                                <?php
+                                    if ($permiso_actualizar == 'SI'){
+
+                                ?>
+                                <button type='button' id="btnGuardar"  style="color:white;"class="btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                <?php
+                                  }
+                                 ?> 
+                              </a>
                               </div>
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
+                          
 
-
+                          <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
+                          <div id="EDITARPREGUNTA<?php echo $var1 ?>" class="modal fade" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content"><!-- Modal content-->
+                                <form  method="POST" class="needs-validation" novalidate>
+                                  <div class="modal-header" style="background-color: #0CCDE3">
+                                    <h4 class="text-center">Editar preguntas</h4>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body"><!--CUERPO DEL MODAL -->
+                                    <div class="row"><!-- INICIO PRIMERA ROW -->  
+                                      <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_pregunta" id="id_pregunta">
+                                      <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Preguntas</label>
+                                          <input  type="text"  value ="<?php echo $var2; ?>" class="form-control" onkeypress="return soloLetrascaracteres(event);"  maxlength="60" minlength="5"    autocomplete = "off" type="text"  
+                                          name="editar_pregunta" id="edipre" required="">
+                                          <div class="invalid-feedback">
+                                       campo obligatorio.
+                                   </div>
+                                        </div>
+                          </div>
+                          <div class="col-sm-12">
+                                        <?php //--INICIO DEL ESTADO
+                                        $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                        FROM tbl_estado
+                                        where CODIGO_ESTADO BETWEEN 2 and 3";
+                                        $resultadod=$conn->query($query);                
+                                       ?>
+                                       <label  class="control-label">Estado</label>  
+                                       <div class="form-group">
+                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_estadopre" id="editar_estado" required>
+                                         <option  value="<?php echo $var4?>"><?php echo $var3;?></option>
+                                          <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                          while($row = $resultadod->fetch_assoc()) { 
+                                          $codigo = $row['CODIGO_ESTADO'];
+                                          $estado = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $estado;?></option>
+                                        <?php } 
+                                         }?>
+                                        </select> 
+                                       </div>
+                                      </div>
+                                    </div> <!-- FIN DE EL PRIMER ROW --> 
+                                  </div><!--FINAL DEL CARD BODY -->                       
+                                  <div class="modal-footer ">
+                                    <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                    <button type="submit" id="editar" name="editar" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                                  </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                </div>
+                              </form>
+                            </div>
+                          </div><!-- FIN DEL MODAL EDITAR -->  
                           
 
                             
@@ -249,7 +335,33 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                                    </div> 
                                 </div>
                             </div>
-                          
+                            <div class="col-sm-12">
+                              <?php //--INICIO DEL ESTADO
+                                $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                FROM tbl_estado
+                                where CODIGO_ESTADO BETWEEN 2 and 3";
+                                $resultadod=$conn->query($query);                
+                               ?>
+                              <label  class="control-label">Estado de la Sección</label>  
+                                <div class="form-group">
+                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="estadopregunta" id="estadopre" required>
+                                      <option selected enable value=""> --Seleccionar Estado-- </option>
+                                      <?php 
+                                       if ($resultadod->num_rows > 0) {
+                                       while($row = $resultadod->fetch_assoc()) { 
+                                       $codigo_seccion = $row['CODIGO_ESTADO'];
+                                       $seccion = $row['NOMBRE'];
+                                       ?>
+                                      <option value="<?php echo $codigo_seccion?>" ><?php echo $seccion;?></option>
+                                      <?php } 
+                                      }?>
+                                      <div class="invalid-feedback">
+                                         Campo obligatorio.
+                                     </div>
+                                    </select> 
+                                </div>
+                            </div>
+                            
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">

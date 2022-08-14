@@ -94,20 +94,24 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                         <tr>
                           <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
+                          <th class="text-center">Estado</th>
                           <th class="text-center">Nombre Sección</th>
                           <th class="text-center">Descripción</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT * FROM `TBL_SECCION`
+                        $query = "select s.CODIGO_SECCION, s.CODIGO_ESTADO, s.NOMBRE, s.DESCRIPCION, e.NOMBRE as Nombreestado from tbl_seccion s, tbl_estado e
+                        where e.CODIGO_ESTADO = s.CODIGO_ESTADO
                         ORDER BY  CODIGO_SECCION ASC ;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_SECCION'];
+                            $var4 = $row['Nombreestado'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
+                            $var5 = $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -169,6 +173,7 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                             </div><!-- final del text-center -->
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
                         <!--INICIO DEL MODAL DE EDITAR  -->
@@ -196,6 +201,29 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                                           <input  type="text"  value ="<?php echo $var3; ?>" class="form-control"  maxlength="100" 
                                           onkeypress="return soloLetrasComa(event);"   autocomplete = "off" type="text" required  name="editar_descripcion" id="editar_descripcion">
                                         </div>
+                                      </div>
+                                      <div class="col-sm-12">
+                                        <?php //--INICIO DEL ESTADO
+                                        $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                        FROM tbl_estado
+                                        where CODIGO_ESTADO BETWEEN 2 and 3";
+                                        $resultadod=$conn->query($query);                
+                                       ?>
+                                       <label  class="control-label">Estado</label>  
+                                       <div class="form-group">
+                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_estadosecci" id="editar_estado" required>
+                                         <option  value="<?php echo $var5 ?>"><?php echo $var4;?></option>
+                                          <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                          while($row = $resultadod->fetch_assoc()) { 
+                                          $codigo = $row['CODIGO_ESTADO'];
+                                          $estado = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $estado;?></option>
+                                        <?php } 
+                                         }?>
+                                        </select> 
+                                       </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -274,6 +302,32 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                              <?php //--INICIO DEL ESTADO
+                                $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                FROM tbl_estado
+                                where CODIGO_ESTADO BETWEEN 2 and 3";
+                                $resultadod=$conn->query($query);                
+                               ?>
+                              <label  class="control-label">Estado de la Sección</label>  
+                                <div class="form-group">
+                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="estadoseccion" id="estadopre" required>
+                                      <option selected enable value=""> --Seleccionar Estado-- </option>
+                                      <?php 
+                                       if ($resultadod->num_rows > 0) {
+                                       while($row = $resultadod->fetch_assoc()) { 
+                                       $codigo_seccion = $row['CODIGO_ESTADO'];
+                                       $seccion = $row['NOMBRE'];
+                                       ?>
+                                      <option value="<?php echo $codigo_seccion?>" ><?php echo $seccion;?></option>
+                                      <?php } 
+                                      }?>
+                                      <div class="invalid-feedback">
+                                         Campo obligatorio.
+                                     </div>
+                                    </select> 
                                 </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
