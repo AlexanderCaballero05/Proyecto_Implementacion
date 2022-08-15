@@ -57,6 +57,13 @@ include_once 'conexionpdo.php';
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
                             <h1 class=" card-title text-center"><strong style="color:black;"></strong></h1>
                         </div>
+
+                        <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+              </svg>
+              </h3>
+            </div>
                         <!-- form start -->
                         <div class="card-body">
                             <div class="table-responsive">
@@ -192,7 +199,11 @@ include_once 'conexionpdo.php';
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center"> </h4>
+                                                                <h4 class="text-center">Ver cita<i class="bi bi-1-circle"></i> <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+                                                                      <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+                                                                </svg></h4>
+
+
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <form method="POST">

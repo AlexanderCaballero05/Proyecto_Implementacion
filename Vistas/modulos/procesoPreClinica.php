@@ -33,6 +33,13 @@
           </div><!--FIN DEL CARD HEADER -->
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class=" needs-validation" novalidate id="form">
+
+             <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
+              </svg>
+              </h3>
+            </div>
                     </br>
                     <H5>Datos Generales Paciente Preclínica</H5>
                     <hr COLOR="blue"> <br>
@@ -118,7 +125,7 @@
                         <div class="col-sm-2 mb-3">
                           <label for="" class="control-label">Presión Arterial</label> 
                           <div class="input-group ">
-                            <input required pattern="[/,0-9]{2,5}"  type="text"  onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);"  minlength="2" maxlength="5"  name="FC" onkeypress="return letranumero(event);" placeholder=" Ej: 70/80"  autocomplete = "off" required class="form-control" required>
+                            <input required pattern="[/,0-9]{2,7}"  type="text"  onKeyDown="sinespacio(this);" onkeyup="noespacio(this, event);"  minlength="2" maxlength="7"  name="FC" onkeypress="return letranumero(event);" placeholder=" Ej: 70/80"  autocomplete = "off" required class="form-control" required>
                             <div class="input-group-append">
                               <span class="input-group-text">mm Hg</span>
                             </div>
@@ -177,7 +184,35 @@
 
 
 
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ <script>
+ var isSubmitting = false
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+    $('#form').data('initial-state', $('#form').serialize());
 
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+function window_mouseout( obj, evt, fn ) {
+if ( obj.addEventListener ) {
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+window_mouseout( document, 'mouseout', event => {
+event = event ? event : window.event;
+var from         = event.relatedTarget || event.toElement;
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
 <script language="javascript">

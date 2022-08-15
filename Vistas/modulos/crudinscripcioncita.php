@@ -151,8 +151,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <tbody>
                                         <?php
                                     
-                                        $query = "SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
-                                        MEDICO ,OT.CODIGO_PERSONA AS CODIGO_PACIENTE,  CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
+                                        $query = "SELECT  a.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                                        MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
                                         FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe
                                         WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
                                         AND ic.AREA_CITA = ar.CODIGO_AREA
@@ -162,7 +162,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         AND E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD
                                         AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA
                                         AND est.CODIGO_ESTADO = '5'
-                                        AND IC.FECHA_CITA = CURDATE() ;";
+                                        AND IC.FECHA_CITA = CURDATE() ;
+                                        ";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
@@ -174,8 +175,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                 $var6 = $row['nombre_estado'];
                                                 $var7 = $row['nombre_area'];
                                                 $var8 = $row['nombre_especialidad'];
-                                                $var9 = $row['CODIGO_PACIENTE'];
-                                        ?>
+                                                $area= $row['CODIGO_AREA'];
+                                                $codigoestado=$row['CODIGO_ESTADO'];
+                                        ?>      
                                                 <tr>
                                                     <td>
                                                         <div class="text-center">
@@ -256,9 +258,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                 <div class="modal-body"> 
                                                                 <!-------- INICIO PRIMERA ROW editar ----------->         
                                                             <div class="row"> 
-                                                                    <input type="text" value="<?php echo $var1; ?>"  hidden class="form-control" name="cod_edit_cita" id="cod_edit_cita">
-                                                                    <input type="text" value="<?php echo $var9; ?>" hidden class="form-control"   name="paciente_editar">
-                                                                    
+                                                                    <input type="text" value="<?php echo $var1; ?>" 
+                                                                    hidden class="form-control"
+                                                                    name="cod_edit_cita" id="cod_edit_cita">
                                                                     <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
@@ -300,7 +302,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         tbl_persona_especialidad tpe,
                                                                         tbl_especialidad  te 
                                                                         where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 ";
+                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 AND TE.CODIGO_AREA=$area";
                                                                         $resultador2=$conn->query($queryr1);
                                                                         ?>  
 
@@ -313,7 +315,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
+                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"
+                                                                                <?php
+                                                                                if ($rowr['CODIGO_ESTADO']==$codigoestado) {
+                                                                                    ?>
+                                                                                    selected
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                ><?php echo $rowr['Nombre_estado']; ?></option>
                                                                                         <?php } 
                                                                                             }?>
                                                                             </select>

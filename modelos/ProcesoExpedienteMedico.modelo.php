@@ -104,10 +104,213 @@
     }
 
 
-?>
 
+//FUNCIONES DEL CRUD ,AGREGAR UN TIPO DE SANGRE 
+    if(isset($_POST['tiposangre'])){
+       try{
+          if(isset($_POST['agregar_tiposangre'])){
+               $tiposangre = ($_POST['tiposangre']);
+               $fechaActual = date('Y-m-d');  
+               $usuario=$_SESSION['vario'];
+              try{ 
+                  $consulta_tipo = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_sangre WHERE tipo = (?);");
+                  $consulta_tipo->execute(array($tiposangre));
+                  $row=$consulta_tipo->fetchColumn();
+                  if($row>0){
+                    echo "<script>
+                    alert('El tipo de sangre $tiposangre ya se encuentra registrado');
+                    window.location = 'procesoExpedienteMedico';
+                    </script>";
+                  exit;
+                  }else{
+                    try{
+                      $query_tiposangre = " INSERT INTO `tbl_tipo_sangre`( `TIPO`, `CREADO_POR`, `FECHA_CREACION`, `CODIGO_ESTADO`) VALUES ('$tiposangre',' $usuario','$fechaActual',2); ";
+                      $resul=$conn->query($query_tiposangre);
+                      if($resul >0){
+                        echo "<script> 
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        include_once 'function_bitacora.php';
+                        exit;
+                      }else{
+                        echo "<script> 
+                        alert('Error auxilio!');
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        exit;
+                      }
+                    }catch(PDOException $e){
+                    echo $e->getMessage(); 
+                    return false;
+                    }
+                  }//fin del else de si no existe 
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }//fin del if de verificar si hay datos
 
-<?php
+       }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+    }//FIN AGREGAR TIPO SANGRE
+//INICIO DEL IF DE REGISTAR UNA ALERGIA
+    
+    if(isset($_POST['nombre_alergia'])){
+       try{
+          if(isset($_POST['AGREGAR_ALERGIAS'])){
+               $nombre_alergia = ($_POST['nombre_alergia']);
+               $descripcion = ($_POST['descripcion_alergia']);
+               $fechaActual = date('Y-m-d');
+               $usuario =$_SESSION['vario'];  
+              try{ 
+                  $consulta_rol = $db->prepare("SELECT COUNT(*) FROM tbl_alergias WHERE NOMBRE = (?);");
+                  $consulta_rol->execute(array($nombre_alergia));
+                  $row=$consulta_rol->fetchColumn();
+                  if($row>0){
+                    echo "<script>
+                    alert('El nombre de la alergia $nombre_alergia ya se encuentra registrado');
+                    window.location = 'procesoExpedienteMedico';
+                    </script>";
+                  exit;
+                  }else{
+                    try{
+                      $query_rol = " INSERT INTO tbl_alergias( NOMBRE, DESCRIPCION,CODIGO_ESTADO,FECHA_CREACION,CREADO_POR) VALUES ('$nombre_alergia','$descripcion',2,'$fechaActual','$usuario'); ";
+                      $resul=$conn->query($query_rol);
+                      if($resul >0){
+                        echo "<script> 
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        exit;
+                        include_once 'procesoExpedienteMedico';
+                      }else{
+                        echo "<script> 
+                        alert('Error auxilio!');
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        exit;
+                      }
+                    }catch(PDOException $e){
+                    echo $e->getMessage(); 
+                    return false;
+                    }
+                  }
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }
+
+       }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+    }//FIN DEL IF DE REGISTAR UNA ALERGIA
+//FUNCIONES DEL CRUD ,AGREGAR TRASTORNO
+if(isset($_POST['agregar_tipo'])){
+  
+  try{
+     if(isset($_POST['agregar_patologia'])){
+          $agregar_tipo = ($_POST['agregar_tipo']);
+             
+         try{ 
+             $consulta_estado = $db->prepare("SELECT COUNT(*) FROM tbl_transtornos_corporales WHERE TIPO = (?);");
+             $consulta_estado->execute(array($agregar_tipo));
+             $row=$consulta_estado->fetchColumn();
+             if($row>0){
+               echo "<script>
+               alert('El nombre del trastorno $agregar_tipo ya se encuentra registrado');
+               window.location = 'procesoExpedienteMedico';
+               </script>";
+             exit;
+             }else{
+               try{
+                 $query_estado = " INSERT INTO `tbl_transtornos_corporales`(TIPO, CODIGO_ESTADO) VALUES ('$agregar_tipo',2); ";
+                 $resul=$conn->query($query_estado);
+                 if($resul >0){
+                   echo "<script> 
+                   alert('Se registro correctamente'); 
+                   window.location = 'procesoExpedienteMedico';
+                   </script>";
+                   exit;
+                 }else{
+                   echo "<script> 
+                   alert('Ocurrio algun error');
+                   window.location = 'procesoExpedienteMedico';
+                   </script>";
+                   exit;
+                 }
+               }catch(PDOException $e){
+               echo $e->getMessage(); 
+               return false;
+               }
+             }//fin del else de si no existe el nombre del estado
+         }catch(PDOException $e){
+         echo $e->getMessage(); 
+         return false;
+         }
+       }//fin del if de verificar si hay datos
+
+  }catch(PDOException $e){
+   echo $e->getMessage(); 
+   return false;
+  }
+}//FIN DEL IF DE REGISTAR UN TRANSTORNO
+//FUNCIONES DEL CRUD ,AGREGAR APARIENCIA FISICA
+if(isset($_POST['apariencia'])){
+  try{
+     if(isset($_POST['nuevo'])){
+          $nombre_apariencia= ($_POST['apariencia']);
+          $fechaActual = date('Y-m-d');
+          $usuario =$_SESSION['vario'];  
+              try{ 
+                  $consulta_modalidad = $db->prepare("SELECT COUNT(*) FROM tbl_apariencia_fisica WHERE TIPO = (?);");
+                  $consulta_modalidad->execute(array($nombre_apariencia));
+                  $row=$consulta_modalidad->fetchColumn();
+                  if($row>0){
+                    echo "<script>
+                    alert('El nombre $nombre_apariencia ya se encuentra registrado');
+                    window.location = 'procesoExpedienteMedico';
+                    </script>";
+                  exit;
+                  }else{
+                    try{
+                      $query_modalidad = " INSERT INTO tbl_apariencia_fisica (TIPO,CODIGO_ESTADO) VALUES ('$nombre_apariencia',2 ); ";
+                      $resul=$conn->query($query_modalidad);
+                      if($resul >0){
+                        echo "<script> 
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        exit;
+                        include_once 'function_bitacora.php';
+                        $codigoObjeto=40;
+                        $accion='INSERCIÓN';
+                        $descripcion= 'SE REGISTRÓ UNA APARIENCIA FISICA ';
+                         bitacora($codigoObjeto, $accion,$descripcion);
+                      }else{
+                        echo "<script> 
+                        alert('Error !');
+                        window.location = 'procesoExpedienteMedico';
+                        </script>";
+                        exit;
+                      }
+                    }catch(PDOException $e){
+                    echo $e->getMessage(); 
+                    return false;
+                    }
+                  }//fin del else de si no existe el nombre del rol
+              }catch(PDOException $e){
+              echo $e->getMessage(); 
+              return false;
+              }
+            }//fin del if de verificar si hay datos
+
+       }catch(PDOException $e){
+        echo $e->getMessage(); 
+        return false;
+       }
+    }//FIN DEL IF DE REGISTAR APARIENCIA FISICA
 //CODIGO PARA ACTUALIZAR EL ESTADO DE INCRIPCION CITA A FINALIZADO  :)
 if(isset($_POST['EXPEDIENTE_CITA'])){
     if(isset($_POST['FINALIZAR_EXPEDIENTE'])){
