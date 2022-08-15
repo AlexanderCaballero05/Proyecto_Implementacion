@@ -59,7 +59,7 @@ bitacora($codigoObjeto, $accion, $descripcion);
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 ">
-        <h4>Mantenimiento Objetos</h4>
+        <h4>Objetos</h4>
     </div>
     <section class="content">
         <div class="container-fluid">

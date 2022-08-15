@@ -64,7 +64,7 @@ include_once "conexion3.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3">
-      <h4>Mantenimiento Personas</h4>
+      <h4>Ver Datos Personas</h4>
     </div>
     <section class="content">
      <div class="card"> 

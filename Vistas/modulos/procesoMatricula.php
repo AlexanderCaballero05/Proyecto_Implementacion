@@ -156,7 +156,7 @@
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td> 
                           <td class="text-center"><?php echo $var4; ?></td>
-                          <td class="text-center"><?php echo $var6; ?></td> 
+                          <td class="text-center"><?php echo $var5; ?></td> 
                           <td class="text-center"><?php echo $var7; ?></td> 
 
                           <div id="MODAL_MATRICULA<?php echo $var6 ?>" class="modal fade" role="dialog">
