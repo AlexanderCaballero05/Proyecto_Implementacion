@@ -531,7 +531,7 @@
                           </li>      
                           
                           <li class="nav-item">
-                            <a href="procesoCitasEspirituales" class="nav-link">
+                            <a href="crudcitasEspiritualesPendientes" class="nav-link">
                               <i class="far fa-edit nav-icon"></i>
                               <p>Proceso Eventos Espirituales</p>
                             </a>
