@@ -52,7 +52,7 @@ Programador               Fecha                      Descripcion
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 ">
-              <h4>Mantenimiento Tipo de Sangre </h4>
+              <h4>Tipo de Sangre </h4>
         </section>
   
   <section class="content">

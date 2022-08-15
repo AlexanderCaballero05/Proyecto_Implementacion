@@ -54,8 +54,7 @@ if($totalErrors>=0){
     include 'conexion3.php';
 
 
-    $TRIGGER_ASIGNAR_PARAMETROS = "
-    CREATE TRIGGER `TRIGGER_ASIGNAR_PARAMETROS` AFTER INSERT ON `tbl_usuario`
+    $TRIGGER_ASIGNAR_PARAMETROS = "CREATE TRIGGER `TRIGGER_ASIGNAR_PARAMETROS` AFTER INSERT ON `tbl_usuario`
     FOR EACH ROW BEGIN
     IF(NEW.Codigo_usuario=1) THEN 
     INSERT INTO tbl_parametros_usuarios(Codigo_usuario, Codigo_parametro,Par_valor) values(NEW.Codigo_usuario,1,0); 

@@ -73,7 +73,9 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
     </div><!-- /.container-fluid -->
   </div>
   <section class="content-header text-xl-center mb-3 btn-light">
-              <h4> Preguntas </h4>
+
+              <h4>Preguntas </h4>
+
         </section>
   
   <section class="content">

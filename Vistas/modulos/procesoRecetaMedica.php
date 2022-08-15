@@ -816,36 +816,8 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
   }
  }
  </script>
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-    $('#form').data('initial-state', $('#form').serialize());
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-if ( obj.addEventListener ) {
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-window_mouseout( document, 'mouseout', event => {
-event = event ? event : window.event;
-var from         = event.relatedTarget || event.toElement;
-} );
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ 
+ 
 </body>
 
 

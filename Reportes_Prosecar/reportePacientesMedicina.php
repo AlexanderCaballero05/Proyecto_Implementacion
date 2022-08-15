@@ -17,13 +17,24 @@ class PDF extends FPDF {
 		$this->Cell(175, 9, ' PROYECTO SEMILLERO CARMELITANO PROSECAR',0,1);
 		$this->SetFont('Arial','',16);
 		$this->SetX(100);
-		$this->Cell(180, 8, utf8_decode('Reporte de pacientes del area medica'));
+		$this->Cell(180, 8, utf8_decode('Reporte de Pacientes del Área Médica'));
+		$this->Ln(6);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(96);
+		$this->Cell(170, 8, utf8_decode('Dirección: Tegucigalpa,M.D.C. Colonia 15 de Septiembre'));
+		$this->Ln(5);
+		$this->SetX(5);
+		$this->SetFont('Arial','',12);
+		$this->SetX(126);
+		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
+		$this->Ln(13);
+		$this->SetFont('Arial','',10);
+		$this->Cell(62, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->SetFont('Arial','',12);
+		$this->SetX(22);
 		$this->SetX(5);
 		$this->Ln(5);
-		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,00,1,'R');
-		
-		$this->Ln(10);
 	}
 
 // Pie de página
@@ -38,7 +49,7 @@ class PDF extends FPDF {
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
 	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+
 	$this->SetX(10);
 	
 
@@ -101,7 +112,7 @@ class PDF extends FPDF {
 			$this->Cell(30, 11, 'DNI', 1, 0, 'C', 1);
 			$this->Cell(35, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
 			$this->Cell(26, 11, 'Sexo', 1, 0, 'C', 1);
-			$this->Cell(22, 11, 'Telefono', 1, 0, 'C', 1);
+			$this->Cell(22, 11, utf8_decode('Teléfono'), 1, 0, 'C', 1);
 			$this->Cell(50, 11, 'Correo', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 		}
@@ -209,7 +220,7 @@ $pdf->Cell(65, 11, 'Nombre completo del paciente', 1, 0, 'C', 1);
 $pdf->Cell(30, 11, 'DNI', 1, 0, 'C', 1);
 $pdf->Cell(35, 11, 'Fecha Nacimiento', 1, 0, 'C', 1);
 $pdf->Cell(26, 11, 'Sexo', 1, 0, 'C', 1);
-$pdf->Cell(22, 11, 'Telefono', 1, 0, 'C', 1);
+$pdf->Cell(22, 11, utf8_decode('Teléfono'), 1, 0, 'C', 1);
 $pdf->Cell(50, 11, 'Correo', 1, 1, 'C', 1);
 
 

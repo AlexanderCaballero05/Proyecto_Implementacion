@@ -22,6 +22,9 @@ include_once 'conexionpdo.php';
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasMedicasPendientes">Citas pendientes</a>
+            </li>
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Personas Preclínica</a>
             </li>
@@ -102,12 +105,12 @@ include_once 'conexionpdo.php';
                                                             <div class="btn-group">
                                                               
 
-                                                                  
+                                                                <!--  
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
-
+                                                                 -->
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-success"><span></span>Atender</button>
                                                               </a>

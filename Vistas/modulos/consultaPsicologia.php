@@ -40,7 +40,7 @@
  ?>
 <head>
 </head>
-<body oncopy="return false" onpaste="return false"></body>
+<body ></body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -265,7 +265,7 @@
                 LEFT JOIN  tbl_persona_especialidad espe ON espe.CODIGO_PERSONA_ESPECIALIDAD = cit.CODIGO_ESPECIALISTA
                 LEFT JOIN  tbl_plan_terapeutico pla ON pla.CODIGO_CONSULTA = con.CODIGO_EXPEDIENTE_PSICO
                 WHERE  cit.AREA_CITA = '3' AND cit.CODIGO_PERSONA = '$codigo_persona'
-                ORDER BY con.FECHA_CREACION;";
+                ORDER BY con.FECHA_CREACION DESC;";
                     $resul=$conn->query($consulti);
                 ?>
                 <?php
@@ -554,10 +554,8 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
 (function () {
   'use strict'
-
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   var forms = document.querySelectorAll('.needs-validation')
-
   // Loop over them and prevent submission
   Array.prototype.slice.call(forms)
     .forEach(function (form) {
@@ -571,16 +569,7 @@
     })
 })()
 
-<script>
-     $(document).ready( function () {
-      $("input").on("keypress", function () {
-       $input=$(this);
-       setTimeout(function () {
-        $input.val($input.val().toUpperCase());
-       },50);
-      })
-     })
-</script>
+
 
 
     </script>

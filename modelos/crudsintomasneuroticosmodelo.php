@@ -33,9 +33,6 @@
                         window.location = 'crudsintomasneuroticos';
                         </script>";
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=47;
-                        $accion='Agregar';
-                        $descripcion='Se agrego un nuevo sintoma neurótico';
                        bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{

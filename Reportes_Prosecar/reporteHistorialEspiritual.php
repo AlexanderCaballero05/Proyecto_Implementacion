@@ -62,7 +62,7 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
 
   footer {
    position: fixed; 
-   bottom: 1cm; 
+   bottom: 0.5cm; 
    left: 0cm; 
    right: 0cm;
    height: 1cm;
@@ -104,8 +104,7 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
     
    
 
-   <footer>
-     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
+   <footer style="text-align:center ;">
       <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>
@@ -181,9 +180,9 @@ if (isset($_POST['reporteHistoricoEspiritual'])) {
         $consulti = "SELECT con.FECHA_CREACION, con.MOTIVO_CONSULTA, con.OBSERVACIONES
         FROM tbl_inscripcion_cita i, tbl_persona pe ,tbl_consulta_espiritual con
         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                                   AND con.CODIGO_CITA = i.CODIGO_CITA
-                                     AND pe.CODIGO_PERSONA = '$persona'
-                                         AND  i.AREA_CITA = '4';";
+        AND con.CODIGO_CITA = i.CODIGO_CITA
+        AND pe.CODIGO_PERSONA = '$persona'
+         AND  i.AREA_CITA = '4' ORDER BY con.FECHA_CREACION DESC";
         $resul=$conn->query($consulti);
       ?>
       

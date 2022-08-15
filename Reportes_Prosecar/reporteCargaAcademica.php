@@ -34,10 +34,11 @@ class PDF extends FPDF {
 		$this->Cell(300, 8, utf8_decode('Teléfono: 2233-1539'));
 		$this->Ln(13);
 		$this->SetFont('Arial','',10);
-		$this->Cell(60, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
+		$this->Cell(50, 5, "Fecha: ". date('d/m/Y | g:i:a') ,0,1,'R');
 		$this->SetFont('Arial','',12);
 		$this->SetX(22);
 		$this->SetX(5);
+		$this->Ln(5);
 	}
 
 // Pie de página
@@ -51,22 +52,7 @@ class PDF extends FPDF {
 //	$this->Cell(120,5,date('d/m/Y | g:i:a') ,00,1,'R');
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
 	$this->SetX(10);
-	
-
-	//$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-//	$this->Cell(95,5,utf8_decode('Página ').$this->PageNo().' / {nb}',0,0,'L');
-//	$this->Line(10,287,200,287);
-//	$this->Cell(0,5,utf8_decode("Kodo Sensei © Todos los derechos reservados."),0,0,"C");
-  
-	//$this->Line(10,287,200,287);
-//
-
-
-
-
 
 	}
 

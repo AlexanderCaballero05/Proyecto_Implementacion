@@ -64,7 +64,7 @@ include_once "conexion3.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3">
-      <h4>Mantenimiento Personas</h4>
+      <h4>Ver Datos Personas</h4>
     </div>
     <section class="content">
      <div class="card"> 
@@ -72,9 +72,6 @@ include_once "conexion3.php";
           <ul class="nav nav-tabs card-header-tabs">
           <li class="nav-item">
             <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
             </li>
             <li class="nav-item">
              <a class="nav-link active" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>

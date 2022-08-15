@@ -58,14 +58,17 @@ include_once 'conexionpdo.php';
     </div>
 
     <section class="content-header text-xl-center mb-3 "> 
-          <h4> Citas Espirituales</h4>
+          <h4> Consultas en espera</h4>
         </section>
     <section class="content">
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
-         <li class="nav-item">
-            <a class=" nav-link active" style="color:#000000;" href="procesoCitasEspirituales">Citas en Espera</a>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasEspiritualesPendientes">Citas pendientes</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link active" style="color:#000000;" href="procesoCitasEspirituales">Consultas en Espera</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>
@@ -91,7 +94,6 @@ include_once 'conexionpdo.php';
                     <div class="card card-primary">
                         <div class="card-header text-center" style="background-color: #F7F8F9";>
                             <!-- TITULO ENCABEZADO DATOS PERSONALES -->
-                            <h1 class=" card-title text-center"><strong style="color:black;">Citas previas</strong></h1>
                         </div>
                         <!-- form start -->
                         <div class="card-body">
@@ -148,11 +150,11 @@ include_once 'conexionpdo.php';
                                                             <div class="btn-group">
                                                               
 
-                                                                  
+                                                               <!--   
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
-                                                                </a>
+                                                                </a>-->
 
                                                                    
 

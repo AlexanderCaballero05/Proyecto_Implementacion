@@ -58,8 +58,6 @@ include('conexion2.php');
     margin-right: 1cm;
     margin-bottom: 2cm;
   }
-
-
   .pagenum:before {
         content: counter(page);
     }
@@ -73,12 +71,9 @@ include('conexion2.php');
       <p  style="text-align: center; font-size: 20px;">Recetas Medicamentos-Examenes</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-  
-   <footer>
-     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
-      <label >Página<span  class="pagenum"></label></p>
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
-
    <main>
    <fieldset><!--Los datos personales del paciente,los de simempre :v -->
       <?php
@@ -106,14 +101,13 @@ include('conexion2.php');
             }
       ?>      
       <legend>  Datos Personales Paciente</legend><br>
-      <label  ><b>Nombre completo:</b> </label><?php  echo utf8_decode(ucwords(strtolower($nombre_pa))); ?> <br>
+      <label  ><b>Nombre Completo:</b> </label><?php  echo utf8_decode(ucwords(strtolower($nombre_pa))); ?> <br>
       <label  ><b>DNI: </b></label> <?php echo $dni; ?><br>
       <label  ><b>Edad: </b></label><?php echo $edad . " años"; ?><br>
-      <label  ><b>Codigo de la cita: </b></label><?php echo $codigo_cita;?><br>
+      <label  ><b>Código de la Cita: </b></label><?php echo $codigo_cita;?><br>
     </fieldset>
     <br>
 
-    
     <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Medicamentos Recetados</label></div><br>
     <?php
      $consulti ="SELECT CON.CODIGO_CONSULTA FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
@@ -164,7 +158,7 @@ include('conexion2.php');
         }
         }
       ?>
-    
+    <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Examenes Recetados</label></div><br>
     <div id="caja3">
           <?php
            $consulti ="SELECT  med.EXAMEN_MEDICO as examen, rec.INDICACIONES as indicaciones ,rec.OBSERVACIONES
@@ -186,15 +180,14 @@ include('conexion2.php');
              $indicacion = $row['indicaciones'];
              $observa = $row['OBSERVACIONES'];
              ?>
-           <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Examenes recetados</label></div><br>
-           <p>Datos de examenes </p><hr><br>
+           <p>Datos de Examenes </p><hr><br>
             <div class="c"><label><b>Nombre del examen: </b></label>
               <?php  echo utf8_decode(strtolower($examen)) ?>
             </div>
             <div class="c"><label><b>Indicaciones del examen: </b></label>
-              <?php  echo utf8_decode(strtolower($indicaciones)) ?>
+              <?php  echo utf8_decode(strtolower($indicacion)) ?>
             </div>
-            <div class="c"><label><b>Observaciones del examen: </b></label>
+            <div class="c"><label><b>Observaciones del Examen: </b></label>
               <?php  echo utf8_decode(strtolower($observa));?>
             </div>
       </div>
@@ -202,9 +195,7 @@ include('conexion2.php');
         } 
         }
       ?>
-    
    </main>
-
     <!--Elaborado por Diana Rut  -->
   </body>
 </html>

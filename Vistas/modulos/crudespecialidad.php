@@ -21,7 +21,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
   
   <section class="content">
      <div class="content-header text-xl-center mb-3 ">
-            <h4>Mantenimiento Especialidad</h4>   
+            <h4>Especialidad</h4>   
      </div>
     <div class="container-fluid">
       <div class="row">

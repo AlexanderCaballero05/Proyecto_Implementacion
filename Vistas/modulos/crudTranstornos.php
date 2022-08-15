@@ -59,7 +59,7 @@
     <div class="container-fluid">
     <section class="content-header text-xl-center mb-3 ">
         <h1>
-            <h4>Mantenimiento de Trastornos</h4>
+            <h4>Trastornos</h4>
         </h1>     
     </section>
       <div class="row">

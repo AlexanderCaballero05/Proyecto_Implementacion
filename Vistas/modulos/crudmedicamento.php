@@ -130,7 +130,7 @@ include_once "conexion3.php";
   <section class="content">
   <section class="content-header text-xl-center mb-3 ">
         <h1>
-            <h4>Mantenimiento Medicamentos</h4>
+            <h4>Medicamentos</h4>
         </h1>     
     </section>
     <div class="container-fluid">

@@ -51,7 +51,7 @@
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3">
-         <h3>Mantenimiento Roles</h3>   
+         <h3>Roles</h3>   
       </div>
       <div class="row">
         <div class="col-md-12">

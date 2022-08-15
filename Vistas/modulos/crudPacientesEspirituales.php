@@ -101,15 +101,14 @@
                                   <a href="#AGREGAR_CITA<?php echo $var1; ?>" data-toggle="modal">
                                    <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Programar Cita</span></button>
                                   </a>
-                                  <form method="post"  action="Reportes_Prosecar/reporteHistorialEspiritual.php">
-                                     <input type="hidden"  value="<?php echo $var6?>">
-                                  </form>
-                                  <a><!--Para descargar el reporte individual uwu -->
-                                     <form method="post"  action="Reportes_Prosecar/reporteHistorialEspiritual.php" target="_blank">
-                                     <input type="hidden" name="reporteHistoricoEspiritual" value="<?php echo $var6?>">
-                                     <button type='submit'  style="color:white; background-color:#FA0079"  class=" form-control btn btn-warning mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> 
+                                  <form method="POST"  action="Vistas/REPORTE.php" target="_blank"> 
                                      </form>
-                                 </a>
+                                  <a> <!--Boton para ver el expediente del estudiante -->
+                                    <form method="post"  action="consultaEspiritual" >
+                                     <input type="text" hidden name="persona_estudiante" value="<?php echo $var6; ?>"> 
+                                     <button type='submit'  style="color:white; "class="form control btn btn-info "><span> <i class=" nav-icon fa fa-file mx-1 "></i></span>Expediente</button>
+                                    </form>
+                                  </a>
                             </div>
                           </div><!--fin del text-center -->
                         </td>

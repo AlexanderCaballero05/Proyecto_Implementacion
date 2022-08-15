@@ -53,7 +53,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
   <section class="content">
     <div class="container-fluid">
     <div class="content-header text-xl-center mb-3 ">
-        <h4>Mantenimiento Alergias</h4>    
+        <h4>Alergias</h4>    
     </div>
       <div class="row">
         <div class="col-md-12">
