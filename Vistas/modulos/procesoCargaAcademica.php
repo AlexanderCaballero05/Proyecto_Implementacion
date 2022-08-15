@@ -327,7 +327,8 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
                 </div><!--cierre de la modalidad  -->
                 <div class="col-md-4">
                   <?php //
-                  $query = "SELECT * FROM tbl_seccion";
+                  $query = "SELECT * FROM tbl_seccion s where 
+                  s.CODIGO_ESTADO = 2";
                   $resultadod=$conn->query($query);                
                   ?>
                     <label class="control-label">Sección:</label> 

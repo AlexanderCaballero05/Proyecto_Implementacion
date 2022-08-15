@@ -49,7 +49,8 @@ Gissela Diaz        06-062022         Agregar los parametros de Minimo y maximo-
   $_SESSION['vario'] ;
   $db = new Conexion();
   $con = $db->conectar();
-  $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;");
+  $comando = $con->query("SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas p 
+  where CODIGO_ESTADO = 2;");
   $comando->execute();
   $resultado = $comando->fetchall(PDO::FETCH_ASSOC);
 ?>

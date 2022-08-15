@@ -81,7 +81,8 @@ ANY HERNANDEZ       01-JUN-2022       PARAMETROS DE MAXIMO Y MINIMO DE LA RESPUE
                              <div class="form-group">
                              <select class="form-control"  aria-label="Default select example"  name="pregunta_usuario" id="pregunta_usuario" required>
                                 <?php
-                                  $query = "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas";
+                                  $query = "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas p 
+                                  where CODIGO_ESTADO = 2";
                                   $resultado=$conn->query($query);
                                 ?>
                                    <option selected enable value="">--Selecione--</option>

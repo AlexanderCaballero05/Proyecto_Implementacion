@@ -122,16 +122,22 @@
                           <th class="text-center">Nivel Educativo</th>
                           <th class="text-center">Ingresos</th>
                           <th class="text-center">Nombre Iglesia</th>
+                          <th class="text-center">Familiar del Estudiante</th>
                           
                         </tr>
                       </thead>
                       <tbody class="text-center">
                         <?php
-                          $query = "SELECT tp.CODIGO_PERSONA, tf.CODIGO_FAMILIAR, tp.DNI, tp.PRIMER_NOMBRE,tp.SEGUNDO_NOMBRE, tp.PRIMER_APELLIDO, tp.SEGUNDO_APELLIDO, tel.NUMERO_TELEFONO , cor.CORREO_PERSONA, tp.DIRECCION, tf.ESTADO_CIVIL, tf.NIVEL_EDUCATIVO, tF.INGRESOS_DE_FAMILIAR,tf.NOMBRE_IGLESIA
-                          from tbl_persona tp, tbl_familiar tf , tbl_telefono tel ,tbl_correo_electronico cor
+                          $query = "SELECT tp.CODIGO_PERSONA, tf.CODIGO_FAMILIAR, fe.CODIGO_ESTUDIANTE, tp.DNI, tp.PRIMER_NOMBRE,tp.SEGUNDO_NOMBRE, tp.PRIMER_APELLIDO, tp.SEGUNDO_APELLIDO, 
+                          tel.NUMERO_TELEFONO ,cor.CORREO_PERSONA, tp.DIRECCION, tf.ESTADO_CIVIL, tf.NIVEL_EDUCATIVO, tF.INGRESOS_DE_FAMILIAR,tf.NOMBRE_IGLESIA,
+                          CONCAT(' ',p.PRIMER_NOMBRE, ' ',p.SEGUNDO_NOMBRE,' ',p.PRIMER_APELLIDO,' ',p.SEGUNDO_APELLIDO) AS ESTUDIANTE_FAMILIAR
+                          from tbl_persona tp, tbl_familiar tf , tbl_telefono tel ,tbl_correo_electronico cor, tbl_familiares_estudiante fe, tbl_estudiante es, tbl_persona p
                           where tp.CODIGO_PERSONA = tf.CODIGO_PERSONA
                           AND tp.CODIGO_PERSONA = tel.CODIGO_PERSONA
                           AND tp.CODIGO_PERSONA = cor.CODIGO_PERSONA
+                          AND tf.CODIGO_FAMILIAR = fe.CODIGO_FAMILIAR
+                          AND fe.CODIGO_ESTUDIANTE = es.CODIGO_ESTUDIANTE
+                          and es.CODIGO_PERSONA = p.CODIGO_PERSONA
                           AND tp.CODIGO_TIPO_PERSONA = 7;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
@@ -151,6 +157,8 @@
                                                 $var5 = $row['INGRESOS_DE_FAMILIAR'];
                                                 $var6 = $row['NOMBRE_IGLESIA'];
                                                 $var7 = $row['CODIGO_FAMILIAR'];
+                                                $var16 = $row['ESTUDIANTE_FAMILIAR'];
+                                                
                         ?>
                           <?php
                             include "conexionpdo.php";
@@ -222,6 +230,7 @@
                           <td><?php echo $var4; ?></td> <!--Nombre usuario-->
                           <td><?php echo $var5; ?></td> <!--Estado-->
                           <td><?php echo $var6; ?></td><!--Fecha creacion-->
+                          <td><?php echo $var16; ?></td><!--Fecha creacion-->
                         <!--INICIO DEL MODAL DE EDITAR -->
                           <div id="EDITARFAMILIAR<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-lg">
