@@ -111,13 +111,28 @@ include "conexionpdo.php";
 
    //Cuando ya de plano termino de recetar los examenes y recetas :)
    if(isset($_POST['finalizar_consulta'])){
-        $codigo_cita = ($_POST['codigo_finalizar']);
-        $cambiar_estado = "UPDATE tbl_inscripcion_cita
-        SET CODIGO_ESTADO = '12'
-        WHERE CODIGO_CITA = ' $codigo_cita'";
-        $consulta_estado =$conn->query($cambiar_estado);
-        echo "<script> window.location = 'expedienteMedico'; </script>"; exit;
-    }
+        $codigo_consulta = ($_POST['consultita']);
+        $existe = $db->prepare("SELECT COUNT(CODIGO_MEDICAMENTO) FROM tbl_receta_medica WHERE CODIGO_CONSULTA = (?)");
+        $existe->execute(array($codigo_consulta));
+        $row=$existe->fetchColumn();
+
+        $existe2 = $db->prepare("SELECT COUNT(CODIGO_EXAMEN) FROM tbl_examenes_pacientes WHERE CODIGO_CONSULTA= (?)");
+            $existe2->execute(array($codigo_consulta));
+            $row2=$existe2->fetchColumn();
+        if($row<=0 AND $row2<=0){
+          echo "<script> alert('No tiene agregado ningun Medicamento o Exámen Médico ');
+          window.location = 'procesoRecetaMedica'; </script>";
+          exit;
+        }else{
+          $codigo_cita = ($_POST['codigo_finalizar']);
+          $cambiar_estado = "UPDATE tbl_inscripcion_cita
+          SET CODIGO_ESTADO = '12'
+          WHERE CODIGO_CITA = ' $codigo_cita'";
+          $consulta_estado =$conn->query($cambiar_estado);
+          echo "<script> window.location = 'expedienteMedico'; </script>"; exit;
+        }
+      
+   }
 ?>
 <?php
 ?>

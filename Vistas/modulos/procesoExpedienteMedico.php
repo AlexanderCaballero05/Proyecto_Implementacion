@@ -28,7 +28,7 @@ include_once 'conexionpdo.php';
 
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body oncopy="return true" onpaste="return true">
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -64,6 +64,13 @@ include_once 'conexionpdo.php';
             </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
+          <br>
+          <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
+              </svg>
+              </h3>
+            </div>
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form" >
                     <H5>Datos Generales del Expediente</H5>
@@ -119,6 +126,7 @@ include_once 'conexionpdo.php';
                             $queryTipo = "SELECT CODIGO_TIPO_SANGRE ,TIPO, CODIGO_ESTADO from tbl_tipo_sangre ";
                             $resultadotipo=$conn->query($queryTipo);                
                             ?>
+                            <button  data-toggle="modal"  href="#AGREGAR_TIPOSANGRE" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-1"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span></button>
                           <label for="" class="control-label">Tipo de Sangre</label> 
                            <div class="form-group">
                              <select class="form-control select2" tyle="width: 100%;"  name ="tipo_sangre"required> 
@@ -178,7 +186,8 @@ include_once 'conexionpdo.php';
                   <div class="col-md-3">
                        <div class="card">
                           <div class="card-header text-center" style="background-color:#DFD4FE;">
-                             <strong>Alergias</strong>
+                          <button  data-toggle="modal"  href="#AGREGAR_ALERGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-1"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span></button>
+                          <strong>Alergias</strong>
                           </div>
                        <div class="card-body">
                         <?php 
@@ -213,7 +222,8 @@ include_once 'conexionpdo.php';
                       <div class="col-md-4">
                         <div class="card">
                             <div class="card-header text-center" style="background-color:#DFD4FE;">
-                              <strong>Trastornos Sistemas Corporales</strong>
+                            <button  data-toggle="modal"  href="#AGREGAR_NOPATOLOGIA" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-1"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span></button>
+                            <strong>Trastornos Sistemas Corporales</strong>
                             </div>
                         <div class="card-body">
                         
@@ -249,7 +259,8 @@ include_once 'conexionpdo.php';
                       <div class="col-md-3">
                         <div class="card">
                             <div class="card-header text-center" style="background-color:#DFD4FE;">
-                              <strong>Apariencia Física</strong>
+                            <button  data-toggle="modal"  href="#AGREGAR" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-1"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span></button>  
+                            <strong>Apariencia Física</strong>
                             </div>
                         <div class="card-body">
                         
@@ -293,7 +304,140 @@ include_once 'conexionpdo.php';
   </section>
 </div>
 </div>
+ <!--INICIO DEL MODAL DE AGREGAR UN NUEVo TIPO DE SANGRE -->
+ <div id="AGREGAR_TIPOSANGRE" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form method="POST" class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Tipo de Sangre</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_pregunta">Tipo de Sangre</label>
+                                    <input  type="text"  onkeyup="mayus(this);" class="form-control" pattern=".{6,8}"  maxlength="8" oninput="this.value = this.value.replace(/[^a-z,A-Z-,+ ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangre" id="sangretipo"onblur="quitarespacios(this);" required>
+                                    <div class="invalid-feedback">
+                                       Campo Obligatorio.
+                                   </div>
+                                </div>
+                            </div>
+                            
+                          
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="agregar_tiposangre" name="agregar_tiposangre" class="btn btn-success" ><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO TIPO DE SANGRE -->
+     <!--INICIO DEL MODAL DE AGREGAR UNA NUEVA ALERGIA -->
+     <div id="AGREGAR_ALERGIA" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form  method="POST"  class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Alergia</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Nombre Alergia</label>
+                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35"onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" onblur="quitarespacios(this);" required>
+                                     <div class="invalid-feedback">
+                                       Campo Obligatorio.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Descripción Alergia</label>
+                                    <input  type="text"   class="form-control"  pattern=".{6,100}"maxlength="100"onkeyup="mayus(this);" onkeypress="return soloLetrasnumeros(event)" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text"  placeholder="Ingrese una descripción de la alergia" name="descripcion_alergia" onblur="quitarespacios(this);" required>
+                                    <div class="invalid-feedback">
+                                       Campo Obligatorio.
+                                   </div>
+                                </div>
+                            </div>
+                            
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                    </div><!--FINAL DEL CARD BODY -->                       
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="AGREGAR_ALERGIAS" name="AGREGAR_ALERGIAS" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVA ALERGIA--> 
+    <!--INICIO DEL MODAL DE AGREGAR UN NUEVO TRASNTORNO -->
+  <div id="AGREGAR_NOPATOLOGIA" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form id="FORMEDITRAPERSONAS" method="POST" class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                      <h4 class="text-center">Agregar Trastorno</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Tipo</label>
+                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50"onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="agregar_tipo" onblur="quitarespacios(this);" required>
+                                    <div class="invalid-feedback">
+                                     Campo obligatorio.
+                                   </div>
 
+                                </div>
+                            </div>
+                        </div> <!-- FIN DE EL PRIMER ROW --> 
+                    </div><!--FINAL DEL CARD BODY -->                     
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="agregar_patologia" name="agregar_patologia" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR NUEVO TRANSTORNO -->
+   <!--INICIO DEL MODAL DE AGREGAR UN NUEVA APARIENCIA FISICA -->
+  <div id="AGREGAR" class="modal fade" role="dialog">
+       <div class="modal-dialog modal-md">
+           <div class="modal-content"><!-- Modal content-->
+                <form id="FORMEDITARMODA" method="POST" class="needs-validation" novalidate>
+                    <div class="modal-header" style="background-color: #0CCDE3">
+                        <h4 class="text-center">Agregar Apariencia Física</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body"><!--CUERPO DEL MODAL -->
+                        <div class="row"><!-- INICIO PRIMERA ROW -->  
+                          <div class="col-sm-12">
+                              <div class="form-group">
+                                  <label >Nombre Apariencia Física</label>
+                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50" onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete = "off" type="text" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" onblur="quitarespacios(this);" required="">
+                                <div class="invalid-feedback">
+                                  Campo obligatorio.
+                                </div>
+                          </div> 
+                          
+                    </div><!--FINAL DEL CARD BODY --> 
+                    </div>                      
+                    <div class="modal-footer ">
+                        <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                        <button type="submit" id="nuevo" name="nuevo" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                    </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                </div>
+            </form>
+      </div>
+   </div><!-- FIN DEL MODAL AGREGAR APARIENCIA FISICA --> 
+ <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
 function soloLetrasnumeros(e){
    key = e.keyCode || e.which;
@@ -312,6 +456,41 @@ function soloLetrasnumeros(e){
   }
  }
  </script>
+ <script>
+ var isSubmitting = false
+$(document).ready(function () {
+    $('#form').submit(function(){
+        isSubmitting = true
+    })
+    $('#form').data('initial-state', $('#form').serialize());
+
+    $(window).on('beforeunload', function() {
+        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
+            return 'You have unsaved changes which will not be saved.'
+        }
+    });
+})
+function window_mouseout( obj, evt, fn ) {
+if ( obj.addEventListener ) {
+    obj.addEventListener( evt, fn, false );
+}
+else if ( obj.attachEvent ) {
+    obj.attachEvent( 'on' + evt, fn );
+}
+}
+window_mouseout( document, 'mouseout', event => {
+event = event ? event : window.event;
+var from         = event.relatedTarget || event.toElement;
+// Si quieres que solo salga una vez el mensaje borra lo comentado
+// y así se guarda en localStorage
+// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
+if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
+    alert( '!Estas a punto de salir!' );
+    // localStorage.setItem( 'leftWindow', true );
+}
+} );
+  </script>
+  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
 

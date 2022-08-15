@@ -414,7 +414,7 @@ include "conexionpdo.php";
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                                        $query = "SELECT ar.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
                                         MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
                                         FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe
                                         WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
@@ -435,6 +435,8 @@ include "conexionpdo.php";
                                             $var6 = $row['nombre_estado'];
                                             $var7 = $row['nombre_area'];
                                             $var8 = $row['nombre_especialidad'];
+                                            $areaGeneral=$row['CODIGO_AREA'];
+                                            $codigoestado=$row['CODIGO_ESTADO'];
                                         ?>
                                                 <tr>
                                                     <td>
@@ -532,16 +534,54 @@ include "conexionpdo.php";
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
                                                                             <select class="form-control" name="estado_edit1" id="estado_edit1" required="">
-                                                                             <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
+                                                                             <option selected  autocomplete = "off" value="">--Seleccione...</option>
                                                                                 <?php 
                                                                                  if ($resultador->num_rows > 0) {
                                                                                     while($rowr = $resultador->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
+                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"<?php
+                                                                                if ($rowr['CODIGO_ESTADO']==$codigoestado) {
+                                                                                    ?>
+                                                                                    selected
+                                                                                    <?php
+                                                                                }
+                                                                                ?>><?php echo $rowr['Nombre_estado']; ?></option>
                                                                                  <?php } 
                                                                                 }?>
                                                                             </select>
                                                                             <div class="invalid-feedback">
                                                                               Campo obligatorio seleccione una opción
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                
+                                                                
+                                                                    <?php
+                                                                            include "conexion1.php";
+                                                                            $queryr1 = "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPECIALIDAD:', te.NOMBRE )  
+                                                                            as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
+                                                                            from tbl_persona tp ,
+                                                                            tbl_persona_especialidad tpe,
+                                                                            tbl_especialidad  te 
+                                                                            where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
+                                                                            AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 AND TE.CODIGO_AREA='$areaGeneral'";
+                                                                            $resultador2=$conn->query($queryr1);
+                                                                    ?>  
+                                                                    <div class="col-sm-6">
+                                                                            <div class="form-group">
+                                                                                <label for="txtcodigo_encargado">Encargado Cita:</label>
+                                                                                    <select class="form-control" name="encargadoCitaGeneral" id ="encargadoCitaGeneral" required >
+                                                                                        <option  value="">--Seleccione...</option>
+                                                                                                <?php 
+                                                                                            if ($resultador2->num_rows > 0) {
+                                                                                                while($rowr1 = $resultador2->fetch_assoc()) { ?>
+                                                                                    <option value="<?php echo $rowr1['CODIGO_PERSONA_ESPECIALIDAD'];?>"<?php 
+                                                                                    ?>><?php echo $rowr1['ESPECIALISTA']; ?></option>
+                                                                                            <?php } 
+                                                                                                }?>
+                                                                                    </select>
+                                                                                        <div class="invalid-feedback">
+                                                                                        Campo obligatorio, seleccione una opción.
+                                                                                        </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
