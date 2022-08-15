@@ -381,8 +381,6 @@ include_once "conexion3.php";
                                             <option value="<?php echo $var13?>"><?php echo $var7;?></option>
                                             <option value="2">ACTIVO</option>
                                             <option value="3">INACTIVO</option>
-                                            <option value="1">NUEVO</option>
-                                            <option value="4">BLOQUEADO</option>
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 

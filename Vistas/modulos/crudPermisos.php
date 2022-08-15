@@ -300,7 +300,7 @@
                                        <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Consultar</label>
-                                            <select class="form-control" name="ediMostrar" id="editar_descripcion">
+                                            <select class="form-control" name="ediMostrar">
                                                  <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
                                                  <option value="SI">SI</option>
                                                  <Option value="NO">NO</Option>
@@ -309,7 +309,7 @@
                                         
                                     
                                     
-                                            <!--Inicio combobox insertar -->
+                                      <!--Inicio combobox insertar -->
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Insertar</label>
@@ -345,7 +345,7 @@
                                             </select>
                                         </div>
                                       </div>
-
+                                    
                                     
 
                                        
@@ -471,7 +471,7 @@
                             </div><!--FINAL COMOBOX Consultar-->
 
                         </div> <!-- FIN DE LA PRIMERA ROW -->     
-                          <div style ="display:none;" id="Grupopermisos">
+                      <div style ="display:none;" id="Grupopermisos">
                           <div class="row"><!-- INICIO SEGUNDA ROW -->                          
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX INSERTAR-->
@@ -484,21 +484,7 @@
                                     </select>
                                 </div>
                             </div> <!--FIN DEL COMOBOX INSERTAR-->
-
-                                 <!--INICIO COMBOBOX ELMIMIAR-->
-                                
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Eliminar:</label>
-                                    <select class="form-control"name="ELIMINAR" required="">
-                                    <option selected disabled value="">--Seleccionar--</option>
-
-                                        <option value="SI">SI</option>
-                                        <option value="NO">NO</option>
-                                    </select>
-                                </div>
-                            </div> <!--FINAL COMOBOX ELIMINAR-->
-
+                              
                             <!--INICIO COMBOBOX EDITAR -->
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -510,6 +496,19 @@
                                     </select>
                                 </div>
                             </div> <!--FINAL COMOBOX MODIFICAR-->
+                               <!--INICIO COMBOBOX ELMIMIAR-->
+                                
+                               <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Eliminar:</label>
+                                    <select class="form-control"name="ELIMINAR" required="">
+                                    <option selected disabled value="">--Seleccionar--</option>
+
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div> <!--FINAL COMOBOX ELIMINAR-->
                           </div><!--FINAL SEGUNDA ROW--> 
                           </div>   <!-- Final del div grupopermisos que oculta los otros pemisos -->
                           
@@ -596,6 +595,8 @@ $( function() {
 $("#consultar1").change( function() {
   if($(this).val() === "SI" ){
     document.getElementById('Grupopermisos').style.display = "block";
+  }else {
+    document.getElementById('Grupopermisos').style.display = "none";
   }
 });
 }); 

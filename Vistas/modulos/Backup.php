@@ -1,45 +1,3 @@
-<!-- 
------------------------------------------------------------------------
-        Universidad Nacional Autonoma de Honduras (UNAH)
-	            	Facultad de Ciencias Economicas
-          Departamento de Informatica administrativa
-         Analisis, Programacion y Evaluacion de Sistemas
-                   Segundo Periodo 2022
-  
-  Equipo:
-  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
-  Luz Maria Montoya Medina (luz.montoya@unah.hn)
-  Diana Rut Garcia Amador (drgarciaa@unah.hn)
-  Any Melissa Hernandez (anyhernandez@unah.hn)
-  Gissela Yamileth Diaz (gdiaza@unah.hn)
-  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
-  
-  Catedratico:
-  Lic. Claudia Nuñez (Analisis)
-  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
-  Lic. Karla Melisa Garcia Pineda (Evaluación)
-
-  ---------------------------------------------------------------------
-   
-    Programa:          codigo que valida el backup
-    Fecha:             04-Marzo-2022
-    Programador:       Arnold Caballero 
-    descripcion:       codigo que valida el backup
-
------------------------------------------------------------------------
-                      Historial de Cambio
------------------------------------------------------------------------
-    
-    Programador               Fecha                      Descripcion
-    
-    Arnold Caballero     		07-06-2022                 cambio en presentar mensaje de confirmacion  al guardar
-   
-
-  ----------------------------------------------------------------------->
-
-
-
-
 <?php
 include './Connet.php';
 $day=date("d");
@@ -101,12 +59,12 @@ if($result){
             fclose($handle);
             echo '<script>
             alert("Copia de Seguridad Realizada con Exito");
-            window.location ="../../RespaldoProsecar"
+            window.location ="../../Respaldo"
             </script>';
         }else{
             echo '<script>
             alert("Ocurrio un Error Inesperado al Crear la Copia de Seguridad");
-            window.location ="../../RespaldoProsecar"
+            window.location ="../../Respaldo"
             </script>';
         }
     }

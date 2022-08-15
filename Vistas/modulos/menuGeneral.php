@@ -53,33 +53,19 @@
 
         <!-- parte de la foto de perfil y nombre de usuario :3-->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <?php 
-            $nomUser= $_SESSION['vario'];
-            $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
-            $result = $conn->query($query);
-            if ($result->num_rows > 0) {
-              while($row = $result->fetch_assoc()) {
-              $var12 = $row['imagen'];
-              ?>
-              <?php
-               }
-              ?>
+          
+             
               <div class="image">
                 <img style="width:35px ; heigth:33px"  class="img-circle elevation-1"   src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
                  <!--  <img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image"> -->
               </div>
               
-             <?php
-            }else if ($result->num_rows < 0){
-             ?>
+            
               <div class="image">
               <img src="vistas/assets/dist/img/usuario.PNG" class="img-circle elevation-2" alt="imagen del usiaro">
                <!--<img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="yghg Image"> -->
               </div>
 
-             <?php
-            }
-          ?>
           
             
             <div class="info">
@@ -604,7 +590,7 @@
           </a>
           <ul class="nav nav-treeview">
           <li class="nav-item">
-             <a href="procesoCitaspPreclinica"class="nav-link">
+             <a href="crudcitasMedicasPendientes"class="nav-link">
                <i class="far fa-edit nav-icon"></i>
                 <p>Proceso Preclínica</p>
              </a>
@@ -874,30 +860,135 @@
                   </a>
                 </li>
               
+                <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
 
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '55'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                 <a href="ediusuarios" class="nav-link">
                  <i class="nav-icon fas fa-table"></i>
                   <p>Usuarios</p>
                 </a>
               </li>
+                    <?php 
+                    }
+                    ?> 
 
-            <li class="nav-item">
+                     <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '2'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
+              <li class="nav-item">
                 <a href="crudRoles" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Roles</p>
                 </a>
               </li>
+                    <?php 
+                    }
+                    ?>      
+                    
+                    
 
+                    <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '5'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                 <a href="crudPermisos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Permisos</p>
                 </a>
               </li>
+                    <?php 
+                    }
+                    ?>      
 
-              
-              
+
+<?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '6'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                 <a href="crudobjetos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -905,28 +996,113 @@
                 </a>
               </li>
               </li>
-
-            
+                    <?php 
+                    }
+                    ?>      
               
+              <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '4'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                 <a href="crudpreguntas" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
                   <p>Preguntas</p>
                 </a>
               </li>
+                    <?php 
+                    }
+                    ?> 
+              
+
+                  <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '1'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                   <a href="estado" class="nav-link" > 
                   <i class="nav-icon fas fa-table"></i>
                     <p>Estados</p>
                   </a>
                 </li>
-             
+                    <?php 
+                    }
+                    ?> 
+              
+              <?php
+                            include "conexionpdo.php";
+                            $usuario=$_SESSION['vario'];
+                            //Evaluo si existe el tipo de Rol
+                            $evaluar_usuario = $db->prepare("SELECT CODIGO_TIPO_ROL 
+                                                            FROM tbl_usuario 
+                                                            WHERE NOMBRE_USUARIO = (?);");
+                            $evaluar_usuario->execute(array($usuario));
+                            $row=$evaluar_usuario->fetchColumn();
+                            if($row > 0){
+                                $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
+
+                                //llamar al procedimiento almacenado
+                                $evaluar_permiso_mostrar = $db->prepare("CALL Sp_permiso_mostrar(?,?);");
+                                $evaluar_permiso_mostrar->execute(array($usuariomo, '3'));
+                                $row1=$evaluar_permiso_mostrar->fetchColumn();
+                                $permiso_mostrar =$row1;             
+                            }
+                            ?> <!-- fin del codigo para sustraer el permiso de mostrar del modulo 27.-->
+
+                    <?php 
+                    if ($permiso_mostrar == 'SI') // Aqui valida que si permiso esta en ON se mostrara el botton de agregar
+                    {
+                    ?>    
               <li class="nav-item">
                 <a href="crudParametros" class="nav-link" > <!--hace referencia al archivo para editar parametros-->
                 <i class="nav-icon fas fa-table"></i>
                    <p>Parametros</p>
                 </a>
               </li>
+                    <?php 
+                    }
+                    ?> 
+              
 
                   
             </ul>
