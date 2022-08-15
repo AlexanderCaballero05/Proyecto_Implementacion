@@ -165,6 +165,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                 $var7 = $row['nombre_area'];
                                                 $var8 = $row['nombre_especialidad'];
                                                 $Cod_especialista = $row['CODIGO_ESPECIALISTA'];
+                                                $paciente = $row['CODIGO_PERSONA'];
                                                 $codigo_estado = $row['CODIGO_ESTADO'];
                                                 $area= $row['CODIGO_AREA'];
                                                 
@@ -256,6 +257,10 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita">
+
+                                                                    <input type="text" value="<?php echo $paciente; ?>" 
+                                                                    hidden class="form-control"
+                                                                    name="paciente_editar" id="cod_edit_cita">
                                                                     <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
