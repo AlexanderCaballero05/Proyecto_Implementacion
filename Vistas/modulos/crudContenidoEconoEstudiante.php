@@ -38,7 +38,7 @@ Diana Rut              27/07/2022             Cambios en el menu,se quito los da
   <div class="content-header">
   </div>
   <div class="content-header text-xl-center mb-3 ">
-      <h4>Estudiantes Prosecar</h4>
+      <h4>Datos Socioeconómicos</h4>
   </div>
   <section class="content">
     <div class="container-fluid">

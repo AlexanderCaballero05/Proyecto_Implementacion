@@ -55,7 +55,7 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
   <section class="content">
     <div class="container-fluid">
     <div class="content-header text-xl-center mb-3 ">
-            <h4>Mantenimiento Apariencia Física</h4>    
+            <h4>Apariencia Física</h4>    
     </div>
       <div class="row">
         <div class="col-md-12">

@@ -100,7 +100,7 @@ if (isset($_POST['expediente'])) {
       content: counter(page);/*Es para que salga la enumeracion de la pagina si */
     }
    </style>
-    <title>Historial Medico Paciente</title>
+    <title>Historial Médico Paciente</title>
   </head>
   <body>
     <header>
@@ -109,10 +109,8 @@ if (isset($_POST['expediente'])) {
       <p  style="text-align: center; font-size: 19px;">Historial Medico del Paciente</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-   <footer>
-    <p style="text-align: center; "><b> Prosecar <?php  echo date("Y");?> </b><b style="color:white;"></b>
-      <label >Página<span  class="pagenum"></label></p>
-      
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
    </footer>
    <main>
     <fieldset>
@@ -220,7 +218,7 @@ if (isset($_POST['expediente'])) {
                 AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO
                 AND  i.AREA_CITA = '2'
                 AND pe.CODIGO_PERSONA= '$persona'
-                GROUP BY con.CODIGO_CONSULTA;";
+                GROUP BY con.FECHA_CREACION DESC;";
         $resul=$conn->query($consulti);
       ?>
       <?php
@@ -255,7 +253,7 @@ if (isset($_POST['expediente'])) {
          <label><b>Fecha: </b><?php echo $fecha; ?></label>
        </fieldset>
        
-      <p>Datos de preclínica </p><hr><br>
+      <p>Datos de Preclínica </p><hr><br>
       <table style="border-collapse: collapse;  border: 0.4px solid #FFFF;">
         <thead >
            <tr>
