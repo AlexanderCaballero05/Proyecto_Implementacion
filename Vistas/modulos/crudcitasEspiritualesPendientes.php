@@ -147,7 +147,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     ?>
                                         <?php
                                     
-                                        $query = "SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                                        $query = "SELECT a.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE,  P.PRIMER_APELLIDO) AS 
                                         MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, IC.AREA_CITA, espe.NOMBRE as nombre_especialidad
                                         FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe
                                         WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
@@ -175,6 +175,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                 $var8 = $row['nombre_especialidad'];
                                                 $Cod_especialista = $row['CODIGO_ESPECIALISTA'];
                                                 $codigo_estado = $row['CODIGO_ESTADO'];
+                                                $area= $row['CODIGO_AREA'];
                                                 
                                                 
                                         ?>
@@ -305,7 +306,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         tbl_persona_especialidad tpe,
                                                                         tbl_especialidad  te 
                                                                         where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 ";
+                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 AND TE.CODIGO_AREA=$area";
                                                                         $resultador2=$conn->query($queryr1);
                                                                         ?>  
 

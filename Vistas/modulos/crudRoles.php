@@ -98,8 +98,8 @@
                           <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
-                          <th class="text-center">Estado</th>
                           <th class="text-center">Descripción</th>
+                          <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -175,6 +175,7 @@
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td>
                           <td class="text-center">
                           <?php 
                           if($var4 == "2"){
@@ -188,7 +189,7 @@
                           }
                           ?>
                           </td>
-                          <td class="text-center"><?php echo $var3; ?></td>
+                          
                         <!--INICIO DEL MODAL DE EDITAR ROL -->
                           <div id="EDITARROL<?php echo $var1 ?>" class="modal fade" role="dialog" >
                             <div class="modal-dialog modal-md">
