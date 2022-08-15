@@ -1,3 +1,37 @@
+
+<!-- 
+-----------------------------------------------------------------------
+        Universidad Nacional Autonoma de Honduras (UNAH)
+	            	Facultad de Ciencias Economicas
+          Departamento de Informatica administrativa
+         Analisis, Programacion y Evaluacion de Sistemas
+                   Segundo Periodo 2022
+
+  Equipo:
+  Arnold Alexander Caballero Garcia (aacaballero@unah.hn)
+  Luz Maria Montoya Medina (luz.montoya@unah.hn)
+  Diana Rut Garcia Amador (drgarciaa@unah.hn)
+  Any Melissa Hernandez (anyhernandez@unah.hn)
+  Gissela Yamileth Diaz (gdiaza@unah.hn)
+  Cesar Fernando Rovelo (Cesar.rovelo@unah.hn)
+
+  Catedratico:
+  Lic. Claudia Nuñez (Analisis)
+  Lic. Giancarlo Martini Scalici Aguilar (Implementación)
+  Lic. Karla Melisa Garcia Pineda (Evaluación)
+---------------------------------------------------------------------
+    Programa:          Mantenimiento de objetos
+    Fecha:             
+    Programador:      
+    descripcion:       Permite llevar un mantenimiento de objetos  ,editar,eliminar nuevo
+-----------------------------------------------------------------------
+  Historial de Cambio
+-----------------------------------------------------------------------
+    Programador               Fecha                      Descripcion
+  ANY HERNANDEZ         		11-08-2022                 AGREGAR ESTADOS Y SU MODIFICACIÓN Y AGREGAR  
+----------------------------------------------------------------------->
+
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
@@ -74,12 +108,16 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <td class="text-center">Área</th>
                         <td class="text-center">Especialidad</th>  
                         <td class="text-center">Descripción</th>
+                        <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                         $query = "SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA from tbl_especialidad te ,tbl_area ta  
-                         where te.CODIGO_AREA  = ta.CODIGO_AREA ORDER BY te.CODIGO_ESPECIALIDAD ASC;";
+                         $query = " SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA , te.CODIGO_ESTADO ,te2.NOMBRE as estado  
+                         from tbl_especialidad te  
+                         left join tbl_area ta    on te.CODIGO_AREA  = ta.CODIGO_AREA 
+                         left join tbl_estado te2 on te2.CODIGO_ESTADO = te.CODIGO_ESTADO 
+                          ORDER BY te.CODIGO_ESPECIALIDAD desc;";
                          $result = $conn->query($query);
                          if ($result->num_rows > 0) {
                              while ($row = $result->fetch_assoc()) {
@@ -87,6 +125,8 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                  $var2 = $row['especialidad'];
                                  $var3 = $row['area'];
                                  $var4 = $row['DESCRIPCION'];
+                                 $var5 = $row['estado'];
+                                 $var6 = $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -164,10 +204,30 @@ bitacora($codigoObjeto,$accion,$descripcion);
                               </div>
                             </div><!-- final del text-center -->
                           </td>
+                          <?php
+                            if($var5 == 'ACTIVO'){
+                          ?> 
+                          
+                          <td class="text-center"><?php echo $var3; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var4; ?></td>
+                          <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var5; ?></td>
+                          
+
+                          <?php
+                             }else{ //si no e; texto de los datos de la tabla no cambian
+                          ?>
+
                                   <td class="text-center"><?php echo $var3; ?></td>
                                   <td class="text-center"><?php echo $var2; ?></td>
                                   <td class="text-center"><?php echo $var4; ?></td>
+                                  <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var5; ?></td>
                           
+                          <?php
+                            }
+                          ?>
+
+              
                           <!--INICIO DEL MODAL DE EDITA ESPECIALIDAD -->
                           <div id="EDITARESPECIALIDAD<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -207,6 +267,17 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                           </div>
                                         </div>
                                       </div>
+                                      <!--INICIO DE ESTADO-->
+                                      <div class="col-sm-12">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
+                                            <option value="<?php echo $var6?>"><?php echo $var5;?></option>
+                                            <option value="2">ACTIVO</option>
+                                            <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div>  
+                                      </div> <!--FIN DE ESTADO-->
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">

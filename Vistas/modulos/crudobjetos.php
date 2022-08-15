@@ -29,6 +29,7 @@
 -----------------------------------------------------------------------
     Programador               Fecha                      Descripcion
   ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
+  ANY HERNANDEZ         		11-08-2022                 AGREGAR ESTADOS Y SU MODIFICACIÓN Y AGREGAR  
 ----------------------------------------------------------------------->
 
 
@@ -119,17 +120,23 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                         <th class="text-center">Código</th>
                                         <th class="text-center">Nombre</th>
                                         <th class="text-center">Descripción</th>
+                                        <th class="text-center">Estado</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $query = "SELECT * FROM tbl_objetos";
+                                        $query = " SELECT o.CODIGO_OBJETO, o.NOMBRE, o.CODIGO_ESTADO ,o.DESCRIPCION,te.NOMBRE  as estado 
+                                        FROM tbl_objetos o
+                                        left join tbl_estado te  on  te.CODIGO_ESTADO = o.CODIGO_ESTADO 
+                                        ORDER BY o.CODIGO_OBJETO desc;";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
                                                 $var1 = $row['CODIGO_OBJETO'];
                                                 $var3 = $row['NOMBRE'];
                                                 $var4 = $row['DESCRIPCION'];
+                                                $var5 = $row['estado'];
+                                                $var6 = $row['CODIGO_ESTADO'];
                                         ?>
                                                 <tr>
                                                     <td>
@@ -199,10 +206,29 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                             </div>
                                                         </div><!-- final del text-center -->
                                                     </td>
+
+                                                    <?php
+                                                        if($var5 == 'ACTIVO'){
+                                                    ?> 
+                                                    
                                                     <td class="text-center"><?php echo $var1; ?></td>
                                                     <td class="text-center"><?php echo $var3; ?></td>
                                                     <td class="text-center"><?php echo $var4; ?></td>
-    
+                                                    <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var5; ?></td>
+                                                    
+
+                                                    <?php
+                                                        }else{ //si no e; texto de los datos de la tabla no cambian
+                                                    ?>
+
+                                                            <td class="text-center"><?php echo $var1; ?></td>
+                                                            <td class="text-center"><?php echo $var3; ?></td>
+                                                            <td class="text-center"><?php echo $var4; ?></td>
+                                                            <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var5; ?></td>
+                                                    
+                                                    <?php
+                                                        }
+                                                    ?>
                                                     <!--INICIO DEL MODAL DE EDITAR -->
                                                     <div id="EDITAROBJETO<?php echo $var1; ?>" class="modal fade" role="dialog">
                                                         <div class="modal-dialog modal-md">
@@ -239,7 +265,17 @@ bitacora($codigoObjeto, $accion, $descripcion);
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div> <!-- FIN DE EL PRIMER ROW -->
+                                                                            <!--INICIO DE ESTADO-->
+                                                                        <div class="col-sm-12">
+                                                                            <label for="cbx_persona" class="control-label">Estado</label>  
+                                                                            <div class="form-group">
+                                                                            <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
+                                                                                <option value="<?php echo $var6?>"><?php echo $var5;?></option>
+                                                                                <option value="2">ACTIVO</option>
+                                                                                <option value="3">INACTIVO</option>
+                                                                            </select> 
+                                                                            </div>  
+                                                                        </div> <!--FIN DE ESTADO-->                                    </div> <!-- FIN DE EL PRIMER ROW -->
                                                                     </div>
                                                                     <!--FINAL DEL CARD BODY -->
                                                                     <div class="modal-footer ">

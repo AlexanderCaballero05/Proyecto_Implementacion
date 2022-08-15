@@ -197,7 +197,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                                         FROM tbl_area
                                         where CODIGO_AREA BETWEEN 1 and 4
                                         and CODIGO_AREA <> 2
-                                        and  CODIGO_AREA <> 3";
+                                        and  CODIGO_AREA <> 3 and CODIGO_ESTADO = 2 ";
                                         $resultadod=$conn->query($query);                
                                        ?>
                                        <label  class="control-label">Área</label>  
@@ -291,7 +291,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                                 FROM tbl_area
                                 where CODIGO_AREA BETWEEN 1 and 4
                                 and CODIGO_AREA <> 2
-                                and  CODIGO_AREA <> 3;";
+                                and  CODIGO_AREA <> 3 and CODIGO_ESTADO = 2 ;";
                                 $resultadod=$conn->query($query);                
                                ?>
                               <label  class="control-label">Área</label>  

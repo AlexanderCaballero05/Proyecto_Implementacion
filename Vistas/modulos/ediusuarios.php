@@ -134,7 +134,7 @@ include_once "conexion3.php";
                           left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
                           left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
                           where
-                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
+                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO desc;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
