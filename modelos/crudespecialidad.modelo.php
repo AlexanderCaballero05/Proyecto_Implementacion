@@ -23,7 +23,7 @@
         exit;
         }else{
           try{
-            $query = " INSERT INTO tbl_especialidad( NOMBRE,CODIGO_AREA, DESCRIPCION) VALUES ('$especialidad','$area','$descripcion'); ";
+            $query = " INSERT INTO tbl_especialidad( NOMBRE,CODIGO_AREA, DESCRIPCION, CODIGO_ESTADO) VALUES ('$especialidad','$area','$descripcion','2'); ";
             $resul=$conn->query($query);
             if($resul >0){
               echo "<script> 
@@ -59,6 +59,7 @@
   $especialidad= $_POST['editespecialidad'];
   $descripcion = $_POST['editar_descripcion'];
   $cod = $_POST['id_especialidad'];
+  $estado = $_POST['ESTADOUSUARIO'];
   try {
     $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_especialidad where NOMBRE = (?) and CODIGO_ESPECIALIDAD <> (?) ;");
     $sentencia->execute(array($especialidad,$cod));
@@ -71,7 +72,10 @@
        exit;
      } else{
       try{
-        $sql = " UPDATE tbl_especialidad SET NOMBRE = '$especialidad' ,DESCRIPCION = '$descripcion'
+        $sql = "UPDATE tbl_especialidad 
+        SET CODIGO_ESTADO = '$estado',
+        NOMBRE = '$especialidad',
+        DESCRIPCION = '$descripcion'
         WHERE CODIGO_ESPECIALIDAD = '$cod' ";
         $consulta=$conn->query($sql);
         if ($consulta>0){

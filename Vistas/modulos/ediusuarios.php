@@ -26,6 +26,7 @@ Diana Rut               09/06/2022           Se modifico los datos de la bitacor
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
 Diana Rut Garcia        21-/06-2022            Se valido las validaciones de editar
 Diana Rut               11/08/2022           Se arreglo el bug que no muestra los dos campos de contraseñas
+Luz Montoya             13/08/2022           La Consulta para solo traer los roles con estados activos
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -64,7 +65,7 @@ include_once "conexion3.php";
   </div>
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Mantenimiento Usuarios</h4>    
+          <h4>Usuarios</h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -133,7 +134,7 @@ include_once "conexion3.php";
                           left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
                           left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
                           where
-                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
+                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO desc;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
@@ -298,7 +299,8 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
                                         <?php
-                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' 
+                                           AND EST_ROL <> '3' ;";
                                            $resultadod=$conn->query($query);                
                                          ?> 
                                         <div class="col-sm-6">

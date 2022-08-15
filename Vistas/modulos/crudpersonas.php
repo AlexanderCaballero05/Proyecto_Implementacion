@@ -64,7 +64,7 @@ include_once "conexion3.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3">
-      <h4>Mantenimiento Personas</h4>
+      <h4>Ver Datos Personas</h4>
     </div>
     <section class="content">
      <div class="card"> 
@@ -137,8 +137,8 @@ include_once "conexion3.php";
                                   Campo Obligatorio.
                              </div>  
                         </div>
-                        <div class="col-md-1">
-                          <button type="submit"  name="generar" class=" form-control btn btn-info b"> Generar</button>
+                        <div class="col-mb-3">
+                          <button type="submit"  name="generar" class=" form-control btn btn-info mb-3"  > Generar</button>
                         </div>
                      </form>
                      </div>  <!--final del codigo del filtrado de personas -->
@@ -192,12 +192,13 @@ include_once "conexion3.php";
                                     <tbody>
                         <?php
                         $tipo = $_POST['BUSCAR'];
-                        $query = "SELECT p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO, p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
-                        FROM TBL_PERSONA p, tbl_telefono tl, tbl_tipo_persona t, tbl_correo_electronico c
-                        WHERE t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
-                        AND tl.CODIGO_PERSONA = p.CODIGO_PERSONA
-                        AND c.CODIGO_PERSONA = p.CODIGO_PERSONA
-                        AND t.CODIGO_TIPO_PERSONA = '$tipo';";
+                        $query = "SELECT p.CODIGO_PERSONA, p.PRIMER_NOMBRE, p.SEGUNDO_NOMBRE, p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO, p.DNI, p.FECHA_NACIMIENTO,
+                        p.LUGAR_NACIMIENTO, p.DIRECCION, p.SEXO, tl.NUMERO_TELEFONO, t.NOMBRE, c.CORREO_PERSONA
+                                            FROM TBL_PERSONA p
+                                            left join tbl_telefono tl   on tl.CODIGO_PERSONA = p.CODIGO_PERSONA  
+                                            left join tbl_tipo_persona t on  t.CODIGO_TIPO_PERSONA = p.CODIGO_TIPO_PERSONA
+                                            left join tbl_correo_electronico c  on c.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                            where  t.CODIGO_TIPO_PERSONA = '$tipo' ORDER BY p.CODIGO_PERSONA desc ;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -399,11 +400,10 @@ include_once "conexion3.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label >Dirección</label>
-                                                                            <input type="text"
-                                                                             value="<?php echo $var18; ?>"
+                                                                            <textarea type="textarea"
                                                                              class="form-control" maxlength="500"  minlength="20"  name="direccion" id="direccion"
                                                                               onkeyup="mayus(this);" autocomplete = "off"
-                                                                                required>
+                                                                                required><?php echo $var18; ?></textarea>
                                                                                <div class="invalid-feedback">
                                                                              Campo Obligatorio.
                                                                               </div>
@@ -442,6 +442,32 @@ include_once "conexion3.php";
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-md-4"><!--INICIO TIPO PERSONA-->
+                                                                    <?php 
+                                                                    $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
+                                                                    $resultadod=$conn->query($query);                
+                                                                    ?>
+                                                                    <label class="control-label">Tipo Persona:</label>
+                                                                    <div class="form-group">
+                                                                    <select class="form-control select2"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
+                                                                        <option selected enable  ><?php echo $var12?></option>
+                                                                        <?php 
+                                                                        if ($resultadod->num_rows > 0) {
+                                                                            while($row = $resultadod->fetch_assoc()) { 
+                                                                            $codigo = $row['CODIGO_TIPO_PERSONA'];
+                                                                            $nombre= $row['NOMBRE'];
+                                                                        ?>
+                                                                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                                        <?php 
+                                                                        } 
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                            Eliga una opción.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  <!-- FIN DE tipo de persona -->
                                                                 </div> <!-- FIN DE EL PRIMER ROW -->
                                                             </div>
                                                             <!--FINAL DEL CARD BODY -->
@@ -784,10 +810,10 @@ include_once "conexion3.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label >Dirección</label>
-                                                                            <input type="text"
-                                                                             value="<?php echo $var18; ?>"
+                                                                            <textarea type="textarea"
                                                                              class="form-control" maxlength="500"  minlength="20"  name="direccion" id="direccion"
-                                                                              onkeyup="mayus(this);" autocomplete = "off" required>
+                                                                              onkeyup="mayus(this);" autocomplete = "off"
+                                                                                required><?php echo $var18; ?></textarea>
                                                                                <div class="invalid-feedback">
                                                                              Campo Obligatorio.
                                                                               </div>
@@ -828,6 +854,32 @@ include_once "conexion3.php";
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                    <div class="col-md-4"><!--INICIO TIPO PERSONA-->
+                                                                    <?php 
+                                                                    $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
+                                                                    $resultadod=$conn->query($query);                
+                                                                    ?>
+                                                                    <label class="control-label">Tipo Persona:</label>
+                                                                    <div class="form-group">
+                                                                    <select class="form-control select2"   style="width: 100%;" name="tipo_persona" id="tipo_persona" required >
+                                                                        <option selected enable ><?php echo $var12?></option>
+                                                                        <?php 
+                                                                        if ($resultadod->num_rows > 0) {
+                                                                            while($row = $resultadod->fetch_assoc()) { 
+                                                                            $codigo = $row['CODIGO_TIPO_PERSONA'];
+                                                                            $nombre= $row['NOMBRE'];
+                                                                        ?>
+                                                                        <option value="<?php echo $codigo?>" ><?php echo $nombre;?></option>
+                                                                        <?php 
+                                                                        } 
+                                                                        }
+                                                                        ?>
+                                                                    </select>
+                                                                    <div class="invalid-feedback">
+                                                                            Eliga una opción.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>  <!-- FIN DE tipo de persona -->
                                                                 </div> <!-- FIN DE EL PRIMER ROW -->
                                                             </div>
                                                             <!--FINAL DEL CARD BODY -->
@@ -1139,6 +1191,16 @@ function telfono(evt,input){
     keyboardEvent.preventDefault();
     });
   </script>
+  <script type="text/javascript"> function solonumero(e) {
+        tecla = (document.all) ? e.keyCode : e.which;
+        if (tecla==8) return true;
+        else if (tecla==0||tecla==9)  return true;
+       // patron =/[0-9\s]/;// -> solo letras
+        patron =/[0-9\s]/;// -> solo numeros
+        te = String.fromCharCode(tecla);
+        return patron.test(te);
+    }
+	</script>
   
 
 <!--♠DianaRut *No me quiten los creditos  modificado por any :( -->

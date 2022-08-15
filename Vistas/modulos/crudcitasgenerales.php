@@ -76,7 +76,7 @@ include "conexionpdo.php";
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 ">
-              <h4>Citas Generales Prosecar </h4>
+              <h4>Citas Generales</h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -174,7 +174,8 @@ include "conexionpdo.php";
                                     AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
                                     AND E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD
                                     AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA  
-                                    AND ic.AREA_CITA = '$area';";
+                                    AND ic.AREA_CITA = '$area'
+                                    ORDER BY IC.CODIGO_CITA DESC;";
                                     $result = $conn->query($query1);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
@@ -186,6 +187,7 @@ include "conexionpdo.php";
                                             $var6 = $row['nombre_estado'];
                                             $var7 = $row['nombre_area'];
                                             $var8 = $row['nombre_especialidad']; 
+                                            $var9= $row['CODIGO']
                                     ?>
                                                 <tr>
                                                     <td>
@@ -414,7 +416,9 @@ include "conexionpdo.php";
                                     </thead>
                                     <tbody>
                                         <?php
+
                                         $query = "SELECT ar.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+
                                         MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
                                         FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe
                                         WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
@@ -423,7 +427,8 @@ include "conexionpdo.php";
                                         AND IC.AREA_CITA = a.CODIGO_AREA
                                         AND IC.CODIGO_ESPECIALISTA = E.CODIGO_PERSONA_ESPECIALIDAD 
                                         AND E.CODIGO_ESPECIALIDAD = espe.CODIGO_ESPECIALIDAD
-                                        AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA ;";
+                                        AND  OT.CODIGO_PERSONA = IC.CODIGO_PERSONA 
+                                        ORDER BY IC.CODIGO_CITA DESC;";
                                         $result = $conn->query($query);
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
@@ -435,8 +440,10 @@ include "conexionpdo.php";
                                             $var6 = $row['nombre_estado'];
                                             $var7 = $row['nombre_area'];
                                             $var8 = $row['nombre_especialidad'];
+
                                             $areaGeneral=$row['CODIGO_AREA'];
                                             $codigoestado=$row['CODIGO_ESTADO'];
+
                                         ?>
                                                 <tr>
                                                     <td>
@@ -485,7 +492,7 @@ include "conexionpdo.php";
                                                         <div class="modal-dialog modal-lg">
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
-                                                            <form method="POST" class="was-validated" >
+                                                            <form method="POST"  >
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
                                                                     <h4 class="text-center">Editar Cita  
                                                                     </h4>
@@ -505,7 +512,7 @@ include "conexionpdo.php";
                                                                         <div class="form-group">
                                                                             <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                             <input type="date" value="<?php echo $var2; ?>"  min= "<?= date ($fechaActual)?>" max="<?= date($fechamaxima)?>" 
-                                                                            class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1" required ="">
+                                                                            class="form-control" name="edit_fecha_cita1"  id="edit_fecha_cita1" >
                                                                         </div>
                                                                         <div class="invalid-feedback">
                                                                         Campo obligatorio, completelo con una fecha valida.
@@ -533,8 +540,10 @@ include "conexionpdo.php";
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_persona">Estado cita:</label>
+
                                                                             <select class="form-control" name="estado_edit1" id="estado_edit1" required="">
                                                                              <option selected  autocomplete = "off" value="">--Seleccione...</option>
+
                                                                                 <?php 
                                                                                  if ($resultador->num_rows > 0) {
                                                                                     while($rowr = $resultador->fetch_assoc()) { ?>

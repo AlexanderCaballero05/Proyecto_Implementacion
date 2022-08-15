@@ -56,7 +56,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 ">
-              <h4>Citas Hoy Prosecar </h4>
+              <h4>Citas Hoy</h4>
     </div>
     <section class="content">
        <div class="card"> 

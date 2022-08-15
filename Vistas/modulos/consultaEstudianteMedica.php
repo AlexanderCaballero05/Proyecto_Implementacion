@@ -40,7 +40,6 @@
  ?>
 <head>
 </head>
-<body oncopy="return false" onpaste="return false"></body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">

@@ -10,10 +10,11 @@
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UNA PREGUNTA
     if(isset($_POST['pregunta'])){
+      
        try{
           if(isset($_POST['agregar_pregunta'])){
                $pregunta = ($_POST['pregunta']);
-               $estado= 2;
+               $estados= ($_POST['estadopregunta']);
                $fechaActual = date('Y-m-d');  
                $usuario=$_SESSION['vario']; 
               try{ 
@@ -28,7 +29,8 @@
                   exit;
                   }else{
                     try{
-                      $query_pregunta = " INSERT INTO `tbl_preguntas`( `CODIGO_ESTADO`, `PREGUNTA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`) VALUES ('$estado','$pregunta',' $usuario','$fechaActual'); ";
+                      $query_pregunta = " INSERT INTO `tbl_preguntas`(`CODIGO_ESTADO`,`PREGUNTA`, `CREADO_POR_USUARIO`, `FECHA_CREACION`)
+                       VALUES ('$estados','$pregunta',' $usuario','$fechaActual');";
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
@@ -71,6 +73,7 @@
     if(isset($_POST['editar'])){
       $codigo_pregunta = ($_POST['id_pregunta']);
       $editar_pregunta = ($_POST['editar_pregunta']);
+      $editar_estado = ($_POST['editar_estadopre']);
       $fechaActual = date('Y-m-d');  
       $usuario = $_SESSION['vario']; 
       try{
@@ -89,7 +92,8 @@
          
           try{
             $sql = " UPDATE tbl_preguntas
-            SET pregunta = '$editar_pregunta',
+            SET CODIGO_ESTADO = '$editar_estado',
+            pregunta = '$editar_pregunta',
             MODIFICADO_POR = '$usuario', 
             FECHA_MODIFICACION = '$fechaActual'
             WHERE CODIGO_PREGUNTAS = '$codigo_pregunta' ";

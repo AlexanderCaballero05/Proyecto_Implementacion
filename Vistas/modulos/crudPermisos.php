@@ -262,7 +262,7 @@
                             <?php
                           include "conexion1.php";
                           $queryr = "SELECT o.CODIGO_OBJETO
-                                      FROM tbl_objetos o;";
+                                      FROM tbl_objetos o where CODIGO_ESTADO = 2;";
                           $resultador=$conn->query($queryr);
                           ?>  
 
@@ -400,9 +400,9 @@
             <?php
             include "conexion1.php";
             $queryr = "SELECT o.CODIGO_OBJETO , o.NOMBRE AS Nom_modulo
-                        FROM tbl_objetos o
-                        WHERE o.CODIGO_OBJETO <> 54
-                        ORDER BY o.nombre ASC;";
+            FROM tbl_objetos o
+            WHERE o.CODIGO_OBJETO <> 54 and  CODIGO_ESTADO = 2
+            ORDER BY o.nombre ASC  ;";
             $resultador=$conn->query($queryr);
             ?>  
 

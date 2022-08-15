@@ -45,7 +45,7 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
       <div class="content-header text-xl-center mb-3 ">
-            <h4>Mantenimiento Parentesco Familiar</h4>    
+            <h4>Parentesco Familiar</h4>    
       </div>
       <div class="row">
         <div class="col-md-12">
