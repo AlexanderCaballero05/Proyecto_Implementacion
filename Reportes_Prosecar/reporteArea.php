@@ -105,7 +105,8 @@ class PDF extends FPDF {
 			$this->Cell(15, 12, 'N', 1, 0, 'C', 0);
 			$this->Cell(50, 12, 'Codigo area', 1, 0, 'C', 0);
 			$this->Cell(70, 12, 'Nombre', 1, 0, 'C', 0);
-			$this->Cell(25, 12, 'Descripcion', 1, 1, 'C', 1);
+			$this->Cell(25, 12, 'Descripcion', 1, 0, 'C', 1);
+            $this->Cell(25, 12, 'Estado', 1, 1, 'C', 1);
 			$this->SetFont('Arial', '', 10);
 		
 		}
@@ -181,8 +182,9 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT CODIGO_AREA, NOMBRE, DESCRIPCION
-    FROM tbl_area
+	$strquery ="   SELECT a.CODIGO_AREA, a.NOMBRE, a.DESCRIPCION,te.NOMBRE AS ESTADO  
+	FROM tbl_area a
+	left join tbl_estado te  on te.CODIGO_ESTADO = a.CODIGO_ESTADO 
     ORDER BY CODIGO_AREA;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
@@ -203,13 +205,14 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(10);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Codigo area', 1, 0, 'C', 1);
 $pdf->Cell(70, 12, 'Nombre', 1, 0, 'C', 1);
-$pdf->Cell(45, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(45, 12, 'Descripcion', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Estado', 1, 1, 'C', 1);
 
 
 
@@ -221,10 +224,12 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,30,70,45)); //???
+$pdf->SetWidths(array(15,30,70,45,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, $data[$i]['CODIGO_AREA'], $data[$i]['NOMBRE'],ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),  ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['CODIGO_AREA'],
+	 $data[$i]['NOMBRE'],  
+	 ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),$data[$i]['ESTADO']  ),10); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
