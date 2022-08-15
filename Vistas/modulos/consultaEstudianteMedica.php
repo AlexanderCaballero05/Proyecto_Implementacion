@@ -478,8 +478,8 @@
                      </table>
                     </div><!--Fin citas pendientes -->
                 </div>
+<!-- Trigger the modal with a button -->
 
-                <!-- Trigger the modal with a button -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -544,7 +544,7 @@
                                     <div class="modal-content">
                                         <!-- Modal content-->
                                         <div class="modal-header" style="background-color: #0CCDE3">
-                                           <h4 class="text-center">Editar Exámenes</h4>
+                                           <h4 class="text-center">Editar Medicamento</h4>
                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <form method="POST" >
@@ -557,7 +557,7 @@
                                                          <div class="col-sm-6">
                                                         <div class="form-group">
                                                             <label for="txtcodigo_persona">
-                                                            Exámen</label>
+                                                            Medicamento</label>
                                                             <input type="text" value="<?php echo $var2; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
                                                             name="nom_Medic" id="nom_Medic" disabled="">
                                                             <div class="invalid-feedback">
