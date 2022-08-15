@@ -22,16 +22,7 @@
     
        <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false"><!--Para la foto de perfil -->
-            <?php 
-                $nomUser= $_SESSION['vario'];
-                $query = "SELECT  imagen from tbl_usuario where NOMBRE_USUARIO ='$nomUser'; ";
-                $result = $conn->query($query);
-                if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    $var12 = $row['imagen'];
-                }
-                }
-            ?>
+           
             <img style="max-width:25px;"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>">
             </a>
         

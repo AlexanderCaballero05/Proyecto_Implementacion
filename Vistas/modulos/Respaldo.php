@@ -9,9 +9,9 @@
 
   <ol class="breadcrumb">
 
-
+  <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 	
-
+	<li class="active">Respaldo y Restauración de Base de Datos</li>
 
   </ol>
 
@@ -31,7 +31,12 @@
     </div> 
 	<br>
 
-	
+	<p>Las copias de seguridad proveen una importante 
+	solución para proteger datos críticos que están almacenados
+	en bases de datos. Y para minimizar el riego de pérdida de datos,
+	usted necesita asegurarse de que respalda sus bases de datos regularmente
+	tomando en consideración los cambios aplicados a sus datos.</p>
+	<br>
 	  <!-- <a href="./vistas/modulos/Backup.php">Realizar copia de seguridad</a> -->
 	  <form action="./vistas/modulos/Backup.php" method="POST"> 
                     <?php
@@ -74,7 +79,13 @@
 	<br>
 	<form action="./vistas/modulos/Restore.php" method="POST">
 
-		
+		<p>Cuando se está recuperando de una falla de base de datos,
+		un administrador necesita restaurar un conjunto 
+		de copias de seguridad en una secuencia correcta y significativa.
+		Con esto en mente, el objetivo es tener un punto de recuperación ante
+		desastres, creando un plan de copias de seguridad, así como un plan 
+		apropiado de restauración de bases de datos.</p>
+	<br>
 	
 
 	<label>Selecciona un Punto de Restauración:</label>
@@ -85,7 +96,7 @@
 			<option value="">Selecciona un Punto de Restauración</option>
 			<?php
 				include_once 'Connet.php';
-				$ruta="C:/xampp/htdocs/Proyecto_Implementacion5/vistas/modulos/Backup/" ;
+				$ruta="C:/xampp/htdocs/Proyecto_Implementacion23/vistas/modulos/Backup/" ;
 				if(is_dir($ruta)){
 				    if($aux=opendir($ruta)){
 				        while(($archivo = readdir($aux)) !== false){

@@ -76,7 +76,7 @@
         <?php
           $nomUser= $_SESSION['vario'];
           $query = "SELECT p.CODIGO_PERSONA, p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO, p.SEGUNDO_APELLIDO,p.DNI,
-          t.NUMERO_TELEFONO, c.CORREO_PERSONA, p.DIRECCION, u.CODIGO_USUARIO ,u.imagen
+          t.NUMERO_TELEFONO, c.CORREO_PERSONA, p.DIRECCION, u.CODIGO_USUARIO
           FROM tbl_persona p 
           LEFT JOIN tbl_telefono t on p.CODIGO_PERSONA= t.CODIGO_PERSONA 
           LEFT JOIN tbl_correo_electronico c on p.CODIGO_PERSONA = c.CODIGO_PERSONA 
@@ -96,7 +96,7 @@
               $var8 = $row ['NUMERO_TELEFONO'];
               $var10 = $row['DIRECCION'];
               $var11 = $row['CODIGO_USUARIO'];
-              $var12 = $row['imagen'];
+              
            }  }
           ?>
         <div class="card card-success card-outline">
@@ -104,15 +104,9 @@
            <div class="text-center">
             <br>
             <div class="row">
+             
               <div class="col-sm-12">
-                <div class="form-group" >
-                  <img class="profile-user-img img-circle"  style=" width: 135px; height: 160px;"  src="data:image/jpeg;base64,<?php echo base64_encode($var12); ?>" >
-                </div>
-              </div>
-              <div class="col-sm-12">
-               <a href="#MOSTRAR<?php echo $var1 ?>" data-toggle="modal">
-                 <button class="btn btn-warning" type='button' data-dismiss="modal"> Editar foto de perfil <span><i class="nav-icon fas fa-camera"></i></span></button>
-               </a>
+               
               </div>
               
             </div>
