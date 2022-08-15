@@ -36,7 +36,7 @@
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
     Luz Montoya             16-06-2022                 Cambio en el encabezado de la tabla, el orden de la columna de permisos
     Luz Montoya             18-06-2022                 Cambio de los nombre de permisos a editar y consultar/ y que si la opción de consultar no está seleccionada las otras no se muestren
-
+    Luz Montoya             14-06-2022                 Cambio en la consulta de permisos para que verifique el estado
 
   ----------------------------------------------------------------------->
 
@@ -418,14 +418,25 @@
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX TIPO DE ROL-->
                                 <div class="form-group">
+                                  <!-- consulta para traer los roles con estado activo -->
+                                <?php 
+                                  $query = "SELECT CODIGO_TIPO_ROL, NOMBRE 
+                                  FROM TBL_ROLES
+                                  WHERE EST_ROL = 2;";
+                                  $resultadod=$conn->query($query);                
+                                ?>
                                     <label for="txtcodigo_persona">Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
                                         <option selected disabled value="">--Seleccionar un rol--</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
-                                          $contador = 0;
-                                        while($rowt = $resultadod->fetch_assoc()) { ?>
-                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php $contador = $contador +1; echo $contador.'- Rol: '.$rowt['NOMBRE']; ?></option>
+                                          $contador = 0; 
+                                        while($rowt = $resultadod->fetch_assoc()) {
+                                          
+                                          $codigo_rol1= $rowt['CODIGO_TIPO_ROL'];
+                                          $nombre_rol = $rowt['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo$codigo_rol1?>"><?php $contador = $contador +1; echo $contador.'- Rol: '.$nombre_rol?></option>
                                       <?php } 
                                               }?>
                                     </select>
@@ -435,7 +446,7 @@
                                 </div>
                             </div> <!--FIN DEL COMOBOX TIPO DE ROL-->
 
-                                 <!--INICIO COMOBOX OBJETO-->
+                                  <!--INICIO COMOBOX OBJETO-->
                                 
                             <div class="col-sm-12">
                                 <div class="form-group">

@@ -101,8 +101,9 @@ class PDF extends FPDF {
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(15, 12, 'N', 1, 0, 'C', 1);
-			$this->Cell(40, 12, 'Nombre Rol', 1, 0, 'C', 1);
-			$this->Cell(100, 12, 'Descripción', 1, 1, 'C', 1);
+			$this->Cell(40, 12, 'Nombre ', 1, 0, 'C', 1);
+			$this->Cell(40, 12, 'Estado ', 1, 0, 'C', 1);
+			$this->Cell(85, 12, 'Descripción', 1, 1, 'C', 1);
 		}
 
 		if ($setX == 100) {
@@ -176,7 +177,10 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT * from tbl_roles ";
+	$strquery ="SELECT r.NOMBRE as ROL, es.NOMBRE as ESTADO ,r.DESCRIPCION 
+	FROM TBL_ROLES r, TBL_ESTADO es 
+	WHERE r.EST_ROL = es.CODIGO_ESTADO
+	ORDER BY  CODIGO_TIPO_ROL ASC; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -191,12 +195,13 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(30);
+$pdf->SetX(15);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(40, 12, 'Nombre Rol', 1, 0, 'C', 1);
-$pdf->Cell(100, 12,utf8_decode("Descripción"), 1, 1, 'C', 1);
+$pdf->Cell(40, 12, 'Nombre', 1, 0, 'C', 1);
+$pdf->Cell(40, 12, 'Estado', 1, 0, 'C', 1);
+$pdf->Cell(85, 12,utf8_decode("Descripción"), 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -206,10 +211,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,40,100)); //???
+$pdf->SetWidths(array(15,40,40,85)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,(utf8_decode($data[$i]['DESCRIPCION'])),),30); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['ROL']))) ,(utf8_decode($data[$i]['ESTADO'])),(utf8_decode($data[$i]['DESCRIPCION'])),),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
