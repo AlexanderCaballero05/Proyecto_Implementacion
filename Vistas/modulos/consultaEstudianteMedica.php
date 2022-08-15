@@ -230,6 +230,7 @@
                             <thead style=" background-color:#73E8FD;">
                                 <tr>
                                     <th class="text-center">Acción</th>
+                                    <th class="text-center">Ver Recetas</th>
                                     <th class="text-center">Fecha Cita</th>
                                     <th class="text-center">Hora</th>
                                     <th class="text-center">Medico</th>
@@ -288,7 +289,16 @@
                                     <div class="text-center">
                                         <div class="btn-group">
                                             <a href="#VER_CITA<?php echo $fecha; ?>" data-toggle="modal">
-                                            <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Ver Detalles</span></button>
+                                            <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-success"><span>Ver Información</span></button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    </td>
+                                    <td>
+                                    <div class="text-center">
+                                    <div class="btn-group">
+                                            <a href="#myModal" data-toggle="modal">
+                                            <button type='button' id="btnGuardar"  style="color:white;"class="form-control btn btn-primary"><span>Ver Recetas</span></button>
                                             </a>
                                         </div>
                                     </div>
@@ -468,6 +478,130 @@
                      </table>
                     </div><!--Fin citas pendientes -->
                 </div>
+
+                <!-- Trigger the modal with a button -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">   </button>
+                <h4 class="modal-title" >Recetas Medicamentos  /  Exámenes</h4>
+            </div>
+            <div class="modal-body">
+            <div class="table-responsive">
+                <table id="tbl_medicamentos" class="table table-bordered table-striped">
+                    <thead class="">
+                        <tr>
+                            <th class="text-LEFT">Editar </th>
+                            <th class="text-LEFT">PDF</th>
+                            <th class="text-LEFT">Nombre del Medicamento</th>
+                            <th class="text-LEFT">Indicación</th>
+                            <th class="text-LEFT">Observaciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query = "SELECT RM.CODIGO_RECETA_MEDICA, M.NOMBRE_MEDICAMENTO,RM.INDICACIONES_RECETA,RM.OBSERVACIONES FROM tbl_receta_medica RM, tbl_medicamento M WHERE RM.CODIGO_CONSULTA='$codigo_consulta'
+                        AND RM.CODIGO_MEDICAMENTO=M.CODIGO_MEDICAMENTO;";
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $var2 = $row['NOMBRE_MEDICAMENTO'];
+                                $var3 = $row['INDICACIONES_RECETA'];
+                                $var4 = $row['OBSERVACIONES'];
+                                
+                                    ?>
+                                <tr>
+                                    <td class="text-LEFT">
+                                        <a href="#editar_medicamento<?php echo $var1; ?>" data-toggle="modal">
+                                            <button type='button' style="color:white;" class="btn btn-warning"><span>
+                                            <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                        </a>
+                                    </td>
+                                    <td class="text-LEFT"><?php echo $var2; ?></td>
+                                    <td class="text-LEFT"><?php echo $var2; ?></td>
+                                    <td class="text-LEFT"><?php echo $var3; ?></td>
+                                    <td class="text-LEFT"><?php echo $var4; ?></td>                
+                        <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--INICIO DEL MODAL DE EDITAR -->
+<div id="editar_medicamento<?php echo $var1; ?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-Mg">
+                                    <div class="modal-content">
+                                        <!-- Modal content-->
+                                        <div class="modal-header" style="background-color: #0CCDE3">
+                                           <h4 class="text-center">Editar Exámenes</h4>
+                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form method="POST" >
+                                            <div class="modal-body">
+                                                <!--CUERPO DEL MODAL -->
+                                                <div class="row">
+                                                    <!-- INICIO PRIMERA ROW -->
+                                                    <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" 
+                                                         name="cod_edit_Medicamento" id="cod_edit_Medicamento" >
+                                                         <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                            Exámen</label>
+                                                            <input type="text" value="<?php echo $var2; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
+                                                            name="nom_Medic" id="nom_Medic" disabled="">
+                                                            <div class="invalid-feedback">
+                                                                Campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>     
+                                                    
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                            Indicación</label>
+                                                            <input type="text" value="<?php echo $var3; ?>" class="form-control" pattern=".{5,100}"  maxlength="100"onkeyup="mayus(this);" onkeypress="return soloLetrasComa(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"  
+                                                            name="edit_indicacion_Medic" id="edit_indicacion_Medic"onblur="quitarespacios(this);" required>
+                                                            <div class="invalid-feedback">
+                                                                Campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                  <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                                Observaciones</label>
+                                                            <input type="text" value="<?php echo $var4; ?>"class="form-control" pattern=".{5,100}" maxlength="100" onkeyup="mayus(this);" onkeypress="return soloLetrasComa(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"
+                                                             name="edit_obs_Medic" id="edit_obs_Medic"onblur="quitarespacios(this);" required></textarea>
+                                                             <div class="invalid-feedback">
+                                                                campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- FIN DE EL PRIMER ROW -->
+                                            </div>
+                                            <!--FINAL DEL CARD BODY -->
+                                            <div class="modal-footer ">
+                                                <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                                <button type="submit"  name="guardarRecetas"  id="guardarRecetas" class="btn btn-success"><span><i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                            </div>
+                                            <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><!-- FIN DEL MODAL EDITAR -->
+
               </div> <!--card-body -->
           </div><!-- card-->
         </div><!--FINAL DE COL-M12-->

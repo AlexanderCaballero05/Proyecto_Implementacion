@@ -790,7 +790,7 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
           <form id="FORMEeliminar" method="POST">
             <div class="modal-body">
             <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_finalizar"> 
-            <input type="text" hidden value="<?php echo $codigocon ?>" name="consultita"> 
+            <input type="text" hidden value="<?php echo $codigocon ?>" name="consultitas"> 
               <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
                 <h4 class="text-center">¿Desea finalizar las Recetas?
 
