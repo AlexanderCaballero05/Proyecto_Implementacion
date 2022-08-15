@@ -61,10 +61,7 @@
               </div>
               
             
-              <div class="image">
-              <img src="vistas/assets/dist/img/usuario.PNG" class="img-circle elevation-2" alt="imagen del usiaro">
-               <!--<img src="vistas/assets/dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="yghg Image"> -->
-              </div>
+            
 
           
             
