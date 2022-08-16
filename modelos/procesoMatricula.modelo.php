@@ -18,7 +18,7 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
       $usuario = $_SESSION['vario']; //variable que trae el usuario que está logeado
       $fechaActual = date('Y-m-d');  
       $tutoria = ($_POST['tutoria']);
-      $nombreestudiante = ($_POST['nombreestudiante']);
+     // $nombreestudiante = ($_POST['nombreestudiante']);
    try{
      $consulta = "";
      $consulta = $db->prepare("SELECT ma.CODIGO_CARGA ,ma.CODIGO_ESTUDIANTE, ca.CODIGO_TUTORIA 
