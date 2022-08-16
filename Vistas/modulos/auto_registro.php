@@ -235,7 +235,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                                <button id="show_password" class="form-control " onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                              </div>
                           </div> 
-                           <FONT SIZE=2>*Debe teber minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
+                           <FONT SIZE=2>*Debe tener minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
                         </div>
                 
               

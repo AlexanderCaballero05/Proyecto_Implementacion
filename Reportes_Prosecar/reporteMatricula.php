@@ -101,17 +101,17 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->Cell(50, 8, 'N', 1, 0, 'C', 0);
-			$this->Cell(60, 8, 'Asignatura', 1, 0, 'C', 0);
-			$this->Cell(80, 8, utf8_decode('Sección'), 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Hora', 1, 1, 'C', 0);
-			$this->Cell(35, 8, 'Modalidad', 1, 1, 'C', 0);
+			$this->SetFont('Helvetica', 'B', 12);
+			$this->SetFont('Helvetica', 'B', 12);
+			$this->Cell(10, 8, 'N', 1, 0, 'C', 0);
+			$this->Cell(30, 8, 'Asignatura', 1, 0, 'C', 0);
+			$this->Cell(30, 8, utf8_decode('Sección'), 1, 0, 'C', 0);
+			$this->Cell(30, 8, 'Hora', 1, 0, 'C', 1);
+			$this->Cell(35, 8, 'Modalidad',1, 0, 'C', 1);
+			$this->Cell(50, 8, 'Nombre del tutor',1, 0, 'C', 1);
+			$this->Cell(40, 8, 'Estudiante', 1, 0, 'C', 1);
+			$this->Cell(30, 8, 'Grado Actual', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
-			$this->Cell(35, 8, 'Nombre del tutor', 1, 1, 'C', 0);
-			$this->Cell(35, 8, 'Estudiante', 1, 0, 'C', 0);
-			$this->Cell(35, 8, 'Grado Actual', 1, 1, 'C', 0);
 			
 		
 		}

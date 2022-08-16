@@ -32,6 +32,7 @@
   ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
   ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
   Diana Rut                 23/07/2022               detalles de estetica
+  Luz María Montoya         16-08-2022                Ya funciona el primer botón del reporte individual
 ----------------------------------------------------------------------->
 
 <?php 
@@ -256,6 +257,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     </a>
                                  <a>
                                
+                                 <a><!--Para descargar el reporte individual  -->
+                                     <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividualEsp.php" target="_blank">
+                                     <input type="hidden" value="<?php echo $var1?>">
+                                     </form>
+                                 </a>
+                              <a>
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
                                     <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
