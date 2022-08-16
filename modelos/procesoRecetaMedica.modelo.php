@@ -111,12 +111,12 @@ include "conexionpdo.php";
 
    //Cuando ya de plano termino de recetar los examenes y recetas :)
    if(isset($_POST['finalizar_consulta'])){
-        $codigo_consulta = ($_POST['consultita']);
+        $codigo_consulta = ($_POST['consultitas']);
         $existe = $db->prepare("SELECT COUNT(CODIGO_MEDICAMENTO) FROM tbl_receta_medica WHERE CODIGO_CONSULTA = (?)");
         $existe->execute(array($codigo_consulta));
         $row=$existe->fetchColumn();
 
-        $existe2 = $db->prepare("SELECT COUNT(CODIGO_EXAMEN) FROM tbl_examenes_pacientes WHERE CODIGO_CONSULTA= (?)");
+        $existe2 = $db->prepare("SELECT COUNT(CODIGO_EXAMEN_MEDICO) FROM tbl_examenes_pacientes WHERE CODIGO_CONSULTA= (?)");
             $existe2->execute(array($codigo_consulta));
             $row2=$existe2->fetchColumn();
         if($row<=0 AND $row2<=0){
