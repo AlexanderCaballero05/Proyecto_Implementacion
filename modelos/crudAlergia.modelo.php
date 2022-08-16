@@ -4,10 +4,10 @@
   include_once 'conexion2.php';
 ?>
 <?php
-    if(isset($_POST['nombre_alergia'])){
+    if(isset($_POST['nombre_alergias'])){
        try{
-          if(isset($_POST['AGREGAR_ALERGIAS'])){
-               $nombre_alergia = ($_POST['nombre_alergia']);
+          if(isset($_POST['AGREGAR_ALERGIASS'])){
+               $nombre_alergia = ($_POST['nombre_alergias']);
                $descripcion = ($_POST['descripcion_alergia']);
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];  

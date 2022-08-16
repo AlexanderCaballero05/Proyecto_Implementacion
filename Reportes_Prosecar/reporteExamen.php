@@ -186,7 +186,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-  $strquery ="SELECT * FROM tbl_examenes_medicos";
+  $strquery ="SELECT EM.EXAMEN_MEDICO,EM.DESCRIPCION,E.NOMBRE AS ESTADO FROM tbl_examenes_medicos EM, tbl_estado E
+  WHERE EM.CODIGO_ESTADO=E.CODIGO_ESTADO";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
     $data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -199,13 +200,13 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(28);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(10, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(45, 12, 'Nombre Examen', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, utf8_decode('Descripción'), 1, 0, 'C', 1);
-$pdf->Cell(40, 12, utf8_decode('Fecha Creación'), 1, 1, 'C', 1);
+$pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode("ESTADO"), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode("EXAMEN_MEDICO"), 1, 0, 'C', 1);
+$pdf->Cell(80, 12, utf8_decode("DESCRIPCION"), 1, 1, 'C', 1);
 
 
 
@@ -217,11 +218,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(10, 45, 60,40)); //???
+$pdf->SetWidths(array(15,25,50,80)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($data[$i]['CODIGO_EXAMEN_MEDICO'], ucwords(strtolower(utf8_decode($data[$i]['EXAMEN_MEDICO']))),ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))), ucwords(strtolower(utf8_decode($data[$i]['FECHA_CREACION']))),  ),28); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['ESTADO']))), ucwords(strtolower(utf8_decode($data[$i]['EXAMEN_MEDICO']))) ,ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))) ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 

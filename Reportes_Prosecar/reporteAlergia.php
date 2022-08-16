@@ -176,7 +176,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT * from tbl_alergias";
+	$strquery ="SELECT A.NOMBRE,A.DESCRIPCION,E.NOMBRE AS ESTADO from tbl_alergias A, tbl_estado E 
+	WHERE A.CODIGO_ESTADO=E.CODIGO_ESTADO";
     
     
 	
@@ -199,11 +200,12 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(25);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(60, 12, utf8_decode("Nombre Alergia"), 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode("Estado"), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode("Nombre Alergia"), 1, 0, 'C', 1);
 $pdf->Cell(80, 12, utf8_decode("Descripción"), 1, 1, 'C', 1);
 
 
@@ -216,10 +218,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,60,80)); //???
+$pdf->SetWidths(array(15,25,50,80,20)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))) ),25); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['ESTADO']))), ucwords(strtolower(utf8_decode($data[$i]['NOMBRE']))) ,ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))) ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

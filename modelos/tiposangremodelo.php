@@ -7,10 +7,10 @@
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN TIPO DE SANGRE 
-    if(isset($_POST['tiposangre'])){
+    if(isset($_POST['tiposangree'])){
        try{
-          if(isset($_POST['agregar_tiposangre'])){
-               $tiposangre = ($_POST['tiposangre']);
+          if(isset($_POST['agregar_tiposangree'])){
+               $tiposangre = ($_POST['tiposangree']);
                $fechaActual = date('Y-m-d');  
                $usuario=$_SESSION['vario'];
                $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']); 

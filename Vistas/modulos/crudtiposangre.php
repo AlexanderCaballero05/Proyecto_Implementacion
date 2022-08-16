@@ -296,7 +296,7 @@ Programador               Fecha                      Descripcion
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_pregunta">Tipo de Sangre</label>
-                                    <input  type="text"   class="form-control" pattern=".{6,8}"  maxlength="8" oninput="this.value = this.value.replace(/[^a-z,A-Z-,+ ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangre" id="sangretipo"onblur="quitarespacios(this);" required>
+                                    <input  type="text"   class="form-control" pattern=".{6,8}"  maxlength="8" oninput="this.value = this.value.replace(/[^a-z,A-Z-,+ ]/,'')" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" name="tiposangree" id="sangretipo"onblur="quitarespacios(this);" required>
                                     <div class="invalid-feedback">
                                        Campo Obligatorio.
                                    </div>
@@ -317,7 +317,7 @@ Programador               Fecha                      Descripcion
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="agregar_tiposangre" name="agregar_tiposangre" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="agregar_tiposangree" name="agregar_tiposangree" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>

@@ -180,7 +180,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT tm.CODIGO_MEDICAMENTO , tm.NOMBRE_MEDICAMENTO ,tm.DESCRIPCION  from tbl_medicamento tm;";
+	$strquery ="SELECT m.CODIGO_MEDICAMENTO,m.NOMBRE_MEDICAMENTO,m.DESCRIPCION, e.NOMBRE AS ESTADO FROM tbl_medicamento M, tbl_estado E
+	WHERE m.CODIGO_ESTADO=E.CODIGO_ESTADO";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -200,13 +201,14 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(10);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Id', 1, 0, 'C', 1);
-$pdf->Cell(70, 12, 'Nombre medicamento', 1, 0, 'C', 1);
-$pdf->Cell(65, 12, 'Descripcion', 1, 1, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode("Estado"), 1, 0, 'C', 1);
+$pdf->Cell(24, 12, 'ID', 1, 0, 'C', 1);
+$pdf->Cell(55, 12, 'Nombre medicamento', 1, 0, 'C', 1);
+$pdf->Cell(71, 12, utf8_decode("Descripción"), 1, 1, 'C', 1);
 
 
 
@@ -218,10 +220,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,30,70,65)); //???
+$pdf->SetWidths(array(15,25,24,55,71)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, $data[$i]['CODIGO_MEDICAMENTO'], $data[$i]['NOMBRE_MEDICAMENTO'],ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),  ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,$data[$i]['ESTADO'], $data[$i]['CODIGO_MEDICAMENTO'], utf8_decode($data[$i]['NOMBRE_MEDICAMENTO']),ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),  ),10); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

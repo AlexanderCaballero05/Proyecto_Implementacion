@@ -307,7 +307,7 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                           <div class="col-sm-12">
                               <div class="form-group">
                                   <label >Nombre Apariencia Física</label>
-                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete = "off" type="text" placeholder="Ingrese la apariencia fisica" name="apariencia" id="apariencia" onblur="quitarespacios(this);" required="">
+                                    <input  type="text"  class="form-control"  pattern=".{5,50}" maxlength="50" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete = "off" type="text" placeholder="Ingrese la apariencia fisica" name="aparienciaa" id="apariencia" onblur="quitarespacios(this);" required="">
                                 <div class="invalid-feedback">
                                   Campo obligatorio.
                                 </div>
@@ -326,7 +326,7 @@ D'aniel Martinez          11-07-2022                 Quitar espacios inicio y fi
                     </div>                      
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="nuevo" name="nuevo" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="nuevoo" name="nuevoo" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>

@@ -286,7 +286,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtcodigo_persona">Nombre Alergia</label>
-                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35"onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergia" onblur="quitarespacios(this);" required>
+                                    <input  type="text"  class="form-control" pattern=".{6,35}"maxlength="35"onkeyup="mayus(this);" onkeypress="return soloLetras(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');" autocomplete = "off" type="text" placeholder="Ingrese un tipo de alergia" name="nombre_alergias" onblur="quitarespacios(this);" required>
                                      <div class="invalid-feedback">
                                        Campo Obligatorio.
                                     </div>
@@ -315,7 +315,7 @@ D'aniel Martinez        11-07-2022                 Agregar funcion para input de
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" id="AGREGAR_ALERGIAS" name="AGREGAR_ALERGIAS" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" id="AGREGAR_ALERGIASS" name="AGREGAR_ALERGIASS" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
