@@ -24,7 +24,9 @@ Diana Rut               28/05/2022            Se modifico la parte de rol para q
 Diana Rut               1/06/2022            Se agrego una validacion de input
 Diana Rut               09/06/2022           Se modifico los datos de la bitacora
 ANY HERNANDEZ         	11-06-2022            revision de ortagrafia 
-Diana Rut Garcia        21-06-2022            Se valido las validaciones de editar
+Diana Rut Garcia        21-/06-2022            Se valido las validaciones de editar
+Diana Rut               11/08/2022           Se arreglo el bug que no muestra los dos campos de contraseñas
+Luz Montoya             13/08/2022           La Consulta para solo traer los roles con estados activos
 ----------------------------------------------------------------------->
 <?php
  include "conexionpdo.php";
@@ -55,30 +57,19 @@ include_once "conexion3.php";
 <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body>
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
     </div><!-- /.container-fluid -->
   </div>
-  
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Mantenimiento Usuarios</h4>    
+          <h4>Usuarios</h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
-          <ul class="nav nav-tabs card-header-tabs">
-             <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="categoria">Agregar Personas/Usuarios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" style="color:#000000;" href="ediusuarios">Ver Datos Usuarios</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" style="color:#000000;" href="crudpersonas">Ver Datos Personas</a>
-              </li>
-          </ul>
+         
         </div>
         <div class="card-body">
     <div class="container-fluid">
@@ -95,7 +86,7 @@ include_once "conexion3.php";
             $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
             //llamar al procedimiento almacenado
             $evaluar_permiso = $db->prepare("CALL Sp_permiso_insertar(?,?);");
-            $evaluar_permiso->execute(array($usuariomo, '25'));
+            $evaluar_permiso->execute(array($usuariomo, '55'));
             $row1=$evaluar_permiso->fetchColumn();
             $permiso_registrar =$row1;             
           }
@@ -106,10 +97,12 @@ include_once "conexion3.php";
         <a href="categoria"> 
             <button  data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>
         </a>
-        <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
+        <a>
+         <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
+        </a>
          <?php 
          }
-        ?>
+        ?> <!--Ordenado y comentado para su mejor compresión ,SI TOCA ORDENELO  :) -->
           <div class="card ">
             <div class="card-header text-center" ><!-- TITULO ENCABEZADO DATOS PERSONALES -->
             </div>
@@ -141,7 +134,7 @@ include_once "conexion3.php";
                           left join tbl_persona p on p.CODIGO_PERSONA = u.CODIGO_PERSONA
                           left join tbl_correo_electronico c on c.CODIGO_PERSONA = p.CODIGO_PERSONA
                           where
-                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO ASC;";
+                          u.CODIGO_USUARIO > 1 ORDER BY CODIGO_USUARIO desc;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {
@@ -169,7 +162,7 @@ include_once "conexion3.php";
                               $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                               //llamar al procedimiento almacenado
                               $evaluar_permiso_actualizar = $db->prepare("CALL Sp_permiso_actualizar(?,?);");
-                              $evaluar_permiso_actualizar->execute(array($usuariomo, '25'));
+                              $evaluar_permiso_actualizar->execute(array($usuariomo, '55'));
                               $row1=$evaluar_permiso_actualizar->fetchColumn();
                               $permiso_actualizar =$row1; 
                             }
@@ -184,7 +177,7 @@ include_once "conexion3.php";
                             if($row > 0){
                               $usuariomo = $row;//capturo el nombre del ROl en la variable para usarla en el Procedimiento almacenado
                               $evaluar_permiso_eliminar = $db->prepare("CALL Sp_permiso_eliminar(?,?);");
-                              $evaluar_permiso_eliminar->execute(array($usuariomo, '25'));
+                              $evaluar_permiso_eliminar->execute(array($usuariomo, '55'));
                               $row1=$evaluar_permiso_eliminar->fetchColumn();
                               $permiso_eliminar =$row1; 
                             }
@@ -281,7 +274,7 @@ include_once "conexion3.php";
                                       </div>
                                       <div class="col-sm-6">
                                         <div class="form-group">
-                                          <label>Correo</label>
+                                          <label>Correo Electrónico</label>
                                           <input  type="text"  value ="<?php echo $var15; ?>" required class="form-control"  maxlength="50" minlength="5"  onKeyDown="sinespacio(this);"  autocomplete = "off" type="text"   name="correo_modi" id="correo_modi">
                                         </div>
                                       </div>
@@ -306,7 +299,8 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
                                         <?php
-                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' ;";
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' 
+                                           AND EST_ROL <> '3' ;";
                                            $resultadod=$conn->query($query);                
                                          ?> 
                                         <div class="col-sm-6">
@@ -333,9 +327,9 @@ include_once "conexion3.php";
                                         <button type="button"  class="btn btn-primary mb-3" onclick="Mostar_div(<?php echo $var2?>)">Resetear Contraseña</button>
                                       </div>
                                     </div>
-                                   <div  class="row">
-
-                                      <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>" class="col-sm-6 mb-2">
+                                    <div style="display:none;" id="Mostrar_reseteo<?php echo $var2?>">
+                                     <div  class="row">
+                                      <div  class="col-sm-6 mb-2">
                                         <label for="" class="control-label">Cambiar Contraseña</label> 
                                         <div class="input-group">
                                           <input type="password" class="form-control" id="clave_nueva<?php echo $var2?>" minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>"  name="clave_nueva">
@@ -348,7 +342,7 @@ include_once "conexion3.php";
                                         </div>
                                       </div>
 
-                                      <div style="display:none;" id="Mostrar_reseteo1<?php echo $var2?>" class="col-sm-6 mb-2">
+                                      <div  class="col-sm-6 mb-2">
                                         <label  class="control-label">Confirmar Contraseña</label> 
                                         <div class="input-group">
                                           <input type="password" class="form-control" id="confirmar_clave<?php echo $var2?>" minlength="<?php echo $valor1;?>"  maxlength="<?php echo $valor?>" name="confirmar_clave"  >
@@ -360,7 +354,8 @@ include_once "conexion3.php";
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
+                                     </div>
+                                    </div><!--Fin del div que encierra la parte de la password -->
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
@@ -454,31 +449,20 @@ include_once "conexion3.php";
       window.open(this.href,'_self');
     }
   </script>
-
-<script>
-   function Descargar3() {
-      window.open('Reportes_Prosecar/reportecitaMedica.php','_blank');
-      window.open(this.href,'_self');
-    }
-  </script>
-
 <script>//funcion que muestra/oculta el div de resetear contraseña
   function Mostar_div(e){
     console.log('object');
      console.log(e);
     let x = document.getElementById('Mostrar_reseteo'+e);
-   let  y = document.getElementById('Mostrar_reseteo1'+e);
-    if(x.style.display === "none" && y.style.display === "none"){
+    if(x.style.display === "none" ){
       x.style.display = "block";
-      y.style.display = "block";
     }else{
       x.style.display = "none";
-      y.style.display = "none";
     }
   }
 </script> 
 
-<script  type="text/javascript">
+<script  type="text/javascript"> //Muestra el icono de los ojitos :3
   function mostrar1(e){
     var cambio1 = document.getElementById("confirmar_clave"+e);
     if(cambio1.type == "password"){
@@ -504,5 +488,5 @@ include_once "conexion3.php";
 </script>
 
 
-<!--Ordenado y comentado para su mejor compresion ,psdt si lo toca ,ordenelo :) -->
+<!--Ordenado y comentado para su mejor compresion ,SI TOCA ORDENELO  :) -->
 <!-- Elaborado  y modificado  unicamente por ♠Diana Rut con ayuda de terceros(algunas cosas :v)  -->

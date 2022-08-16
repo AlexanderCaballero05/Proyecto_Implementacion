@@ -130,14 +130,14 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
                     </div><!--FINAL DEL CARD BODY -->                       
                     <div class="modal-footer ">
                         <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
-                        <button type="submit" name="AGREGAR_MEDICAMENTO" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
+                        <button type="submit" name="AGREGAR_MEDICAMENTO" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"onclick="mostrartextos(this)"></i></span>Guardar</button>      
                     </div><!--FIN DEL DIV DE BOTONES DE GUARDAR -->
                 </div>
             </form>
       </div>
    </div><!-- FIN DEL MODAL AGREGAR UN MEDICAMENTO --> 
    
-   <body oncopy="return false" onpaste="return false">
+   <body oncopy="return true" onpaste="return true">
 <div class="content-wrapper">
     <div class="content-header">
     <div class="container-fluid">
@@ -217,7 +217,14 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
 
             ?>
             <div class="col-sm-12 mb-3">
-             <h5> </h5><hr color="blue">
+<div class="alert alert" style="border-color:blue">
+                  <h3 class="text-center"> Paso <i class="bi bi-4-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-4-circle" viewBox="0 0 16 16">
+                      <path d="M7.519 5.057c.22-.352.439-.703.657-1.055h1.933v5.332h1.008v1.107H10.11V12H8.85v-1.559H4.978V9.322c.77-1.427 1.656-2.847 2.542-4.265ZM6.225 9.281v.053H8.85V5.063h-.065c-.867 1.33-1.787 2.806-2.56 4.218Z"/>
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z"/>
+                      </svg>
+                  </h3>
+                </div>
+
             </div>
             
           
@@ -319,17 +326,17 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
               
               </div><!-- FIN DEL MODAL AGREGAR -->
                   <div class="row pl-3">
-                        <div class="col-md-6"> <!--INICIO INDICE ACADEMICO-->
+                        <div class="col-md-6" style="display:none;" id="IndicacionReceta"> <!--INICIO INDICE ACADEMICO-->
                           <label  class="control-label">Indicación de Receta</label> 
                           <div class="form-group">
                             
-                          <textarea required class="form-control" type="textarea" pattern=".{5,100}"  maxlength="100" name="indicaciones" id="indicaciones" onkeyup="mayus(this);"onkeypress="return soloLetrasComa(event);" autocomplete = "off" onkeypress=""></textarea>
+                          <textarea required  class="form-control" type="textarea" pattern=".{5,100}"  maxlength="100" name="indicaciones" id="indicaciones" onkeyup="mayus(this);"onkeypress="return soloLetrasComa(event);" autocomplete = "off" onkeypress=""></textarea>
                             <div class="invalid-feedback">
                                   Campo obligatorio.
                               </div>
                           </div>
                         </div>
-                        <div class="col-md-6"> <!--INICIO PASATIEMPOS-->
+                        <div class="col-md-6" style="display:none;" id="observacionReceta"> <!--INICIO PASATIEMPOS-->
                           <label class="control-label">Observaciones</label> 
                           <div class="form-group">
                           <textarea required class="form-control" type="textarea" pattern=".{5,100}"  maxlength="100" name="observaciones" id="observaciones" onkeyup="mayus(this);"onkeypress="return soloLetrasComa(event);" autocomplete = "off" onkeypress=""></textarea>
@@ -506,9 +513,6 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    
-
-
                                                 </div> <!-- FIN DE EL PRIMER ROW -->
                                             </div>
                                             <!--FINAL DEL CARD BODY -->
@@ -786,8 +790,11 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
           <form id="FORMEeliminar" method="POST">
             <div class="modal-body">
             <input type="text" hidden value="<?php echo $codigocita ?>" name="codigo_finalizar"> 
+            <input type="text" hidden value="<?php echo $codigocon ?>" name="consultitas"> 
               <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="rol_eliminar" id="rol_eliminar">
-                <h4 class="text-center">¿Desea finalizar las Recetas?</h4>
+                <h4 class="text-center">¿Desea finalizar las Recetas?
+
+                </h4>
             </div> 
              <div class="modal-footer ">
                <button type="button" name="cerrar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -818,18 +825,7 @@ D'aniel Martinez        8-01-2022                        Permitir numeros, letra
  </script>
  <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
  <script>
- var isSubmitting = false
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-    $('#form').data('initial-state', $('#form').serialize());
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
+
 
 
 function window_mouseout( obj, evt, fn ) {
@@ -860,6 +856,10 @@ var from         = event.relatedTarget || event.toElement;
           document.getElementById('medicamentos').style.display = "block";
           document.getElementById('agregarmedicamento').required = true;
           document.getElementById('agregarexamen').required = false;
+          document.getElementById('IndicacionReceta').required = true;
+          document.getElementById('IndicacionReceta').style.display = "block";
+          document.getElementById('observacionReceta').required = true;
+          document.getElementById('observacionReceta').style.display = "block";
           
 
         }else if($(this).val() === "2"){//
@@ -867,11 +867,25 @@ var from         = event.relatedTarget || event.toElement;
           document.getElementById('examenes').style.display = "block";
           document.getElementById('agregarmedicamento').required = false;
           document.getElementById('agregarexamen').required = true;
+          document.getElementById('IndicacionReceta').required = true;
+          document.getElementById('IndicacionReceta').style.display = "block";
+          document.getElementById('observacionReceta').required = true;
+          document.getElementById('observacionReceta').style.display = "block";
         }
     });
   }); // 
 </script>
-
+<script type="text/javascript">//codigo del select
+    function local(attribute,value=null){
+    if(value)
+        return localStorage.setItem(attribute,value);
+    return localStorage.getItem(attribute);
+}
+// set property
+local('background-color', 'yellow');
+// get property
+local('background-color');
+</script>
 <script type="text/javascript">
 (function() {
     'use strict'

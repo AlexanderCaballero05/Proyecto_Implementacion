@@ -47,7 +47,7 @@ include_once 'conexionpdo.php';
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> 
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body >
 <div class="content-wrapper">
   <div class="content-header">
     <div class="container-fluid">
@@ -55,7 +55,7 @@ include_once 'conexionpdo.php';
   </div>
   <section class="content">
     <div class="container-fluid">
-        <section class="content-header text-xl-center mb-3 btn-light"> 
+        <section class="content-header text-xl-center mb-3"> 
           <h4> Registro de Expediente Espiritual  <i></i></h4>
         </section>
         <div class="card">
@@ -78,10 +78,16 @@ include_once 'conexionpdo.php';
             </li>
           </ul>
           </div><!--FIN DEL CARD HEADER -->
+          <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM6.646 6.24v.07H5.375v-.064c0-1.213.879-2.402 2.637-2.402 1.582 0 2.613.949 2.613 2.215 0 1.002-.6 1.667-1.287 2.43l-.096.107-1.974 2.22v.077h3.498V12H5.422v-.832l2.97-3.293c.434-.475.903-1.008.903-1.705 0-.744-.557-1.236-1.313-1.236-.843 0-1.336.615-1.336 1.306Z"/>
+              </svg>
+              </h3>
+            </div>
            <div class="card-body"><!--Cuerpo del card body principal -->
              <form method="POST" class="needs-validation" novalidate id="form">
-                    <strong>Datos Generales de Expediente</strong>
-                    <hr>
+                    <h5>Datos Generales de Expediente</h5>
+                    <hr color="blue">
                     <div class= "row"> 
                         <div  class="col-sm-8">
                         <?php
@@ -119,7 +125,7 @@ include_once 'conexionpdo.php';
                                     $codigo2 = $row2['CODIGO_PERSONA'];
                                     $nombre2 = $row2['PACIENTE'];
                                     ?>
-                                     <label for="" class="control-label">Persona</label> 
+                                     <label for="" class="control-label">Nombre de la Persona</label> 
                           <div class="form-group">
                             <input  readonly class="form-control" value="<?php echo $nombre2;?>">
                             <input  hidden name="codigo_paciente_expediente_espiritual" value="<?php echo $codigo2;?>">
@@ -180,37 +186,10 @@ include_once 'conexionpdo.php';
                      
                     </div><!--div del row -->  
                     <hr><br>
-                    <!--Sacramentos realizados por el estudiante-->
-                        <div class="row mb-3 pl-3">
-                           <h5>Sacramentos realizados</h5> 
-                        </div>
-
-                    <div class="row mb-5 pl-3">
-                        <?php //
-                        $query = "SELECT GROUP_CONCAT(sac.NOMBRE) AS sacramentos
-                        FROM tbl_sacramento sac, tbl_estudiante es, tbl_sacramento_estudiante se
-                        WHERE es.CODIGO_ESTUDIANTE = se.CODIGO_ESTUDIANTE
-                        AND   se.CODIGO_SACRAMENTO = sac.CODIGO_SACRAMENTO
-                        AND   se.CODIGO_ESTUDIANTE = '$codigo2';";
-                        $resultSacramentos=$conn->query($query); 
-
-                        ?>
-                        <?php 
-                            if ($resultSacramentos->num_rows > 0) {
-                            while($row2 = $resultSacramentos->fetch_assoc()) { 
-                            $nombre_sacramentos = $row2['sacramentos'];
-                            ?>
-                        <div class="col-sm-10 order-2 pl-2">
-                        <input  readonly class="form-control" value="<?php echo $nombre_sacramentos;?>">                       
-                        </div>
-                        <?php 
-                                } 
-                                }
-                                ?>
-                    </div> 
+                     
 
                  </br></br>
-                <button type="submit"  id="" name="registrar_expediente_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar</button>
+                <button type="submit"  id="" name="registrar_expediente_espiritual" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar</button>
              </form><!-- FIN DEL FORM-->
           </div><!--FIN DEL CARD BODY -->
         </div><!--fIN DEL CARD GENERAL -->
@@ -218,57 +197,7 @@ include_once 'conexionpdo.php';
   </section>
 </div>
 </div>
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
 
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-// let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if ( /* !leftWindow  && */ (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    // localStorage.setItem( 'leftWindow', true );
-}
-} );
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
 

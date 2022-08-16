@@ -25,8 +25,8 @@
               exit;
               }else{
                try {
-                $query_objeto = " INSERT INTO tbl_objetos(NOMBRE,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION)  
-                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual'); ";
+                $query_objeto = " INSERT INTO tbl_objetos(NOMBRE,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,`CODIGO_ESTADO`)  
+                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual','2'); ";
                 $resul=$conn->query($query_objeto);
                 if ($resul >0){
                   echo "<script> 
@@ -70,7 +70,7 @@
         $edinombre_objeto = ($_POST['editnombre']);
         $edi_descripcion = ($_POST['editdescripcion']);
         $fecha_modificacion= date('Y-m-d');
-
+        $estado = ($_POST['ESTADOUSUARIO']);
         $user = $_SESSION['vario'];
 
         try {
@@ -86,7 +86,10 @@
          } else {
           try {
             $sql = " UPDATE tbl_objetos SET NOMBRE = '$edinombre_objeto' 
-                                          ,DESCRIPCION = '$edi_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = 'ADMIN'
+             ,DESCRIPCION = '$edi_descripcion',
+             CODIGO_ESTADO = '$estado',
+             FECHA_MODIFICACION = '$fecha_modificacion',
+              MODIFICADO_POR = 'ADMIN'
             WHERE CODIGO_OBJETO = '$codigo_objeto' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

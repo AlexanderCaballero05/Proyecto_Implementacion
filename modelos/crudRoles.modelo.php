@@ -27,6 +27,7 @@
 -----------------------------------------------------------------------
 Programador               Fecha                      Descripcion
 Diana Rut Garica     		05-06-2022               Cambio en la consultas
+Luz Montoya y José      13-08-2022               Se agregaron los estados en la tabla de roles
 ----------------------------------------------------------------------->
  <?php
   include_once 'conexion3.php';
@@ -39,6 +40,7 @@ Diana Rut Garica     		05-06-2022               Cambio en la consultas
           if(isset($_POST['agregar_rol'])){
                $nombre_rol = ($_POST['nombre_rol']);
                $descripcion = ($_POST['descripcion_rol']);
+               $estado = ($_POST['Est_rol']);
                $fechaActual = date('Y-m-d');
                $usuario =$_SESSION['vario'];   
               try{ 
@@ -53,7 +55,7 @@ Diana Rut Garica     		05-06-2022               Cambio en la consultas
                   exit;
                   }else{
                     try{
-                      $query_rol = " INSERT INTO tbl_roles( NOMBRE, DESCRIPCION, FECHA_CREACION,CREADO_POR_USUARIO) VALUES ('$nombre_rol','$descripcion','$fechaActual','$usuario'); ";
+                      $query_rol = " INSERT INTO tbl_roles( NOMBRE, DESCRIPCION, FECHA_CREACION,CREADO_POR_USUARIO,EST_ROL) VALUES ('$nombre_rol','$descripcion','$fechaActual','$usuario','$estado'); ";
                       $resul=$conn->query($query_rol);
                       if($resul >0){
                         echo "<script> 
@@ -96,6 +98,7 @@ Diana Rut Garica     		05-06-2022               Cambio en la consultas
       $codigo_rol = ($_POST['id_rol']);
       $editar_nombre = ($_POST['editar_nombre']);
       $editar_descripcion = ($_POST['editar_descripcion']);
+      $estadou = ($_POST['Est_rol_u']);
       $fecha_modificacion = date('Y-m-d'); 
       $user=$_SESSION['vario'];
       try{
@@ -111,7 +114,7 @@ Diana Rut Garica     		05-06-2022               Cambio en la consultas
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
+            $sql = " UPDATE tbl_roles SET NOMBRE = '$editar_nombre' ,EST_ROL = '$estadou' ,DESCRIPCION = '$editar_descripcion',FECHA_MODIFICACION = '$fecha_modificacion', MODIFICADO_POR = '$user'
             WHERE CODIGO_TIPO_ROL = '$codigo_rol' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){

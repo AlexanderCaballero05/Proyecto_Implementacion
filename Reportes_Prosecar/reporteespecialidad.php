@@ -42,13 +42,15 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
-	   	// Posición: a 1,5 cm del final
 		$this->SetFont('helvetica', 'B', 9);
 		$this->SetY(-15);
-		$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
-		//$this->Line(10,287,200,287);
-		$this->Cell(170,0,utf8_decode('Prosecar © Todos los derechos reservados.'),0,0,'C');
-		$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+		$this->SetX(20);
+		$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+		
+		$this->SetX(20);
+		$this->Line(10,287,200,287);
+	
+		$this->SetX(10);
 
 	}
 
@@ -107,7 +109,8 @@ class PDF extends FPDF {
 			$this->Cell(13, 12, 'N', 1, 0, 'C', 0);
 			$this->Cell(30, 12, utf8_decode('Área'), 1, 0, 'C', 0);
 			$this->Cell(60, 12, 'Nombre ', 1, 0, 'C', 0);
-			$this->Cell(70, 12, utf8_decode('Descripción'), 1, 1, 'C', 0);
+			$this->Cell(70, 12, utf8_decode('Descripción'), 1, 0, 'C', 0);
+			$this->Cell(35, 12, utf8_decode('Estado'), 1, 1, 'C', 0);
 			
 			$this->SetFont('Arial', '', 12);
 			
@@ -185,8 +188,11 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-  $strquery ="SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA from tbl_especialidad te ,tbl_area ta  
-  where te.CODIGO_AREA  = ta.CODIGO_AREA ORDER BY te.CODIGO_ESPECIALIDAD ASC;";
+  $strquery ="SELECT ta.NOMBRE as area,te.NOMBRE as especialidad, te.DESCRIPCION, te.CODIGO_ESPECIALIDAD , ta.CODIGO_AREA , te.CODIGO_ESTADO ,te2.NOMBRE as estado  
+  from tbl_especialidad te  
+  left join tbl_area ta    on te.CODIGO_AREA  = ta.CODIGO_AREA 
+  left join tbl_estado te2 on te2.CODIGO_ESTADO = te.CODIGO_ESTADO 
+ ORDER BY te.CODIGO_ESPECIALIDAD desc;ORDER BY te.CODIGO_ESPECIALIDAD ASC;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
     $data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -201,13 +207,14 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(5);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(13, 12, 'N', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, utf8_decode('Área'), 1, 0, 'C', 1);
-$pdf->Cell(60, 12, 'Tipo especialidad', 1, 0, 'C', 1);
-$pdf->Cell(70, 12, utf8_decode('Descripción'), 1, 1, 'C', 1);
+$pdf->Cell(50, 12, 'Tipo especialidad', 1, 0, 'C', 1);
+$pdf->Cell(70, 12, utf8_decode('Descripción'), 1, 0, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Estado'), 1, 1, 'C', 1);
 
 
 
@@ -219,10 +226,13 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(13,30,60,70)); //???
+$pdf->SetWidths(array(13,30,50,70,35)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['area']))), ucwords(strtolower(utf8_decode($data[$i]['especialidad']))), ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),  ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA//EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['area']))),
+	 ucwords(strtolower(utf8_decode($data[$i]['especialidad']))),
+	  ucwords(strtolower(utf8_decode($data[$i]['DESCRIPCION']))),
+	  ucwords(strtolower(utf8_decode($data[$i]['estado'])))  ),5); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA//EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 

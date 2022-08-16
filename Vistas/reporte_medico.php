@@ -104,10 +104,9 @@ include('conexion2.php');
       <p  style="text-align: center; font-size: 20px;">Reporte Médico del Paciente</p>
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
-   <footer>
-     <p style="text-align: center; "><b> Prosecar © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;">letras pra rellenar para </b>
-      <label >Página<span  class="pagenum"></label></p>
-   </footer>
+    <footer style="text-align: center;">
+      <label style="text-align: center;">Página<span  class="pagenum"></label></p>
+    </footer>
    <main>
     <fieldset>
       <?php
@@ -173,7 +172,7 @@ include('conexion2.php');
          <tr>
            <th>Tipo sangre</th>
            <th>Tratamientos</th>
-           <th>Enfermedades</th>
+           <th>Apariencia</th>
            <th>Alergias</th>
            <th>Trastornos</th>
            <th>Enfermedades</th>
@@ -183,10 +182,10 @@ include('conexion2.php');
          <tr>
          <td ><?php echo utf8_decode(strtolower($var1)); ?></td>
          <td ><?php echo utf8_decode(strtolower($var2)); ?></td>
-         <td ><?php echo utf8_decode($var3); ?></td>
+         <td ><?php echo utf8_decode(strtolower($var6)); ?></td>
          <td ><?php echo utf8_decode(strtolower($var4)); ?></td>
          <td ><?php echo utf8_decode(strtolower($var5));?></td>
-         <td ><?php echo utf8_decode(strtolower($var6));?></td>
+         <td ><?php echo utf8_decode(strtolower($var3));?></td>
          </tr>
          <?php
            }
@@ -274,13 +273,14 @@ include('conexion2.php');
             $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
             $evolucion = $row['EVOLUCION'];
             $diagnostico_egreso = $row['DIAGNOSTICO_EGRESO'];
+            $fecha_cita = $row['FECHA_CITA'];
       ?>
-       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Información de la consulta<?php echo $fecha;?></label></div><br>
+       <div style="background-color: #2FB8F6;padding: 3.5px; text-align:center; color:#F7F9FA; "><label style="font-size: 18px;">Información de la Consulta <?php echo $fecha_cita;?></label></div><br>
        <div>
-          <div class="c" ><label><b>Síntomas: </b></label> <?php  echo (strtolower($sintomas)) ?> </div>
-          <div class="c" > <label><b>Diagnóstico Ingreso: </b></label> <?php  echo (strtolower($diagnostico_ingreso))?></div>
-          <div class="c" > <label><b>Evolución: </b></label><?php echo  (strtolower($evolucion)) ?></div>
-          <div class="c" > <label><b>Diagnóstico Egreso: </b></label><?php echo (strtolower($diagnostico_egreso))?></div>
+          <div class="c" ><label><b>Síntomas: </b></label> <?php  echo utf8_decode(strtolower($sintomas)) ?> </div>
+          <div class="c" > <label><b>Diagnóstico Ingreso: </b></label> <?php  echo utf8_decode(strtolower($diagnostico_ingreso))?></div>
+          <div class="c" > <label><b>Evolución: </b></label><?php echo  utf8_decode(strtolower($evolucion)) ?></div>
+          <div class="c" > <label><b>Diagnóstico Egreso: </b></label><?php echo utf8_decode(strtolower($diagnostico_egreso))?></div>
        </div>
       <?php 
        } 

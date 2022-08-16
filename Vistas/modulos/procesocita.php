@@ -178,7 +178,7 @@ $result3= $conn->query($query);
                 <div class="row">
                    <div class="col-sm-3 mb-3">
                      <?php
-                      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1";
+                      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  where CODIGO_AREA <> 1 and CODIGO_ESTADO = 2 ";
                       $filas_area= $conn->query($query);
                       ?>
                             <label for="txtcodigo_especialista">Área de la Cita</label>
@@ -200,7 +200,7 @@ $result3= $conn->query($query);
                     </div>
                     <div style ="display:none;" id="es_medico" class="col-sm-4  mb-3">
                         <?php
-                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA =2 ";
+                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA =2 and CODIGO_ESTADO = 2 ";
                         $resultado= $conn->query($query);
                         ?> 
                         <div class="form-group">
@@ -226,7 +226,7 @@ $result3= $conn->query($query);
                     
                     <div  style ="display:none;" id="es_psico" class="col-sm-4  mb-3">
                         <?php
-                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 3 ";
+                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 3 and CODIGO_ESTADO = 2";
                         $resultado= $conn->query($query);
                         ?> 
                         <div class="form-group">
@@ -250,7 +250,7 @@ $result3= $conn->query($query);
                     </div>
                     <div  style ="display:none;" id="es_espiritual" class="col-sm-4  mb-3">
                         <?php
-                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 4 ";
+                        $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 4 and CODIGO_ESTADO = 2 ";
                         $resultado= $conn->query($query);
                         ?> 
                         <div class="form-group">
@@ -411,7 +411,6 @@ $result3= $conn->query($query);
   </div><!--fin del form group -->
 <!-- Cierre del div wraper -->
 
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 
 </body>
 

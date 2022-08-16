@@ -108,7 +108,7 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
      $query= "SELECT CODIGO_AREA ,NOMBRE  FROM tbl_area  
      where CODIGO_AREA <> 6
      AND CODIGO_AREA <> 2
-     AND CODIGO_AREA <> 3";
+     AND CODIGO_AREA <> 3  and CODIGO_ESTADO =2";
      $filas_area= $conn->query($query);
      ?>
    <div class="form-group">

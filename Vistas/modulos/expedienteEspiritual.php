@@ -20,8 +20,9 @@
     </div>
     <section class="content">
         <div class="container-fluid">
+          
             <section class="content-header text-xl-center mb-3 "> 
-                <h4> Informe Espiritual Paciente</h4>
+                <h4> Informe de Consulta</h4>
             </section>
             <div class="card">
                 <div class="card-header" style="background-color:#B3F2FF;">
@@ -45,7 +46,13 @@
                 </div><!--FIN DEL CARD HEADER -->
                 <div class="card-body"><!--Cuerpo del card body principal -->
 
-
+                <div class="alert alert" style="border-color:blue">
+                  <h3 class="text-center"> Paso <i class="bi bi-4-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-4-circle" viewBox="0 0 16 16">
+                      <path d="M7.519 5.057c.22-.352.439-.703.657-1.055h1.933v5.332h1.008v1.107H10.11V12H8.85v-1.559H4.978V9.322c.77-1.427 1.656-2.847 2.542-4.265ZM6.225 9.281v.053H8.85V5.063h-.065c-.867 1.33-1.787 2.806-2.56 4.218Z"/>
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z"/>
+                      </svg>
+                  </h3>
+                </div>
                
                 
                 <!--Form del archivo expediente -->
@@ -217,7 +224,7 @@
                    </div><!-- fin row-->
                 
                   <div class="modal-footer justify-content-start">
-                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-warning btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
+                 <button style="color:#ffff;" type="submit"   name="FINALIZAR_CITA_ESPIRITUAL" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
                  </form><!--fin form del archivo expediente-->
                  <!--form para el reporte de la consulta-->
                   <form action="Reportes_Prosecar/reporteConsultaEspiritual.php" method="POST"> 
@@ -237,57 +244,7 @@
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 
     </section><!-- FINAL SECTION -->
- <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
- <script>
- var isSubmitting = false
-
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if (!leftWindow  && (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    localStorage.setItem( 'leftWindow', true );
-}
-} );
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+ 
 </body>
 
    <script>//previene que se mantenga una tecla pulsada

@@ -42,6 +42,17 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
     $valor2 = $row1;
   }
 ?>
+
+<?php
+  //Parametro de maximo usuario
+  $max_usuario = "RECUPERACION_CORREO";
+  $sentencia1 = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $sentencia1->execute(array($max_usuario));
+  $row1=$sentencia1->fetchColumn();
+  if($row1>0){
+    $valor3 = $row1;
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
  <head>
@@ -71,7 +82,7 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
                         <form class="needs-validation" novalidate method="POST" action="../../modelos/metodo_seleccionado_recuperacion.php">
                             <div class="input-group mb-1">
                              <p><strong>¿Olvidaste tu contraseña?</strong></p></br>
-                               <p class="fw-normal ">Ingresa tu nombre  usuario para restablecer la contraseña mediante 2 formas.</p>
+                               <p class="fw-normal ">Ingresa tu nombre de Usuario para restablecer la contraseña.</p>
                             </div>
                             <div class="input-group mb-3">
                               <div class="input-group-prepend">
@@ -83,14 +94,28 @@ Diana Rut Garcia	 	26-may-2021       Cambio apariencia pantalla -->
                                    Debe tener minimo <?php echo $valor1; ?> caracteres.
                                 </div>
                             </div>
+                            <!-- Si el parametro de recuperacion por correo esta activo mostrara la opcion-->
+                            <?PHP if($valor3 == 'ACTIVO') {
+                            ?>
                             <div class="d-grid gap-2"><!--Botones  -->
                               <button type="submit" name="correo"  class="btn btn-block btn-outline-primary">
                                 <i class="fa fa-envelope mr-2"></i>Recuperar por Correo Electrónico
                               </button>
+
                               <button type="submit" name="recu" class="btn btn-block btn-outline-success">
                                 <i class="fa fa-question-circle mr-2"></i>Por Preguntas de Seguridad </button><br>
                               <button type="button"  onclick="location.href='../../index.php'" class="btn btn-block btn-danger btn-flat">CANCELAR</button>
                             </div>
+                           <?PHP }else {
+                            ?>
+                             <button type="submit" name="recu" class="btn btn-block btn-outline-success">
+                                <i class="fa fa-question-circle mr-2"></i>Por Preguntas de Seguridad </button><br>
+                              <button type="button"  onclick="location.href='../../index.php'" class="btn btn-block btn-danger btn-flat">CANCELAR</button>
+                            </div>
+
+                            <?PHP
+                            }
+                            ?>
                         </form>
                     </div>
                 </div>

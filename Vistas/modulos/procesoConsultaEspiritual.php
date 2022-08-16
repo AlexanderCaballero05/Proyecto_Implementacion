@@ -31,7 +31,7 @@
 -----------------------------------------------------------------------
     
     Programador               Fecha                      Descripcion
-    
+    Diana Rut            09/08/2022                 cambio en apariencia dejando estandar
   ----------------------------------------------------------------------->
 
 <?php
@@ -47,15 +47,15 @@ include_once 'conexionpdo.php';
     <script src="../vistas/assets/plugins/jquery/jquery.min.js"></script>
 </head>
 
-<body oncopy="return false" onpaste="return false">
+<body >
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
 
-    <section class="content-header text-xl-center mb-3 btn-light"> 
-          <h4> Consulta Espiritual PROSECAR  <i class="nav-icon fas fa-stethoscope"></i></h4>
+    <section class="content-header text-xl-center mb-3 "> 
+          <h4> Consulta Espiritual</h4>
         </section>
     <section class="content">
        <div class="card"> 
@@ -81,9 +81,16 @@ include_once 'conexionpdo.php';
         <div class="card-body">
         <body oncopy="return false" onpaste="return false" >
         <form method="POST" class="needs-validation" novalidate id="form">
+        <div class="alert alert" style="border-color:blue">
+          <h3 class="text-center"> Paso <i class="bi bi-3-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-3-circle" viewBox="0 0 16 16">
+            <path d="M7.918 8.414h-.879V7.342h.838c.78 0 1.348-.522 1.342-1.237 0-.709-.563-1.195-1.348-1.195-.79 0-1.312.498-1.348 1.055H5.275c.036-1.137.95-2.115 2.625-2.121 1.594-.012 2.608.885 2.637 2.062.023 1.137-.885 1.776-1.482 1.875v.07c.703.07 1.71.64 1.734 1.917.024 1.459-1.277 2.396-2.93 2.396-1.705 0-2.707-.967-2.754-2.144H6.33c.059.597.68 1.06 1.541 1.066.973.006 1.6-.563 1.588-1.354-.006-.779-.621-1.318-1.541-1.318Z"/>
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Z"/>
+            </svg>
+          </h3>
+        </div>
             
             <h5>Datos de la Persona</h5>
-            <hr>
+            <hr color="blue">
                       
             <div class="row mb-8">
                                     <?php
@@ -117,11 +124,11 @@ include_once 'conexionpdo.php';
                           
                           ?>
                       <input type="text" name="codigo_cita_espiritual" value="<?php echo $var3?>" hidden>
-                       <label for="">Nombre de la persona:</label> 
+                       <label for="">Nombre de la Persona</label> 
                        <input type="text" name="nombre" disabled ="disabled"class="form-control"  aria-label="nombre" onkeyup="mayus(this);" value="<?php echo $var1?>" >
                     </div>
                      <div class="col">
-                         <label for="">DNI:</label>
+                         <label for="">DNI</label>
                          <input type="text" name="dni" class="form-control"  aria-label="dni"  value="<?php echo $var2 ?>" disabled ="disabled">
                     </div>
                     </div>
@@ -129,8 +136,8 @@ include_once 'conexionpdo.php';
                     }
                     ?>
                     <br></br>
-                    <h5>Expediente Espiritual</h5>
-                    <hr>
+                    <h5> Datos Expediente Espiritual</h5>
+                    <hr color ="blue">
             <!--INICIO COMBOBOX -->
              <div class="form-group">
              <?php
@@ -182,11 +189,11 @@ include_once 'conexionpdo.php';
                     ?> <!--METER EL CICLO TODO LOS TEXTOS Y DENTRO DEL ROW PRINCIPAL-->
              </div><!--fin del div de row DE EXPEDIENTE-->
                     
-                    <h5>Datos de consulta</h5>
-                    <hr>
+                    <h5>Datos de Consulta</h5>
+                    <hr color="blue">
                     <div class="row">
                       <div class="col-md-6"> 
-                        <label for="identidad" class="control-label">Motivo de consulta:</label> 
+                        <label for="identidad" class="control-label">Motivo de Consulta</label> 
                         <div class="form-group">
                           <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="5"  name="Motivo_consulta" id="Motivo_consulta" autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
@@ -196,7 +203,7 @@ include_once 'conexionpdo.php';
                       </div>               
                 
                       <div class="col-md-6">
-                        <label for="identidad" class="control-label">Observaciónes:</label> 
+                        <label for="identidad" class="control-label">Observaciónes</label> 
                         <div class="form-group">
                           <textarea class="form-control" type="text" onkeypress="return soloLetrasComa(event);"  minlength="3" name="observaciones_espiritual" id="observaciones_espiritual"  autocomplete = "off" required></textarea>
                           <div class="invalid-feedback">
@@ -207,7 +214,7 @@ include_once 'conexionpdo.php';
                     </div><!--Fin de una fila -->
                     <br>
                     <a>
-                    <button type="submit"  name="Consulta_espiritual" class="btn btn-info btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
+                    <button type="submit"  name="Consulta_espiritual" class="btn btn-success btn mx-1"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Registrar Consulta</button>
                     </a> 
                   </form>   
                 </div><!--fin del div de responsivi -->
@@ -221,7 +228,7 @@ include_once 'conexionpdo.php';
                       </div>
   </section><!-- FINAL SECTION -->
 
-   <!--funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
+   
    <script>
       function soloLetrasComa(e){
        key = e.keyCode || e.which;
@@ -240,72 +247,13 @@ include_once 'conexionpdo.php';
       }
     }
   </script>
-   <script>
- var isSubmitting = false
 
-$(document).ready(function () {
-    $('#form').submit(function(){
-        isSubmitting = true
-    })
-
-    $('#form').data('initial-state', $('#form').serialize());
-
-    $(window).on('beforeunload', function() {
-        if (!isSubmitting && $('#form').serialize() != $('#form').data('initial-state')){
-            return 'You have unsaved changes which will not be saved.'
-        }
-    });
-})
-
-
-function window_mouseout( obj, evt, fn ) {
-
-if ( obj.addEventListener ) {
-
-    obj.addEventListener( evt, fn, false );
-}
-else if ( obj.attachEvent ) {
-
-    obj.attachEvent( 'on' + evt, fn );
-}
-}
-
-window_mouseout( document, 'mouseout', event => {
-
-event = event ? event : window.event;
-
-var from         = event.relatedTarget || event.toElement;
-
-// Si quieres que solo salga una vez el mensaje borra lo comentado
-// y así se guarda en localStorage
-
-let leftWindow   = localStorage.getItem( 'leftWindow' ) || false;
-
-if (!leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
-
-    // Haz lo que quieras aquí
-    alert( '!Estas a punto de salir!' );
-    localStorage.setItem( 'leftWindow', true );
-}
-} );
-  </script>
-  <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
 </body>
 
  
 
  
   <script>
-
-$(document).ready(function() {
-    $('.hb').select2();
-});
-
-//funcion para poner mayusculas
-function mayus(e) {
-        e.value = e.value.toUpperCase();
-    }
-
     (function () { 
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')

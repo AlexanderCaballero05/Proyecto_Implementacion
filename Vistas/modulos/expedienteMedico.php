@@ -18,7 +18,6 @@ include_once 'conexionpdo.php';
         <div class="container-fluid">
         </div><!-- /.container-fluid -->
     </div>
-    <section class="content">
         <div class="container-fluid">
             <div class="content-header text-xl-center mb-3 "> 
                 <h4> Informe de Consulta<i class="nav-icon fas fa-stethoscope"></i></h4>
@@ -48,6 +47,13 @@ include_once 'conexionpdo.php';
                 </li>
             </ul>
                 </div><!--FIN DEL CARD HEADER -->
+                <br>
+                <div class="alert alert" style="border-color:blue">
+                  <h3 class="text-center"> Paso <i class="bi bi-4-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-4-circle" viewBox="0 0 16 16">
+                      <path d="M1 8a7 7 0 1 1 14 0A7 7 0 0 1 1 8Zm15 0A8 8 0 1 0 0 8a8 8 0 0 0 16 0Zm-8.006 4.158c-1.57 0-2.654-.902-2.719-2.115h1.237c.14.72.832 1.031 1.529 1.031.791 0 1.57-.597 1.57-1.681 0-.967-.732-1.57-1.582-1.57-.767 0-1.242.45-1.435.808H5.445L5.791 4h4.705v1.103H6.875l-.193 2.343h.064c.17-.258.715-.68 1.611-.68 1.383 0 2.561.944 2.561 2.585 0 1.687-1.184 2.806-2.924 2.806Z"/>
+                      </svg>
+                  </h3>
+                </div>
                 <div class="card-body"><!--Cuerpo del card body principal -->
                 <form method="POST" id="form" >
                   <div>
@@ -240,115 +246,84 @@ include_once 'conexionpdo.php';
                   </div><!-- fin row-->
                   <div>
                       <h5>Información de Receta</h5>
-                  </div>
-                  <hr color="blue"> 
-                  <div class="row">
-                    <?php //Consulta que trae los medicamentos y examenes recetados del paciente
-                       $consulta = "SELECT rec.CODIGO_CONSULTA, GROUP_CONCAT('/ ',med.NOMBRE_MEDICAMENTO) as medicamentos, GROUP_CONCAT('/ ',rec.INDICACIONES_RECETA) as indicaciones, GROUP_CONCAT('/ ',exa.EXAMEN_MEDICO) as examenes, GROUP_CONCAT('/ ',exap.INDICACIONES) as indicaciones_examen
-                       FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con, tbl_receta_medica rec, tbl_medicamento med, tbl_examenes_medicos exa, tbl_examenes_pacientes exap
-                       WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
-                       AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
-                       AND i.CODIGO_ESTADO = est.CODIGO_ESTADO
-                       AND con.CODIGO_CITA = i.CODIGO_CITA
-                       AND con.CODIGO_CONSULTA = rec.CODIGO_CONSULTA
-                       AND rec.CODIGO_MEDICAMENTO = med.CODIGO_MEDICAMENTO
-                       AND exap.CODIGO_CONSULTA = con.CODIGO_CONSULTA
-                       AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO
-                       AND es.CODIGO_PERSONA = '$cod_usuario'
-                       AND i.CODIGO_ESTADO = '12' 
-                       AND  i.AREA_CITA = '2'
-                       AND con.CODIGO_CITA = '$codigo_cita' 
-                       AND rec.CODIGO_CONSULTA = '$codigo_consulta'
-                       AND i.FECHA_CITA = CURDATE(); ";
-                       $resul=$conn->query($consulta);
-                    ?>
-                      <?php
-                       if ($resul->num_rows > 0) {
-                         while($row = $resul->fetch_assoc()) { 
-                         $medicamentos = $row['medicamentos'];
-                         $indicaciones = $row['indicaciones'];
-                         $examenes = $row['examenes'];
-                         $indicaciones_examen = $row['indicaciones_examen'];
-                         //Estas son variables establecidas con sus datos
-                         $medicamento = 'Nombre medicamento(s)';
-                         $examen = 'Nombre examen(es)';
-                        ?> 
-                        <!--Codigo para mostrar los medicamentos en el expediente-->
-                        <?php 
-                          if($medicamentos == '' && $indicaciones == '') {
-                            $ninguno = 'Ninguno';
-                        ?>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Medicamentos Recetados</label>
-                            <div class="form-group">
-                              <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label  class="form-label">Indicaciones Medicamentos</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
-                            </div>
-                        </div>
-                         <?php
-                          }else{
-                        ?>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Medicamentos Recetados</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control"><?php echo $medicamento.': '.$medicamentos;  ?></textarea>
-                            </div>
-                        </div>
-                        <div  class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones Medicamentos</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control" ><?php echo $indicaciones;?></textarea>
-                           </div>
-                        </div>
-                        <?php
-                             }
-                        ?>
-                        <!--fin deCodigo para mostrar los medicamentos en el expediente-->
-                        <!--Inicio de Codigo para mostrar los examenes en el expediente-->
-                        <?php
-                        if($examenes == '' && $indicaciones_examen == ''){
-                            $ninguno = 'Ninguno';
-                        ?>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Examenes Recetados</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control"><?php echo $ninguno;  ?></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones Examnes</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control" ><?php echo $ninguno;?></textarea>
-                            </div>
-                        </div>
-                        <?php
-                            }else{ 
-                         ?>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Examenes Eecetados</label>
-                            <div class="form-group">
-                                <textarea  readonly class="form-control"><?php echo $examen.': '.$examenes;  ?></textarea>
-                            </div>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <label class="form-label">Indicaciones Examenes</label>
-                            <div class="form-group">
-                                 <textarea  readonly class="form-control" ><?php echo $indicaciones_examen;?></textarea>
-                            </div>
-                        </div>
-                        <?php
-                         }
-                        ?>
-                        <?php
-                          }
-                          }
-                        ?>
-                  </div><a >
+                  </div><hr color="blue"> 
+
+                  <div class="card-body">
+    <div class="table-responsive">
+        <table id="tbl_medicamentos" class="table table-bordered table-striped">
+            <thead class="">
+                <tr>
+                    <th class="text-LEFT">Nombre del Medicamento</th>
+                    <th class="text-LEFT">Indicación</th>
+                    <th class="text-LEFT">Observaciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT RM.CODIGO_RECETA_MEDICA, M.NOMBRE_MEDICAMENTO,RM.INDICACIONES_RECETA,RM.OBSERVACIONES FROM tbl_receta_medica RM, tbl_medicamento M WHERE RM.CODIGO_CONSULTA='$codigo_consulta'
+                AND RM.CODIGO_MEDICAMENTO=M.CODIGO_MEDICAMENTO;";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $var2 = $row['NOMBRE_MEDICAMENTO'];
+                        $var3 = $row['INDICACIONES_RECETA'];
+                        $var4 = $row['OBSERVACIONES'];
+                        
+                              ?>
+                        <tr>
+                            
+                            <td class="text-LEFT"><?php echo $var2; ?></td>
+                            <td class="text-LEFT"><?php echo $var3; ?></td>
+                            <td class="text-LEFT"><?php echo $var4; ?></td>                
+                <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+        </div></div>
+    <!--fin del div de responsivi -->
+    <br>
+  <!--comienzo recetas de elos examenes medicos -->
+  <div class="card-body">
+    <div class="table-responsive">
+        <table id="tbl_medicamentos" class="table table-bordered table-striped">
+            <thead class="">
+                <tr>
+                    <th class="text-LEFT">Nombre del Examen Médico</th>
+                    <th class="text-LEFT">Indicación</th>
+                    <th class="text-LEFT">Observaciones</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $query = "SELECT EP.CODIGO_EXAMEN_PACIENTE,EM.EXAMEN_MEDICO,EP.INDICACIONES,EP.OBSERVACIONES FROM tbl_examenes_pacientes EP, tbl_examenes_medicos EM WHERE EP.CODIGO_CONSULTA='$codigo_consulta'
+                AND EP.CODIGO_EXAMEN_MEDICO= EM.CODIGO_EXAMEN_MEDICO";
+                $result = $conn->query($query);
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $var2 = $row['EXAMEN_MEDICO'];
+                        $var3 = $row['INDICACIONES'];
+                        $var4 = $row['OBSERVACIONES'];
+                        
+                              ?>
+                        <tr>
+                            
+                            <td class="text-LEFT"><?php echo $var2; ?></td>
+                            <td class="text-LEFT"><?php echo $var3; ?></td>
+                            <td class="text-LEFT"><?php echo $var4; ?></td>               
+                <?php
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+    <!--fin del div de responsivi -->
+                  
                   <button type="submit"  id="" name="FINALIZAR_EXPEDIENTE" class="btn btn-success"><span><i class="nav-icon fas fa-save mx-1"></i></span>Finalizar Consulta</button>
                   
                     <form method="POST"  action="Vistas/reporte_medico.php" target="_blank"> 
@@ -363,10 +338,9 @@ include_once 'conexionpdo.php';
                 </div><!--fin card body -->
             </div><!-- FINAL cad genera -->
         </div><!-- FINAL CONTAINER FLUID --> 
-    </section><!-- FINAL SECTION -->
+    </body>
 
-
-<script>// Codigo para descargar los reportes en pdf :3 ,el otro codigo de abajo no lo hice asi que no toquen :)
+<script>// Codigo para descargar los reportes en pdf 
     function Descargar1() {
       window.open('Vistas/reporte_medico.php','_blank');
       window.open(this.href,'_self');
@@ -418,6 +392,6 @@ if (  !leftWindow  &&  (!from || from.nodeName === 'HTML') ) {
 } );
   </script>
   <!--fin de la funcion que advierte al usuario antes de salir de un proceso con cambios no guardados-->
-</body>
+
 
 

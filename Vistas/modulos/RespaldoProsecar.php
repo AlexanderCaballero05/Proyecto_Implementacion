@@ -118,7 +118,7 @@ Programador               Fecha                      Descripcion
                     {
                     ?>      
 
-	            <button type="submit"  name="backup" class="btn btn-primary"><span class="glyphicon glyphicon-eject"></span>  Realizar Copia de Seguridad</button>
+	            <button type="submit"  name="backup" class="btn btn-primary"><span class="glyphicon glyphicon-eject"></span>Realizar Copia de Seguridad</button>
    
                 <?php
                 }

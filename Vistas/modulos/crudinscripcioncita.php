@@ -56,7 +56,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         </div><!-- /.container-fluid -->
     </div>
     <div class="content-header text-xl-center mb-3 ">
-              <h4>Citas Hoy Prosecar </h4>
+              <h4>Citas Hoy</h4>
     </div>
     <section class="content">
        <div class="card"> 
@@ -151,7 +151,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <tbody>
                                         <?php
                                     
-                                        $query = "SELECT  IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE, P.SEGUNDO_NOMBRE, P.PRIMER_APELLIDO,P.SEGUNDO_APELLIDO) AS 
+                                        $query = "SELECT  a.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE,P.PRIMER_APELLIDO) AS 
                                         MEDICO , CONCAT_WS(' ',OT.PRIMER_NOMBRE, OT.SEGUNDO_NOMBRE, OT.PRIMER_APELLIDO,OT.SEGUNDO_APELLIDO) AS PACIENTE, IC.CODIGO_ESTADO ,est.NOMBRE as nombre_estado, ar.NOMBRE as nombre_area, espe.NOMBRE as nombre_especialidad
                                         FROM tbl_inscripcion_cita IC ,tbl_persona P ,tbl_persona_especialidad E ,tbl_persona OT, tbl_area a, tbl_estado est, tbl_area ar, tbl_especialidad espe
                                         WHERE E.CODIGO_PERSONA = P.CODIGO_PERSONA 
@@ -175,7 +175,11 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                 $var6 = $row['nombre_estado'];
                                                 $var7 = $row['nombre_area'];
                                                 $var8 = $row['nombre_especialidad'];
-                                        ?>
+                                                $area= $row['CODIGO_AREA'];
+                                                $codigoestado=$row['CODIGO_ESTADO'];
+                                                $Cod_especialista = $row['CODIGO_ESPECIALISTA'];
+                                                $paciente = $row['CODIGO_PERSONA'];
+                                        ?>      
                                                 <tr>
                                                     <td>
                                                         <div class="text-center">
@@ -247,9 +251,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                 </div>
                                                                 <form method="POST"  class="needs-validation">
                                                                 <?php  
-                                                                    date_default_timezone_set("America/Guatemala"); /* Establece una zona horaria para la fecha actual  */
-                                                                    $Fechaactual=  date("$valor" ); /* Asigno la variable valor del parametro que contiene la fecha actual*/
-                                                                    $fechamaxima= date("$valor",strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
+                                                                    date_default_timezone_set("America/Guatemala");
+                                                                    $fechaactual = date('Y-m-d');  /* Asigno la variable valor del parametro que contiene la fecha actual*/
+                                                                    $fechamaxima= date('Y-m-d',strtotime($Fechaactual."+ 2 month"));/* para la fecha maxima le sumo dos meses a la fecha actual */
                                                                 ?>
 
                                                                 <!-------------CUERPO DEL MODAL  editar--------------> 
@@ -259,11 +263,14 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita">
+                                                                    <input type="text" value="<?php echo $paciente; ?>" 
+                                                                    hidden class="form-control"
+                                                                    name="paciente_editar" id="cod_edit_cita">
                                                                     <div class="col-sm-6">
                                                                     <div class="form-group">
                                                                         <label for="fecha" class="form-label">Fecha de la cita: </label>
                                                                         <input type="date"autocomplete = "off" value="<?php echo $var2;?>" 
-                                                                        min= "<?= date ($valor)?>"  max="<?= date($fechamaxima)?>" 
+                                                                        min= "<?= date ($fechaactual)?>"  
                                                                         class="form-control" 
                                                                         name="edit_fecha_cita"  id="edit_fecha_cita">
                                                                     </div>
@@ -300,7 +307,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         tbl_persona_especialidad tpe,
                                                                         tbl_especialidad  te 
                                                                         where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 ";
+                                                                        AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA <>1 AND TE.CODIGO_AREA=$area";
                                                                         $resultador2=$conn->query($queryr1);
                                                                         ?>  
 
@@ -313,7 +320,19 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                                             <?php 
                                                                                         if ($resultador->num_rows > 0) {
                                                                                             while($rowr = $resultador->fetch_assoc()) { ?>
-                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"><?php echo $rowr['Nombre_estado']; ?></option>
+                                                                                <option value="<?php echo $rowr['CODIGO_ESTADO'];?>"
+                                                                                <?php
+                                                                                if ($rowr['CODIGO_ESTADO']==$codigoestado) {
+                                                                                    ?>
+                                                                                    selected
+                                                                                    <?php
+                                                                                }
+                                                                                ?>
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                ><?php echo $rowr['Nombre_estado']; ?></option>
                                                                                         <?php } 
                                                                                             }?>
                                                                             </select>
@@ -327,7 +346,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                         <div class="form-group">
                                                                           <label for="txtcodigo_encargado">Encargado Cita:</label>
                                                                             <select class="form-control" name="encargadocitados" id ="encargadocitados" required >
-                                                                                <option  value="">--Seleccione...</option>
+                                                                            <option value="<?php echo $Cod_especialista?>"><?php echo $var5?></option>
                                                                                             <?php 
                                                                                         if ($resultador2->num_rows > 0) {
                                                                                             while($rowr1 = $resultador2->fetch_assoc()) { ?>

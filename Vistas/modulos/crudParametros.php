@@ -40,10 +40,7 @@ include_once "conexion3.php";
 ?>
       <!--llamada de la fuction bitacora -->
      <?php 
-      $codigoObjeto=3;
-      $accion='Ingreso a la pantalla de mantenimiento parámetros';
-      $descripcion= 'Aqui se visualiza los registros existentes de la tabla parámetros';
-      bitacora($codigoObjeto, $accion,$descripcion);
+     
       ?>
       
 <head>
@@ -60,7 +57,7 @@ include_once "conexion3.php";
   <section class="content">
     <div class="container-fluid">
     <div class="content-header text-xl-center mb-3 "> 
-          <h4> Mantenimiento Parámetros</h4>
+          <h4>Parámetros</h4>
     </div>
         <div class="card">
           <div class="card-header" style="background-color:#B3F2FF;">
@@ -320,7 +317,7 @@ include_once "conexion3.php";
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="txtparametro">Parámetro</label>
-                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onKeyDown="sinespacio(this);" onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
+                                    <input  type="text"  class="form-control"  maxlength="20" minlength="5"  onkeyup="mayus(this);" autocomplete = "off" type="text" onkeypress="return soloLetrascaracteres(event);" placeholder="Ingrese el parámetro" name="parametro" id="parametro" required>
                                     <div class="invalid-feedback">
                                      Llene este campo.
                                     </div>

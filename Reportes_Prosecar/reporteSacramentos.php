@@ -37,6 +37,7 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
+
 	// Posición: a 1,5 cm del final
 	$this->SetFont('helvetica', 'B', 9);
 	$this->SetY(-15);
@@ -46,6 +47,7 @@ class PDF extends FPDF {
 	$this->Cell(170,0,utf8_decode(''),0,0,'C');
 	$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
 	
+
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------

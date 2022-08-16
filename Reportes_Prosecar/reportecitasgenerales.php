@@ -47,8 +47,7 @@ class PDF extends FPDF {
 	
 	$this->SetX(27);
 	$this->Line(27,197,270,197);
-	
-	$this->Cell(0,5,utf8_decode(' Proyecto Prosecar © Todos los derechos reservados '),0,0,'C');
+
 	$this->SetX(10);
 	
 
@@ -104,8 +103,7 @@ class PDF extends FPDF {
 			$this->SetX($setX);
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
-			$this->SetFont('Helvetica', 'B', 15);
-			$this->SetFont('Helvetica', 'B', 15);
+			$this->SetFont('Helvetica', 'B', 12);
 			$this->Cell(25, 8,  utf8_decode('Código'), 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Fecha', 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);

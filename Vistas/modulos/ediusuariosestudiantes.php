@@ -66,7 +66,7 @@ include_once "conexion3.php";
   
   <section class="content">
      <div class="content-header text-xl-center mb-3">
-          <h4>Estudiantes Prosecar</h4>    
+          <h4>Datos Generales Estudiantes </h4>    
     </div>
    <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
@@ -381,8 +381,6 @@ include_once "conexion3.php";
                                             <option value="<?php echo $var13?>"><?php echo $var7;?></option>
                                             <option value="2">ACTIVO</option>
                                             <option value="3">INACTIVO</option>
-                                            <option value="1">NUEVO</option>
-                                            <option value="4">BLOQUEADO</option>
                                           </select> 
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 

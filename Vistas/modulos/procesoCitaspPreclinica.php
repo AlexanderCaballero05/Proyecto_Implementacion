@@ -22,6 +22,9 @@ include_once 'conexionpdo.php';
        <div class="card"> 
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasMedicasPendientes">Citas pendientes</a>
+            </li>
             <li class="nav-item">
             <a class=" nav-link active" style="color:#000000;" href="#">Personas Preclínica</a>
             </li>
@@ -35,7 +38,12 @@ include_once 'conexionpdo.php';
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-            
+                <div class="alert alert" style="border-color:blue">
+              <h3 class="text-center"> Paso <i class="bi bi-2-circle"></i><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-2-circle" viewBox="0 0 16 16">
+                <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+              </svg>
+              </h3>
+            </div>
                    
                     <!-- jquery validation -->
                     <div class="card card-primary">
@@ -102,12 +110,12 @@ include_once 'conexionpdo.php';
                                                             <div class="btn-group">
                                                               
 
-                                                                  
+                                                                <!--  
                                                                 <a href="#editar_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-warning"><span>
                                                                      <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                                                 </a>
-
+                                                                 -->
                                                               <a href="#ver_cita<?php echo $var1; ?>" data-toggle="modal">
                                                                     <button type='button' style="color:white;" class="form-control btn btn-success"><span></span>Atender</button>
                                                               </a>
@@ -193,7 +201,9 @@ include_once 'conexionpdo.php';
                                                             <div class="modal-content">
                                                                 <!-- Modal content  editar-->
                                                                 <div class="modal-header" style="background-color: #0CCDE3">
-                                                                    <h4 class="text-center">Ver Cita</h4>
+                                                                    <h4 class="text-center">Ver cita<i class="bi bi-1-circle"></i> <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-1-circle" viewBox="0 0 16 16">
+                                                                      <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM9.283 4.002V12H7.971V5.338h-.065L6.072 6.656V5.385l1.899-1.383h1.312Z"/>
+                                                                </svg></h4>
                                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <form method="POST">

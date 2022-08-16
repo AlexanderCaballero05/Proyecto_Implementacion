@@ -36,7 +36,7 @@
     Diana Garcia         		08-06-2022                 Cambio en el modal de editar con el titulo de la pagina
     Luz Montoya             16-06-2022                 Cambio en el encabezado de la tabla, el orden de la columna de permisos
     Luz Montoya             18-06-2022                 Cambio de los nombre de permisos a editar y consultar/ y que si la opción de consultar no está seleccionada las otras no se muestren
-
+    Luz Montoya             14-06-2022                 Cambio en la consulta de permisos para que verifique el estado
 
   ----------------------------------------------------------------------->
 
@@ -119,9 +119,8 @@
                           <th class="text-center">Permiso Objeto</th>
                           <th class="text-center">Permiso Consultar</th>
                           <th class="text-center">Permiso Insertar</th>
-                          <th class="text-center">Permiso Eliminar</th>
                           <th class="text-center">Permiso Editar</th>
-                         
+                          <th class="text-center">Permiso Eliminar</th>
                                                    
 
                         </tr>
@@ -230,9 +229,8 @@
                           <td class="text-center"><?php echo $var5; ?></td>
                           <td class="text-center"><?php echo $var9; ?></td>
                           <td class="text-center"><?php echo $var6; ?></td>
-                          <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>
-                          
+                          <td class="text-center"><?php echo $var7; ?></td>
                                                    <!--INICIO DEL MODAL ELIMINAR   -->
                          <div id="ELIMINAR_PERMISO<?php echo $var1 ?>"  name="ELIMINAR_PERMISO" id="ELIMINAR_PERMISO"class="modal fade" role="dialog">
                             <div class="modal-dialog">
@@ -264,7 +262,7 @@
                             <?php
                           include "conexion1.php";
                           $queryr = "SELECT o.CODIGO_OBJETO
-                                      FROM tbl_objetos o;";
+                                      FROM tbl_objetos o where CODIGO_ESTADO = 2;";
                           $resultador=$conn->query($queryr);
                           ?>  
 
@@ -302,7 +300,7 @@
                                        <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Consultar</label>
-                                            <select class="form-control" name="ediMostrar" id="editar_descripcion">
+                                            <select class="form-control" name="ediMostrar">
                                                  <option hidden value="<?php echo $var8?>"> <?php echo $var8 ?></option>
                                                  <option value="SI">SI</option>
                                                  <Option value="NO">NO</Option>
@@ -311,7 +309,7 @@
                                         
                                     
                                     
-                                            <!--Inicio combobox insertar -->
+                                      <!--Inicio combobox insertar -->
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Insertar</label>
@@ -323,17 +321,7 @@
                                         </div>
                                       </div>
 
-                                         <!--Inicio combobox eliminar -->
-                                        <div class="col-sm-12">
-                                        <div class="form-group">
-                                          <label for="txtcodigo_persona">Eliminar</label>
-                                            <select class="form-control" name="ediEliminar" id="editar_descripcion">
-                                                 <option hidden value="<?php echo $var7?>"> <?php echo $var7 ?></option>
-                                                 <option value="SI">SI</option>
-                                                 <Option value="NO">NO</Option>
-                                            </select>
-                                        </div>
-                                      </div>
+                                        
                                         <!--Inicio combobox Editar-->
                                       <div class="col-sm-12">
                                         <div class="form-group">
@@ -346,6 +334,18 @@
                                         </div>
                                       </div>
 
+                                       <!--Inicio combobox eliminar -->
+                                       <div class="col-sm-12">
+                                        <div class="form-group">
+                                          <label for="txtcodigo_persona">Eliminar</label>
+                                            <select class="form-control" name="ediEliminar" id="editar_descripcion">
+                                                 <option hidden value="<?php echo $var7?>"> <?php echo $var7 ?></option>
+                                                 <option value="SI">SI</option>
+                                                 <Option value="NO">NO</Option>
+                                            </select>
+                                        </div>
+                                      </div>
+                                    
                                     
 
                                        
@@ -400,9 +400,9 @@
             <?php
             include "conexion1.php";
             $queryr = "SELECT o.CODIGO_OBJETO , o.NOMBRE AS Nom_modulo
-                        FROM tbl_objetos o
-                        WHERE o.CODIGO_OBJETO <> 54
-                        ORDER BY o.nombre ASC;";
+            FROM tbl_objetos o
+            WHERE o.CODIGO_OBJETO <> 54 and  CODIGO_ESTADO = 2
+            ORDER BY o.nombre ASC  ;";
             $resultador=$conn->query($queryr);
             ?>  
 
@@ -418,14 +418,25 @@
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX TIPO DE ROL-->
                                 <div class="form-group">
+                                  <!-- consulta para traer los roles con estado activo -->
+                                <?php 
+                                  $query = "SELECT CODIGO_TIPO_ROL, NOMBRE 
+                                  FROM TBL_ROLES
+                                  WHERE EST_ROL = 2;";
+                                  $resultadod=$conn->query($query);                
+                                ?>
                                     <label for="txtcodigo_persona">Rol:</label>
                                     <select class="form-control" name="PERUSUARIO" required="">
                                         <option selected disabled value="">--Seleccionar un rol--</option>
                                         <?php 
                                         if ($resultadod->num_rows > 0) {
-                                          $contador = 0;
-                                        while($rowt = $resultadod->fetch_assoc()) { ?>
-                                        <option value="<?php echo $rowt['CODIGO_TIPO_ROL'];?>"><?php $contador = $contador +1; echo $contador.'- Rol: '.$rowt['NOMBRE']; ?></option>
+                                          $contador = 0; 
+                                        while($rowt = $resultadod->fetch_assoc()) {
+                                          
+                                          $codigo_rol1= $rowt['CODIGO_TIPO_ROL'];
+                                          $nombre_rol = $rowt['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo$codigo_rol1?>"><?php $contador = $contador +1; echo $contador.'- Rol: '.$nombre_rol?></option>
                                       <?php } 
                                               }?>
                                     </select>
@@ -435,7 +446,7 @@
                                 </div>
                             </div> <!--FIN DEL COMOBOX TIPO DE ROL-->
 
-                                 <!--INICIO COMOBOX OBJETO-->
+                                  <!--INICIO COMOBOX OBJETO-->
                                 
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -471,7 +482,7 @@
                             </div><!--FINAL COMOBOX Consultar-->
 
                         </div> <!-- FIN DE LA PRIMERA ROW -->     
-                          <div style ="display:none;" id="Grupopermisos">
+                      <div style ="display:none;" id="Grupopermisos">
                           <div class="row"><!-- INICIO SEGUNDA ROW -->                          
                             <div class="col-sm-12">
                                  <!--INICIO COMOBOX INSERTAR-->
@@ -484,21 +495,7 @@
                                     </select>
                                 </div>
                             </div> <!--FIN DEL COMOBOX INSERTAR-->
-
-                                 <!--INICIO COMBOBOX ELMIMIAR-->
-                                
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label for="txtcodigo_persona">Eliminar:</label>
-                                    <select class="form-control"name="ELIMINAR" required="">
-                                    <option selected disabled value="">--Seleccionar--</option>
-
-                                        <option value="SI">SI</option>
-                                        <option value="NO">NO</option>
-                                    </select>
-                                </div>
-                            </div> <!--FINAL COMOBOX ELIMINAR-->
-
+                              
                             <!--INICIO COMBOBOX EDITAR -->
                             <div class="col-sm-12">
                                 <div class="form-group">
@@ -510,6 +507,19 @@
                                     </select>
                                 </div>
                             </div> <!--FINAL COMOBOX MODIFICAR-->
+                               <!--INICIO COMBOBOX ELMIMIAR-->
+                                
+                               <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="txtcodigo_persona">Eliminar:</label>
+                                    <select class="form-control"name="ELIMINAR" required="">
+                                    <option selected disabled value="">--Seleccionar--</option>
+
+                                        <option value="SI">SI</option>
+                                        <option value="NO">NO</option>
+                                    </select>
+                                </div>
+                            </div> <!--FINAL COMOBOX ELIMINAR-->
                           </div><!--FINAL SEGUNDA ROW--> 
                           </div>   <!-- Final del div grupopermisos que oculta los otros pemisos -->
                           
@@ -596,6 +606,8 @@ $( function() {
 $("#consultar1").change( function() {
   if($(this).val() === "SI" ){
     document.getElementById('Grupopermisos').style.display = "block";
+  }else {
+    document.getElementById('Grupopermisos').style.display = "none";
   }
 });
 }); 

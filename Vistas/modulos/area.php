@@ -26,6 +26,7 @@
 -----------------------------------------------------------------------
     Programador           Fecha                      Descripcion
 Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+ANY HERNANDEZ       		11-08-2022                 AGREGAR ESTADOS Y SU MODIFICACIÓN Y AGREGAR 
 ----------------------------------------------------------------------->
 
 <?php
@@ -87,22 +88,27 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                       <thead>
                         <tr>
                         <th class="text-center">Acción</th>
-                        <th class="text-center">ID</th>
+                        <th class="text-center">Código</th>
                         <th class="text-center">Nombre Área</th>
                         <th class="text-center">Descripción</th>
+                        <th class="text-center">Estado</th>
+
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_AREA, NOMBRE, DESCRIPCION
-                        FROM tbl_area  WHERE CODIGO_AREA 
-                        ORDER BY CODIGO_AREA";
+                        $query = " SELECT a.CODIGO_AREA, a.NOMBRE, a.DESCRIPCION,te.NOMBRE AS ESTADO ,te.CODIGO_ESTADO 
+                        FROM tbl_area a
+                        left join tbl_estado te  on te.CODIGO_ESTADO = a.CODIGO_ESTADO 
+                        WHERE CODIGO_AREA  ORDER BY CODIGO_AREA desc; ";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_AREA'];
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['DESCRIPCION'];
+                            $var4 = $row['ESTADO'];
+                            $var5 = $row['CODIGO_ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -163,11 +169,24 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                               </div>
                             </div><!-- final del text-center -->
                           </td>
+                          <?php
+                            if($var4 == 'ACTIVO'){
+                          ?>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
-                      
-                         
+                          <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var4; ?></td>
+                          <?php
+                             }else{ //si no e; texto de los datos de la tabla no cambian
+                          ?>
+                          <td class="text-center"><?php echo $var1; ?></td>
+                          <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td>
+                          <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var4; ?></td>
+                          
+                          <?php
+                            }
+                          ?>
                         <!--INICIO DEL MODAL DE EDITAR AREA -->
                           <div id="EDITARAREA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -192,9 +211,19 @@ Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con
                                           <input  type="text"  value ="<?php echo $var3; ?>" onkeypress="return soloLetrasComa(event);" class="form-control"  maxlength="150"  required   autocomplete = "off" type="text" onkeypress="return soloLetras(event);" onkeyup="mayus(this);"  name="editar_descripcion" id="editar_descripcion">
                                         </div>
                                       </div>
+                                      <!--INICIO DE ESTADO-->
+                                      <div class="col-sm-12">
+                                        <label for="cbx_persona" class="control-label">Estado</label>  
+                                        <div class="form-group">
+                                          <select class="form-control select2 select2-primary" required  style="width: 100%;" name="ESTADOUSUARIO" id="ESTADOUSUARIO" required="">
+                                            <option value="<?php echo $var5?>"><?php echo $var4;?></option>
+                                            <option value="2">ACTIVO</option>
+                                            <option value="3">INACTIVO</option>
+                                          </select> 
+                                        </div>  
+                                      </div> <!--FIN DE ESTADO-->
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY --> 
-
                                   <div class="modal-footer ">
                                     <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
                                     <button type="submit" id="editar_area" name="editar_area" class="btn btn-success"><span> <i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>      
