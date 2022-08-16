@@ -340,7 +340,7 @@ include_once 'conexionpdo.php';
         </div><!-- FINAL CONTAINER FLUID --> 
     </body>
 
-<script>// Codigo para descargar los reportes en pdf :3 ,el otro codigo de abajo no lo hice asi que no toquen :)
+<script>// Codigo para descargar los reportes en pdf 
     function Descargar1() {
       window.open('Vistas/reporte_medico.php','_blank');
       window.open(this.href,'_self');

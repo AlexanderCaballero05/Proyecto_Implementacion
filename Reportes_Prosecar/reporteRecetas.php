@@ -7,7 +7,7 @@ date_default_timezone_set("America/Guatemala");
 include('conexion.php');
 include('conexion2.php'); 
   
-?>
+?>reporte_medico.php
 <!doctype html>
 <html lang="en">
   <head>

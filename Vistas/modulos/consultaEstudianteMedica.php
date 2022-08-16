@@ -509,6 +509,7 @@
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
+                                $receta = $row['CODIGO_RECETA_MEDICA'];
                                 $var2 = $row['NOMBRE_MEDICAMENTO'];
                                 $var3 = $row['INDICACIONES_RECETA'];
                                 $var4 = $row['OBSERVACIONES'];
@@ -516,7 +517,7 @@
                                     ?>
                                 <tr>
                                     <td class="text-LEFT">
-                                        <a href="#editar_medicamento<?php echo $var1; ?>" data-toggle="modal">
+                                        <a href="#editar_medicamento<?php echo $receta; ?>" data-toggle="modal">
                                             <button type='button' style="color:white;" class="btn btn-warning"><span>
                                             <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                         </a>
@@ -529,7 +530,40 @@
                             }
                         }
                         ?>
-                    </tbody>
+                               <tr>
+
+                    <!--Registro de los examenes-->
+                        <?php
+                        $query = "SELECT exap.CODIGO_EXAMEN_PACIENTE, exa.EXAMEN_MEDICO, exap.OBSERVACIONES , exap.INDICACIONES
+                        FROM tbl_examenes_pacientes exap, tbl_examenes_medicos exa
+                        WHERE exap.CODIGO_CONSULTA = '$codigo_consulta'
+                        AND exap.CODIGO_EXAMEN_MEDICO = exa.CODIGO_EXAMEN_MEDICO;";
+                        $result = $conn->query($query);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $codigo_examen = $row['CODIGO_EXAMEN_PACIENTE'];
+                                $nombre = $row['EXAMEN_MEDICO'];
+                                $indicacion = $row['INDICACIONES'];
+                                $observacion = $row['OBSERVACIONES'];
+                                
+                                    ?>
+                                <tr>
+                                    <td class="text-LEFT">
+                                        <a href="#editar_examen<?php echo $codigo_examen; ?>" data-toggle="modal">
+                                            <button type='button' style="color:white;" class="btn btn-warning"><span>
+                                            <i class="nav-icon fas fa-edit mx-1"></i></span></button>
+                                        </a>
+                                    </td>
+                                    <td class="text-LEFT"><?php echo $nombre; ?></td>
+                                    <td class="text-LEFT"><?php echo $nombre; ?></td>
+                                    <td class="text-LEFT"><?php echo $indicacion; ?></td>
+                                    <td class="text-LEFT"><?php echo $observacion; ?></td>                
+                        <?php
+                            }
+                        }
+                        ?>
+                                <tr>
+                        </tbody>
                 </table>
             </div>
             <div class="modal-footer">
@@ -538,8 +572,9 @@
         </div>
     </div>
 </div>
-<!--INICIO DEL MODAL DE EDITAR -->
-<div id="editar_medicamento<?php echo $var1; ?>" class="modal fade" role="dialog">
+
+<!--INICIO DEL MODAL DE EDITAR MEDICAMENTOS -->
+<div id="editar_medicamento<?php echo $receta; ?>" class="modal fade" role="dialog">
                                 <div class="modal-dialog modal-Mg">
                                     <div class="modal-content">
                                         <!-- Modal content-->
@@ -552,7 +587,7 @@
                                                 <!--CUERPO DEL MODAL -->
                                                 <div class="row">
                                                     <!-- INICIO PRIMERA ROW -->
-                                                    <input type="text" value="<?php echo $var1; ?>" hidden class="form-control" 
+                                                    <input type="text" value="<?php echo $receta; ?>" hidden class="form-control" 
                                                          name="cod_edit_Medicamento" id="cod_edit_Medicamento" >
                                                          <div class="col-sm-6">
                                                         <div class="form-group">
@@ -601,6 +636,71 @@
                                     </div>
                                 </div>
                             </div><!-- FIN DEL MODAL EDITAR -->
+
+
+                            <div id="editar_examen<?php echo $codigo_examen; ?>" class="modal fade" role="dialog">
+                                <div class="modal-dialog modal-Mg">
+                                    <div class="modal-content">
+                                        <!-- Modal content-->
+                                        <div class="modal-header" style="background-color: #0CCDE3">
+                                           <h4 class="text-center">Editar Examen</h4>
+                                           <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
+                                        <form method="POST" >
+                                            <div class="modal-body">
+                                                <!--CUERPO DEL MODAL -->
+                                                <div class="row">
+                                                    <!-- INICIO PRIMERA ROW -->
+                                                    <input type="text" value="<?php echo $codigo_examen; ?>" hidden class="form-control" 
+                                                         name="cod_edit_Medicamento" id="cod_edit_Medicamento" >
+                                                         <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                            Examen</label>
+                                                            <input type="text" value="<?php echo $nombre; ?>" class="form-control" maxlength="10"  autocomplete="off" type="text" onkeyup="mayus(this);" onkeypress="return solonumero(event)" ; 
+                                                            name="nom_Medic" id="nom_Medic" disabled="">
+                                                            <div class="invalid-feedback">
+                                                                Campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>     
+                                                    
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                            Indicación</label>
+                                                            <input type="text" value="<?php echo $indicacion; ?>" class="form-control" pattern=".{5,100}"  maxlength="100"onkeyup="mayus(this);" onkeypress="return soloLetrasComa(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"  
+                                                            name="edit_indicacion_Medic" id="edit_indicacion_Medic"onblur="quitarespacios(this);" required>
+                                                            <div class="invalid-feedback">
+                                                                Campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                  <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for="txtcodigo_persona">
+                                                                Observaciones</label>
+                                                            <input type="text" value="<?php echo $observacion; ?>"class="form-control" pattern=".{5,100}" maxlength="100" onkeyup="mayus(this);" onkeypress="return soloLetrasComa(event);" onkeyup="this.value=this.value.replace(/^\s+/,'');"  autocomplete="off" type="text"
+                                                             name="edit_obs_Medic" id="edit_obs_Medic"onblur="quitarespacios(this);" required></textarea>
+                                                             <div class="invalid-feedback">
+                                                                campo obligatorio.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- FIN DE EL PRIMER ROW -->
+                                            </div>
+                                            <!--FINAL DEL CARD BODY -->
+                                            <div class="modal-footer ">
+                                                <button type="button" name="ELI" class="btn btn-danger" data-dismiss="modal"><span> <i class="nav-icon fas fa-window-close mx-1"></i></span>Cerrar</button>
+                                                <button type="submit"  name="guardarRecetas"  id="guardarRecetas" class="btn btn-success"><span><i class="nav-icon fas fa-save mx-1"></i></span>Guardar</button>
+                                            </div>
+                                            <!--FIN DEL DIV DE BOTONES DE GUARDAR -->
+                                        </form>
+                                    </div>
+                                </div>
+                            </div><!-- FIN DEL MODAL EDITAR -->
+
 
               </div> <!--card-body -->
           </div><!-- card-->
