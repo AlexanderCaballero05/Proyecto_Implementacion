@@ -32,6 +32,7 @@
   ANY HERNANDEZ             15/07/2022               ARREGLO DE ESTADO ACTIVO Y ENACTIVO
   ANY HERNANDEZ             18/07/2022               cambio del la consulta de personas o tutor
   Diana Rut                 23/07/2022               detalles de estetica
+  Luz María Montoya         16-08-2022                Ya funciona el primer botón del reporte individual
 ----------------------------------------------------------------------->
 
 <?php 

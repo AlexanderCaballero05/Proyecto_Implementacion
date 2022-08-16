@@ -106,7 +106,7 @@ include('conexion2.php');
        <p  style="font-size: 14px;"> Fecha: <?php  echo date("d/m/Y | g:i:a");?></p>
     </header>
    <footer>
-     <p style="text-align: center; "><b> UNIVERSIDAD AUTÓNOMA DE HONDURAS © Todos los derechos reservados <?php  echo date("Y");?> </b><b style="color:white;"> </b>
+     <p style="text-align: center; "><b>  </b><b style="color:white;"> </b>
       <label >Página<span  class="pagenum"></label></p>
    </footer>
    <main>

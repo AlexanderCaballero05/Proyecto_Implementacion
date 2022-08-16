@@ -29,6 +29,7 @@ Programador               Fecha                      Descripcion
 ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
 Diana Rut Garcia        03/07/2022                   Cambio en el titulo
 ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LOS DATOS 
+Luz María Montoya       16-08-2022                   Cambié la consulta para traer solo los encargados que tengan el usuario activo
 ----------------------------------------------------------------------->
 
 
@@ -191,8 +192,11 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
  
 <div style="display:none" id="tutores_academicos" class="col-md-6 mb-3"> <!--Fila para tutores academicos-->
  <?php 
- $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
- FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 2;";
+ $query = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE, pe.SEGUNDO_NOMBRE, pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as NOMBRE
+ FROM `tbl_persona` pe , `tbl_usuario` us
+ WHERE pe.CODIGO_TIPO_PERSONA = 2
+ AND pe.CODIGO_PERSONA = us.CODIGO_PERSONA
+ AND us.CODIGO_ESTADO = 2;";
  $resultadod=$conn->query($query);                
  ?>
  <div class="form-group">
@@ -220,8 +224,11 @@ ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LO
  
 <div style="display:none" id="tutores_espirituales" class="col-md-6 mb-3"> <!--Fila para tutores_espirituales-->
  <?php 
- $query = "SELECT CODIGO_PERSONA, CONCAT_WS(' ',DNI,PRIMER_NOMBRE, SEGUNDO_NOMBRE, PRIMER_APELLIDO,SEGUNDO_APELLIDO) as NOMBRE
- FROM `tbl_persona` WHERE CODIGO_TIPO_PERSONA = 8;";
+ $query = "SELECT pe.CODIGO_PERSONA, CONCAT_WS(' ',pe.DNI,pe.PRIMER_NOMBRE, pe.SEGUNDO_NOMBRE, pe.PRIMER_APELLIDO,pe.SEGUNDO_APELLIDO) as NOMBRE
+  FROM `tbl_persona` pe, `tbl_usuario` us
+  WHERE CODIGO_TIPO_PERSONA = 8
+  AND pe.CODIGO_PERSONA = us.CODIGO_PERSONA
+  AND us.CODIGO_ESTADO = 2;";
  $resultadod=$conn->query($query);                
  ?>
  <div class="form-group">
