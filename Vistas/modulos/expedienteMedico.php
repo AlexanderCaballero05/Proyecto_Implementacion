@@ -6,10 +6,6 @@ include_once 'conexionpdo.php';
 
  
  $codigoObjeto=2;
- $accion='Ingreso a la tabla de expediente medico';
- $descripcion= 'Usuario se autentifico ';
- bitacora($codigoObjeto, $accion,$descripcion);
- 
 ?>
 
 <body oncopy="return false" onpaste="return false"> 
