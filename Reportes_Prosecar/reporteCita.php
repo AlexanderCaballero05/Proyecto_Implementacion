@@ -105,13 +105,14 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
 			$this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(25, 8, utf8_decode('Código'), 1, 0, 'C', 0);
+			$this->Cell(10, 8, utf8_decode('N°'), 1, 0, 'C', 0);
 			$this->Cell(25, 8, 'Fecha', 1, 0, 'C', 0);
-			$this->Cell(25, 8, 'Hora', 1, 0, 'C', 0);
+			$this->Cell(20, 8, 'Hora', 1, 0, 'C', 0);
 			$this->Cell(60, 8, 'Paciente', 1, 0, 'C', 0);
-			$this->Cell(50, 8, 'Especialista', 1, 0, 'C', 0);
-			$this->Cell(30, 8, 'Estado', 1, 0, 'C', 0);
-			$this->Cell(30, 8, utf8_decode('Área'), 1, 1, 'C', 0);
+			$this->Cell(60, 8, 'Especialista', 1, 0, 'C', 0);
+			$this->Cell(30, 8, utf8_decode('Área'), 1, 0, 'C', 0);
+			$this->Cell(35, 8, 'Especialidad', 1, 0, 'C', 0);
+			$this->Cell(30, 8, 'Estado', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 10);
 			
 		
@@ -219,16 +220,17 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(20);
+$pdf->SetX(15);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(25, 12, utf8_decode('Código'), 1, 0, 'C', 1);
+$pdf->Cell(10, 12, utf8_decode('N°'), 1, 0, 'C', 1);
 $pdf->Cell(25, 12, 'Fecha', 1, 0, 'C', 1);
-$pdf->Cell(25, 12, 'Hora', 1, 0, 'C', 1);
+$pdf->Cell(20, 12, 'Hora', 1, 0, 'C', 1);
 $pdf->Cell(60, 12, 'Paciente', 1, 0, 'C', 1);
-$pdf->Cell(50, 12, 'Especialista', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, 'Estado', 1, 0, 'C', 1);
-$pdf->Cell(30, 12, utf8_decode('Área'), 1, 1, 'C', 1);
+$pdf->Cell(60, 12, 'Especialista', 1, 0, 'C', 1);
+$pdf->Cell(30, 12, utf8_decode('Área'), 1, 0, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Especialidad'), 1, 0, 'C', 1);
+$pdf->Cell(30, 12, 'Estado', 1, 1, 'C', 1);
 
 
 
@@ -241,11 +243,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 10);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(25, 25, 25, 60,50,30,30)); //???
+$pdf->SetWidths(array(10, 25, 20, 60,60,30,35,30)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, $data[$i]['FECHA_CITA'], $data[$i]['HORARIO'],ucwords(strtolower(utf8_decode($data[$i]['PACIENTE']))), ucwords(strtolower(utf8_decode($data[$i]['MEDICO']))),ucwords(strtolower(utf8_decode($data[$i]['nombre_estado']))),ucwords(strtolower(utf8_decode($data[$i]['nombre_area']))),   ),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, $data[$i]['FECHA_CITA'], $data[$i]['HORARIO'],ucwords(strtolower(utf8_decode($data[$i]['PACIENTE']))), ucwords(strtolower(utf8_decode($data[$i]['MEDICO']))),ucwords(strtolower(utf8_decode($data[$i]['nombre_area']))),  ucwords(strtolower(utf8_decode($data[$i]['nombre_especialidad']))),ucwords(strtolower(utf8_decode($data[$i]['nombre_estado']))), ),15); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
