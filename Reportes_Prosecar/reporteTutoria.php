@@ -180,7 +180,7 @@ class PDF extends FPDF {
   $conexion=$data->conect(); 
 	$strquery ="SELECT  t.NOMBRE as TUTORIA, t.CODIGO_AREA ,a.NOMBRE  AS AREA ,t.CODIGO_TUTORIA
     FROM tbl_tutoria t ,tbl_area a
-    where t.CODIGO_AREA = a.CODIGO_AREA ";
+    where t.CODIGO_AREA = a.CODIGO_AREA  ";
     
     
 	
