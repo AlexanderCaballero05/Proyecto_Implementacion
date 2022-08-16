@@ -587,7 +587,7 @@ Diana Rut               27/05/2022            Se agrego con js required en false
                     <div class="row">
                       <div  id="sacramentos" class="col-md-12">
                           <?php 
-                          $query = "SELECT CODIGO_SACRAMENTO,NOMBRE from tbl_sacramento ";
+                          $query = "SELECT CODIGO_SACRAMENTO,CODIGO_ESTADO, NOMBRE from tbl_sacramento where CODIGO_ESTADO = 2";
                           $resultado=$conn->query($query);                
                           ?>
                           <?php 

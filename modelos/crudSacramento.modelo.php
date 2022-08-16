@@ -31,6 +31,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
        try{
           if(isset($_POST['agregar_sacramento'])){
                $nombre_sacramento = ($_POST['nombre_sacramento']);
+               $estado_sacramento = ($_POST['estadosacramento']);
                $descripcion = ($_POST['descripcion_sacramento']);  
               try{ 
                   $consulta_sacramento = $db->prepare("SELECT COUNT(*) FROM tbl_sacramento WHERE NOMBRE = (?);");
@@ -44,7 +45,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                   exit;
                   }else{
                     try{
-                      $nombre_sacramento = " INSERT INTO tbl_sacramento( NOMBRE, DESCRIPCION) VALUES ('$nombre_sacramento','$descripcion'); ";
+                      $nombre_sacramento = " INSERT INTO tbl_sacramento( CODIGO_ESTADO, NOMBRE, DESCRIPCION) VALUES ('$estado_sacramento','$nombre_sacramento','$descripcion'); ";
                       $resul=$conn->query($nombre_sacramento);
                       if($resul >0){
                         echo "<script> 
@@ -85,6 +86,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
     if(isset($_POST['editar_sacramento'])){
       $codigo_sacramento = ($_POST['id_sacramento']);
       $editar_nombre = ($_POST['editar_nombre']);
+      $editar_estadosa = ($_POST['editar_estadosacra']);
       $editar_descripcion = ($_POST['editar_descripcion']);
       try{
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_sacramento where NOMBRE = (?) and CODIGO_SACRAMENTO <> (?) ;");
@@ -98,7 +100,7 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
           exit;
         }else{
           try{
-            $sql = " UPDATE tbl_sacramento SET NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion'
+            $sql = " UPDATE tbl_sacramento SET CODIGO_ESTADO = ' $editar_estadosa', NOMBRE = '$editar_nombre' ,DESCRIPCION = '$editar_descripcion'
             WHERE CODIGO_SACRAMENTO = '$codigo_sacramento' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
@@ -134,7 +136,7 @@ if(isset($_POST['sacramento_eliminar'])){
   if(isset($_POST['ELIMINAR_SACRAMENTO'])){
     $code = ($_POST['sacramento_eliminar']);//asigna a una variable el id del estado a eliminar
     try{
-      $relacion_tablas =  $db->prepare("SELECT s.CODIGO_SACRAMENTO from  tbl_sacramento s ,tbl_sacramento_persona r
+      $relacion_tablas =  $db->prepare("SELECT s.CODIGO_SACRAMENTO from  tbl_sacramento s ,tbl_sacramento_estudiante r
       where r.CODIGO_SACRAMENTO  = s.CODIGO_SACRAMENTO  and r.CODIGO_SACRAMENTO  = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
