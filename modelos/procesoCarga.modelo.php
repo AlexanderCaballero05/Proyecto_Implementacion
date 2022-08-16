@@ -71,16 +71,30 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                                     `HORA`,`FECHA_INICIO`, `FECHA_FINAL`, `CREADO_POR_USUARIO`, `FECHA_CREACION`,`HORA_FINAL`,`ANIO`,`PERIODO`,`CODIGO_ESTADO`) 
                                     VALUES ('$tutoria_academica','$tutor_academico','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo','2'); ";
                                     $resul=$conn->query($insert);
+
+                                    $sentencia1 = $db->prepare("SELECT MAX(CODIGO_CARGA) FROM tbl_carga_academica");
+                                    // llamar al procedimiento almacenado
+                                    $sentencia1->execute();
+                                    $ID=$sentencia1->fetchColumn();
+
+                                    $sentencia2 = $db->prepare("SELECT NOMBRE FROM tbl_tutoria where CODIGO_TUTORIA = $tutoria_academica ");
+                                    // llamar al procedimiento almacenado
+                                    $sentencia2->execute();
+                                    $TUTORIA=$sentencia2->fetchColumn();
         
                                         echo "<script> 
                                         window.location = 'crudCargaAcademica';
                                         </script>";
-                                        exit;
+                                        
                                         include_once 'function_bitacora.php';
                                         $codigoObjeto=20;
-                                        $accion='Registro';
-                                        $descripcion= 'Se asigno una carga academica ';
-                                        bitacora($codigoObjeto, $accion,$descripcion);
+                                        $accion='INSERCIÓN';
+                                        $CAMPO="CARGA";
+                                        $VAL_ACTUAL = $TUTORIA;
+                                        $ID_REGISTRO = $ID;
+                                        $VAL_ANTERIOR = "";
+                                        bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                                        exit;
 
                                    }else{
                                     echo "<script> 
@@ -88,10 +102,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                                     </script>";
                                     exit;
                                     include_once 'function_bitacora.php';
-                                    $codigoObjeto=20;
-                                    $accion='Registro';
-                                    $descripcion= 'error intente de nuevo';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                 
                                    }
                                    
                                }catch(PDOException $e){
@@ -177,28 +188,37 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
                                     VALUES ('$tutoria_espritual','$tutor_espiritual','$modalidad','$seccion','$hora','$fech_inicio','$fecha_final', '$user','$fecha','$hora_final','$anio','$periodo','2'); ";
                                     $resul2=$conn->query($insert2);
         
+                                    $sentencia1 = $db->prepare("SELECT MAX(CODIGO_CARGA) FROM tbl_carga_academica");
+                                    // llamar al procedimiento almacenado
+                                    $sentencia1->execute();
+                                    $ID=$sentencia1->fetchColumn();
+
+                                    $sentencia2 = $db->prepare("SELECT NOMBRE FROM tbl_tutoria where CODIGO_TUTORIA = $tutoria_espritual ");
+                                    // llamar al procedimiento almacenado
+                                    $sentencia2->execute();
+                                    $TUTORIA=$sentencia2->fetchColumn();
+
 
                                         echo "<script> 
-                                        window.location = 'crudCargaAcademica';
+                                        window.location = 'crudCargaEspiritual';
                                         </script>";
-                                        exit;
+                                        
                                         include_once 'function_bitacora.php';
                                         $codigoObjeto=20;
-                                        $accion='Registro';
-                                        $descripcion= 'Se asigno una carga academica ';
-                                        bitacora($codigoObjeto, $accion,$descripcion);
-
-
+                                        $accion='INSERCIÓN';
+                                        $CAMPO="CARGA";
+                                        $VAL_ACTUAL = $TUTORIA;
+                                        $ID_REGISTRO = $ID;
+                                        $VAL_ANTERIOR = "";
+                                        bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                                        exit;
                                    }else{
                                     echo "<script> 
                                     window.location = 'crudCargaAcademica';
                                     </script>";
                                     exit;
                                     include_once 'function_bitacora.php';
-                                    $codigoObjeto=20;
-                                    $accion='Registro';
-                                    $descripcion= 'error intente de nuevo';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                   
 
                                    }
                                    
@@ -346,11 +366,7 @@ if(isset($_POST['eliminar_carga'])){
                         echo "<script>
                         window.location = 'crudCargaAcademica';
                         </script>";
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=20;
-                        $accion='Eliminación';
-                        $descripcion= 'Se elimino una carga academica ';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                        
                         exit;
                     }else{
                         echo "<script>

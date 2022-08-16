@@ -152,7 +152,7 @@ include_once "conexion3.php";
                           left join tbl_estudiante est on est.CODIGO_PERSONA = p.CODIGO_PERSONA
                           where
                           u.CODIGO_USUARIO > 1
-                          And r.CODIGO_TIPO_ROL = 8 ORDER BY p.CODIGO_PERSONA ASC;";
+                          And r.CODIGO_TIPO_ROL = 8 ORDER BY p.CODIGO_PERSONA desc;";
                           $result = $conn->query($query);
                           if ($result->num_rows > 0) {
                             while($row = $result->fetch_assoc()) {

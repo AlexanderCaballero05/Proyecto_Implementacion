@@ -307,7 +307,7 @@ include_once "conexion3.php";
                                         </div>  
                                       </div> <!--FIN DE ESTADO--> 
                                         <?php
-                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO' and NOMBRE <>'SUPER USUARIO' 
+                                           $query = "SELECT CODIGO_TIPO_ROL,NOMBRE FROM tbl_roles WHERE NOMBRE <>'Indefinido' and NOMBRE <>'INDEFINIDO'  
                                            AND EST_ROL <> '3' ;";
                                            $resultadod=$conn->query($query);                
                                          ?> 
