@@ -101,7 +101,7 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
                       </thead>
                       <tbody>
                         <?php
-                        $query = "select s.CODIGO_SECCION, s.CODIGO_ESTADO, s.NOMBRE, s.DESCRIPCION, e.NOMBRE as Nombreestado from tbl_seccion s, tbl_estado e
+                        $query = "SELECT s.CODIGO_SECCION, s.CODIGO_ESTADO, s.NOMBRE, s.DESCRIPCION, e.NOMBRE as Nombreestado from tbl_seccion s, tbl_estado e
                         where e.CODIGO_ESTADO = s.CODIGO_ESTADO
                         ORDER BY  CODIGO_SECCION ASC ;";
                         $result = $conn->query($query);

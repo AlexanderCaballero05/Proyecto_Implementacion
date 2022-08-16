@@ -38,15 +38,17 @@ class PDF extends FPDF {
 // Pie de página
 
 	function Footer() {
-		$this->SetFont('helvetica', 'B', 9);
-		$this->SetY(-15);
-		$this->SetX(20);
-		$this->Cell(120,5,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
-		
-		$this->SetX(20);
-		$this->Line(10,287,200,287);
 
-		$this->SetX(10);
+	// Posición: a 1,5 cm del final
+	$this->SetFont('helvetica', 'B', 9);
+	$this->SetY(-15);
+	$this->Cell(40,0,date('d/m/Y | g:i:a') ,00,1,'R');
+  
+	//$this->Line(10,287,200,287);
+	$this->Cell(170,0,utf8_decode(''),0,0,'C');
+	$this->Cell(0,0,utf8_decode('Página ').$this->PageNo().'/{nb}',0,0,'L');
+	
+
 	}
 
 // --------------------METODO PARA ADAPTAR LAS CELDAS------------------------------
@@ -102,7 +104,8 @@ class PDF extends FPDF {
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->SetFont('Helvetica', 'B', 15);
 			$this->Cell(14, 8, utf8_decode('N'), 1, 0, 'C', 0);
-			$this->Cell(135, 8, 'Pregunta', 1, 1, 'C', 0);
+			$this->Cell(35, 8, utf8_decode('Estado'), 1, 0, 'C', 0);
+			$this->Cell(115, 8, 'Pregunta', 1, 1, 'C', 0);
 			$this->SetFont('Arial', '', 12);
 			
 		
@@ -179,7 +182,8 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT CODIGO_PREGUNTAS, PREGUNTA from tbl_preguntas ;";
+	$strquery ="SELECT P.CODIGO_PREGUNTAS,P.CODIGO_ESTADO, e.NOMBRE as Nombre, P.PREGUNTA from tbl_preguntas P, tbl_estado E
+	WHERE  E.CODIGO_ESTADO = P.CODIGO_ESTADO ;";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
 	$data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -194,11 +198,12 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(33);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
 $pdf->Cell(15, 12, utf8_decode('N'), 1, 0, 'C', 1);
-$pdf->Cell(135, 12, 'Pregunta', 1, 1, 'C', 1);
+$pdf->Cell(35, 12, utf8_decode('Estado'), 1, 0, 'C', 1);
+$pdf->Cell(115, 12, 'Pregunta', 1, 1, 'C', 1);
 
 
 
@@ -210,10 +215,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(15,135)); //???
+$pdf->SetWidths(array(15,35,115)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['PREGUNTA']))) ,),33); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['Nombre']))), ucwords(strtolower(utf8_decode($data[$i]['PREGUNTA']))) ,),20); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

@@ -529,7 +529,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                     <div class="row">
                       <div  id="sacramentos" class="col-md-12">
                           <?php 
-                          $query = "SELECT CODIGO_SACRAMENTO,NOMBRE from tbl_sacramento ";
+                          $query = "SELECT CODIGO_SACRAMENTO,CODIGO_ESTADO, NOMBRE from tbl_sacramento where CODIGO_ESTADO = 2";
                           $resultado=$conn->query($query);                
                           ?>
                           <?php 
