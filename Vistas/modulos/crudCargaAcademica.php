@@ -265,6 +265,14 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                   <a href="#EDITACARGA<?php echo $var1; ?>" data-toggle="modal">
                                     <button type='button' id="btnGuardar"  style="color:white;"class=" form-control btn btn-warning"><span> <i class="nav-icon fas fa-edit mx-1"></i></span></button>
                                     </a>
+
+                                    <a><!--Para descargar el reporte individual  -->
+                                     <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividualEsp.php" target="_blank">
+                                     <input type="hidden" value="<?php echo $var1?>">
+                                     </form>
+                                 </a>
+                              <a>
+
                                  <a>
                                
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 

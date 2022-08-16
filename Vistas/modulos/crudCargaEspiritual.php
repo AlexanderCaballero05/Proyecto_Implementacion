@@ -256,6 +256,12 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     </a>
                                  <a>
                                
+                                 <a><!--Para descargar el reporte individual  -->
+                                     <form method="post"  action="Reportes_Prosecar/reporteMatriculaIndividualEsp.php" target="_blank">
+                                     <input type="hidden" value="<?php echo $var1?>">
+                                     </form>
+                                 </a>
+                              <a>
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
                                     <button type='submit' title='Imprimir'  style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
