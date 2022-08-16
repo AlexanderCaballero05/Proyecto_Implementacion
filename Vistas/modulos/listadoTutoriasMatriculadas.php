@@ -93,8 +93,8 @@ session_start();
                      </div>
 
                      </div><!--fin del div de busqueda -->
-                     <div class="col-md-1">
-                      <button type="submit"  name="MANDAR_TUTORIA" class=" form-control btn btn-info b"> Generar</button>
+                     <div class="col--mb-3">
+                      <button type="submit"  name="MANDAR_TUTORIA" class="form-control btn btn-info mb-6"> Generar</button>
                      </div>
                      
                   </form>

@@ -83,7 +83,7 @@
                              ?>
 
                           <button  data-toggle="modal"  href="#AGREGAR_ESPECIALIDAD" type='button' id="btnGuardar"  style="color:white;"class="btn btn-primary mb-3"><span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar</button>           
-                          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>  
+                          <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnreporte"  style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>  
                 
                             <?php
                               }
@@ -369,10 +369,10 @@
 
                                <div class="col-sm-12">
                                 <?php //--INICIO DEL ESTADO
-                                  $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area";
+                                  $query = "SELECT  CODIGO_AREA,NOMBRE FROM tbl_area where CODIGO_ESTADO = 2  ";
                                   $resultadod=$conn->query($query);                
                                 ?>
-                                <label  class="control-label">Area</label>  
+                                <label  class="control-label">Área</label>  
                                 <div class="form-group">
                                     <select class="form-control select2 select2-primary"   
                                       style="width: 100%;" name="codigo_area" id="codigo_area" 

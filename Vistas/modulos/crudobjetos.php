@@ -90,12 +90,12 @@ include_once "conexion3.php";
                      ?>
                      
                     <button type="button" class="btn btn-primary mb-3" style="color:white;" data-toggle="modal" data-target="#ADDOBJETO">
-                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar Objeto
+                     <span> <i class="nav-icon fa fa-plus-square mx-1"></i></span>Agregar 
                     </button>
                    
-                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"
+                       <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnreporte"
                          style="color:white; background-color:#FA0079"class="btn btn-danger mb-3"> 
-                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Generar Reporte</button>
+                         <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
                        <?php 
                       }
                      ?>
