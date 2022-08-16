@@ -50,10 +50,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
  include_once "conexion3.php";
  include "conexionpdo.php";
  include "conexionpdo.php";
- $codigoObjeto=2;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
- bitacora($codigoObjeto, $accion,$descripcion);
+
  
 ?>
 

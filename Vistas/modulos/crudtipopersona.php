@@ -1,10 +1,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=12;
- $accion='Ingreso a mantenimiento preguntas';
- $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
-bitacora($codigoObjeto,$accion,$descripcion);
+
 ?>
 <head>
 

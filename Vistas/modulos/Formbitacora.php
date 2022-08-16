@@ -162,13 +162,14 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
             
                <thead class="bg-info">
                 <tr>
-                <th></th>
-                <th>Número</th>
 			        	<th width="20%" class="text-center">Fecha</th>
 				        <th class="text-center">Usuario</th>
+                <th class="text-center">Acción</th>
 				        <th class="text-center">Objeto</th>
-				        <th class="text-center">Acción</th>
-                <th class="text-center">Descripción</th>
+                <th class="text-center">Campo</th>
+                <th class="text-center">Codigo Registro</th>
+                <th class="text-center">Valor Actual</th>
+                <th class="text-center">Valor Anterior</th>
                 </tr>
               </thead>
               <tbody>
@@ -182,11 +183,11 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                   $desde1= $_SESSION['bdesde'];
                   $hasta1= $_SESSION['bhasta'];
              //Este hace la union de dos tablas pero solo e spara reflejar el nombre del usuario que realiza la modificaion
-                    $queryi = "SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
-                    FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
-                    WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
-                    AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-                    AND bi.FECHA BETWEEN '$desde1' AND '$hasta1'
+                    $queryi = "SELECT bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.CAMPO,bi.VAL_ACTUAL,bi.VAL_ANTERIOR,bi.ID_REGISTRO
+                    FROM tbl_bitacora_sistema bi
+                    INNER JOIN tbl_usuario u on u.CODIGO_USUARIO = bi.CODIGO_USUARIO
+                    INNER JOIN tbl_objetos ob on ob.CODIGO_OBJETO = bi.CODIGO_OBJETO
+                    WHERE bi.FECHA BETWEEN '$desde1' AND '$hasta1'
                     ORDER BY bi.CODIGO_BITACORA DESC;";
                            //llamando los datos de la base y almacenadolos en variables 
                            
@@ -195,22 +196,24 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                       $contador = 0;
                         // output data of each row
                         while($row = $resulta->fetch_assoc()) {
-                          $contador = $contador + 1;
-                          $var1 = $row['CODIGO_BITACORA'];
                           $var2 = $row['FECHA'];
                           $var3 = $row['NOMBRE_USUARIO'];
                           $var4 = $row['NOMBRE_OBJETO'];
                           $var5 = $row['ACCION'];
-                          $var6 = $row['DESCRIPCION'];
+                          $var6 = $row['CAMPO'];
+                          $var7 = $row['VAL_ACTUAL'];
+                          $var8 = $row['VAL_ANTERIOR'];
+                          $var9 = $row['ID_REGISTRO'];
                     ?>
                 <tr>
-                     <td style="visibility:hidden;"></td>
-                 <td class="text-center"><?php echo $contador ?></td>
                  <td class="text-center"><?php echo $var2 ?></td>
                  <td class="text-center"><?php echo $var3 ?></td>
-				         <td class="text-center"><?php echo $var4 ?></td>
 				         <td class="text-center"><?php echo $var5 ?></td>
+				         <td class="text-center"><?php echo $var4 ?></td>
                  <td class="text-center"><?php echo $var6 ?></td>
+                 <td class="text-center"><?php echo $var9 ?></td>
+				         <td class="text-center"><?php echo $var7 ?></td>
+                 <td class="text-center"><?php echo $var8 ?></td>
                     </div>
                     <?php
                       }

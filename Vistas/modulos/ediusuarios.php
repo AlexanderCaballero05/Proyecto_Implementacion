@@ -113,6 +113,7 @@ include_once "conexion3.php";
                       <thead >
                         <tr>
                           <th class="text-center">Acción</th>
+                          <th class="text-center">ID</th>
                           <th class="text-center">Primer Nombre</th>
                           <th class="text-center">Primer Apellido</th>
                           <th class="text-center">Nombre Usuario</th>
@@ -150,6 +151,8 @@ include_once "conexion3.php";
                               $var16 = $row['CODIGO_USUARIO'];
                               $var17 = $row['FECHA_CREACION'];
                               $var18 = $row['FECHA_MODIFICACION'];
+                              $Codigo_usuario = $row['CODIGO_USUARIO'];
+
                         ?>
                           <?php
                             include "conexionpdo.php";
@@ -217,6 +220,7 @@ include_once "conexion3.php";
                           <?php
                             if($var7 == 'ACTIVO' OR $var7 =='NUEVO'){
                           ?>
+                          <td><?php echo $Codigo_usuario; ?></td>
                           <td><?php echo $var3; ?></td>
                           <td><?php echo $var4; ?></td>
                           <td><?php echo $var6; ?></td>
@@ -226,10 +230,11 @@ include_once "conexion3.php";
                           <td><?php echo $var17; ?></td>
                           <td><?php echo $var18; ?></td>
 
+
                           <?php
                              }else{ //si no e; texto de los datos de la tabla no cambian
                           ?>
-
+                          <td><?php echo $Codigo_usuario; ?></td>
                           <td><?php echo $var3; ?></td>
                           <td><?php echo $var4; ?></td>
                           <td><?php echo $var6; ?></td>
@@ -254,6 +259,9 @@ include_once "conexion3.php";
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
+                                      <input type="text" value ="<?php echo $Codigo_usuario; ?>" hidden class="form-control" name="codigo_usuario" id="CODUSUARIO">
+                                      <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ROLL" id="CODUSUARIO">
+
                                       <div class="col-sm-6">
                                         <div class="form-group">
                                           <label>Nombre Usuario</label>

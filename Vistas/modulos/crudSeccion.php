@@ -34,11 +34,6 @@ ANY HERNANDEZ           26/06/22                 NO QUITAR ESPACIOS Y COSAS DE D
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=46;
- $accion='INGRESO AL MANTENIMIENTO SECCIONES';
- $descripcion= 'USUARIO SE AUTENTIFICO';
- bitacora($codigoObjeto, $accion,$descripcion);
- 
 ?>
 <head>
 

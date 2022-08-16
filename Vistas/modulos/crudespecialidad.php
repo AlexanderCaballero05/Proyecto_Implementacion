@@ -35,10 +35,7 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=19;
- $accion='Ingreso a mantenimiento especialidad';
- $descripcion='mantenimiento especialidad';
-bitacora($codigoObjeto,$accion,$descripcion);
+ 
 ?>
 
 <head>

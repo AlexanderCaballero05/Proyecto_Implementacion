@@ -35,6 +35,7 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
+  include_once 'Conexionpdo.php';
   include_once 'function_bitacora.php';
 ?>
 <?php
@@ -121,11 +122,24 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                 '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                  if ($resultadomateria = mysqli_fetch_assoc($consulta)>0) {
+                                  // CODIGO PARA LA BITACORA
+                                 $sentencia1 = $db->prepare("SELECT MAX(CODIGO_USUARIO) FROM tbl_usuario");
+                                 // llamar al procedimiento almacenado
+                                 $sentencia1->execute();
+                                 $ID=$sentencia1->fetchColumn();
+                                 //
                                   echo "<script> 
                                    alert('Usuario registrado correctamente');
                                     location.href = 'crudpersonas';
                                     </script>";
-                                   
+                                    $codigoObjeto=25;
+                                    $accion='INSERCIÓN';
+                                    $CAMPO="USUARIO";
+                                    $VAL_ACTUAL= $usuario;
+                                    $ID_REGISTRO = $ID;
+                                    $VAL_ANTERIOR = "";
+                                    bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                                    //FIN DE CODIGO PARA LA BITACORA
                                     exit;
                                   }else{
                                     echo "<script> 
@@ -157,11 +171,25 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                 '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
-                                  echo "<script> 
-                                  alert('Usuario registrado correctamente');
+                               // CODIGO PARA LA BITACORA
+                               $sentencia1 = $db->prepare("SELECT MAX(CODIGO_USUARIO) FROM tbl_usuario");
+                               // llamar al procedimiento almacenado
+                               $sentencia1->execute();
+                               $ID=$sentencia1->fetchColumn();
+                               //
+                                echo "<script> 
+                                 alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  
+                                  $codigoObjeto=25;
+                                  $accion='INSERCIÓN';
+                                  $CAMPO="USUARIO";
+                                  $VAL_ACTUAL= $usuario;
+                                  $ID_REGISTRO = $ID;
+                                  $VAL_ANTERIOR = "";
+                                  bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                                  //FIN DE CODIGO PARA LA BITACORA
+                                  exit;
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -194,18 +222,35 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                 '$estado','$rol','$contrasena');" ;
                                  $consulta=$conn->query($insert);
                                 if($resultado = mysqli_fetch_assoc($consulta)>0 ){
+                                 // CODIGO PARA LA BITACORA
+                                 $sentencia1 = $db->prepare("SELECT MAX(CODIGO_USUARIO) FROM tbl_usuario");
+                                 // llamar al procedimiento almacenado
+                                 $sentencia1->execute();
+                                 $ID=$sentencia1->fetchColumn();
+                                 //
                                   echo "<script> 
-                                  alert('Usuario registrado correctamente');
-                                  location.href = 'crudpersonas';
-                                  </script>";
-                                  
-                                  exit;
+                                   alert('Usuario registrado correctamente');
+                                    location.href = 'crudpersonas';
+                                    </script>";
+                                    $codigoObjeto=25;
+                                    $accion='INSERCIÓN';
+                                    $CAMPO="USUARIO";
+                                    $VAL_ACTUAL= $usuario;
+                                    $ID_REGISTRO = $ID;
+                                    $VAL_ANTERIOR = "";
+                                    bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                                    //FIN DE CODIGO PARA LA BITACORA
+                                    exit;                   
+                            
                                 }else{
                                   echo "<script> 
                                   alert('No se puede registrar el enfermero');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                 
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN ENFERMERO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }
                               }
@@ -305,7 +350,10 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                           alert('Usuario registrado correctamente');
                           location.href = 'crudpersonas';
                            </script>";
-                          
+                           $codigoObjeto=13;
+                           $accion='INSERCIÓN';
+                           $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN ESTUDIANTE';
+                           bitacora($codigoObjeto, $accion,$descripcion);
                            exit;
                           }else{
                             echo "<script> 
@@ -344,7 +392,10 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                    
+                                    $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN MEDICO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -382,7 +433,10 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                   echo "<script>
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';</script>";
-                                  
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN PSICOLOGO';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -417,7 +471,10 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                  
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN CATEQUISTA';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -446,7 +503,11 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                                 alert('persona registrada correctamente');
                                 location.href = 'crudpersonas';
                                 </script>";
-                                  
+                                   $codigoObjeto=13;
+                                    $accion='INSERCIÓN';
+                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN FAMILIAR';
+                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                    exit;
                               }else{
                                 echo "<script> 
                                 alert('No se pudo registrar la persona,comunicarse con el admin');
@@ -486,11 +547,13 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
     $userregis = ($_SESSION['vario']);
     if (isset($_POST['ACT_PERSONA'])){
       $CODUSUARIO = ($_POST['CODUSUARIO']);
+      $CODIGO = ($_POST['codigo_usuario']);
       $USUARIO = ($_POST['NOMUSUARIO']); 
       $PASS = ($_POST['clave_nueva']);
       $CONFIRMA = ($_POST['confirmar_clave']);
       $ESTADO = ($_POST['ESTADOUSUARIO']);
       $ROLL = ($_POST['ROLUSUARIO']);
+      $NOMBRE_ROLL = ($_POST['ROLL']);
       $correo_mofi = ($_POST['correo_modi']);
       $nombre_modi = ($_POST['nombre_modi']);
       $apellido_modi = ($_POST['apellido_modi']);
@@ -552,6 +615,12 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
 
+                  $sentencia1 = $db->prepare("SELECT NOMBRE from tbl_Roles WHERE CODIGO_TIPO_ROL = $ROLL");
+                  // llamar al procedimiento almacenado
+                  $sentencia1->execute();
+                  $ID=$sentencia1->fetchColumn();
+                  //
+
                
 
                 $sql = "CALL Sp_modificar_usuarios('$CODUSUARIO','$nombre_modi','$apellido_modi','$correo_mofi','$USUARIO','$ESTADO','$userregis','$ROLL');" ;
@@ -567,15 +636,14 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> alert('Usuario modificado exitosamente');
                     window.location = 'ediusuarios'; </script>";
-                    include_once 'function_bitacora.php';
-                    $codigoObjeto=14;
-                    $codigo_registro = 2;
-                    $campo = 'hola';
-                    $actividad = 'SE ACTUALIZO LA INFORMACION DE UNA PERSONA';
-                    $valor_actual = 'hola';
-                    $valor_anterior = 'hola';
-                    bitacora($codigoObjeto, $codigo_registro,$campo,$actividad,$valor_actual,$valor_anterior);
-              
+                    $codigoObjeto=25;
+                    $accion='MODIFICACIÓN';
+                    $CAMPO = "TIPO_ROL";
+                    $VAL_ACTUAL= $ID;
+                    $ID_REGISTRO = $CODIGO;
+                    $VAL_ANTERIOR = $NOMBRE_ROLL;
+                    bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+                    
                     exit;
 
                   }else{ //Si las contraseñas son diferentes ,no permitira que se registre
@@ -589,7 +657,10 @@ Diana Rut Garcia        11-08-2022               Modificacion en registrar famil
                         $consulta=$conn->query($sql);
                         if (($consulta)>0) {
                           echo "<script> alert('Cambio exitosamente');window.location = 'ediusuarios';</script>";
-                       
+                          $codigoObjeto=14;
+                          $accion='MODIFICACIÓN';
+                          $descripcion= 'SE MODIFICO UNA CONTRASEÑA';
+                          bitacora($codigoObjeto, $accion,$descripcion);
                           exit;
                         }
                       }else{

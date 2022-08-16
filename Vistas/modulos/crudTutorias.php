@@ -34,11 +34,6 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
  include_once "conexion.php";
  include_once "conexion3.php";
  include "conexionpdo.php";
- 
- $codigoObjeto=22;
- $accion='INGRESO AL MANTENIMIENTO TUTORÍAS';
- $descripcion= 'USUARIO SE AUTENTIFICO';
- bitacora($codigoObjeto, $accion,$descripcion);
 ?>
 <head>
 </head>

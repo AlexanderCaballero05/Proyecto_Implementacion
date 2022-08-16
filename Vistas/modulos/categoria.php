@@ -686,6 +686,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                     <?php 
                       }
                      ?> 
+                     
                     </br> 
                   </div><!--Fin del card body del form -->
                </form> <!-- Final del form de registar persona -->

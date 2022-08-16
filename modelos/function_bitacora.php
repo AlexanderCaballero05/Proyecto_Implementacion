@@ -38,7 +38,7 @@
 
 
 <?php
-function bitacora($codigoObjeto, $accion,$descripcion){
+function bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO){
 include 'conexion.php';
 //se obtiene el codigo del usuario
 $usuario =$_SESSION['vario'];
@@ -54,8 +54,8 @@ $resultado = mysqli_query($conn,$consulta);
 $filas= mysqli_fetch_array($resultado);
 $codigoUsuario=$filas[0];
 
-$consultaBitacora=mysqli_query($conn,"INSERT INTO tbl_bitacora_sistema (CODIGO_USUARIO, CODIGO_OBJETO, FECHA, ACCION, DESCRIPCION)
-                        VALUES('$codigoUsuario','$codigoObjeto','$fechaActual','$accion','$descripcion')");
+$consultaBitacora=mysqli_query($conn,"INSERT INTO tbl_bitacora_sistema (CODIGO_USUARIO, CODIGO_OBJETO, FECHA, ACCION, VAL_ANTERIOR,VAL_ACTUAL,ID_REGISTRO,CAMPO)
+                        VALUES('$codigoUsuario','$codigoObjeto','$fechaActual','$accion','$VAL_ANTERIOR','$VAL_ACTUAL','$ID_REGISTRO','$CAMPO')");
 
 
 }
