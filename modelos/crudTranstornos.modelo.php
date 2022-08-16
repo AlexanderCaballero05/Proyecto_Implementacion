@@ -9,11 +9,11 @@
 <?php
 
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ESTADO
-if(isset($_POST['agregar_tipo'])){
+if(isset($_POST['agregar_tipoo'])){
   
   try{
-     if(isset($_POST['agregar_patologia'])){
-          $agregar_tipo = ($_POST['agregar_tipo']);
+     if(isset($_POST['agregar_patologiaa'])){
+          $agregar_tipo = ($_POST['agregar_tipoo']);
           $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']);
              
          try{ 
@@ -123,17 +123,12 @@ if(isset($_POST['transtorno_eliminar'])){
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_examenes_medicos WHERE  CODIGO_EXAMEN_MEDICO = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_transtornos_corporales WHERE CODIGO_TRANSTORNO='$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             alert('Se elimino correctamente'); 
             window.location = 'crudTranstornos';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un transtorno ';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>

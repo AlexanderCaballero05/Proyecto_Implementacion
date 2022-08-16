@@ -177,8 +177,8 @@ class PDF extends FPDF {
 
 $data=new Conexion();
 $conexion=$data->conect(); 
-  $strquery ="SELECT `CODIGO_TRANSTORNO`, `TIPO` FROM `tbl_transtornos_corporales`
-  ORDER BY  CODIGO_TRANSTORNO ASC ;";
+  $strquery ="SELECT TC.TIPO,E.NOMBRE AS ESTADO FROM tbl_transtornos_corporales TC, tbl_estado E
+  WHERE TC.CODIGO_ESTADO=E.CODIGO_ESTADO";
   $result = $conexion->prepare($strquery);
   $result->execute();
   $data = $result->fetchall(PDO::FETCH_ASSOC);
@@ -198,11 +198,12 @@ $pdf->SetMargins(10, 10, 10); //MARGENES
 $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(50);
+$pdf->SetX(60);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(20, 12, 'N', 1, 0, 'C', 1);
-$pdf->Cell(80, 12, 'Nombre del Transtorno', 1, 1, 'C', 1);
+$pdf->Cell(10, 12, utf8_decode('N'), 1, 0, 'C', 1);
+$pdf->Cell(25, 12, utf8_decode("ESTADO"), 1, 0, 'C', 1);
+$pdf->Cell(60, 12, 'TIPO', 1, 1, 'C', 1);
 
 
 
@@ -214,10 +215,10 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(20,80)); //???
+$pdf->SetWidths(array(10,25,60)); //???
 
 for ($i = 0; $i < count($data); $i++) {
-	$pdf->Row(array($i + 1 ,ucwords(strtolower(utf8_decode($data[$i]['TIPO']))) ),50 ); 
+	$pdf->Row(array($i + 1,ucwords(strtolower(utf8_decode($data[$i]['ESTADO']))),ucwords(strtolower(utf8_decode($data[$i]['TIPO']))) ,),60); 
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)

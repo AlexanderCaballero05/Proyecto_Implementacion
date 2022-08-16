@@ -8,10 +8,10 @@
 ?>
 <?php
 //FUNCIONES DEL CRUD ,AGREGAR,EDITAR Y ELIMINAR UN ROL
-if(isset($_POST['apariencia'])){
+if(isset($_POST['aparienciaa'])){
   try{
-     if(isset($_POST['nuevo'])){
-          $nombre_apariencia= ($_POST['apariencia']);
+     if(isset($_POST['nuevoo'])){
+          $nombre_apariencia= ($_POST['aparienciaa']);
           $fechaActual = date('Y-m-d');
           $usuario =$_SESSION['vario'];
           $estado_mantenimiento = ($_POST['ESTADOMANTENIMIENTO']);    
