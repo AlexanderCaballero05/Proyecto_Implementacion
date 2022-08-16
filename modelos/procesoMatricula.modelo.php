@@ -38,14 +38,26 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
       VALUES ('$CARGA','$ESTUDIANTE', '9','$fechaActual','$usuario','$fechaActual' ); ";
       $resul=$conn->query($matricula);
 
+      $sentencia1 = $db->prepare("SELECT MAX(CODIGO_MATRICULA) FROM tbl_matricula_Academica");
+      // llamar al procedimiento almacenado
+      $sentencia1->execute();
+      $ID=$sentencia1->fetchColumn();
+
+     
+
       if($resul >0){
         echo "<script> 
         window.location = 'crudMatricula';
         </script>";
-        $codigoObjeto=23;
-        $accion='INSERCIÓN';
-        $descripcion= 'SE MATRICULÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$ESTUDIANTE;
-        bitacora($codigoObjeto, $accion,$descripcion);
+                                        include_once 'function_bitacora.php';
+                                        $codigoObjeto=23;
+                                        $accion='INSERCIÓN';
+                                        $CAMPO="ESTUDIANTE";
+                                        $VAL_ACTUAL = $ESTUDIANTE;
+                                        $ID_REGISTRO = $ID;
+                                        $VAL_ANTERIOR = "";
+                                        bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+       
         exit;
       }else{
         echo "<script> 
@@ -89,15 +101,26 @@ if(isset($_POST['AGREGAR_MATRICULA'])){
      VALUES ('$CARGA','$ESTUDIANTE', '9','$fechaActual','$usuario','$fechaActual' ); ";
      $resul=$conn->query($matricula);
 
+     $sentencia1 = $db->prepare("SELECT MAX(CODIGO_MATRICULA) FROM tbl_matricula_Academica");
+      // llamar al procedimiento almacenado
+      $sentencia1->execute();
+      $ID=$sentencia1->fetchColumn();
+
      if($resul >0){
        echo "<script>  
        alert('Tutoría Matriculada Exitosamente');
        window.location = 'crudMatriculaEspiritual';
        </script>";
+      
+       include_once 'function_bitacora.php';
        $codigoObjeto=23;
        $accion='INSERCIÓN';
-       $descripcion= 'SE MATRICULÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$ESTUDIANTE;
-       bitacora($codigoObjeto, $accion,$descripcion);
+       $CAMPO="ESTUDIANTE";
+       $VAL_ACTUAL = $ESTUDIANTE;
+       $ID_REGISTRO = $ID;
+       $VAL_ANTERIOR = "";
+       bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+
        exit;
      }else{
        echo "<script> 
@@ -128,10 +151,7 @@ if(isset($_POST['ma_eliminar'])){
             
             window.location = 'crudMatricula';
             </script>";
-            $codigoObjeto=23;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$estudiante;
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

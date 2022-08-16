@@ -145,12 +145,13 @@
            AND es.CODIGO_ESTUDIANTE = ma.CODIGO_ESTUDIANTE
            AND p.CODIGO_PERSONA = es.CODIGO_PERSONA
            AND est.CODIGO_ESTADO = ma.OBSERVACION
-           AND tu.CODIGO_AREA = 4;";
+           AND tu.CODIGO_AREA = 4
+           order by ma.CODIGO_MATRICULA desc;";
               $result = $conn->query($query);
               if ($result->num_rows > 0) {
                 $contador = 0;
                 while($row = $result->fetch_assoc()) {
-                  $contador =  $contador +1;
+                
                   $var1 = $row['CODIGO_MATRICULA'];
                   $var2 = $row['ESTUDIANTE'];
                   $var3 = $row['NOMBRE_TUTOR'];
@@ -212,7 +213,7 @@
                               </div>
                             </div><!-- final del text-center -->
                           </td>
-                          <td class="text-center"><?php echo $contador; ?></td>
+                          <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var4; ?></td>
                           <td class="text-center"><?php echo $var7; ?></td>
                           <td class="text-center"><?php echo $var8; ?></td>

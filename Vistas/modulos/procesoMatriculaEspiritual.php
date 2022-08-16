@@ -36,10 +36,7 @@
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=23;
- $accion='INGRESO A MATRÍCULA';
- $descripcion= 'AGREGA UNA MATRÍCULA ESPIRITUAL';
- bitacora($codigoObjeto, $accion,$descripcion);
+ 
 ?>
 <?php
   if (isset($_POST['estu_codigo1'])) {
