@@ -18,7 +18,6 @@
         $correo = $_POST['correo'];
         $telefono =$_POST['telefono'];
         $direccion= $_POST['direccion'];
-        $tpersona= $_POST['tipo_persona'];
         $fechaactual = (date("d-m-Y"));       
         try{
           // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
@@ -40,8 +39,7 @@
                 PRIMER_APELLIDO = '$p_apellido' ,
                 SEGUNDO_APELLIDO = '$s_apellido' ,
                 DNI = '$dni',
-                DIRECCION = '$direccion',
-                CODIGO_TIPO_PERSONA ='$tpersona'
+                DIRECCION = '$direccion'
                 WHERE CODIGO_PERSONA = '$codpersona'; ";
             $resultado11=$conn->query($update_perfil);
             //consulta para la table correo
@@ -113,11 +111,7 @@
                echo "<script>
                window.location = 'crudpersonas';
                </script>";
-               include_once 'function_bitacora.php';
-               $codigoObjeto=14;
-               $accion='ELIMINACION';
-               $descripcion= 'Se elimino UNA PERSONA ';
-               bitacora($codigoObjeto, $accion,$descripcion);
+              
                exit;
              }else{
                echo "<script>

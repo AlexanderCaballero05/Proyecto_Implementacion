@@ -31,10 +31,6 @@ ANY HERNANDEZ           26/06/22                     ARREGLOS DE DESCRIPCION
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=19;
- $accion='INGRESO A MANTENIMIENTO MODALIDAD';
- $descripcion='MANTENIMIENTO A LOS REGISTROS DE MODALIDAD';
-bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
 
