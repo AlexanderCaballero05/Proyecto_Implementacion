@@ -177,13 +177,13 @@
                 <li class="nav-item">
                   <a href="crudSacramentos"class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Sacramentos</p>
+                    <p>Sacramentos</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="crudContenidoEconomico" class="nav-link">
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Contenido Socieconómico</p>
+                    <p>Contenido Socieconómico</p>
                   </a>
                 </li> 
                 <!--
@@ -196,7 +196,7 @@
                 <li class="nav-item">
                   <a href="crudParentesco" class="nav-link" > <!--modifique acuerdate -->
                   <i class="nav-icon fas fa-table"></i>
-                    <p>Mantenimiento Parentesco</p>
+                    <p>Parentesco</p>
                   </a>
                 </li>
               </ul>
@@ -356,25 +356,25 @@
               <li class="nav-item">
                 <a href="crudTutorias" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento Tutorías</p>
+                  <p>Tutorías</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="area" class="nav-link" > 
               <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento Áreas</p>
+                  <p>Áreas</p>
               </a>
               </li>
               <li class="nav-item">
                 <a href="crudSeccion" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento Secciones</p>
+                  <p>Secciones</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="crudmodalidad" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                  <p>Mantenimiento Modalidad</p>
+                  <p>Modalidad</p>
                 </a>
               </li>
               
@@ -543,15 +543,7 @@
                       <?php
                         }
                         ?>
-
-
-
-
-
-
-
-
-            
+         
                <?php
                            include "conexionpdo.php";
                             $usuario=$_SESSION['vario'];
@@ -799,7 +791,7 @@
             <li class="nav-item">
               <a href="crudsintomasneuroticos" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
-                <p>Mantenimiento Síntomas</p>
+                <p>Síntomas</p>
               </a>
             </li> 
           </ul>
