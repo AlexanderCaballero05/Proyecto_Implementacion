@@ -5,10 +5,7 @@
   include "conexionpdo.php";
 
  
- $codigoObjeto=2;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
- bitacora($codigoObjeto, $accion,$descripcion);
+
  
 ?>
 

@@ -56,7 +56,6 @@
         $codigoObjeto=31;
         $accion='REGISTRAR';
         $descripcion= 'SE REGISTRO UNA CONSULTA PSICOLÓGICA ';
-        bitacora($codigoObjeto, $accion,$descripcion);
         
         if ($consulta >0){
           $update = "UPDATE tbl_inscripcion_cita

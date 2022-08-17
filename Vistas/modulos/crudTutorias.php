@@ -24,10 +24,11 @@
 -----------------------------------------------------------------------
   Historial de Cambio
 -----------------------------------------------------------------------
-    Programador           Fecha                      Descripcion
-Diana Rut Garcia     		09-06-2022                Cambio en mensajes bitacora,con detalles de escritura y otros
+    Programador             Fecha                      Descripcion
+Diana Rut Garcia     		  09-06-2022                 Cambio en mensajes bitacora,con detalles de escritura y otros
 ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia 
-ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRECIONES DE DESCRIPCION
+ANY HERNANDEZ             26-06-22                   ESPACIOS BACIOS Y ALGUNAS CORRECIONES DE DESCRIPCION
+Luz María Montoya         16-08-2022                 Se le agrego el campo de estados a las tutorías
 
 ----------------------------------------------------------------------->
 <?php
@@ -87,13 +88,15 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre Tutoría</th>
                           <th class="text-center">Área</th>
+                          <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_TUTORIA,t.CODIGO_AREA, t.NOMBRE , a.NOMBRE as AREA, t.FECHA_CREACION, t.CREADO_POR, t.FECHA_MODIFICACION, t.MODIFICADO_POR
+                        $query = "SELECT CODIGO_TUTORIA , t.CODIGO_AREA, t.NOMBRE , a.NOMBRE as AREA, t.CODIGO_ESTADO as ESTADO
                         FROM tbl_tutoria t, tbl_area a
-                        WHERE  a.CODIGO_AREA = t.CODIGO_AREA ORDER BY  CODIGO_TUTORIA ASC ;";
+                        WHERE  a.CODIGO_AREA = t.CODIGO_AREA 
+                        ORDER BY  CODIGO_TUTORIA ASC ;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
@@ -101,6 +104,7 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                             $var2 = $row['NOMBRE'];
                             $var3 = $row['AREA'];
                             $var6 = $row['CODIGO_AREA'];
+                            $var4 = $row['ESTADO'];
                         ?>
                         <tr>
                           <td>
@@ -159,6 +163,19 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
                           <td class="text-center"><?php echo $var3; ?></td>
+                          <td class="text-center">
+                          <?php 
+                          if($var4 == "2"){
+                          ?>
+                          <B><FONT COLOR="green"> ACTIVO</FONT>
+                          <?php  
+                          }elseif($var4 =="3"){
+                          ?>
+                          <B><FONT COLOR="red"> INACTIVO</FONT>
+                          <?php 
+                          }
+                          ?>
+                          </td>
                         <!--INICIO DEL MODAL DE EDITAR TUTORIA -->
                           <div id="EDITARTUTORIA<?php echo $var1 ?>" class="modal fade" role="dialog">
                             <div class="modal-dialog modal-md">
@@ -210,6 +227,28 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                                          }?>
                                         </select> 
                                        </div>
+                                      </div>
+                                      <!-- campo de estados -->
+                                      <div class="col-sm-12">
+                                      <label for="txtestado_persona">Estado</label>
+                                      <select class="form-control select2" name="Edit_Estuto" id="Edit_Estuto" required>
+                                          <option value= ""><?php
+                                          if ($var4 == 2){
+                                          ?>
+                                          ACTIVO
+                                          <?php
+                                          }elseif($var4 == 3) {
+                                          ?>
+                                          INACTIVO
+                                          <?php
+                                          }
+                                          ?></option>
+                                          <option value= "2">ACTIVO</option>
+                                          <option value= "3">INACTIVO</option>
+                                          </select>
+                                          <div class="invalid-feedback">
+                                            Campo obligatorio.
+                                          </div>
                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
@@ -307,6 +346,20 @@ ANY HERNANDEZ             26/06/22               ESPACIOS BACIOS Y ALGUNAS CORRE
                                      </div>
                                     </select> 
                                 </div>
+                            </div>
+                            <!-- una vaina de estado -->
+                            <div class="col-sm-12">
+                               <div class="form-group">
+                                <label for="txtcodigo_persona">Estado</label>
+                                <select class="form-control select2" name="Est_tuto" id="Est_tuto" required>
+                                <option value= "">--Seleccione un estado--</option>
+                                <option value= "2">ACTIVO</option>
+                                <option value= "3">INACTIVO</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                   campo obligatorio.  
+                               </div>
+                               </div>
                             </div>
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       

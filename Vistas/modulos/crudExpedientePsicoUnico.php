@@ -25,14 +25,7 @@ Programador                   Fecha               Descripción
 Diana Rut Garcia            20/06/2022          Modificaciones en el modal
 Diana Rut Garcia            20/07/2022          Modificaciones en el boton del reporte
 ----------------------------------------------------------------------->
-<?php
- include_once "conexion.php";
- include_once "conexion3.php";
- $codigoObjeto= 34;
- $accion='INGRESO A MANTENIMIENTO EXPEDIENTE PSICOLOGICO UNICO';
- $descripcion='MANTENIMIENTO A LOS REGISTROS DE EXPEDIENTE';
-bitacora($codigoObjeto,$accion,$descripcion);
-?>
+
 <head>
 
 </head>

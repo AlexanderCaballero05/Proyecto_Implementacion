@@ -26,10 +26,11 @@ descripcion:       Pantalla que contrala cargar academica
 -----------------------------------------------------------------------
 
 Programador               Fecha                      Descripcion
-ANY HERNANDEZ           26/06/22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
-Diana Rut Garcia        03/07/2022                   Cambio en el titulo
-ANY HERNANDEZ           15/07/2022                   MODIFICACION DE ORDEN DE LOS DATOS 
+ANY HERNANDEZ           26-06-22                      NO ACEPTE LETRAS EN EL CAMPOS MESES Y ORTOGRAFIA,FECHA MINIMA Y MAXIMA
+Diana Rut Garcia        03-07-2022                   Cambio en el titulo
+ANY HERNANDEZ           15-07-2022                   MODIFICACION DE ORDEN DE LOS DATOS 
 Luz María Montoya       16-08-2022                   Cambié la consulta para traer solo los encargados que tengan el usuario activo
+Luz María Montoya       16-08-2022                   Cambié la consulta para que traer solo las tutorias con estados activos
 ----------------------------------------------------------------------->
 
 
@@ -135,8 +136,9 @@ Luz María Montoya       16-08-2022                   Cambié la consulta para t
  <div style ="display:none;" id="tutorias_academicas" class="col-md-3"> <!--inicio seleccionar tutoria academica-->
    <?php //
    $query = "SELECT CODIGO_TUTORIA, NOMBRE
-    FROM tbl_tutoria
-    WHERE CODIGO_AREA = 1";
+   FROM tbl_tutoria
+   WHERE CODIGO_AREA = 1
+   AND CODIGO_ESTADO = 2;";
    $resultadod=$conn->query($query);                
    ?>
    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
@@ -165,7 +167,8 @@ Luz María Montoya       16-08-2022                   Cambié la consulta para t
    <?php //
    $query = "SELECT CODIGO_TUTORIA, NOMBRE
     FROM tbl_tutoria
-    WHERE CODIGO_AREA = 4";
+    WHERE CODIGO_AREA = 4
+    AND CODIGO_ESTADO = 2;";
    $resultadod=$conn->query($query);                
    ?>
    <label for="identidad" class="control-label">Nombre Tutoría:</label> 
