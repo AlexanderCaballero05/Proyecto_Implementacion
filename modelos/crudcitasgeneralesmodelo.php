@@ -10,6 +10,7 @@
     $cod =$_POST['cod_edit_cita'];
     $ENCARGADO= $_POST['encargadocitados'];
     $paciente1= $_POST['paciente_editar'];
+    $VALOR_ANTERIOR = $_POST['VALORANTERIOR'];
     try{
        $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
        from tbl_inscripcion_cita   where CODIGO_PERSONA  = (?) AND HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?)
@@ -36,6 +37,26 @@
         </script>";
          exit; 
        }else{
+        $sentencia1 = $db->prepare(" SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO )  
+        as ESPECIALISTA 
+        from tbl_persona tp 
+        left join tbl_persona_especialidad tpe  on tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
+        where  tpe.CODIGO_PERSONA_ESPECIALIDAD =$VALOR_ANTERIOR");
+        // llamar al procedimiento almacenado
+        $sentencia1->execute();
+        $nombre_anterior=$sentencia1->fetchColumn(); 
+
+         // consulta para mandar a llamr el nombre modificado 
+        $sentencia2 = $db->prepare("SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO )  
+        as ESPECIALISTA 
+        from tbl_persona tp 
+        left join tbl_persona_especialidad tpe  on tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
+        where  tpe.CODIGO_PERSONA_ESPECIALIDAD =$ENCARGADO");
+        // llamar al procedimiento almacenado
+        $sentencia2->execute();
+        $nombre_actual=$sentencia2->fetchColumn(); 
+        
+         // consulta para mandar update
         $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
         $consulta=$conn->query($sql);
         if($consulta > 0){
@@ -45,8 +66,11 @@
           </script>";
           $codigoObjeto=32;
           $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
+          $CAMPO = "ENCARGADO";
+          $VAL_ACTUAL= $nombre_actual;
+          $ID_REGISTRO = $cod;
+          $VAL_ANTERIOR = $nombre_anterior;
+          bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
         }else{
           echo "<script>
           alert('Ocurrio un error');

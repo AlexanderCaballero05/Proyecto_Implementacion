@@ -314,6 +314,11 @@ include_once "conexion3.php";
                                                                     <input type="text" value="<?php echo $var1; ?>"
                                                                         hidden class="form-control" name="cod_personaguardar"
                                                                         id="cod_personaguardar">
+
+                                                                        <input type="text" value="<?php echo $var14; ?>"
+                                                                        hidden class="form-control" name="VALORANTERIOR"
+                                                                        id="cod_personaguardar">
+
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label >Primer Nombre</label>
@@ -415,7 +420,7 @@ include_once "conexion3.php";
                                                                             <input type="text"
                                                                                 value="<?php echo $var14; ?>"
                                                                                 class="form-control" maxlength="50"
-                                                                                minlength="15"
+                                                                                minlength="5"
                                                                                 onKeyDown="sinespacio(this);"
                                                                                 autocomplete="off" type="text"
                                                                                 name="correo" id="correo"  required >

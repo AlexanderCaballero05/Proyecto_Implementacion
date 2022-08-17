@@ -180,7 +180,8 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                     <tbody>
                     <?php
                       $query = "SELECT c.CODIGO_CARGA, c.CODIGO_PERSONA, c.CODIGO_MODALIDAD, c.CODIGO_TUTORIA, t.NOMBRE as TUTORIA,  CONCAT_WS(' ',p.PRIMER_NOMBRE,p.SEGUNDO_NOMBRE,p.PRIMER_APELLIDO,p.SEGUNDO_APELLIDO) 
-                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR, c.FECHA_MODIFICACION, c.PERIODO , te.NOMBRE ,te.CODIGO_ESTADO 
+                      as NOMBRE_COMPLETO  ,m.TIPO as MODALIDAD, c.CODIGO_SECCION, s.NOMBRE AS SECCION, c.HORA , c.HORA_FINAL, c.FECHA_INICIO, c.FECHA_FINAL, c.CREADO_POR_USUARIO, c.FECHA_CREACION, c.MODIFICADO_POR,
+                       c.FECHA_MODIFICACION, c.PERIODO , te.NOMBRE ,te.CODIGO_ESTADO 
                       FROM tbl_carga_academica c 
                       left join tbl_tutoria t  on  c.CODIGO_TUTORIA = t.CODIGO_TUTORIA
                       left join tbl_persona p  on  c.CODIGO_PERSONA = p.CODIGO_PERSONA
@@ -331,6 +332,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                 <div class="modal-body"><!--CUERPO DEL MODAL -->
                                   <div class="row"><!-- INICIO PRIMERA ROW --> 
                                     <input type="text" value ="<?php echo $var1; ?>" hidden  class="form-control" name="IDCARGA">
+                                    <input type="text" value ="<?php echo $var11; ?>" hidden  class="form-control" name="IDVALORANTERIOR">
                                     <div class="col-sm-4">
                                       <div class="form-group">
                                         <label for="txtcodigo_persona">Hora Inicio:</label>
