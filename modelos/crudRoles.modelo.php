@@ -63,11 +63,6 @@ Luz Montoya y José      13-08-2022               Se agregaron los estados en la
                         window.location = 'crudRoles';
                         </script>";
                         exit;
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=2;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nuevo rol ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
                       }else{
                         echo "<script> 
                         alert('Error auxilio');
@@ -122,11 +117,6 @@ Luz Montoya y José      13-08-2022               Se agregaron los estados en la
               alert('El rol se modifico correctamente');           
               window.location = 'crudRoles';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=2;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un rol ';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
@@ -169,11 +159,6 @@ if(isset($_POST['rol_eliminar'])){
             echo "<script>
             window.location = 'crudRoles';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino un rol ';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>

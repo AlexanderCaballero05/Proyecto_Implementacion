@@ -31,10 +31,7 @@
         echo "<script>
         window.location = 'procesoconsultapsicologia'
         </script>";
-        $codigoObjeto=31;
-        $accion='REGISTRAR';
-        $descripcion= 'SE REGISTRO EL EXPEDIENTE PSICOLÓGICO A LA PERSONA CON CODIGO'.$codigo_expediente_paciente;
-        bitacora($codigoObjeto, $accion,$descripcion);
+       
         exit;
     }
 ?>
@@ -63,8 +60,7 @@
                      alert('Se registro correctamente'); 
                      window.location = 'procesoExpedientePsicologico';
                      </script>";
-                     include_once 'function_bitacora.php';
-                    bitacora($codigoObjeto,$accion,$descripcion);
+                     
                      exit;
                    }else{
                      echo "<script> 

@@ -3,6 +3,7 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
   include "conexionpdo.php";
+
 ?>
 
 <body oncopy="return false" onpaste="return false"> 

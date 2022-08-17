@@ -22,11 +22,7 @@
                   alert('Se actualizo correctamente')
                   window.location = 'crudExpedientePsicoUnico';
                   </script>";
-                  include_once 'function_bitacora.php';
-                  $codigoObjeto=62;
-                  $accion='MODIFICACIÓN';
-                  $descripcion= 'SE MODIFICÓ UN EXPEDIENTE PSICOLÓGICO ÚNICO';
-                  bitacora($codigoObjeto, $accion,$descripcion);
+                 
                   exit;
                 }else{
                     echo "<script>
@@ -74,11 +70,7 @@
                 alert('¡Especialidad eliminada!');
                 window.location = 'crudExpedientePsicoUnico';
                 </script>";
-                include_once 'function_bitacora.php';
-                $codigoObjeto=62;
-                $accion='ELIMIMINACIÓN';
-                $descripcion= 'SE ELIMINÓ UN EXPEDIENTE PSICOLOGICO ÚNICO ';
-                bitacora($codigoObjeto, $accion,$descripcion);
+               
                 exit;
             }else{
                 echo "<script>

@@ -25,10 +25,12 @@ Programador                   Fecha               Descripción
 Diana Rut Garcia            20/06/2022          Modificaciones en el modal
 Diana Rut Garcia            20/07/2022          Modificaciones en el boton del reporte
 ----------------------------------------------------------------------->
+
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
 ?>
+
 <head>
 
 </head>

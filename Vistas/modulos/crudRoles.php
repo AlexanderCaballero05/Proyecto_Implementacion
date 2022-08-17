@@ -217,11 +217,11 @@
                                           <option value= ""><?php
                                           if ($var4 == 2){
                                           ?>
-                                          Activo
+                                          ACTIVO
                                           <?php
                                           }elseif($var4 == 3) {
                                           ?>
-                                          Inactivo
+                                          INACTIVO
                                           <?php
                                           }
                                           ?></option>
