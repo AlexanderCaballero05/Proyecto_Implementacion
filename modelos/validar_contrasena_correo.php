@@ -102,11 +102,7 @@ if(isset($_SESSION['vario'] )) {
                                                             if($resul >0){//En caso que la contraseña se actualice correctamente.
                                                               echo "<script> alert('¡Cambio de contraseña correcto!') location.href = '../index.php'; </script>";
                                                               $_SESSION['vario'] =$nomUser;
-                                                              $codigoObjeto=54;
-
-                                                              $accion='MODIFICACIÓN DE CONTRASEÑA';
-                                                              $descripcion= 'EL USUARIO MODIFICÓ LA CONTRASEÑA POR EL METODO DE CORREO';
-                                                              bitacora($codigoObjeto, $accion,$descripcion);
+                                                             
                                                             }
                                                          }
                                                         else{//error al ingresar los datos,saber que error sera :v (pero hay que mostrar mensaje de error xd )

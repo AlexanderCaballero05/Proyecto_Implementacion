@@ -86,10 +86,7 @@ if(isset($_SESSION['vario'])) {
                                             echo "<script> alert('Contraseña cambiada exitosamente');
                                             location.href = '../index.php'; </script>";
                                             //llamada de la fuction bitacora -->
-                                         $codigoObjeto=1;
-                                         $accion='Cambio de contraseña';
-                                         $descripcion= 'Usuario nuevo, hizo el cambio de contraseña';
-                                         bitacora($codigoObjeto, $accion,$descripcion);
+                                        
                                         }//final del else
                                     }catch (PDOException $e){
                                     echo $e->getMessage();  

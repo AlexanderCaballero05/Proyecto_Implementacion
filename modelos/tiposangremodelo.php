@@ -94,11 +94,7 @@
               echo "<script>
               window.location = 'crudtiposangre';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=37;
-              $accion='MODIFICACIÓN'; 
-              $descripcion= 'SE MODIFICÓ UN TIPO DE SANGRE';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el tipo de sangre!');
@@ -140,11 +136,7 @@ if(isset($_POST['eliminar_tiposangre'])){
             echo "<script>
             window.location = 'crudtiposangre';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=37;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ UN TIPO DE SANGRE';
-            bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>
