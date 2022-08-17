@@ -89,13 +89,13 @@ Luz María Montoya       16-08-2022                   Cambié la consulta para t
           <div class="card-header" style="background-color:#B3F2FF;">
             <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Ver Carga Académica</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaAcademica">Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Carga Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
+            <a class="nav-link active" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga Académica/Espiritual</a>
             </li>
             </ul>
           </div><!--FIN DEL CARD HEADER -->

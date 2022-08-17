@@ -105,7 +105,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
     </div>
     <section class="content-header text-xl-center mb-3 ">
       <h1>
-          <h4> Lista de Carga Académica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
+          <h4> Carga Académica <i class=" nav-icon fas  fa-graduation-cap"></i></h4>
       </h1>
     </section>
       <section class="content">
@@ -113,13 +113,13 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="card-header" style="background-color:#B3F2FF;">
           <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-            <a class="nav-link active" style="color:#000000;" href="#">Ver Carga Académica</a>
+            <a class="nav-link active" style="color:#000000;" href="#">Carga Académica</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Ver Carga Espiritual</a>
+            <a class="nav-link" style="color:#000000;" href="crudCargaEspiritual">Carga Espiritual</a>
             </li>
             <li class="nav-item">
-            <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga</a>
+            <a class="nav-link" style="color:#000000;" href="procesoCargaAcademica">Agregar Carga Académica/Espiritual</a>
             </li>
           </ul>
         </div>
@@ -273,7 +273,6 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                               <a>
 
                                  <a>
-                               
                                    <form method="post"  class="form-horizontal" role="form" action="Reportes_Prosecar/reporteIndividualCarga.php" target="_blank"> 
                                     <input type="hidden" name="imprimir" value="<?php echo $var1 ?>">
                                     <button type='submit' title='Imprimir' style="color:white; background-color:#FA0079"class=" form-control btn btn mb-3"><span><i class="nav-icon fa fa-file-pdf mx-1"></i></span></button> </form>
@@ -318,9 +317,6 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                             }
                          ?>
 
-
-
-                        
                         <div id="EDITACARGA<?php echo $var1 ?>" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
                             <div class="modal-content"><!-- Modal content-->
@@ -456,7 +452,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                       FROM tbl_persona p 
                                       left join tbl_usuario tu  on tu.CODIGO_PERSONA = p.CODIGO_PERSONA 
                                       left join tbl_roles tr  on tr.CODIGO_TIPO_ROL = tu.CODIGO_TIPO_ROL 
-                                      where tr.CODIGO_TIPO_ROL   = 2;";
+                                      left join tbl_estado est on est.CODIGO_ESTADO = tu.CODIGO_ESTADO
+                                      where tr.CODIGO_TIPO_ROL   = 2
+                                      and  est.CODIGO_ESTADO = 2;";
                                       $resultadod=$conn->query($query);                
                                       ?>
                                       <div class="form-group">
