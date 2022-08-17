@@ -26,11 +26,6 @@ Luz Montoya             18/06/2022            Arreglo de errores de ortografía
  include_once "conexion3.php";
  include "conexionpdo.php";
  
- $codigoObjeto=45;
- $accion='INGRESO AL MANTENIMIENTO SACRAMENTOS';
- $descripcion= 'USUARIO SE AUTENTIFICO';
- bitacora($codigoObjeto, $accion,$descripcion);
- 
 ?>
 <head>
 </head>

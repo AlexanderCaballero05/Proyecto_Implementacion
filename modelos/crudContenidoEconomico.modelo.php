@@ -30,10 +30,6 @@
                       if($resul >0){
                         echo "<script> window.location = 'crudContenidoEconomico'; </script>";
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=18;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRO UN CONTENIDO DE TIPO SOCIOECONÓMICO';
-                        bitacora($codigoObjeto, $accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
@@ -90,10 +86,6 @@
             if ($consulta>0){
               echo "<script> window.location = 'crudContenidoEconomico'; </script>";
               include_once 'function_bitacora.php';
-              $codigoObjeto=18;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UN CONTENIDO DE TIPO SOCIOECONÓMICO ';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
@@ -133,16 +125,11 @@ if(isset($_POST['contenido_eliminar'])){
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
-          mysqli_query($link, "DELETE FROM tbl_Contenido_socioeconomico WHERE  CODIGO_TIPOSOCIO  = '$code' ");
+          mysqli_query($link, "DELETE FROM tbl_Contenido_socioeconomico WHERE  CODIGO_CONTENIDO_SOCIOECONOMICO  = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
             window.location = 'crudContenidoEconomico';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=18;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINO UN CONTENIDO DE TIPO SOCIOECONÓMICO ';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>

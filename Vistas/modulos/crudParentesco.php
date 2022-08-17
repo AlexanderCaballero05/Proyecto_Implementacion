@@ -31,10 +31,6 @@ include_once "conexion3.php";
 ?>
  <!--llamada de la fuction bitacora -->
      <?php 
-      $codigoObjeto=44;
-      $accion='INGRESO A LA PANTALLA MANTENIMIENTO PARENTESCO';
-      $descripcion= 'SE AUTENTIFICO';
-      bitacora($codigoObjeto, $accion,$descripcion);
       ?>
  <head>
 </head>  

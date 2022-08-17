@@ -51,11 +51,6 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
                         echo "<script> 
                         window.location = 'crudSacramentos';
                         </script>";
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=45;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRO UN SACRAMENTO';
-                         bitacora($codigoObjeto, $accion,$descripcion);
                          exit;
                       }else{
                         echo "<script> 
@@ -107,11 +102,6 @@ Diana Rut               09/06/2022            Se modifico los mensajes de bitaco
               echo '<script>              
               window.location = "crudSacramentos";
               </script>';
-              include_once 'function_bitacora.php';
-              $codigoObjeto=45;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UN SACRAMENTO';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
@@ -155,11 +145,6 @@ if(isset($_POST['sacramento_eliminar'])){
             alert('¡Sacramento eliminado!');
             window.location = 'crudSacramentos';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=45;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINO UN SACRAMENTO';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>
