@@ -37,28 +37,13 @@
                       $resul=$conn->query($query_param);
                       if($resul >0){
                         echo "<script> 
-                       
                         window.location = 'crudParametros';
                         </script>";
-                        
-
-                        //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Insertar parámetro';
-                        $descripcion= 'Agregó/insertó un nuevo parámetro';
-                        bitacora($codigoObjeto, $accion,$descripcion);
-
                       }else{
                         echo "<script> 
-                        
                         window.location = 'crudParametros';
                         </script>";
-                        
-                        //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=3;
-                        $accion='Registro fallido de parámetro';
-                        $descripcion= 'Se intentó insertar un nuevo parámetro';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                                               
                       }
                     }catch(PDOException $e){
                     echo $e->getMessage(); 
@@ -87,6 +72,7 @@
     if(isset($_POST['Edit_parametro'])){
       $codigo_param = ($_POST['id_param']);
       $editar_valor = ($_POST['Edit_valor']);
+      $valorAnterior = ($_POST['ValorAnterior']);
       $fechaActual = date('Y-m-d');
       try{
        //   
@@ -100,28 +86,29 @@
                 FECHA_MODIFICACION = '$fechaActual'
             WHERE CODIGO_PARAMETRO = '$codigo_param' ";
             $consulta=$conn->query($sql);
+
+            $sentencia1 = $db->prepare("SELECT VALOR from tbl_parametros WHERE CODIGO_PARAMETRO = $codigo_param");
+            // llamar al procedimiento almacenado
+            $sentencia1->execute();
+            $ID=$sentencia1->fetchColumn();
+
             if ($consulta>0){
               echo "<script>
-              
               window.location = 'crudParametros';
               </script>";
               
               //<!--llamada de la fuction bitacora -->
-              $codigoObjeto=3;
-              $accion='Editar parámetro';
-              $descripcion= 'Se editó el registro de un parámetro ya existente';
-              bitacora($codigoObjeto, $accion,$descripcion);
+                    $codigoObjeto=3;
+                    $accion='MODIFICACIÓN';
+                    $CAMPO = "VALOR";
+                    $VAL_ACTUAL= $ID;
+                    $ID_REGISTRO = $codigo_param;
+                    $VAL_ANTERIOR = $valorAnterior;
+                    bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
             }else{
               echo "<script>
-              
               window.location = 'crudParametros';
               </script>";
-
-              //<!--llamada de la fuction bitacora -->
-              $codigoObjeto=3;
-              $accion='Editar parámetro fallido';
-              $descripcion= 'Se intentó editar el registro de un parámetro ya existente';
-              bitacora($codigoObjeto, $accion,$descripcion);
             }
 
       }catch(PDOException $e){
@@ -149,12 +136,6 @@ if(isset($_POST['param_eliminar'])){
         alert('¡No se puede eliminar este parámetro,esta relacionado con otras tablas!');
         window.location = 'crudParametros';
         </script>";
-        
-        //<!--llamada de la fuction bitacora -->
-        $codigoObjeto=3;
-        $accion='No eliminar parámetro';
-        $descripcion= 'Intento de invalido de eliminar parametro';
-        bitacora($codigoObjeto, $accion,$descripcion); 
 
       }else{
         try{
@@ -162,28 +143,16 @@ if(isset($_POST['param_eliminar'])){
           mysqli_query($link, "DELETE FROM tbl_parametros WHERE  CODIGO_PARAMETRO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            
-            window.location = 'crudParametros';
+             window.location = 'crudParametros';
             </script>";
-
-            //<!--llamada de la fuction bitacora -->
-            $codigoObjeto=3;
-            $accion='Eliminar parámetro';
-            $descripcion= 'Se eliminó un registro de parámetro';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
-            echo "<script>
-           
+
+            echo "<script> 
             window.location = 'crudParametros';
             </script>";
             exit;
 
-            //<!--llamada de la fuction bitacora -->
-            $codigoObjeto=3;
-            $accion='Eliminar parámetro fallido';
-            $descripcion= 'Falló eliminar el registro de parámetro';
-            bitacora($codigoObjeto, $accion,$descripcion);
           }
         }catch(PDOException $e){
         echo $e->getMessage(); 

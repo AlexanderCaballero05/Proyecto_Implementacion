@@ -66,9 +66,6 @@ if(isset($_POST['sintomas2'])){
         $consulta4 = mysqli_query($conn,"SELECT CODIGO_PERSONA FROM `tbl_inscripcion_cita` WHERE CODIGO_CITA='$codigo_cita'");
         $IDE2=mysqli_fetch_array($consulta4);                  
         $codigoObjeto=30;
-        $accion='REGISTRAR CONSULTA';
-        $descripcion= 'SE REGISTRÓ UNA CONSULTA MEDICA AL PACIENTE CON CÓDIGO '.$IDE2['CODIGO_PERSONA'];
-        bitacora($codigoObjeto,$accion,$descripcion);
         echo "<script> 
         window.location = 'procesoRecetaMedica';
         </script>";  
