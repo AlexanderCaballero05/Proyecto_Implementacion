@@ -123,10 +123,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                    alert('Usuario registrado correctamente');
                                     location.href = 'crudpersonas';
                                     </script>";
-                                    $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN ADMINISTRADOR';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                   }else{
                                     echo "<script> 
@@ -162,10 +158,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                   $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN TUTOR';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -209,10 +201,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('No se puede registrar el enfermero');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                   $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN ENFERMERO';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }
                               }
@@ -331,10 +319,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                    $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN ESTUDIANTE';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -373,10 +357,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                    $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN MEDICO';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -414,10 +394,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   echo "<script>
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';</script>";
-                                   $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN PSICOLOGO';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
+                                 
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -452,10 +429,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                   alert('Usuario registrado correctamente');
                                   location.href = 'crudpersonas';
                                   </script>";
-                                   $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN CATEQUISTA';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                                 }else{
                                   echo "<script> 
@@ -480,22 +453,11 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                                '$estado_civil','$nivel_edu','$ingresos','$iglesia');" ;
                               $consulti =$conn->query($insert_persona);
 
-                                
-
-
-
-
-
-
                               if($resultado = mysqli_fetch_assoc($consulti)>0 ){
                                 echo "<script> 
                                 alert('persona registrada correctamente');
                                 location.href = 'crudpersonas';
                                 </script>";
-                                   $codigoObjeto=13;
-                                    $accion='INSERCIÓN';
-                                    $descripcion= 'SE REGISTRO AL USUARIO '.$nombre_usuario.' COMO UN FAMILIAR';
-                                    bitacora($codigoObjeto, $accion,$descripcion);
                                     exit;
                               }else{
                                 echo "<script> 
@@ -540,7 +502,6 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
       $editar_distractores = ($_POST['editDISTRACTORES']);
       $editar_metas = ($_POST['editMETAS']);
       $indice = ($_POST['indice']);
-
       $CODUSUARIO = ($_POST['CODUSUARIO']);
       $USUARIO = ($_POST['NOMUSUARIO']); 
       $PASS = ($_POST['clave_nueva']);
@@ -556,6 +517,8 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
       $direccion = $_POST['direccion'];
       $connueva = ($_POST['clave_nueva']);
       $confconn = ($_POST['confirmar_clave']);
+      $valor_anterior = ($_POST['valor_anterior']);
+
       $expre = " /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/ ";
       date_default_timezone_set("America/Guatemala");
       $Fechaactual=  date("Y-m-d" );
@@ -580,6 +543,21 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
             $ID_PERSONA_CORREO = $row;
             if($ID_PERSONA_CORREO <= 0 || $ID_PERSONA_CORREO == $CODUSUARIO){
                 try{
+                
+                  // consulta para mandar a llamar el nombre sin modificar
+                  $sentencia1 = $db->prepare("SELECT te.NOMBRE AS ESTADO 
+                  FROM tbl_estado te  where  te.CODIGO_ESTADO = $valor_anterior");
+                  // llamar al procedimiento almacenado
+                  $sentencia1->execute();
+                  $nombre_anterior=$sentencia1->fetchColumn(); 
+
+                   // consulta para mandar a llamr el nombre modificado 
+                  $sentencia2 = $db->prepare("SELECT te.NOMBRE AS ESTADO 
+                  FROM tbl_estado te  where  te.CODIGO_ESTADO = $ESTADO");
+                  // llamar al procedimiento almacenado
+                  $sentencia2->execute();
+                  $nombre_actual=$sentencia2->fetchColumn(); 
+
                 $sql = "CALL Sp_modificar_usuarios_estudiantes('$CODUSUARIO','$DNI','$nombre_modi', '$nombre_modi2', '$apellido_modi','$apellido_modi2',  '$telefono', '$correo_mofi','$direccion',
                 '$USUARIO','$ESTADO','$userregis','$editar_pasatiempos','$editar_metas','$editar_distractores','$editar_grado','$indice');" ;
                 $consulta=$conn->query($sql);
@@ -587,10 +565,15 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                   if (empty($connueva) and empty($confconn)) {
                     echo "<script> alert('Usuario modificado exitosamente');
                     window.location = 'ediusuariosestudiantes'; </script>";
-                    $codigoObjeto=14;
-                    $accion='MODIFICACIÓN';
-                    $descripcion= 'SE MODIFICO UN USUARIO';
-                    bitacora($codigoObjeto, $accion,$descripcion);
+
+                    include_once 'function_bitacora.php';
+                            $codigoObjeto=26;
+                            $accion='MODIFICACIÓN';
+                            $CAMPO="ESTADO";
+                            $VAL_ACTUAL = $nombre_actual;
+                            $ID_REGISTRO = $CODUSUARIO;
+                            $VAL_ANTERIOR = $nombre_anterior;
+                            bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
                     exit;
 
                   }else{ //Si las contraseñas son diferentes ,no permitira que se registre
@@ -604,10 +587,7 @@ Diana Rut Garcia     		15-06-2022                Se agregaron mensajes de regist
                         $consulta=$conn->query($sql);
                         if (($consulta)>0) {
                           echo "<script> alert('Cambio exitosamente');window.location = 'ediusuariosestudiantes';</script>";
-                          $codigoObjeto=14;
-                          $accion='MODIFICACIÓN';
-                          $descripcion= 'SE MODIFICO UNA CONTRASEÑA';
-                          bitacora($codigoObjeto, $accion,$descripcion);
+                          
                           exit;
                         }
                       }else{

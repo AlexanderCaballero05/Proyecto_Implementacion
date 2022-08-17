@@ -329,7 +329,8 @@ include_once "conexion3.php";
                                    <hr color="blue">
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var2; ?>" hidden class="form-control" name="CODUSUARIO" id="CODUSUARIO">
-                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="NOMUSUARIO" id="CODUSUARIO">
+                                      <input type="text" value ="<?php echo $var6; ?>" hidden class="form-control" name="NOMUSUARIO" id="CODUSUARIO"> 
+                                      <input type="text" value ="<?php echo $var13; ?>" hidden class="form-control" name="valor_anterior" id="valor_anterior">
                                       <div class="col-sm-3">
                                         <div class="form-group">
                                           <label>Primer Nombre</label>

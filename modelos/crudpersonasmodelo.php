@@ -18,8 +18,18 @@
         $correo = $_POST['correo'];
         $telefono =$_POST['telefono'];
         $direccion= $_POST['direccion'];
-        $fechaactual = (date("d-m-Y"));       
+        $fechaactual = (date("d-m-Y")); 
+        $VALOR_ANTERIOR =  $_POST['VALORANTERIOR'];
+
         try{
+          
+        $sentencia1 = $db->prepare(" SELECT tce.CORREO_PERSONA  
+        from tbl_correo_electronico tce  
+        where tce.CODIGO_PERSONA =$VALOR_ANTERIOR");
+        // llamar al procedimiento almacenado
+        $sentencia1->execute();
+        $nombre_anterior=$sentencia1->fetchColumn(); 
+
           // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
           $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
           $sentencia->execute(array($correo));
@@ -53,9 +63,19 @@
             WHERE CODIGO_PERSONA = '$codpersona'; ";
             $resultatel=$conn->query($update_telefono);
             if($resultado11 > 0 && $resulta > 0 && $resultatel > 0){
-              echo "<script>
+              echo "<script>  
+             alert('!Persona Actualizada!');
               window.location = 'crudpersonas';
               </script>";
+
+              $codigoObjeto= 25;
+              $accion='MODIFICACIÓN';
+              $CAMPO = "CORREO ELECTRONICO";
+              $VAL_ACTUAL= $correo;
+              $ID_REGISTRO = $codpersona;
+              $VAL_ANTERIOR = $nombre_anterior;
+              bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+
           }else{
             echo "<script>
             alert('!Actualizacion fallida!');

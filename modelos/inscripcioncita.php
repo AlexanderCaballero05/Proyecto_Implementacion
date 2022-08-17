@@ -107,10 +107,6 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           alert('Cita agregada correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
-                          $codigoObjeto=32;
-                          $accion='INSERCIÓN';
-                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-                          bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
                           echo "<script> 
@@ -127,9 +123,6 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           alert('Cita agregada correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
-                          $accion='INSERCIÓN';
-                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-                          bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
                           echo "<script> 
@@ -145,10 +138,6 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
                           alert('Cita Agregada Correctamente');
                           window.location = 'crudinscripcioncita';
                           </script>";
-                          $codigoObjeto=32;
-                          $accion='INSERCIÓN';
-                          $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-                          bitacora($codigoObjeto,$accion,$descripcion);
                           exit;
                         }else{
                           echo "<script> 
@@ -191,6 +180,7 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
     $cod =$_POST['cod_edit_cita'];
     $ENCARGADO= $_POST['encargadocitados'];
     $paciente1= $_POST['paciente_editar'];
+    $VALOR_ANTERIOR = $_POST['VALORANTERIOR'];
     try{
        $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
        from tbl_inscripcion_cita   where CODIGO_PERSONA  = (?) AND HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?)
@@ -215,8 +205,28 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
         alert('El  Especialista  ya tiene asignada una cita en esa fecha y hora');
         window.location = 'crudinscripcioncita';
         </script>";
-         exit; 
+         exit;
        }else{
+
+        // consulta para mandar a llamar el nombre sin modificar
+        $sentencia1 = $db->prepare("  SELECT concat_ws(' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO )  
+        as ESPECIALISTA 
+        from tbl_persona tp 
+        where  tp.CODIGO_PERSONA =$VALOR_ANTERIOR");
+        // llamar al procedimiento almacenado
+        $sentencia1->execute();
+        $nombre_anterior=$sentencia1->fetchColumn(); 
+
+         // consulta para mandar a llamr el nombre modificado 
+        $sentencia2 = $db->prepare("SELECT concat_ws(' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO )  
+        as ESPECIALISTA 
+        from tbl_persona tp 
+        where  tp.CODIGO_PERSONA=$cod");
+        // llamar al procedimiento almacenado
+        $sentencia2->execute();
+        $nombre_actual=$sentencia2->fetchColumn(); 
+
+        //comienza la consulta del update
         $sql ="UPDATE  tbl_inscripcion_cita SET  HORARIO ='$hora', FECHA_CITA='$fecha', CODIGO_ESTADO ='$estado', CODIGO_ESPECIALISTA ='$ENCARGADO' where CODIGO_CITA ='$cod' ;";
         $consulta=$conn->query($sql);
         if($consulta > 0){
@@ -226,8 +236,12 @@ if(isset($_POST['GUARDARCITA_GENERAL'])){
           </script>";
           $codigoObjeto=32;
           $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
+          $CAMPO = "ENCARGADO";
+          $VAL_ACTUAL= $nombre_actual;
+          $ID_REGISTRO = $cod;
+          $VAL_ANTERIOR = $nombre_anterior;
+          bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+          
         }else{
           echo "<script>
           alert('Ocurrio un error');
@@ -285,10 +299,6 @@ if (isset($_POST['cod_edit_cita'])){
           alert('Cita Actualizada');
           window.location = 'crudcitasMedicasPendientes';
           </script>";
-          $codigoObjeto=32;
-          $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
         }else{
           echo "<script>
           alert('Ocurrio un error');
@@ -347,10 +357,6 @@ if (isset($_POST['cod_edit_cita'])){
           alert('Cita Actualizada');
           window.location = 'crudcitasPsicologicasPendientes';
           </script>";
-          $codigoObjeto=32;
-          $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
         }else{
           echo "<script>
           alert('Ocurrio un error');
@@ -410,10 +416,6 @@ if (isset($_POST['cod_edit_cita'])){
           alert('Cita Actualizada');
           window.location = 'crudcitasEspiritualesPendientes';
           </script>";
-          $codigoObjeto=32;
-          $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
         }else{
           echo "<script>
           alert('Ocurrio un error');
@@ -500,10 +502,6 @@ if (isset($_POST['cod_edit_cita'])){
             alert('¡Cita eliminada!');
             window.location = 'crudinscripcioncita';
             </script>";
-            $codigoObjeto=32;// cambiar 
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ UNA CITA ';
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
               echo "<script>
@@ -563,10 +561,6 @@ if (isset($_POST['cod_edit_cita'])){
             echo "<script>
              alert('Cita Registrada Exitosamente');
              window.location = 'crudPacientesMedicos';</script>";
-            $codigoObjeto=32;
-            $accion='INSERCIÓN';
-            $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-            bitacora($codigoObjeto,$accion,$descripcion);
               exit;
           }else{
             echo "<script> window.location = 'crudPacientesMedicos';</script>";
@@ -623,10 +617,6 @@ if (isset($_POST['cod_edit_cita'])){
               echo "<script> 
               alert('Cita Registrada Exitosamente');
               window.location = 'crudPacientesPsicologicos';</script>";
-              $codigoObjeto=32;
-              $accion='INSERCIÓN';
-              $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-              bitacora($codigoObjeto,$accion,$descripcion);
               exit;
             }else{
               echo "<script> 
@@ -690,10 +680,6 @@ if (isset($_POST['cod_edit_cita'])){
             alert('Cita Registrada Exitosamente');
             window.location = 'crudPacientesEspirituales';
             </script>";
-            $codigoObjeto=32;
-            $accion='INSERCIÓN';
-            $descripcion='SE REGISTRÓ UNA NUEVA CITA';
-            bitacora($codigoObjeto,$accion,$descripcion);
             exit;
           }else{
             echo "<script> 
