@@ -182,10 +182,6 @@ if(isset($_POST['MatriEliminar'])){
             
             window.location = 'crudMatricula';
             </script>";
-            $codigoObjeto=23;
-            $accion='ELIMINACIÓN';
-            $descripcion=  $descripcion= 'SE ELIMINÓ LA TUTORÍA'.' ' .$tutoria.' '.'AL ESTUDIANTE'.' ' .$estudiante;
-            bitacora($codigoObjeto, $accion,$descripcion);
             exit;
           }else{
             echo "<script>

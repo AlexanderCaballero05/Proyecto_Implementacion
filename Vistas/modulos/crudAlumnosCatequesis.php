@@ -287,7 +287,7 @@
                                         ?>
                                          <div class="form-group">
                                             <label for="txtcodigo_especialista">Estado de matrícula</label>
-                                            <select class="form-control select2" name="codigo_estado" required>
+                                            <select class="form-control select2" name="codigo_estado">
                                                 <option selected disabled autocomplete = "off" value=""><?php echo $var6; ?></option>
                                                  <?php
                                                     if ($result1->num_rows > 0){

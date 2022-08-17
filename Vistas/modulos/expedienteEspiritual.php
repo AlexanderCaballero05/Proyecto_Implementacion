@@ -6,13 +6,10 @@
 
  
  $codigoObjeto=2;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
- bitacora($codigoObjeto, $accion,$descripcion);
  
 ?>
 
-<body oncopy="return false" onpaste="return false"> 
+<body> 
     <div class="content-wrapper">
     <div class="content-header">
         <div class="container-fluid">
