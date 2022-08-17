@@ -4,9 +4,6 @@
  include_once 'conexionpdo.php';
   include "conexionpdo.php";
 
- 
-
- 
 ?>
 
 <body oncopy="return false" onpaste="return false"> 

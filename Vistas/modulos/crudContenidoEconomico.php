@@ -27,10 +27,6 @@ ANY HERNANDEZ         		11-06-2022                 revision de ortagrafia
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
-$codigoObjeto = 18;
-$accion = 'INGRESO A LA PANTALLA MANTENIMIENTO CONTENIDO TIPO SOCIOECONÓMICO';
-$descripcion = 'SE AUTENTIFICO';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <head>
 

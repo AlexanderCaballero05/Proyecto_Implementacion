@@ -53,9 +53,7 @@
        DIAGNOSTICO_EGRESO,OBSEVARCIONES,FECHA_CREACION) values ('$codigocita2','$sintomas','$Ingreso','$Egreso',
        '$observaciones','$fechaActual')";
         $consulta=$conn->query($insert);
-        $codigoObjeto=31;
-        $accion='REGISTRAR';
-        $descripcion= 'SE REGISTRO UNA CONSULTA PSICOLÓGICA ';
+
         
         if ($consulta >0){
           $update = "UPDATE tbl_inscripcion_cita
