@@ -3,10 +3,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto = 51;///cambiar
-$accion = 'CONSULTA DE CITAS PSICOLOGICAS';
-$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA DE SUS CITAS PSICOLOGICAS';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <head>

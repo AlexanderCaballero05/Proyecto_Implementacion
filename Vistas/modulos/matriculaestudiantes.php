@@ -3,10 +3,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto = 51;///cambiar
-$accion = 'CONSULTA DE MATRICULA ESTUDIANTE';
-$descripcion = 'EL ESTUDIANTE CONSULTO LA PANTALLA PARA VER SU MATRICULA';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <head>

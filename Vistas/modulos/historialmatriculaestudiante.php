@@ -3,10 +3,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
  include "conexionpdo.php";
-$codigoObjeto = 48;///cambiar
-$accion = 'Ingreso a la pantalla de mantenimiento de Inscripcion Cita ';
-$descripcion = 'Ver los registros de los Inscripcion Cita ';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 
 <head>
