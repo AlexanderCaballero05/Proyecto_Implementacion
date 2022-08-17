@@ -12,6 +12,7 @@
        try{
           if(isset($_POST['agregar_persona'])){
                $persona = ($_POST['TIPO_PERSONA']);
+               $estado_tipo = ($_POST['estadotipopersona']);
                
               try{  //Cambien la consulta :D
                   $consulta_pregunta = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_persona WHERE NOMBRE = (?);");
@@ -25,7 +26,7 @@
                   exit;
                   }else{
                     try{
-                      $query_pregunta = " INSERT INTO `tbl_tipo_persona`( `nombre`) VALUES ('$persona'); ";
+                      $query_pregunta = " INSERT INTO `tbl_tipo_persona`( `nombre`, CODIGO_ESTADO) VALUES ('$persona', '$estado_tipo'); ";
                       $resul=$conn->query($query_pregunta);
                       if($resul >0){
                         echo "<script> 
@@ -63,11 +64,12 @@
 
 
 
-  //PARTE PARA EDITAR UNA PREGUNTA
+  //PARTE PARA EDITAR UNA PERSONA
   if(isset($_POST['id_editar'])){
     if(isset($_POST['editartipoper'])){
       $codigo_persona = ($_POST['id_editar']);
       $editar_persona = ($_POST['editar_persona']);
+      $editar_estadotipo = ($_POST['editar_estadotip']);
       try{
        // 
        $sentencia = $db->prepare("SELECT COUNT(*) FROM tbl_tipo_persona where NOMBRE = (?) and CODIGO_TIPO_PERSONA <> (?) ;");
@@ -83,7 +85,7 @@
         }else{
          
           try{
-            $sql = " UPDATE tbl_tipo_persona SET nombre= '$editar_persona'  
+            $sql = " UPDATE tbl_tipo_persona SET nombre= '$editar_persona', CODIGO_ESTADO = ' $editar_estadotipo'  
             WHERE CODIGO_tipo_persona= '$codigo_persona' ";
             $consulta=$conn->query($sql);
             if ($consulta>0){
