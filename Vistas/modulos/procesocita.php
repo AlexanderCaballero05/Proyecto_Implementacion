@@ -34,7 +34,7 @@ include_once "conexion.php";
 include_once "conexion3.php";
 include "conexionpdo.php";
 include "conexionpdo.php";
-$codigoObjeto = 32;///CAMBIAR 
+
 
 ?>
 <!-- Selecciona el prametro de la base de datos para la fecha y hora de la cita  :v-->

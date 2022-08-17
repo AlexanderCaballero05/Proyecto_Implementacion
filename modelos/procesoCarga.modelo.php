@@ -141,7 +141,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
         $anio = date("Y");
         $periodo = ($_POST['periodo']);
         $area = ($_POST['area_tutoria']);
-        $estado = ($_POST['ESTEDITADO']);   
+          
 
        try{
              $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
