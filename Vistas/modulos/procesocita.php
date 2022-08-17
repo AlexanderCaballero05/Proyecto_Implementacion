@@ -35,7 +35,6 @@ include_once "conexion3.php";
 include "conexionpdo.php";
 include "conexionpdo.php";
 
-
 ?>
 <!-- Selecciona el prametro de la base de datos para la fecha y hora de la cita  :v-->
 <?php

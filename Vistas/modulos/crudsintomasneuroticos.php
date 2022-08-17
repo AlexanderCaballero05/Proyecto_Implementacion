@@ -1,10 +1,6 @@
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto=47;
- $accion='Ingreso a mantenimiento sintomas neuroticos';
- $descripcion='Describe los sintomas de un paciente psicológico';
-bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
 

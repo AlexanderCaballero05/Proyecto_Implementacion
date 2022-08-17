@@ -3,13 +3,6 @@
  include_once "conexion3.php";
  include_once 'conexionpdo.php';
   include "conexionpdo.php";
-
- 
- $codigoObjeto=2;
- $accion='Ingreso a la tabla de roles';
- $descripcion= 'Usuario se autentifico ';
- bitacora($codigoObjeto, $accion,$descripcion);
- 
 ?>
 
 <body oncopy="return false" onpaste="return false"> 
