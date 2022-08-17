@@ -43,10 +43,10 @@
           alert('Cita Actualizada');
           window.location = 'crudcitasgenerales';
           </script>";
-          $codigoObjeto=32;
-          $accion='MODIFICACIÓN';
-          $descripcion='SE MODIFICÓ UNA CITA';
-          bitacora($codigoObjeto,$accion,$descripcion);
+          // $codigoObjeto=32;
+          // $accion='MODIFICACIÓN';
+          // $descripcion='SE MODIFICÓ UNA CITA';
+          // bitacora($codigoObjeto,$accion,$descripcion);
         }else{
           echo "<script>
           alert('Ocurrio un error');
