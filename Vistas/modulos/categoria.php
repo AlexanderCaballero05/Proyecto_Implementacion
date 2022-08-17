@@ -568,7 +568,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                               onblur="quitarespacios(this);" placeholder="Nombre Usuario">
                           </div>
                           <div class="invalid-feedback">
-                            Debe teber minimo <?php echo $valor1; ?> caracteres.
+                            Debe tener minimo <?php echo $valor1; ?> caracteres.
                           </div>
                         </div>
                         <div  class="col-sm-4 mb-2" >
@@ -579,7 +579,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                                <button id="show_password" class="form-control btn btn-info btn-sm btn-block" onclick="mostrar1()" type="button" onKeyDown="sinespacio(this);"><span class="icon1 fa fa-eye-slash"></button></span>
                              </div>
                           </div> 
-                           <FONT SIZE=2>*Debe teber minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
+                           <FONT SIZE=2>*Debe tener minimo <?php echo $valor4; ?> caracteres, numeros, mayusculas minusculas.</FONT>
                         </div>
                                                    
                        <div style ="display:none;"  class="col-md-4" id="especialidad_psico"><!--especialidad psicologia-->

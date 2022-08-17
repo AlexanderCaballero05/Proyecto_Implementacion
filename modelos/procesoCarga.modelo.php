@@ -141,7 +141,7 @@ if(isset($_POST['tutorias_academicas'])  ){//if principal cuando una tutoria es 
         $anio = date("Y");
         $periodo = ($_POST['periodo']);
         $area = ($_POST['area_tutoria']);
-        $estado = ($_POST['ESTEDITADO']);   
+          
 
        try{
              $query1 = $db->prepare ("SELECT CODIGO_TUTORIA, CODIGO_SECCION FROM tbl_carga_academica WHERE 
@@ -263,7 +263,8 @@ if(isset($_POST['IDCARGA'])){
         $fecha_modi = date('Y-m-d'); //fecha del sistema
         $usuario_modi = $_SESSION['vario'];
         $codigo_carga = ($_POST['IDCARGA']);
-        $estado = ($_POST['ESTEDITADO']);       
+        $estado = ($_POST['ESTEDITADO']); 
+        $ID_ANTERIOR = ($_POST['IDVALORANTERIOR']);
         
         try{
             $query = $db->prepare(" SELECT COUNT(*) FROM tbl_carga_academica 
@@ -289,6 +290,26 @@ if(isset($_POST['IDCARGA'])){
                 exit;
               }else{
                     try{
+                        // consulta para mandar a llamar el nombre sin modificar
+                        $sentencia1 = $db->prepare("SELECT CONCAT_WS(' ',PRIMER_NOMBRE, PRIMER_APELLIDO) as NOMBRE
+                        FROM tbl_persona p 
+                        left join tbl_usuario tu  on tu.CODIGO_PERSONA = p.CODIGO_PERSONA 
+                        left join tbl_roles tr  on tr.CODIGO_TIPO_ROL = tu.CODIGO_TIPO_ROL 
+                        where p.CODIGO_PERSONA =$ID_ANTERIOR");
+                        // llamar al procedimiento almacenado
+                        $sentencia1->execute();
+                        $nombre_anterior=$sentencia1->fetchColumn(); 
+
+                         // consulta para mandar a llamr el nombre modificado 
+                        $sentencia2 = $db->prepare("SELECT CONCAT_WS(' ',PRIMER_NOMBRE, PRIMER_APELLIDO) as NOMBRE
+                        FROM tbl_persona p 
+                        left join tbl_usuario tu  on tu.CODIGO_PERSONA = p.CODIGO_PERSONA 
+                        left join tbl_roles tr  on tr.CODIGO_TIPO_ROL = tu.CODIGO_TIPO_ROL 
+                        where p.CODIGO_PERSONA =$tutor_modi");
+                        // llamar al procedimiento almacenado
+                        $sentencia2->execute();
+                        $nombre_actual=$sentencia2->fetchColumn(); 
+
                         $corre = "UPDATE `tbl_carga_academica` SET 
                         HORA = '$hora_modi' , 
                         FECHA_INICIO = '$fecha_inicio_modi',
@@ -308,6 +329,15 @@ if(isset($_POST['IDCARGA'])){
                             alert('Modificación Exitosamente');
                             window.location = 'crudCargaAcademica';
                             </script>";
+                             
+                            include_once 'function_bitacora.php';
+                            $codigoObjeto=20;
+                            $accion='MODIFICACIÓN';
+                            $CAMPO="ENCARGADO";
+                            $VAL_ACTUAL = $nombre_actual;
+                            $ID_REGISTRO = $codigo_carga;
+                            $VAL_ANTERIOR = $nombre_anterior;
+                            bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
                             exit;
                         }else{
                             $msg="problema ".mysqli_error($conn);

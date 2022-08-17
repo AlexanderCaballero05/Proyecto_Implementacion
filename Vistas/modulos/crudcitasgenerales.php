@@ -138,7 +138,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                     <thead>
                                         <tr>
                                             <th class="text-center">Acción</th>
-                                            <th class="text-center">ID</th>
+                                            <th class="text-center">Código</th>
                                             <th class="text-center">Fecha cita</th>
                                             <th class="text-center">Hora</th>
                                             <th class="text-center">Beneficiario</th>
@@ -260,7 +260,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita">
-
+                                                                    <input type="text" value="<?php echo $Cod_especialista; ?>" 
+                                                                    hidden class="form-control"
+                                                                    name="VALORANTERIOR" id="cod_edit_cita">
                                                                     <input type="text" value="<?php echo $paciente; ?>" 
                                                                     hidden class="form-control"
                                                                     name="paciente_editar" id="cod_edit_cita">
@@ -499,7 +501,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteCita.php','_blank');
+      window.open('Reportes_Prosecar/reportecitasgenerales.php','_blank');
       window.open(this.href,'_self');
     }
   </script>

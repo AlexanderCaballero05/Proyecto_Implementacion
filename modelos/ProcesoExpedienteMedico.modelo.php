@@ -85,21 +85,11 @@
                                         $query_apariencia->execute(array($codigo, $apariencias));
                                         $conn->commit();
                                     }  
-                                    $codigoObjeto=30;
-                                    $accion='REGISTAR EXPEDIENTE';
-                                    $descripcion= 'SE REGISTRÓ EL EXPEDIENTE MEDICO DEL PACIENTE CON CÓDIGO '.$codigo_expediente_paciente;
-                                    bitacora($codigoObjeto,$accion,$descripcion);   
+                                    $codigoObjeto=30;  
                                      echo "<script> 
                                   window.location = 'procesoConsulta';
                                   </script>";
-                                } // fin para apariencias
-            
-                               
-     
-
-        
-
-            
+                                } // fin para apariencias     
 
     }
 
@@ -284,10 +274,7 @@ if(isset($_POST['apariencia'])){
                         </script>";
                         exit;
                         include_once 'function_bitacora.php';
-                        $codigoObjeto=40;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRÓ UNA APARIENCIA FISICA ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                        
                       }else{
                         echo "<script> 
                         alert('Error !');
