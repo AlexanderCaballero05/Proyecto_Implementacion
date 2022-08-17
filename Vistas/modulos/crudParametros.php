@@ -231,6 +231,8 @@ include_once "conexion3.php";
                                   <div class="modal-body"><!--CUERPO DEL MODAL -->
                                     <div class="row"><!-- INICIO PRIMERA ROW -->  
                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="id_param" id="id_param">
+                                      <input type="text" value ="<?php echo $var3; ?>" hidden class="form-control" name="ValorAnterior" id="id_param">
+
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_parametro">Parámetro</label>
