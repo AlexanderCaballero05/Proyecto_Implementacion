@@ -111,12 +111,15 @@ class PDF extends FPDF {
            
 			//volvemos a definir el  encabezado cuando se crea una nueva pagina
             $this->SetFont('Helvetica', 'B', 12);
-			$this->Cell(20, 8, utf8_decode('Número'), 1, 0, 'C', 0);
+			$this->Cell(10, 8, utf8_decode('N'), 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Fecha', 1, 0, 'C', 0);
 			$this->Cell(30, 8, 'Usuario', 1, 0, 'C', 0);
-			$this->Cell(45, 8, 'Objeto', 1, 0, 'C', 0);
-			$this->Cell(45, 8, utf8_decode('Acción'), 1, 0, 'C', 0);
-			$this->Cell(70, 8, utf8_decode('Descripción'), 1, 1, 'C', 0);
+			$this->Cell(35, 8, 'Objeto', 1, 0, 'C', 0);
+			$this->Cell(45, 8, 'campo', 1, 0, 'C', 0);
+			$this->Cell(20, 8, 'Registro', 1, 0, 'C', 0);
+			$this->Cell(45, 8, utf8_decode('Valor Actual'), 1, 0, 'C', 0);
+			$this->Cell(50, 8, utf8_decode('Valor Anterior'), 1, 1, 'C', 0);
+			
 			$this->SetFont('Arial', '', 12);
 			
 		
@@ -193,11 +196,11 @@ class PDF extends FPDF {
 
   $data=new Conexion();
   $conexion=$data->conect(); 
-	$strquery ="SELECT bi.CODIGO_BITACORA, bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.DESCRIPCION
-    FROM tbl_bitacora_sistema bi, tbl_usuario u, tbl_objetos ob
-    WHERE bi.CODIGO_USUARIO = u.CODIGO_USUARIO
-    AND bi.CODIGO_OBJETO = ob.CODIGO_OBJETO
-    AND bi.FECHA BETWEEN '$desde' AND '$hasta'
+	$strquery ="SELECT bi.FECHA, u.NOMBRE_USUARIO, ob.NOMBRE as NOMBRE_OBJETO, bi.ACCION, bi.CAMPO,bi.VAL_ACTUAL,bi.VAL_ANTERIOR,bi.ID_REGISTRO
+	FROM tbl_bitacora_sistema bi
+	INNER JOIN tbl_usuario u on u.CODIGO_USUARIO = bi.CODIGO_USUARIO
+	INNER JOIN tbl_objetos ob on ob.CODIGO_OBJETO = bi.CODIGO_OBJETO
+	WHERE bi.FECHA BETWEEN '$desde' AND '$hasta'
 	ORDER BY bi.CODIGO_BITACORA DESC; ";
 	$result = $conexion->prepare($strquery);
 	$result->execute();
@@ -215,15 +218,17 @@ $pdf->SetAutoPageBreak(true, 20); //salto de pagina automatico
 
 
 // -----------ENCABEZADO------------------
-$pdf->SetX(30);
+$pdf->SetX(20);
 $pdf->SetFillColor(72, 208, 234);
 $pdf->SetFont('Helvetica', 'B', 12);
-$pdf->Cell(20, 12, utf8_decode('Número'), 1, 0, 'C', 1);
+$pdf->Cell(10, 12, utf8_decode('N'), 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Fecha', 1, 0, 'C', 1);
 $pdf->Cell(30, 12, 'Usuario', 1, 0, 'C', 1);
-$pdf->Cell(45, 12, 'Objeto', 1, 0, 'C', 1);
-$pdf->Cell(45, 12, utf8_decode('Acción'), 1, 0, 'C', 1);
-$pdf->Cell(70, 12, utf8_decode('Descripción'), 1, 1, 'C', 1);
+$pdf->Cell(35, 12, 'Objeto', 1, 0, 'C', 1);
+$pdf->Cell(45, 12, 'Campo', 1, 0, 'C', 1);
+$pdf->Cell(20, 12, 'Registro', 1, 0, 'C', 1);
+$pdf->Cell(45, 12, utf8_decode('Valor Actual'), 1, 0, 'C', 1);
+$pdf->Cell(50, 12, utf8_decode('Valor Anterior'), 1, 1, 'C', 1);
 
 // -------TERMINA----ENCABEZADO------------------
 
@@ -233,11 +238,11 @@ $pdf->SetDrawColor(61, 61, 61); //color de linea  rgb
 $pdf->SetFont('Arial', '', 12);
 
 //El ancho de las celdas
-$pdf->SetWidths(array(20, 30, 30, 45,45,70)); //???
+$pdf->SetWidths(array(10, 30, 30, 35,45, 20, 45, 50)); //???
 
 for ($i = 0; $i < count($data); $i++) {
 
-	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),(ucwords(utf8_decode($data[$i]['NOMBRE_USUARIO']))), (ucwords(utf8_decode($data[$i]['NOMBRE_OBJETO']))), (utf8_decode($data[$i]['ACCION'])), (ucwords(utf8_decode($data[$i]['DESCRIPCION'])))   ),30 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
+	$pdf->Row(array($i + 1, ucwords(strtolower(utf8_decode($data[$i]['FECHA']))),(ucwords(utf8_decode($data[$i]['NOMBRE_USUARIO']))), (ucwords(utf8_decode($data[$i]['NOMBRE_OBJETO']))), (utf8_decode($data[$i]['CAMPO'])), (ucwords(utf8_decode($data[$i]['ID_REGISTRO']))),(utf8_decode($data[$i]['VAL_ACTUAL'])),(utf8_decode($data[$i]['VAL_ANTERIOR']))   ),20 ); //EL 28 ES EL MARGEN QUE TIENE DE DERECHA
 }
 
 // cell(ancho, largo, contenido,borde?, salto de linea?)
