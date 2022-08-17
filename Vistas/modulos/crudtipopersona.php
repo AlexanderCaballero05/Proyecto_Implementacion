@@ -4,7 +4,7 @@
  $codigoObjeto=12;
  $accion='Ingreso a mantenimiento preguntas';
  $descripcion='Pregunta realizadas al usuario para cambio de contraseña';
-bitacora($codigoObjeto,$accion,$descripcion);
+
 ?>
 <head>
 
@@ -70,16 +70,20 @@ bitacora($codigoObjeto,$accion,$descripcion);
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
                           <th class="text-center">Nombre</th>
+                          <th class="text-center">Estado</th>
                         </tr>
                       </thead>
                       <tbody>
                         <?php
-                        $query = "SELECT CODIGO_TIPO_PERSONA, NOMBRE from tbl_tipo_persona;";
+                        $query = "SELECT p.CODIGO_TIPO_PERSONA, p.NOMBRE, es.NOMBRE as ESTADO 
+                        from tbl_tipo_persona p, tbl_estado es
+                        where p.CODIGO_ESTADO = es.CODIGO_ESTADO;";
                         $result = $conn->query($query);
                         if ($result->num_rows > 0) {
                           while($row = $result->fetch_assoc()) {
                             $var1 = $row['CODIGO_TIPO_PERSONA'];
                             $var2 = $row['NOMBRE'];
+                            $var3 = $row['ESTADO'];
                            
                         ?>
                         <tr>
@@ -158,6 +162,7 @@ bitacora($codigoObjeto,$accion,$descripcion);
                           </td>
                           <td class="text-center"><?php echo $var1; ?></td>
                           <td class="text-center"><?php echo $var2; ?></td>
+                          <td class="text-center"><?php echo $var3; ?></td>
     
 
                         <!--INICIO DEL MODAL DE EDITAR TIPO PERSONA-->
@@ -183,6 +188,29 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                           </div>
                                         </div>
                                         </div>
+                                        <div class="col-sm-12">
+                                        <?php //--INICIO DEL ESTADO
+                                        $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                        FROM tbl_estado
+                                        where CODIGO_ESTADO BETWEEN 2 and 3";
+                                        $resultadod=$conn->query($query);                
+                                       ?>
+                                       <label  class="control-label">Estado</label>  
+                                       <div class="form-group">
+                                         <select class="form-control select2 select2-primary"   style="width: 100%;" name="editar_estadotip" id="editar_estado" required>
+                                         <option  value="<?php echo $var5?>"><?php echo $var3;?></option>
+                                          <?php 
+                                          if ($resultadod->num_rows > 0) {
+                                          while($row = $resultadod->fetch_assoc()) { 
+                                          $codigo = $row['CODIGO_ESTADO'];
+                                          $estado = $row['NOMBRE'];
+                                          ?>
+                                        <option value="<?php echo $codigo?>" ><?php echo $estado;?></option>
+                                        <?php } 
+                                         }?>
+                                        </select> 
+                                       </div>
+                                       </div>
                                     </div> <!-- FIN DE EL PRIMER ROW --> 
                                   </div><!--FINAL DEL CARD BODY -->                       
                                   <div class="modal-footer ">
@@ -252,6 +280,31 @@ bitacora($codigoObjeto,$accion,$descripcion);
                                     </div>
                                   </div>
                             </div>
+                            <div class="col-sm-12">
+                              <?php //--INICIO DEL ESTADO
+                                $query = "SELECT  CODIGO_ESTADO, NOMBRE
+                                FROM tbl_estado
+                                where CODIGO_ESTADO BETWEEN 2 and 3";
+                                $resultadod=$conn->query($query);                
+                               ?>
+                              <label  class="control-label">Estado de la Sección</label>  
+                                <div class="form-group">
+                                    <select class="form-control select2 select2-primary"   style="width: 100%;" name="estadotipopersona" id="estadopre" required>
+                                      <option selected enable value=""> --Seleccionar Estado-- </option>
+                                      <?php 
+                                       if ($resultadod->num_rows > 0) {
+                                       while($row = $resultadod->fetch_assoc()) { 
+                                       $codigo_estado= $row['CODIGO_ESTADO'];
+                                       $estado= $row['NOMBRE'];
+                                       ?>
+                                      <option value="<?php echo $codigo_estado?>" ><?php echo $estado;?></option>
+                                      <?php } 
+                                      }?>
+                                      <div class="invalid-feedback">
+                                         Campo obligatorio.
+                                     </div>
+                                    </select> 
+                                </div>
                           
                         </div> <!-- FIN DE EL PRIMER ROW --> 
                     </div><!--FINAL DEL CARD BODY -->                       
