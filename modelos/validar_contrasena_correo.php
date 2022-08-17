@@ -37,7 +37,6 @@
 
 <?php
  session_start();
- include "function_bitacora.php";
  include_once "conexion3.php";
 include_once "conexion.php";
 ?>

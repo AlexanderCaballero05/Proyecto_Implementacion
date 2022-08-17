@@ -28,10 +28,6 @@ Diana Rut Garcia            20/07/2022          Modificaciones en el boton del r
 <?php
  include_once "conexion.php";
  include_once "conexion3.php";
- $codigoObjeto= 34;
- $accion='INGRESO A MANTENIMIENTO EXPEDIENTE PSICOLOGICO UNICO';
- $descripcion='MANTENIMIENTO A LOS REGISTROS DE EXPEDIENTE';
-bitacora($codigoObjeto,$accion,$descripcion);
 ?>
 <head>
 

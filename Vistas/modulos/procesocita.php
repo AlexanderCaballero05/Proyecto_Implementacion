@@ -34,10 +34,6 @@ include_once "conexion.php";
 include_once "conexion3.php";
 include "conexionpdo.php";
 include "conexionpdo.php";
-$codigoObjeto = 32;///CAMBIAR 
-$accion = 'INGRESO A LA PANTALLA DE PROCESO CITAS';
-$descripcion = 'REGISTRA UNA CITA DE LAS DIFERENTES AREAS ';
-bitacora($codigoObjeto, $accion, $descripcion);
 ?>
 <!-- Selecciona el prametro de la base de datos para la fecha y hora de la cita  :v-->
 <?php
