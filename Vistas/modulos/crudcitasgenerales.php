@@ -499,7 +499,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
 
 <script>
     function Descargar() {
-      window.open('Reportes_Prosecar/reporteCita.php','_blank');
+      window.open('Reportes_Prosecar/reportecitasgenerales.php','_blank');
       window.open(this.href,'_self');
     }
   </script>
