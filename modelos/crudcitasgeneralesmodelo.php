@@ -64,6 +64,9 @@
           alert('Cita Actualizada');
           window.location = 'crudcitasgenerales';
           </script>";
+
+          
+
           $codigoObjeto=32;
           $accion='MODIFICACIÓN';
           $CAMPO = "ENCARGADO";
@@ -71,6 +74,7 @@
           $ID_REGISTRO = $cod;
           $VAL_ANTERIOR = $nombre_anterior;
           bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+
         }else{
           echo "<script>
           alert('Ocurrio un error');
