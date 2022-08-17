@@ -49,7 +49,7 @@ if($result){
     if($error==1){
         echo '<script>
         alert("Ocurrio un Error Inesperado al Crear la Copia de Seguridad");
-        window.location ="../../respaldo"
+        window.location ="../../RespaldoProsecar"
         </script>';
     }else{
         chmod(BACKUP_PATH, 0777);
@@ -59,12 +59,12 @@ if($result){
             fclose($handle);
             echo '<script>
             alert("Copia de Seguridad Realizada con Exito");
-            window.location ="../../Respaldo"
+            window.location ="../../RespaldoProsecar"
             </script>';
         }else{
             echo '<script>
             alert("Ocurrio un Error Inesperado al Crear la Copia de Seguridad");
-            window.location ="../../Respaldo"
+            window.location ="../../RespaldoProsecar"
             </script>';
         }
     }
