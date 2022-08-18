@@ -120,11 +120,7 @@ try {
 
         $_SESSION['vario'] = $usuario;
 
-        //llamada de la fuction bitacora -->
-        $codigoObjeto = 1;
-        $accion = 'Autoregistro';
-        $descripcion = 'El usuario se autoregistro';
-        bitacora($codigoObjeto, $accion, $descripcion);
+       
       } catch (PDOException $e) {
         // si ocurre un error hacemos rollback para anular todos los insert
         $conn->rollback();
