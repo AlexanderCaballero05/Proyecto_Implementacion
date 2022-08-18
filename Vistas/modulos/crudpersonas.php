@@ -315,10 +315,6 @@ include_once "conexion3.php";
                                                                         hidden class="form-control" name="cod_personaguardar"
                                                                         id="cod_personaguardar">
 
-                                                                        <input type="text" value="<?php echo $var14; ?>"
-                                                                        hidden class="form-control" name="VALORANTERIOR"
-                                                                        id="cod_personaguardar">
-
                                                                     <div class="col-sm-6">
                                                                         <div class="form-group">
                                                                             <label >Primer Nombre</label>
