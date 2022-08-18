@@ -74,6 +74,17 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
     $valor4 = $row3;
   }
 ?>
+
+<?php
+  // Parametro de fecha de naciemiento
+  $fecha_nacimiento = "FECHA_NACIMIENTO";
+  $fecha = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
+  $fecha->execute(array($fecha_nacimiento));
+  $row=$fecha->fetchColumn();
+  if($row>0){
+    $fechana = $row;
+  }
+  ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -158,7 +169,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                 <div class="col-md-6 mb-3"><!-- Inicio del campo fecha de nacimiento -->
                  <label  class="control-label mb-2">Fecha Nacimiento:</label> 
                   <div class="form-group">
-                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max="2011-01-01" min="1950-01-01">
+                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max=max="<?php echo $fechana;?>"  min="1950-01-01">
                   </div>
                 </div><!-- Fin del campo fecha de nacimiento -->
                
@@ -212,7 +223,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
               <div class="col-md-12 mb-3"><!--inicio campo dirección-->
                  <label  class="control-label mb-2">Dirección:</label> 
                   <div class="form-group">
-                  <textarea type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="50" onkeypress="return soloLetras(event);"    required="" autocomplete = "off"></textarea>
+                  <textarea type="text" name="direccion" class="form-control"  aria-label="segundo nombre" onkeyup="mayus(this);" minlength="5" maxlength="500" onkeypress="return soloLetras(event);"    required="" autocomplete = "off"></textarea>
                   </div>
                 </div><!--fin campo dirección-->
               </div><!-- Fin del otro row -->
