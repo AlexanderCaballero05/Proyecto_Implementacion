@@ -49,9 +49,12 @@
         </div>
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
-         <ul class="nav nav-tabs card-header-tabs">
-         <li class="nav-item">
-         <a class=" nav-link" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en Espera</a>
+        <ul class="nav nav-tabs card-header-tabs">
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasPsicologicasPendientes">Citas pendientes</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="ProcesoCitasPsicologicas">Consultas en Espera</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>

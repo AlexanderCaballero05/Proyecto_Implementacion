@@ -126,10 +126,7 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                echo '<script>  alert("Verifique su correo electrónico se ha enviado una contraseña de restableción"); window.location="../login";</script>';
                $_SESSION['vario'] =$usuario;
                                //llamada de la fuction bitacora -->
-               $codigoObjeto=54;
-               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
-               $descripcion= 'EL USUARIO SOLICITO RECUPERAR LA CONTRASEÑA POR CORREO';
-               bitacora($codigoObjeto, $accion,$descripcion);
+              
                
                require "PHPMailer/Exception.php"; // aqui se utliza la libreria de PHPMAILER
                require "PHPMailer/PHPMailer.php";
@@ -153,14 +150,14 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                 // $parametros_mail="SELECT "
 
                 $oMail->isSMTP();
-                $oMail->Host=($servidor_correo);
-                $oMail->Port=($puerto_servidor);
+                $oMail->Host=("smtp.office365.com");
+                $oMail->Port=(587);
                 $oMail->SMTPSecure="tls";
                 $oMail->SMTPAuth=true;
 
-                $oMail->Username=($usuario_correo); 
-                $oMail->Password=($contrasena_usuario);
-                $oMail->setFrom($usuario_correo); // direccion de correo de destino hacia los correos de usuarios
+                $oMail->Username=("aacaballero@unah.hn"); 
+                $oMail->Password=("*Iamhappy.2020*");
+                $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                 $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                 $mensaje="
                 
@@ -218,15 +215,9 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
 
       if($filas>0){
         header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
-        $codigoObjeto=54;
-               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
-               $descripcion= 'EL USUARIO SOLICITÓ RECUPERAR LA CONTRASEÑA POR PREGUNTAS DE SEGURIDAD';
-               bitacora($codigoObjeto, $accion,$descripcion);
+      
       }else{
-        $codigoObjeto=54;
-               $accion='SOLICITAR RECUPERACIÓN DE CONTRASEÑA';
-               $descripcion= 'EL USUARIO SOLICITÓ RECUPERAR LA CONTRASEÑA POR PREGUNTAS DE SEGURIDAD FUE FALLIDO';
-               bitacora($codigoObjeto, $accion,$descripcion);
+        
         echo '<script> alert("Datos incorrectos");window.location="../Vistas/modulos/metodos_recuperar_clave.php"; </script>';
       }
     }//Fin del else if

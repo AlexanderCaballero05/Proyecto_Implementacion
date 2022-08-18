@@ -93,10 +93,7 @@
               alert('¡Se modifico el tipo de persona!');
               window.location = 'crudtipopersona';
               </script>";
-              $codigoObjeto=12;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UN TIPO DE PERSONA ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el tipo de persona!');
@@ -139,10 +136,7 @@ if(isset($_POST['persona_eliminar'])){
             alert('¡Se elimino un tipo de persona!');
             window.location = 'crudtipopersona';
             </script>";
-            $codigoObjeto=12;
-            $accion='Eliminacion';
-            $descripcion= 'Se elimino una persona';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

@@ -108,12 +108,7 @@
                       PAR_VALOR=(PAR_VALOR+1)
                       WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario') AND CODIGO_PARAMETRO = 2;";
                       $dato=$conn->query($query);  
-                           
-                            //llamada de la fuction bitacora -->
-                         $codigoObjeto=1;
-                         $accion='Usuario ingreso a modificar preguntas';
-                         $descripcion= 'Usuario modifico las preguntas';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                       
                         
                         //si el parametro no es igual se envia a contestar la siguiente pregunta              
                       echo "<script>

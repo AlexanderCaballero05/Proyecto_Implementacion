@@ -155,11 +155,7 @@ if(isset($_POST['preclinica_eliminar'])){
             alert('Registro eliminado!');
             window.location = 'crudPreclinica';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=50;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un registro en la tabla preclinica';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

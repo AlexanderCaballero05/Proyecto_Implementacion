@@ -601,7 +601,7 @@ if (isset($_POST['cod_edit_cita'])){
       }else{
         $consulta2 = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA
         from tbl_inscripcion_cita   where  CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?)");
-        $consulta2->execute(array($encargado_psicologo, $hora,$fecha));
+        $consulta2->execute(array($codigo_medico, $hora_cita,$fecha_cita));
         $row2=$consulta2->fetchColumn();
         try{
           if($row2 > 0){

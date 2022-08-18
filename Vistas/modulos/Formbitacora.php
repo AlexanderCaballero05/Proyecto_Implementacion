@@ -188,7 +188,7 @@ if(isset($_POST["guardarCambiosb"]) && !Empty($_POST["bdesde"]) && !Empty($_POST
                     INNER JOIN tbl_usuario u on u.CODIGO_USUARIO = bi.CODIGO_USUARIO
                     INNER JOIN tbl_objetos ob on ob.CODIGO_OBJETO = bi.CODIGO_OBJETO
                     WHERE bi.FECHA BETWEEN '$desde1' AND '$hasta1'
-                    ORDER BY bi.CODIGO_BITACORA DESC;";
+                    ORDER BY bi.codigo_bitacora desc;";
                            //llamando los datos de la base y almacenadolos en variables 
                            
                     $resulta = $conn->query($queryi);

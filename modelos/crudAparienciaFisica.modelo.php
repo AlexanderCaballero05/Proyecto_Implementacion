@@ -34,11 +34,7 @@ if(isset($_POST['aparienciaa'])){
                         window.location = 'crudAparienciaFisica';
                         </script>";
                         exit;
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=40;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRÓ UNA APARIENCIA FISICA ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                       
                       }else{
                         echo "<script> 
                         alert('Error !');
@@ -95,10 +91,7 @@ if(isset($_POST['aparienciaa'])){
               window.location = "crudAparienciaFisica";
               </script>';
               include_once 'function_bitacora.php';
-              $codigoObjeto=40;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICÓ UNA APARIENCIA FISICA';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
               exit;
             }else{
               echo "<script>
@@ -143,10 +136,7 @@ if(isset($_POST['aparienciaa'])){
              window.location = 'crudAparienciaFisica';
              </script>";
              include_once 'function_bitacora.php';
-             $codigoObjeto=40;
-             $accion='ELIMINACION';
-             $descripcion= 'SE ELIMINÓ UNA APARIENCIA ';
-             bitacora($codigoObjeto, $accion,$descripcion);
+           
              exit;
            }else{
              echo "<script>

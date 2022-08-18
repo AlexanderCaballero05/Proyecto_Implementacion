@@ -19,7 +19,7 @@ Lic. Karla Melisa Garcia Pineda (Evaluación)
 Programa:         Pantalla de Ingreso a mantenimiento modalidad
 Fecha:             01-jan-2016
 Programador:       Gissela Diaz Y ANY HERNANDEZ
-descripcion:       Pantalla que contrala la modalidad de las tutorias 
+descripcion:       Pantalla que contralara la modalidad de las tutorias 
 
 -----------------------------------------------------------------------
                       Historial de Cambio
@@ -88,9 +88,12 @@ $query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPEC
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
-tbl_especialidad  te 
+tbl_especialidad  te, tbl_usuario usu
 where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 2
+AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD 
+AND tp.CODIGO_PERSONA = usu.CODIGO_PERSONA
+and te.CODIGO_AREA = 2
+and usu.CODIGO_ESTADO = 2;
 ";
 $result1= $conn->query($query);
 ?>
@@ -100,9 +103,13 @@ $query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPEC
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
-tbl_especialidad  te 
+tbl_especialidad  te,
+tbl_usuario usu
 where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 3
+AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD
+AND tp.CODIGO_PERSONA = usu.CODIGO_PERSONA
+ and te.CODIGO_AREA = 3
+ and usu.CODIGO_ESTADO = 2;
 ";
 $result2= $conn->query($query);
 ?>
@@ -112,9 +119,13 @@ $query= "SELECT concat_ws (' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO, ' , ' 'ESPEC
 as ESPECIALISTA ,tpe.CODIGO_PERSONA_ESPECIALIDAD 
 from tbl_persona tp ,
 tbl_persona_especialidad tpe,
-tbl_especialidad  te 
+tbl_especialidad  te,
+tbl_usuario usu
 where  tp.CODIGO_PERSONA = tpe.CODIGO_PERSONA
-AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD and te.CODIGO_AREA = 4
+AND te.CODIGO_ESPECIALIDAD= tpe.CODIGO_ESPECIALIDAD
+AND tp.CODIGO_PERSONA = usu.CODIGO_PERSONA
+ and te.CODIGO_AREA = 4
+ and usu.CODIGO_ESTADO = 2;
 ";
 $result3= $conn->query($query);
 ?>

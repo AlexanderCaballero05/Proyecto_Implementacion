@@ -88,10 +88,23 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                <?php
+                                        $usuario= $_SESSION['vario'];
+                                        //Consulta que trae el codigo del usuario
+                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
+                                        FROM tbl_usuario u, tbl_persona p 
+                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
+                                        AND NOMBRE_USUARIO = (?);");
+                                        $sentencia1->execute(array($usuario));
+                                        $cod_usuario=$sentencia1->fetchColumn();
+                                    ?>
                   
                     
-                    <button  onclick="Descargar()" data-toggle="modal"  href="" type='button' id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span>Reporte</button>
-                    </br></br>
+                    
+                  <form method="POST" action="Reportes_Prosecar/reporteCitasEspiritualesPendientes.php" target="_blank">
+                      <input type="text"  hidden value="<?php echo $cod_usuario; ?>" name="codigo_CATEQUISTA">
+                      <button  type="submit" title='Imprimir'     id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
+                     </form>
                     
                      <!--
                     <div class="row">
@@ -135,16 +148,7 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                        $usuario= $_SESSION['vario'];
-                                        //Consulta que trae el codigo del usuario
-                                        $sentencia1 = $db->prepare("SELECT p.CODIGO_PERSONA
-                                        FROM tbl_usuario u, tbl_persona p 
-                                        WHERE u.CODIGO_PERSONA = p.CODIGO_PERSONA
-                                        AND NOMBRE_USUARIO = (?);");
-                                        $sentencia1->execute(array($usuario));
-                                        $cod_usuario=$sentencia1->fetchColumn();
-                                    ?>
+                                   
                                         <?php
                                     
                                         $query = "SELECT a.CODIGO_AREA, IC.CODIGO_CITA,IC.FECHA_CITA,IC.HORARIO , IC.CODIGO_PERSONA ,IC.CODIGO_ESPECIALISTA , CONCAT_WS(' ',P.PRIMER_NOMBRE,  P.PRIMER_APELLIDO) AS 

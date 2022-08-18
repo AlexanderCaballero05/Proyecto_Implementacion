@@ -110,11 +110,7 @@ if(isset($_POST['eliminarfami'])){
             echo "<script>
             window.location = 'crudfamiliares';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=2;
-            $accion='Eliminación';
-            $descripcion= 'Se elimino un familiar ';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

@@ -31,10 +31,7 @@
               </script>";
               exit;
               include_once 'function_bitacora.php';
-              $codigoObjeto=40;
-              $accion='Registro';
-              $descripcion= 'Se agrego una nueva especialidad ';
-               bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script> 
               alert('Error auxilio!');
@@ -83,10 +80,7 @@
           window.location = "crudespecialidad";
           </script>';
           include_once 'function_bitacora.php';
-          $codigoObjeto=40;
-          $accion='Modificacion';
-          $descripcion= 'Se edito una especialidad ';
-          bitacora($codigoObjeto, $accion,$descripcion);
+         
           exit;
         }else{
           echo "<script>
@@ -131,10 +125,7 @@
              window.location = 'crudespecialidad';
              </script>";
              include_once 'function_bitacora.php';
-             $codigoObjeto=19;
-             $accion='Modificacion';
-             $descripcion= 'Se elimino una especialidad';
-             bitacora($codigoObjeto, $accion,$descripcion);
+             
              exit;
            }else{
              echo "<script>

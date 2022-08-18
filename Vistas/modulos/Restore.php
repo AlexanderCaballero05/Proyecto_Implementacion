@@ -36,12 +36,12 @@ if($totalErrors>=0){
 
     echo "<script>
               alert('Restauracion completada exitosamente');
-              window.location = '../../RespaldoProsecar';
+              window.location = '../../RestauracionProsecar';
                     </script>";
 }else{
 	echo  '<script>
     alert("Error al realizar la restauracion del sistema");
-    window.location ="../../RespaldoProsecar"
+    window.location ="../../RestauracionProsecar"
     </script>';
 }
 

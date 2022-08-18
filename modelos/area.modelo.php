@@ -33,11 +33,7 @@
                         echo "<script> 
                         window.location = 'area';
                         </script>";
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=21;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE AGREGO UNA ÁREA';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                       
                         exit;
                       }else{
                         echo "<script> 
@@ -102,11 +98,7 @@
               echo "<script>
               window.location = 'area';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=21;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UNA ÁREA';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script>
               alert('¡Error al intentar modificar la area!');
@@ -137,10 +129,7 @@ if(isset($_POST['area_eli'])){
         window.location = 'area';
         </script>";
          //<!--llamada de la fuction bitacora -->
-         $codigoObjeto=21;
-         $accion='ELIMINACIÓN';
-         $descripcion= 'SE ELIMINO UNA ÁREA';
-         bitacora($codigoObjeto, $accion,$descripcion);
+        
         exit;
       }else{
         echo "<script>

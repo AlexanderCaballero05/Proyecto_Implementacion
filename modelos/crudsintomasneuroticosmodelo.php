@@ -90,11 +90,7 @@
               alert('El síntoma se modifico correctamente'); 
               window.location = 'crudsintomasneuroticos';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=47;
-              $accion='Editar'; 
-              $descripcion= 'Se edito un sintoma neurótico';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el síntoma!');
@@ -137,11 +133,7 @@ if(isset($_POST['eliminarsintoneu'])){
             alert('Se elimino correctamente'); 
             window.location = 'crudsintomasneuroticos';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=4;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino una pregunta ';
-            bitacora($codigoObjeto, $accion,$descripcion);
+            
             exit;
           }else{
             echo "<script>
