@@ -246,6 +246,7 @@ $result3= $conn->query($query);
                         </div>
                     </div>
                     <div  style ="display:none;" id="es_espiritual" class="col-sm-4  mb-3">
+                        
                         <?php
                         $query= "SELECT  CODIGO_ESPECIALIDAD,NOMBRE FROM tbl_especialidad where CODIGO_AREA = 4 and CODIGO_ESTADO = 2 ";
                         $resultado= $conn->query($query);

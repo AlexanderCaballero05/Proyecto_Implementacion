@@ -235,7 +235,7 @@
                                       <div class="col-sm-12">
                                         <div class="form-group">
                                           <label for="txtcodigo_persona">Descripción</label>
-                                          <textarea  type="text" class="form-control"  required pattern="[A-Z]{5,255}" minlength="5" maxlength="255" autocomplete = "off" type="text" onkeyup="mayus(this);"   name="editar_descripcion"  onkeypress="return soloLetras(event);" id="editar_descripcion"><?php echo $var3; ?></textarea>
+                                          <textarea  type="text" class="form-control"  required pattern="[A-Z]{5,255}" minlength="5" maxlength="255" autocomplete = "off" type="text" onkeyup="mayus(this);"   name="editar_descripcion"  id="editar_descripcion"><?php echo $var3; ?></textarea>
                                           <div class="invalid-feedback">
                                             Campo obligatorio.
                                           </div>
@@ -326,7 +326,7 @@
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label>Descripción</label>
-                                    <textarea  type="text"   class="form-control" required pattern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off"  onkeypress="return soloLetras(event);" placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
+                                    <textarea  type="text"   class="form-control" required pattlern="[A-Z]{5,255}" minlength="5" maxlength="255"  autocomplete = "off"   placeholder="Ingrese una descripción del rol" name="descripcion_rol" id="descripcion_rol" ></textarea>
                                     <div class="invalid-feedback">
                                       Campo obligatorio.
                                    </div>

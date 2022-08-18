@@ -373,40 +373,10 @@ include_once "conexion3.php";
                                   
 <!-- funciones del sistema -->
 <script>
-  function soloLetras(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = " áéíóúabcdefghijklmnñopqrstuvwxyz_-";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
+ 
 
 //funcion para solo letras y algunos caracteres
-function soloLetrascaracteres(e){
-   key = e.keyCode || e.which;
-   tecla = String.fromCharCode(key).toLowerCase();
-   letras = "_áéíóúabcdefghijklmnñopqrstuvwxyz";
-   especiales = ["8-37-39-46"];
-   tecla_especial = false
-   for(var i in especiales){
-    if(key == especiales[i]){
-      tecla_especial = true;
-      break;
-    }
-  }
-  if(letras.indexOf(tecla)==-1 && !tecla_especial){
-    return false;
-  }
- }
+
 
 
  //funcion para solu numeros ingresar en el campo
@@ -424,38 +394,12 @@ function soloLetrascaracteres(e){
     return false;
     }
   }
-   //funcion para quitar espacios
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
+   
   //funcion para poner mayusculas
   function mayus(e) {
     e.value = e.value.toUpperCase();
   }
-   //funcion sin espacios 
-  function sinespacio(e) {
-    var cadena =  e.value;
-    var limpia = "";
-    var parts = cadena.split(" ");
-    var length = parts.length;
-    for (var i = 0; i < length; i++) {
-     nuevacadena = parts[i];
-     subcadena = nuevacadena.trim();
-     if(subcadena != "") {
-       limpia += subcadena + " ";
-      }
-    }
-   limpia = limpia.trim();
-   e.value = limpia;
-  };
-  //otra funcion para quitar espacios 
-  function quitarespacios(e) {
-    var cadena =  e.value;
-    cadena = cadena.trim();
-    e.value = cadena;
-  };
+  
 </script>
 
 

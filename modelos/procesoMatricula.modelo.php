@@ -143,14 +143,24 @@ if(isset($_POST['ma_eliminar'])){
     $code = ($_POST['ma_eliminar']);//asigna a una variable el id del estado a eliminar
     $estudiante = ($_POST['estudiante_eli']);
     $tutoria = ($_POST['eliminartutoria']);
+    $VALOR = ($_POST['CATEQUESIS2']);
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
           mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            
             window.location = 'crudMatricula';
             </script>";
+             
+            include_once 'function_bitacora.php';
+            $codigoObjeto=23;
+            $accion='ELIMINAR';
+            $CAMPO="TUTORIA";
+            $VAL_ACTUAL =  "";
+            $ID_REGISTRO = $code;
+            $VAL_ANTERIOR =  $VALOR;
+            bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+
            
             exit;
           }else{
@@ -174,6 +184,7 @@ if(isset($_POST['MatriEliminar'])){
     $code = ($_POST['MatriEliminar']);//asigna a una variable el id del estado a eliminar
     $estudiante = ($_POST['estudianteElim']);
     $tutoria = ($_POST['asignaturaEliminar']);
+    $VALOR = ($_POST['tutoria']);
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
           mysqli_query($link, "DELETE from  tbl_matricula_academica where CODIGO_MATRICULA = '$code' and CODIGO_ESTUDIANTE = '$estudiante';");
@@ -182,6 +193,17 @@ if(isset($_POST['MatriEliminar'])){
             
             window.location = 'crudMatricula';
             </script>";
+            
+            include_once 'function_bitacora.php';
+            $codigoObjeto=23;
+            $accion='ELIMINAR';
+            $CAMPO="TUTORIA_ACADEMICA";
+            $VAL_ACTUAL = "";
+            $ID_REGISTRO = $code;
+            $VAL_ANTERIOR = $VALOR;
+            bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+
+           
             exit;
           }else{
             echo "<script>

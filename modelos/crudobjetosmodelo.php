@@ -11,6 +11,7 @@
      if (isset($_POST['ADD_OBJETO'])){
         $nombre_objeto = ($_POST['nombre']);
         $descripcion = ($_POST['descripcion']);
+        $estado = ($_POST['Est_obj']);
         $fechaActual = date('Y-m-d');
         $usuario =$_SESSION['vario'];
         try {
@@ -26,7 +27,7 @@
               }else{
                try {
                 $query_objeto = " INSERT INTO tbl_objetos(NOMBRE,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,`CODIGO_ESTADO`)  
-                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual','2'); ";
+                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual','$estado'); ";
                 $resul=$conn->query($query_objeto);
                 if ($resul >0){
                   echo "<script> 
@@ -34,10 +35,7 @@
                   </script>";
                   exit;
                   include_once 'function_bitacora.php';
-                         $codigoObjeto=6;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nuevo objeto ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                       
                 } else {
                   echo "<script> 
                         alert('Error !');
@@ -96,11 +94,6 @@
               echo "<script>
               window.location = 'crudobjetos';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=6;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un objeto ';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
             }else{
               echo "<script>
@@ -148,11 +141,6 @@
                 echo "<script>
               window.location = 'crudobjetos';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=6;
-              $accion='Eliminación';
-              $descripcion= 'Se elimino un OBJETO ';
-              bitacora($codigoObjeto, $accion,$descripcion);
               exit;
               }else{
                 echo "<script>

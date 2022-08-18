@@ -246,7 +246,7 @@ include_once "conexion3.php";
                                                                             <div class="col-sm-12">
                                                                                 <div class="form-group">
                                                                                     <label>Nombre</label>
-                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);"
+                                                                                    <input type="text" value="<?php echo $var3; ?>" class="form-control" maxlength="40" minlength="5" onkeyup="mayus(this);" autocomplete="off" type="text" 
                                                                                     name="editnombre" autocomplete = "off" id="editnombre" required>
                                                                                     <div class="invalid-feedback">
                                                                                     Complete este campo.
@@ -256,7 +256,7 @@ include_once "conexion3.php";
                                                                             <div class="col-sm-12">
                                                                                 <div class="form-group">
                                                                                     <label>Descripción</label>
-                                                                                    <textarea type="text"  onkeyup="mayus(this);"  class="form-control" required pattern="[A-Z]{5,100}" maxlength="100" minlength="5"  onkeyup="mayus(this);" autocomplete="off" type="text" onkeypress="return soloLetras(event);" name="editdescripcion" autocomplete = "off" id="editdescripcion" ><?php echo $var4;?></textarea>
+                                                                                    <textarea type="text" class="form-control" required pattern="[A-Z]{5,100}" maxlength="100" minlength="5"   autocomplete="off" type="text"  name="editdescripcion" autocomplete = "off" id="editdescripcion" ><?php echo $var4;?></textarea>
                                                                                      <div class="invalid-feedback">
                                                                                       Complete este campo.
                                                                                     </div>
@@ -346,7 +346,7 @@ include_once "conexion3.php";
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Nombre</label>
-                                <input type="text" class="form-control" required minlength="10" maxlength="40"   onkeyup="mayus(this);" autocomplete="off"  onkeypress="return soloLetras(event);"
+                                <input type="text" class="form-control" required minlength="10" maxlength="40"   onkeyup="mayus(this);" autocomplete="off"  
                                  name="nombre" id="nombre" >
                                 <div class="invalid-feedback">
                                   Campo obligatorio.
@@ -356,13 +356,28 @@ include_once "conexion3.php";
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label >Descripción</label>
-                                <textarea type="text" class="form-control" required pattern="[A-Z,]{5,100}" minlength="5" maxlength="100" onkeyup="mayus(this);"  onkeypress="return soloLetras(event);"      name="descripcion"  ></textarea>
+                                <textarea type="text" class="form-control" required pattern="[A-Z,]{5,100}" minlength="5" maxlength="100" onkeyup="mayus(this);"       name="descripcion"  ></textarea>
                                  <div class="invalid-feedback">
                                    Campo obligatorio.
                                 </div>
                                 
                             </div>
                         </div>
+                        <div class="col-sm-12">
+                               <div class="form-group">
+                                <label for="txtcodigo_persona">Estado</label>
+                                <select class="form-control select2" name="Est_obj" id="Est_obj" required>
+                                <option value= "">--Seleccione un estado--</option>
+                                <option value= "2">ACTIVO</option>
+                                <option value= "3">INACTIVO</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                   campo obligatorio.  
+                               </div>
+                               </div>
+                            </div>
+ 
+
                     </div> <!-- FIN DE EL PRIMER ROW -->
                 </div>
                 <!--FINAL DEL CARD BODY -->

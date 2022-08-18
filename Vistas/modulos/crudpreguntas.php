@@ -127,9 +127,8 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                         <tr>
                         <th class="text-center">Acción</th>
                           <th class="text-center">Código</th>
-                          <th class="text-center">Estado</th>
                           <th class="text-center">Pregunta</th>
-                     
+                          <th class="text-center">Estado</th>
                           
                       
                         </tr>
@@ -216,9 +215,30 @@ Gissela Diaz        		02-06-2022                 cambio en la validacion de agre
                               </div>
                             </div><!-- final del text-center -->
                           </td>
-                          <td class="text-center"><?php echo $var1; ?></td>
-                          <td class="text-center"><?php echo $var3; ?></td>
-                          <td class="text-center"><?php echo $var2; ?></td>
+
+                          
+                          <?php
+                                                        if($var3 == 'ACTIVO'){
+                                                    ?> 
+                                                    
+                                                    <td class="text-center"><?php echo $var1; ?></td>
+                                                    <td class="text-center"><?php echo $var2; ?></td>
+                                                    <td class="text-center "style="color: green; font-weight: bold;"><?php echo $var3; ?></td>
+                                                    
+
+                                                    <?php
+                                                        }else{ //si no e; texto de los datos de la tabla no cambian
+                                                    ?>
+
+                                                            <td class="text-center"><?php echo $var1; ?></td>
+                                                            <td class="text-center"><?php echo $var2; ?></td>
+                                                            <td class="text-center" style="color: red; font-weight: bold;"><?php echo $var3; ?></td>
+                                                    
+                                                    <?php
+                                                        }
+                                                    ?>
+
+                          
                           
 
                           <!--INICIO DEL MODAL DE EDITAR PREGUNTA -->
