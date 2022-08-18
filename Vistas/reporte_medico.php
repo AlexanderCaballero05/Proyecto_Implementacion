@@ -253,7 +253,7 @@ include('conexion2.php');
       <br>
     
       <?php
-        $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO
+        $consulti ="SELECT CON.CODIGO_CONSULTA, con.CODIGO_CITA, con.SINTOMAS, con.DIAGNOSTICO_INGRESO, con.EVOLUCION, con.DIAGNOSTICO_EGRESO, i.FECHA_CITA
         FROM tbl_inscripcion_cita i, tbl_persona pe , tbl_persona_especialidad es, tbl_estado est, tbl_consulta_medica con
         WHERE i.CODIGO_PERSONA = pe.CODIGO_PERSONA
           AND i.CODIGO_ESPECIALISTA = es.CODIGO_PERSONA_ESPECIALIDAD
@@ -350,7 +350,7 @@ include('conexion2.php');
               <?php  echo utf8_decode(strtolower($examen)) ?>
             </div>
             <div class="c2"><label><b>Indicaciones del Examen: </b></label>
-              <?php  echo utf8_decode(strtolower($indicaciones)) ?>
+              <?php  echo utf8_decode(strtolower($indicacion)) ?>
             </div>
             <div class="c2"><label><b>Observaciones del Examen: </b></label>
               <?php  echo utf8_decode(strtolower($observa));?>
