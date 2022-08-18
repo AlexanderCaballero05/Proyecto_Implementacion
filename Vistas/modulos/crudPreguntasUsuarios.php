@@ -44,12 +44,10 @@ include_once 'conexionpdo.php';
  include "conexionpdo.php";
 
  ?>
- <?php
-
-?>
 
     
       <?php
+
   $Min = "MIN_RESPUESTA_PREGUNTAS";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($Min));
@@ -205,7 +203,7 @@ include_once 'conexionpdo.php';
 
                     <?php
                     include_once "conexion3.php";
-                    $query1= "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas;";
+                    $query1= "SELECT  CODIGO_PREGUNTAS, PREGUNTA FROM tbl_preguntas where  CODIGO_ESTADO = 2;";
                     $resultado= $conn->query($query1);
                     ?>
 <!-- Inicio para agregar preguntas usuario-->

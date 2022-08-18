@@ -88,7 +88,7 @@
               echo "<script>
               window.location = 'estado';
               </script>";
-              
+
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el Estado!');
@@ -111,9 +111,9 @@
 if(isset($_POST['estado_eliminar'])){
   if(isset($_POST['ELIMINAR_ESTADO'])){
     $code = ($_POST['estado_eliminar']);//asigna a una variable el id del estado a eliminar
-    try{
-      $relacion_tablas =  $db->prepare("SELECT u.CODIGO_ESTADO, u.CODIGO_USUARIO  from  tbl_usuario  u ,tbl_estado r
-      where r.CODIGO_ESTADO  = u.CODIGO_ESTADO  and r.CODIGO_ESTADO  = (?);;");
+      $relacion_tablas = $db->prepare("  SELECT u.CODIGO_ESTADO  , u.NOMBRE 
+      from  tbl_estado  u,tbl_usuario r, tbl_inscripcion_cita tic   
+      where  r.CODIGO_ESTADO = u.CODIGO_ESTADO  or tic.CODIGO_ESTADO = u.CODIGO_ESTADO and u.CODIGO_ESTADO = (?);");
       $relacion_tablas->execute(array($code));
       $row = $relacion_tablas->fetchColumn();
       if($row >0){
@@ -121,17 +121,14 @@ if(isset($_POST['estado_eliminar'])){
         alert('¡Error al eliminar un estado, relacionado con otras tablas!');
         window.location = 'estado';
         </script>";
-        exit;
       }else{
-        try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
           mysqli_query($link, "DELETE FROM tbl_estado WHERE  CODIGO_ESTADO = '$code' ");
           if(mysqli_affected_rows($link)>0){
             echo "<script>
-            
             window.location = 'estado';
             </script>";
-           
+
             exit;
           }else{
             echo "<script>
@@ -140,15 +137,7 @@ if(isset($_POST['estado_eliminar'])){
             </script>";
             exit;
           }
-        }catch(PDOException $e){
-        echo $e->getMessage(); 
-        return false;
-       }
       }
-    }catch(PDOException $e){
-     echo $e->getMessage(); 
-     return false;
-    }
   }
 }//Cerre del if padre
 

@@ -318,6 +318,7 @@
                                    <div class="modal-body">
                                        <input type="text" value ="<?php echo $var8; ?>" hidden class="form-control" name="ma_eliminar">
                                        <input type="text" value ="<?php echo $var9; ?>" hidden class="form-control" name="estudiante_eli">
+                                       <input type="text" value ="<?php echo $var1; ?>" hidden class="form-control" name="CATEQUESIS2">
                                        <h4 class="text-center">¿Está seguro de eliminar la clase <?php echo $var1; ?>?</h4>
                                     </div> <!--fin el card body -->
                                     <div class="modal-footer ">

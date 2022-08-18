@@ -11,6 +11,7 @@
      if (isset($_POST['ADD_OBJETO'])){
         $nombre_objeto = ($_POST['nombre']);
         $descripcion = ($_POST['descripcion']);
+        $estado = ($_POST['Est_obj']);
         $fechaActual = date('Y-m-d');
         $usuario =$_SESSION['vario'];
         try {
@@ -26,14 +27,14 @@
               }else{
                try {
                 $query_objeto = " INSERT INTO tbl_objetos(NOMBRE,DESCRIPCION,CREADO_POR_USUARIO,FECHA_CREACION,`CODIGO_ESTADO`)  
-                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual','2'); ";
+                VALUES ('$nombre_objeto','$descripcion','$usuario','$fechaActual','$estado'); ";
                 $resul=$conn->query($query_objeto);
                 if ($resul >0){
                   echo "<script> 
                   window.location = 'crudobjetos';
                   </script>";
                   exit;
-                 
+
                 } else {
                   echo "<script> 
                         alert('Error !');
@@ -92,7 +93,7 @@
               echo "<script>
               window.location = 'crudobjetos';
               </script>";
-             
+
               exit;
             }else{
               echo "<script>
@@ -140,7 +141,7 @@
                 echo "<script>
               window.location = 'crudobjetos';
               </script>";
-              
+
               exit;
               }else{
                 echo "<script>

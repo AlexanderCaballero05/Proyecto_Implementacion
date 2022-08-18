@@ -36,11 +36,6 @@
                         echo "<script> 
                         window.location = 'crudpreguntas';
                         </script>";
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=4;
-                        $accion='INSERCIÓN';
-                        $descripcion='SE REGISTRÓ UNA PREGUNTA';
-                       bitacora($codigoObjeto,$accion,$descripcion);
                         exit;
                       }else{
                         echo "<script> 
@@ -102,7 +97,7 @@
               echo "<script>
               window.location = 'crudpreguntas';
               </script>";
-             
+
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar la pregunta!');
