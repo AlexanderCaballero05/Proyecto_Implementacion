@@ -445,7 +445,7 @@ include_once "conexion3.php";
                                                                     </div>
                                                                     <div class="col-md-4"><!--INICIO TIPO PERSONA-->
                                                                     <?php 
-                                                                    $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
+                                                                    $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido'and CODIGO_ESTADO = 2;";
                                                                     $resultadod=$conn->query($query);                
                                                                     ?>
                                                                     <label class="control-label">Tipo Persona:</label>

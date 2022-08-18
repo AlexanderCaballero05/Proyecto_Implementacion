@@ -128,7 +128,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                     <div class="row">
                        <div class="col-md-4"><!--INICIO TIPO PERSONA-->
                           <?php 
-                          $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido';";
+                          $query = "SELECT * FROM `tbl_tipo_persona` WHERE CODIGO_TIPO_PERSONA <> 3 AND NOMBRE <> 'no definido'and CODIGO_ESTADO = 2;";
                           $resultadod=$conn->query($query);                
                           ?>
                          <label class="control-label">Tipo Persona:</label>
@@ -201,7 +201,7 @@ Diana Rut               11/08/2022            Cambios en la parte de familiar ,s
                         <div class="form-group">
                           <input class="form-control" type="date"  name="fecha_nacimiento" min="1950-01-01" max="<?php echo $fechita;?>"  required  >
                           <div class="invalid-feedback">
-                            Seleccione una fecha correcta.
+                            Seleccione una fecha correcta antes del <?php echo $fechita;?>
                           </div> 
                         </div>
                       </div>
