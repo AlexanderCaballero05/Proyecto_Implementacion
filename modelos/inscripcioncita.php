@@ -266,6 +266,7 @@ if (isset($_POST['cod_edit_cita'])){
     $cod =$_POST['cod_edit_cita'];
     $ENCARGADO= $_POST['encargadocitados'];
     $paciente1= $_POST['paciente_editar'];
+    $anterior= $_POST['valoactualencargado'];
     try{
        $sentencia_especialista = $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_PERSONA
        from tbl_inscripcion_cita   where CODIGO_PERSONA  = (?) AND HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?)
@@ -280,6 +281,16 @@ if (isset($_POST['cod_edit_cita'])){
         </script>";
         exit;
       }else{
+
+         ///sentencia de jalar encargado de valor actual
+       // consulta para mandar a llamar el nombre sin modificar
+       $sentencia10 = $db->prepare("  SELECT concat_ws(' ',tp.PRIMER_NOMBRE,tp.PRIMER_APELLIDO )  
+       as ESPECIALISTA 
+       from tbl_persona tp 
+       where  tp.CODIGO_PERSONA =$ENCARGADO");
+       $sentencia10->execute();
+       $nombre_actual2=$sentencia10->fetchColumn(); 
+        ///////
        $sentencia_paciente= $db->prepare("SELECT  HORARIO , FECHA_CITA , CODIGO_ESPECIALISTA , CODIGO_ESTADO, CODIGO_CITA
        from tbl_inscripcion_cita   where CODIGO_ESPECIALISTA  = (?) and HORARIO = (?)  and FECHA_CITA = (?) and CODIGO_ESTADO = (?) 
         AND CODIGO_CITA <> (?) ");
@@ -298,7 +309,15 @@ if (isset($_POST['cod_edit_cita'])){
           echo "<script>
           alert('Cita Actualizada');
           window.location = 'crudcitasMedicasPendientes';
-          </script>";
+           </script>";
+           $codigoObjeto=32;
+           $accion='MODIFICACIÓN';
+           $CAMPO = "ENCARGADO";
+           $VAL_ACTUAL= $nombre_actual2;
+           $ID_REGISTRO = $cod;
+           $VAL_ANTERIOR = $anterior;
+           bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
+   
         }else{
           echo "<script>
           alert('Ocurrio un error');
