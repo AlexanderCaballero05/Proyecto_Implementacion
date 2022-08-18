@@ -268,6 +268,9 @@ if(isset($_POST["bdesde"]) && isset($_POST["bhasta"])){
                                                                     <input type="text" value="<?php echo $var1; ?>" 
                                                                     hidden class="form-control"
                                                                     name="cod_edit_cita" id="cod_edit_cita">
+                                                                    <input type="text" value="<?php echo $var5; ?>" 
+                                                                    hidden class="form-control"
+                                                                    name="valoactualencargado" id="valoactualencargado">
 
                                                                     <input type="text" value="<?php echo $paciente; ?>" 
                                                                     hidden class="form-control"
