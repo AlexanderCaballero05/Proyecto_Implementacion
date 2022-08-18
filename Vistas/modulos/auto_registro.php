@@ -169,7 +169,7 @@ Luz María Montoya   11-Ago-2022       Modificación en el orden de los campos, 
                 <div class="col-md-6 mb-3"><!-- Inicio del campo fecha de nacimiento -->
                  <label  class="control-label mb-2">Fecha Nacimiento:</label> 
                   <div class="form-group">
-                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max=max="<?php echo $fechana;?>"  min="1950-01-01">
+                   <input type="date" name="fechana" class="form-control"  aria-label="fecha nacimiento" max="<?php echo $fechana;?>"  min="1950-01-01">
                   </div>
                 </div><!-- Fin del campo fecha de nacimiento -->
                

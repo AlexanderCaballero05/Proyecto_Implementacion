@@ -266,6 +266,7 @@
                                     if ($resul->num_rows > 0) {
                                     while($row = $resul->fetch_assoc()) { 
                                     $codigo_consulta = $row['CODIGO_CONSULTA'];
+                                    $codigo_cita = $row['CODIGO_CITA'];
                                     $sintomas = $row['SINTOMAS'];
                                     $diagnostico_ingreso = $row['DIAGNOSTICO_INGRESO'];
                                     $evolucion = $row['EVOLUCION'];
@@ -491,6 +492,12 @@
             </div>
             <div class="modal-body">
             <div class="table-responsive">
+            <form method="POST" action="Reportes_Prosecar/reporteRecetasConsulta.php" target="_blank">
+                      <input type="text"  hidden value="<?php echo $codigo_cita; ?>" name="codigo_cita">
+                      <input type="text"  hidden value="<?php echo $codigo_consulta; ?>" name="codigo_consulta">
+         
+                      <button  type="submit" title='Imprimir'     id="btnGuardar"  style="color:white; background-color:#FA0079" class="btn btn-danger mb-3"> <span><i class="nav-icon fa fa-file-pdf mx-1"></i></span> Reporte</button>
+                </form>
                 <table id="tbl_medicamentos" class="table table-bordered table-striped">
                     <thead class="">
                         <tr>

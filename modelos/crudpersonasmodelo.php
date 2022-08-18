@@ -3,6 +3,7 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
+  include "conexionpdo.php";
 ?>
 <?php
  /// editar usario
@@ -23,12 +24,7 @@
 
         try{
           
-        $sentencia1 = $db->prepare(" SELECT tce.CORREO_PERSONA  
-        from tbl_correo_electronico tce  
-        where tce.CODIGO_PERSONA =$VALOR_ANTERIOR");
-        // llamar al procedimiento almacenado
-        $sentencia1->execute();
-        $nombre_anterior=$sentencia1->fetchColumn(); 
+       
 
           // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
           $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
@@ -62,6 +58,15 @@
             SET NUMERO_TELEFONO = '$telefono' 
             WHERE CODIGO_PERSONA = '$codpersona'; ";
             $resultatel=$conn->query($update_telefono);
+
+
+            $sentencia1 = $db->prepare(" SELECT tce.CORREO_PERSONA  
+            from tbl_correo_electronico tce  
+            where tce.CODIGO_PERSONA =$VALOR_ANTERIOR");
+            // llamar al procedimiento almacenado
+            $sentencia1->execute();
+            $nombre_anterior=$sentencia1->fetchColumn(); 
+
             if($resultado11 > 0 && $resulta > 0 && $resultatel > 0){
               echo "<script>  
              alert('!Persona Actualizada!');

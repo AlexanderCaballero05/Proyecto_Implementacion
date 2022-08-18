@@ -339,6 +339,7 @@ if(isset($_POST['IDCARGA'])){
                             $VAL_ANTERIOR = $nombre_anterior;
                             bitacora($codigoObjeto,$accion,$VAL_ANTERIOR,$VAL_ACTUAL,$ID_REGISTRO,$CAMPO);
                             exit;
+                             
                         }else{
                             $msg="problema ".mysqli_error($conn);
                             var_dump($msg);
