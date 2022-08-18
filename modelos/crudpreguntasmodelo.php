@@ -97,6 +97,7 @@
               echo "<script>
               window.location = 'crudpreguntas';
               </script>";
+
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar la pregunta!');

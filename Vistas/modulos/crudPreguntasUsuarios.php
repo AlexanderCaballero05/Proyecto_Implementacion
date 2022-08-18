@@ -44,13 +44,10 @@ include_once 'conexionpdo.php';
  include "conexionpdo.php";
 
  ?>
- <?php
 
-?>
+    
+      <?php
 
-      <!--llamada de la fuction bitacora -->
-  
- <?php
   $Min = "MIN_RESPUESTA_PREGUNTAS";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");
   $sentencia->execute(array($Min));

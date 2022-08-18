@@ -88,6 +88,7 @@
               echo "<script>
               window.location = 'estado';
               </script>";
+
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el Estado!');
@@ -127,6 +128,7 @@ if(isset($_POST['estado_eliminar'])){
             echo "<script>
             window.location = 'estado';
             </script>";
+
             exit;
           }else{
             echo "<script>

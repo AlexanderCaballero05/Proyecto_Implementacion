@@ -17,8 +17,11 @@
       <div class="card"> <!--card del menu-->
         <div class="card-header" style="background-color:#B3F2FF;">
         <ul class="nav nav-tabs card-header-tabs">
-         <li class="nav-item">
-            <a class=" nav-link" style="color:#000000;" href="procesoCitasEspirituales">Citas en Espera</a>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="crudcitasEspiritualesPendientes">Citas pendientes</a>
+            </li>
+            <li class="nav-item">
+            <a class=" nav-link" style="color:#000000;" href="procesoCitasEspirituales">Consultas en Espera</a>
             </li>
             <li class="nav-item">
             <a class=" nav-link" style="color:#000000;" href="#">Registrar Expediente</a>

@@ -26,7 +26,7 @@
             </li>
           </ul>
         </div>
-        <?php
+                  <?php
                     $usuario= $_SESSION['vario'];
 
                     //Consulta que trae el codigo del usuario

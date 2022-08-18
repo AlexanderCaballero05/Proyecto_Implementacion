@@ -35,11 +35,7 @@
                         alert('¡Modalidad agregada correctamente');
                         </script>";
                         exit;
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=19;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRÓ UNA MODALIDAD';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                       
                       }else{
                         echo "<script> 
                         alert('Error auxilio!');
@@ -96,11 +92,7 @@
               
               window.location = "crudmodalidad";
               </script>';
-              include_once 'function_bitacora.php';
-              $codigoObjeto=19;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICÓ UNA MODALIDAD';
-              bitacora($codigoObjeto, $accion,$descripcion);
+            
               exit;
             }else{
               echo "<script>
@@ -143,11 +135,7 @@ if(isset($_POST['eliminar'])){
             echo "<script>
             window.location = 'crudmodalidad';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=19;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ UNA MODALIDAD ';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

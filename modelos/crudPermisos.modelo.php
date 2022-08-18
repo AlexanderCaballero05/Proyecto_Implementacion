@@ -87,11 +87,7 @@ if(isset($_POST['PERUSUARIO'])){
                                  alert('¡El Permiso ha sido asignado correctamente!');
                                 window.location = 'crudPermisos';
                                  </script>";
-                                 include_once 'function_bitacora.php';
-                                 $codigoObjeto=5;
-                                 $accion='INSERCIÓN';
-                                 $descripcion= 'SE REGISTRO UN PERMISO SOBRE UN ROL';
-                                  bitacora($codigoObjeto, $accion,$descripcion);
+                                
                                   exit;
                                  }else{
                                    
@@ -182,11 +178,7 @@ if(isset($_POST['EDITIPO'])){//Evaluo al tipo de usuario
                        window.location = 'crudPermisos';
                           </script>";
 
-                        include_once 'function_bitacora.php';
-                                 $codigoObjeto=5;
-                                 $accion='MODIFICACIÓN';
-                                 $descripcion= 'SE MODIFICO UN PERMISO A UN ROL';
-                                  bitacora($codigoObjeto, $accion,$descripcion);
+                       
                                   exit;
                         }else{
                         echo "<script>
@@ -249,11 +241,7 @@ if(isset($_POST['ELIMINAR_PERMISO'])){
             alert('¡Rol eliminado!');
             window.location = 'crudPermisos';
             </script>";
-            include_once 'function_bitacora.php';
-                                 $codigoObjeto=5;
-                                 $accion='ELIMINACIÓN';
-                                 $descripcion= 'SE ELIMINO UN PERMISO A UN ROL';
-                                  bitacora($codigoObjeto, $accion,$descripcion);
+           
                                   exit;
           }else{
             echo "<script>

@@ -42,11 +42,7 @@
                         </script>";
                         
 
-                        //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=31;
-                        $accion='Insertar Prueba pscicométrica';
-                        $descripcion= 'Agregó/insertó una nueva prueba psicométrica';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                        
 
                       }else{
                         echo "<script> 
@@ -54,11 +50,7 @@
                         window.location = 'crudPruebapsicometrica';
                         </script>";
                         
-                        //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=31;
-                        $accion='Registro fallido de prueba';
-                        $descripcion= 'Se intentó insertar una nueva prueba psicométrica';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                        
                       }
                     }catch(PDOException $e){
                     echo $e->getMessage(); 
@@ -108,22 +100,14 @@
               window.location = 'crudPruebapsicometrica';
               </script>";
               
-              //<!--llamada de la fuction bitacora -->
-              $codigoObjeto=3;
-              $accion='Editar prueba psicométrica';
-              $descripcion= 'Se editó el registro de una prueba psicométrica ya existente';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar esta prueba psicométrica!');
               window.location = 'crudPruebapsicometrica';
               </script>";
 
-              //<!--llamada de la fuction bitacora -->
-              $codigoObjeto=3;
-              $accion='Editar rueba psicométrica fallido';
-              $descripcion= 'Se intentó editar el registro de una rueba psicométrica';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
             }
 
       }catch(PDOException $e){
@@ -152,12 +136,7 @@ if(isset($_POST['eliminar_pruebap'])){
         window.location = 'crudPruebapsicometrica';
         </script>";
         
-        //<!--llamada de la fuction bitacora -->
-        $codigoObjeto=31;
-        $accion='No eliminar prueba';
-        $descripcion= 'Intento de invalido de eliminar una prueba psicométrica';
-        bitacora($codigoObjeto, $accion,$descripcion); 
-
+       
       }else{
         try{
           $link = mysqli_connect("localhost", "root", "", "db_proyecto_Prosecar");
@@ -169,10 +148,7 @@ if(isset($_POST['eliminar_pruebap'])){
             </script>";
 
             //<!--llamada de la fuction bitacora -->
-            $codigoObjeto=3;
-            $accion='Eliminar prueba';
-            $descripcion= 'Se eliminó un registro de la prueba psicométrica';
-            bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>
@@ -182,10 +158,7 @@ if(isset($_POST['eliminar_pruebap'])){
             exit;
 
             //<!--llamada de la fuction bitacora -->
-            $codigoObjeto=31;
-            $accion='Eliminar prueba psicométrica fallido';
-            $descripcion= 'Falló eliminar el registro de la prueba psicométrica';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
           }
         }catch(PDOException $e){
         echo $e->getMessage(); 

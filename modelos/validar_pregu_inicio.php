@@ -120,10 +120,7 @@ Gissela Diaz        		02-06-2022                 cambio en agregar que no acepte
                           WHERE CODIGO_USUARIO=(SELECT codigo_usuario From tbl_usuario where NOMBRE_USUARIO = '$usuario');";
                             $dato=$conn->query($query); 
                             //llamada de la fuction bitacora -->
-                         $codigoObjeto=1;
-                         $accion='Ingreso de preguntas para recuperacion';
-                         $descripcion= 'Nuevo usuario registro las preguntas';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                        
 
                         }
                         //si el parametro no es igual se envia a contestar la siguiente pregunta              

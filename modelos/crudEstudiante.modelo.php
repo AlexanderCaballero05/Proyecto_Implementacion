@@ -126,10 +126,7 @@
                       echo "<script>
                       window.location = 'crudEstudiante';
                       </script>";
-                      $codigoObjeto=26;
-                      $accion='INSERTAR';
-                      $descripcion= 'SE REGISTRO LOS DATOS ESCOLARES DEL CODIGO '.$codigo.' DE ESTUDIANTE';
-                      bitacora($codigoObjeto, $accion,$descripcion);
+                     
                       exit;
                       
                     
@@ -183,11 +180,7 @@
                AND e.CODIGO_ESTUDIANTE = '$codigo_estudiante'; ";
 
                   $consulta_nombre =$conn->query($nombre_estudiante);
-                      include_once 'function_bitacora.php';
-                      $codigoObjeto=26;
-                      $accion='MODIFICACIÓN';
-                      $descripcion= 'SE MODIFICÓ LOS DATOS ESCOLARES DEL CODIGO '.$codigo_estudiante.' DE ESTUDIANTE';
-                      bitacora($codigoObjeto, $accion,$descripcion);
+                    
                       exit;
             }else{
               echo "<script>
@@ -229,11 +222,7 @@ if(isset($_POST['estudiante_eliminar'])){
             alert('¡Estudiante eliminado!');
             window.location = 'estudiante';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=26;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ EL ESTUDIANTER CON CODIGO '.$codigo_estudiante.'';
-            bitacora($codigoObjeto, $accion,$descripcion);
+            
           
             exit;
           }else{

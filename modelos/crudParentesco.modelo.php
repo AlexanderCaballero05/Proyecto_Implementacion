@@ -65,11 +65,7 @@ Diana Rut Garcia     		10-06-2022                Cambio en las consultas de edit
                         alert('Se registro el parentesco correctamente');
                         window.location = 'crudParentesco';
                         </script>";
-                        //<!--llamada de la fuction bitacora -->
-                        $codigoObjeto=44;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRO UN PARENTESCO';
-                        bitacora($codigoObjeto, $accion,$descripcion);
+                      
                         exit;
                       }else{
                         echo "<script> 
@@ -122,10 +118,7 @@ if(isset($_POST['paren_eliminar'])){
             window.location = 'crudParentesco';
             </script>";
             //<!--llamada de la fuction bitacora -->
-            $codigoObjeto=44;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINO UN PARENTESCO';
-            bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>
@@ -172,10 +165,7 @@ if(isset($_POST['codigo_parentesco'])){
             window.location = 'crudParentesco';
             </script>";
             include_once 'function_bitacora.php';
-            $codigoObjeto=44; //<!--llamada de la fuction bitacora -->
-            $accion='MODIFICACIÓN';
-            $descripcion= 'SE MODIFICO UN PARENTESCO';
-            bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>

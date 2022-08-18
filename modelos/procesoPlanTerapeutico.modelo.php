@@ -30,10 +30,7 @@
          echo "<script>
          window.location = 'procesoPlanTerapeuticoInforme'
          </script>";
-        $codigoObjeto=31;
-        $accion='REGISTRAR';
-        $descripcion= 'SE REGISTRO UN PLAN TERAPÉUTICO ';
-        bitacora($codigoObjeto, $accion,$descripcion);
+        
         exit;
 
         }else{

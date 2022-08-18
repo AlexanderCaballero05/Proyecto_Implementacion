@@ -34,8 +34,7 @@
                   window.location = 'crudobjetos';
                   </script>";
                   exit;
-                  include_once 'function_bitacora.php';
-                       
+
                 } else {
                   echo "<script> 
                         alert('Error !');
@@ -94,6 +93,7 @@
               echo "<script>
               window.location = 'crudobjetos';
               </script>";
+
               exit;
             }else{
               echo "<script>
@@ -141,6 +141,7 @@
                 echo "<script>
               window.location = 'crudobjetos';
               </script>";
+
               exit;
               }else{
                 echo "<script>

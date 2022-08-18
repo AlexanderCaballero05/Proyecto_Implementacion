@@ -33,11 +33,7 @@
                    alert('Medicamento Registrado Correctamente');
                    window.location = 'crudmedicamento';
                    </script>";
-                   include_once 'function_bitacora.php';
-                    $codigoObjeto=35; // cambiar 
-                    $accion='INSERCIÓN';
-                    $descripcion= 'SEREGISTRÓ UN MEDICAMENTO';
-                    bitacora($codigoObjeto, $accion,$descripcion);
+                  
                     exit;
                  } else {
                    echo "<script> 
@@ -88,11 +84,7 @@
               echo "<script>
               window.location = 'crudmedicamento';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=35; // cambiar 
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICÓ UN MEDICAMENTO';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
               exit;
             }else{
               echo "<script>
@@ -135,11 +127,7 @@
               echo "<script>
               window.location = 'crudmedicamento';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=35;
-              $accion='ELIMINACIÓN';
-              $descripcion= 'SE ELIMINÓ UN MEDICAMENTO ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+            
               exit;
             }else{
               echo "<script>
