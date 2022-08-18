@@ -3,7 +3,10 @@
   include_once 'conexion3.php';
   include_once 'conexion.php';
   include_once 'conexion2.php';
-  include "conexionpdo.php";
+
+  include_once 'function_bitacora.php';
+  
+
 ?>
 <?php
  /// editar usario
@@ -20,11 +23,18 @@
         $telefono =$_POST['telefono'];
         $direccion= $_POST['direccion'];
         $fechaactual = (date("d-m-Y")); 
-        $VALOR_ANTERIOR =  $_POST['VALORANTERIOR'];
+
+        
 
         try{
-          
-       
+
+          $sentencia8= $db->prepare(" SELECT tce.CORREO_PERSONA  
+          from tbl_correo_electronico tce  
+          where tce.CODIGO_PERSONA =?;");
+          // llamar al procedimiento almacenado
+          $sentencia8->execute(array($codpersona));
+          $nombre_anterior=$sentencia8->fetchColumn();
+
 
           // evaluemos si el CORREO existe y veamos a quien le pertenece (si es igual a 0 significa que no existe si es igual o mayor a 1 significa que ya lo tiene alguien)
           $sentencia = $db->prepare("SELECT CODIGO_PERSONA FROM tbl_correo_electronico WHERE correo_persona = ?;");
