@@ -20,11 +20,7 @@ include_once "../../modelos/conexion3.php";
   if($row1>0){
     $valor1 = $row1;
   }
-  include "../../modelos/function_bitacora.php";
-  $codigoObjeto=54;
-  $accion='MODIFICACIÓN DE CONTRASEÑA';
-  $descripcion= 'EL USUARIO MODIFICÓ LA CONTRASEÑA POR EL METODO DE PREGUNTAS DE SEGURIDAD';
-  bitacora($codigoObjeto, $accion,$descripcion);
+ 
 ?>
 <!doctype html>
 <html lang="en">

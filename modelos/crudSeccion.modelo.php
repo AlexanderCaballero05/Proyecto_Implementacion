@@ -31,11 +31,7 @@
                         alert('La sección se registro correctamente'); 
                         window.location = 'crudSeccion';
                         </script>";
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=46;
-                        $accion='INSERCIÓN';
-                        $descripcion= 'SE REGISTRO UNA SECCIÓN';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                        
                          exit;
                       }else{
                         echo "<script> 
@@ -91,11 +87,7 @@
               alert("Sección modificada correctamente");             
               window.location = "crudSeccion";
               </script>';
-              include_once 'function_bitacora.php';
-              $codigoObjeto=46;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UNA SECCIÓN';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
               exit;
             }else{
               echo "<script>
@@ -139,11 +131,7 @@ if(isset($_POST['seccion_eliminar'])){
             alert('Se elimino correctamente'); 
             window.location = 'crudSeccion';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=46;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINO UNA SECCIÓN';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

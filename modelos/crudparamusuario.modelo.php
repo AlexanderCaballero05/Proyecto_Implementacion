@@ -39,10 +39,7 @@ if(isset($_POST['id_paramusu'])){
             window.location = 'crudparametrosusuario';
             </script>";
              //<!--llamada de la fuction bitacora -->
-             $codigoObjeto=9;
-             $accion='MODIFICACION';
-             $descripcion= 'SE MODIFICO CONTADOR';
-             bitacora($codigoObjeto, $accion,$descripcion);
+            
           //}else{
             echo "<script>
             alert('¡Error al intentar modificar Par Valor!');
@@ -83,12 +80,7 @@ if(isset($_POST['paramusuario_eli'])){
         alert('¡No se puede eliminar este campo,esta relacionado con otras tablas!');
         window.location = 'crudparametrosusuario';
         </script>";
-        
-        //<!--llamada de la fuction bitacora -->
-        $codigoObjeto=9;
-        $accion='INTENTO DE ELIMINACIÓN';
-        $descripcion= 'INTENTO DE ELIMINACIÓN DE CONTADOR';
-        bitacora($codigoObjeto, $accion,$descripcion); 
+       
 
       }else{
         
@@ -100,22 +92,14 @@ if(isset($_POST['paramusuario_eli'])){
             alert('¡Contador eliminado!');
             window.location = 'crudparametrosusuario';
             </script>";
-             //<!--llamada de la fuction bitacora -->
-             $codigoObjeto=9;
-             $accion='ELIMINACIÓN';
-             $descripcion= 'SE ELIMINO EL CONTADOR';
-             bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>
             alert('¡Error al eliminar el contador!');
             window.location = 'crudparametrosusuario';
             </script>";
-             //<!--llamada de la fuction bitacora -->
-             $codigoObjeto=9;
-             $accion='NO SE ELIMINO';
-             $descripcion= 'NO  SE ELIMINO EL CONTADOR';
-             bitacora($codigoObjeto, $accion,$descripcion); 
+             
             exit;
           }
         }catch(PDOException $e){

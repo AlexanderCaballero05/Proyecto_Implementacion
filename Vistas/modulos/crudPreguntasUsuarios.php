@@ -48,13 +48,7 @@ include_once 'conexionpdo.php';
 
 ?>
 
-      <!--llamada de la fuction bitacora -->
-     <?php 
-      $codigoObjeto=1;
-      $accion='Ingreso a la pantalla de mantenimiento usuarios';
-      $descripcion= 'Ver los registros de los usuarios';
-      bitacora($codigoObjeto, $accion,$descripcion);
-      ?>
+    
       <?php
   $Min = "MIN_RESPUESTA_PREGUNTAS";
   $sentencia = $db->prepare("SELECT VALOR FROM tbl_parametros WHERE PARAMETRO =(?);");

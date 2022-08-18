@@ -88,11 +88,7 @@
               echo "<script>
               window.location = 'estado';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un estado ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el Estado!');
@@ -135,11 +131,7 @@ if(isset($_POST['estado_eliminar'])){
             
             window.location = 'estado';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un estado ';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

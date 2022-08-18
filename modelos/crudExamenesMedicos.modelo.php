@@ -69,11 +69,7 @@ if(isset($_POST['nombre_examen'])){
                         window.location = 'crudExamenesMedicos';
                         </script>";
                         exit;
-                        include_once 'function_bitacora.php';
-                        $codigoObjeto=19;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un examen ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                        
                       }else{
                         echo "<script> 
                         alert('Error!');
@@ -130,11 +126,7 @@ if(isset($_POST['nombre_examen'])){
               
               window.location = "crudExamenesMedicos";
               </script>';
-              include_once 'function_bitacora.php';
-              $codigoObjeto=19;
-              $accion='Modificacion';
-              $descripcion= 'Se edito la modalidad';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
               exit;
             }else{
               echo "<script>
@@ -176,11 +168,7 @@ if(isset($_POST['examen_eliminar'])){
             echo "<script>
             window.location = 'crudExamenesMedicos';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=30;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINÓ UN TIPO DE EXAMEN MEDICO';
-            bitacora($codigoObjeto, $accion,$descripcion);
+            
             exit;
           }else{
             echo "<script>

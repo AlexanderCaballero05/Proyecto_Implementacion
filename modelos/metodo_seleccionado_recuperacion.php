@@ -150,14 +150,14 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                 // $parametros_mail="SELECT "
 
                 $oMail->isSMTP();
-                $oMail->Host=($servidor_correo);
-                $oMail->Port=($puerto_servidor);
+                $oMail->Host=("smtp.office365.com");
+                $oMail->Port=(587);
                 $oMail->SMTPSecure="tls";
                 $oMail->SMTPAuth=true;
 
-                $oMail->Username=($usuario_correo); 
-                $oMail->Password=($contrasena_usuario);
-                $oMail->setFrom($usuario_correo); // direccion de correo de destino hacia los correos de usuarios
+                $oMail->Username=("aacaballero@unah.hn"); 
+                $oMail->Password=("*Iamhappy.2020*");
+                $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                 $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                 $mensaje="
                 
@@ -215,9 +215,9 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
 
       if($filas>0){
         header("location: ../Vistas/modulos/recuperacion_clave_preguntas.php"); 
-       
+      
       }else{
-     
+        
         echo '<script> alert("Datos incorrectos");window.location="../Vistas/modulos/metodos_recuperar_clave.php"; </script>';
       }
     }//Fin del else if

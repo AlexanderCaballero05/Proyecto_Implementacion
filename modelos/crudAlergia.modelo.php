@@ -87,11 +87,7 @@
               echo '<script>              
               window.location = "crudAlergias";
               </script>';
-              include_once 'function_bitacora.php';
-              $codigoObjeto=39;
-              $accion='MODIFICACIÓN';
-              $descripcion= 'SE MODIFICO UNA ALERGIA';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
               exit;
             }else{
               echo "<script>
@@ -134,11 +130,7 @@ if(isset($_POST['alergia_eliminar'])){
             echo "<script>
             window.location = 'crudAlergias';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=39;
-            $accion='ELIMINACIÓN';
-            $descripcion= 'SE ELIMINO UNA ALERGIA';
-            bitacora($codigoObjeto, $accion,$descripcion);
+          
             exit;
           }else{
             echo "<script>

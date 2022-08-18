@@ -34,11 +34,7 @@
                     alert('Tipo Socioeconómico registrado correctamente');
                     window.location = 'crudtiposocioeconomico';
                     </script>";
-                    include_once 'function_bitacora.php';
-                    $codigoObjeto=17;
-                    $accion='INSERCIÓN';
-                    $descripcion= 'SE REGISTRO UN TIPO SOCIOECONÓMICO';
-                    bitacora($codigoObjeto, $accion,$descripcion);
+                   
                     exit;
                   }else{
                     echo "<script> 
@@ -89,11 +85,7 @@
                   alert('¡Tipo Socioeconómico modificado exitosamente!');
                   window.location = 'crudtiposocioeconomico';
                   </script>";
-                  include_once 'function_bitacora.php';
-                  $codigoObjeto=17;
-                  $accion='MODIFICACIÓN';
-                  $descripcion= 'SE MODIFICO UN TIPO SOCIOECONÓMICO ';
-                  bitacora($codigoObjeto, $accion,$descripcion);
+                  
                   exit;
                 }else{
                     echo "<script>
@@ -140,11 +132,7 @@
                 alert('¡Tipo socioeconómico eliminado!');
                 window.location = 'crudtiposocioeconomico';
                 </script>";
-                include_once 'function_bitacora.php';
-                $codigoObjeto=17;
-                $accion='ELIMINACIÓN';
-                $descripcion= 'SE ELIMINO UN TIPO SOCIOECONÓMICO';
-                bitacora($codigoObjeto, $accion,$descripcion);
+               
                 exit;
             }else{
                 echo "<script>

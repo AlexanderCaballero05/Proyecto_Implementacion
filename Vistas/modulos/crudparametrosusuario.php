@@ -39,12 +39,7 @@ include_once "conexion.php";
 include_once "conexion3.php";
 ?>
       <!--llamada de la fuction bitacora -->
-     <?php 
-      $codigoObjeto=1;
-      $accion='Parametros Usuarios';
-      $descripcion= 'Ver los parametros de los usuarios';
-      bitacora($codigoObjeto, $accion,$descripcion);
-      ?>
+    
       
 <head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

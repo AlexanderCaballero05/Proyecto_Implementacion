@@ -33,11 +33,7 @@
                   window.location = 'crudobjetos';
                   </script>";
                   exit;
-                  include_once 'function_bitacora.php';
-                         $codigoObjeto=6;
-                        $accion='Registro';
-                        $descripcion= 'Se agrego un nuevo objeto ';
-                         bitacora($codigoObjeto, $accion,$descripcion);
+                 
                 } else {
                   echo "<script> 
                         alert('Error !');
@@ -96,11 +92,7 @@
               echo "<script>
               window.location = 'crudobjetos';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=6;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un objeto ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
               exit;
             }else{
               echo "<script>
@@ -148,11 +140,7 @@
                 echo "<script>
               window.location = 'crudobjetos';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=6;
-              $accion='Eliminación';
-              $descripcion= 'Se elimino un OBJETO ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+              
               exit;
               }else{
                 echo "<script>

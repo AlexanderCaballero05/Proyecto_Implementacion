@@ -93,11 +93,7 @@
               alert('¡Estudiante modificado exitosamente!');
               window.location = 'estudiante';
               </script>";
-              include_once 'function_bitacora.php';
-              $codigoObjeto=1;
-              $accion='Modificacion';
-              $descripcion= 'Se edito un estudiante ';
-              bitacora($codigoObjeto, $accion,$descripcion);
+             
             }else{
               echo "<script>
               alert('¡Error al  intentar modificar el estudiante!');
@@ -140,11 +136,7 @@ if(isset($_POST['estudiante_eliminar'])){
             alert('¡Estudiante eliminado!');
             window.location = 'estudiante';
             </script>";
-            include_once 'function_bitacora.php';
-            $codigoObjeto=1;
-            $accion='Modificacion';
-            $descripcion= 'Se elimino un estudiante ';
-            bitacora($codigoObjeto, $accion,$descripcion);
+           
             exit;
           }else{
             echo "<script>

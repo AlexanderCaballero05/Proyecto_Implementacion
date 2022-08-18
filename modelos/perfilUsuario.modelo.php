@@ -84,10 +84,7 @@
                                         if($resul >0){
                                            echo "<script> 
                                            alert('¡Se ha actualizado la contraseña!');  location.href = 'perfilUsuario'; </script>";
-                                           $codigoObjeto=54;
-                                           $accion='USUARIO CAMBIÓ CONTRASEÑA';
-                                           $descripcion= 'CONTRASEÑA ACTUALIZADA';
-                                           bitacora($codigoObjeto, $accion,$descripcion);
+                                           
                                            
                                            session_destroy();
                                            echo '<script> 
@@ -130,19 +127,17 @@ if(isset($_POST['ACTUALIZAR'])){
     $s_nombre = $_POST['s_nombre'];
     $p_apellido = $_POST['p_apellido'];
     $s_apellido = $_POST['s_apellido'];
-    $dni = $_POST['DNI'];
+   
     $correo = $_POST['correo'];
     $telefono =$_POST['telefono'];
-    $direccion= $_POST['direccion'];
+   
 
     //consulta para la table persona
     $update_perfil = "UPDATE tbl_persona 
      SET PRIMER_NOMBRE = '$p_nombre' ,
      SEGUNDO_NOMBRE = '$s_nombre' ,
      PRIMER_APELLIDO = '$p_apellido' ,
-     SEGUNDO_APELLIDO = '$s_apellido' ,
-     DNI = '$dni',
-     DIRECCION = '$direccion'
+     SEGUNDO_APELLIDO = '$s_apellido' 
     WHERE CODIGO_PERSONA = '$codigo_persona'; ";
     $resultado11=$conn->query($update_perfil);
     //consulta para la table correo
