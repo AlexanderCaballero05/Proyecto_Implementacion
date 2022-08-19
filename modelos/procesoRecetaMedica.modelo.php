@@ -45,12 +45,27 @@ include "conexionpdo.php";
        if(isset($_POST['codigo_consulta'])){
           $codigo_consulta = ($_POST['codigo_consulta']);
           $fecha_receta = ($_POST['fecha_receta']);
-          $codigo_medicamento = ($_POST['codigo_medicamento']);
+          
           $indicaciones =  ($_POST['indicaciones']);
           $observaciones =  ($_POST['observaciones']);
           $tipo_receta = ($_POST['recetas']);
-          $codigo_examen = ($_POST['codigo_examen']); 
+          
           $consultar=0;
+          if(isset($_POST['codigo_examen'])){
+            $codigo_examen = ($_POST['codigo_examen']); 
+          }else{
+            $codigo_examen = 0;
+          }
+          
+
+          if(isset($_POST['codigo_medicamento'])){
+            $codigo_medicamento = ($_POST['codigo_medicamento']);
+          }else{
+            $codigo_medicamento = 0;
+          }
+          
+
+
           if($tipo_receta ==1){ //Para cuando es una receta de medicamentos
             $existe = $db->prepare("SELECT COUNT(*) FROM tbl_receta_medica WHERE CODIGO_MEDICAMENTO = (?)
             AND CODIGO_CONSULTA = (?)");
@@ -89,7 +104,7 @@ include "conexionpdo.php";
             $insertar_examen = "INSERT INTO `tbl_examenes_pacientes`(`CODIGO_CONSULTA`, `CODIGO_EXAMEN_MEDICO`, `OBSERVACIONES`, `INDICACIONES`)
              VALUES('$codigo_consulta', '$codigo_examen', '$observaciones','$indicaciones')";
              $consulta_examen =$conn->query($insertar_examen);
-             if($consulta_receta>0){
+             if($consulta_examen>0){
                 echo "<script> window.location = 'procesoRecetaMedica'; </script>"; exit;
              }else{
                 echo "<script> 
