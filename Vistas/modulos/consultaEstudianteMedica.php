@@ -503,7 +503,7 @@
                         <tr>
                             <th class="text-LEFT">Editar </th>
                             <th class="text-LEFT">PDF</th>
-                            <th class="text-LEFT">Nombre del Medicamento</th>
+                            <th class="text-LEFT">Nombre de receta</th>
                             <th class="text-LEFT">Indicación</th>
                             <th class="text-LEFT">Observaciones</th>
 
@@ -574,7 +574,7 @@
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>

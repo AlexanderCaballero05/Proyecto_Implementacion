@@ -13,7 +13,7 @@ $codigo_consulta1 = $_POST['codigo_consulta'];
 include('conexion.php');
 include('conexion2.php'); 
   
-?>reporte_medico.php
+?>
 <!doctype html>
 <html lang="en">
   <head>

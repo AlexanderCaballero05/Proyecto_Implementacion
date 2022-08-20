@@ -67,15 +67,7 @@
             $update_telefono = "UPDATE tbl_telefono
             SET NUMERO_TELEFONO = '$telefono' 
             WHERE CODIGO_PERSONA = '$codpersona'; ";
-            $resultatel=$conn->query($update_telefono);
-
-
-            $sentencia1 = $db->prepare(" SELECT tce.CORREO_PERSONA  
-            from tbl_correo_electronico tce  
-            where tce.CODIGO_PERSONA =$VALOR_ANTERIOR");
-            // llamar al procedimiento almacenado
-            $sentencia1->execute();
-            $nombre_anterior=$sentencia1->fetchColumn(); 
+            $resultatel=$conn->query($update_telefono); 
 
             if($resultado11 > 0 && $resulta > 0 && $resultatel > 0){
               echo "<script>  
