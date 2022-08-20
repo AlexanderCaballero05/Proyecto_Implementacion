@@ -80,7 +80,7 @@ CREATE TABLE `tbl_bitacora_sistema` (
   PRIMARY KEY (`CODIGO_BITACORA`),
   KEY `FK_COD_USU_BIT` (`CODIGO_USUARIO`),
   KEY `FK_COD_OBJ_BIT` (`CODIGO_OBJETO`)
-) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_bitacora_sistema VALUES("1","1","25","TIPO_ROL","2022-08-16","MODIFICACIÓN","ADMINISTRADOR","TUTOR","32");
 INSERT INTO tbl_bitacora_sistema VALUES("2","1","20","CARGA","2022-08-16","INSERCIÓN","","2","1");
@@ -137,6 +137,29 @@ INSERT INTO tbl_bitacora_sistema VALUES("52","1","25","TIPO_ROL","2022-08-18","M
 INSERT INTO tbl_bitacora_sistema VALUES("53","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ESTUDIANTE","ESTUDIANTE","33");
 INSERT INTO tbl_bitacora_sistema VALUES("54","1","26","ESTADO","2022-08-18","MODIFICACIÓN","ACTIVO","INACTIVO","38");
 INSERT INTO tbl_bitacora_sistema VALUES("55","1","3","VALOR","2022-08-18","MODIFICACIÓN","2011-01-01","2012-01-01","23");
+INSERT INTO tbl_bitacora_sistema VALUES("56","1","25","CORREO ELECTRONICO","2022-08-18","MODIFICACIÓN","CESARROVELO@GMAIL.COM","CesarRovelo@gmail.com","7");
+INSERT INTO tbl_bitacora_sistema VALUES("57","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","PSICOLOGO","PSICOLOGO","29");
+INSERT INTO tbl_bitacora_sistema VALUES("58","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","PSICOLOGO","PSICOLOGO","29");
+INSERT INTO tbl_bitacora_sistema VALUES("59","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ESTUDIANTE","ESTUDIANTE","27");
+INSERT INTO tbl_bitacora_sistema VALUES("60","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ADMINISTRADOR","ADMINISTRADOR","3");
+INSERT INTO tbl_bitacora_sistema VALUES("61","20","32","ENCARGADO","2022-08-18","MODIFICACIÓN","PAULA SOFIA MARADIAGA GARCIA","ADMIN ADMIN","77");
+INSERT INTO tbl_bitacora_sistema VALUES("62","1","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","TUTOR","SUPER USUARIO","6");
+INSERT INTO tbl_bitacora_sistema VALUES("63","6","3","VALOR","2022-08-18","MODIFICACIÓN","2012-01-01","2010-01-01","23");
+INSERT INTO tbl_bitacora_sistema VALUES("64","6","23","ESTUDIANTE","2022-08-18","INSERCIÓN","","8","27");
+INSERT INTO tbl_bitacora_sistema VALUES("65","6","23","TUTORIA_ACADEMICA","2022-08-18","ELIMINAR","","","27");
+INSERT INTO tbl_bitacora_sistema VALUES("66","6","20","ENCARGADO","2022-08-18","MODIFICACIÓN","MARIA MONTALVAN","JUAN PEREZ","4");
+INSERT INTO tbl_bitacora_sistema VALUES("67","6","32","ENCARGADO","2022-08-18","MODIFICACIÓN","DANIEL MARTINEZ","PAULA MARADIAGA","74");
+INSERT INTO tbl_bitacora_sistema VALUES("68","6","23","ESTUDIANTE","2022-08-18","INSERCIÓN","","3","28");
+INSERT INTO tbl_bitacora_sistema VALUES("69","6","23","ESTUDIANTE","2022-08-18","INSERCIÓN","","3","29");
+INSERT INTO tbl_bitacora_sistema VALUES("70","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","PSICOLOGO","PSICOLOGO","29");
+INSERT INTO tbl_bitacora_sistema VALUES("71","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","PSICOLOGO","PSICOLOGO","29");
+INSERT INTO tbl_bitacora_sistema VALUES("72","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","SUPER USUARIO","ADMINISTRADOR","6");
+INSERT INTO tbl_bitacora_sistema VALUES("73","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ADMINISTRADOR","ADMINISTRADOR","6");
+INSERT INTO tbl_bitacora_sistema VALUES("74","6","3","VALOR","2022-08-18","MODIFICACIÓN","564654564564","jfpsfjpdsfjpdsf","6");
+INSERT INTO tbl_bitacora_sistema VALUES("75","6","3","VALOR","2022-08-18","MODIFICACIÓN","2010-01-01","2012-01-01","23");
+INSERT INTO tbl_bitacora_sistema VALUES("76","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ESTUDIANTE","SUPER USUARIO","33");
+INSERT INTO tbl_bitacora_sistema VALUES("77","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","ADMINISTRADOR","SUPER USUARIO","6");
+INSERT INTO tbl_bitacora_sistema VALUES("78","6","25","TIPO_ROL","2022-08-18","MODIFICACIÓN","PSICOLOGO","TUTOR","30");
 
 
 
@@ -175,7 +198,7 @@ CREATE TABLE `tbl_carga_academica` (
 INSERT INTO tbl_carga_academica VALUES("1","2","18","1","1","2","13:30:00","14:00:00","2022-08-02","2022-08-27","2022","2","GABRIELA","2022-07-27","2022-08-03","ALEXANDER");
 INSERT INTO tbl_carga_academica VALUES("2","6","16","1","1","2","13:30:00","14:00:00","2022-08-04","2022-08-31","2022","1","ADMIN","2022-07-27","2022-08-03","RUT");
 INSERT INTO tbl_carga_academica VALUES("3","4","8","1","1","2","14:00:00","15:07:00","2022-07-30","2022-11-26","2022","1","CESAR","2022-07-27","0000-00-00","");
-INSERT INTO tbl_carga_academica VALUES("4","6","21","1","3","2","13:00:00","14:00:00","2022-07-26","2022-08-26","2022","2","ALEXANDER","2022-07-27","2022-08-17","ALEXANDER");
+INSERT INTO tbl_carga_academica VALUES("4","6","8","1","3","2","13:00:00","14:00:00","2022-07-26","2022-08-26","2022","2","ALEXANDER","2022-07-27","2022-08-19","ALEXANDER");
 INSERT INTO tbl_carga_academica VALUES("5","3","18","1","3","2","11:00:00","12:00:00","2022-07-27","2022-08-28","2022","4","RUT","2022-07-27","0000-00-00","");
 INSERT INTO tbl_carga_academica VALUES("6","1","16","1","2","2","10:00:00","11:00:00","2022-07-26","2022-08-31","2022","2","ALEXANDER","2022-07-27","0000-00-00","");
 INSERT INTO tbl_carga_academica VALUES("7","5","32","1","1","2","14:00:00","15:00:00","2022-08-02","2022-09-29","2022","4","LUZ","2022-08-03","0000-00-00","");
@@ -220,7 +243,7 @@ CREATE TABLE `tbl_consulta_medica` (
   PRIMARY KEY (`CODIGO_CONSULTA`),
   KEY `FK_COD_PREC` (`CODIGO_PRECLINICA`),
   KEY `FK_COD_CIT` (`CODIGO_CITA`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_consulta_medica VALUES("1","1","11","Fiebre alta","Tiene baja las plaquetas","Ninguna"," Ninguna","","2022-07-27","0000-00-00","");
 INSERT INTO tbl_consulta_medica VALUES("2","2","4","inflamación, dolor y ardor","grave","toda la cara"," piel muy irritada","","2022-07-27","0000-00-00","");
@@ -239,7 +262,8 @@ INSERT INTO tbl_consulta_medica VALUES("14","14","50","DOLOR DE CABEZA","POSIBLE
 INSERT INTO tbl_consulta_medica VALUES("15","15","51","DOLOR DE CABEZA,NAUESAS","RECETAR MEDICAMENTOS Y EXAMNE","SE ESPERAN BUENOS RESULTADOS"," NINGUNA","","2022-08-03","0000-00-00","");
 INSERT INTO tbl_consulta_medica VALUES("16","16","52","DOLOR DE CUERPO","POSIBLE COVID","LEVE","  NINGUNO","","2022-08-03","0000-00-00","");
 INSERT INTO tbl_consulta_medica VALUES("17","17","58","FIEBRE","INFECCION EN LA GARGANTA","BIEN"," BIEN","","2022-08-16","0000-00-00","");
-INSERT INTO tbl_consulta_medica VALUES("18","18","70","FIEBRE ALTA","POSIBLE DENGUE","EXCELENTE"," BIENDD","","2022-08-18","","");
+INSERT INTO tbl_consulta_medica VALUES("18","18","70","FIEBRE ALTA","POSIBLE DENGUE","EXCELENTE"," BIENDD","","2022-08-18","0000-00-00","");
+INSERT INTO tbl_consulta_medica VALUES("19","19","60","BIEN BEIEN","NEIRII","NERIERINI"," IRNEIERIENRIE","","2022-08-19","0000-00-00","");
 
 
 
@@ -284,8 +308,8 @@ INSERT INTO tbl_correo_electronico VALUES("dianaamador130@gmail.com","2");
 INSERT INTO tbl_correo_electronico VALUES("montoyaluz0405@gmail.com","3");
 INSERT INTO tbl_correo_electronico VALUES("jose@gmail.com","4");
 INSERT INTO tbl_correo_electronico VALUES("gabriela17@gmail.com","5");
-INSERT INTO tbl_correo_electronico VALUES("aacaballero6@unah.hn","6");
-INSERT INTO tbl_correo_electronico VALUES("cesar.58rovelo@gmail.com","7");
+INSERT INTO tbl_correo_electronico VALUES("aacaballero@unah.hn","6");
+INSERT INTO tbl_correo_electronico VALUES("CesarRovelo@gmail.com","7");
 INSERT INTO tbl_correo_electronico VALUES("juan@gmail.com","8");
 INSERT INTO tbl_correo_electronico VALUES("davidochoa@gmail.com","9");
 INSERT INTO tbl_correo_electronico VALUES("ikerCasillas@gmail.com","10");
@@ -521,7 +545,7 @@ CREATE TABLE `tbl_examenes_pacientes` (
   KEY `FK_COD_EXAMEN_MEDICO` (`CODIGO_EXAMEN_MEDICO`),
   CONSTRAINT `FK_COD_CONSULTA` FOREIGN KEY (`CODIGO_CONSULTA`) REFERENCES `tbl_consulta_medica` (`CODIGO_CONSULTA`),
   CONSTRAINT `FK_COD_EXAMEN_MEDICO` FOREIGN KEY (`CODIGO_EXAMEN_MEDICO`) REFERENCES `tbl_examenes_medicos` (`CODIGO_EXAMEN_MEDICO`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_examenes_pacientes VALUES("1","1","1","NINGUNA","EN AYUNAS");
 INSERT INTO tbl_examenes_pacientes VALUES("2","2","1","HACERLO EN AYUNAS, SOLO SE PUEDE TOMAR AGUA","PARA VER NIVEL DE GLOBULOS ROJOS Y BLANCOS");
@@ -539,6 +563,7 @@ INSERT INTO tbl_examenes_pacientes VALUES("13","14","2","NINGUNA","PARA CHEQUEO"
 INSERT INTO tbl_examenes_pacientes VALUES("14","16","1","NINGUNO","SANGRE");
 INSERT INTO tbl_examenes_pacientes VALUES("15","17","1","BIEN","EN LA MAÑANA");
 INSERT INTO tbl_examenes_pacientes VALUES("16","18","1","Ninguna","Ninguna");
+INSERT INTO tbl_examenes_pacientes VALUES("17","19","2","DSFDSFDSFDS","RFEWFSDEF");
 
 
 
@@ -609,7 +634,7 @@ CREATE TABLE `tbl_expediente_psicologico_consulta` (
   `FECHA_MODIFICACION` date DEFAULT NULL,
   PRIMARY KEY (`CODIGO_EXPEDIENTE_PSICO`),
   KEY `FK_CODIGO_CITA_CONSULTA` (`CODIGO_CITA`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_expediente_psicologico_consulta VALUES("1","10","ESCUCHA VOCES,NO PUEDE DORMIR POR LA NOCHES","NINGUNO","SE ESPERA EN RESULTADOS","ES UN CASO DELICADO","","2022-07-27","","0000-00-00");
 INSERT INTO tbl_expediente_psicologico_consulta VALUES("2","9","SE PRESENTA TRISTEZA EN LA MAYOR PARTE DEL TIEMPO","POR LOS SINTOMAS ENCONTRADO LA PERSONA SUFRE DEPRESION","HA MEJORADO AL HACER EJERCICIOS FISICOS","NINGUNA","","2022-07-27","","0000-00-00");
@@ -620,7 +645,8 @@ INSERT INTO tbl_expediente_psicologico_consulta VALUES("6","45","NO TIENE ","NO 
 INSERT INTO tbl_expediente_psicologico_consulta VALUES("7","46","NO TIENE ","NO TIENE","NO TIENE","NO TIENE","","2022-08-03","","0000-00-00");
 INSERT INTO tbl_expediente_psicologico_consulta VALUES("8","47","NO PUEDE DORMIR EN LA NOCHE,VE SOMBRAS","SE VE TEMEROSA,MIEDOSA","SE ESPERAN BUENOS RESULTADOS","RECETAR PLAN","","2022-08-03","","0000-00-00");
 INSERT INTO tbl_expediente_psicologico_consulta VALUES("9","49","ESCULLAS VOCES,LE CUESTA DORMIR POR LAS NOCHES","ES UN CASO DELICADO,SE DEBE TRATAR CON DISCRECION","NO SE TIENE AUN ","NINGUNA","","2022-08-03","","0000-00-00");
-INSERT INTO tbl_expediente_psicologico_consulta VALUES("10","71","ANSIEDAD","BIEN BIEN","BIEN BIEN","BIEN BIEN","","2022-08-18","","");
+INSERT INTO tbl_expediente_psicologico_consulta VALUES("10","71","ANSIEDAD","BIEN BIEN","BIEN BIEN","BIEN BIEN","","2022-08-18","","0000-00-00");
+INSERT INTO tbl_expediente_psicologico_consulta VALUES("11","75","ANSIEDAD","NINGUNO","NINGUNO","NINGUNO","","2022-08-19","","0000-00-00");
 
 
 
@@ -680,7 +706,7 @@ CREATE TABLE `tbl_familiares_estudiante` (
   KEY `COD_ESTU_PARE` (`CODIGO_ESTUDIANTE`),
   KEY `COD_FAM_PARE` (`CODIGO_FAMILIAR`),
   KEY `COD_PARA_PARE` (`CODIGO_PARENTESCO`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_familiares_estudiante VALUES("1","2","1","1");
 INSERT INTO tbl_familiares_estudiante VALUES("2","1","2","2");
@@ -690,6 +716,8 @@ INSERT INTO tbl_familiares_estudiante VALUES("5","1","3","2");
 INSERT INTO tbl_familiares_estudiante VALUES("6","1","4","8");
 INSERT INTO tbl_familiares_estudiante VALUES("7","9","1","7");
 INSERT INTO tbl_familiares_estudiante VALUES("8","9","4","8");
+INSERT INTO tbl_familiares_estudiante VALUES("9","3","1","1");
+INSERT INTO tbl_familiares_estudiante VALUES("10","3","4","2");
 
 
 
@@ -712,7 +740,7 @@ CREATE TABLE `tbl_inscripcion_cita` (
   KEY `FK_CODIGO_ESPECIALISTA` (`CODIGO_ESPECIALISTA`),
   KEY `COD_ESTA_FK` (`CODIGO_ESTADO`),
   KEY `COD_AREA_FK` (`AREA_CITA`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_inscripcion_cita VALUES("1","27","6","7","3","2022-07-27","10:00:00","2022-07-27","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("2","27","1","5","3","2022-08-19","12:00:00","2022-07-27","0000-00-00","0000-00-00","");
@@ -772,7 +800,7 @@ INSERT INTO tbl_inscripcion_cita VALUES("56","10","8","5","2","2022-08-19","10:0
 INSERT INTO tbl_inscripcion_cita VALUES("57","10","1","5","2","2022-08-22","09:00:00","2022-08-12","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("58","27","1","13","2","2022-08-15","11:00:00","2022-08-12","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("59","25","8","5","2","2022-08-18","09:00:00","2022-08-12","0000-00-00","0000-00-00","");
-INSERT INTO tbl_inscripcion_cita VALUES("60","24","1","5","2","2022-08-18","13:00:00","2022-08-12","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("60","24","1","13","2","2022-08-18","13:00:00","2022-08-12","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("61","31","11","5","3","2022-08-20","11:00:00","2022-08-13","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("62","27","11","5","3","2022-08-18","11:00:00","2022-08-13","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("63","10","3","5","4","2022-08-19","09:00:00","2022-08-13","0000-00-00","0000-00-00","");
@@ -780,12 +808,16 @@ INSERT INTO tbl_inscripcion_cita VALUES("64","9","3","13","4","2022-08-15","14:0
 INSERT INTO tbl_inscripcion_cita VALUES("65","9","11","5","3","2022-08-29","16:00:00","2022-08-13","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("66","10","5","5","4","2022-08-18","15:00:00","2022-08-15","0000-00-00","0000-00-00","");
 INSERT INTO tbl_inscripcion_cita VALUES("67","10","3","5","4","2022-08-18","09:00:00","2022-08-15","0000-00-00","0000-00-00","");
-INSERT INTO tbl_inscripcion_cita VALUES("68","31","11","5","3","2022-08-28","15:00:00","2022-08-17","0000-00-00","","");
-INSERT INTO tbl_inscripcion_cita VALUES("69","9","11","5","3","2022-08-31","16:00:00","2022-08-17","0000-00-00","","");
-INSERT INTO tbl_inscripcion_cita VALUES("70","38","8","13","2","2022-08-17","16:00:00","2022-08-17","0000-00-00","","");
-INSERT INTO tbl_inscripcion_cita VALUES("71","38","6","13","3","2022-08-17","17:00:00","2022-08-18","0000-00-00","","");
-INSERT INTO tbl_inscripcion_cita VALUES("72","38","5","13","4","2022-08-17","09:00:00","2022-08-18","0000-00-00","","");
-INSERT INTO tbl_inscripcion_cita VALUES("73","38","5","5","4","2022-08-19","11:00:00","2022-08-18","0000-00-00","","");
+INSERT INTO tbl_inscripcion_cita VALUES("68","31","11","5","3","2022-08-28","15:00:00","2022-08-17","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("69","9","11","5","3","2022-08-31","16:00:00","2022-08-17","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("70","38","8","13","2","2022-08-17","16:00:00","2022-08-17","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("71","38","6","13","3","2022-08-17","17:00:00","2022-08-18","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("72","38","5","13","4","2022-08-17","09:00:00","2022-08-18","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("73","38","5","5","4","2022-08-19","11:00:00","2022-08-18","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("74","30","8","5","2","2022-08-18","16:00:00","2022-08-19","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("75","24","6","13","3","2022-08-18","10:00:00","2022-08-19","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("76","24","11","5","3","2022-08-18","15:00:00","2022-08-19","0000-00-00","0000-00-00","");
+INSERT INTO tbl_inscripcion_cita VALUES("77","10","1","5","2","2022-08-18","11:00:00","2022-08-19","0000-00-00","0000-00-00","");
 
 
 
@@ -807,7 +839,7 @@ CREATE TABLE `tbl_matricula_academica` (
   KEY `FK_COD_ESTU` (`CODIGO_ESTUDIANTE`),
   KEY `FK_COD_CARGA_MATR` (`CODIGO_CARGA`),
   KEY `FK_COD_ESTA_MATR` (`OBSERVACION`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_matricula_academica VALUES("2","3","4","13","2022-07-27","Falta de atención remitirlo al psicólogo","2022-07-26","CESAR","2022-07-27","0000-00-00","");
 INSERT INTO tbl_matricula_academica VALUES("3","2","7","9","2022-07-27","","0000-00-00","LUZ","2022-07-27","0000-00-00","");
@@ -830,7 +862,9 @@ INSERT INTO tbl_matricula_academica VALUES("22","5","5","9","2022-07-29","","000
 INSERT INTO tbl_matricula_academica VALUES("23","2","1","9","2022-08-05","","0000-00-00","ALEXANDER","2022-08-05","0000-00-00","");
 INSERT INTO tbl_matricula_academica VALUES("24","8","1","9","2022-08-05","","0000-00-00","ALEXANDER","2022-08-05","0000-00-00","");
 INSERT INTO tbl_matricula_academica VALUES("25","6","2","9","2022-08-16","","0000-00-00","ADMIN","2022-08-16","0000-00-00","");
-INSERT INTO tbl_matricula_academica VALUES("26","4","5","9","2022-08-17","","","ALEXANDER","2022-08-17","","");
+INSERT INTO tbl_matricula_academica VALUES("26","4","5","9","2022-08-17","","0000-00-00","ALEXANDER","2022-08-17","0000-00-00","");
+INSERT INTO tbl_matricula_academica VALUES("28","4","3","9","2022-08-19","","","ALEXANDER","2022-08-19","","");
+INSERT INTO tbl_matricula_academica VALUES("29","1","3","9","2022-08-19","","","ALEXANDER","2022-08-19","","");
 
 
 
@@ -881,7 +915,7 @@ CREATE TABLE `tbl_ms_hist_contrasena` (
   `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`CODIGO_HIST_CONTRASENA`),
   KEY `FK_COD_USU_HISCON` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_ms_hist_contrasena VALUES("1","2","$2a$07$usesomesillystringfore37tskQ0TgAuqkXPeNH3AVSZts/Lxk.i","2","0000-00-00","0000-00-00","");
 INSERT INTO tbl_ms_hist_contrasena VALUES("2","4","$2a$07$usesomesillystringforePP9wVrG7ur0QdkQ9rpSzfE/DlP4e8u.","4","0000-00-00","0000-00-00","");
@@ -917,13 +951,15 @@ INSERT INTO tbl_ms_hist_contrasena VALUES("31","28","$2a$07$usesomesillystringfo
 INSERT INTO tbl_ms_hist_contrasena VALUES("32","31","$2a$07$usesomesillystringforeo.Za9sjz40Tnh798TxidWyZRTQ.mtoC","31","0000-00-00","0000-00-00","");
 INSERT INTO tbl_ms_hist_contrasena VALUES("33","32","$2a$07$usesomesillystringforeXAQheGJF7USzYzdQgtA7gv6RllsR2Va","32","0000-00-00","0000-00-00","");
 INSERT INTO tbl_ms_hist_contrasena VALUES("34","29","$2a$07$usesomesillystringforebrDq7a11hNalS8A/Qc005lZHvD30Wd6","29","0000-00-00","0000-00-00","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("35","20","$2a$07$usesomesillystringfore2/XnZku.0I5OQxVI56ZyHa5TRoxuZlG","20","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("36","20","$2a$07$usesomesillystringforewunHdCVOHtEdLYWmZ6OuNwTzags6toq","20","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("37","16","$2a$07$usesomesillystringforeYvwVwFdn.wYcLp8bkDtYnY0bKhlJa1O","16","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("38","33","$2a$07$usesomesillystringfore1Lka/UUu/Tc0yO9RQex8mxLVI.5yqkK","33","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("39","33","$2a$07$usesomesillystringforedWaDfnapn9Q356ONwBpq19KvvzhhVwS","33","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("40","33","$2a$07$usesomesillystringforebLW4WEIQC6RIrWG9KG4IjHUse.LljEe","33","0000-00-00","","");
-INSERT INTO tbl_ms_hist_contrasena VALUES("41","33","$2a$07$usesomesillystringforesTdoLXO3A5.gZs.7Baw3GBzDMV1pA36","33","0000-00-00","","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("35","20","$2a$07$usesomesillystringfore2/XnZku.0I5OQxVI56ZyHa5TRoxuZlG","20","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("36","20","$2a$07$usesomesillystringforewunHdCVOHtEdLYWmZ6OuNwTzags6toq","20","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("37","16","$2a$07$usesomesillystringforeYvwVwFdn.wYcLp8bkDtYnY0bKhlJa1O","16","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("38","33","$2a$07$usesomesillystringfore1Lka/UUu/Tc0yO9RQex8mxLVI.5yqkK","33","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("39","33","$2a$07$usesomesillystringforedWaDfnapn9Q356ONwBpq19KvvzhhVwS","33","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("40","33","$2a$07$usesomesillystringforebLW4WEIQC6RIrWG9KG4IjHUse.LljEe","33","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("41","33","$2a$07$usesomesillystringforesTdoLXO3A5.gZs.7Baw3GBzDMV1pA36","33","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("42","20","$2a$07$usesomesillystringforebpEps4WbpHVJcXpWLLEajLXEyJhmmju","20","0000-00-00","0000-00-00","");
+INSERT INTO tbl_ms_hist_contrasena VALUES("43","29","$2a$07$usesomesillystringforeZ3x51R2rN0SEQgrkhB/SgtI9y1OSCcK","29","0000-00-00","","");
 
 
 
@@ -987,7 +1023,7 @@ INSERT INTO tbl_parametros VALUES("2","NUM_MAX_PREGUNTAS","2","Administrador","2
 INSERT INTO tbl_parametros VALUES("3","NUM_MAX_CONTRASENAS","8","Administrador","2022-02-07","2022-03-10","ADMIN");
 INSERT INTO tbl_parametros VALUES("4","NUM_MAX_CARACTER","15","Administrador","2022-02-07","2022-04-07","ADMIN");
 INSERT INTO tbl_parametros VALUES("5","ADMIN_SERVIDOR_CORREO","smtp.office365.com","","0000-00-00","2022-08-18","ALEXANDER");
-INSERT INTO tbl_parametros VALUES("6","ADMIN_CPASSWORD","564654564564","","0000-00-00","2022-08-18","ALEXANDER");
+INSERT INTO tbl_parametros VALUES("6","ADMIN_CPASSWORD","jfpsfjpdsfjpdsf","","0000-00-00","2022-08-19","ALEXANDER");
 INSERT INTO tbl_parametros VALUES("7","ADMIN_CUSUARIO","aacaballero@unah.hn","","0000-00-00","2022-08-18","ALEXANDER");
 INSERT INTO tbl_parametros VALUES("8","ADMIN_CPUERTO","587","ADMIN","2022-03-07","2022-08-18","ALEXANDER");
 INSERT INTO tbl_parametros VALUES("10","NOMBRE_EMPRESA","PROYECTO SEMILLERO CARMELITANO PROSECAR\n","ADMIN","2022-03-22","0000-00-00","");
@@ -1003,7 +1039,7 @@ INSERT INTO tbl_parametros VALUES("19","NUM_INTENTOS_PREGUNTAS","2","Administrad
 INSERT INTO tbl_parametros VALUES("20","MIN_RESPUESTA_PREGUNTAS","4","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros VALUES("21","MAX_RESPUESTA_PREGUNTAS","50","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros VALUES("22","RECUPERACION_CORREO","ACTIVO","ALEXANDER","2022-08-13","2022-08-18","ALEXANDER");
-INSERT INTO tbl_parametros VALUES("23","FECHA_NACIMIENTO","2012-01-01","ADMIN","2022-08-18","2022-08-18","ADMIN");
+INSERT INTO tbl_parametros VALUES("23","FECHA_NACIMIENTO","2012-01-01","ADMIN","2022-08-18","2022-08-19","ALEXANDER");
 
 
 
@@ -1021,7 +1057,7 @@ CREATE TABLE `tbl_parametros_usuarios` (
   PRIMARY KEY (`CODIGO_PARAM_USUARIO`),
   KEY `FK_CODPAR_USU` (`CODIGO_USUARIO`),
   KEY `FK_CODPAR_PAR` (`CODIGO_PARAMETRO`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_parametros_usuarios VALUES("1","1","1","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("2","2","1","0","","0000-00-00","2022-08-11","");
@@ -1041,7 +1077,7 @@ INSERT INTO tbl_parametros_usuarios VALUES("15","5","2","1","","0000-00-00","000
 INSERT INTO tbl_parametros_usuarios VALUES("16","5","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("17","5","19","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("18","6","1","0","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_parametros_usuarios VALUES("19","6","2","1","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("19","6","2","2","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("20","6","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("21","6","19","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("22","7","1","1","","0000-00-00","0000-00-00","");
@@ -1096,7 +1132,7 @@ INSERT INTO tbl_parametros_usuarios VALUES("70","19","1","0","","0000-00-00","00
 INSERT INTO tbl_parametros_usuarios VALUES("71","19","2","1","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("72","19","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("73","19","19","0","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_parametros_usuarios VALUES("74","20","1","2","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("74","20","1","3","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("75","20","2","1","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("76","20","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("77","20","19","0","","0000-00-00","0000-00-00","");
@@ -1132,7 +1168,7 @@ INSERT INTO tbl_parametros_usuarios VALUES("106","28","1","1","","0000-00-00","0
 INSERT INTO tbl_parametros_usuarios VALUES("107","28","2","1","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("108","28","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("109","28","19","0","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_parametros_usuarios VALUES("110","29","1","3","","0000-00-00","2022-08-11","");
+INSERT INTO tbl_parametros_usuarios VALUES("110","29","1","2","","0000-00-00","2022-08-11","");
 INSERT INTO tbl_parametros_usuarios VALUES("111","29","2","1","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("112","29","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("113","29","19","0","","0000-00-00","0000-00-00","");
@@ -1148,10 +1184,11 @@ INSERT INTO tbl_parametros_usuarios VALUES("122","32","1","1","","0000-00-00","0
 INSERT INTO tbl_parametros_usuarios VALUES("123","32","2","1","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("124","32","3","0","","0000-00-00","0000-00-00","");
 INSERT INTO tbl_parametros_usuarios VALUES("125","32","19","0","","0000-00-00","0000-00-00","");
-INSERT INTO tbl_parametros_usuarios VALUES("126","33","1","0","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("127","33","2","2","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("128","33","3","0","","0000-00-00","","");
-INSERT INTO tbl_parametros_usuarios VALUES("129","33","19","0","","0000-00-00","","");
+INSERT INTO tbl_parametros_usuarios VALUES("126","33","1","0","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("127","33","2","2","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("128","33","3","0","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("129","33","19","0","","0000-00-00","0000-00-00","");
+INSERT INTO tbl_parametros_usuarios VALUES("130","29","1","2","","0000-00-00","","");
 
 
 
@@ -1270,7 +1307,7 @@ INSERT INTO tbl_persona VALUES("2","DIANA","RUT","GARCIA","AMADOR","080120001239
 INSERT INTO tbl_persona VALUES("3","LUZ","MARÍA","MONTOYA","MEDINA","0801200108492","F","2001-05-04","TEGUCIGALPA","MI CASA","2022-07-26","0000-00-00","1","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("4","JOSE","LUIS","MORALES","DIAZ","0810199365874","M","1993-08-23","TEGUCIGALPA","COLONIA ALEMAN","2022-07-26","0000-00-00","1","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("5","GABRIELA","GISSELA","DIAZ","AGUILERA","0601197000182","F","1970-11-17","CHOLUTECA","BARRIO LAS COLINAS CHOLUTECA ","2022-07-26","0000-00-00","1","ADMIN","0000-00-00","","0000-00-00");
-INSERT INTO tbl_persona VALUES("6","ARNOLD","ALEXANDER","CABALLERO","","1411199600015","M","1990-07-05","OCOTEPEQUE","LA LAGUNA","2022-07-26","0000-00-00","2","ADMIN","0000-00-00","","0000-00-00");
+INSERT INTO tbl_persona VALUES("6","ARNOLD","ALEXANDER","CABALLERO","","1411199600015","M","1990-07-05","OCOTEPEQUE","LA LAGUNA","2022-07-26","0000-00-00","3","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("7","CESAR","FERNANDO","ROVELO","VELASQUEZ","0801199902485","M","1999-02-02","TEGUS","COLONIA LA ESPERANZA","2022-07-26","0000-00-00","1","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("8","JUAN","ALBERTO","PEREZ","CRUZ","1202199601236","M","1996-03-06","LA PAZ","COL. KENEDY","2022-07-26","0000-00-00","2","LUZ","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("9","DAVID","ALEJANDRO","OCHOA","MARQUEZ","0943928932402","M","2011-05-26","TEGUCIGALPA","PRADOS UNIVERSITARIO","2022-07-27","0000-00-00","4","","0000-00-00","","0000-00-00");
@@ -1298,11 +1335,11 @@ INSERT INTO tbl_persona VALUES("30","ESTEFANY","NAOMI","VARELA","MAYORGA","08012
 INSERT INTO tbl_persona VALUES("31","ERICK","","VACA","SOTO","0140545447488","M","1998-04-05","SAN PEDRO SULA","COLONIA EL HOGAR","2022-07-27","0000-00-00","4","","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("32","ANY","MELISSA","HERNANDEZ","FUENTES","1702199600058","F","1996-03-13","ALIANZA VALLE","ALBORAYA PUEBLO VALENCIA ","2022-07-29","0000-00-00","8","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("33","ISEL","DARIELA","FLORES","PADILLA","","F","1996-06-02","CHOLUTECA","","2022-07-29","0000-00-00","6","ADMIN","0000-00-00","","0000-00-00");
-INSERT INTO tbl_persona VALUES("34","ARMANDO","JOSE","PERALTA","AGULAR","0608199000125","M","1990-10-20","TEGUCIGALPA","TEGUSCIGALPA","2022-07-29","0000-00-00","6","GABRIELA","0000-00-00","","0000-00-00");
+INSERT INTO tbl_persona VALUES("34","ARMANDO","JOSE","PERALTA","AGULAR","0608199000125","M","1990-10-20","TEGUCIGALPA","TEGUSCIGALPA","2022-07-29","0000-00-00","2","GABRIELA","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("35","LUISIN","MIGUEL","CRUZ","MENDEZ","0801199012645","M","1990-07-11","TEGUCIGALPA","COL. SAN MIGUEL","2022-08-02","0000-00-00","2","LUZ","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("36","VALERIA","SOFIA","PADILLA","ZEELAYA","0802199000168","F","1990-05-05","ALUBAREN","FRANCISCO MORAZAN ","2022-08-02","0000-00-00","2","ADMIN","0000-00-00","","0000-00-00");
 INSERT INTO tbl_persona VALUES("37","RAMIRO","","BRUSCHI","","0515484897498","M","2008-01-07","TEGUCIGALPA","FDSKLNKLJSDHNJFH DSFJHDSFHDSUFYHDSUFYEWURWUIYFSEID","2022-08-17","0000-00-00","3","","2022-08-17","","0000-00-00");
-INSERT INTO tbl_persona VALUES("38","ASTRID","ELIZABETH","URQUIA","DIAZ","0801200898565","F","2009-03-04","TEGUCIGALP","LA LAGUNA","2022-08-17","","4","","0000-00-00","","");
+INSERT INTO tbl_persona VALUES("38","ASTRID","ELIZABETH","URQUIA","DIAZ","0801200898565","F","2009-03-04","TEGUCIGALP","LA LAGUNA","2022-08-17","0000-00-00","3","","0000-00-00","","0000-00-00");
 
 
 
@@ -1440,13 +1477,14 @@ CREATE TABLE `tbl_plan_terapeutico` (
   `RESULTADOS` varchar(600) COLLATE utf8mb4_bin NOT NULL,
   PRIMARY KEY (`CODIGO_PLAN`),
   KEY `COD_CONSUL_PSICO_FK` (`CODIGO_CONSULTA`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_plan_terapeutico VALUES("1","2","HACER EJERCICIO, EJERCITARSE ","ANDA A PASO LIGERO DE 15 A 30 MINUTOS","LA COMPAÑIA DE UN AMIGO","EJERCICIOS DE RESPIRACION QUE PUEDE AYUDAR A REENCOTRARSE MEJOR CON LA DEPRESION","EN CUANTO A LA PRACTICA DE ESTAS TECNICAS ESTA MEJORANDO ");
 INSERT INTO tbl_plan_terapeutico VALUES("2","4","ESCRIBIR EN UN DIARIO LO QUE SIENTE","DE RELAJACIÓN","DIARIO PERSONAL, LAPIZ","ESCRIBIR AL MENOS MEDIA PÁGINA TODOS LOS DÍAS POR  2 SEMANAS","LO AVERIGUAREMOS :U");
 INSERT INTO tbl_plan_terapeutico VALUES("3","5","HORIGAMI,  PRACTICAR DEPORTE","DE RELAJACIÓN ","PAPEL, BALÓN PARA PRACTICAR ALGÚN DEPORTE","HACER HORIGAMI AL MENOS 3 VECES EN LA SEMANA","NINGUNO POR EL MOMENTO");
 INSERT INTO tbl_plan_terapeutico VALUES("4","8","VER PELICULAS DE TERROR","NINGUNA ","UN TELEVISOR ","ESCRIBIR EN UN DIARIO ANTES DE DORIR","SE ESPERA REDUCIR LAS PESADILLAS");
 INSERT INTO tbl_plan_terapeutico VALUES("5","10","NINGUNA","NINGUNA","NINGUNA","NINGUNA","NINGUNA");
+INSERT INTO tbl_plan_terapeutico VALUES("6","11","NINGUNO","NINGUNO","NINGUNO","NINGUNO","NINGUNO");
 
 
 
@@ -1469,7 +1507,7 @@ CREATE TABLE `tbl_preclinica` (
   `MODIFICADO_POR` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
   PRIMARY KEY (`CODIGO_PRECLINICA`),
   KEY `FK_CODIGO_CITA_PREC` (`CODIGO_CITA`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_preclinica VALUES("1","11","100","18.5","1.20","35","70","70/80","12","No tiene","","2022-07-27","0000-00-00","");
 INSERT INTO tbl_preclinica VALUES("2","4","138","19","1.85","38","85","70/85","12","Moderado","","2022-07-27","0000-00-00","");
@@ -1488,7 +1526,8 @@ INSERT INTO tbl_preclinica VALUES("14","50","138","18.5","1.83","38","70","60/80
 INSERT INTO tbl_preclinica VALUES("15","51","130.5","18.6","1.85","37.5","70","70/80","12","No tiene","","2022-08-03","0000-00-00","");
 INSERT INTO tbl_preclinica VALUES("16","52","135","15.5","1.85","65","48","70/80","13","No tiene","","2022-08-03","0000-00-00","");
 INSERT INTO tbl_preclinica VALUES("17","58","150","18.5","1.82","36.2","70","70/120","13","Grave","","2022-08-16","0000-00-00","");
-INSERT INTO tbl_preclinica VALUES("18","70","120","18.5","1.20","36.5","70","170/180","12","Moderado","","2022-08-18","","");
+INSERT INTO tbl_preclinica VALUES("18","70","120","18.5","1.20","36.5","70","170/180","12","Moderado","","2022-08-18","0000-00-00","");
+INSERT INTO tbl_preclinica VALUES("19","60","135","18.5","1.50","37.5","70","120/180","12","No tiene","","2022-08-19","0000-00-00","");
 
 
 
@@ -1532,7 +1571,7 @@ CREATE TABLE `tbl_preguntas_usuarios` (
   PRIMARY KEY (`CODIGO_PREGUNTA_USUARIO`),
   KEY `FK_CODPRE_PREU` (`CODIGO_PREGUNTAS`),
   KEY `FK_CODU_PREU` (`CODIGO_USUARIO`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_preguntas_usuarios VALUES("1","7","2","NEGRO","","0000-00-00","","0000-00-00");
 INSERT INTO tbl_preguntas_usuarios VALUES("2","1","4","POLLO","","0000-00-00","","0000-00-00");
@@ -1565,8 +1604,9 @@ INSERT INTO tbl_preguntas_usuarios VALUES("29","1","28","ARROZ","","0000-00-00",
 INSERT INTO tbl_preguntas_usuarios VALUES("30","7","31","NEGRO","","0000-00-00","","0000-00-00");
 INSERT INTO tbl_preguntas_usuarios VALUES("31","4","32","A MI MAMA","","0000-00-00","","0000-00-00");
 INSERT INTO tbl_preguntas_usuarios VALUES("32","2","6","BOB ESPONJA","","0000-00-00","","0000-00-00");
-INSERT INTO tbl_preguntas_usuarios VALUES("34","1","33","POLLO","","","","");
-INSERT INTO tbl_preguntas_usuarios VALUES("36","4","33","ABUELA","","","","");
+INSERT INTO tbl_preguntas_usuarios VALUES("34","1","33","POLLO","","0000-00-00","","0000-00-00");
+INSERT INTO tbl_preguntas_usuarios VALUES("36","4","33","ABUELA","","0000-00-00","","0000-00-00");
+INSERT INTO tbl_preguntas_usuarios VALUES("37","1","6","POLLO","","","","");
 
 
 
@@ -1586,7 +1626,7 @@ CREATE TABLE `tbl_receta_medica` (
   PRIMARY KEY (`CODIGO_RECETA_MEDICA`),
   KEY `FK_CODIGO_CONSULTA_MEDICA` (`CODIGO_CONSULTA`),
   KEY `FK_CODIGO_MEDICAMENTO` (`CODIGO_MEDICAMENTO`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO tbl_receta_medica VALUES("1","1","0102","TOMAR DOS DIARIAS\n","NINGUNA","2022-07-26","ADMIN","2022-07-26","","0000-00-00");
 INSERT INTO tbl_receta_medica VALUES("2","2","0102","TOMAR 1 CADA 8 HORAS","NINGUNA","2022-07-26","ADMIN","2022-07-26","","0000-00-00");
@@ -1606,6 +1646,7 @@ INSERT INTO tbl_receta_medica VALUES("15","16","0102","CADA 8H","NINGUNO","2022-
 INSERT INTO tbl_receta_medica VALUES("16","17","01025","TOMAR UNA CADA 12 HORAS","BIENN","2022-08-15","ADMIN","2022-08-15","","0000-00-00");
 INSERT INTO tbl_receta_medica VALUES("17","17","0102","PARA LA INFECCION","NINGUNA","2022-08-15","ADMIN","2022-08-15","","0000-00-00");
 INSERT INTO tbl_receta_medica VALUES("19","18","0102","NINGUNA","NINGUNA","2022-08-17","ADMIN","2022-08-17","","0000-00-00");
+INSERT INTO tbl_receta_medica VALUES("20","19","0102","NINGUNA","NINGUNA","2022-08-18","ADMIN","2022-08-18","","0000-00-00");
 
 
 
@@ -1623,7 +1664,7 @@ CREATE TABLE `tbl_roles` (
   PRIMARY KEY (`CODIGO_TIPO_ROL`),
   KEY `FK_ESTADO_ROL` (`EST_ROL`),
   CONSTRAINT `FK_ESTADO_ROL` FOREIGN KEY (`EST_ROL`) REFERENCES `tbl_estado` (`CODIGO_ESTADO`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 INSERT INTO tbl_roles VALUES("1","ADMINISTRADOR","Todos los permisos","2","Administrador","2022-02-11","2022-08-14","ADMIN");
 INSERT INTO tbl_roles VALUES("2","TUTOR","Usuario con permisos al modulo de escuela","2","Administrador","2022-02-11","2022-03-11","ADMIN");
@@ -1634,6 +1675,7 @@ INSERT INTO tbl_roles VALUES("6","CATEQUISTA","Área espiritual","2","","2022-03
 INSERT INTO tbl_roles VALUES("7","ENFERMERO","Area Medica","2","","2022-04-23","0000-00-00","");
 INSERT INTO tbl_roles VALUES("8","ESTUDIANTE","El usuario solo permitirá ver las citas y tutorías que tiene este.  ","2","ADMIN","2022-05-03","2022-08-15","ADMIN");
 INSERT INTO tbl_roles VALUES("9","SUPER USUARIO","Este rol tiene todos los permisos","2","ADMIN","2022-05-03","2022-08-15","ADMIN");
+INSERT INTO tbl_roles VALUES("12","BACKUP","restaurar","2","ALEXANDER","2022-08-19","","");
 
 
 
@@ -1651,7 +1693,7 @@ CREATE TABLE `tbl_sacramento` (
 
 INSERT INTO tbl_sacramento VALUES("1","2","BAUTISMO","PRIMER SACRAMENTO");
 INSERT INTO tbl_sacramento VALUES("2","2","COMUNION ","SEGUNDO SACRAMENTO");
-INSERT INTO tbl_sacramento VALUES("3","2","CONFIRMA","TERCER SACRAMENTO");
+INSERT INTO tbl_sacramento VALUES("3","3","CONFIRMA","TERCER SACRAMENTO");
 
 
 
@@ -1801,7 +1843,7 @@ INSERT INTO tbl_tipo_persona VALUES("6","PSICOLOGO","2");
 INSERT INTO tbl_tipo_persona VALUES("7","FAMILIAR","2");
 INSERT INTO tbl_tipo_persona VALUES("8","CATEQUISTA","2");
 INSERT INTO tbl_tipo_persona VALUES("9","ENFERMERO","2");
-INSERT INTO tbl_tipo_persona VALUES("10","ODONTOLOGO","2");
+INSERT INTO tbl_tipo_persona VALUES("10","ODONTOLOGO","3");
 
 
 
@@ -1914,10 +1956,10 @@ CREATE TABLE `tbl_usuario` (
 
 INSERT INTO tbl_usuario VALUES("1","1","ADMIN","2","9","$2a$07$usesomesillystringforeDLU0KLdU3tCNprit2LU2PhciUHQJFsG","2022-09-24","","2022-07-26","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("2","2","RUT","2","1","$2a$07$usesomesillystringforeCFgULGhtYgEopegGdjbjYiHOQCeHz.S","0000-00-00","ADMIN","2022-07-26","2022-08-14","ADMIN");
-INSERT INTO tbl_usuario VALUES("3","3","LUZ","2","1","$2a$07$usesomesillystringforeFz7dK1VZWNMEJiH0HNOXYw/HL.5hY4.","0000-00-00","ADMIN","2022-07-26","2022-08-14","ADMIN");
+INSERT INTO tbl_usuario VALUES("3","3","LUZ","2","1","$2a$07$usesomesillystringforeFz7dK1VZWNMEJiH0HNOXYw/HL.5hY4.","0000-00-00","ADMIN","2022-07-26","2022-08-18","ADMIN");
 INSERT INTO tbl_usuario VALUES("4","4","JOSE","2","1","$2a$07$usesomesillystringforePP9wVrG7ur0QdkQ9rpSzfE/DlP4e8u.","0000-00-00","ADMIN","2022-07-26","2022-08-14","ADMIN");
 INSERT INTO tbl_usuario VALUES("5","5","GABRIELA","2","1","$2a$07$usesomesillystringforek7hUNAdfzELkC2Xk6YPva7JCsoP6rh.","0000-00-00","ADMIN","2022-07-26","2022-07-29","ADMIN");
-INSERT INTO tbl_usuario VALUES("6","6","ALEXANDER","2","2","$2a$07$usesomesillystringforeP7mXKbfh9ebyT3M.rcGnqD3gYHLx/pu","0000-00-00","ADMIN","2022-07-26","2022-08-18","ADMIN");
+INSERT INTO tbl_usuario VALUES("6","6","ALEXANDER","2","9","$2a$07$usesomesillystringforeP7mXKbfh9ebyT3M.rcGnqD3gYHLx/pu","0000-00-00","ADMIN","2022-07-26","2022-08-18","ALEXANDER");
 INSERT INTO tbl_usuario VALUES("7","7","CESAR","2","1","$2a$07$usesomesillystringforelk7hEP5l/8xGhqhzzpBD065n5bEXx2S","0000-00-00","ADMIN","2022-07-26","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("8","8","JUAN","2","2","$2a$07$usesomesillystringfore24KuaN0qO9IVZ9tIXt3l5Gy/G5o.KWm","0000-00-00","LUZ","2022-07-26","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("9","9","DAVID","2","8","$2a$07$usesomesillystringforeK2F0CA.OyIc/hzje/abe5/.lBawI8Ca","0000-00-00","CESAR","2022-07-27","2022-08-13","ADMIN");
@@ -1931,20 +1973,20 @@ INSERT INTO tbl_usuario VALUES("16","18","FRANCISCO","2","6","$2a$07$usesomesill
 INSERT INTO tbl_usuario VALUES("17","19","JOSUE","2","4","$2a$07$usesomesillystringforeto0mvDpaV0DK4cFtWyWxnWiZ4qt7Z4.","0000-00-00","RUT","2022-07-26","2022-07-26","RUT");
 INSERT INTO tbl_usuario VALUES("18","20","LAURA","2","6","$2a$07$usesomesillystringforeOe47YYBALHNylsq90yhjERGpHl.p9kG","0000-00-00","GABRIELA","2022-07-26","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("19","21","MAJO","2","2","$2a$07$usesomesillystringforeVTuDZ.MUZx5QQxqolAMBpd2VqKlfrRa","0000-00-00","LUZ","2022-07-26","0000-00-00","");
-INSERT INTO tbl_usuario VALUES("20","22","PAULA","2","5","$2a$07$usesomesillystringforewunHdCVOHtEdLYWmZ6OuNwTzags6toq","0000-00-00","ADMIN","2022-07-26","2022-08-17","ALEXANDER");
+INSERT INTO tbl_usuario VALUES("20","22","PAULA","2","5","$2a$07$usesomesillystringforebpEps4WbpHVJcXpWLLEajLXEyJhmmju","0000-00-00","ADMIN","2022-07-26","2022-08-18","ADMIN");
 INSERT INTO tbl_usuario VALUES("21","23","MARIO","2","4","$2a$07$usesomesillystringforeC1qiwiZxWnmXgS0TeTaf41.2zC9eoJa","0000-00-00","RUT","2022-07-26","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("22","24","CRIS","2","8","$2a$07$usesomesillystringforemrCfnY4uA0DxWUm8xBIP17QxqXX.scS","0000-00-00","ALEXANDER","2022-07-27","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("23","25","ANDREA","2","8","$2a$07$usesomesillystringforehRJWC.CF6mpqr2p1llRk3PxU/cZ65DS","0000-00-00","CESAR","2022-07-27","0000-00-00","");
 INSERT INTO tbl_usuario VALUES("24","27","KATY","2","8","$2a$07$usesomesillystringforeHgs1s2uw38U9bfe/nzsY9NxbYN5tPiC","0000-00-00","RUT","2022-07-27","2022-07-28","ADMIN");
 INSERT INTO tbl_usuario VALUES("25","29","DESIRETH","2","8","$2a$07$usesomesillystringforeBNDqae843YwiG.YpUXHq9I4KSLbDAQ6","0000-00-00","GABRIELA","2022-07-27","2022-07-26","GABRIELA");
 INSERT INTO tbl_usuario VALUES("26","30","NAOMI","2","8","$2a$07$usesomesillystringfore6EINqszN38WG50TBh9xqXuz82S4gTBK","0000-00-00","LUZ","2022-07-27","0000-00-00","");
-INSERT INTO tbl_usuario VALUES("27","31","ERICK","3","8","$2a$07$usesomesillystringforeP5wUikw4pkTxWim7XoEvmNeS8uKtbjS","0000-00-00","ADMIN","2022-07-27","2022-08-17","ALEXANDER");
+INSERT INTO tbl_usuario VALUES("27","31","ERICK","2","8","$2a$07$usesomesillystringforeP5wUikw4pkTxWim7XoEvmNeS8uKtbjS","0000-00-00","ADMIN","2022-07-27","2022-08-18","ADMIN");
 INSERT INTO tbl_usuario VALUES("28","32","ANYH","2","6","$2a$07$usesomesillystringforef3K3SHJ3KU57GQVdI9QQ7CPsELwicyS","0000-00-00","ADMIN","2022-07-29","0000-00-00","");
-INSERT INTO tbl_usuario VALUES("29","33","ISEL","2","4","$2a$07$usesomesillystringforebrDq7a11hNalS8A/Qc005lZHvD30Wd6","0000-00-00","ADMIN","2022-07-29","2022-08-17","ALEXANDER");
-INSERT INTO tbl_usuario VALUES("30","34","ARMANDO","2","4","$2a$07$usesomesillystringforeIWLQb30CQ.VUYtobQCyzQFYDZlzPjV6","0000-00-00","GABRIELA","2022-07-29","2022-08-11","ALEXANDER");
+INSERT INTO tbl_usuario VALUES("29","33","ISEL","2","4","$2a$07$usesomesillystringforeZ3x51R2rN0SEQgrkhB/SgtI9y1OSCcK","0000-00-00","ADMIN","2022-07-29","2022-08-18","ALEXANDER");
+INSERT INTO tbl_usuario VALUES("30","34","ARMANDO","2","2","$2a$07$usesomesillystringforeIWLQb30CQ.VUYtobQCyzQFYDZlzPjV6","0000-00-00","GABRIELA","2022-07-29","2022-08-18","ALEXANDER");
 INSERT INTO tbl_usuario VALUES("31","35","LUISMI","2","2","$2a$07$usesomesillystringforeo.Za9sjz40Tnh798TxidWyZRTQ.mtoC","0000-00-00","LUZ","2022-08-02","2022-08-16","ADMIN");
 INSERT INTO tbl_usuario VALUES("32","36","VALERIA","2","2","$2a$07$usesomesillystringforeXAQheGJF7USzYzdQgtA7gv6RllsR2Va","0000-00-00","ADMIN","2022-08-02","2022-08-16","ADMIN");
-INSERT INTO tbl_usuario VALUES("33","38","ASTRID","3","8","$2a$07$usesomesillystringforesTdoLXO3A5.gZs.7Baw3GBzDMV1pA36","","ALEXANDER","2022-08-17","2022-08-18","ADMIN");
+INSERT INTO tbl_usuario VALUES("33","38","ASTRID","3","9","$2a$07$usesomesillystringforesTdoLXO3A5.gZs.7Baw3GBzDMV1pA36","0000-00-00","ALEXANDER","2022-08-17","2022-08-18","ALEXANDER");
 
 
 
