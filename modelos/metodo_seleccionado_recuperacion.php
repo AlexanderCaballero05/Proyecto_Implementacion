@@ -155,8 +155,8 @@ if(isset($_REQUEST['usuario'])) {  //aqui capturo el usuario enviado
                 $oMail->SMTPSecure="tls";
                 $oMail->SMTPAuth=true;
 
-                $oMail->Username=("aacaballero@unah.hn"); 
-                $oMail->Password=("*Iamhappy.2020*");
+                $oMail->Username=("nolose@gmail.com"); 
+                $oMail->Password=("klkljkljkl");
                 $oMail->setFrom("aacaballero@unah.hn"); // direccion de correo de destino hacia los correos de usuarios
                 $oMail->addAddress($correo); //Variable que recoger el correo al que sera enviado la clave de recuperacion.
                 $mensaje="
